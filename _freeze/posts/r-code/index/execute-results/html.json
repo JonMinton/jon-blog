@@ -1,0 +1,16 @@
+{
+  "hash": "4bc87c2148637b619dcb6ec941a65fe6",
+  "result": {
+    "markdown": "---\ntitle: \"Post with code\"\nauthor: \"Jon Minton\"\ndate: \"2023-11-28\"\ncategories: [R]\n---\n\n\nThis short post is intended to confirm that I can run and render R code within a Quarto blog post.\n\n### Very simple example\n\nLet's start off with some very simple base-R\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n\n\nAnd of course let's not forget the obligatory\n\n\n::: {.cell}\n\n```{.r .cell-code}\nstatement <- \"Hello World\"\n\nstatement\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"Hello World\"\n```\n:::\n:::\n\n\n### Graphs\n\nLet's now look at a base-R graphic, again using a cliched example\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplot(mtcars$mpg ~ mtcars$wt)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n### Some extensions\n\nLet's now continue to be cliched, and load and use the tidyverse\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nglimpse(mtcars)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nRows: 32\nColumns: 11\n$ mpg  <dbl> 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,…\n$ cyl  <dbl> 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,…\n$ disp <dbl> 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16…\n$ hp   <dbl> 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180…\n$ drat <dbl> 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,…\n$ wt   <dbl> 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.…\n$ qsec <dbl> 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18…\n$ vs   <dbl> 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,…\n$ am   <dbl> 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,…\n$ gear <dbl> 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,…\n$ carb <dbl> 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,…\n```\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nmtcars |> \n  group_by(carb) |> \n  summarise(\n    mean_mpg = mean(mpg)\n  ) |> \n  ungroup()\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 6 × 2\n   carb mean_mpg\n  <dbl>    <dbl>\n1     1     25.3\n2     2     22.4\n3     3     16.3\n4     4     15.8\n5     6     19.7\n6     8     15  \n```\n:::\n:::\n\n\nAnd to visualise\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmtcars |> \n  mutate(cyl = factor(cyl)) |> \n  ggplot(aes(x = wt, y = mpg, colour = cyl, group= cyl)) + \n  geom_point(aes(shape = cyl)) + \n  stat_smooth(se = FALSE, method = \"lm\") + \n  labs(\n    x = \"Weight\", \n    y = \"Miles per gallon\"\n  )\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n`geom_smooth()` using formula = 'y ~ x'\n```\n:::\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-7-1.png){width=672}\n:::\n:::\n\n\n### Conclusion\n\nSo far, so good...\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
