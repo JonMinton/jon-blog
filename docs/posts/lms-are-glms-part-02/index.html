@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2023-11-28">
 
-<title>Jon Minton’s Blog</title>
+<title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,50 +80,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -115,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -143,271 +133,88 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Jon Minton’s Blog</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Linear Models are General Linear Models</h1>
+            <p class="subtitle lead">Part Two: Systematic components and link functions</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+              </div>
+                  </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 28, 2023</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Epidemiology">Epidemiology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Mortality">Mortality <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Papers">Papers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="economics">economics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="health">health <span class="quarto-category-count">(1)</span></div><div class="category" data-category="modelling">modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="talks">talks <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
+<section id="tldr" class="level2">
+<h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
+<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> .</p>
+</section>
+<section id="part-2-systematic-components-and-link-functions" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-systematic-components-and-link-functions">Part 2: Systematic components and link functions</h2>
+<p>In part 1 of this series we introduced the following general framework for thinking about statistical models and what they contain.</p>
+<p><strong>Stochastic Component</strong></p>
+<p><span class="math display">\[
+Y_i \sim f(\theta_i, \alpha)
+\]</span></p>
+<p><strong>Systematic Component</strong></p>
+<p><span class="math display">\[
+\theta_i = g(X_i, \beta)
+\]</span> The terminology are as described previously.</p>
+<p>These equations are too broad and abstract to be implemented directly. Instead, specific choices about the <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(g(.)\)</span> need to be made. <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> gives the following examples:</p>
+<p><strong>Logistic Regression</strong></p>
+<p><span class="math display">\[
+Y_i \sim Bernoulli(\pi_i)
+\]</span></p>
+<p><span class="math display">\[
+\pi_i = \frac{1}{1 + e^{-X_i\beta}}
+\]</span></p>
+<p><strong>Linear Regression</strong></p>
+<p><span class="math display">\[
+Y_i \sim N(\mu_i, \sigma^2)
+\]</span> <span class="math display">\[
+\mu_i = X_i\beta
+\]</span></p>
+<p>So, what’s so special about linear regression, in this framework?</p>
+<p>In one sense, not so much. It’s got a systematic component, and it’s got a stochastic component. But so do other models. But in another sense, quite a lot. It’s a rare case where the systematic component, <span class="math inline">\(g(.)\)</span>, <em>doesn’t</em> transform its inputs in some weird and wonderful way. We can say that <span class="math inline">\(g(.)\)</span> is the identity transform, <span class="math inline">\(I(.)\)</span>, which in words means <em>take what you’re given, do nothing to it, and pass it on</em>.</p>
+<p>By contrast, the systematic component for logistic regression ..</p>
 
 
 
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1701189405656" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/lms-are-glms-part-02/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/lms-are-glms-part-02/index.html">
-<h3 class="no-anchor listing-title">
-Linear Models are General Linear Models
-</h3>
-<div class="listing-subtitle">
-Part Two: Systematic components and link functions
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
-statistics
-</div>
-</div>
-<a href="./posts/lms-are-glms-part-02/index.html">
-<div class="listing-description">
-This is…<span class="citation" data-cites="KinTomWit00"></span>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/lms-are-glms-part-02/index.html">
-<div class="listing-date">
-Nov 28, 2023
-</div>
-<div class="listing-author">
-Jon Minton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="R" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1701163997765" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/r-code/index.html"> <p class="card-img-top"><img src="posts/r-code/index_files/figure-html/unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/r-code/index.html">
-<h3 class="no-anchor listing-title">
-Post with code
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<a href="./posts/r-code/index.html">
-<div class="listing-description">
-This short post is intended to confirm that I can run and render R code within a Quarto blog post.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/r-code/index.html">
-<div class="listing-date">
-Nov 28, 2023
-</div>
-<div class="listing-author">
-Jon Minton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1701187861425" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./posts/lms-are-glms-part-01/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/lms-are-glms-part-01/index.html">
-<h3 class="no-anchor listing-title">
-Linear Models are General Linear Models
-</h3>
-<div class="listing-subtitle">
-Part One: Model fitting as parameter calibration
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
-statistics
-</div>
-</div>
-<a href="./posts/lms-are-glms-part-01/index.html">
-<div class="listing-description">
-This is…<span class="citation" data-cites="KinTomWit00"></span>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/lms-are-glms-part-01/index.html">
-<div class="listing-date">
-Nov 28, 2023
-</div>
-<div class="listing-author">
-Jon Minton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="R,modelling,talks,economics,health" data-listing-date-sort="1700870400000" data-listing-file-modified-sort="1701163997765" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/talk-at-edinbr/index.html"> <p class="card-img-top"><img src="posts/talk-at-edinbr/images/Screenshot 2023-11-25 at 15.46.29.png"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/talk-at-edinbr/index.html">
-<h3 class="no-anchor listing-title">
-EdinbR talk on modelling economic (in)activity transitions
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('modelling'); return false;">
-modelling
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('talks'); return false;">
-talks
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('economics'); return false;">
-economics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('health'); return false;">
-health
-</div>
-</div>
-<a href="./posts/talk-at-edinbr/index.html">
-<div class="listing-description">
-Yesterday I had the great privilege of being one of two speakers at the Edinburgh R Users group, called EdinbR. (Difficult to say without sounding like a pirate.)
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/talk-at-edinbr/index.html">
-<div class="listing-date">
-Nov 25, 2023
-</div>
-<div class="listing-author">
-Jon Minton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Mortality,Epidemiology,Papers" data-listing-date-sort="1700870400000" data-listing-file-modified-sort="1701163997766" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/unattended-deaths/index.html"> <p class="card-img-top"><img src="posts/unattended-deaths/blogfigure.png"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/unattended-deaths/index.html">
-<h3 class="no-anchor listing-title">
-A Deathly Silence
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Mortality'); return false;">
-Mortality
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Epidemiology'); return false;">
-Epidemiology
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Papers'); return false;">
-Papers
-</div>
-</div>
-<a href="./posts/unattended-deaths/index.html">
-<div class="listing-description">
-What does it mean when someone dies, and no one notices for days, weeks, or months on end?
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/unattended-deaths/index.html">
-<div class="listing-date">
-Nov 25, 2023
-</div>
-<div class="listing-author">
-Jon Minton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="news" data-listing-date-sort="1700870400000" data-listing-file-modified-sort="1701163997767" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/welcome/index.html"> <p class="card-img-top"><img src="posts/welcome/thumbnail.jpg"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/welcome/index.html">
-<h3 class="no-anchor listing-title">
-First Post
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
-news
-</div>
-</div>
-<a href="./posts/welcome/index.html">
-<div class="listing-description">
-Hi, this is my first blog post. I’m making this using Quarto, starting off by slavishly following the tutorial, then incrementally adapting it to suit my preferences.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/welcome/index.html">
-<div class="listing-date">
-Nov 25, 2023
-</div>
-<div class="listing-author">
-Jon Minton
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-KinTomWit00" class="csl-entry" role="listitem">
+King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

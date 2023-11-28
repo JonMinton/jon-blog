@@ -1,0 +1,57 @@
+---
+title: "Linear Models are General Linear Models"
+subtitle: "Part Two: Systematic components and link functions"
+author: "Jon Minton"
+date: "2023-11-28"
+categories: [statistics]
+bibliography: references.bib
+---
+
+## tl;dr
+
+This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in @KinTomWit00 .
+
+## Part 2: Systematic components and link functions
+
+In part 1 of this series we introduced the following general framework for thinking about statistical models and what they contain.
+
+**Stochastic Component**
+
+$$
+Y_i \sim f(\theta_i, \alpha)
+$$
+
+**Systematic Component**
+
+$$
+\theta_i = g(X_i, \beta)
+$$ The terminology are as described previously.
+
+These equations are too broad and abstract to be implemented directly. Instead, specific choices about the $f(.)$ and $g(.)$ need to be made. @KinTomWit00 gives the following examples:
+
+**Logistic Regression**
+
+$$
+Y_i \sim Bernoulli(\pi_i) 
+$$
+
+$$
+\pi_i = \frac{1}{1 + e^{-X_i\beta}}
+$$
+
+**Linear Regression**
+
+$$
+Y_i \sim N(\mu_i, \sigma^2) 
+$$
+$$
+ \mu_i = X_i\beta
+$$
+
+So, what's so special about linear regression, in this framework?
+
+In one sense, not so much. It's got a systematic component, and it's got a stochastic component. But so do other models. But in another sense, quite a lot. It's a rare case where the systematic component, $g(.)$, *doesn't* transform its inputs in some weird and wonderful way. We can say that $g(.)$ is the identity transform, $I(.)$, which in words means *take what you're given, do nothing to it, and pass it on*.
+
+By contrast, the systematic component for logistic regression is known as the logistic function. $logistic(x) := \frac{1}{1 + e^{-x}}$ It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren't predicted values, but predicted *probabilities*, and nothing can be more probable than certain (1) or less probable than impossible (0). 
+
+
