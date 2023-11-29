@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-11-28">
+<meta name="dcterms.date" content="2023-11-29">
 
-<title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
+<title>Jon Minton’s Blog - Robocop (1987) is wonderfully childish</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -81,8 +62,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -134,10 +113,10 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Linear Models are General Linear Models</h1>
-            <p class="subtitle lead">Part Two: Systematic components and link functions</p>
+      <h1 class="title">Robocop (1987) is wonderfully childish</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">stories</div>
+                <div class="quarto-category">films</div>
               </div>
                   </div>
   </div>
@@ -155,7 +134,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 28, 2023</p>
+        <p class="date">November 29, 2023</p>
       </div>
     </div>
     
@@ -173,48 +152,51 @@ div.csl-indent {
 
 
 
-<section id="tldr" class="level2">
-<h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
-<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> .</p>
-</section>
-<section id="part-2-systematic-components-and-link-functions" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-systematic-components-and-link-functions">Part 2: Systematic components and link functions</h2>
-<p>In part 1 of this series we introduced the following general framework for thinking about statistical models and what they contain.</p>
-<p><strong>Stochastic Component</strong></p>
-<p><span class="math display">\[
-Y_i \sim f(\theta_i, \alpha)
-\]</span></p>
-<p><strong>Systematic Component</strong></p>
-<p><span class="math display">\[
-\theta_i = g(X_i, \beta)
-\]</span> The terminology are as described previously.</p>
-<p>These equations are too broad and abstract to be implemented directly. Instead, specific choices about the <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(g(.)\)</span> need to be made. <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> gives the following examples:</p>
-<p><strong>Logistic Regression</strong></p>
-<p><span class="math display">\[
-Y_i \sim Bernoulli(\pi_i)
-\]</span></p>
-<p><span class="math display">\[
-\pi_i = \frac{1}{1 + e^{-X_i\beta}}
-\]</span></p>
-<p><strong>Linear Regression</strong></p>
-<p><span class="math display">\[
-Y_i \sim N(\mu_i, \sigma^2)
-\]</span> <span class="math display">\[
-\mu_i = X_i\beta
-\]</span></p>
-<p>So, what’s so special about linear regression, in this framework?</p>
-<p>In one sense, not so much. It’s got a systematic component, and it’s got a stochastic component. But so do other models. But in another sense, quite a lot. It’s a rare case where the systematic component, <span class="math inline">\(g(.)\)</span>, <em>doesn’t</em> transform its inputs in some weird and wonderful way. We can say that <span class="math inline">\(g(.)\)</span> is the identity transform, <span class="math inline">\(I(.)\)</span>, which in words means <em>take what you’re given, do nothing to it, and pass it on</em>.</p>
-<p>By contrast, the systematic component for logistic regression is known as the logistic function. <span class="math inline">\(logistic(x) := \frac{1}{1 + e^{-x}}\)</span> It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren’t predicted values, but predicted <em>probabilities</em>, and nothing can be more probable than certain (1) or less probable than impossible (0).</p>
-
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-KinTomWit00" class="csl-entry" role="listitem">
-King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.hollywoodintoto.com/wp-content/uploads/2022/07/robocop-1987-review-35-years-later-2.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Robocop (1987): Wonderfully Childish</figcaption>
+</figure>
 </div>
-</div></section></div></main> <!-- /main -->
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>Here’s something that’s differently nerdy. Some thoughts on the enduring and childish appeal of Robocop as a character and concept, lifted largely from some notes I made on Obsidian (which also uses Markdown).</p>
+</section>
+<section id="notes-on-robocop" class="level2">
+<h2 class="anchored" data-anchor-id="notes-on-robocop">Notes on Robocop</h2>
+<p>Went through a Robocop phase. <a href="https://www.imdb.com/title/tt0093870/">First film</a> is good. <a href="https://www.imdb.com/title/tt0100502/?ref_=fn_al_tt_1">Second film</a> is adequate fan service (by Frank Miller), though unpleasant in terms of how it makes <a href="https://moviemorgue.fandom.com/wiki/Hob">a boy a main antagonist</a>. <a href="https://www.imdb.com/title/tt1234721/">Reboot</a> is terrible.</p>
+<p>I think this was inspired by seeing footage for the Robocop game <a href="https://store.steampowered.com/agecheck/app/1681430/">Rogue City</a>. Also remembered discussion about how in the original film Robocop’s death and resurrection is <a href="https://www.theguardian.com/culture/2022/may/16/robocop-american-jesus-paul-verhoeven-ultra-violent-cult-classic-pter-weller-chin">modelled on Jesus</a>. It’s definitely true his death is a ‘passion’ (modern equivalent: torture porn?), and that his suffering at the hands of sadistic tormenters fits this pattern.</p>
+<p>In the first film there’s also the sense of the protagonist reclaiming his humanity. Murphy’s memory is wiped, but through force of will he brings himself to remember who he was, and to identify as Murphy. That’s the last line. <a href="https://youtu.be/53uKKlXmPiU?si=K_Eq9pecZdxzeoz_&amp;t=166">He’s thanked and addressed by the Old Man as a person, not as property</a> That’s the arc: becoming human again.</p>
+<p>By contrast the reboot started with Murphy knowing who he was, though the scientists can modify the extent to which his feelings or programming are in charge. There’s a plot about police corruption and selling weapons illegally, and plenty of exposition from scientists where they try to shoehorn in cod-philosophy on personhood and free will, but this felt like ‘filler’ between a series of action sequences, which were much faster but also much less weighty and visceral than those in the original.</p>
+<p>In the original Robocop is a bullet sponge. He was slow, apparently unfeeling. Though this might be partly a function of Peter Weller not having a great deal of mobility when wearing the suit, it also feeds into the central character arc: robots don’t feel; people do.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Robots aren’t vulnerable as people are. As Robocop becomes damaged, he becomes more vulnerable, and his face becomes visible. Vulnerability is necessary for humanity to be restored. Robocop’s suit makes him a superhero, an adolescent boy fantasy of massive strength and power, but it also makes him a prisoner, trapped and entombed.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://m.media-amazon.com/images/M/MV5BMTM0NTExNTgyMF5BMl5BanBnXkFtZTcwNTMwODU2NA@@._V1_.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Regaining Humanity: But at what cost?</figcaption>
+</figure>
+</div>
+<p>Again, by contrast, in the remake Murphy has lost less. He still has a human hand, still has his memories and sense of self, and still has all the speed and mobility he had as a person, only more so. He doesn’t have an arc, he has perturbations and wobbles.</p>
+<p>Let’s think some more about why Robocop is an adolescent, or even pre-adolescent, fantasy. Firstly, it appeals to a kind of crude creativity of combinatorials: take two things that are familiar, combine them, and make something unfamiliar. With only a limited number of schemas, even a young child can wonder what happens when they are combined, and feel excited and proud about bootstrapping from everyday experience to pure fantasy. Like the distinction between animal, vegetable and mineral, ‘man’ and ‘machine’ are different primary colours, and seeing the concept of Robocop may be for a young child like seeing red and blue make purple for the first time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.greenmangaming.com/blog/wp-content/uploads/2022/06/teenage-mutant-ninja-turtles-characters-ranked.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Teenage Mutant Ninja Turtles: Another contemporaneous example of the ‘primary colour chimera’ attractive to children</figcaption>
+</figure>
+</div>
+<p>Second, there’s the power fantasy. Within this, there’s the sense of seeing someone who can play an action game and be allowed to ‘cheat’. The roles of an action game, involving shooting, must include that, once shot, the player must ‘play dead’. But in Robocop is a fantasy of a character who’s still allowed to shoot others whilst being able to ignore when others shoot him. Robocop presents a fantasy for a young child of playing a game where you can do things that no-one else can, because you’re more special than everyone else.</p>
+<p>I suspect that’s why, even though Robocop was clearly unsuitable for children, the concept of Robocop appeared to have so much appeal to children. There’s something inherently childish about seeing such a pure chimera rendered on screen, and the possibilities and affordances of this chimera are signalled so brightly from the images alone that the (adult) source material does not need to be consulted.</p>
+<p>Again, this seems to be yet another reason why the remake did not work: 2014’s Murphy was not machine enough. The suit did not make him clearly ‘other’ enough. Even though the graphic violence was toned down so that in theory children could watch, the lack of schematic purity in the ideal types being mixed meant the pleasure of seeing primary colours being mixed, in the way the original so effectively managed, was muddied and diluted.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Alistair Gray’s Lanark played with a similar idea, in the form of Dragonhide, a magical realist representation of dermatitis, emotional distance, and lack of outlet for artistic expression. Too much Dragonhide, the book warns, causes sufferers to become unable to move, and unable to vent, their heat and energy, without expression, eventually causing them to boil to death!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

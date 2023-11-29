@@ -1,0 +1,141 @@
+---
+title: "Tidy Tuesday on Dr Who"
+author: 
+  - "Jon Minton"
+  - "Nick Christofides"
+date: "2023-11-29"
+categories: [R, tidy tuesday, Dr Who]
+---
+
+## Tidy Tuesday challenge
+
+First we load the packages 
+
+The tidyverse equivalent of pacman is now pak.
+
+The latest dataset is [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-28), and the specific files to work. 
+
+
+
+```{r}
+library(tidyverse)
+
+dta_list <- tidytuesdayR::tt_load(x = "2023-11-28")
+
+dta_eps <- dta_list[["drwho_episodes"]]
+dta_wrt <- dta_list[["drwho_writers"]]
+
+```
+
+Let's see how the viewship changed over time 
+
+```{r}
+dta_eps_season <- 
+  dta_eps |> 
+  group_by(season_number) |> 
+  mutate(
+    mean_viewers = mean(uk_viewers),
+    mean_date = mean(first_aired)
+    ) |> 
+  ungroup()
+
+dta_eps_season |> 
+  ggplot(aes(x = first_aired, y = uk_viewers)) + 
+  geom_point(colour = "grey") +
+  geom_point(aes(x = mean_date, y = mean_viewers), size = 2.5) + 
+  scale_x_date(breaks = "2 years", labels = \(x) format(x, "%Y")) +
+  labs(
+    x = "First aired",
+    y = "UK Viewers (millions)",
+    title = "Viewers over time for Dr Who",
+    subtitle = "People don't watch TV like they used to..."
+  ) +
+  annotate("text", x = lubridate::make_date(2015), y = 10, label = "What happened here?!") +
+  annotate("text", x = lubridate::make_date(2014), y= 8, label = "Smartphone strangling the TV from now", hjust = 0) + 
+  stat_smooth(colour = "blue", se = FALSE) 
+```
+
+Let's now look at writers by season
+
+```{r}
+dta_eps_wrt <- 
+  dta_eps |> 
+    left_join(dta_wrt, by = "story_number") 
+
+```
+
+How many episodes by writer?
+
+```{r}
+dta_eps_wrt |> 
+  group_by(writer) |>  
+  summarise(
+    n_written = n()
+  ) |> 
+  ungroup() |> 
+  arrange(desc(n_written))
+```
+So Moffat wrote most episodes, then Davies, then Chibnall
+
+And what about popularity by writer?
+
+```{r}
+dta_eps_wrt |> 
+  group_by(writer) |>  
+  mutate(
+    n_written = n()
+  ) |> 
+  ungroup() |> 
+  filter(n_written >= 5) |> 
+  ggplot(aes(x = fct_reorder(writer, rating), y= rating)) + 
+  geom_boxplot() + 
+  coord_flip() + 
+  labs(
+    x = "Distribution of ratings",
+    y = "Writer", 
+    title = "Rating distribution by writer",
+    subtitle = "Writers who wrote at least five episodes"
+  )
+```
+
+When were the different writers active?
+
+```{r}
+major_writers_active <- 
+  dta_eps_wrt |> 
+    group_by(writer) |>  
+    mutate(
+      n_written = n()
+    ) |> 
+    ungroup() |> 
+    filter(n_written >= 5) |> 
+    group_by(writer) |> 
+    summarise(
+      started_writing = min(first_aired),
+      finished_writing = max(first_aired),
+      n_written = n_written[1]
+    ) |> 
+    ungroup() |> 
+    mutate(
+      yr_start = year(started_writing),
+      yr_end = year(finished_writing)
+    )
+
+major_writers_active |> 
+  arrange(started_writing)
+```
+
+
+Here we see the tenure of different major writers. Russell T Davies and Steven Moffatt are the major players.
+
+
+
+## Coda
+
+Neither of us know much about Dr Who! 
+
+But hopefully we now know a bit more!
+
+
+
+
