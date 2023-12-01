@@ -77,6 +77,34 @@
     "text": "Coda\nNeither of us know much about Dr Who!\nBut hopefully we now know a bit more!"
   },
   {
+    "objectID": "posts/lms-are-glms-part-02/index.html",
+    "href": "posts/lms-are-glms-part-02/index.html",
+    "title": "Linear Models are General Linear Models",
+    "section": "",
+    "text": "This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in King, Tomz, and Wittenberg (2000) ."
+  },
+  {
+    "objectID": "posts/lms-are-glms-part-02/index.html#tldr",
+    "href": "posts/lms-are-glms-part-02/index.html#tldr",
+    "title": "Linear Models are General Linear Models",
+    "section": "",
+    "text": "This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in King, Tomz, and Wittenberg (2000) ."
+  },
+  {
+    "objectID": "posts/lms-are-glms-part-02/index.html#part-2-systematic-components-and-link-functions",
+    "href": "posts/lms-are-glms-part-02/index.html#part-2-systematic-components-and-link-functions",
+    "title": "Linear Models are General Linear Models",
+    "section": "Part 2: Systematic components and link functions",
+    "text": "Part 2: Systematic components and link functions\nIn part 1 of this series we introduced the following general framework for thinking about statistical models and what they contain.\nStochastic Component\n\\[\nY_i \\sim f(\\theta_i, \\alpha)\n\\]\nSystematic Component\n\\[\n\\theta_i = g(X_i, \\beta)\n\\] The terminology are as described previously.\nThese equations are too broad and abstract to be implemented directly. Instead, specific choices about the \\(f(.)\\) and \\(g(.)\\) need to be made. King, Tomz, and Wittenberg (2000) gives the following examples:\nLogistic Regression\n\\[\nY_i \\sim Bernoulli(\\pi_i)\n\\]\n\\[\n\\pi_i = \\frac{1}{1 + e^{-X_i\\beta}}\n\\]\nLinear Regression\n\\[\nY_i \\sim N(\\mu_i, \\sigma^2)\n\\] \\[\n\\mu_i = X_i\\beta\n\\]\nSo, what’s so special about linear regression, in this framework?\nIn one sense, not so much. It’s got a systematic component, and it’s got a stochastic component. But so do other models. But in another sense, quite a lot. It’s a rare case where the systematic component, \\(g(.)\\), doesn’t transform its inputs in some weird and wonderful way. We can say that \\(g(.)\\) is the identity transform, \\(I(.)\\), which in words means take what you’re given, do nothing to it, and pass it on.\nBy contrast, the systematic component for logistic regression is known as the logistic function. \\(logistic(x) := \\frac{1}{1 + e^{-x}}\\) It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren’t predicted values, but predicted probabilities, and nothing can be more probable than certain (1) or less probable than impossible (0).\nWe can compare the transformations used in linear and logistic regression as follows:1\n\n# Define transformations\nident &lt;- function(x) {x}\nlgt &lt;- function(x) {1 / (1 + exp(-x))}\n\n\n# Draw the associations\ncurve(ident, -6, 6,\n      xlab = \"x (before transform)\",\n      ylab = \"z (after transform)\",\n      main = \"The Identity 'Transformation'\"\n      )\ncurve(lgt, -6, 6, \n      xlab = \"x (before transform)\", \n      ylab = \"z (after transform)\",\n      main = \"The Logistic Transformation\"\n      )\n\n\n\n\n\n\nIdentity Transformation\n\n\n\n\n\n\n\nLogistic Transformation\n\n\n\n\n\n\nThe usual input to the transformation function \\(g(.)\\) is a sum of products. For three variables, for example, this could be \\(\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2\\). In matrix algebra this generalises to \\(\\boldsymbol{X\\beta}\\) , where \\(\\boldsymbol{X}\\) is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The \\(\\boldsymbol{\\beta}\\) term is a row-wise vector comprising each specific \\(\\beta\\) term, such as $ = {_0, _1, _2} $ in the three variable example above."
+  },
+  {
+    "objectID": "posts/lms-are-glms-part-02/index.html#footnotes",
+    "href": "posts/lms-are-glms-part-02/index.html#footnotes",
+    "title": "Linear Models are General Linear Models",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nUsing some base R graphics functions as I’m feeling masochistic↩︎"
+  },
+  {
     "objectID": "posts/talk-at-edinbr/index.html",
     "href": "posts/talk-at-edinbr/index.html",
     "title": "EdinbR talk on modelling economic (in)activity transitions",
@@ -137,6 +165,6 @@
     "href": "index.html",
     "title": "Jon Minton’s Blog",
     "section": "",
-    "text": "Interactive Sliders with Crosstalk and Plotly\n\n\n\n\n\n\n\nR\n\n\nplotly\n\n\ncrosstalk\n\n\n\n\n\n\n\n\n\n\n\nNov 30, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nRobocop (1987) is wonderfully childish\n\n\n\n\n\n\n\nstories\n\n\nfilms\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nTidy Tuesday on Dr Who\n\n\n\n\n\n\n\nR\n\n\ntidy tuesday\n\n\nDr Who\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2023\n\n\nJon Minton, Nick Christofides\n\n\n\n\n\n\n  \n\n\n\n\nPost with code\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nNov 28, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nLinear Models are General Linear Models\n\n\nPart One: Model fitting as parameter calibration\n\n\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nNov 28, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nEdinbR talk on modelling economic (in)activity transitions\n\n\n\n\n\n\n\nR\n\n\nmodelling\n\n\ntalks\n\n\neconomics\n\n\nhealth\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nA Deathly Silence\n\n\n\n\n\n\n\nMortality\n\n\nEpidemiology\n\n\nPapers\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nFirst Post\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2023\n\n\nJon Minton\n\n\n\n\n\n\nNo matching items"
+    "text": "Linear Models are General Linear Models\n\n\nPart Two: Systematic components and link functions\n\n\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nDec 1, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nInteractive Sliders with Crosstalk and Plotly\n\n\n\n\n\n\n\nR\n\n\nplotly\n\n\ncrosstalk\n\n\n\n\n\n\n\n\n\n\n\nNov 30, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nRobocop (1987) is wonderfully childish\n\n\n\n\n\n\n\nstories\n\n\nfilms\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nTidy Tuesday on Dr Who\n\n\n\n\n\n\n\nR\n\n\ntidy tuesday\n\n\nDr Who\n\n\n\n\n\n\n\n\n\n\n\nNov 29, 2023\n\n\nJon Minton, Nick Christofides\n\n\n\n\n\n\n  \n\n\n\n\nPost with code\n\n\n\n\n\n\n\nR\n\n\n\n\n\n\n\n\n\n\n\nNov 28, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nLinear Models are General Linear Models\n\n\nPart One: Model fitting as parameter calibration\n\n\n\n\nstatistics\n\n\n\n\n\n\n\n\n\n\n\nNov 28, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nEdinbR talk on modelling economic (in)activity transitions\n\n\n\n\n\n\n\nR\n\n\nmodelling\n\n\ntalks\n\n\neconomics\n\n\nhealth\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nA Deathly Silence\n\n\n\n\n\n\n\nMortality\n\n\nEpidemiology\n\n\nPapers\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2023\n\n\nJon Minton\n\n\n\n\n\n\n  \n\n\n\n\nFirst Post\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 25, 2023\n\n\nJon Minton\n\n\n\n\n\n\nNo matching items"
   }
 ]
