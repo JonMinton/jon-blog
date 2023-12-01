@@ -7,11 +7,15 @@ code-fold: true
 categories: [R, plotly, crosstalk]
 ---
 
+## Introduction
+
 Below is an example of creating a plotly chart with an interactive slider using crosstalk.
 
 By default, the plot shows the proportion of datazones in a local authority that are in the 15% most deprived datazones in Scotland. (Using the 2020 SIMD). 
 
 The slider allows different thresholds than the 15% default to be selected. 
+
+## Data Downloading and Preparation
 
 *To see the code itself, just click on the word 'code' to open up the block'.*
 
@@ -38,6 +42,8 @@ if(!file.exists(here("simd_data.xlsx"))){
 dta <- openxlsx::readWorkbook(here("simd_data.xlsx"), sheet = "SIMD 2020v2 DZ lookup data")
 
 ```
+
+The code for the figure itself is below. It's quite a convoluted process. There's almost certaintly neater ways of doing this. The main thing to keep in mind is *all the figures exist; just only one is visible at a time*.
 
 
 ```{r}
@@ -133,4 +139,38 @@ fig
 ```
 
 As you can see, there's still some work to do regarding formatting. But it works! 
+
+
+## Static 
+
+For comparison, here's the same data used to produce a static plot
+
+```{r}
+# Now to put it in the structure, and set active for `dep_quants = 0.15`
+
+df_15pc <- shared_df |> 
+  filter(between(dep_quants, 0.149, 0.151)) |> 
+  select(-dep_quants, -undep_quants)
+
+df_15pc |>
+  mutate(pct_deprived = 100 * prop_deprived) |> 
+  ggplot(aes(y= pct_deprived, x = fct_reorder(HBname, pct_deprived))) + 
+  geom_bar(stat = "identity") +
+  geom_text(
+    aes(
+      label = ifelse(df_15pc$prop_deprived > 0, sprintf("%.1f", pct_deprived), "")
+    ), 
+    color = "white",
+    hjust = 1, 
+    nudge_y = -0.5
+  ) + 
+  coord_flip() + 
+  labs(
+    x = "Health Board",
+    y = "Percent of datazones in 15% most deprived proportion of Scotland",
+    title = "Percent of datazones in Health Board in 15% most deprived areas of Scotland",
+    subtitle = "SIMD 2020"
+  ) + 
+  geom_hline(yintercept = 0)
+```
 

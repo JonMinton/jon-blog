@@ -7,15 +7,19 @@ website:
   navbar:
     right:
       - about.qmd
-      - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
       - icon: window-fullscreen
         href: https://jonminton.net 
+      - icon: github
+        href: https://github.com/JonMinton
+      - icon: twitter
+        href: https://twitter.com/JonMinton
+      - icon: linkedin
+        href: https://uk.linkedin.com/in/jon-minton-09480b13a
 format:
   html:
-    theme: cosmo
+    theme: 
+      dark: slate
+      light: cosmo
     css: styles.css
 
 

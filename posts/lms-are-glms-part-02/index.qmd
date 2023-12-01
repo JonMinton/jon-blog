@@ -2,8 +2,7 @@
 title: "Linear Models are General Linear Models"
 subtitle: "Part Two: Systematic components and link functions"
 author: "Jon Minton"
-date: "2023-11-28"
-draft: true
+date: "2023-12-1"
 categories: [statistics]
 bibliography: references.bib
 ---
@@ -44,8 +43,7 @@ $$
 
 $$
 Y_i \sim N(\mu_i, \sigma^2) 
-$$
-$$
+$$ $$
  \mu_i = X_i\beta
 $$
 
@@ -53,6 +51,42 @@ So, what's so special about linear regression, in this framework?
 
 In one sense, not so much. It's got a systematic component, and it's got a stochastic component. But so do other models. But in another sense, quite a lot. It's a rare case where the systematic component, $g(.)$, *doesn't* transform its inputs in some weird and wonderful way. We can say that $g(.)$ is the identity transform, $I(.)$, which in words means *take what you're given, do nothing to it, and pass it on*.
 
-By contrast, the systematic component for logistic regression is known as the logistic function. $logistic(x) := \frac{1}{1 + e^{-x}}$ It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren't predicted values, but predicted *probabilities*, and nothing can be more probable than certain (1) or less probable than impossible (0). 
+By contrast, the systematic component for logistic regression is known as the logistic function. $logistic(x) := \frac{1}{1 + e^{-x}}$ It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren't predicted values, but predicted *probabilities*, and nothing can be more probable than certain (1) or less probable than impossible (0).
+
+We can compare the transformations used in linear and logistic regression as follows:[^1]
+
+[^1]: Using some base R graphics functions as I'm feeling masochistic
+
+```{r}
+#| layout-ncol: 2
+#| fig-cap: 
+#|   - "Identity Transformation"
+#|   - "Logistic Transformation"
 
 
+# Define transformations
+ident <- function(x) {x}
+lgt <- function(x) {1 / (1 + exp(-x))}
+
+
+# Draw the associations
+curve(ident, -6, 6,
+      xlab = "x (before transform)",
+      ylab = "z (after transform)",
+      main = "The Identity 'Transformation'"
+      )
+
+curve(lgt, -6, 6, 
+      xlab = "x (before transform)", 
+      ylab = "z (after transform)",
+      main = "The Logistic Transformation"
+      )
+
+
+```
+
+The usual input to the transformation function $g(.)$ is a sum of products. For three variables, for example, this could be $\beta_0 + \beta_1 x_1 + \beta_2 x_2$. In matrix algebra this generalises to $\boldsymbol{X\beta}$ , where $\boldsymbol{X}$ is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The $\boldsymbol{\beta}$ term is a row-wise vector comprising each specific $\beta$ term, such as $\boldsymbol{\beta} = \{ \beta_0, \beta_1, \beta_2 \}$ in the three variable example above.
+
+What's special about the identity transformation, and so linear regression, is that there is a fairly clear correspondence between a $\beta_j$ term and the estimated influence of changing a predictor variable $x_j$ on the predicted outcome $Y$, i.e. the 'effect of $x_j$ on $Y$'. For other transformations this tends to not be the case.
+
+We'll delve into this a bit more in a later post.
