@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-11-28">
+<meta name="dcterms.date" content="2023-12-01">
 
 <title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
 <style>
@@ -197,7 +197,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 28, 2023</p>
+        <p class="date">December 1, 2023</p>
       </div>
     </div>
     
@@ -221,7 +221,7 @@ div.csl-indent {
 </section>
 <section id="part-2-systematic-components-and-link-functions" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-systematic-components-and-link-functions">Part 2: Systematic components and link functions</h2>
-<p>In part 1 of this series we introduced the following general framework for thinking about statistical models and what they contain.</p>
+<p>In <a href="../lms-are-glms-part-01">part 1 of this series</a> we introduced the following general framework for thinking about statistical models and what they contain.</p>
 <p><strong>Stochastic Component</strong></p>
 <p><span class="math display">\[
 Y_i \sim f(\theta_i, \alpha)
@@ -286,7 +286,9 @@ Y_i \sim N(\mu_i, \sigma^2)
 </div>
 </div>
 </div>
-<p>The usual input to the transformation function <span class="math inline">\(g(.)\)</span> is a sum of products. For three variables, for example, this could be <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2\)</span>. In matrix algebra this generalises to <span class="math inline">\(\boldsymbol{X\beta}\)</span> , where <span class="math inline">\(\boldsymbol{X}\)</span> is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The <span class="math inline">\(\boldsymbol{\beta}\)</span> term is a row-wise vector comprising each specific <span class="math inline">\(\beta\)</span> term, such as $ = {_0, _1, _2} $ in the three variable example above.</p>
+<p>The usual input to the transformation function <span class="math inline">\(g(.)\)</span> is a sum of products. For three variables, for example, this could be <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2\)</span>. In matrix algebra this generalises to <span class="math inline">\(\boldsymbol{X\beta}\)</span> , where <span class="math inline">\(\boldsymbol{X}\)</span> is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The <span class="math inline">\(\boldsymbol{\beta}\)</span> term is a row-wise vector comprising each specific <span class="math inline">\(\beta\)</span> term, such as <span class="math inline">\(\boldsymbol{\beta} = \{ \beta_0, \beta_1, \beta_2 \}\)</span> in the three variable example above.</p>
+<p>What’s special about the identity transformation, and so linear regression, is that there is a fairly clear correspondence between a <span class="math inline">\(\beta_j\)</span> term and the estimated influence of changing a predictor variable <span class="math inline">\(x_j\)</span> on the predicted outcome <span class="math inline">\(Y\)</span>, i.e.&nbsp;the ‘effect of <span class="math inline">\(x_j\)</span> on <span class="math inline">\(Y\)</span>’. For other transformations this tends to not be the case.</p>
+<p>We’ll delve into this a bit more in a later post.</p>
 
 
 
@@ -650,6 +652,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 

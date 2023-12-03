@@ -9,7 +9,7 @@ bibliography: references.bib
 
 ## tl;dr
 
-This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in @KinTomWit00 . 
+This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in @KinTomWit00 .
 
 ## Part 1: What are statistical models and how are they fit?
 
@@ -100,6 +100,6 @@ flowchart LR
 
 ```
 
-Pretty much all statistical model fitting involves iterating along this $g \to \beta$ and $\beta \to g$ feedback loop until some kind of condition is met involving minimising $\delta$. 
+Pretty much all statistical model fitting involves iterating along this $g \to \beta$ and $\beta \to g$ feedback loop until some kind of condition is met involving minimising $\delta$.
 
-I'll expand on this idea further in some later posts :)
+I'll expand on this idea further in [part 2](../lms-are-glms-part-02).

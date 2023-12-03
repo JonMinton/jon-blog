@@ -1,0 +1,27 @@
+---
+title: "How to wrap presents"
+author: "Jon Minton"
+date: "2023-12-3"
+categories: [Christmas, Birthdays, Arts & Crafts]
+---
+
+Here's the key information I've learned from watching too many Youtube videos on how to wrap presents over the years.
+
+```{mermaid}
+flowchart TB
+
+start(Presents to Wrap)
+decision{Are they cuboid?}
+box(Put them in a cuboid)
+action(Wrap them)
+finish[Presents are wrapped]
+
+start --> decision
+decision -->|yes| action
+decision -->|no| box
+box --> action
+action --> finish
+
+```
+
+You're welcome!

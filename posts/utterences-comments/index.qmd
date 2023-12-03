@@ -1,0 +1,41 @@
+---
+title: "New blog feature: comments"
+author: "Jon Minton"
+date: "2023-12-02"
+categories: [quarto, blog]
+---
+
+I *think* I've managed to set up a blog comment feature for each of the posts.
+
+As usual, the quarto documentation is great, though information on comments is in the [HTML basics section](https://quarto.org/docs/output-formats/html-basics.html#commenting) rather than the [website or blog](https://quarto.org/docs/websites/) section, so takes a bit of hunting. [Albert Rapp's very comprehensive blogpost](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html) is a great resource, covering this and much else.
+
+The Quarto documentation gives three options for comments:
+
+-   [Hypothes.is](https://web.hypothes.is/), which allows comments and annotations to be provided line-by-line, a bit like non-editable tracked changes.
+-   [utterances](https://github.com/apps/utterances), which is a lightweight interface based on the discussion feature in github.
+-   [giscus](https://giscus.app/), which seems to be built on utterances, but a bit more heavy-weight/opinionated.
+
+I've attempted, and think I've managed to implement, utterances.
+
+In order to make a comment on a post, you need to have a Github username, and log in.
+
+From my end, I needed to do the following:
+
+1.  Set up a public Github repo for blog comments. I unimaginately called this `BlogComments`
+2.  Install utterances on github and associate it with this repo
+3.  Within the file `posts/_metadata.yml`, add the following declaration
+
+```
+comments: 
+  utterances: 
+    repo:  JonMinton/BlogComments
+```
+
+Parameters in `posts/_metadata.yml` are applied to all posts within the `posts` subdirectory. This *should* mean that each post will now contain a comment box at the bottom.
+
+When a comment is added by a registered Github user, metadata from the specific post being commented on *should* be appended to an issue/discussion post within the `JonMinton/BlogComments` directory. And whenever a post is rendered, all associated discussion/issue items in the `BlogComments` repo should be fetched and shown at the bottom of the post. 
+
+I've said *should* because I've only just set this up, and there are currently no comments. 
+
+Why not try to add a comment and see what happens?!
+

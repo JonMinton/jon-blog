@@ -13,7 +13,7 @@ This is part of a series of posts which introduce and discuss the implications o
 
 ## Part 2: Systematic components and link functions
 
-In part 1 of this series we introduced the following general framework for thinking about statistical models and what they contain.
+In [part 1 of this series](../lms-are-glms-part-01) we introduced the following general framework for thinking about statistical models and what they contain.
 
 **Stochastic Component**
 
@@ -89,4 +89,4 @@ The usual input to the transformation function $g(.)$ is a sum of products. For 
 
 What's special about the identity transformation, and so linear regression, is that there is a fairly clear correspondence between a $\beta_j$ term and the estimated influence of changing a predictor variable $x_j$ on the predicted outcome $Y$, i.e. the 'effect of $x_j$ on $Y$'. For other transformations this tends to not be the case.
 
-We'll delve into this a bit more in a later post.
+We'll delve into how this is implemented in practice in [part 3](../lms-are-glms-part-03).
