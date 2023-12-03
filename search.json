@@ -39,7 +39,7 @@
     "href": "posts/wrapping-guide/index.html",
     "title": "How to wrap presents",
     "section": "",
-    "text": "Here’s the key information I’ve learned from watching too many Youtube videos on how to wrap presents over the years.\n\n\n\n\nflowchart TB\n\nstart(Presents to Wrap)\ndecision{Are they cuboid?}\nbox(Put them in a cuboid)\naction(Wrap them)\nfinish[Presents are wrapped]\n\nstart --&gt; decision\ndecision --&gt;|yes| action\ndecision --&gt;|no| box\nbox --&gt; action\naction --&gt; finish\n\n\n\n\n\n\nYou’re welcome!"
+    "text": "Here’s the key information I’ve learned from watching too many Youtube videos on how to wrap presents over the years.\n\n\n\n\nflowchart TB\n\nstart[Presents to Wrap]\ndecision{Are they cuboid?}\nbox(Put them in a cuboid)\naction(Wrap them)\nfinish[Presents are wrapped]\n\nstart --&gt; decision\ndecision --&gt;|yes| action\ndecision --&gt;|no| box\nbox --&gt; action\naction --&gt; finish\n\n\n\n\n\n\nYou’re welcome!"
   },
   {
     "objectID": "posts/tidy-tuesday-dr-who/index.html",
