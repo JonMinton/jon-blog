@@ -10,7 +10,7 @@ Here's the key information I've learned from watching too many Youtube videos on
 ```{mermaid}
 flowchart TB
 
-start(Presents to Wrap)
+start[Presents to Wrap]
 decision{Are they cuboid?}
 box(Put them in a cuboid)
 action(Wrap them)
