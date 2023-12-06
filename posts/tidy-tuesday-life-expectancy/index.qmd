@@ -1,0 +1,106 @@
+---
+title: "Tidy Tuesday on Life Expectancy"
+author: 
+  - "Nick Christofides"
+  - "Jon Minton"
+date: "2023-12-06"
+categories: [R, tidy tuesday, Life Expectancy]
+---
+
+This week's Tidy Tuesday compares life expectancy across the globe and is available here:
+
+## Loading the data
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+data_url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-12-05/life_expectancy_different_ages.csv"
+ 
+dta <- read_csv(data_url)
+
+# Alternatively
+tuesdata <- tidytuesdayR::tt_load('2023-12-05')
+```
+
+```{r}
+names(tuesdata)
+life_expectancy <- tuesdata$life_expectancy
+
+n_distinct(life_expectancy$Entity)
+```
+
+## Setting a global plot theme
+
+```{r}
+theme_set(theme_minimal())
+```
+
+## Comparing life expectancy across regions
+
+```{r}
+regions <- life_expectancy %>%
+  filter(str_detect(Entity, "region"))
+
+regions %>%
+  ggplot(aes(x = Year, y = LifeExpectancy)) +
+  geom_line(aes(col = Entity)) +
+  theme(legend.position = "top") +
+  annotate(geom = "text",
+           x = 1960, y = 50,
+           label = "What happened here?") +
+  geom_vline(xintercept = 2019, linetype = 2) +
+  annotate(geom = "text", x = 2019, y = 75,
+           label = "Start of COVID pandemic",
+           hjust = 1)
+```
+
+## Difference in life expectancy between more and less developed regions
+
+```{r}
+regions %>%
+  filter(Entity %in% c("More developed regions",
+                       "Less developed regions"))  %>%
+  arrange(Year, Entity) %>%
+  group_by(Year) %>%
+  mutate(difference = LifeExpectancy - lag(LifeExpectancy)) %>%
+  filter(!is.na(difference)) %>%
+  ungroup() %>%
+  ggplot(aes(x = Year, y = difference)) +
+  geom_area(alpha = 0.5) +
+  expand_limits(y = 0) +
+  labs(title = "Difference in life expectancy between more developed and less developed regions",
+       y = "Difference in life expectancy (years)")
+```
+
+We look at life expectancy at different ages in three specific countries.
+
+```{r}
+
+ 
+data_tidy <-
+  dta |>
+    pivot_longer(
+      cols = LifeExpectancy0:LifeExpectancy80
+    ) |>
+    mutate(
+      starting_age = str_remove(name, "LifeExpectancy") %>%
+        as.numeric()
+    ) |>
+    select(-name) |>
+    rename(e_x = value)
+```
+
+
+```{r}
+data_tidy |>
+  filter(
+    Entity %in% c(
+      "Nigeria", "Iran",
+      "South Africa"
+    )
+  ) |>
+  arrange(Year)  |>
+  ggplot(aes(Year, e_x, group = factor(starting_age), colour = factor(starting_age))) +
+  geom_line() +
+  facet_wrap(~Entity)
+```
