@@ -8,6 +8,7 @@
 
 <meta name="author" content="Nick Christofides">
 <meta name="author" content="Jon Minton">
+<meta name="author" content="Sandra Nwobi">
 <meta name="dcterms.date" content="2023-12-06">
 
 <title>Jon Minton’s Blog - Tidy Tuesday on Life Expectancy</title>
@@ -173,6 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="quarto-title-meta-contents">
                <p>Nick Christofides </p>
                <p>Jon Minton </p>
+               <p>Sandra Nwobi </p>
             </div>
     </div>
       
@@ -201,7 +203,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="loading-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-the-data">Loading the data</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
 </div>
@@ -217,10 +222,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-12-05/life_expectancy_different_ages.csv"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 20755 Columns: 9
 ── Column specification ────────────────────────────────────────────────────────
@@ -231,8 +239,11 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2023-12-05'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>--- Compiling #TidyTuesday Information for 2023-12-05 ----
 --- There are 3 files available ---
@@ -249,14 +260,20 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 </div>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tuesdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "life_expectancy"                "life_expectancy_different_ages"
 [3] "life_expectancy_female_male"   </code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>life_expectancy <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>life_expectancy</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">n_distinct</span>(life_expectancy<span class="sc">$</span>Entity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 261</code></pre>
 </div>
@@ -265,12 +282,17 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 <section id="setting-a-global-plot-theme" class="level2">
 <h2 class="anchored" data-anchor-id="setting-a-global-plot-theme">Setting a global plot theme</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="comparing-life-expectancy-across-regions" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-life-expectancy-across-regions">Comparing life expectancy across regions</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>regions <span class="ot">&lt;-</span> life_expectancy <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(Entity, <span class="st">"region"</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -285,6 +307,7 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">2019</span>, <span class="at">y =</span> <span class="dv">75</span>,</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Start of COVID pandemic"</span>,</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -293,6 +316,8 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 <section id="difference-in-life-expectancy-between-more-and-less-developed-regions" class="level2">
 <h2 class="anchored" data-anchor-id="difference-in-life-expectancy-between-more-and-less-developed-regions">Difference in life expectancy between more and less developed regions</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>regions <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Entity <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"More developed regions"</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"Less developed regions"</span>))  <span class="sc">%&gt;%</span></span>
@@ -306,12 +331,15 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Difference in life expectancy between more developed and less developed regions"</span>,</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Difference in life expectancy (years)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We look at life expectancy at different ages in three specific countries.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data_tidy <span class="ot">&lt;-</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  dta <span class="sc">|&gt;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
@@ -323,8 +351,11 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">|&gt;</span></span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">e_x =</span> value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data_tidy <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    Entity <span class="sc">%in%</span> <span class="fu">c</span>(</span>
@@ -336,10 +367,19 @@ dbl (7): Year, LifeExpectancy0, LifeExpectancy10, LifeExpectancy25, LifeExpe...
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Year, e_x, <span class="at">group =</span> <span class="fu">factor</span>(starting_age), <span class="at">colour =</span> <span class="fu">factor</span>(starting_age))) <span class="sc">+</span></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Entity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Sandra Nwobi, who suggested the three countries above, provides the following summary:</p>
+<blockquote class="blockquote">
+<p>Of the three developing countries—Iran, South Africa, and Nigeria—Nigeria has a significantly higher zero-age death rate in the late 50s and early 60s. This can be attributed to a number of factors, including socioeconomic instability, political unrest, malnutrition, and limited access to healthcare. Comparing this result to South Africa and Iran, it is comparatively higher. However, there have been noticeable improvements in Nigeria during the 1980s, with a steady increase. Nevertheless, much work needs to be done to combat this in Nigeria, as it performs significantly worse than the other two countries.<br>
+</p>
+<p>There was a noticeable decline in data in the early 2000s, particularly in South Africa. Health crises like HIV/AIDS, which may have affected people between the ages of 0 and 25, as well as a number of social and economic problems may have contributed to this decline.<br>
+</p>
+<p>Iran’s data indicates consistent growth across all age groups over the years, with the exception of a general decline in 2020 that was likely caused by the COVID-19 virus. Out of the three countries, South Africa is the most affected, maybe as a result of a much older demography compared to Nigeria.</p>
+</blockquote>
 
 
 </section>

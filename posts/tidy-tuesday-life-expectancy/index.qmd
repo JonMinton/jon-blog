@@ -3,7 +3,10 @@ title: "Tidy Tuesday on Life Expectancy"
 author: 
   - "Nick Christofides"
   - "Jon Minton"
+  - "Sandra Nwobi"
 date: "2023-12-06"
+modified: "2023-12-06"
+code-fold: true
 categories: [R, tidy tuesday, Life Expectancy]
 ---
 
@@ -90,7 +93,6 @@ data_tidy <-
     rename(e_x = value)
 ```
 
-
 ```{r}
 data_tidy |>
   filter(
@@ -104,3 +106,11 @@ data_tidy |>
   geom_line() +
   facet_wrap(~Entity)
 ```
+
+Sandra Nwobi, who suggested the three countries above, provides the following summary:
+
+> Of the three developing countries---Iran, South Africa, and Nigeria---Nigeria has a significantly higher zero-age death rate in the late 50s and early 60s. This can be attributed to a number of factors, including socioeconomic instability, political unrest, malnutrition, and limited access to healthcare. Comparing this result to South Africa and Iran, it is comparatively higher. However, there have been noticeable improvements in Nigeria during the 1980s, with a steady increase. Nevertheless, much work needs to be done to combat this in Nigeria, as it performs significantly worse than the other two countries.\
+>
+> There was a noticeable decline in data in the early 2000s, particularly in South Africa. Health crises like HIV/AIDS, which may have affected people between the ages of 0 and 25, as well as a number of social and economic problems may have contributed to this decline.\
+>
+> Iran's data indicates consistent growth across all age groups over the years, with the exception of a general decline in 2020 that was likely caused by the COVID-19 virus. Out of the three countries, South Africa is the most affected, maybe as a result of a much older demography compared to Nigeria.
