@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-02">
+<meta name="dcterms.date" content="2023-12-08">
 
-<title>Jon Minton’s Blog - New blog feature: comments</title>
+<title>Jon Minton’s Blog - Optimised for Twitter?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -66,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - New blog feature: comments">
+<meta name="twitter:title" content="Jon Minton’s Blog - Optimised for Twitter?">
 <meta name="twitter:description" content="">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
@@ -125,10 +159,11 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">New blog feature: comments</h1>
+      <h1 class="title">Optimised for Twitter?</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">quarto</div>
-                <div class="quarto-category">blog</div>
+                <div class="quarto-category">twitter</div>
+                <div class="quarto-category">X</div>
+                <div class="quarto-category">news</div>
               </div>
                   </div>
   </div>
@@ -146,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 2, 2023</p>
+        <p class="date">December 8, 2023</p>
       </div>
     </div>
     
@@ -164,29 +199,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>I <em>think</em> I’ve managed to set up a blog comment feature for each of the posts.</p>
-<p>As usual, the quarto documentation is great, though information on comments is in the <a href="https://quarto.org/docs/output-formats/html-basics.html#commenting">HTML basics section</a> rather than the <a href="https://quarto.org/docs/websites/">website or blog</a> section, so takes a bit of hunting. <a href="https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html">Albert Rapp’s very comprehensive blogpost</a> is a great resource, covering this and much else.</p>
-<p>The Quarto documentation gives three options for comments:</p>
-<ul>
-<li><a href="https://web.hypothes.is/">Hypothes.is</a>, which allows comments and annotations to be provided line-by-line, a bit like non-editable tracked changes.</li>
-<li><a href="https://github.com/apps/utterances">utterances</a>, which is a lightweight interface based on the discussion feature in github.</li>
-<li><a href="https://giscus.app/">giscus</a>, which seems to be built on utterances, but a bit more heavy-weight/opinionated.</li>
-</ul>
-<p>I’ve attempted, and think I’ve managed to implement, utterances.</p>
-<p>In order to make a comment on a post, you need to have a Github username, and log in.</p>
-<p>From my end, I needed to do the following:</p>
-<ol type="1">
-<li>Set up a public Github repo for blog comments. I unimaginately called this <code>BlogComments</code></li>
-<li>Install utterances on github and associate it with this repo</li>
-<li>Within the file <code>posts/_metadata.yml</code>, add the following declaration</li>
-</ol>
-<pre><code>comments: 
-  utterances: 
-    repo:  JonMinton/BlogComments</code></pre>
-<p>Parameters in <code>posts/_metadata.yml</code> are applied to all posts within the <code>posts</code> subdirectory. This <em>should</em> mean that each post will now contain a comment box at the bottom.</p>
-<p>When a comment is added by a registered Github user, metadata from the specific post being commented on <em>should</em> be appended to an issue/discussion post within the <code>JonMinton/BlogComments</code> directory. And whenever a post is rendered, all associated discussion/issue items in the <code>BlogComments</code> repo should be fetched and shown at the bottom of the post.</p>
-<p>I’ve said <em>should</em> because I’ve only just set this up, and there are currently no comments.</p>
-<p>Why not try to add a comment and see what happens?!</p>
+<p>I’ve finally got around to ‘optimising the Quarto blog for Twitter’, by following the guidance in <a href="https://quarto.org/docs/websites/website-tools.html#twitter-cards">this section</a> of Quarto’s website and adding the following declaration to the <code>_quarto.yml</code> file in the project root.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">twitter-card</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">"@jonminton"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, is Twitter optimised for Twitter, these days? Is Twitter even Twitter!?</p>
 
 
 
