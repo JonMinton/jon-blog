@@ -1,0 +1,16 @@
+---
+title: "Optimised for Twitter?"
+author: "Jon Minton"
+date: "2023-12-08"
+categories: [twitter, X, news]
+---
+
+I've finally got around to 'optimising the Quarto blog for Twitter', by following the guidance in [this section](https://quarto.org/docs/websites/website-tools.html#twitter-cards) of Quarto's website and adding the following declaration to the `_quarto.yml` file in the project root.
+
+``` yaml
+website:
+  twitter-card:
+   site: "@jonminton"
+```
+
+However, is Twitter optimised for Twitter, these days? Is Twitter even Twitter!?

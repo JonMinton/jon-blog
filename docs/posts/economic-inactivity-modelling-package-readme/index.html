@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-02">
+<meta name="dcterms.date" content="2023-12-09">
 
-<title>Jon Minton’s Blog - New blog feature: comments</title>
+<title>Jon Minton’s Blog - My Economic Inactivity Modelling Package: Informative Readme File!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - New blog feature: comments">
+<meta name="twitter:title" content="Jon Minton’s Blog - My Economic Inactivity Modelling Package: Informative Readme File!">
 <meta name="twitter:description" content="">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
@@ -125,10 +125,12 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">New blog feature: comments</h1>
+      <h1 class="title">My Economic Inactivity Modelling Package: <em>Informative Readme File!</em></h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">quarto</div>
-                <div class="quarto-category">blog</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Economic Inactivity</div>
+                <div class="quarto-category">News</div>
+                <div class="quarto-category">Packages</div>
               </div>
                   </div>
   </div>
@@ -146,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 2, 2023</p>
+        <p class="date">December 9, 2023</p>
       </div>
     </div>
     
@@ -164,33 +166,21 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>I <em>think</em> I’ve managed to set up a blog comment feature for each of the posts.</p>
-<p>As usual, the quarto documentation is great, though information on comments is in the <a href="https://quarto.org/docs/output-formats/html-basics.html#commenting">HTML basics section</a> rather than the <a href="https://quarto.org/docs/websites/">website or blog</a> section, so takes a bit of hunting. <a href="https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html">Albert Rapp’s very comprehensive blogpost</a> is a great resource, covering this and much else.</p>
-<p>The Quarto documentation gives three options for comments:</p>
-<ul>
-<li><a href="https://web.hypothes.is/">Hypothes.is</a>, which allows comments and annotations to be provided line-by-line, a bit like non-editable tracked changes.</li>
-<li><a href="https://github.com/apps/utterances">utterances</a>, which is a lightweight interface based on the discussion feature in github.</li>
-<li><a href="https://giscus.app/">giscus</a>, which seems to be built on utterances, but a bit more heavy-weight/opinionated.</li>
-</ul>
-<p>I’ve attempted, and think I’ve managed to implement, utterances.</p>
-<p>In order to make a comment on a post, you need to have a Github username, and log in.</p>
-<p>From my end, I needed to do the following:</p>
-<ol type="1">
-<li>Set up a public Github repo for blog comments. I unimaginately called this <code>BlogComments</code></li>
-<li>Install utterances on github and associate it with this repo</li>
-<li>Within the file <code>posts/_metadata.yml</code>, add the following declaration</li>
+<p>A few weeks ago, as I wasn’t using any personal or sensitive data, I decided to make the main repository where I keep my economic inactivity modelling work <strong>public</strong>, meaning in theory anyone could take a look.</p>
+<p><em>However (much like this blog), I didn’t tell anyone about it.</em></p>
+<p>The repo is a bit of a mess, but it works. It’s both an R package, containing various convenience functions and lookup files, and a series of notebooks, presentations and now draft papers which make use of such functions and files through quarto. In due course, it may be a good idea to separate the package side of things from the ‘working’ repo which makes use of the package. Any suggestions how best to do this are welcome.</p>
+<p>The main thing I’ve changed recently is the <code>readme.md</code> file. The economic inactivity project makes extensive use of <a href="https://www.understandingsociety.ac.uk/">Understanding Society</a>, in order to populate the models with information on transitions from one wave to the next between the seven mutually exclusive economic inactivity states. Now, the <code>readme.md</code> contains information about how and where to add the relevant <em>Understanding Society</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> dataset to a local clone of the repo in order to try out the functions and package.</p>
+<p>To reiterate, <em>caveat emptor</em>, the repo is what it is. But if you’re interested in taking a look, creating your own fork of it, cloning it, and adding the requisite data, then it’s available from <a href="https://github.com/JonMinton/economic_inactivity">this link</a></p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The particular version of the dataset I plumped for includes British Household Panel Survey data as well, the predecessor to Understanding Society, which began in 1991. So there’s the potential to use the package to explore changes in transition probabilities and drivers thereof between states for a much longer period than I’m using to calibrate the model and explore the trends.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-<pre><code>comments: 
-  utterances: 
-    repo:  JonMinton/BlogComments</code></pre>
-<p>Parameters in <code>posts/_metadata.yml</code> are applied to all posts within the <code>posts</code> subdirectory. This <em>should</em> mean that each post will now contain a comment box at the bottom.</p>
-<p>When a comment is added by a registered Github user, metadata from the specific post being commented on <em>should</em> be appended to an issue/discussion post within the <code>JonMinton/BlogComments</code> directory. And whenever a post is rendered, all associated discussion/issue items in the <code>BlogComments</code> repo should be fetched and shown at the bottom of the post.</p>
-<p>I’ve said <em>should</em> because I’ve only just set this up, and there are currently no comments.</p>
-<p>Why not try to add a comment and see what happens?!</p>
-
-
-
-</main> <!-- /main -->
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

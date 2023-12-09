@@ -1,0 +1,18 @@
+---
+title: "My Economic Inactivity Modelling Package: *Informative Readme File!*"
+author: "Jon Minton"
+date: "2023-12-9"
+categories: [R, Economic Inactivity, News, Packages]
+---
+
+A few weeks ago, as I wasn't using any personal or sensitive data, I decided to make the main repository where I keep my economic inactivity modelling work **public**, meaning in theory anyone could take a look.
+
+*However (much like this blog), I didn't tell anyone about it.*
+
+The repo is a bit of a mess, but it works. It's both an R package, containing various convenience functions and lookup files, and a series of notebooks, presentations and now draft papers which make use of such functions and files through quarto. In due course, it may be a good idea to separate the package side of things from the 'working' repo which makes use of the package. Any suggestions how best to do this are welcome.
+
+The main thing I've changed recently is the `readme.md` file. The economic inactivity project makes extensive use of [Understanding Society](https://www.understandingsociety.ac.uk/), in order to populate the models with information on transitions from one wave to the next between the seven mutually exclusive economic inactivity states. Now, the `readme.md` contains information about how and where to add the relevant *Understanding Society*[^1] dataset to a local clone of the repo in order to try out the functions and package.
+
+[^1]: The particular version of the dataset I plumped for includes British Household Panel Survey data as well, the predecessor to Understanding Society, which began in 1991. So there's the potential to use the package to explore changes in transition probabilities and drivers thereof between states for a much longer period than I'm using to calibrate the model and explore the trends.
+
+To reiterate, *caveat emptor*, the repo is what it is. But if you're interested in taking a look, creating your own fork of it, cloning it, and adding the requisite data, then it's available from [this link](https://github.com/JonMinton/economic_inactivity)

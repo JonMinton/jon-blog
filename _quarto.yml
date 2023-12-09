@@ -1,9 +1,10 @@
 project:
   type: website
   output-dir: docs
-
 website:
   title: "Jon Minton's Blog"
+  twitter-card: 
+    site: "@jonminton"
   navbar:
     right:
       - about.qmd
@@ -21,6 +22,7 @@ format:
       dark: slate
       light: cosmo
     css: styles.css
+
 
 
 
