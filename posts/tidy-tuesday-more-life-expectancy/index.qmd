@@ -1,0 +1,125 @@
+---
+title: "Tidy Tuesday on Life Expectancy - Part Two"
+author: 
+  - "Jon Minton"
+  - "Andrew Saul"
+  - "Nick Christofides"
+  - "James McMahon"
+  - "Kennedy Owuso-Afrije"
+  - "Sandra Nwobi"
+date: "2023-12-13"
+code-fold: true
+warning: false
+message: false
+categories: [R, tidy tuesday, Life Expectancy]
+---
+
+## Introduction 
+
+In the [previous week's TidyTuesday session](../tidy-tuesday-life-expectancy/index.qmd), we looked at [Life Expectancy](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-12-05). 
+
+For this week, the Tidy Tuesday dataset of the week was of [Christmas films](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-12-12). However, as public health folks we felt more interested in continuing to look at life expectancy, so continued with [the previous week's dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-12-05). 
+
+This session was led by Andrew Saul. 
+
+## Script and outputs from session
+
+Loading some packages 
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+Use the `tidytuesdayR` package to load the data (rather than a direct link):
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2023-12-05')
+```
+
+Populate the content of the list above into three separate datasets:
+
+```{r}
+le <- tuesdata[[1]]
+le_diff <- tuesdata[[2]]
+le_gender <- tuesdata[[3]]
+```
+
+Have a quick look at the data 
+
+```{r}
+glimpse(le)
+glimpse(le_diff)
+glimpse(le_gender)
+```
+
+There are fields `code` and `entity`, where entity tends to be more verbose/descriptive. Entities include geographic regions, countries, economic groupings etc. (So fairly messy, definitely not mutally exclusive and exhaustive)
+
+```{r}
+#| eval: false
+le_diff %>% 
+  count(Entity) %>% 
+  pull(Entity)
+
+```
+
+We decided to look at a series of countries from across the world.
+
+```{r}
+countries <- c("Germany", "United Kingdom", "Saudi Arabia", "South Africa",
+               "South Korea", "Japan", "Vietnam", "Argentina", "Venezuela", "France")
+
+```
+
+Today we looked at life expectency in a selection of countries from 1900
+```{r}
+le1900 <- le %>% 
+  filter(Entity %in% countries,
+         Year>=1900) 
+
+le1900 %>% 
+  ggplot(aes(x=Year, y=LifeExpectancy))+
+  geom_line()+
+  facet_wrap(vars(Entity))
+```
+
+We then looked at the change in life expectency per year
+```{r}
+le1900 %>% 
+  group_by(Entity) %>% 
+  mutate(lag_diff = LifeExpectancy - lag(LifeExpectancy, order_by = Year),
+         sign = lag_diff>0) %>% 
+  ggplot(aes(x=Year, y=lag_diff))+
+  geom_point(aes(colour = sign))+
+  geom_hline(yintercept = 0)+
+  facet_wrap(vars(Entity))
+  
+```
+
+We changed the axis magnification of each country, so that the changes were more readily observable
+```{r}
+le1900lag <- le1900 %>% 
+  group_by(Entity) %>% 
+  mutate(lag_diff = LifeExpectancy - lag(LifeExpectancy, order_by = Year),
+         sign = lag_diff>0)
+
+ le1900lag %>% 
+  ggplot(aes(x=Year, y=lag_diff))+
+  geom_point(aes(colour = sign))+
+  geom_hline(yintercept = 0)+
+  facet_wrap(vars(Entity), scales = "free_y")
+```
+
+Finally, we examined variability in the change of life expectency altered for UK, France and Germany.  Here is can be seen that variability in life expectancy dramatically increased around the First and Second World Wars.  Data for Germany was incomplete for this period.
+
+To do this we made use of the `slider` package, and within this the `slide_index` function, to produce a rolling standard deviation of annual changes. 
+
+```{r}
+library(slider)
+le1900lag %>% 
+  arrange(Year) %>% 
+  filter(Entity %in% c("United Kingdom", "France", "Germany")) %>% 
+  mutate(roll_sd = slide_index_dbl(lag_diff, Year, .before = 4, .after = 4, .f = sd, .complete = T)) %>% 
+  ggplot(aes(x=Year, y=roll_sd, color = Entity))+
+  geom_line()
+```
