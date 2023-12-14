@@ -70,8 +70,9 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Jon Minton’s Blog - Nerdy Dialogues on Life and Death">
 <meta name="twitter:description" content="Part 1: Introduction; Life Expectancy">
+<meta name="twitter:image" content="images/ABDEC269-EDFD-4BD8-857E-984F61FCE1B9.jpg">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -130,9 +131,9 @@ ul.task-list li input[type="checkbox"] {
       <h1 class="title">Nerdy Dialogues on Life and Death</h1>
             <p class="subtitle lead">Part 1: Introduction; Life Expectancy</p>
                                 <div class="quarto-categories">
-                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">demography</div>
+                <div class="quarto-category">population health</div>
                 <div class="quarto-category">methodology</div>
-                <div class="quarto-category">epidemiology</div>
               </div>
                   </div>
   </div>
@@ -168,12 +169,18 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ABDEC269-EDFD-4BD8-857E-984F61FCE1B9.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Two cats, Emu and Goose. Goose is invading Emu’s personal space slightly</figcaption>
+</figure>
+</div>
 <p>Here’s an attempt to think some more about how and why standardised rates are used to compare populations. I’m doing so via the medium of a Socratic Dialogue<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <section id="why-age-standardise-a-dialogue" class="level2">
 <h2 class="anchored" data-anchor-id="why-age-standardise-a-dialogue">Why age standardise? A dialogue</h2>
 <p><em>More than twice as many deaths are reported in population A than population B</em></p>
 <p>First question: Does population A have about twice the population as population B?</p>
-<p><em>Okay. I’ve got the number of deaths in population A, <span class="math inline">\(n_A\)</span>, and the population size in population A, <span class="math inline">\(N_A\)</span>. So, I’ve calculated the rate <span class="math inline">\(r_A = \frac{n_A}{N_A}\)</span> for population A, and done the same for population B, <span class="math inline">\(r_B = \frac{n_B}{N_B}\)</span>.</em></p>
+<p><em>Okay. I’ve got the number of deaths in population A,</em> <span class="math inline">\(n_A\)</span>, and the population size in population A, <span class="math inline">\(N_A\)</span>. So, I’ve calculated the rate <span class="math inline">\(r_A = \frac{n_A}{N_A}\)</span> for population A, and done the same for population B, <span class="math inline">\(r_B = \frac{n_B}{N_B}\)</span>.</p>
 <p>Okay… so what’s the ratio of <span class="math inline">\(r_A\)</span> to <span class="math inline">\(r_B\)</span>?</p>
 <p><em>It’s 1.4. So, the mortality rate in population A is 40% higher than in population B</em></p>
 <p>And what does that mean?</p>
@@ -206,9 +213,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Probably quite a bit longer. ‘Life expectancy’ <span class="math inline">\(e\)</span> is usually used as shorthand for ‘period life expectancy from birth’, <span class="math inline">\(e_0\)</span>, or ‘unconditional period life expectancy’. Historically, the first year of life was one of the most dangerous ages to be alive.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> It’s a tall and weighty hurdle to cross. But as a 31 year old you’ve already crossed it. Your life expectancy isn’t ‘unconditional’ life expectancy from birth, <span class="math inline">\(e_0\)</span>, but ‘conditional’ life expectancy from age 31, <span class="math inline">\(e_{31}\)</span>.</p>
 <p><em>What does this mean?</em></p>
 <p>Say there were 10,000 people running the obstacle course of life, and they’re starting at the start of the course. The further you follow the course along, the fewer people reach each stage. Life expectancy at birth <span class="math inline">\(e_0\)</span>, heuristically, answers the question “at what stage in the course should you expect there’ll only be 5,000 of the original contestants remaining, on average?”</p>
-<p><em>And <span class="math inline">\(e_{31}\)</span>?</em></p>
+<p><em>And</em> <span class="math inline">\(e_{31}\)</span>?</p>
 <p>Almost the same, except instead of the 10,000 people starting at the start of the course, they’re all allowed to start at stage 31 instead.</p>
-<p><em>Ah! I think I see now why $e_{31} should be greater than <span class="math inline">\(e_0\)</span>!</em></p>
+<p><em>Ah! I think I see now why $e_{31} should be greater than</em> <span class="math inline">\(e_0\)</span>!</p>
 <p>Yes, and as mentioned it used to be a lot higher, because the first stage used to be one of the toughest.</p>
 <p><em>Okay. I think I understand why life expectancy isn’t a completely straightforward concept. Let’s go into the weeds even further. Why did you refer to life expectancy as period life expectancy? What’s the alternative?</em></p>
 <p>Well, let’s keep with the obstacle course analogy. Imagine two more things…</p>
@@ -222,7 +229,15 @@ ul.task-list li input[type="checkbox"] {
 <p><em>So, it’s cohorts who traverse the course, but you said life expectancy is usually period life expectancy. What does this mean?</em></p>
 <p>A period life expectancy is like taking a snapshot, or just a few seconds-long clip, of people who are currently on the obstacle course, at all stages, and using this information to try to work out how far a cohort, starting at the start of the course, would likely get along the course, <em>if the obstacle course never changed while the cohort is traversing the course</em>.</p>
 <p><em>That sounds like an important caveat, given you just said the course is always changing.</em></p>
-<p>It certainly is, given</p>
+<p>It certainly is. It’s for this reason a period life expectancy is sometimes also called a <em>synthetic cohort</em> life expectancy, because the cohort imagined to traverse the obstacle course doesn’t actually exist, but is made up of different pieces of different cohorts at different stages of the course.</p>
+<p><em>So, why not use a real cohort?</em></p>
+<p>Two reasons: Relevance, and data.</p>
+<p><em>Go on..</em></p>
+<p>Either you have a completed cohort, where there’s the data, but not the relevance. Or you have an incomplete cohort, where there’s the relevance, but not the data.</p>
+<p><em>I think I understand: The completed cohort completed the obstacle course, especially the start of it, when it was very different to how it is now, so although the data’s complete, much of it doesn’t speak to the current challenges on the course. And for the incomplete cohort, as they’ve not yet reached all the hurdles, we can’t yet know how many of them will reach each stage.</em></p>
+<p>Correct, and correct. Two reasons why period life expectancies are usually used, even though they’re based on some pretty weird fictions.</p>
+<p><em>This whole dialogue is a weird fiction. Shall we call it a night?</em></p>
+<p>Indeed we shall!</p>
 
 
 </section>
