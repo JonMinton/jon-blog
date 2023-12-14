@@ -1,0 +1,138 @@
+---
+title: "Nerdy Dialogues on Life and Death"
+subtitle: "Part 1: Introduction; Life Expectancy"
+author: "Jon Minton"
+date: "2023-12-14"
+draft: true
+categories: [demography, population health, methodology
+---
+
+![Two cats, Emu and Goose. Goose is invading Emu's personal space slightly](images/ABDEC269-EDFD-4BD8-857E-984F61FCE1B9.jpg)Here's an attempt to think some more about how and why standardised rates are used to compare populations. I'm doing so via the medium of a Socratic Dialogue[^1].
+
+[^1]: i.e. two people talking about an idea, one of whom thinks they know more than the other one, though, very annoyingly, insists they don't.
+
+## Why age standardise? A dialogue
+
+*More than twice as many deaths are reported in population A than population B*
+
+First question: Does population A have about twice the population as population B?
+
+*Okay. I've got the number of deaths in population A,* $n_A$, and the population size in population A, $N_A$. So, I've calculated the rate $r_A = \frac{n_A}{N_A}$ for population A, and done the same for population B, $r_B = \frac{n_B}{N_B}$.
+
+Okay... so what's the ratio of $r_A$ to $r_B$?
+
+*It's 1.4. So, the mortality rate in population A is 40% higher than in population B*
+
+And what does that mean?
+
+*Population A are exposed to more of something bad, or maybe less to something good, than those in population B.*
+
+Possibly. What if I told you that the mortality rate in a care home was 40% higher than the mortality rate in a combat unit fighting on the front line? If the differences in rates is just due to differences in exposures, surely if we were to move the people in the care home into the combat unit, the differences in mortality rates between the two populations should disappear?
+
+*That doesn't sound right. I think the mortality rates of the care home population would be even higher if they were in the combat unit.*
+
+And what does that imply?
+
+*Differences in health outcomes between populations can be due to differences in the characteristics of the populations being compared, as well as differences in the exposures the two populations encounter*
+
+Exactly. And what are the main differences in characteristics between the care home population and the combat unit population likely to be?
+
+*I'd expect the combat unit population to be much younger than the care home population. I'd also expect the combat unit population to be overwhelmingly male, whereas the care home population might be more mixed, but perhaps skewed more towards females than males.*
+
+Good. So what does this mean for methodology?
+
+*We need to look to compare like-with-like when trying to work out how much of a difference in health outcome is due to differences in exposures. At the very least, we should try to compare like-with-like on age and sex, as these are very important determinants of mortality risk.*
+
+Great. So, instead of just a single ratio to compare between populations, we can compare a load of ratios, one for each combination of age and sex we've got common data for. So, the ratio of mortality rates in 25 year old females, 37 year old males, 60 year old females, 82 year old males, and so on...
+
+*Maybe...*
+
+If we've got males and females, each by age in single year up to age 90, that means we have almost 200 such ratios to compare. Any difficulties with that?
+
+*I guess that makes it hard to see the wood for the trees, one or two numbers is easier to convey than one hundred or two hundred.*
+
+...
+
+*So I guess we need some way of summarising this further, making sure the summary measure presented is a reasonable summary of all of the like-with-like comparisons we've got?*
+
+Yes. What might be some ways of doing this?
+
+*I guess we could do something like the mean or median value of these age-sex specific ratios??*
+
+From first principles, that doesn't seem like a terrible idea. However it would have some problems.
+
+*Such as?*
+
+For example, if a few ratios are based on small numbers of deaths and population counts, they could be very big or very small due to sample estimation issues alone. This would be more of an issue if using the mean than the median.
+
+Also all subpopulations' estimates would contribute equally to such a summary measure, even if some subpopulations contribute much more to the overall health outcome in the population than others.
+
+*So, what are some better alternatives?*
+
+Well, I guess, for overall mortality, you could use life expectancy.
+
+*Ah, we're all familiar with that.*
+
+Maybe not as familiar as you think you are. It's [less straightforward to calculate and interpret](https://ourworldindata.org/life-expectancy-how-is-it-calculated-and-how-should-it-be-interpreted#article-citation) than you might think. For example, imagine it's 1890, and life expectancy is 51 years of age. You're 31 years old. How long can you expect to live?
+
+*Twenty more years? More if I'm careful*
+
+Probably quite a bit longer. 'Life expectancy' $e$ is usually used as shorthand for 'period life expectancy from birth', $e_0$, or 'unconditional period life expectancy'. Historically, the first year of life was one of the most dangerous ages to be alive.[^2] It's a tall and weighty hurdle to cross. But as a 31 year old you've already crossed it. Your life expectancy isn't 'unconditional' life expectancy from birth, $e_0$, but 'conditional' life expectancy from age 31, $e_{31}$.
+
+[^2]: Existing starts with a boss fight.
+
+*What does this mean?*
+
+Say there were 10,000 people running the obstacle course of life, and they're starting at the start of the course. The further you follow the course along, the fewer people reach each stage. Life expectancy at birth $e_0$, heuristically, answers the question "at what stage in the course should you expect there'll only be 5,000 of the original contestants remaining, on average?"
+
+*And* $e_{31}$?
+
+Almost the same, except instead of the 10,000 people starting at the start of the course, they're all allowed to start at stage 31 instead.
+
+*Ah! I think I see now why \$e\_{31} should be greater than* $e_0$!
+
+Yes, and as mentioned it used to be a lot higher, because the first stage used to be one of the toughest.
+
+*Okay. I think I understand why life expectancy isn't a completely straightforward concept. Let's go into the weeds even further. Why did you refer to life expectancy as period life expectancy? What's the alternative?*
+
+Well, let's keep with the obstacle course analogy. Imagine two more things...
+
+*Okay, but you're hurting my brain.*
+
+... Firstly, that the 10,000 contestants aren't all the contestants. Instead, they're just one of a series of cohorts of contestants. Every fifteen minutes, say, another 10,000 contestants are lined up at the starting block and, when *their* starting pistol goes, they start the course.
+
+*Sounds pretty crowded...*
+
+Yes. None of this is practically possible; we also have to assume everyone runs at the same rate for the analogy to work.
+
+Anyway, the second big thing to imagine is that the designers of the obstacle course are *constantly redesigning it*. They're making some of the hurdles higher, and other hurdles lower, and they're doing this all the time.
+
+*Ah, so the obstacle course is never the same for any two cohorts who traverse it?*
+
+Exactly! You've got it![^3]
+
+[^3]: My Socrates doesn't intend this to sound condescending, but it still does a bit.
+
+*So, it's cohorts who traverse the course, but you said life expectancy is usually period life expectancy. What does this mean?*
+
+A period life expectancy is like taking a snapshot, or just a few seconds-long clip, of people who are currently on the obstacle course, at all stages, and using this information to try to work out how far a cohort, starting at the start of the course, would likely get along the course, *if the obstacle course never changed while the cohort is traversing the course*.
+
+*That sounds like an important caveat, given you just said the course is always changing.*
+
+It certainly is. It's for this reason a period life expectancy is sometimes also called a *synthetic cohort* life expectancy, because the cohort imagined to traverse the obstacle course doesn't actually exist, but is made up of different pieces of different cohorts at different stages of the course.
+
+*So, why not use a real cohort?*
+
+Two reasons: Relevance, and data.
+
+*Go on..*
+
+Either you have a completed cohort, where there's the data, but not the relevance. Or you have an incomplete cohort, where there's the relevance, but not the data.
+
+*I think I understand: The completed cohort completed the obstacle course, especially the start of it, when it was very different to how it is now, so although the data's complete, much of it doesn't speak to the current challenges on the course. And for the incomplete cohort, as they've not yet reached all the hurdles, we can't yet know how many of them will reach each stage.*
+
+Correct, and correct. Two reasons why period life expectancies are usually used, even though they're based on some pretty weird fictions.
+
+*This whole dialogue is a weird fiction. Shall we call it a night?*
+
+Indeed we shall!
