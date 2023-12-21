@@ -1,0 +1,118 @@
+---
+title: "Linear Models are General Linear Models"
+subtitle: "Part Four: why only betas just look at beta"
+author: "Jon Minton"
+date: "2023-12-19"
+code-fold: true
+warning: false
+message: false
+draft: true
+header-includes: 
+    - \usepackage{amsmath}
+categories: [statistics, R]
+bibliography: references.bib
+---
+
+## tl;dr
+
+This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in @KinTomWit00.
+
+## Part 4: Why overuse of linear regression lead people to look at models in the wrong way
+
+In previous posts in this series I've reintroduced standard linear regression and logistic regression as both being special versions of the same generalised model formula
+
+**Stochastic Component**
+
+$$
+Y_i \sim f(\theta_i, \alpha)
+$$
+
+**Systematic Component**
+
+$$
+\theta_i = g(X_i, \beta)
+$$
+
+With standard linear regression the link function $g(.)$ is $I(.)$, i.e. the identity function, meaning *what goes in, is what comes out*. By contrast for logistic regression $g(.)$ is the logistic function, which squishes and squashes any real number as an input into a value between 0 and 1 as an output.
+
+Though it's not always phrased this way, a motivating question behind the construction of most statistical models is, "What influence does a single input to the model, $x_j$, have on the output, $Y$?"[^1] For a single variable $x_j$ which is either present (`1`) or absent (`0`), this is in effect asking what is $E(Y | x_j = 1) - E(Y | x_j = 0)$ ?[^2]
+
+[^1]: Note here I'm using $x_j$, not $x_i$, and that $X\beta$ is shorthand for $\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3$ and so on. In using the $j$ suffix, I'm referring to just one of the specific $x$ values, $x_1$, $x_2$, $x_3$, which is equivalent to selecting one of the *columns in* $X$. By contrast $i$ should be considered shorthand for selection of one of the *rows of* $X$, i.e. one of the series of observations that goes into the dataset $D$.
+
+[^2]: $E(.)$ is the expectation operator, and $|$ indicates a condition. So, the two terms mean, respectively, *what is the expected value of the outcome if the variable of interest is 'switched on'?*, and *what is the expected value of the outcome if the variable of interest is 'switched off'?*
+
+Let's look at a linear regression case, then a logistic regression case.
+
+**Linear Regression example**
+
+Using the iris dataset, let's try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species setosa or not. As a reminder the data relating these three variables look as follows:
+
+```{r}
+library(ggplot2)
+
+iris |>
+    ggplot(aes(Sepal.Length, Sepal.Width, group = Species, colour = Species, shape = Species)) + 
+    geom_point()
+
+
+```
+
+Let's now build the model:
+
+```{r}
+library(tidyverse)
+df <- iris |> mutate(is_setosa = Species == 'setosa')
+
+mod_lm <- lm(Sepal.Width ~ Sepal.Length + is_setosa, data = df)
+
+mod_lm
+```
+
+The coefficients $\boldsymbol{\beta}  = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and is_setosa respectively. 
+
+If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34`  or about `2.78` where `is_setosa` is false. 
+
+The difference between these two values, `3.77` and `2.78`, i.e. the 'influence of setosa' on the outcome, is `0.99`, i.e. the $\beta_2$ coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e. negative) value of Sepal Length, the difference is still `0.99`. 
+
+This is the $\beta_2$ coefficient, and the reason why, for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information (something @KinTomWit00 calls a 'quantity of interest') about the size of influence that a predictor has on a response. 
+
+
+Now let's look at an equivalent (swapped) example using logistic regression, in which we try to understand how the *probability* of an observation being setosa depends jointly on Sepal length and Sepal width, and we are especially interested in the influence that a 1 unit change in Sepal length has on this probability
+
+```{r}
+
+mod_logistic <- glm(
+    am ~ mpg + disp + hp + vs,
+    data = mtcars, 
+    family = binomial()
+    )
+
+mod_logistic
+```
+
+Here the coefficients $\boldsymbol{\beta}  = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and is_setosa respectively.
+
+But what does this actually mean, substantively? 
+
+A very common approach to trying to answer this question is to look at the statistical significance of the coefficients, which we can do with the `summary()` function
+
+```{r}
+summary(mod_logistic)
+
+```
+
+This indicates that the standard errors on the coefficients is very large in comparison with the coefficient point estimates. The ratio of these two quantities is the z value, where heuristically 'larger is better'. The column `Pr(>|z|)` indicates the probability that the coefficient estimates include zero (where, heuristically, smaller is better). 
+
+The model above is terrible. To better try to illustrate my point let's look at a variant including an interaction term between the `Sepal.Length` and `Sepal.width`
+
+```{r}
+# Note the * instead of the + in the formula line below
+mod_logistic2 <- glm(
+    is_setosa ~ Sepal.Length * Sepal.Width, 
+    data = df, 
+    family = binomial(link = "logit")
+    )
+
+summary(mod_logistic2)
+
+```

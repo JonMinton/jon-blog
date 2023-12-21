@@ -1,0 +1,124 @@
+---
+title: "Tidy Tuesday: Christmas films"
+author:
+    - "Tom Fowler"
+    - "Nick Christofides"
+    - "Andrew Saul"
+    - "Jon Minton"
+date: "2023-12-21"
+---
+
+A shorter and even tardier Tidy Tuesday this week, given we gave ourselves only half an hour rather than the usual hour to look over the most recent dataset. 
+
+The dataset was about Christmas films. 
+
+Our first question: is *Die Hard a Christmas film?*
+
+Not according to [the methods used to produce the dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-12-12). If a film doesn't have Christmas or equivalent in its title, it's not coming in! 
+
+
+
+```{r setup}
+#| include: FALSE
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+- loading
+
+```{r Load}
+tt <- tidytuesdayR::tt_load('2023-12-12')
+
+df1 <- tt[[1]]
+df2 <- tt[[2]]
+
+```
+
+ - 
+- count of films by year
+```{r}
+df1 %>%
+  count(year, sort = TRUE)
+
+
+```
+
+- how many films by year -plot with log on y axis
+```{r}
+df1 %>%
+  count(year) %>%
+  ggplot(aes(x = year, y = n))+
+  geom_point()+
+  #stat_smooth()+
+  scale_y_log10()
+
+
+```
+- how many films by year -plot with log on y axis
+- filter by 1960 onwards
+
+```{r}
+df1 %>%
+  filter(year >= 1960) %>%
+  count(year) %>%
+  ggplot(aes(x = year, y = n))+
+  geom_point()+
+  #stat_smooth()+
+  scale_y_log10()
+
+```
+- how many films by year -plot with log on y axis
+- filter by 1960 onwards
+
+```{r}
+df1 %>%
+  filter(year >= 1960) %>%
+  count(year) %>%
+  ggplot(aes(x = year, y = n))+
+  geom_point()+
+  stat_smooth(method = "lm")+
+  scale_y_log10()
+
+```
+
+# questions
+
+- how are they published? [cinema / streaming?]
+- is it on imdb?
+- full inclusion of 2023?
+- are more recent films rubbish?
+
+
+```{r}
+df1 %>%
+  
+  group_by(year) %>%
+  summarise(avg_rating = mean(average_rating)) %>%
+  ggplot(aes(x = year, y = avg_rating))+
+  geom_point()
+```
+- number of films vs avg rating
+- fewer films may drive extreme values
+
+```{r}
+df1 %>%
+  
+  group_by(year) %>%
+  summarise(
+    avg_rating = mean(average_rating), 
+    n_films = n() ) %>%
+  ggplot(aes(x = n_films, y = avg_rating))+
+  geom_point()
+```
+- number of films vs avg rating
+
+```{r}
+df1 %>%
+  
+  group_by(year) %>%
+  summarise(
+    avg_rating = mean(average_rating), 
+    n_films = n() ) %>%
+  ggplot(aes(x = n_films, y = avg_rating))+
+  geom_point()
+```

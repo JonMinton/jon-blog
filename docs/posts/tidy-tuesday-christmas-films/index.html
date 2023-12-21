@@ -6,10 +6,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tom Fowler">
+<meta name="author" content="Nick Christofides">
+<meta name="author" content="Andrew Saul">
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-01">
+<meta name="dcterms.date" content="2023-12-21">
 
-<title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
+<title>Jon Minton’s Blog - Tidy Tuesday: Christmas films</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,26 +59,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -117,13 +101,11 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
-<meta name="twitter:description" content="Part Two: Systematic components and link functions">
-<meta name="twitter:image" content="index_files/figure-html/unnamed-chunk-1-1.png">
+<meta name="twitter:title" content="Jon Minton’s Blog - Tidy Tuesday: Christmas films">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="index_files/figure-html/unnamed-chunk-2-1.png">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -181,20 +163,19 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Linear Models are General Linear Models</h1>
-            <p class="subtitle lead">Part Two: Systematic components and link functions</p>
-                                <div class="quarto-categories">
-                <div class="quarto-category">statistics</div>
-              </div>
-                  </div>
+      <h1 class="title">Tidy Tuesday: Christmas films</h1>
+                      </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
       <div>
-      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-heading">Authors</div>
       <div class="quarto-title-meta-contents">
+               <p>Tom Fowler </p>
+               <p>Nick Christofides </p>
+               <p>Andrew Saul </p>
                <p>Jon Minton </p>
             </div>
     </div>
@@ -202,7 +183,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 1, 2023</p>
+        <p class="date">December 21, 2023</p>
       </div>
     </div>
     
@@ -220,96 +201,165 @@ div.csl-indent {
 
 
 
-<section id="tldr" class="level2">
-<h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
-<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> .</p>
+<p>A shorter and even tardier Tidy Tuesday this week, given we gave ourselves only half an hour rather than the usual hour to look over the most recent dataset.</p>
+<p>The dataset was about Christmas films.</p>
+<p>Our first question: is <em>Die Hard a Christmas film?</em></p>
+<p>Not according to <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-12-12">the methods used to produce the dataset</a>. If a film doesn’t have Christmas or equivalent in its title, it’s not coming in!</p>
+<ul>
+<li>loading</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2023-12-12'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Compiling #TidyTuesday Information for 2023-12-12 ----</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- There are 2 files available ---</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Starting Download ---</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Downloading file 1 of 2: `holiday_movies.csv`
+    Downloading file 2 of 2: `holiday_movie_genres.csv`</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>--- Download complete ---</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> tt[[<span class="dv">1</span>]]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> tt[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li></li>
+<li>count of films by year</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 2
+    year     n
+   &lt;dbl&gt; &lt;int&gt;
+ 1  2021   183
+ 2  2022   173
+ 3  2020   172
+ 4  2019   143
+ 5  2018   129
+ 6  2023   107
+ 7  2017   102
+ 8  2015    76
+ 9  2016    75
+10  2012    68
+# ℹ 81 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>how many films by year -plot with log on y axis</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n))<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#stat_smooth()+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>how many films by year -plot with log on y axis</li>
+<li>filter by 1960 onwards</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1960</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n))<span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#stat_smooth()+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>how many films by year -plot with log on y axis</li>
+<li>filter by 1960 onwards</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1960</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n))<span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="questions" class="level1">
+<h1>questions</h1>
+<ul>
+<li>how are they published? [cinema / streaming?]</li>
+<li>is it on imdb?</li>
+<li>full inclusion of 2023?</li>
+<li>are more recent films rubbish?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_rating =</span> <span class="fu">mean</span>(average_rating)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_rating))<span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>number of films vs avg rating</li>
+<li>fewer films may drive extreme values</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_rating =</span> <span class="fu">mean</span>(average_rating), </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_films =</span> <span class="fu">n</span>() ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n_films, <span class="at">y =</span> avg_rating))<span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>number of films vs avg rating</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_rating =</span> <span class="fu">mean</span>(average_rating), </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_films =</span> <span class="fu">n</span>() ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n_films, <span class="at">y =</span> avg_rating))<span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
 </section>
-<section id="part-2-systematic-components-and-link-functions" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-systematic-components-and-link-functions">Part 2: Systematic components and link functions</h2>
-<p>In <a href="../lms-are-glms-part-01">part 1 of this series</a> we introduced the following general framework for thinking about statistical models and what they contain.</p>
-<p><strong>Stochastic Component</strong></p>
-<p><span class="math display">\[
-Y_i \sim f(\theta_i, \alpha)
-\]</span></p>
-<p><strong>Systematic Component</strong></p>
-<p><span class="math display">\[
-\theta_i = g(X_i, \beta)
-\]</span> The terminology are as described previously.</p>
-<p>These equations are too broad and abstract to be implemented directly. Instead, specific choices about the <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(g(.)\)</span> need to be made. <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> gives the following examples:</p>
-<p><strong>Logistic Regression</strong></p>
-<p><span class="math display">\[
-Y_i \sim Bernoulli(\pi_i)
-\]</span></p>
-<p><span class="math display">\[
-\pi_i = \frac{1}{1 + e^{-X_i\beta}}
-\]</span></p>
-<p><strong>Linear Regression</strong></p>
-<p><span class="math display">\[
-Y_i \sim N(\mu_i, \sigma^2)
-\]</span> <span class="math display">\[
-\mu_i = X_i\beta
-\]</span></p>
-<p>So, what’s so special about linear regression, in this framework?</p>
-<p>In one sense, not so much. It’s got a systematic component, and it’s got a stochastic component. But so do other models. But in another sense, quite a lot. It’s a rare case where the systematic component, <span class="math inline">\(g(.)\)</span>, <em>doesn’t</em> transform its inputs in some weird and wonderful way. We can say that <span class="math inline">\(g(.)\)</span> is the identity transform, <span class="math inline">\(I(.)\)</span>, which in words means <em>take what you’re given, do nothing to it, and pass it on</em>.</p>
-<p>By contrast, the systematic component for logistic regression is known as the logistic function. <span class="math inline">\(logistic(x) := \frac{1}{1 + e^{-x}}\)</span> It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren’t predicted values, but predicted <em>probabilities</em>, and nothing can be more probable than certain (1) or less probable than impossible (0).</p>
-<p>We can compare the transformations used in linear and logistic regression as follows:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define transformations</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ident <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {x}</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lgt <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>x))}</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the associations</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(ident, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x (before transform)"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"z (after transform)"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"The Identity 'Transformation'"</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(lgt, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x (before transform)"</span>, </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"z (after transform)"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"The Logistic Transformation"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Identity Transformation</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Logistic Transformation</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>The usual input to the transformation function <span class="math inline">\(g(.)\)</span> is a sum of products. For three variables, for example, this could be <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2\)</span>. In matrix algebra this generalises to <span class="math inline">\(\boldsymbol{X\beta}\)</span> , where <span class="math inline">\(\boldsymbol{X}\)</span> is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The <span class="math inline">\(\boldsymbol{\beta}\)</span> term is a row-wise vector comprising each specific <span class="math inline">\(\beta\)</span> term, such as <span class="math inline">\(\boldsymbol{\beta} = \{ \beta_0, \beta_1, \beta_2 \}\)</span> in the three variable example above.</p>
-<p>What’s special about the identity transformation, and so linear regression, is that there is a fairly clear correspondence between a <span class="math inline">\(\beta_j\)</span> term and the estimated influence of changing a predictor variable <span class="math inline">\(x_j\)</span> on the predicted outcome <span class="math inline">\(Y\)</span>, i.e.&nbsp;the ‘effect of <span class="math inline">\(x_j\)</span> on <span class="math inline">\(Y\)</span>’. For other transformations this tends to not be the case.</p>
-<p>We’ll delve into this a bit more in a later post.</p>
 
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-KinTomWit00" class="csl-entry" role="listitem">
-King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Using some base R graphics functions as I’m feeling masochistic<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

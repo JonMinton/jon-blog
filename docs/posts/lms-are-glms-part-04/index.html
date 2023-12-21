@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-01">
+<meta name="dcterms.date" content="2023-12-19">
 
 <title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
 <style>
@@ -116,19 +116,20 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
+<meta name="twitter:description" content="Part Four: why only betas just look at beta">
+<meta name="twitter:image" content="index_files/figure-html/unnamed-chunk-1-1.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary_large_image">
+</head><body class="nav-fixed fullcontent">\usepackage{amsmath}
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
-<meta name="twitter:description" content="Part Two: Systematic components and link functions">
-<meta name="twitter:image" content="index_files/figure-html/unnamed-chunk-1-1.png">
-<meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary_large_image">
-</head>
 
-<body class="nav-fixed fullcontent">
+
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -182,9 +183,10 @@ div.csl-indent {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Linear Models are General Linear Models</h1>
-            <p class="subtitle lead">Part Two: Systematic components and link functions</p>
+            <p class="subtitle lead">Part Four: why only betas just look at beta</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">statistics</div>
+                <div class="quarto-category">R</div>
               </div>
                   </div>
   </div>
@@ -202,7 +204,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 1, 2023</p>
+        <p class="date">December 19, 2023</p>
       </div>
     </div>
     
@@ -222,11 +224,11 @@ div.csl-indent {
 
 <section id="tldr" class="level2">
 <h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
-<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> .</p>
+<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>.</p>
 </section>
-<section id="part-2-systematic-components-and-link-functions" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-systematic-components-and-link-functions">Part 2: Systematic components and link functions</h2>
-<p>In <a href="../lms-are-glms-part-01">part 1 of this series</a> we introduced the following general framework for thinking about statistical models and what they contain.</p>
+<section id="part-4-why-overuse-of-linear-regression-lead-people-to-look-at-models-in-the-wrong-way" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-why-overuse-of-linear-regression-lead-people-to-look-at-models-in-the-wrong-way">Part 4: Why overuse of linear regression lead people to look at models in the wrong way</h2>
+<p>In previous posts in this series I’ve reintroduced standard linear regression and logistic regression as both being special versions of the same generalised model formula</p>
 <p><strong>Stochastic Component</strong></p>
 <p><span class="math display">\[
 Y_i \sim f(\theta_i, \alpha)
@@ -234,66 +236,149 @@ Y_i \sim f(\theta_i, \alpha)
 <p><strong>Systematic Component</strong></p>
 <p><span class="math display">\[
 \theta_i = g(X_i, \beta)
-\]</span> The terminology are as described previously.</p>
-<p>These equations are too broad and abstract to be implemented directly. Instead, specific choices about the <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(g(.)\)</span> need to be made. <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> gives the following examples:</p>
-<p><strong>Logistic Regression</strong></p>
-<p><span class="math display">\[
-Y_i \sim Bernoulli(\pi_i)
 \]</span></p>
-<p><span class="math display">\[
-\pi_i = \frac{1}{1 + e^{-X_i\beta}}
-\]</span></p>
-<p><strong>Linear Regression</strong></p>
-<p><span class="math display">\[
-Y_i \sim N(\mu_i, \sigma^2)
-\]</span> <span class="math display">\[
-\mu_i = X_i\beta
-\]</span></p>
-<p>So, what’s so special about linear regression, in this framework?</p>
-<p>In one sense, not so much. It’s got a systematic component, and it’s got a stochastic component. But so do other models. But in another sense, quite a lot. It’s a rare case where the systematic component, <span class="math inline">\(g(.)\)</span>, <em>doesn’t</em> transform its inputs in some weird and wonderful way. We can say that <span class="math inline">\(g(.)\)</span> is the identity transform, <span class="math inline">\(I(.)\)</span>, which in words means <em>take what you’re given, do nothing to it, and pass it on</em>.</p>
-<p>By contrast, the systematic component for logistic regression is known as the logistic function. <span class="math inline">\(logistic(x) := \frac{1}{1 + e^{-x}}\)</span> It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren’t predicted values, but predicted <em>probabilities</em>, and nothing can be more probable than certain (1) or less probable than impossible (0).</p>
-<p>We can compare the transformations used in linear and logistic regression as follows:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define transformations</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ident <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {x}</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lgt <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>x))}</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the associations</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(ident, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x (before transform)"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"z (after transform)"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"The Identity 'Transformation'"</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(lgt, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x (before transform)"</span>, </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"z (after transform)"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"The Logistic Transformation"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Identity Transformation</figcaption>
-</figure>
+<p>With standard linear regression the link function <span class="math inline">\(g(.)\)</span> is <span class="math inline">\(I(.)\)</span>, i.e.&nbsp;the identity function, meaning <em>what goes in, is what comes out</em>. By contrast for logistic regression <span class="math inline">\(g(.)\)</span> is the logistic function, which squishes and squashes any real number as an input into a value between 0 and 1 as an output.</p>
+<p>Though it’s not always phrased this way, a motivating question behind the construction of most statistical models is, “What influence does a single input to the model, <span class="math inline">\(x_j\)</span>, have on the output, <span class="math inline">\(Y\)</span>?”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For a single variable <span class="math inline">\(x_j\)</span> which is either present (<code>1</code>) or absent (<code>0</code>), this is in effect asking what is <span class="math inline">\(E(Y | x_j = 1) - E(Y | x_j = 0)\)</span> ?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Let’s look at a linear regression case, then a logistic regression case.</p>
+<p><strong>Linear Regression example</strong></p>
+<p>Using the iris dataset, let’s try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species setosa or not. As a reminder the data relating these three variables look as follows:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(Sepal.Length, Sepal.Width, <span class="at">group =</span> Species, <span class="at">colour =</span> Species, <span class="at">shape =</span> Species)) <span class="sc">+</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Logistic Transformation</figcaption>
-</figure>
+<p>Let’s now build the model:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> iris <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">is_setosa =</span> Species <span class="sc">==</span> <span class="st">'setosa'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Width <span class="sc">~</span> Sepal.Length <span class="sc">+</span> is_setosa, <span class="at">data =</span> df)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>mod_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Sepal.Width ~ Sepal.Length + is_setosa, data = df)
+
+Coefficients:
+  (Intercept)   Sepal.Length  is_setosaTRUE  
+       0.7307         0.3420         0.9855  </code></pre>
 </div>
 </div>
+<p>The coefficients <span class="math inline">\(\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}\)</span> are <span class="math inline">\(\{0.73, 0.34, 0.99\}\)</span>, and refer to the intercept, Sepal Length and is_setosa respectively.</p>
+<p>If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is <code>0.73 + 6 * 0.34 + 0.99</code> or about <code>3.77</code> in the case where <code>is_setosa</code> is true, and <code>0.73 + 6 * 0.34</code> or about <code>2.78</code> where <code>is_setosa</code> is false.</p>
+<p>The difference between these two values, <code>3.77</code> and <code>2.78</code>, i.e.&nbsp;the ‘influence of setosa’ on the outcome, is <code>0.99</code>, i.e.&nbsp;the <span class="math inline">\(\beta_2\)</span> coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e.&nbsp;negative) value of Sepal Length, the difference is still <code>0.99</code>.</p>
+<p>This is the <span class="math inline">\(\beta_2\)</span> coefficient, and the reason why, for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information (something <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> calls a ‘quantity of interest’) about the size of influence that a predictor has on a response.</p>
+<p>Now let’s look at an equivalent (swapped) example using logistic regression, in which we try to understand how the <em>probability</em> of an observation being setosa depends jointly on Sepal length and Sepal width, and we are especially interested in the influence that a 1 unit change in Sepal length has on this probability</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    is_setosa <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mod_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = is_setosa ~ Sepal.Length + Sepal.Width, family = binomial(link = "logit"), 
+    data = df)
+
+Coefficients:
+ (Intercept)  Sepal.Length   Sepal.Width  
+       437.2        -163.4         137.9  
+
+Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
+Null Deviance:      191 
+Residual Deviance: 2.706e-08    AIC: 6</code></pre>
 </div>
 </div>
+<p>Here the coefficients <span class="math inline">\(\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}\)</span> are <span class="math inline">\(\{0.73, 0.34, 0.99\}\)</span>, and refer to the intercept, Sepal Length and is_setosa respectively.</p>
+<p>But what does this actually mean, substantively?</p>
+<p>A very common approach to trying to answer this question is to look at the statistical significance of the coefficients, which we can do with the <code>summary()</code> function</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_logistic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = is_setosa ~ Sepal.Length + Sepal.Width, family = binomial(link = "logit"), 
+    data = df)
+
+Deviance Residuals: 
+       Min          1Q      Median          3Q         Max  
+-1.249e-04  -2.100e-08  -2.100e-08   2.100e-08   1.003e-04  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)     437.2   128737.9   0.003    0.997
+Sepal.Length   -163.4    45394.8  -0.004    0.997
+Sepal.Width     137.9    44846.1   0.003    0.998
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1.9095e+02  on 149  degrees of freedom
+Residual deviance: 2.7060e-08  on 147  degrees of freedom
+AIC: 6
+
+Number of Fisher Scoring iterations: 25</code></pre>
 </div>
-<p>The usual input to the transformation function <span class="math inline">\(g(.)\)</span> is a sum of products. For three variables, for example, this could be <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2\)</span>. In matrix algebra this generalises to <span class="math inline">\(\boldsymbol{X\beta}\)</span> , where <span class="math inline">\(\boldsymbol{X}\)</span> is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The <span class="math inline">\(\boldsymbol{\beta}\)</span> term is a row-wise vector comprising each specific <span class="math inline">\(\beta\)</span> term, such as <span class="math inline">\(\boldsymbol{\beta} = \{ \beta_0, \beta_1, \beta_2 \}\)</span> in the three variable example above.</p>
-<p>What’s special about the identity transformation, and so linear regression, is that there is a fairly clear correspondence between a <span class="math inline">\(\beta_j\)</span> term and the estimated influence of changing a predictor variable <span class="math inline">\(x_j\)</span> on the predicted outcome <span class="math inline">\(Y\)</span>, i.e.&nbsp;the ‘effect of <span class="math inline">\(x_j\)</span> on <span class="math inline">\(Y\)</span>’. For other transformations this tends to not be the case.</p>
-<p>We’ll delve into this a bit more in a later post.</p>
+</div>
+<p>This indicates that the standard errors on the coefficients is very large in comparison with the coefficient point estimates. The ratio of these two quantities is the z value, where heuristically ‘larger is better’. The column <code>Pr(&gt;|z|)</code> indicates the probability that the coefficient estimates include zero (where, heuristically, smaller is better).</p>
+<p>The model above is terrible. To better try to illustrate my point let’s look at a variant including an interaction term between the <code>Sepal.Length</code> and <code>Sepal.width</code></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the * instead of the + in the formula line below</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mod_logistic2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    is_setosa <span class="sc">~</span> Sepal.Length <span class="sc">*</span> Sepal.Width, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_logistic2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = is_setosa ~ Sepal.Length * Sepal.Width, family = binomial(link = "logit"), 
+    data = df)
+
+Deviance Residuals: 
+       Min          1Q      Median          3Q         Max  
+-8.167e-05  -2.100e-08  -2.100e-08   2.100e-08   6.280e-05  
+
+Coefficients:
+                          Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                1144.40  777433.66   0.001    0.999
+Sepal.Length               -288.93  166374.92  -0.002    0.999
+Sepal.Width                -194.66  240635.52  -0.001    0.999
+Sepal.Length:Sepal.Width     60.29   50045.48   0.001    0.999
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1.9095e+02  on 149  degrees of freedom
+Residual deviance: 1.4661e-08  on 146  degrees of freedom
+AIC: 8
+
+Number of Fisher Scoring iterations: 25</code></pre>
+</div>
+</div>
 
 
 
@@ -307,7 +392,8 @@ King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most o
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Using some base R graphics functions as I’m feeling masochistic<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Note here I’m using <span class="math inline">\(x_j\)</span>, not <span class="math inline">\(x_i\)</span>, and that <span class="math inline">\(X\beta\)</span> is shorthand for <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3\)</span> and so on. In using the <span class="math inline">\(j\)</span> suffix, I’m referring to just one of the specific <span class="math inline">\(x\)</span> values, <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_3\)</span>, which is equivalent to selecting one of the <em>columns in</em> <span class="math inline">\(X\)</span>. By contrast <span class="math inline">\(i\)</span> should be considered shorthand for selection of one of the <em>rows of</em> <span class="math inline">\(X\)</span>, i.e.&nbsp;one of the series of observations that goes into the dataset <span class="math inline">\(D\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="math inline">\(E(.)\)</span> is the expectation operator, and <span class="math inline">\(|\)</span> indicates a condition. So, the two terms mean, respectively, <em>what is the expected value of the outcome if the variable of interest is ‘switched on’?</em>, and <em>what is the expected value of the outcome if the variable of interest is ‘switched off’?</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
