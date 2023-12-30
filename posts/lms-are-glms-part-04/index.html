@@ -116,6 +116,11 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
 <meta name="twitter:description" content="Part Four: why only betas just look at beta">
 <meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/lms-are-glms-part-04/index_files/figure-html/unnamed-chunk-1-1.png">
@@ -123,15 +128,9 @@ div.csl-indent {
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
 <meta name="twitter:card" content="summary_large_image">
-</head><body class="nav-fixed fullcontent">\usepackage{amsmath}
+</head>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="../../styles.css">
-
-
-
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -228,8 +227,8 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
 <p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>.</p>
 </section>
-<section id="part-4-why-overuse-of-linear-regression-lead-people-to-look-at-models-in-the-wrong-way" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-why-overuse-of-linear-regression-lead-people-to-look-at-models-in-the-wrong-way">Part 4: Why overuse of linear regression lead people to look at models in the wrong way</h2>
+<section id="part-4-why-overuse-of-linear-regression-leads-people-to-look-at-models-in-the-wrong-way" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-why-overuse-of-linear-regression-leads-people-to-look-at-models-in-the-wrong-way">Part 4: Why overuse of linear regression leads people to look at models in the wrong way</h2>
 <p>In previous posts in this series I’ve reintroduced standard linear regression and logistic regression as both being special versions of the same generalised model formula</p>
 <p><strong>Stochastic Component</strong></p>
 <p><span class="math display">\[
@@ -242,7 +241,8 @@ Y_i \sim f(\theta_i, \alpha)
 <p>With standard linear regression the link function <span class="math inline">\(g(.)\)</span> is <span class="math inline">\(I(.)\)</span>, i.e.&nbsp;the identity function, meaning <em>what goes in, is what comes out</em>. By contrast for logistic regression <span class="math inline">\(g(.)\)</span> is the logistic function, which squishes and squashes any real number as an input onto a value between 0 and 1 as an output.</p>
 <p>Though it’s not always phrased this way, a motivating question behind the construction of most statistical models is, “What influence does a single input to the model, <span class="math inline">\(x_j\)</span>, have on the output, <span class="math inline">\(Y\)</span>?”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For a single variable <span class="math inline">\(x_j\)</span> which is either present (<code>1</code>) or absent (<code>0</code>), this is in effect asking what is <span class="math inline">\(E(Y | x_j = 1) - E(Y | x_j = 0)\)</span> ?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Let’s look at a linear regression case, then a logistic regression case.</p>
-<p>###Linear Regression example</p>
+<section id="linear-regression-example" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-example">Linear Regression example</h3>
 <p>Using the iris dataset, let’s try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species is setosa or not (a discrete variable). As a reminder, the data relating these three variables look as follows:</p>
 <div class="cell">
 <details>
@@ -282,6 +282,7 @@ Coefficients:
 <p>If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is <code>0.73 + 6 * 0.34 + 0.99</code> or about <code>3.77</code> in the case where <code>is_setosa</code> is true, and <code>0.73 + 6 * 0.34</code> or about <code>2.78</code> where <code>is_setosa</code> is false.</p>
 <p>The difference between these two values, <code>3.77</code> and <code>2.78</code>, i.e.&nbsp;the ‘influence of setosa’ on the outcome, is <code>0.99</code>, i.e.&nbsp;the <span class="math inline">\(\beta_2\)</span> coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e.&nbsp;negative) value of Sepal Length, the difference is still <code>0.99</code>.</p>
 <p>This is the <span class="math inline">\(\beta_2\)</span> coefficient, and the reason why, <strong>for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information</strong> (something <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> calls a ‘quantity of interest’) about the size of influence that a predictor has on a response.</p>
+</section>
 <section id="logistic-regression-example" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression-example">Logistic Regression example</h3>
 <p>Now let’s look at an example using logistic regression. We will use another tiresomely familiar dataset, <code>mtcars</code>. We are interested in estimating the effect that having a straight engine (<code>vs=1</code>) has on the probability of the car having a manual transmission (<code>am=1</code>). Our model also tries to control for the miles-per-gallon (<code>mpg</code>). The model specification is shown, the model is run, and the coefficeints are all shown below:</p>
