@@ -6,6 +6,8 @@ website:
   twitter-card: 
     site: "@jonminton"
   navbar:
+    left: 
+      - glms.qmd
     right:
       - about.qmd
       - icon: window-fullscreen
