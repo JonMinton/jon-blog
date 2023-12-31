@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-19">
+<meta name="dcterms.date" content="2023-12-30">
 
 <title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
 <style>
@@ -116,20 +116,21 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
-<meta name="twitter:description" content="Part Four: why only betas just look at beta">
-<meta name="twitter:image" content="index_files/figure-html/unnamed-chunk-1-1.png">
-<meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary_large_image">
-</head><body class="nav-fixed fullcontent">\usepackage{amsmath}
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
+<meta name="twitter:description" content="Part Four: why only betas just look at beta">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/lms-are-glms-part-04/index_files/figure-html/unnamed-chunk-1-1.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
+</head>
 
-
-
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -204,7 +205,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 19, 2023</p>
+        <p class="date">December 30, 2023</p>
       </div>
     </div>
     
@@ -226,8 +227,8 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
 <p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>.</p>
 </section>
-<section id="part-4-why-overuse-of-linear-regression-lead-people-to-look-at-models-in-the-wrong-way" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-why-overuse-of-linear-regression-lead-people-to-look-at-models-in-the-wrong-way">Part 4: Why overuse of linear regression lead people to look at models in the wrong way</h2>
+<section id="part-4-why-overuse-of-linear-regression-leads-people-to-look-at-models-in-the-wrong-way" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-why-overuse-of-linear-regression-leads-people-to-look-at-models-in-the-wrong-way">Part 4: Why overuse of linear regression leads people to look at models in the wrong way</h2>
 <p>In previous posts in this series I’ve reintroduced standard linear regression and logistic regression as both being special versions of the same generalised model formula</p>
 <p><strong>Stochastic Component</strong></p>
 <p><span class="math display">\[
@@ -237,11 +238,12 @@ Y_i \sim f(\theta_i, \alpha)
 <p><span class="math display">\[
 \theta_i = g(X_i, \beta)
 \]</span></p>
-<p>With standard linear regression the link function <span class="math inline">\(g(.)\)</span> is <span class="math inline">\(I(.)\)</span>, i.e.&nbsp;the identity function, meaning <em>what goes in, is what comes out</em>. By contrast for logistic regression <span class="math inline">\(g(.)\)</span> is the logistic function, which squishes and squashes any real number as an input into a value between 0 and 1 as an output.</p>
+<p>With standard linear regression the link function <span class="math inline">\(g(.)\)</span> is <span class="math inline">\(I(.)\)</span>, i.e.&nbsp;the identity function, meaning <em>what goes in, is what comes out</em>. By contrast for logistic regression <span class="math inline">\(g(.)\)</span> is the logistic function, which squishes and squashes any real number as an input onto a value between 0 and 1 as an output.</p>
 <p>Though it’s not always phrased this way, a motivating question behind the construction of most statistical models is, “What influence does a single input to the model, <span class="math inline">\(x_j\)</span>, have on the output, <span class="math inline">\(Y\)</span>?”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For a single variable <span class="math inline">\(x_j\)</span> which is either present (<code>1</code>) or absent (<code>0</code>), this is in effect asking what is <span class="math inline">\(E(Y | x_j = 1) - E(Y | x_j = 0)\)</span> ?<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Let’s look at a linear regression case, then a logistic regression case.</p>
-<p><strong>Linear Regression example</strong></p>
-<p>Using the iris dataset, let’s try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species setosa or not. As a reminder the data relating these three variables look as follows:</p>
+<section id="linear-regression-example" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-example">Linear Regression example</h3>
+<p>Using the iris dataset, let’s try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species is setosa or not (a discrete variable). As a reminder, the data relating these three variables look as follows:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -276,38 +278,43 @@ Coefficients:
        0.7307         0.3420         0.9855  </code></pre>
 </div>
 </div>
-<p>The coefficients <span class="math inline">\(\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}\)</span> are <span class="math inline">\(\{0.73, 0.34, 0.99\}\)</span>, and refer to the intercept, Sepal Length and is_setosa respectively.</p>
+<p>The coefficients <span class="math inline">\(\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}\)</span> are <span class="math inline">\(\{0.73, 0.34, 0.99\}\)</span>, and refer to the intercept, Sepal Length and <code>is_setosa</code> respectively.</p>
 <p>If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is <code>0.73 + 6 * 0.34 + 0.99</code> or about <code>3.77</code> in the case where <code>is_setosa</code> is true, and <code>0.73 + 6 * 0.34</code> or about <code>2.78</code> where <code>is_setosa</code> is false.</p>
 <p>The difference between these two values, <code>3.77</code> and <code>2.78</code>, i.e.&nbsp;the ‘influence of setosa’ on the outcome, is <code>0.99</code>, i.e.&nbsp;the <span class="math inline">\(\beta_2\)</span> coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e.&nbsp;negative) value of Sepal Length, the difference is still <code>0.99</code>.</p>
-<p>This is the <span class="math inline">\(\beta_2\)</span> coefficient, and the reason why, for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information (something <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> calls a ‘quantity of interest’) about the size of influence that a predictor has on a response.</p>
-<p>Now let’s look at an equivalent (swapped) example using logistic regression, in which we try to understand how the <em>probability</em> of an observation being setosa depends jointly on Sepal length and Sepal width, and we are especially interested in the influence that a 1 unit change in Sepal length has on this probability</p>
+<p>This is the <span class="math inline">\(\beta_2\)</span> coefficient, and the reason why, <strong>for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information</strong> (something <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> calls a ‘quantity of interest’) about the size of influence that a predictor has on a response.</p>
+</section>
+<section id="logistic-regression-example" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression-example">Logistic Regression example</h3>
+<p>Now let’s look at an example using logistic regression. We will use another tiresomely familiar dataset, <code>mtcars</code>. We are interested in estimating the effect that having a straight engine (<code>vs=1</code>) has on the probability of the car having a manual transmission (<code>am=1</code>). Our model also tries to control for the miles-per-gallon (<code>mpg</code>). The model specification is shown, the model is run, and the coefficeints are all shown below:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    is_setosa <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    am <span class="sc">~</span> mpg <span class="sc">+</span> vs,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mtcars, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>()</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mod_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Call:  glm(formula = is_setosa ~ Sepal.Length + Sepal.Width, family = binomial(link = "logit"), 
-    data = df)
+Call:  glm(formula = am ~ mpg + vs, family = binomial(), data = mtcars)
 
 Coefficients:
- (Intercept)  Sepal.Length   Sepal.Width  
-       437.2        -163.4         137.9  
+(Intercept)          mpg           vs  
+    -9.9183       0.5359      -2.7957  
 
-Degrees of Freedom: 149 Total (i.e. Null);  147 Residual
-Null Deviance:      191 
-Residual Deviance: 2.706e-08    AIC: 6</code></pre>
+Degrees of Freedom: 31 Total (i.e. Null);  29 Residual
+Null Deviance:      43.23 
+Residual Deviance: 24.94    AIC: 30.94</code></pre>
 </div>
 </div>
-<p>Here the coefficients <span class="math inline">\(\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}\)</span> are <span class="math inline">\(\{0.73, 0.34, 0.99\}\)</span>, and refer to the intercept, Sepal Length and is_setosa respectively.</p>
+<p>Here the coefficients <span class="math inline">\(\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}\)</span> are <span class="math inline">\(\{-0.92, 0.54, -2.80\}\)</span>, and refer to the intercept, mpg, and vs respectively.</p>
 <p>But what does this actually mean, substantively?</p>
+</section>
+<section id="dont-stargaze" class="level3">
+<h3 class="anchored" data-anchor-id="dont-stargaze">(Don’t) Stargaze</h3>
 <p>A very common approach to trying to answer this question is to look at the statistical significance of the coefficients, which we can do with the <code>summary()</code> function</p>
 <div class="cell">
 <details>
@@ -317,68 +324,371 @@ Residual Deviance: 2.706e-08    AIC: 6</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-glm(formula = is_setosa ~ Sepal.Length + Sepal.Width, family = binomial(link = "logit"), 
-    data = df)
+glm(formula = am ~ mpg + vs, family = binomial(), data = mtcars)
 
 Deviance Residuals: 
-       Min          1Q      Median          3Q         Max  
--1.249e-04  -2.100e-08  -2.100e-08   2.100e-08   1.003e-04  
+    Min       1Q   Median       3Q      Max  
+-1.3389  -0.6304  -0.2980   0.3069   2.0106  
 
 Coefficients:
-             Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept)     437.2   128737.9   0.003    0.997
-Sepal.Length   -163.4    45394.8  -0.004    0.997
-Sepal.Width     137.9    44846.1   0.003    0.998
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)  -9.9183     3.4942  -2.839  0.00453 **
+mpg           0.5359     0.1967   2.724  0.00644 **
+vs           -2.7957     1.4723  -1.899  0.05758 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 1.9095e+02  on 149  degrees of freedom
-Residual deviance: 2.7060e-08  on 147  degrees of freedom
-AIC: 6
+    Null deviance: 43.230  on 31  degrees of freedom
+Residual deviance: 24.944  on 29  degrees of freedom
+AIC: 30.944
 
-Number of Fisher Scoring iterations: 25</code></pre>
+Number of Fisher Scoring iterations: 6</code></pre>
 </div>
 </div>
-<p>This indicates that the standard errors on the coefficients is very large in comparison with the coefficient point estimates. The ratio of these two quantities is the z value, where heuristically ‘larger is better’. The column <code>Pr(&gt;|z|)</code> indicates the probability that the coefficient estimates include zero (where, heuristically, smaller is better).</p>
-<p>The model above is terrible. To better try to illustrate my point let’s look at a variant including an interaction term between the <code>Sepal.Length</code> and <code>Sepal.width</code></p>
+<p>A common practice in many social and health sciences is to offer something like a narrative summary of the above, something like:</p>
+<blockquote class="blockquote">
+<p>Our logistic regression model indicates that manualness is positively and significantly associated with our measure of fuel efficiency (p &lt; 0.01). There is also an indication of a negative association with straight engine, but this effect does not quite meet conventional thresholds for statistical significance (p &lt; 0.10).</p>
+</blockquote>
+<p>This above practice is known as ‘star-gazing’, because summary tables like those above tend to have one or more <code>*</code> symbols in the final row, if the value of the <code>Pr(&gt;|z|)</code> is below 0.05, and narrative summaries like those just above tend to involve looking at the number of stars in each row, alongside whether the <code>Estimate</code> values have a minus sign in front of them.</p>
+<p>Star gazing is a very common practice. It’s also a terrible practice, which - ironically - turns the final presented output of a <em>quantitative</em> model into the crudest of <em>qualitative</em> summaries (positive, negative; significant, not significant). Star gazing is what researchers tend to default to when presented with model outputs from the above because, unlike in the linear regression example, the extent to which the <span class="math inline">\(\beta\)</span> coefficients answer substantive ‘how-much’-ness questions, like “How much does having a straight engine change the probability of manual transmission?, is not easily apparent from the coefficients themselves.</p>
+</section>
+<section id="standardisation" class="level3">
+<h3 class="anchored" data-anchor-id="standardisation">Standardisation</h3>
+<p>So, how can we do better?</p>
+<p>One approach is to standardise the data that goes into the model before passing them to the model. Standardisation means attempting to make the distribution and range of different variables more similar, and is especially useful when comparing between different continuous variables.</p>
+<p>To give an example of this, let’s look at a specification with weight (<code>wt</code>) and horsepower (<code>hp</code>) in place of <code>mpg</code>, but keeping engine-type indicator (<code>vs</code>):</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the * instead of the + in the formula line below</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mod_logistic2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    is_setosa <span class="sc">~</span> Sepal.Length <span class="sc">*</span> Sepal.Width, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_logistic2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod_logistic_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    am <span class="sc">~</span> vs <span class="sc">+</span> wt <span class="sc">+</span> hp,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mtcars, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_logistic_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-glm(formula = is_setosa ~ Sepal.Length * Sepal.Width, family = binomial(link = "logit"), 
-    data = df)
+glm(formula = am ~ vs + wt + hp, family = binomial(), data = mtcars)
 
 Deviance Residuals: 
-       Min          1Q      Median          3Q         Max  
--8.167e-05  -2.100e-08  -2.100e-08   2.100e-08   6.280e-05  
+     Min        1Q    Median        3Q       Max  
+-1.88193  -0.10513  -0.01248   0.10256   1.65058  
 
 Coefficients:
-                          Estimate Std. Error z value Pr(&gt;|z|)
-(Intercept)                1144.40  777433.66   0.001    0.999
-Sepal.Length               -288.93  166374.92  -0.002    0.999
-Sepal.Width                -194.66  240635.52  -0.001    0.999
-Sepal.Length:Sepal.Width     60.29   50045.48   0.001    0.999
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) 25.35510   11.24613   2.255   0.0242 *
+vs          -3.12906    2.92958  -1.068   0.2855  
+wt          -9.64982    4.05528  -2.380   0.0173 *
+hp           0.03242    0.01959   1.655   0.0979 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 1.9095e+02  on 149  degrees of freedom
-Residual deviance: 1.4661e-08  on 146  degrees of freedom
-AIC: 8
+    Null deviance: 43.2297  on 31  degrees of freedom
+Residual deviance:  8.5012  on 28  degrees of freedom
+AIC: 16.501
 
-Number of Fisher Scoring iterations: 25</code></pre>
+Number of Fisher Scoring iterations: 8</code></pre>
 </div>
 </div>
+<p>Here both <code>wt</code> and <code>hp</code> are continuous variables.</p>
+<p>A star gazing zombie might say something like</p>
+<blockquote class="blockquote">
+<p>manualness is negatively and significantly associated with weight (p &lt; 0.05); there is a positive association with horsepower but this does not meet standard thresholds of statistical significance (0.05 &lt; p &lt; 0.10).</p>
+</blockquote>
+<p>A <em>slightly</em> better approach would be to standardise the variables <code>wt</code> and <code>hp</code> before passing to the model. Standardising means trying to set the variables to a common scale, and giving the variables more similar statistical characteristics.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>standardise <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>mtcars_z <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>mtcars_z<span class="sc">$</span>wt_z <span class="ot">=</span> <span class="fu">standardise</span>(mtcars<span class="sc">$</span>wt)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>mtcars_z<span class="sc">$</span>hp_z <span class="ot">=</span> <span class="fu">standardise</span>(mtcars<span class="sc">$</span>hp)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>mod_logistic_2_z <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    am <span class="sc">~</span> vs <span class="sc">+</span> wt_z <span class="sc">+</span> hp_z,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mtcars_z, </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">binomial</span>()</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_logistic_2_z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = am ~ vs + wt_z + hp_z, family = binomial(), data = mtcars_z)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.88193  -0.10513  -0.01248   0.10256   1.65058  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)  -0.9348     1.4500  -0.645   0.5191  
+vs           -3.1291     2.9296  -1.068   0.2855  
+wt_z         -9.4419     3.9679  -2.380   0.0173 *
+hp_z          2.2230     1.3431   1.655   0.0979 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 43.2297  on 31  degrees of freedom
+Residual deviance:  8.5012  on 28  degrees of freedom
+AIC: 16.501
+
+Number of Fisher Scoring iterations: 8</code></pre>
+</div>
+</div>
+<p><code>wt_z</code> is the standardised version of <code>wt</code>, and <code>hp_z</code> is the standardised version of <code>hp</code>. By convention, whereas unstandardised coefficients are usually referred to as <span class="math inline">\(\beta\)</span> (‘beta’) coefficients, standardised coefficients are instead referred to as <span class="math inline">\(b\)</span> coefficients. But really, it’s the same model.</p>
+<p>Note the p value of <code>wt_z</code> is the same as for <code>wt</code>, and the p value of <code>hp_z</code> is the same as that for <code>hp</code>. Note also the directions of effect are the same: the coefficients on <code>wt</code> and <code>wt_z</code> are both negative, and the coefficients of <code>hp</code> and <code>hp_z</code> are both positive.</p>
+<p>This isn’t a coincidence. Of course standardising can’t really add any new information, can’t really change the relationship between a predictor and a response. It’s not <em>really</em> a new variable, it’s the same old variable, so the relationship between predictor and response that there used to be is still there now.</p>
+<p>So why bother standardising?</p>
+<p>One reason is it gives, subject to some assumptions and caveats, a way of gauging the relative importance of the two different continuous variables, by allowing a slightly more meaningful comparison between the two coefficients.</p>
+<p>In this case, we have a standardised <span class="math inline">\(b\)</span> coefficient of <code>-9.44</code> for <code>wt_z</code>, and of <code>2.22</code> for <code>hp_z</code>. As with the unstandardised coefficients we can still assert that manualness is negatively associated with weight, and positively associated with horsepower. But now we can also compare the two numbers <code>-9.44</code> and <code>2.22</code>. The ratio of these two numbers is around <code>4.3</code>. So, we might hazard to suggest something like:</p>
+<blockquote class="blockquote">
+<p>a given increase in weight is around four times as important in <em>negatively predicting</em> manual transmission (i.e.&nbsp;in predicting an automatic transmission) as an equivalent increase in horsepower is in <em>positively predicting</em> manual transmission.</p>
+</blockquote>
+<p>This isn’t a statement that’s easy to parse, but does at least allow slightly more information to be gleamed from the model. For example, it implies that, if a proposed change to a vehicle leads to similar relative (standardised) increases in both weight and horsepower then, as the weight effect is greater than the horsepower effect, the model will predict a <em>decreased</em> probability of manualness as a result.</p>
+<p>But what about the motivating question, “What’s <em>the</em> effect of a straight engine (<code>vs=1</code>) on the probability of manual transmission (<code>am=1</code>)?”</p>
+<p>The problem, unlike with the linear regression, is this is now a badly formulated question, based on an incorrect premise. The problem is with the word ‘the’, which implies there should be a single answer to this question, i.e.&nbsp;that the effect of <code>vs</code> on the probability of <code>am=1</code> should always be the same. But, at least when it comes to absolute changes in the probability of <code>am=1</code>, this is no longer the case, as it depends on the values of the other variables in the model.</p>
+<p>Instead of assuming <code>vs=1</code> has a single effect on <code>P(am=1)</code>, we instead need to think about predictions of the marginal effects of <code>vs</code> on <code>am</code> in the context of other plausible values of the other predictors in the model, <code>wt</code> and <code>hp</code>. This involves asking the model a series of well formulated and specific questions.</p>
+</section>
+<section id="maximum-marginal-effects-divide-by-four" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-marginal-effects-divide-by-four">Maximum marginal effects: Divide-by-four</h3>
+<p>Before we do that, however, there’s a useful heuristic that can be employed when looking at discrete variables and using a logistic regression specification. The heuristic, which is based on the properties of the logistic function,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> is called <em>divide-by-four</em>. What this means is that, if we take the coefficient on <code>vs</code> of <code>-3.13</code>, and divide this value by four, we get a value of <code>-0.78</code>. Notice that the absolute value of <code>-0.78</code> is between 0 and 1.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> What this value gives is the <em>maximum possible</em> effect that the discrete variable (the presence rather than absence of a straight engine) has on the probability of being a manual transmission. We can say, “a straight engine <em>reduces</em> the probability of a manual transmission by <em>up to</em> 78%”</p>
+<p>But, as mentioned, this doesn’t quite answer the motivating question, it gives an upper bound to the answer, not the answer itself.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> We can instead start to get a sense of ‘the’ effect of the variable <code>vs</code> on <code>P(am=1)</code> by asking the model a series of questions.</p>
+</section>
+<section id="predictions-on-a-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="predictions-on-a-matrix">Predictions on a matrix</h3>
+<p>We can start by getting the range of observed values for the two continuous variables, <code>hp</code> and <code>mpg</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(mtcars<span class="sc">$</span>hp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 52</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(mtcars<span class="sc">$</span>hp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 335</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(mtcars<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.513</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(mtcars<span class="sc">$</span>wt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.424</code></pre>
+</div>
+</div>
+<p>We can then ask the model to make predictions of <span class="math inline">\(P(am=1)\)</span> for a large number of values of <code>hp</code> and <code>wt</code> within the observed range, both in the condition in which <code>vs=0</code> and in the condition in which <code>vs=1</code>. The <code>expand_grid</code> function<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> can help us do this:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">hp =</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>hp), <span class="fu">max</span>(mtcars<span class="sc">$</span>hp), <span class="at">length.out =</span> <span class="dv">100</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">wt =</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>wt), <span class="fu">max</span>(mtcars<span class="sc">$</span>wt), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>predictors_straight <span class="ot">&lt;-</span> predictors <span class="sc">|&gt;</span> </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vs =</span> <span class="dv">1</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>predictors_vshaped <span class="ot">&lt;-</span> predictors <span class="sc">|&gt;</span> </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vs =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>For each of these permutations of inputs, we can use the model to get a conditional prediction. For convenience, we can also attach this as an additional column to the predictor data frame:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>predictions_predictors_straight <span class="ot">&lt;-</span> predictors_straight <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_manual =</span> <span class="fu">predict</span>(mod_logistic_2, <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> predictors_straight)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>predictions_predictors_vshaped <span class="ot">&lt;-</span> predictors_vshaped <span class="sc">|&gt;</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_manual =</span> <span class="fu">predict</span>(mod_logistic_2, <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> predictors_vshaped)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We can see how the predictions vary over <code>hp</code> and <code>wt</code> using a heat map or contour map:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>predictions_predictors_straight <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    predictions_predictors_vshaped</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> wt, <span class="at">z =</span> p_manual)) <span class="sc">+</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>() <span class="sc">+</span> </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>vs) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Predicted probability of marginal transmission by wt, hp, and vs"</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can also produce a contour map of the differences between these two contour maps, i.e.&nbsp;the effect of a straight (<code>vs=1</code>) compared with v-shaped (<code>vs=0</code>) engine, which gets us a bit closer to the answer:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>predictions_predictors_straight <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    predictions_predictors_vshaped</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hp, wt) <span class="sc">|&gt;</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">diff_p_manual =</span> p_manual[vs<span class="sc">==</span><span class="dv">1</span>] <span class="sc">-</span> p_manual[vs<span class="sc">==</span><span class="dv">0</span>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> wt, <span class="at">z =</span> diff_p_manual)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>() <span class="sc">+</span> </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Marginal effect of vs=1 given wt and hp on P(am=1)"</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see here that, for large ranges of wt and hp, the marginal effect of <code>vs=1</code> is small. However, for particular combinations of hp and wt, such as where hp is around 200 and wt is slightly below 3, then the marginal effect of <code>vs=1</code> becomes large, up to around a -70% reduction in the probability of manual transmission. (i.e.&nbsp;similar to the theoretical maximum marginal effect of around -78%).</p>
+<p>So, what’s <em>the</em> effect of <code>vs=1</code> on <code>P(am=1)</code>? i.e.&nbsp;how should we boil down all these 10,000 predicted effect sizes into a single effect size?</p>
+<p>I guess, if we have to try to answer this silly question, then we could take the average effect size…</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>predictions_predictors_straight <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    predictions_predictors_vshaped</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hp, wt) <span class="sc">|&gt;</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">diff_p_manual =</span> p_manual[vs<span class="sc">==</span><span class="dv">1</span>] <span class="sc">-</span> p_manual[vs<span class="sc">==</span><span class="dv">0</span>]</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_diff_p_manual =</span> <span class="fu">mean</span>(diff_p_manual)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  mean_diff_p_manual
+               &lt;dbl&gt;
+1            -0.0821</code></pre>
+</div>
+</div>
+<p>So, we get an average difference of around <code>-0.08</code>, i.e.&nbsp;about an 8% reduction in probability of manual transmission.</p>
+</section>
+<section id="marginal-effects-on-observed-data" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-effects-on-observed-data">Marginal effects on observed data</h3>
+<p>Is this a reasonable answer? Probably not, because although the permutations of <code>wt</code> and <code>hp</code> we looked at come from the observed range, most of these combinations are likely very ‘theoretical’. We can get a sense of this by plotting the observed values of <code>wt</code> and <code>hp</code> onto the above contour map:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>predictions_predictors_straight <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    predictions_predictors_vshaped</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hp, wt) <span class="sc">|&gt;</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">diff_p_manual =</span> p_manual[vs<span class="sc">==</span><span class="dv">1</span>] <span class="sc">-</span> p_manual[vs<span class="sc">==</span><span class="dv">0</span>]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> wt, <span class="at">z =</span> diff_p_manual)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour_filled</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Observations from mtcars on the predicted probability surface"</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> hp, <span class="at">y =</span> wt), <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mtcars</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Perhaps a better option, then, would be to calculate an average marginal effect using the observed values, but switching the observations for <code>vs</code> to 1 in one scenario, and 0 in another scenario:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>predictions_predictors_observed_straight <span class="ot">&lt;-</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp, wt) <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vs =</span> <span class="dv">1</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>predictions_predictors_observed_straight <span class="ot">&lt;-</span> predictions_predictors_observed_straight <span class="sc">|&gt;</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_manual =</span> <span class="fu">predict</span>(mod_logistic_2, <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> predictions_predictors_observed_straight)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>predictions_predictors_observed_vshaped <span class="ot">&lt;-</span> mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp, wt) <span class="sc">|&gt;</span> </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vs =</span> <span class="dv">0</span>) </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>predictions_predictors_observed_vshaped <span class="ot">&lt;-</span> predictions_predictors_observed_vshaped <span class="sc">|&gt;</span> </span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_manual =</span> <span class="fu">predict</span>(mod_logistic_2, <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> predictions_predictors_observed_vshaped)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>predictions_predictors_observed <span class="ot">&lt;-</span> </span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    predictions_predictors_observed_straight,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    predictions_predictors_observed_vshaped</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>predictions_marginal <span class="ot">&lt;-</span> </span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>  predictions_predictors_observed <span class="sc">|&gt;</span> </span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(hp, wt) <span class="sc">|&gt;</span> </span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">diff_p_manual =</span> p_manual[vs<span class="sc">==</span><span class="dv">1</span>] <span class="sc">-</span> p_manual[vs<span class="sc">==</span><span class="dv">0</span>]</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>predictions_marginal <span class="sc">|&gt;</span> </span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> diff_p_manual)) <span class="sc">+</span> </span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(diff_p_manual)), <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(diff_p_manual)), <span class="at">colour =</span> <span class="st">"green"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In the above the red line indicates the mean value of these marginal differences, which is <code>-0.12</code>, and the green line the median value of these differences, which is around <code>-0.02</code>. So, even with just these two measures of central tendency, there’s around a six-fold difference in the estimate of ‘the effect’. We can also see there’s a lot of variation, from around nothing (right hand side), to around a 65% reduction (left hand side).</p>
+<p>If forced to give a simple answer (to this overly simplistic question), we might plump for the mean for theoretical reasons, and say something like “The effect of a straight engine is to reduce the probability of a manual transmission by around an eighth”. But I’m sure, having seen how much variation there is in these marginal effects, we can agree this ‘around an eighth’ answer, or any single number answer, is likely to be overly reductive.</p>
+<p>Hopefully, however, it is more informative than ‘statistically significant and negative’, (the stargazing approach) or ‘up to around 78%’ (the divide-by-four approach).</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Linear regression tends to give a false impression about how straightforward it is to use a model to answer questions of the form “What is the effect of x on y?”. This is because, for linear regression, but few other model specifications, the answer to this question is in the <span class="math inline">\(\beta\)</span> coefficients themselves. For other model specifications, like the logistic regression example above, the correct-but-uninformative answer tends to be “it depends”, and potentially more informative answers tend to require a bit more work to derive and interpret.</p>
 
 
 
@@ -394,6 +704,10 @@ King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most o
 <ol>
 <li id="fn1"><p>Note here I’m using <span class="math inline">\(x_j\)</span>, not <span class="math inline">\(x_i\)</span>, and that <span class="math inline">\(X\beta\)</span> is shorthand for <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3\)</span> and so on. In using the <span class="math inline">\(j\)</span> suffix, I’m referring to just one of the specific <span class="math inline">\(x\)</span> values, <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_3\)</span>, which is equivalent to selecting one of the <em>columns in</em> <span class="math inline">\(X\)</span>. By contrast <span class="math inline">\(i\)</span> should be considered shorthand for selection of one of the <em>rows of</em> <span class="math inline">\(X\)</span>, i.e.&nbsp;one of the series of observations that goes into the dataset <span class="math inline">\(D\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p><span class="math inline">\(E(.)\)</span> is the expectation operator, and <span class="math inline">\(|\)</span> indicates a condition. So, the two terms mean, respectively, <em>what is the expected value of the outcome if the variable of interest is ‘switched on’?</em>, and <em>what is the expected value of the outcome if the variable of interest is ‘switched off’?</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The logistic function maps any real number <code>z</code> onto the value range 0 to 1. <code>z</code> is <span class="math inline">\(X\beta\)</span>, which in non-matrix notation is equivalent to a sum of products <span class="math inline">\(\sum_{k=0}^{K}x_k\beta_k\)</span> (where, usually, <span class="math inline">\(x_0\)</span> is 1, i.e.&nbsp;the intercept term). Another way of expressing this would be something like <span class="math inline">\(\sum_{k \in S}x_k\beta_k\)</span> where by default <span class="math inline">\(S = \{0, 1, 2, ..., K\}\)</span>. We can instead imagine partitioning out <span class="math inline">\(S = \{S^{-J}, S^{J}\}\)</span> where the superscript <span class="math inline">\(J\)</span> indicates the Jth variable, and <span class="math inline">\(-J\)</span> indicates everything in <span class="math inline">\(S\)</span> <em>apart from</em> the Jth variable. Where J is a discrete variable, the effect of J on <span class="math inline">\(P(Y=1)\)</span> is <span class="math inline">\(logistic({\sum_{k \in S^{-J}}x_k\beta_k + \beta_J}) - logistic({\sum_{k \in S^{-J}}x_k\beta_k})\)</span>, where <span class="math inline">\(logistic(z) = \frac{1}{1 + e^{-z}}\)</span>. The marginal effect of the <span class="math inline">\(\beta_J\)</span> coefficient thus depends on the other term <span class="math inline">\(\sum_{k \in S^{-J}}x_k\beta_k\)</span>. Where this other term is set to 0 the marginal effect of <span class="math inline">\(\beta_J\)</span> becomes <span class="math inline">\(logistic(\beta_J) - logistic(0)\)</span>. According to p.82 of <a href="https://vulstats.ucsd.edu/pdf/Gelman.ch-05.logistic-regression.pdf">this chapter by Gelman</a> we can equivalently ask the question ‘what is the first derivative of the logistic regression with respect to <span class="math inline">\(\beta\)</span>?’. Asking more about this to Wolfram Alpha we get <a href="https://www.wolframalpha.com/input?i=what+is+the+the+maximum+absolute+value+of+the+derivative+of+1+%2F+%281+%2B+exp%28beta%29%29+with+respect+to+beta%3F">this page of information</a>, and scrolling down to the section on the global minimum we indeed get an absolute value of <span class="math inline">\(\frac{1}{4}\)</span>, so the maximum change in <span class="math inline">\(P(Y=1)\)</span> given a unit change in <span class="math inline">\(\beta\)</span> is indeed one quarter of the value of <span class="math inline">\(\beta\)</span>, hence why the ‘divide-by-four’ heuristic ‘works’. This isn’t quite a full derivation, but more explanation than I was planning for a footnote! In general, it’s better just to remember ‘divide-by-four’ than go down the rabbit warren of derivation each time! (As I’ve just learned, to my cost, writing this footnote!)<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>We should <em>always</em> expect the absolute value of a coefficient for a discrete variable to be less than four, for this reason.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>The lower bound for the marginal effect of a discrete variable, or any variable, is zero. This is when the absolute value of the sum of the product of the other variables is infinite.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Or the base R <code>expand.grid</code> function<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

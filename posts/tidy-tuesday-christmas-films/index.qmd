@@ -100,16 +100,7 @@ df1 %>%
 - number of films vs avg rating
 - fewer films may drive extreme values
 
-```{r}
-df1 %>%
-  
-  group_by(year) %>%
-  summarise(
-    avg_rating = mean(average_rating), 
-    n_films = n() ) %>%
-  ggplot(aes(x = n_films, y = avg_rating))+
-  geom_point()
-```
+
 - number of films vs avg rating
 
 ```{r}

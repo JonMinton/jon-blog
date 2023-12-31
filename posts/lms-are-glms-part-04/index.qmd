@@ -2,13 +2,10 @@
 title: "Linear Models are General Linear Models"
 subtitle: "Part Four: why only betas just look at beta"
 author: "Jon Minton"
-date: "2023-12-19"
+date: "2023-12-30"
 code-fold: true
 warning: false
 message: false
-draft: true
-header-includes: 
-    - \usepackage{amsmath}
 categories: [statistics, R]
 bibliography: references.bib
 ---
@@ -17,7 +14,7 @@ bibliography: references.bib
 
 This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in @KinTomWit00.
 
-## Part 4: Why overuse of linear regression lead people to look at models in the wrong way
+## Part 4: Why overuse of linear regression leads people to look at models in the wrong way
 
 In previous posts in this series I've reintroduced standard linear regression and logistic regression as both being special versions of the same generalised model formula
 
@@ -33,7 +30,7 @@ $$
 \theta_i = g(X_i, \beta)
 $$
 
-With standard linear regression the link function $g(.)$ is $I(.)$, i.e. the identity function, meaning *what goes in, is what comes out*. By contrast for logistic regression $g(.)$ is the logistic function, which squishes and squashes any real number as an input into a value between 0 and 1 as an output.
+With standard linear regression the link function $g(.)$ is $I(.)$, i.e. the identity function, meaning *what goes in, is what comes out*. By contrast for logistic regression $g(.)$ is the logistic function, which squishes and squashes any real number as an input onto a value between 0 and 1 as an output.
 
 Though it's not always phrased this way, a motivating question behind the construction of most statistical models is, "What influence does a single input to the model, $x_j$, have on the output, $Y$?"[^1] For a single variable $x_j$ which is either present (`1`) or absent (`0`), this is in effect asking what is $E(Y | x_j = 1) - E(Y | x_j = 0)$ ?[^2]
 
@@ -43,9 +40,9 @@ Though it's not always phrased this way, a motivating question behind the constr
 
 Let's look at a linear regression case, then a logistic regression case.
 
-**Linear Regression example**
+### Linear Regression example
 
-Using the iris dataset, let's try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species setosa or not. As a reminder the data relating these three variables look as follows:
+Using the iris dataset, let's try to predict Sepal Width (a continuous variable) on Sepal Length (a continuous variable) and whether the species is setosa or not (a discrete variable). As a reminder, the data relating these three variables look as follows:
 
 ```{r}
 library(ggplot2)
@@ -68,21 +65,21 @@ mod_lm <- lm(Sepal.Width ~ Sepal.Length + is_setosa, data = df)
 mod_lm
 ```
 
-The coefficients $\boldsymbol{\beta}  = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and is_setosa respectively. 
+The coefficients $\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and `is_setosa` respectively.
 
-If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34`  or about `2.78` where `is_setosa` is false. 
+If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34` or about `2.78` where `is_setosa` is false.
 
-The difference between these two values, `3.77` and `2.78`, i.e. the 'influence of setosa' on the outcome, is `0.99`, i.e. the $\beta_2$ coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e. negative) value of Sepal Length, the difference is still `0.99`. 
+The difference between these two values, `3.77` and `2.78`, i.e. the 'influence of setosa' on the outcome, is `0.99`, i.e. the $\beta_2$ coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e. negative) value of Sepal Length, the difference is still `0.99`.
 
-This is the $\beta_2$ coefficient, and the reason why, for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information (something @KinTomWit00 calls a 'quantity of interest') about the size of influence that a predictor has on a response. 
+This is the $\beta_2$ coefficient, and the reason why, **for linear regression, and almost exclusively linear regression, looking at the coefficients themselves provides substantively meaningful information** (something @KinTomWit00 calls a 'quantity of interest') about the size of influence that a predictor has on a response.
 
+### Logistic Regression example
 
-Now let's look at an equivalent (swapped) example using logistic regression, in which we try to understand how the *probability* of an observation being setosa depends jointly on Sepal length and Sepal width, and we are especially interested in the influence that a 1 unit change in Sepal length has on this probability
+Now let's look at an example using logistic regression. We will use another tiresomely familiar dataset, `mtcars`. We are interested in estimating the effect that having a straight engine (`vs=1`) has on the probability of the car having a manual transmission (`am=1`). Our model also tries to control for the miles-per-gallon (`mpg`). The model specification is shown, the model is run, and the coefficeints are all shown below:
 
 ```{r}
-
 mod_logistic <- glm(
-    am ~ mpg + disp + hp + vs,
+    am ~ mpg + vs,
     data = mtcars, 
     family = binomial()
     )
@@ -90,9 +87,11 @@ mod_logistic <- glm(
 mod_logistic
 ```
 
-Here the coefficients $\boldsymbol{\beta}  = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and is_setosa respectively.
+Here the coefficients $\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}$ are $\{-9.92, 0.54, -2.80\}$, and refer to the intercept, mpg, and vs respectively.
 
-But what does this actually mean, substantively? 
+But what does this actually mean, substantively?
+
+### (Don't) Stargaze
 
 A very common approach to trying to answer this question is to look at the statistical significance of the coefficients, which we can do with the `summary()` function
 
@@ -101,18 +100,282 @@ summary(mod_logistic)
 
 ```
 
-This indicates that the standard errors on the coefficients is very large in comparison with the coefficient point estimates. The ratio of these two quantities is the z value, where heuristically 'larger is better'. The column `Pr(>|z|)` indicates the probability that the coefficient estimates include zero (where, heuristically, smaller is better). 
+A common practice in many social and health sciences is to offer something like a narrative summary of the above, something like:
 
-The model above is terrible. To better try to illustrate my point let's look at a variant including an interaction term between the `Sepal.Length` and `Sepal.width`
+> Our logistic regression model indicates that manualness is positively and significantly associated with our measure of fuel efficiency (p \< 0.01). There is also an indication of a negative association with straight engine, but this effect does not quite meet conventional thresholds for statistical significance (p \< 0.10).
+
+This above practice is known as 'star-gazing', because summary tables like those above tend to have one or more `*` symbols in the final row, if the value of the `Pr(>|z|)` is below 0.05, and narrative summaries like those just above tend to involve looking at the number of stars in each row, alongside whether the `Estimate` values have a minus sign in front of them.
+
+Star gazing is a very common practice. It's also a terrible practice, which - ironically - turns the final presented output of a *quantitative* model into the crudest of *qualitative* summaries (positive, negative; significant, not significant). Star gazing is what researchers tend to default to when presented with model outputs from the above because, unlike in the linear regression example, the extent to which the $\beta$ coefficients answer substantive 'how-much'-ness questions, like "How much does having a straight engine change the probability of manual transmission?, is not easily apparent from the coefficients themselves.
+
+
+### Standardisation 
+
+So, how can we do better?
+
+One approach is to standardise the data that goes into the model before passing them to the model. Standardisation means attempting to make the distribution and range of different variables more similar, and is especially useful when comparing between different continuous variables.
+
+To give an example of this, let's look at a specification with weight (`wt`) and horsepower (`hp`) in place of `mpg`, but keeping engine-type indicator (`vs`):
 
 ```{r}
-# Note the * instead of the + in the formula line below
-mod_logistic2 <- glm(
-    is_setosa ~ Sepal.Length * Sepal.Width, 
-    data = df, 
-    family = binomial(link = "logit")
+mod_logistic_2 <- glm(
+    am ~ vs + wt + hp,
+    data = mtcars, 
+    family = binomial()
     )
 
-summary(mod_logistic2)
+summary(mod_logistic_2)
+```
+
+Here both `wt` and `hp` are continuous variables.
+
+A star gazing zombie might say something like
+
+> manualness is negatively and significantly associated with weight (p \< 0.05); there is a positive association with horsepower but this does not meet standard thresholds of statistical significance (0.05 \< p \< 0.10).
+
+A *slightly* better approach would be to standardise the variables `wt` and `hp` before passing to the model. Standardising means trying to set the variables to a common scale, and giving the variables more similar statistical characteristics.
+
+```{r}
+
+standardise <- function(x){
+  (x - mean(x)) / sd(x)
+}
+
+mtcars_z <- mtcars
+mtcars_z$wt_z = standardise(mtcars$wt)
+mtcars_z$hp_z = standardise(mtcars$hp)
+
+mod_logistic_2_z <- glm(
+    am ~ vs + wt_z + hp_z,
+    data = mtcars_z, 
+    family = binomial()
+    )
+
+summary(mod_logistic_2_z)
 
 ```
+
+`wt_z` is the standardised version of `wt`, and `hp_z` is the standardised version of `hp`. By convention, whereas unstandardised coefficients are usually referred to as $\beta$ ('beta') coefficients, standardised coefficients are instead referred to as $b$ coefficients. But really, it's the same model.
+
+Note the p value of `wt_z` is the same as for `wt`, and the p value of `hp_z` is the same as that for `hp`. Note also the directions of effect are the same: the coefficients on `wt` and `wt_z` are both negative, and the coefficients of `hp` and `hp_z` are both positive.
+
+This isn't a coincidence. Of course standardising can't really add any new information, can't really change the relationship between a predictor and a response. It's not *really* a new variable, it's the same old variable, so the relationship between predictor and response that there used to be is still there now.
+
+So why bother standardising?
+
+One reason is it gives, subject to some assumptions and caveats, a way of gauging the relative importance of the two different continuous variables, by allowing a slightly more meaningful comparison between the two coefficients.
+
+In this case, we have a standardised $b$ coefficient of `-9.44` for `wt_z`, and of `2.22` for `hp_z`. As with the unstandardised coefficients we can still assert that manualness is negatively associated with weight, and positively associated with horsepower. But now we can also compare the two numbers `-9.44` and `2.22`. The ratio of these two numbers is around `4.3`. So, we might hazard to suggest something like:
+
+> a given increase in weight is around four times as important in *negatively predicting* manual transmission (i.e. in predicting an automatic transmission) as an equivalent increase in horsepower is in *positively predicting* manual transmission.
+
+This isn't a statement that's easy to parse, but does at least allow slightly more information to be gleamed from the model. For example, it implies that, if a proposed change to a vehicle leads to similar relative (standardised) increases in both weight and horsepower then, as the weight effect is greater than the horsepower effect, the model will predict a *decreased* probability of manualness as a result.
+
+But what about the motivating question, "What's *the* effect of a straight engine (`vs=1`) on the probability of manual transmission (`am=1`)?"
+
+The problem, unlike with the linear regression, is this is now a badly formulated question, based on an incorrect premise. The problem is with the word 'the', which implies there should be a single answer to this question, i.e. that the effect of `vs` on the probability of `am=1` should always be the same. But, at least when it comes to absolute changes in the probability of `am=1`, this is no longer the case, as it depends on the values of the other variables in the model.
+
+Instead of assuming `vs=1` has a single effect on `P(am=1)`, we instead need to think about predictions of the marginal effects of `vs` on `am` in the context of other plausible values of the other predictors in the model, `wt` and `hp`. This involves asking the model a series of well formulated and specific questions.
+
+### Maximum marginal effects: Divide-by-four
+
+Before we do that, however, there's a useful heuristic that can be employed when looking at discrete variables and using a logistic regression specification. The heuristic, which is based on the properties of the logistic function,[^3] is called *divide-by-four*. What this means is that, if we take the coefficient on `vs` of `-3.13`, and divide this value by four, we get a value of `-0.78`. Notice that the absolute value of `-0.78` is between 0 and 1.[^4] What this value gives is the *maximum possible* effect that the discrete variable (the presence rather than absence of a straight engine) has on the probability of being a manual transmission. We can say, "a straight engine *reduces* the probability of a manual transmission by *up to* 78%"
+
+[^3]: The logistic function maps any real number `z` onto the value range 0 to 1. `z` is $X\beta$, which in non-matrix notation is equivalent to a sum of products $\sum_{k=0}^{K}x_k\beta_k$ (where, usually, $x_0$ is 1, i.e. the intercept term). Another way of expressing this would be something like $\sum_{k \in S}x_k\beta_k$ where by default $S = \{0, 1, 2, ..., K\}$. We can instead imagine partitioning out $S = \{S^{-J}, S^{J}\}$ where the superscript $J$ indicates the Jth variable, and $-J$ indicates everything in $S$ *apart from* the Jth variable. Where J is a discrete variable, the effect of J on $P(Y=1)$ is $logistic({\sum_{k \in S^{-J}}x_k\beta_k + \beta_J}) - logistic({\sum_{k \in S^{-J}}x_k\beta_k})$, where $logistic(z) = \frac{1}{1 + e^{-z}}$. The marginal effect of the $\beta_J$ coefficient thus depends on the other term $\sum_{k \in S^{-J}}x_k\beta_k$. Where this other term is set to 0 the marginal effect of $\beta_J$ becomes $logistic(\beta_J) - logistic(0)$. According to p.82 of [this chapter by Gelman](https://vulstats.ucsd.edu/pdf/Gelman.ch-05.logistic-regression.pdf) we can equivalently ask the question 'what is the first derivative of the logistic regression with respect to $\beta$?'. Asking more about this to Wolfram Alpha we get [this page of information](https://www.wolframalpha.com/input?i=what+is+the+the+maximum+absolute+value+of+the+derivative+of+1+%2F+%281+%2B+exp%28beta%29%29+with+respect+to+beta%3F), and scrolling down to the section on the global minimum we indeed get an absolute value of $\frac{1}{4}$, so the maximum change in $P(Y=1)$ given a unit change in $\beta$ is indeed one quarter of the value of $\beta$, hence why the 'divide-by-four' heuristic 'works'. This isn't quite a full derivation, but more explanation than I was planning for a footnote! In general, it's better just to remember 'divide-by-four' than go down the rabbit warren of derivation each time! (As I've just learned, to my cost, writing this footnote!)
+
+[^4]: We should *always* expect the absolute value of a coefficient for a discrete variable to be less than four, for this reason.
+
+But, as mentioned, this doesn't quite answer the motivating question, it gives an upper bound to the answer, not the answer itself.[^5] We can instead start to get a sense of 'the' effect of the variable `vs` on `P(am=1)` by asking the model a series of questions.
+
+[^5]: The lower bound for the marginal effect of a discrete variable, or any variable, is zero. This is when the absolute value of the sum of the product of the other variables is infinite.
+
+### Predictions on a matrix
+
+We can start by getting the range of observed values for the two continuous variables, `hp` and `mpg`:
+
+```{r}
+min(mtcars$hp)
+max(mtcars$hp)
+
+min(mtcars$wt)
+max(mtcars$wt)
+```
+
+We can then ask the model to make predictions of $P(am=1)$ for a large number of values of `hp` and `wt` within the observed range, both in the condition in which `vs=0` and in the condition in which `vs=1`. The `expand_grid` function[^6] can help us do this:
+
+[^6]: Or the base R `expand.grid` function
+
+```{r}
+predictors <- expand_grid(
+  hp = seq(min(mtcars$hp), max(mtcars$hp), length.out = 100),
+  wt = seq(min(mtcars$wt), max(mtcars$wt), length.out = 100)
+)
+
+predictors_straight <- predictors |> 
+  mutate(vs = 1)
+
+predictors_vshaped <- predictors |> 
+  mutate(vs = 0)
+
+```
+
+
+For each of these permutations of inputs, we can use the model to get a conditional prediction. For convenience, we can also attach this as an additional column to the predictor data frame:
+
+```{r}
+predictions_predictors_straight <- predictors_straight |> 
+  mutate(
+    p_manual = predict(mod_logistic_2, type = "response", newdata = predictors_straight)
+  )
+
+predictions_predictors_vshaped <- predictors_vshaped |> 
+  mutate(
+    p_manual = predict(mod_logistic_2, type = "response", newdata = predictors_vshaped)
+  )
+
+```
+
+We can see how the predictions vary over `hp` and `wt` using a heat map or contour map:
+
+```{r}
+predictions_predictors_straight |> 
+  bind_rows(
+    predictions_predictors_vshaped
+  ) |> 
+  ggplot(aes(x = hp, y = wt, z = p_manual)) + 
+  geom_contour_filled() + 
+  facet_wrap(~vs) +
+  labs(
+    title = "Predicted probability of marginal transmission by wt, hp, and vs"
+  )
+
+```
+
+We can also produce a contour map of the differences between these two contour maps, i.e. the effect of a straight (`vs=1`) compared with v-shaped (`vs=0`) engine, which gets us a bit closer to the answer: 
+
+```{r}
+predictions_predictors_straight |> 
+  bind_rows(
+    predictions_predictors_vshaped
+  ) |> 
+  group_by(hp, wt) |> 
+  summarise(
+    diff_p_manual = p_manual[vs==1] - p_manual[vs==0]
+  ) |> 
+  ungroup() |> 
+  ggplot(
+    aes(x = hp, y = wt, z = diff_p_manual)
+  ) + 
+  geom_contour_filled() + 
+  labs(
+    title = "Marginal effect of vs=1 given wt and hp on P(am=1)"
+  )
+
+```
+
+We can see here that, for large ranges of wt and hp, the marginal effect of `vs=1` is small. However, for particular combinations of hp and wt, such as where hp is around 200 and wt is slightly below 3, then the marginal effect of `vs=1` becomes large, up to around a -70% reduction in the probability of manual transmission. (i.e. similar to the theoretical maximum marginal effect of around -78%). 
+
+So, what's *the* effect of `vs=1` on `P(am=1)`? i.e. how should we boil down all these 10,000 predicted effect sizes into a single effect size? 
+
+I guess, if we have to try to answer this silly question, then we could take the average effect size...
+
+```{r}
+predictions_predictors_straight |> 
+  bind_rows(
+    predictions_predictors_vshaped
+  ) |> 
+  group_by(hp, wt) |> 
+  summarise(
+    diff_p_manual = p_manual[vs==1] - p_manual[vs==0]
+  ) |> 
+  ungroup() |> 
+  summarise(
+    mean_diff_p_manual = mean(diff_p_manual)
+  )
+
+```
+
+So, we get an average difference of around `-0.08`, i.e. about an 8% reduction in probability of manual transmission. 
+
+### Marginal effects on observed data
+
+Is this a reasonable answer? Probably not, because although the permutations of `wt` and `hp` we looked at come from the observed range, most of these combinations are likely very 'theoretical'. We can get a sense of this by plotting the observed values of `wt` and `hp` onto the above contour map:
+
+```{r}
+predictions_predictors_straight |> 
+  bind_rows(
+    predictions_predictors_vshaped
+  ) |> 
+  group_by(hp, wt) |> 
+  summarise(
+    diff_p_manual = p_manual[vs==1] - p_manual[vs==0]
+  ) |> 
+  ungroup() |> 
+  ggplot(
+    aes(x = hp, y = wt, z = diff_p_manual)
+  ) + 
+  geom_contour_filled(alpha = 0.2, show.legend = FALSE) + 
+  labs(
+    title = "Observations from mtcars on the predicted probability surface"
+  ) +
+  geom_point(
+    aes(x = hp, y = wt), inherit.aes = FALSE,
+    data = mtcars
+  )
+
+```
+
+
+Perhaps a better option, then, would be to calculate an average marginal effect using the observed values, but switching the observations for `vs` to 1 in one scenario, and 0 in another scenario:
+
+```{r}
+predictions_predictors_observed_straight <- mtcars |> 
+  select(hp, wt) |> 
+  mutate(vs = 1)
+
+predictions_predictors_observed_straight <- predictions_predictors_observed_straight |> 
+  mutate(
+    p_manual = predict(mod_logistic_2, type = "response", newdata = predictions_predictors_observed_straight)
+  )
+
+predictions_predictors_observed_vshaped <- mtcars |> 
+  select(hp, wt) |> 
+  mutate(vs = 0) 
+
+predictions_predictors_observed_vshaped <- predictions_predictors_observed_vshaped |> 
+  mutate(
+    p_manual = predict(mod_logistic_2, type = "response", newdata = predictions_predictors_observed_vshaped)
+  )
+  
+
+predictions_predictors_observed <- 
+  bind_rows(
+    predictions_predictors_observed_straight,
+    predictions_predictors_observed_vshaped
+  )
+
+predictions_marginal <- 
+  predictions_predictors_observed |> 
+    group_by(hp, wt) |> 
+    summarise(
+      diff_p_manual = p_manual[vs==1] - p_manual[vs==0]
+    )
+
+predictions_marginal |> 
+  ggplot(aes(x = diff_p_manual)) + 
+  geom_histogram() +
+  geom_vline(aes(xintercept = mean(diff_p_manual)), colour = "red") + 
+  geom_vline(aes(xintercept = median(diff_p_manual)), colour = "green")
+
+```
+
+In the above the red line indicates the mean value of these marginal differences, which is `-0.12`, and the green line the median value of these differences, which is around `-0.02`. So, even with just these two measures of central tendency, there's around a six-fold difference in the estimate of 'the effect'. We can also see there's a lot of variation, from around nothing (right hand side), to around a 65% reduction (left hand side). 
+
+If forced to give a simple answer (to this overly simplistic question), we might plump for the mean for theoretical reasons, and say something like "The effect of a straight engine is to reduce the probability of a manual transmission by around an eighth". But I'm sure, having seen how much variation there is in these marginal effects, we can agree this 'around an eighth' answer, or any single number answer, is likely to be overly reductive. 
+
+Hopefully, however, it is more informative than 'statistically significant and negative', (the stargazing approach) or 'up to around 78%' (the divide-by-four approach). 
+
+
+## Conclusion
+
+Linear regression tends to give a false impression about how straightforward it is to use a model to answer questions of the form "What is the effect of x on y?". This is because, for linear regression, but few other model specifications, the answer to this question is in the $\beta$ coefficients themselves. For other model specifications, like the logistic regression example above, the correct-but-uninformative answer tends to be "it depends", and potentially more informative answers tend to require a bit more work to derive and interpret.  
