@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-08">
+<meta name="dcterms.date" content="2023-12-01">
 
-<title>Jon Minton’s Blog - Optimised for Twitter?</title>
+<title>Jon Minton’s Blog - Part Two: Systematic components and link functions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,27 +56,46 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -98,12 +117,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Optimised for Twitter?">
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Two: Systematic components and link functions">
 <meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/glms/lms-are-glms-part-02/index_files/figure-html/unnamed-chunk-1-1.png">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -113,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -124,13 +148,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../glms.html" rel="" target="">
+    <a class="nav-link" href="../../../glms.html" rel="" target="">
  <span class="menu-text">Generalised Linear Models</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -165,11 +189,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Optimised for Twitter?</h1>
+      <h1 class="title">Part Two: Systematic components and link functions</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">twitter</div>
-                <div class="quarto-category">X</div>
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">statistics</div>
               </div>
                   </div>
   </div>
@@ -187,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 8, 2023</p>
+        <p class="date">December 1, 2023</p>
       </div>
     </div>
     
@@ -205,15 +227,96 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>I’ve finally got around to ‘optimising the Quarto blog for Twitter’, by following the guidance in <a href="https://quarto.org/docs/websites/website-tools.html#twitter-cards">this section</a> of Quarto’s website and adding the following declaration to the <code>_quarto.yml</code> file in the project root.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">twitter-card</span><span class="kw">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">   </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">"@jonminton"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>However, is Twitter optimised for Twitter, these days? Is Twitter even Twitter!?</p>
+<section id="tldr" class="level2">
+<h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
+<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> .</p>
+</section>
+<section id="part-2-systematic-components-and-link-functions" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-systematic-components-and-link-functions">Part 2: Systematic components and link functions</h2>
+<p>In <a href="../lms-are-glms-part-01">part 1 of this series</a> we introduced the following general framework for thinking about statistical models and what they contain.</p>
+<p><strong>Stochastic Component</strong></p>
+<p><span class="math display">\[
+Y_i \sim f(\theta_i, \alpha)
+\]</span></p>
+<p><strong>Systematic Component</strong></p>
+<p><span class="math display">\[
+\theta_i = g(X_i, \beta)
+\]</span> The terminology are as described previously.</p>
+<p>These equations are too broad and abstract to be implemented directly. Instead, specific choices about the <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(g(.)\)</span> need to be made. <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> gives the following examples:</p>
+<p><strong>Logistic Regression</strong></p>
+<p><span class="math display">\[
+Y_i \sim Bernoulli(\pi_i)
+\]</span></p>
+<p><span class="math display">\[
+\pi_i = \frac{1}{1 + e^{-X_i\beta}}
+\]</span></p>
+<p><strong>Linear Regression</strong></p>
+<p><span class="math display">\[
+Y_i \sim N(\mu_i, \sigma^2)
+\]</span> <span class="math display">\[
+\mu_i = X_i\beta
+\]</span></p>
+<p>So, what’s so special about linear regression, in this framework?</p>
+<p>In one sense, not so much. It’s got a systematic component, and it’s got a stochastic component. But so do other models. But in another sense, quite a lot. It’s a rare case where the systematic component, <span class="math inline">\(g(.)\)</span>, <em>doesn’t</em> transform its inputs in some weird and wonderful way. We can say that <span class="math inline">\(g(.)\)</span> is the identity transform, <span class="math inline">\(I(.)\)</span>, which in words means <em>take what you’re given, do nothing to it, and pass it on</em>.</p>
+<p>By contrast, the systematic component for logistic regression is known as the logistic function. <span class="math inline">\(logistic(x) := \frac{1}{1 + e^{-x}}\)</span> It transforms inputs that could be anywhere on the real number line to values that lay somewhere between 0 and 1. Why 0 to 1? Because what logistic regression models produce aren’t predicted values, but predicted <em>probabilities</em>, and nothing can be more probable than certain (1) or less probable than impossible (0).</p>
+<p>We can compare the transformations used in linear and logistic regression as follows:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define transformations</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ident <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {x}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lgt <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>x))}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the associations</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(ident, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x (before transform)"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"z (after transform)"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"The Identity 'Transformation'"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(lgt, <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x (before transform)"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">"z (after transform)"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"The Logistic Transformation"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Identity Transformation</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Logistic Transformation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The usual input to the transformation function <span class="math inline">\(g(.)\)</span> is a sum of products. For three variables, for example, this could be <span class="math inline">\(\beta_0 + \beta_1 x_1 + \beta_2 x_2\)</span>. In matrix algebra this generalises to <span class="math inline">\(\boldsymbol{X\beta}\)</span> , where <span class="math inline">\(\boldsymbol{X}\)</span> is the predictor data whose rows are observations, columns are variables, and whose first column is a vector of 1s (for the intercept term). The <span class="math inline">\(\boldsymbol{\beta}\)</span> term is a row-wise vector comprising each specific <span class="math inline">\(\beta\)</span> term, such as <span class="math inline">\(\boldsymbol{\beta} = \{ \beta_0, \beta_1, \beta_2 \}\)</span> in the three variable example above.</p>
+<p>What’s special about the identity transformation, and so linear regression, is that there is a fairly clear correspondence between a <span class="math inline">\(\beta_j\)</span> term and the estimated influence of changing a predictor variable <span class="math inline">\(x_j\)</span> on the predicted outcome <span class="math inline">\(Y\)</span>, i.e.&nbsp;the ‘effect of <span class="math inline">\(x_j\)</span> on <span class="math inline">\(Y\)</span>’. For other transformations this tends to not be the case.</p>
+<p>We’ll delve into how this is implemented in practice in <a href="../lms-are-glms-part-03">part 3</a>.</p>
 
 
 
-</main> <!-- /main -->
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-KinTomWit00" class="csl-entry" role="listitem">
+King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Using some base R graphics functions as I’m feeling masochistic<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

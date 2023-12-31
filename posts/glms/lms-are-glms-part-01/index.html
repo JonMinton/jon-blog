@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-02">
+<meta name="dcterms.date" content="2023-11-28">
 
-<title>Jon Minton’s Blog - Linear Models are General Linear Models</title>
+<title>Jon Minton’s Blog - Part One: Model fitting as parameter calibration</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -78,24 +44,24 @@ div.csl-indent {
 }</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,16 +82,18 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Linear Models are General Linear Models">
-<meta name="twitter:description" content="Part Three: glm is just fancy lm">
-<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/lms-are-glms-part-03/index_files/figure-html/unnamed-chunk-1-1.png">
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part One: Model fitting as parameter calibration">
+<meta name="twitter:description" content="">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:image-height" content="960">
-<meta name="twitter:image-width" content="1344">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -135,7 +103,7 @@ div.csl-indent {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -144,9 +112,15 @@ div.csl-indent {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../glms.html" rel="" target="">
+ <span class="menu-text">Generalised Linear Models</span></a>
+  </li>  
+</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -181,11 +155,9 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Linear Models are General Linear Models</h1>
-            <p class="subtitle lead">Part Three: glm is just fancy lm</p>
+      <h1 class="title">Part One: Model fitting as parameter calibration</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">statistics</div>
-                <div class="quarto-category">R</div>
               </div>
                   </div>
   </div>
@@ -203,7 +175,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 2, 2023</p>
+        <p class="date">November 28, 2023</p>
       </div>
     </div>
     
@@ -223,182 +195,100 @@ div.csl-indent {
 
 <section id="tldr" class="level2">
 <h2 class="anchored" data-anchor-id="tldr">tl;dr</h2>
-<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>.</p>
+<p>This is part of a series of posts which introduce and discuss the implications of a general framework for thinking about statistical modelling. This framework is most clearly expressed in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> .</p>
 </section>
-<section id="part-3-how-to-express-a-linear-model-as-a-generalised-linear-model" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-how-to-express-a-linear-model-as-a-generalised-linear-model">Part 3: How to express a linear model as a generalised linear model</h2>
-<p>In the last part, we introduced two types of generalised linear models, with two types of transformation for the systematic component of the model, <code>g(.)</code>, the logit transformation, and the identity transformation. This post will show how this framework is implemented in practice in R.</p>
-<p>In R, there’s the <code>lm</code> function for linear models, and the <code>glm</code> function for generalised linear models.</p>
-<p>I’ve argued previously that the standard linear regression is just a specific type of generalised linear model, one that makes use of an identity transformation <code>I(.)</code> for its systematic component <code>g(.)</code>. Let’s now demonstrate that by producing the same model specification using both <code>lm</code> and <code>glm</code>.</p>
-<p>We can start by being painfully unimaginative and picking using one of R’s standard datasets</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Petal.Length, Sepal.Length)) <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"The Iris dataset *Yawn*"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Petal Length"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Sepal Length"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>It looks like, where the petal length is over 2.5, the relationship with sepal length is fairly linear</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Petal.Length <span class="sc">&gt;</span> <span class="fl">2.5</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Petal.Length, Sepal.Length)) <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"The Iris dataset *Yawn*"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Petal Length"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Sepal Length"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>So, let’s make a linear regression just of this subset</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris_ss <span class="ot">&lt;-</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  iris <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Petal.Length <span class="sc">&gt;</span> <span class="fl">2.5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can produce the regression using <code>lm</code> as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(Sepal.Length <span class="sc">~</span> Petal.Length, <span class="at">data =</span> iris_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And we can use the <code>summary</code> function (which checks the type of <code>mod_lm</code> and evokes <code>summary.lm</code> implicitly) to get the following:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Sepal.Length ~ Petal.Length, data = iris_ss)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.09194 -0.26570  0.00761  0.21902  0.87502 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   2.99871    0.22593   13.27   &lt;2e-16 ***
-Petal.Length  0.66516    0.04542   14.64   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.3731 on 98 degrees of freedom
-Multiple R-squared:  0.6864,    Adjusted R-squared:  0.6832 
-F-statistic: 214.5 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<p>Woohoo! Three stars next to the <code>Petal.Length</code> coefficient! Definitely publishable!</p>
-<p>To do the same using <code>glm</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mod_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(Sepal.Length <span class="sc">~</span> Petal.Length, <span class="at">data =</span> iris_ss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And we can use the <code>summary</code> function for this data too. In this case, <code>summary</code> evokes <code>summary.glm</code> because it knows the class of <code>mod_glm</code> contains <code>glm</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = Sepal.Length ~ Petal.Length, data = iris_ss)
-
-Deviance Residuals: 
-     Min        1Q    Median        3Q       Max  
--1.09194  -0.26570   0.00761   0.21902   0.87502  
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   2.99871    0.22593   13.27   &lt;2e-16 ***
-Petal.Length  0.66516    0.04542   14.64   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 0.1391962)
-
-    Null deviance: 43.496  on 99  degrees of freedom
-Residual deviance: 13.641  on 98  degrees of freedom
-AIC: 90.58
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-</div>
-<p>So, the coefficients are exactly the same. But there’s also some additional information in the summary, including on the type of ‘family’ used. Why is this?</p>
-<p>If we look at the help for <code>glm</code> we can see that, by default, the <code>family</code> argument is set to <code>gaussian</code>.</p>
-<p>And if we delve a bit further into the help file, in the details about the family argument, it links to the <code>family</code> help page. The usage statement of the <code>family</code> help file is as follows:</p>
-<pre><code>family(object, ...)
-
-binomial(link = "logit")
-gaussian(link = "identity")
-Gamma(link = "inverse")
-inverse.gaussian(link = "1/mu^2")
-poisson(link = "log")
-quasi(link = "identity", variance = "constant")
-quasibinomial(link = "logit")
-quasipoisson(link = "log")
-</code></pre>
-<p>Each family has a default <code>link</code> argument, and for this <code>gaussian</code> family, this link is the identity function.</p>
-<p>We can also see that, for both the <code>binomial</code> and <code>quasibinomial</code> family, the default link is <code>logit</code>, which transforms all predictors onto a 0-1 scale, as shown in the last post.</p>
-<p>So, by using the default family, the Gaussian family is selected, and by using the default Gaussian family member, the identity link is selected.</p>
-<p>We can confirm this by setting the family and link explicitly, showing that we get the same results</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod_glm2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Sepal.Length <span class="sc">~</span> Petal.Length, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>), <span class="at">data =</span> iris_ss)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_glm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = Sepal.Length ~ Petal.Length, family = gaussian(link = "identity"), 
-    data = iris_ss)
-
-Deviance Residuals: 
-     Min        1Q    Median        3Q       Max  
--1.09194  -0.26570   0.00761   0.21902   0.87502  
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   2.99871    0.22593   13.27   &lt;2e-16 ***
-Petal.Length  0.66516    0.04542   14.64   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 0.1391962)
-
-    Null deviance: 43.496  on 99  degrees of freedom
-Residual deviance: 13.641  on 98  degrees of freedom
-AIC: 90.58
-
-Number of Fisher Scoring iterations: 2</code></pre>
-</div>
-</div>
-<p>It’s the same!</p>
-<p>How do these terms used in the <code>glm</code> function, <code>family</code> and <code>link</code>, relate to the general framework in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>?</p>
+<section id="part-1-what-are-statistical-models-and-how-are-they-fit" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-what-are-statistical-models-and-how-are-they-fit">Part 1: What are statistical models and how are they fit?</h2>
+<p>It’s common for different statistical methods to be taught as if they’re completely different species or families. In particular, for standard linear regression to be taught first, then additional, more exotic models, like logistic or Poisson regression, to be introduced at a later stage, in an advanced course.</p>
+<p>The disadvantage with this standard approach to teaching statistics is that it obscures the way that almost all statistical models are, fundamentally, trying to do something very similar, and work in very similar ways.</p>
+<p>Something I’ve found immensely helpful over the years is the following pair of equations:</p>
+<p><strong>Stochastic Component</strong></p>
+<p><span class="math display">\[
+Y_i \sim f(\theta_i, \alpha)
+\]</span></p>
+<p><strong>Systematic Component</strong></p>
+<p><span class="math display">\[
+\theta_i = g(X_i, \beta)
+\]</span></p>
+<p>In words, the above is saying something like:</p>
 <ul>
-<li><code>family</code> is the stochastic component, <code>f(.)</code></li>
-<li><code>link</code> is the systematic component, <code>g(.)</code></li>
+<li>The predicted response <span class="math inline">\(Y_i\)</span> for a set of predictors <span class="math inline">\(X_i\)</span> is assumed to be drawn from (the <span class="math inline">\(\sim\)</span> symbol) a stochastic distribution (<span class="math inline">\(f(.,.)\)</span>)</li>
+<li>The stochastic distribution contains both parameters we’re interested in, and which are determined by the data <span class="math inline">\(\theta_i\)</span>, and parameters we’re not interested in and might just have to assume, <span class="math inline">\(\alpha\)</span>.</li>
+<li>The parameters we’re interested in determining from the data <span class="math inline">\(\theta_i\)</span> are themselves determined by a systematic component <span class="math inline">\(g(.,.)\)</span> which take and transform two inputs: The observed predictor data <span class="math inline">\(X_i\)</span>, and a set of coefficients <span class="math inline">\(\beta\)</span></li>
 </ul>
-<p>They’re different terms, but it’s the same broad framework.</p>
-<p>Linear models are just one type of general linear model!</p>
+<p>And graphically this looks something like:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  X
+  beta
+  g
+  f
+  alpha
+  theta
+  Y
+  
+  X --&gt; g
+  beta --&gt; g
+  g --&gt; theta
+  theta --&gt; f
+  alpha --&gt; f
+  
+  f --&gt; Y
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>To understand how this fits into the ‘whole game’ of modelling, it’s worth introducing another term, <span class="math inline">\(D\)</span>, for the data we’re using, and to say that <span class="math inline">\(D\)</span> is partitioned into observed predictors <span class="math inline">\(X_i\)</span>, and observed responses, <span class="math inline">\(y_i\)</span>.</p>
+<p>For each observation, <span class="math inline">\(i\)</span>, we therefore have a predicted response, <span class="math inline">\(Y_i\)</span>, and an observed response, <span class="math inline">\(y_i\)</span>. We can compare <span class="math inline">\(Y_i\)</span> with <span class="math inline">\(y_i\)</span> to get the difference between the two, <span class="math inline">\(\delta_i\)</span>.</p>
+<p>Now, obviously can’t change the data to make it fit our model better. But what we can do is calibrate the model a little better. How do we do this? Through adjusting the <span class="math inline">\(\beta\)</span> parameters that feed into the systematic component <span class="math inline">\(g\)</span>. Graphically, this process of comparison, adjustment, and calibration looks as follows:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  D
+  y
+  X
+  beta
+  g
+  f
+  alpha
+  theta
+  Y
+  diff
+  
+  D --&gt;|partition| X
+  D --&gt;|partition| y
+  X --&gt; g
+  beta --&gt;|rerun| g
+  g --&gt;|transform| theta
+  theta --&gt; f
+  alpha --&gt; f
+  
+  f --&gt;|predict| Y
+  
+  Y --&gt;|compare| diff
+  y --&gt;|compare| diff
+  
+  diff --&gt;|adjust| beta
+  
+  
+  
+  linkStyle default stroke:blue, stroke-width:1px
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Pretty much all statistical model fitting involves iterating along this <span class="math inline">\(g \to \beta\)</span> and <span class="math inline">\(\beta \to g\)</span> feedback loop until some kind of condition is met involving minimising <span class="math inline">\(\delta\)</span>.</p>
+<p>I’ll expand on this idea further in <a href="../lms-are-glms-part-02">part 2</a>.</p>
 
 
 
