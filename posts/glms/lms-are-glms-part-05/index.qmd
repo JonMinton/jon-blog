@@ -125,6 +125,7 @@ In the code above we have created $y$, a vector of nine observed responses; and 
 Graphically, the relationship between x and y looks as follows:
 
 ```{r}
+library(tidyverse)
 tibble(x=x, y=y) |>
     ggplot(aes(x, y)) + 
     geom_point()
@@ -138,7 +139,7 @@ In this toy example, but almost never in reality, we *know* the correct paramete
 
 
 ```{r}
-library(tidyverse)
+
 candidate_param_values <- expand_grid(
     beta_0 = seq(-5, 5, by = 0.1),
     beta_1 = seq(-5, 5, by = 0.1)
@@ -181,3 +182,6 @@ candidate_param_values |>
 
 We have now introduced the concepts of Bayes Rule, Likelihood, and log likelihood, then derived the log likelihood for standard linear regression. We then built a toy dataset where we know the true parameters, and looked at how the log likelihood varies as different $\beta$ parameters are proposed. We identified a 'hot spot' when the $\beta$ parameters proposed are close to the 'true values'. 
 
+## Coming up 
+
+The [next part of this series](../lms-are-glms-part-05/index.qmd) shows how log likelihood functions tend to be used in practice, in conjunction with optimisation algorithms that (usally) arrive at good estimates of our coefficients in far fewer steps than we've used above. 

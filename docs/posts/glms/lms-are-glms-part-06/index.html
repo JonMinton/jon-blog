@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2024-01-02">
+<meta name="dcterms.date" content="2024-01-03">
 
-<title>Jon Minton’s Blog - Part Five: Traversing the Likelihood Landscape</title>
+<title>Jon Minton’s Blog - Part Six: The Robo-Chauffeur</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,26 +56,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -121,9 +102,9 @@ div.csl-indent {
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Part Five: Traversing the Likelihood Landscape">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Six: The Robo-Chauffeur">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/glms/lms-are-glms-part-05/index_files/figure-html/unnamed-chunk-3-1.png">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/glms/lms-are-glms-part-06/index_files/figure-html/unnamed-chunk-3-1.png">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
@@ -189,7 +170,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Part Five: Traversing the Likelihood Landscape</h1>
+      <h1 class="title">Part Six: The Robo-Chauffeur</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">statistics</div>
                 <div class="quarto-category">R</div>
@@ -210,7 +191,7 @@ div.csl-indent {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 2, 2024</p>
+        <p class="date">January 3, 2024</p>
       </div>
     </div>
     
@@ -230,53 +211,22 @@ div.csl-indent {
 
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">Aim</h2>
-<p>In <a href="../../../posts/glms/lms-are-glms-part-01/index.html">the first part of this series</a>, I stated that statistical model fitting, within the generalised model framework presented in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>, involves adjusting candidate values for elements of <span class="math inline">\(\beta = \{\beta_0, \beta_1, ..., \beta_K \}\)</span> such that the difference between what the model predicts given some predictor values, <span class="math inline">\(Y_i | X_i\)</span>, and what has been observed alongside the predictors, <span class="math inline">\(y_i\)</span>, is minimised on average<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in some way.</p>
-<p>The aim of this post is to show how this process is typically implemented in GLMs, using likelihood theory.</p>
+<p>In <a href="../../../posts/glms/lms-are-glms-part-05/index.html">the previous post</a> in this series, I presented a function for calculating the log likelihood of a standard linear regression with a Normal error term. I then built a very simple dataset, ten data points linking <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span>, and showed how the log likelihood varied as a combination of different candidate values for the model’s intercept and slope terms (<span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> respectively).</p>
+<p>The aim of this this post is to show how the best parameter combinations tend to be estimated from a model’s log likelihood in practice, using an optimisation algorithm that iteratively tries out new parameter values, and keeps trying and trying until some kind of condition is met. This is what the last figure in <a href="../../../posts/glms/lms-are-glms-part-01/index.html">the first post</a> is trying to illustrate.</p>
 </section>
-<section id="bayes-rule-and-likelihood" class="level2">
-<h2 class="anchored" data-anchor-id="bayes-rule-and-likelihood">Bayes’ Rule and Likelihood</h2>
-<p>Statisticians and more advanced users of statistical models often divide themselves into ‘frequentists’ and ‘Bayesians’. To some extent the distinction is really between ‘improper Bayesians’ and ‘proper Bayesians’, however, as Bayes’ Rule is at the root of both approaches. <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes’ Rule</a> is:</p>
-<p><span class="math display">\[
-P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-\]</span></p>
-<p>Note in the above the left hand side of the equation is <span class="math inline">\(P(A|B)\)</span> and the right hand side of the equation <em>includes</em> <span class="math inline">\(P(B|A)\)</span>. To write it out as awkward prose, therefore, Bayes’ Rule is a way of expressing <strong>that given this</strong> in terms of <strong>this given that</strong>.</p>
-<p>As with much of algebra, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are just placeholders. We could instead use different symbols instead, such as:</p>
-<p><span class="math display">\[
-P(\tilde{\theta} | y) = \frac{P(y | \tilde{\theta})P(\tilde{\theta})}{P(y)}
-\]</span></p>
-<p>Likelihood theory offers a way of thinking about how good a model is in terms of its relationship to the data. According to <span class="citation" data-cites="King98">King (<a href="#ref-King98" role="doc-biblioref">1998</a>)</span> (p.&nbsp;59), it can be expressed as:</p>
-<p><span class="math display">\[
-L(\tilde{\theta}| y) = k(y) P(y | \tilde{\theta})
-\]</span></p>
-<p>Or</p>
-<p><span class="math display">\[
-L(\tilde{\theta} | y) \propto P(y | \tilde{\theta})
-\]</span></p>
-<p>Where <span class="math inline">\(\tilde{\theta}\)</span> is a proposed parameter or parameter combination for the model, and <span class="math inline">\(y\)</span> is the observed outcome.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>The important thing to note is that both Bayes’ Rule and Likelihood Theory are ways of expressing <strong>this given that</strong> as a function of <strong>that given this</strong>. Specifically, the model given the data, as a function of the data given the model. <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<section id="optimisation-algorithms-getting-there-faster" class="level2">
+<h2 class="anchored" data-anchor-id="optimisation-algorithms-getting-there-faster">Optimisation algorithms: getting there faster</h2>
+<p>In the previous post, we ‘cheated’ a bit when using the log likelihood function, fixing the value for one of the parameters <span class="math inline">\(\sigma^2\)</span> to the value we used when we generated the data, so we could instead look at how the log likelihood surface varied as different combinations of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> were plugged into the formula. <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> values ranging from -5 to 5, and at steps of 0.1, were considered: 101 values of <span class="math inline">\(\beta_0\)</span>, 101 values of <span class="math inline">\(\beta_1\)</span>, and so over 10,000<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> unique <span class="math inline">\(\{\beta_0, \beta_1\}\)</span> combinations were stepped through. This approach is known as grid search, and seldom used in practice (except for illustration purposes) because the number of calculations involved can very easily get out of hand. For example, if we were to use it to explore as many distinct values of <span class="math inline">\(\sigma^2\)</span> as we considered for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, the total number of <span class="math inline">\(\{\beta_0, \beta_1, \sigma^2 \}\)</span> combinations we would crawl through would be over 100,000 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> rather than over 10,000.</p>
+<p>One feature we noticed with the likelihood surface over <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> in the previous post is that it appears to look like a hill, with a clearly defined highest point (the region of maximum likelihood) and descent in all directions from this highest point. Where likelihood surfaces have this feature of being single-peaked in this way (known as ‘unimodal’), then a class of algorithms known as ‘hill climbing algorithms’ can be applied to find the top of such peaks in a way that tends to be both quicker (fewer steps) and more precise than the grid search approach used for illustration in the previous post.</p>
 </section>
-<section id="likelihood-for-linear-regression" class="level2">
-<h2 class="anchored" data-anchor-id="likelihood-for-linear-regression">Likelihood for linear regression</h2>
-<p>When, many years ago, I completed <a href="https://scholar.harvard.edu/msen/classes/government-2001-advanced-quantitative-research-methodology-professor-gary-king">the course</a> from this modelling framework is most associated, a hazing ritual employed near the start of the course was to require participants to derive the likelihood of different model specifications. However, I don’t feel like hazing myself right now, so instead we can use the derivation shown on <a href="https://scholar.harvard.edu/files/msen/files/sen_gov2001_section5.pdf">slide 8 of these slides</a>:</p>
-<p><span class="math display">\[
-L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
-\]</span></p>
-<p>Where <span class="math inline">\(\mu = X \beta\)</span>, <span class="math inline">\(i\)</span> indicates an observation in the data (a row of <span class="math inline">\(X\)</span> when <span class="math inline">\(X\)</span> is in matrix form), and <span class="math inline">\(\prod\)</span> indicates the likelihoods from each observation should be multiplied with each other to derive the overall likelihood for all observed data.</p>
-<p>In practice the log Likelihood, rather than the likelihood itself, is used, because this allows calculation of a sum of terms (<span class="math inline">\(\sum\)</span>) rather than product of terms (<span class="math inline">\(\prod\)</span>), and the latter tends to be computationally easier to calculate.</p>
-<p>As we are interested only in how likelihood varies as a function of those model parameters we wish to estimate, <span class="math inline">\(\theta = \{\beta, \sigma^2\}\)</span>, some of the terms in the log likelihood expression can be omitted, leaving us with:</p>
-<p><span class="math display">\[
-\log{L(\beta, \sigma^2 | y)} \doteq \sum{-\frac{1}{2}[\log{\sigma^2} + \frac{(y_i - X_i\beta)^2}{\sigma^2}]}
-\]</span></p>
-<p>For all the complexity of the above expression, at heart it takes three inputs:</p>
+<section id="code-recap" class="level2">
+<h2 class="anchored" data-anchor-id="code-recap">Code recap</h2>
+<p>Let’s copy over the code we used in the previous post for:</p>
 <ul>
-<li><span class="math inline">\(\theta = \{\beta, \sigma^2\}\)</span> : The candidate <em>parameters</em> for the model.</li>
-<li><span class="math inline">\(y\)</span> : the observed <strong>response</strong> value from the dataset <span class="math inline">\(D\)</span></li>
-<li><span class="math inline">\(X\)</span> : the observed <strong>predictor</strong> values from the dataset <span class="math inline">\(D\)</span></li>
+<li><ol type="1">
+<li>Calculating log likelihood</li>
+</ol></li>
 </ul>
-<p>And returns one value, the log likelihood <span class="math inline">\(\log{L(.)}\)</span>.</p>
-<p>To reiterate, we can’t change the data, but we can keep changing the candidate parameters <span class="math inline">\(\theta\)</span>. Each time we do so, <span class="math inline">\(\log{L(.)}\)</span> will change too.</p>
-<p><em>The aim of model calibration, in the Likelihood framework, is to maximise the Likelihood.</em> The parameter set that maximises the likelihood is also the parameter set that maximises the log likelihood.</p>
-<p>To continue the example from the slides, we can write out a function for calculating the log likelihood of standard linear regression as follows:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -287,9 +237,12 @@ L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In the above, <code>pars</code> is (almost but not quite) <span class="math inline">\(\theta\)</span>, the parameters to estimate. For standard linear regression <span class="math inline">\(\theta = \{\beta, \sigma^2\}\)</span>, where <span class="math inline">\(\beta = \{\beta_0, \beta_1, ..., \beta_k\}\)</span>, i.e.&nbsp;a vector of beta parameters, one for each column (variable) in <span class="math inline">\(X\)</span>, the predictor matrix of observations; this is why <span class="math inline">\(beta\)</span> is selected from the first K values in <code>pars</code> where K is the number of columns in <span class="math inline">\(X\)</span>.</p>
-<p>The last value in <code>pars</code> is used to derive the proposed <span class="math inline">\(\sigma^2\)</span>. If we call this last value <code>eta</code> (<span class="math inline">\(\eta\)</span>), then we can say <span class="math inline">\(\sigma^2 = e^{\eta}\)</span>. So, whereas <span class="math inline">\(\theta\)</span> is a vector that ‘packs’ <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma^2\)</span> into a single ordered series of values, <code>pars</code> packs <code>eta</code> in place of <span class="math inline">\(\sigma^2\)</span>. This substitution of <code>eta</code> for <span class="math inline">\(\sigma^2\)</span> is done to make it easier for standard parameter fitting algorithms to work, as they tend to operate over the full real number range, rather than just over positive values.</p>
-<p>In order to illustrate how the log likelihood function <code>llNormal</code> works in practice, let’s construct a simple toy dataset <span class="math inline">\(D\)</span>, and decompose <span class="math inline">\(D = \{y, X\}\)</span>, the two types of data input that go into the <code>llNormal</code> function.</p>
+<p>And</p>
+<ul>
+<li><ol start="2" type="1">
+<li>Generating our tame toy dataset of 10 data points</li>
+</ol></li>
+</ul>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -309,8 +262,7 @@ L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In the code above we have created <span class="math inline">\(y\)</span>, a vector of nine observed responses; and <span class="math inline">\(X\)</span>, a matrix of predictors with two columns (the number of variables for which <span class="math inline">\(beta\)</span> terms need to be estimated) and nine rows (the number of observations).</p>
-<p>Graphically, the relationship between x and y looks as follows:</p>
+<p>To recap, the toy dataset looks as follows:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -323,82 +275,150 @@ L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>In this toy example, but almost never in reality, we <em>know</em> the correct parameters for the model. These are <span class="math inline">\({\beta_0 = 2.5, \beta_1 = 1.4}\)</span> and <span class="math inline">\(\sigma^2 = 0.25\)</span>. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Soon, we will see how effectively we can use optimisation algorithms to recover these true model parameters. But first, let’s see how the log likelihood varies as a function jointly of different candidate values of <span class="math inline">\(\beta_0\)</span> (the intercept) and <span class="math inline">\(\beta_1\)</span> (the slope parameter), if we already set <span class="math inline">\(\sigma^2\)</span> to <code>0.25</code>.</p>
+</section>
+<section id="optim-our-robo-chauffeur" class="level2">
+<h2 class="anchored" data-anchor-id="optim-our-robo-chauffeur"><code>optim</code>: our Robo-Chauffeur</h2>
+<p>Note how the <code>llNormal</code> function takes a single argument, <code>pars</code>, which packages up all the specific candidate parameter values we want to try out. In our previous post, we also had a ‘feeder function’, <code>feed_to_ll</code>, which takes the various <span class="math inline">\(\beta\)</span> candidate values from the grid and packages them into <code>pars</code>. In our previous post, we had to specify the candidate values to try to feed to <code>llNormal</code> packages inside <code>pars</code>.</p>
+<p>But we don’t have to do this. We can instead use an algorithm to take candidate parameters, try them out, then make new candidate parameters and try them out, for us. Much as a taxi driver needs to know where to meet a passenger, but doesn’t want the passenger to tell them exactly which route to take, we just need to specify a starting set of values for the parameters to optimise. R’s standard way of doing this is with the <code>optim</code> function. Here’s it in action:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>candidate_param_values <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta_0 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.1</span>),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta_1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>feed_to_ll <span class="ot">&lt;-</span> <span class="cf">function</span>(b0, b1){</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    pars <span class="ot">&lt;-</span> <span class="fu">c</span>(b0, b1, <span class="fu">log</span>(<span class="fl">0.25</span>))</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">llNormal</span>(pars, y, X)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>candidate_param_values <span class="ot">&lt;-</span> candidate_param_values <span class="sc">|&gt;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">ll =</span> <span class="fu">map2_dbl</span>(beta_0, beta_1, feed_to_ll)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>candidate_param_values <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(beta_0, beta_1, <span class="at">z =</span> ll)) <span class="sc">+</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_contour_filled</span>() <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Log likelihood as a function of possible values of beta_0 and beta_1"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"beta0 (the intercept)"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"beta1 (the slope)"</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Looking at this joint surface of values, we can see a ‘hotspot’ where <span class="math inline">\(\beta_0\)</span> is around 2.5, and <span class="math inline">\(\beta_1\)</span> is around 1.4, just as we should expect. We can check this further by filtering candidate_param_values on the highest observed values of ll.</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>candidate_param_values <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(ll <span class="sc">==</span> <span class="fu">max</span>(ll))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>optim_results <span class="ot">&lt;-</span>  <span class="fu">optim</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># par contains our initial guesses for the three parameters to estimate</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">par =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by default, most optim algorithms prefer to search for a minima (lowest point) rather than maxima </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (highest point). So, I'm making a function to call which simply inverts the log likelihood by multiplying </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># what it returns by -1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fn =</span> <span class="cf">function</span>(par, y, X) {<span class="sc">-</span><span class="fu">llNormal</span>(par, y, X)}, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># in addition to the par vector, our function also needs the observed output (y)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and the observed predictors (X). These have to be specified as additional arguments.</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y, <span class="at">X =</span> X</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>optim_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  beta_0 beta_1    ll
-   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1    2.4    1.4  1.41</code></pre>
+<pre><code>$par
+[1]  2.460571  1.375421 -1.336209
+
+$value
+[1] -1.51397
+
+$counts
+function gradient 
+     216       NA 
+
+$convergence
+[1] 0
+
+$message
+NULL</code></pre>
 </div>
 </div>
+<p>The <code>optim</code> function returns a fairly complex output structure, with the following components:</p>
+<ul>
+<li><p><code>par</code>: the values for the parameters (in our case <span class="math inline">\(\{\beta_0, \beta_1, \eta \}\)</span>) which the optimisation algorithm ended up with.</p></li>
+<li><p><code>value</code>: the value returned by the function <code>fn</code> when the optim routine was stopped.</p></li>
+<li><p><code>counts</code>: the number of times the function <code>fn</code> was repeatedly called by <code>optim</code> before <code>optim</code> decided it had had enough</p></li>
+<li><p><code>convergence</code>: whether the algorithm used by <code>optim</code> completed successfully (i.e.&nbsp;reached what it considers a good set of parameter estimates in <code>par</code>), or not.</p></li>
+</ul>
+<p>In this case, convergence is <code>0</code>, which (perhaps counterintuitively) indicates a successful completion. <code>counts</code> indicates that optim called the log likelihood function 216 times before stopping, and <code>par</code> indicates values of <span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.38, \eta = -1.34\}\)</span> were arrived at. As <span class="math inline">\(\sigma^2 = e^\eta\)</span>, this means <span class="math inline">\(\theta = \{\beta_0 = 2.46, \beta_1 = 1.38, \sigma^2 = 0.26 \}\)</span>. As a reminder, the ‘true’ values are <span class="math inline">\(\{\beta_0 = 2.50, \beta_1 = 1.40, \sigma^2 = 0.25\}\)</span>.</p>
+<p>So, the <code>optim</code> algorithm has arrived at pretty much the correct answers for all three parameters, in 216 calls to the log likelihood function, whereas for the grid search approach in the last post we made over 10,000 calls to the log likelihood function for just <em>two</em> of the three parameters.</p>
+<p>Let’s see if we can get more information on exactly what kind of path <code>optim</code> took to get to this set of parameter estimates. We should be able to do this by specifying a value in the <code>trace</code> component in the <code>control</code> argument slot…</p>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>We have now introduced the concepts of Bayes Rule, Likelihood, and log likelihood, then derived the log likelihood for standard linear regression. We then built a toy dataset where we know the true parameters, and looked at how the log likelihood varies as different <span class="math inline">\(\beta\)</span> parameters are proposed. We identified a ‘hot spot’ when the <span class="math inline">\(\beta\)</span> parameters proposed are close to the ‘true values’.</p>
+<section id="comparisons" class="level2">
+<h2 class="anchored" data-anchor-id="comparisons">Comparisons</h2>
+<p>For comparison let’s see what <code>lm</code> and <code>glm</code> produce.</p>
+<p>First <code>lm</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>toy_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> toy_df)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = toy_df)
 
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.6082 -0.3852 -0.1668  0.2385  1.1092 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.46067    0.20778   11.84 6.95e-06 ***
+x            1.37542    0.07504   18.33 3.56e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5813 on 7 degrees of freedom
+Multiple R-squared:  0.9796,    Adjusted R-squared:  0.9767 
+F-statistic:   336 on 1 and 7 DF,  p-value: 3.564e-07</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.38\}\)</span>, i.e.&nbsp;the same to 2 decimal places.</p>
+<p>And now with <code>glm</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> toy_df, <span class="at">family =</span> <span class="fu">gaussian</span>(<span class="at">link =</span> <span class="st">"identity"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ x, family = gaussian(link = "identity"), data = toy_df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.6082  -0.3852  -0.1668   0.2385   1.1092  
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  2.46067    0.20778   11.84 6.95e-06 ***
+x            1.37542    0.07504   18.33 3.56e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.3378601)
+
+    Null deviance: 115.873  on 8  degrees of freedom
+Residual deviance:   2.365  on 7  degrees of freedom
+AIC: 19.513
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+<p>Once again, <span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.38\}\)</span></p>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>In the above, we’ve successfully used <code>optim</code>, our Robo-Chauffeur, to arrive very quickly at some good estimates for our parameters of interest, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, which are in effect identical to those produced by the <code>lm</code> and <code>glm</code> functions.</p>
+<p>This isn’t a coincidence. What we’ve done the hard way is what the <code>glm</code> function (in particular) largely does ‘under the hood’.</p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p>In <a href="../../../posts/glms/lms-are-glms-part-07/index.html">the next part of this series</a>, we’ll see how other outputs available from <code>optim</code> can be used to estimate uncertainty in the parameters of interest, how this information can be used to produce the kinds of estimates of standard errors around coefficients which are summarised in <code>glm</code> and <code>lm</code> <code>summary()</code> functions, and which many (ab)users of statistical models obsess about when star-gazing, and how information about uncertainty in parameter estimates allows for more honest model-based predictions.</p>
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-King98" class="csl-entry" role="listitem">
-King, Gary. 1998. <em>Unifying Political Methodology: The Likelihood Theory of Statistical Inference</em>. University of Michigan Press. <a href="http://www.jstor.org/stable/10.3998/mpub.23784">http://www.jstor.org/stable/10.3998/mpub.23784</a>.
-</div>
-<div id="ref-KinTomWit00" class="csl-entry" role="listitem">
-King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>If <span class="math inline">\(Y_i\)</span> is what the model predicts given observations <span class="math inline">\(X_i\)</span>, and <span class="math inline">\(y_i\)</span> is the outcome observed to have occurred alongside <span class="math inline">\(X_i\)</span>, then we can call <span class="math inline">\(\delta_i = h(y_i, Y_i)\)</span> the difference, or error, between predicted and observed value. The function <span class="math inline">\(h(.,.)\)</span> is typically the squared difference between predicted and observed values, <span class="math inline">\((Y_i - y_i)^2\)</span>, but could also in principle be the absolute difference <span class="math inline">\(|Y_i - y_i|\)</span>. Term-fitting algorithms usually compare not any individual <span class="math inline">\(\delta_i\)</span>, but a sum of these error terms <span class="math inline">\(\delta\)</span>. The aim of the algorithm is to find the set of <span class="math inline">\(\beta\)</span> terms that is least wrong for the whole dataset <span class="math inline">\(D\)</span>, rather than any specific row in the dataset <span class="math inline">\(D_i\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>As <span class="citation" data-cites="King98">King (<a href="#ref-King98" role="doc-biblioref">1998</a>)</span> (p.&nbsp;59) describes it, “<span class="math inline">\(k(y)\)</span> is an unknown fuction of the data. Whereas traditional probability is a measure of <em>absolute</em> uncertainty … the constant <span class="math inline">\(k(y)\)</span> means that likelihood is only a <em>relative</em> measure of uncertainty”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Frequentist approaches can thus be considered a kind of ‘improper Bayesian’ approach by considering <span class="math inline">\(k(y)\)</span> in the Likelihood formula as a stand-in for <span class="math inline">\(\frac{P(\tilde{\theta})}{P(y)}\)</span> in Bayes’ Rule. Roughly speaking, it’s because of the improperness of treating the two terms as equivalent, and the relativeness of <span class="math inline">\(k(y)\)</span>, that mean frequentist probability statements can’t be interpreted as Bayesian probability statements. But thinking of the two terms as equivalent can be helpful for spotting the similarity between the two formulae.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>i.e.&nbsp;the square of the <code>sd</code> passed to <code>rnorm()</code> of 0.5<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><span class="math inline">\(101^2 = 10201\)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="math inline">\(101^3 = 1030301\)</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
