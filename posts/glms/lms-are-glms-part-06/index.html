@@ -212,10 +212,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">Aim</h2>
 <p>In <a href="../../../posts/glms/lms-are-glms-part-05/index.html">the previous post</a> in this series, I presented a function for calculating the log likelihood of a standard linear regression with a Normal error term. I then built a very simple dataset, ten data points linking <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span>, and showed how the log likelihood varied as a combination of different candidate values for the model’s intercept and slope terms (<span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> respectively).</p>
-<p>The aim of this this post is to show how the best parameter combinations tend to be estimated from a model’s log likelihood in practice, using an algorithm that iteratively tries out new parameter values, and keeps trying and trying until some kind of condition is met. This is what the last figure in <a href="../../../posts/glms/lms-are-glms-part-01/index.html">the first post</a> is trying to illustrate.</p>
+<p>The aim of this this post is to show how the best parameter combinations tend to be estimated from a model’s log likelihood in practice, using an optimisation algorithm that iteratively tries out new parameter values, and keeps trying and trying until some kind of condition is met. This is what the last figure in <a href="../../../posts/glms/lms-are-glms-part-01/index.html">the first post</a> is trying to illustrate.</p>
 </section>
-<section id="from-grid-to-gradient" class="level2">
-<h2 class="anchored" data-anchor-id="from-grid-to-gradient">From grid to gradient</h2>
+<section id="optimisation-algorithms-getting-there-faster" class="level2">
+<h2 class="anchored" data-anchor-id="optimisation-algorithms-getting-there-faster">Optimisation algorithms: getting there faster</h2>
 <p>In the previous post, we ‘cheated’ a bit when using the log likelihood function, fixing the value for one of the parameters <span class="math inline">\(\sigma^2\)</span> to the value we used when we generated the data, so we could instead look at how the log likelihood surface varied as different combinations of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> were plugged into the formula. <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> values ranging from -5 to 5, and at steps of 0.1, were considered: 101 values of <span class="math inline">\(\beta_0\)</span>, 101 values of <span class="math inline">\(\beta_1\)</span>, and so over 10,000<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> unique <span class="math inline">\(\{\beta_0, \beta_1\}\)</span> combinations were stepped through. This approach is known as grid search, and seldom used in practice (except for illustration purposes) because the number of calculations involved can very easily get out of hand. For example, if we were to use it to explore as many distinct values of <span class="math inline">\(\sigma^2\)</span> as we considered for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, the total number of <span class="math inline">\(\{\beta_0, \beta_1, \sigma^2 \}\)</span> combinations we would crawl through would be over 100,000 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> rather than over 10,000.</p>
 <p>One feature we noticed with the likelihood surface over <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> in the previous post is that it appears to look like a hill, with a clearly defined highest point (the region of maximum likelihood) and descent in all directions from this highest point. Where likelihood surfaces have this feature of being single-peaked in this way (known as ‘unimodal’), then a class of algorithms known as ‘hill climbing algorithms’ can be applied to find the top of such peaks in a way that tends to be both quicker (fewer steps) and more precise than the grid search approach used for illustration in the previous post.</p>
 </section>
@@ -283,9 +283,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>optim_results <span class="ot">&lt;-</span>  <span class="fu">optim</span>(<span class="at">par =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">fn =</span> <span class="cf">function</span>(par, y, X) {<span class="sc">-</span><span class="fu">llNormal</span>(par, y, X)}, <span class="at">y =</span> y, <span class="at">X =</span> X)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>optim_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>optim_results <span class="ot">&lt;-</span>  <span class="fu">optim</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># par contains our initial guesses for the three parameters to estimate</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">par =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by default, most optim algorithms prefer to search for a minima (lowest point) rather than maxima </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (highest point). So, I'm making a function to call which simply inverts the log likelihood by multiplying </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># what it returns by -1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fn =</span> <span class="cf">function</span>(par, y, X) {<span class="sc">-</span><span class="fu">llNormal</span>(par, y, X)}, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># in addition to the par vector, our function also needs the observed output (y)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and the observed predictors (X). These have to be specified as additional arguments.</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y, <span class="at">X =</span> X</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>optim_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
@@ -353,7 +365,7 @@ Multiple R-squared:  0.9796,    Adjusted R-squared:  0.9767
 F-statistic:   336 on 1 and 7 DF,  p-value: 3.564e-07</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.37\}\)</span>, i.e.&nbsp;the same to 2 decimal places.</p>
+<p><span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.38\}\)</span>, i.e.&nbsp;the same to 2 decimal places.</p>
 <p>And now with <code>glm</code>:</p>
 <div class="cell">
 <details>
@@ -387,12 +399,16 @@ AIC: 19.513
 Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
-<p>Once again, <span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.37\}\)</span></p>
+<p>Once again, <span class="math inline">\(\{\beta_0 = 2.46, \beta_1 = 1.38\}\)</span></p>
 </section>
 <section id="discussion" class="level2">
 <h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
 <p>In the above, we’ve successfully used <code>optim</code>, our Robo-Chauffeur, to arrive very quickly at some good estimates for our parameters of interest, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, which are in effect identical to those produced by the <code>lm</code> and <code>glm</code> functions.</p>
 <p>This isn’t a coincidence. What we’ve done the hard way is what the <code>glm</code> function (in particular) largely does ‘under the hood’.</p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p>In <a href="../../../posts/glms/lms-are-glms-part-07/index.html">the next part of this series</a>, we’ll see how other outputs available from <code>optim</code> can be used to estimate uncertainty in the parameters of interest, how this information can be used to produce the kinds of estimates of standard errors around coefficients which are summarised in <code>glm</code> and <code>lm</code> <code>summary()</code> functions, and which many (ab)users of statistical models obsess about when star-gazing, and how information about uncertainty in parameter estimates allows for more honest model-based predictions.</p>
 
 
 </section>
