@@ -443,6 +443,62 @@ E(Y) = \mu_i = x_i \beta
 <p>So, in this case, the expected value is the systematic component only, and does not involve the dispersion parameter in the stochastic component, which for normal linear regression is the <span class="math inline">\(\sigma^2\)</span> term. That’s why we didn’t use estimates of <span class="math inline">\(\sigma^2\)</span> when simulating the expected values.</p>
 <p>But why is this? Well, it comes from the expectation operator, <span class="math inline">\(E(.)\)</span>. This operator means something like, <em>return to me the value that would be expected if this experiment were performed an infinite number of times</em>.</p>
 <p>There are two types of uncertainty which give rise to variation in the predicted estimate: <em>sampling uncertainty</em>, and <em>stochastic variation</em>. In the expected value condition, this second source of variation falls to zero,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> leaving only the influence of sampling uncertainty, as in uncertainty about the true value of the <span class="math inline">\(\beta\)</span> parameters, remaining on uncertainty on the predicted outputs.</p>
+<p>For <em>predicted values</em>, we therefore need to reintroduce <em>stochastic variation</em> as a source of variation in the range of estimates produced. Each <span class="math inline">\(\eta\)</span> value we have implies a different <span class="math inline">\(\sigma^2\)</span> value in the stochastic part of the equation, which we can then add onto the variation caused by parameter uncertainty alone:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(param_draws)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>predicted_y_simpler <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>, N)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N){</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    predicted_y_simpler[i] <span class="ot">&lt;-</span> param_draws[i, <span class="st">"beta0"</span>] <span class="sc">+</span> candidate_x <span class="sc">*</span> param_draws[i, <span class="st">"beta1"</span>] <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rnorm</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(param_draws[i, <span class="st">"eta"</span>]))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predicted_y_simpler)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.802092 6.706397 7.073450 6.118750 6.757717 7.461254</code></pre>
+</div>
+</div>
+<p>Let’s now get the 95% prediction interval for the predicted values, and compare them with the expected values predicted interval earlier</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pv_range <span class="ot">&lt;-</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">quantile</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        predicted_y_simpler, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.500</span>, <span class="fl">0.975</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>pv_range</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    2.5%      50%    97.5% 
+4.766300 5.895763 7.055408 </code></pre>
+</div>
+</div>
+<p>So, whereas the median is similar to before, <code>5.90</code>, the 95% interval is now from <code>4.77</code> to <code>7.06</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This compares with the <code>5.51</code> to <code>6.29</code> range for the expected values. Let’s now plot this predicted value range just as we did with the expected values:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>toy_df <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"point"</span>, <span class="at">x =</span> candidate_x, <span class="at">y =</span>  pv_range[<span class="dv">2</span>], <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> candidate_x, <span class="at">xend=</span>candidate_x, <span class="at">y =</span> pv_range[<span class="dv">1</span>], <span class="at">yend =</span> pv_range[<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Clearly considerably wider.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>This post is hopefully where our toy dataset, which we’ve been hauling with us since post five, can finally retire, happy in the knowledge that it’s taken us through some of the toughest parts of this blog series. The ideas developed over the last few posts can now finally be applied to answering some questions that are actually (or arguably) <em>interesting</em>!</p>
 
 
 
@@ -458,6 +514,7 @@ King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most o
 <ol>
 <li id="fn1"><p>Where <span class="math inline">\(\sigma^2\)</span> is from <span class="math inline">\(\eta\)</span> and we defined <span class="math inline">\(e^{\eta} = \sigma^2\)</span>, a transformation which allowed <code>optim()</code> to search over an unbounded rather than bounded real number line<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>It can be easier to see this by using the more conventional way of expressing Normal linear regression: <span class="math inline">\(Y_i = x_i \beta + \epsilon\)</span>, where <span class="math inline">\(\epsilon \sim Normal(0, \sigma^2)\)</span>. The expectation is therefore <span class="math inline">\(E(Y_i) = E( x_i \beta + \epsilon ) = E(x_i \beta) + E(\epsilon)\)</span>. For the first part of this equation, <span class="math inline">\(E(x_i \beta) = x_i \beta\)</span>, because the systematic component is always the same value, no matter how many times a draw is taken from the model. And for the second part, <span class="math inline">\(E(\epsilon) = 0\)</span>, because Normal distributions are symmetrical around their central value over the long term: on average, every large positive value drawn from this distribution will become cancelled out by an equally large negative value, meaning the expected value returned by the distribution is zero. Hence, <span class="math inline">\(E(Y) = x_i \beta\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Because these estimates depend on random variation, these intervals may be slightly different to two decimal places than the values I’m quoting here.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
