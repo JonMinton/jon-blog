@@ -1,0 +1,223 @@
+---
+title: "Part Ten: Log Likelihood estimation for Logistic Regression"
+author: "Jon Minton"
+date: "2024-01-27"
+code-fold: true
+warning: false
+message: false
+categories: [statistics, R]
+---
+
+## Recap
+
+Within this series, parts 1-4 formed what we might call 'section one', and part 5-9 'section two'. 
+
+Section one (re)introduced statistical models as siblings, children of a mother model which combines a systematic component (an equation with a $=$ symbol in it) and a stochastic component (an equation with a $\sim$ in it, which can largely be read as 'drawn from'). Part one provided a graphical representation of the challenge of model fitting from an algorithmic perspective, in which the parameters that go into the two component are tweaked and tweaked until some condition is met: usually that the discrepency between model predictions and observed outcomes are minimised some way. The two component mother model is *largely* equivalent to the concept of the generalised linear model: parts two and three explored this association a bit more. Part four demonstrated how, for statistical models other than standard linear regression, the kinds of answer one usually wants from a model are not readily apparent from the model coefficients themselves, and so careful use of model predictions, and calibration of the questions, are required to use models to answer substantivelly meaningful questions. 
+
+Section two aimed to show how likelihood theory is used in practice in order to justify a loss function that algorithms can be used to try to 'solve'.[^1] These loss functions and optimisation algorithms are usually called implicitly by statistical model functions, but we did things the hard way by building the loss function from scratch, and evoking the algorithms more directly, using R's `optim()` function. As well as the pedagogical value (and bragging rights) of being able to create and fit statistical models directly, an additional benefit of using `optim()` (with some of its algorithms) is that it returns something called the Hessian. The Hessian is what allows us to be honest when making model predictions and projections, showing how our uncertainty about the true value of the model parameters (the multiple inputs that `optim()` algorithms try to tweak until they're good enough) leads to uncertainty in what we're predicting and projecting. 
+
+Unfortunately, we're still in section two. The material below aims to repeat the same kind of exercise performed for standard linear regression, but using logistic regression instead. 
+
+## Log likelihood for logistic regression 
+
+Previously we focused on the log likelihood for standard linear regression. Let's now do the same for logistic regression. According to [the relevant section of the Zelig website](https://docs.zeligproject.org/articles/zelig_logit.html#model-definition):
+
+**Stochastic component**
+$$
+Y_i \sim Bernoulli(y_i | \pi_i )
+$$
+
+$$
+Y_i = \pi_i^{y_i}(1 - \pi_i)^{1-y_i}
+$$
+
+where $\pi_i = P(Y_i = 1)$
+
+And 
+
+**Systematic Component**
+
+$$
+\pi_i = \frac{1}{1 + \exp{(-x_i \beta)}}
+$$
+
+The likelihood is the product of the above for all observations in the dataset $i \in N$
+
+$$
+L(.) = \prod{\pi_i^{y_i}(1 - \pi_i)^{1-y_i}}
+$$
+
+The effect of logging the above[^2]:
+
+$$
+\log{L(.)} = \sum{[y_i \log{\pi_i} + (1-y_i)\log{(1-y_i)}]}
+$$
+
+This can now be implemented as a function: 
+
+```{r}
+llogit <- function(par, y, X){
+    xform <- function(z) {1 / (1 + exp(-z))}
+    p <- xform(X%*%par)
+    sum(y * log(p) + (1-y) * log(1 - p))
+}
+
+```
+
+Let's pick an appropriate dataset. How about... picking a [Palmer Penguin](https://allisonhorst.github.io/palmerpenguins/)!?
+
+```{r}
+library(tidyverse)
+palmerpenguins::penguins
+
+```
+
+Let's say we want to predict whether a penguin is of the Chinstrap species
+
+```{r}
+palmerpenguins::penguins %>%
+    filter(complete.cases(.)) |>
+    mutate(is_chinstrap = species == "Chinstrap") |>
+    ggplot(aes(x = bill_length_mm, y = bill_depth_mm, colour = is_chinstrap, shape = sex)) + 
+    geom_point()
+
+```
+
+Neither bill length nor bill depth alone appears to distinguish between chinstrap and other species. But perhaps the interaction (product) of the two terms would do:
+
+```{r}
+palmerpenguins::penguins %>%
+    filter(complete.cases(.)) |>
+    mutate(is_chinstrap = species == "Chinstrap") |>
+    mutate(bill_size = bill_length_mm * bill_depth_mm) |>
+    ggplot(aes(x = bill_size, fill = is_chinstrap)) + 
+    facet_wrap(~sex) + 
+    geom_histogram()
+
+```
+
+The interaction term isn't great at separating the two classes, but seems to be better than either length or size alone. So I'll include it in the model. 
+
+```{r}
+df <- palmerpenguins::penguins %>%
+    filter(complete.cases(.)) |>
+    mutate(is_chinstrap = species == "Chinstrap") |>
+    mutate(bill_size = bill_length_mm * bill_depth_mm) |>
+    mutate(is_male = as.numeric(sex == "male"))
+
+y <- df$is_chinstrap
+
+X <- cbind(1, df[,c("bill_length_mm", "bill_depth_mm", "bill_size", "is_male")]) |>
+as.matrix()
+
+```
+
+So, including the intercept term, our predictor matrix $X$ contains 5 columns, including the interaction term `bill_size`. [^3]
+
+Let's try now to use the above in `optim()`
+
+```{r}
+fuller_optim_output <- optim(
+    par = rep(0, 5), 
+    fn = llogit,
+    method = "BFGS",
+    control = list(fnscale = -1),
+    hessian = TRUE,
+    y = y, 
+    X = X
+)
+
+fuller_optim_output
+hess <- fuller_optim_output$hessian
+inv_hess <- solve(-hess)
+inv_hess
+
+```
+
+Now let's compare with `glm()`
+
+```{r}
+mod_glm <- glm(is_chinstrap ~ bill_length_mm * bill_depth_mm +is_male, data = df, 
+family = binomial())
+summary(mod_glm)
+```
+
+Uh oh! On this occasion it appears one or both approaches have become confused. A five dimensional search space might be too much for the algorithms to cope with, especially with collinearity [^4] between some of the terms. Let's simplify the task a bit, and just use intercept, bill size, and is_male as covariates. First with the standard package:
+
+```{r}
+mod_glm_simpler <- glm(is_chinstrap ~ bill_size +is_male,   data = df, 
+family = binomial())
+summary(mod_glm_simpler)
+
+```
+
+And now with the bespoke function and optim
+
+```{r}
+X <- cbind(1, df[,c("bill_size", "is_male")]) |>
+as.matrix()
+
+fuller_optim_output <- optim(
+    par = rep(0, 3), 
+    fn = llogit,
+    method = "BFGS",
+    control = list(fnscale = -1),
+    hessian = TRUE,
+    y = y, 
+    X = X
+)
+
+fuller_optim_output
+hess <- fuller_optim_output$hessian
+inv_hess <- solve(-hess)
+inv_hess
+
+```
+
+The estimates from the two approaches are now much closer, even if they aren't as close to each other as in the earlier examples. Using `optim()`, we have parameter estimates $\beta = \{\beta_0 = -32.60, \beta_1 = 0.04, \beta_2 = -6.99\}$, and using `glm()`, we have estimates $\beta = \{\beta_0 = -32.83, \beta_1 = 0.04, \beta_2 = -32.82 \}$ 
+
+If we cheat a bit, and give the five dimensional version starting values closer to the estimates from `glm()`, we can probably get similar estimates too. 
+
+```{r}
+X <- cbind(1, df[,c("bill_length_mm", "bill_depth_mm", "bill_size", "is_male")]) |>
+as.matrix()
+
+fuller_optim_output <- optim(
+    par = c(300, -10, -29, 0.5, -10), 
+    fn = llogit,
+    method = "BFGS",
+    control = list(fnscale = -1),
+    hessian = TRUE,
+    y = y, 
+    X = X
+)
+
+fuller_optim_output
+hess <- fuller_optim_output$hessian
+inv_hess <- solve(-hess)
+inv_hess
+
+
+
+```
+
+Well, they are *closer*, but they aren't *very close*. As mentioned, the `glm()` model produced warnings, and some of the variables are likely to be collinear, so this initial specification may have been especially difficult to fit. Both approaches found an answer, but neither seem happy about it! 
+
+
+## Summary
+
+In the exercise above we did for logistic regression what the previous few posts in section two did for standard regression: i.e. we derived the log likelihood, applied it using optim, and compared with results from the `glm()` package. We saw in this case that fitting models isn't always straightforward. We were - well, I was - overly ambitious in building and applying an overly parameterised model specification. But we eventually got to similar parameter values using both approaches. 
+
+Though this wasn't as straightforward as I was hoping for, I'm presenting it warts-and-all. In principle, the log-likelihood maximisation approach generalises to a great many model specifications, even if in practice some model structures aren't as straightforward to fit as others. 
+
+## Coming up
+
+In the next few posts, I'll finally be moving off 'section two', with its algebra and algorithms, and showing some tools that can be used to make honest prediction and projections with models, but without all the efforts undertaken here and in the last few posts.
+
+[^1]: By 'loss function' I mean a function that takes one or more numeric inputs and returns a single numeric output. The aim of the algorithm is to find the combination of inputs that minimises (or maximises) the function's output. 
+
+[^2]: Thanks to [this post](https://arunaddagatla.medium.com/maximum-likelihood-estimation-in-logistic-regression-f86ff1627b67). My calculus is a bit rusty these days.
+
+[^3]: An important point to note is that, though bill_size is derived from other variables, it's its own variable, and so has another distinct 'slot' in the vector of $\beta$ parameters. It's just another dimension in the search space for optim to search through. 
+
+[^4]: This is fancy-speak for when two terms aren't independent, or both adding unique information. For example, length in mm, length in cm, and length in inches would all be perfectly collinear, so shouldn't all be included in the model. 

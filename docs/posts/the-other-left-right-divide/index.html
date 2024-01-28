@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-01-24">
 
-<title>Jon Minton’s Blog - Generalised Linear Models</title>
+<title>Jon Minton’s Blog - The Other Left-Right Divide: Iain McGilchrist and the Battle of the Hemispheres</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +22,46 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +82,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Generalised Linear Models">
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Other Left-Right Divide: Iain McGilchrist and the Battle of the Hemispheres">
 <meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://damiengwalter.files.wordpress.com/2024/01/int-thumbs-instagram-post-1.png">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -121,13 +110,13 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./glms.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../glms.html" rel="" target="">
  <span class="menu-text">Generalised Linear Models</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -159,139 +148,79 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Other Left-Right Divide: Iain McGilchrist and the Battle of the Hemispheres</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">podcasts</div>
+                <div class="quarto-category">stories</div>
+                <div class="quarto-category">sci-fi</div>
+                <div class="quarto-category">myth</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 24, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Generalised Linear Models</h1>
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://damiengwalter.files.wordpress.com/2024/01/int-thumbs-instagram-post-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Iain McGilchrist on the mythos and the machine</figcaption>
+</figure>
 </div>
+<p>In Watching The English, <span class="citation" data-cites="fox2005watching">Fox (<a href="#ref-fox2005watching" role="doc-biblioref">2005</a>)</span> writes that:</p>
+<blockquote class="blockquote">
+<p>At the most basic level, an underlying rule in all English conversation is the proscription of ‘earnestness’. … [The] English are probably more acutely sensitive than any other nation to the distinction between ‘serious’ and ‘solemn’, between ‘sincerity’ and ‘earnestness’.</p>
+<p>… [The] Importance of Not Being Earnest rule is really quite simple. Seriousness is acceptable, solemnity is prohibited. Sincerity is allowed, earnestness is strictly forbidden. Pomposity and self-importance are outlawed. Serious matters can be spoken of seriously, but one must never take <em>oneself</em> too seriously. [p.&nbsp;62]</p>
+</blockquote>
+<p>A serial violator of the Importance of Not Being Earnest Rule is <a href="https://damiengwalter.com/">Damien Walter</a>, producer and host of <a href="https://damiengwalter.com/podcast/">the Science Fiction podcast</a>, which states its mission as being to explore “the best in SF storytelling [and to ask] what happens when logos meets mythos, reason meets imagination and science … meets fiction”. English former Guardian journalist Damien Walter (alternately Damien G Walter) is <em>very</em> earnest. Which might explain why he doesn’t live in England anymore.</p>
+<p>In the latest podcast, the very earnest Englishman Damien G Walter interviews the very earnest Scotsman Iain McGilchrist, talking broadly around McGilchrist’s somewhat mythic framing of the left-right divide. McGilchrist’s left-right divide isn’t a divide between the <em>political</em> Left and Right, but a divide between the two hemispheres of the brain.</p>
+<p>McGilchrist professes that his left-right hemispheric divide isn’t mere pop science, attributing certain temperaments or qualities, like reason and creativity, to one or the other hemisphere. Instead his argument seems marginally more subtle that that, something like:</p>
+<blockquote class="blockquote">
+<p>The left hemisphere’s domain is the <em>centre</em>. It’s the part of the brain that takes charge when you choose to focus on an object, grasp it, manipulate it, name it, take it apart and put it back together, use or abuse it as a tool.</p>
+<p>The right hemisphere’s domain is the <em>periphery.</em> It’s what notices and contextualizes all around you, and so provides the context through which one can relate to and negotiate with the totality of the world.</p>
+</blockquote>
+<p>McGilchrist’s broader thesis appears to be that broadly left-hemispheric thinking has become somewhat over-dominant in modern culture, leading to an overly atomistic and instrumentalist way of thinking. Everything is thought about, to some extent, in terms of how it can be used, grasped, broken down and thought about as machines and systems. Walter makes the intriguing observation that this may help explain a tendency towards literal-mindedness in much commentary and critique of modern sci-fi and fantasy, which appears blind or indifferent to underlying mythos and symbolism that stories are drawing from. I think there’s much compelling about this literal-mindedness observation, even if I’m somewhat more ambivalent about the left-right hemispheric distinction drawn by McGilchrist more generally, especially in terms of the trends or tendencies he’s proposing.</p>
+<p>Since starting this blog in late November, I’ve discovered most of my posts tend to focus either on <em>statistics</em> or <em>stories</em>. These dual preoccupations don’t completely map onto the left-right hemispheric distinction - for example there’s a lot of contextualisation (right-thinking) involved in finding meaning in statistical outputs; and there is value in thinking about stories in a somewhat mechanical, graspable-component-like way - but it’s not a bad first approximation. I find stories valuable to think about, especially where they bring an intense quality of emotional engagement and I want to know why. Sometimes I even risk treating the exploration and interpretation of stories with the earnestness they deserve (even when writing about <a href="../../posts/robocop-is-wonderfully-childish/index.html">Robocop</a>).</p>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This page lists a series of posts I’ve written which attempt to demystify generalised linear models (GLMs), by first reintroducing linear models as a specific type of GLM.</p>
-
-
-
-</section>
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1704041017393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part One: Model fitting as parameter calibration" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 28, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-01/index.html" class="title listing-title">Part One: Model fitting as parameter calibration</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics" data-listing-date-sort="1701388800000" data-listing-file-modified-sort="1704041032180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part Two: Systematic components and link functions" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 1, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-02/index.html" class="title listing-title">Part Two: Systematic components and link functions</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1701475200000" data-listing-file-modified-sort="1704043139377" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Part Three: glm is just fancy lm" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 2, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-03/index.html" class="title listing-title">Part Three: glm is just fancy lm</a>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1703894400000" data-listing-file-modified-sort="1704042952237" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-title-sort="Part Four: why only betas just look at betas" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 30, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-04/index.html" class="title listing-title">Part Four: why only betas just look at betas</a>
-</td>
-</tr>
-<tr data-index="4" data-categories="statistics,R" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1704361517401" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Five: Traversing the Likelihood Landscape" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-05/index.html" class="title listing-title">Part Five: Traversing the Likelihood Landscape</a>
-</td>
-</tr>
-<tr data-index="5" data-categories="statistics,R" data-listing-date-sort="1704240000000" data-listing-file-modified-sort="1704446733326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Part Six: The Robo-Chauffeur" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-06/index.html" class="title listing-title">Part Six: The Robo-Chauffeur</a>
-</td>
-</tr>
-<tr data-index="6" data-categories="statistics,R" data-listing-date-sort="1704326400000" data-listing-file-modified-sort="1704408318811" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Seven: Feeling Uncertain" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-07/index.html" class="title listing-title">Part Seven: Feeling Uncertain</a>
-</td>
-</tr>
-<tr data-index="7" data-categories="statistics,R" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1705756844909" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-08/index.html" class="title listing-title">Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet</a>
-</td>
-</tr>
-<tr data-index="8" data-categories="statistics,R" data-listing-date-sort="1705708800000" data-listing-file-modified-sort="1705773305554" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 20, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-09/index.html" class="title listing-title">Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values</a>
-</td>
-</tr>
-<tr data-index="9" data-categories="statistics,R" data-listing-date-sort="1706313600000" data-listing-file-modified-sort="1706378571308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Part Ten: Log Likelihood estimation for Logistic Regression" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 27, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-10/index.html" class="title listing-title">Part Ten: Log Likelihood estimation for Logistic Regression</a>
-</td>
-</tr>
-</tbody>
-
-</table>
-<div class="listing-no-matching d-none">
-No matching items
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-fox2005watching" class="csl-entry" role="listitem">
+Fox, K. 2005. <em>Watching the English: The Hidden Rules of English Behaviour</em>. Hodder &amp; Stoughton. <a href="https://books.google.co.uk/books?id=tNZfLeHSFvQC">https://books.google.co.uk/books?id=tNZfLeHSFvQC</a>.
 </div>
-</div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -639,6 +568,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
