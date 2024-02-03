@@ -312,7 +312,7 @@
     "href": "posts/tidy-tuesday-groundhogs/index.html#additional",
     "title": "Tidy Tuesday 30 Jan 2024: Groundhogs",
     "section": "Additional",
-    "text": "Additional\nAndrew presented the code chunk for how to use plotly to produce multiple traces based on summary stats:\n\n\nCode\nlibrary(plotly)\n\ndf &lt;- \n  mpg %&gt;% \n  summarise(avg_city = mean(cty), .by = c(manufacturer, year))\n\nmanfs &lt;- df %&gt;% distinct(manufacturer) %&gt;% pull()\n\np &lt;- plot_ly()\n\nfor(manf in manfs){\n  df_manf &lt;- df %&gt;% \n    filter(manufacturer == manf)\n  p &lt;- add_trace(p,\n                 mode = \"lines+markers\",\n                 x = ~year,\n                 y = ~avg_city,\n                 data = df_manf) # must include new df as data for plolty layer\n}\n\np"
+    "text": "Additional\nAndrew presented the following code solution for how to use plotly to produce multiple traces based on summary stats:\n\n\nCode\nlibrary(plotly)\n\ndf &lt;- \n  mpg %&gt;% \n  summarise(avg_city = mean(cty), .by = c(manufacturer, year))\n\nmanfs &lt;- df %&gt;% distinct(manufacturer) %&gt;% pull()\n\np &lt;- plot_ly()\n\nfor(manf in manfs){\n  df_manf &lt;- df %&gt;% \n    filter(manufacturer == manf)\n  p &lt;- add_trace(p,\n                 mode = \"lines+markers\",\n                 x = ~year,\n                 y = ~avg_city,\n                 data = df_manf) # must include new df as data for plolty layer\n}\n\np"
   },
   {
     "objectID": "posts/glm-series/index.html",
