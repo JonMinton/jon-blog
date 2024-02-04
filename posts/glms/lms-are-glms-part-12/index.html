@@ -430,12 +430,12 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept) log(dose)    suppVC log(dose):suppVC
-[1,]    20.68855  8.918649 -2.791572         4.085721
-[2,]    21.03584  9.087500 -5.498812         3.944559
-[3,]    21.58485 11.707897 -6.394050         1.234645
-[4,]    20.54774  8.023190 -2.992465         4.354103
-[5,]    21.08885  9.010550 -4.647332         4.808531
-[6,]    21.25794  9.958011 -4.839740         2.408021</code></pre>
+[1,]    20.87538  9.689866 -2.836542         1.723545
+[2,]    19.43247  8.859462 -2.908695         4.902105
+[3,]    20.04414 10.951369 -2.337728         1.553765
+[4,]    20.08595  9.444338 -3.747288         4.100071
+[5,]    20.38512  7.122832 -2.729296         4.390524
+[6,]    20.26225 10.424484 -2.907097         1.458138</code></pre>
 </div>
 </div>
 <p>Let’s first look at each of these parameters individually:</p>
@@ -587,7 +587,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_ev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.67869 23.06366 24.19739 22.33806 23.09949 23.48001</code></pre>
+<pre><code>[1] 23.03761 21.40940 22.48786 22.19340 21.97454 22.58840</code></pre>
 </div>
 </div>
 <p>Let’s now get a 95% credible interval:</p>
@@ -598,7 +598,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.27208 22.72799 24.16366 </code></pre>
+21.31398 22.71939 24.14458 </code></pre>
 </div>
 </div>
 <p>So, the 95% interval for the expected value is between <code>21.31</code> and <code>24.14</code>, with a middle (median) estimate of <code>22.73</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s check this against estimates from the <code>predict()</code> function:</p>
@@ -630,7 +630,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_pv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.56073 25.32326 22.67873 18.21301 19.14766 23.85349</code></pre>
+<pre><code>[1] 25.66925 28.20725 28.10618 18.29734 22.02755 24.62414</code></pre>
 </div>
 </div>
 <p>Let’s get the 95% interval from the above using quantile</p>
@@ -641,7 +641,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-15.37372 22.76655 30.07494 </code></pre>
+15.35227 22.72828 30.31997 </code></pre>
 </div>
 </div>
 <p>As expected, the interval is now much wider, with a 95% interval from <code>15.34</code> to <code>30.11</code>. The central estimate should in theory, with an infinite number of runs, be the same, however because of random variation it will never be <em>exactly</em> the same to an arbitrary number of decimal places. In this case, the middle estimate is <code>22.75</code>, not identical to the central estimate from the expected values distribution of <code>22.72</code>. The number of simulations can <em>always</em> be increased to produce greater precision if needed.</p>
@@ -703,23 +703,75 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <pre><code># A tibble: 10,000 × 3
       x0    x1    fd
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  22.7  20.8 -1.88
- 2  23.1  18.4 -4.62
- 3  24.2  18.1 -6.12
- 4  22.3  20.3 -2.02
- 5  23.1  19.5 -3.57
- 6  23.5  19.2 -4.30
- 7  22.5  20.0 -2.53
- 8  23.0  19.9 -3.09
- 9  22.2  19.6 -2.62
-10  22.2  21.0 -1.18
+ 1  23.0  20.6 -2.45
+ 2  21.4  19.6 -1.81
+ 3  22.5  20.5 -1.99
+ 4  22.2  19.4 -2.83
+ 5  22.0  20.2 -1.75
+ 6  22.6  20.0 -2.58
+ 7  23.8  19.1 -4.74
+ 8  23.1  19.8 -3.32
+ 9  22.6  20.2 -2.40
+10  22.8  20.6 -2.21
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
-
-
-
+<p>Let’s look at the distribution of both scenarios individually:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>predictions_df <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"scenario"</span>, <span class="at">values_to =</span> <span class="st">"estimate"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(scenario <span class="sc">!=</span> <span class="st">"fd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>scenario, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>And the distribution of the pairwise differences between them:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>predictions_df <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"scenario"</span>, <span class="at">values_to =</span> <span class="st">"estimate"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(scenario <span class="sc">==</span> <span class="st">"fd"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span> </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>It’s this last distribution which shows our first differences, i.e.&nbsp;our answer, hedged with an appropriate dose of uncertainty, to the specific question shown above. We can get a 95% interval of the first difference as follows:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>predictions_df <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"scenario"</span>, <span class="at">values_to =</span> <span class="st">"estimate"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(scenario <span class="sc">==</span> <span class="st">"fd"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="st">'estimate'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">quantile</span>(<span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.500</span>, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      2.5%        50%      97.5% 
+-4.8391048 -2.8440436 -0.8101429 </code></pre>
+</div>
+</div>
+<p>So, 95% of estimates of the first difference are between <code>-4.85</code> and <code>-0.81</code>, with the middle of this distribution (on this occasion) being <code>-2.83</code>.</p>
+<p>Unlike with the expected values and predicted values, the <code>predict()</code> function does not return first differences with honest uncertainty in this way. What we have above is something new.</p>
 </section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this post we’ve finally combined all the learning we’ve developed over the 11 previous posts to answer three specific ‘what if?’ questions: one on expected values, one on predicted values, and one on first differences. These are what <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> refer to as <em>quantities of interest</em>, and I hope you agree these are more organic and reasonable types of question to ask of data and statistical models than simply looking at coefficients and p-values and reporting which ones are ‘statistically significant’.</p>
+<p>If you’ve been able to follow everything in these posts, and can generalise the approach shown above to other types of statistical model, then <strong>congratulations!</strong> You’ve learned the framework for answering meaningful questions using statistical models which is at the heart of <a href="https://projects.iq.harvard.edu/gov2001/home">one of the toughest methods courses for social scientists offered by one of the most prestigious universities in the world</a>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+
+
+
 </section>
 
 
@@ -732,6 +784,7 @@ King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most o
 <ol>
 <li id="fn1"><p>These are the values produced the first time I ran the simulation. They are likely to be a little different each time, so may not be identical to the number of decimal places reported when I next render this document. These estimates are <em>approximations</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Because the simulation approach relies on random numbers, the draws will never be the same unless the same random number seed is using using <code>set.seed()</code>. However with more simulations, using the <code>n</code> parameter from <code>mvrnorm</code>, the distributions of estimates should become ever closer to each other.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>I took this course via the Harvard extension school while doing my PhD in York quite a few years ago. I took it as a non-credit option - as what’s the value of a fraction of a degree when I had two already? - but was told by the tutors that I’d completed it to a ‘Grade A-’ level. So, not perfect, but good enough…<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
