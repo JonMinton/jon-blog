@@ -1,0 +1,21 @@
+---
+title: "Tardy Tuesdays"
+listing: 
+  contents: posts/tardy-tuesday/**/**.qmd
+  sort: "date"
+  type: table
+  fields: [date, title]
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+---
+
+## Introduction
+
+For the last couple of years, I've run an informal weekly R training session to support people who want to develop and maintain their R skills in matters of data tidying and analysis. By default the sessions are based around the [weekly TidyTuesday data challenges](https://github.com/rfordatascience/tidytuesday) developed to support people using R through the [tidyverse](https://www.tidyverse.org/) paradigm promoted in [R for Data Science](https://r4ds.hadley.nz/). Each week, TidyTuesday makes a new open source dataset available; we give ourselves one hour, with no preparation, to see what we can learn from the data.
+
+Because, due to scheduling conflicts, Tuesdays tend to be especially busy, the sessions actually take place first thing on Wednesday mornings. Hence, **Tardy Tuesdays**! The scripts developed since I've been using Quarto for blogging, with attendees listed as authors (generally in alphabetical order) are shown below: 
+
+

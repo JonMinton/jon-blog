@@ -174,7 +174,7 @@ inv_hess
 
 ```
 
-The estimates from the two approaches are now much closer, even if they aren't as close to each other as in the earlier examples. Using `optim()`, we have parameter estimates $\beta = \{\beta_0 = -32.60, \beta_1 = 0.04, \beta_2 = -6.99\}$, and using `glm()`, we have estimates $\beta = \{\beta_0 = -32.83, \beta_1 = 0.04, \beta_2 = -32.82 \}$ 
+The estimates from the two approaches are now much closer, even if they aren't as close to each other as in the earlier examples. Using `optim()`, we have parameter estimates $\beta = \{\beta_0 = -32.60, \beta_1 = 0.04, \beta_2 = -6.99\}$, and using `glm()`, we have estimates $\beta = \{\beta_0 = -32.82, \beta_1 = 0.04, \beta_2 = -7.04 \}$ 
 
 If we cheat a bit, and give the five dimensional version starting values closer to the estimates from `glm()`, we can probably get similar estimates too. 
 

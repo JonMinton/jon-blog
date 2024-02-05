@@ -1,0 +1,116 @@
+---
+title: "Tidytuesday 2024-01-23"
+subtitle: "Educational attainment and town size"
+author: 
+  - "Brendan Clarke"
+  - "Andrew Saul"
+  - "Nick Christofides"
+  - "Kennedy Owuso-Afrije"
+  - "Jon Minton"
+date: "2024-01-25"
+categories: [R, Education, Tidy Tuesday]
+---
+
+## Background
+
+[This week's TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-01-23/readme.md) used data from the UK ONS which was explored in the 2023 article ['Why do children and young people in smaller towns do better academically than those in larger towns?](https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/articles/whydochildrenandyoungpeopleinsmallertownsdobetteracademicallythanthoseinlargertowns/2023-07-25)'. 
+
+## Aims
+
+Our first aim was to try to replicate the headline finding from the article above: that children in smaller towns have better average educational outcomes than in larger towns. We also sought to replicate and improve on the 'beeswarm' plot used in the original article, and to look at other factors which may explain differences in educational qualifications.
+
+## Package loading
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(ggbeeswarm) # for the beeswarm plot
+```
+
+
+## Data
+```{r}
+#| message: false
+#| warning: false
+
+# ee <- tidytuesdayR::tt_load('2024-01-23') |>
+#   purrr::pluck(1)
+
+# Direct link to get past API rate limit issue using tt_load()
+ee <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-23/english_education.csv')
+
+```
+
+`purrr::pluck(1)` was used because the data contained only a single dataset, but by default the `tt_load` function returns a list. So, the `pluck(1)` function takes the first element of the list, which in this case is in effect turning the data into a dataframe. 
+
+## Counting towns in data
+```{r}
+ee |>
+  count(size_flag, sort=T) |>
+  knitr::kable(caption = "Counts of small/med/city class")
+```
+
+There are 662 small towns, 331 medium towns, and 89 large towns
+
+## Removing oddball locations and Londons and factoring
+```{r}
+ee |>
+  mutate(town_size = factor(size_flag, levels = c("Small Towns", "Medium Towns", "Large Towns"), ordered=T)) |>
+  filter(!is.na(town_size)) -> ee_fact
+```
+
+## Summary by group
+```{r}
+ee_fact |>
+  group_by(town_size) |>
+  summarise(count = n(),
+            `mean ed score` = mean(education_score),
+            `sd ed score` = sd(education_score),
+            se = `sd ed score`/count^0.5,
+            `total population` = sum(population_2011)) |>
+  mutate(across(where(is.numeric), round, 3)) |>
+  knitr::kable()
+```
+
+
+
+## ANOVA for small/med/large towns
+
+We built a series of linear regression models, and used ANOVA to compare between them. 
+A low p-value from ANOVA, when comparing two or more models that are 'nested', can be taken as a signal that the more complex/unrestricted of the models should be used. 
+
+```{r}
+mod_base <- lm(education_score ~ town_size, data = ee_fact)
+summary(mod_base)
+
+mod_dep <- lm(education_score ~ town_size + income_flag, data = ee_fact)
+summary(mod_dep)
+
+mod_dep2 <- lm(education_score ~ town_size * income_flag, data = ee_fact)
+summary(mod_dep2)
+
+anova(mod_base, mod_dep, mod_dep2)
+anova(mod_dep, mod_dep2)
+```
+
+The summary from `mod_dep` indicates that deprivation tertile, using the IMD income domain, may have more of an effect than town size, and in the opposite direction. 
+
+## Beeswarm plot
+
+We reproduce the beeswarm plot from the original article, but colouring areas by income tertile:
+
+```{r}
+ee_fact |>
+  mutate(income_flag = factor(income_flag, levels = c("Lower deprivation towns", "Mid deprivation towns", "Higher deprivation towns"))) |>
+  ggplot(aes(x = town_size, y = education_score, color = income_flag)) +
+  geom_beeswarm() +
+  coord_flip() +
+  theme(legend.position = "bottom") +
+  scale_color_manual(values = c("#73b8fd", "#0068c6", "#003b7c"))
+
+```
+
+## Conclusion
+
+We were able to replicate the headline finding from the article, and the type of visualisation used. But we also identified area deprivation as an important (and likely a more important) determinant of education scores. 

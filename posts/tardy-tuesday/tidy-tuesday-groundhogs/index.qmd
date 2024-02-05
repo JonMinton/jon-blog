@@ -1,0 +1,206 @@
+---
+title: "Tidy Tuesday 30 Jan 2024: Groundhogs"
+subtitle: "Even tardier than usual..."
+date: "2024-02-02"
+author: 
+    - "Brendan Clarke"
+    - "Jon Minton"
+    - "Kennedy Owusu-Afriyie"
+    - "Katie Pyper"
+    - "Andrew Saul"
+code-fold: true
+categories: [R, Tidy Tuesday, North America]
+---
+
+The latest TidyTuesday dataset is on [Groundhog Days](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-01-30/readme.md), a North American tradition in which the behaviours of specific groundhogs are used to make predictions about the weather over the next six weeks, as immortalised in [the eponymous sci-fi rom-com featuring Bill Murray](https://en.wikipedia.org/wiki/Groundhog_Day_(film)). 
+
+Oddly, the data provided *does not* include meteorological information on whether the groundhogs' predictions are accurate. (Who knows? Maybe they are!) But the data do include latitude, longitude, and other geographic information. So, we decided to see if we could plot these Groundhog Day events on an interactive map. 
+
+First we load the data, using the bespoke `tidytuesdayR` package:
+
+```{r}
+library(tidyverse)
+
+# The number of queries made via tidyTuesdayR is limited. The commented code below shows how to extract the TidyTuesday data using the tidytuesdayR package. Instead I'll link directly:
+# dat <- tidytuesdayR::tt_load('2024-01-30')
+```
+
+```{r}
+
+# predictions <- dat |>
+#   pluck(1) # that's the predictions
+```
+
+```{r}
+# dat |>
+#   pluck(2) # that's the groundhogs
+```
+
+```{r}
+# groundhogs <- dat |>
+#   pluck(2) 
+
+# Direct approach 
+
+groundhogs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-30/groundhogs.csv')
+predictions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-30/predictions.csv')
+```
+
+We now have the two datasets in separate objects. Let's look at some of the information in the description field
+
+```{r}
+groundhogs |>
+  filter(!is_groundhog) |>
+  select(description)
+```
+
+```{r}
+predictions |>
+  count(shadow, sort=T)
+```
+
+```{r}
+# dat |>
+#   pluck(1) |>
+#   left_join(groundhogs) 
+predictions |> 
+    left_join(groundhogs)
+```
+
+## Mapping 
+We decided to try using [Leaflet](https://rstudio.github.io/leaflet/) to plot where the Groundhog day events occurred. 
+
+
+```{r}
+#install.packages('leaflet')
+library(leaflet)
+
+```
+
+We start by following one of the first examples in the Leaflet intro page above, adding markers to geolocate the sightings/events, and a popup with the name (assigned to) the Groundhog:
+
+
+```{r}
+groundhogs |>
+  select(lat = latitude, lng = longitude, popup = name) |>
+  leaflet() |>
+  addTiles()|>
+  addMarkers(~lng, ~lat, popup = ~popup)
+```
+
+We next wanted to colour these markers based on whether the predictions are classed as 'active' or not. This was slightly more tricky, but the example given in the **Awesome Icons** section of [the markers part of the Leaflet documentation](https://rstudio.github.io/leaflet/markers.html) gave the following code pattern we could work with: 
+
+```{{r}}
+# first 20 quakes
+df.20 <- quakes[1:20,]
+
+getColor <- function(quakes) {
+  sapply(quakes$mag, function(mag) {
+  if(mag <= 4) {
+    "green"
+  } else if(mag <= 5) {
+    "orange"
+  } else {
+    "red"
+  } })
+}
+
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = getColor(df.20)
+)
+
+leaflet(df.20) %>% addTiles() %>%
+  addAwesomeMarkers(~long, ~lat, icon=icons, label=~as.character(mag))
+
+```
+
+So, in the above `addAwesomeMarkers()` is used in place of `addMarkers()`, and takes an argument `icon`. A vector of icons is created of the same length as the number of rows of the dataframe, whose colour is determined through the `getColor` function. 
+
+In our case we are interested in the `active` column, which has just two mutually exclusive categories: `TRUE` and `FALSE`. So we just need two colours to be specified 
+
+```{r}
+
+# We saw if we could implement the code pattern above using list columns, but were not successful
+
+# colouring markers
+# groundhogs_icons <- groundhogs |>
+#   mutate(markerColor = ifelse(active, "green", "red")) |>
+#   rowwise() |>
+#   mutate(icon = list(awesomeIcons(
+#     icon = 'ios-close',
+#     iconColor = 'black',
+#     library = 'ion',
+#     markerColor = markerColor
+#   )))
+
+getColor <- function(groundhogs) {
+  sapply(groundhogs$active, function(active) {
+    if(active) {
+      "green"  } else {
+          "red"  } })
+}
+
+# create vector of matching vectors
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = getColor(groundhogs)
+)
+
+# now with active/inactive icons
+
+groundhogs |>
+  select(lat = latitude, lng = longitude, popup = name) |>
+  leaflet() |>
+  addTiles()|>
+  addAwesomeMarkers(~lng, ~lat, popup = ~popup, icon = icons)
+
+
+```
+
+
+Challenge complete! As we would expect, most predictions are not currently active.
+
+## Other possibilities
+
+Some other things we could have explored include:
+
+- Attempting to link to appropriate meteorological data to see if the predictions came true at more than chance rates (likely a challenge)
+- Natural Language Programming to identify patterns and key terms in the free text fields like description
+- Additional customisation of the leaflet maps, such as including additional popup fields, further customising the icons based on multiple variables, and adding date sliders to give a third dimension (latitude, longitude, and date) to the user display
+
+## Additional 
+
+Andrew presented the following code solution for how to use `plotly` to produce multiple traces based on summary stats:
+
+
+```{r}
+#| warning: false
+library(plotly)
+
+df <- 
+  mpg %>% 
+  summarise(avg_city = mean(cty), .by = c(manufacturer, year))
+
+manfs <- df %>% distinct(manufacturer) %>% pull()
+
+p <- plot_ly()
+
+for(manf in manfs){
+  df_manf <- df %>% 
+    filter(manufacturer == manf)
+  p <- add_trace(p,
+                 mode = "lines+markers",
+                 x = ~year,
+                 y = ~avg_city,
+                 data = df_manf) # must include new df as data for plolty layer
+}
+
+p
+
+
+```
