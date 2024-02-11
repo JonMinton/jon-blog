@@ -234,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="on-marbles-and-jumping-beans">On marbles and jumping beans</h2>
 <p><a href="../../../posts/glms/lms-are-glms-part-05/index.html">Post five</a> introduced Bayes’ Rule and the Likelihood axiom. It pointed out that, at heart, Bayes’ Rule is a way of expressing <strong>that</strong> given <strong>this</strong> in terms of <strong>this</strong> given <strong>that</strong>; and that Likelihood is also a claim about how <strong>that</strong> given <strong>this</strong> relates to <strong>this</strong> given <strong>that</strong>. More specifically, the claim of Likelihood is:</p>
 <blockquote class="blockquote">
-<p>The likelihood of the model given the data is proportional to the likelihood of the data given the model.</p>
+<p>The likelihood of the model given the data is proportional to the probability of the data given the model.</p>
 </blockquote>
 <p>There are two aspects to the model: firstly its <em>structure</em>; secondly its <em>parameters</em>. The structure includes the type of statistical model - whether it is a standard linear regression, negative binomial regression, logistic regression, Poisson regression model and so on - and also the specific types of columns from the dataset selected as either predictor variables (<span class="math inline">\(X\)</span>) or response variables (<span class="math inline">\(Y\)</span>). It is only after both the higher level structure of the model family, and the lower level structure of the data inputs (what’s being regressed on what?) have been decided that the Likelihood theory is used.</p>
 <p>And how is Likelihood theory used? Well, it defines a <em>landscape</em> over which an algorithm searches. This landscape has as many dimensions as there are parameters to fit. Where there are just two parameters, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> to fit, we can visualise this landscape using something like a contour plot, with <span class="math inline">\(\beta_0\)</span> as latitude, <span class="math inline">\(\beta_1\)</span> as longitude, and the likelihood at this position its elevation or depth. Each possible joint value <span class="math inline">\(\beta = \{\beta_0, \beta_1\}\)</span> which the algorithm might wish to propose leads to a different long-lat coordinate over the surface, and each coordinate has a different elevation or depth. Although we can’t see beyond three dimensions (latitude, longitude, and elevation/depth), mathematics has no problem extending the concept of multidimensional space into far more dimensions than we can see or meaningfully comprehenend. If a model has ten parameters to fit, for example, the likelihood search space really is ten dimensional, and so on.</p>
@@ -353,8 +353,8 @@ F-statistic:  64.5 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 4.2e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.42 seconds.
+Chain 1: Gradient evaluation took 0.000898 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 8.98 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -371,15 +371,15 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.037 seconds (Warm-up)
-Chain 1:                0.037 seconds (Sampling)
-Chain 1:                0.074 seconds (Total)
+Chain 1:  Elapsed Time: 0.031 seconds (Warm-up)
+Chain 1:                0.032 seconds (Sampling)
+Chain 1:                0.063 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 7e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+Chain 2: Gradient evaluation took 5e-06 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -396,15 +396,15 @@ Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.034 seconds (Warm-up)
-Chain 2:                0.03 seconds (Sampling)
-Chain 2:                0.064 seconds (Total)
+Chain 2:  Elapsed Time: 0.032 seconds (Warm-up)
+Chain 2:                0.034 seconds (Sampling)
+Chain 2:                0.066 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 7e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+Chain 3: Gradient evaluation took 3e-06 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -421,15 +421,15 @@ Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.03 seconds (Warm-up)
-Chain 3:                0.029 seconds (Sampling)
-Chain 3:                0.059 seconds (Total)
+Chain 3:  Elapsed Time: 0.032 seconds (Warm-up)
+Chain 3:                0.031 seconds (Sampling)
+Chain 3:                0.063 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 1.1e-05 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.11 seconds.
+Chain 4: Gradient evaluation took 5e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -446,9 +446,9 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.03 seconds (Warm-up)
-Chain 4:                0.036 seconds (Sampling)
-Chain 4:                0.066 seconds (Total)
+Chain 4:  Elapsed Time: 0.033 seconds (Warm-up)
+Chain 4:                0.031 seconds (Sampling)
+Chain 4:                0.064 seconds (Total)
 Chain 4: </code></pre>
 </div>
 <details>
@@ -470,26 +470,26 @@ Model Info:
 Estimates:
                    mean   sd   10%   50%   90%
 (Intercept)      20.7    0.7 19.8  20.7  21.6 
-log(dose)         9.3    1.3  7.7   9.3  10.9 
-suppVC           -3.7    1.0 -5.0  -3.7  -2.5 
-log(dose):suppVC  3.8    1.8  1.5   3.8   6.1 
-sigma             3.8    0.4  3.3   3.8   4.3 
+log(dose)         9.3    1.2  7.7   9.3  10.8 
+suppVC           -3.7    1.0 -4.9  -3.7  -2.5 
+log(dose):suppVC  3.8    1.7  1.6   3.8   6.0 
+sigma             3.8    0.4  3.4   3.8   4.3 
 
 Fit Diagnostics:
            mean   sd   10%   50%   90%
-mean_PPD 18.8    0.7 18.0  18.8  19.7 
+mean_PPD 18.8    0.7 17.9  18.8  19.7 
 
 The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
 
 MCMC diagnostics
                  mcse Rhat n_eff
-(Intercept)      0.0  1.0  3497 
-log(dose)        0.0  1.0  2271 
-suppVC           0.0  1.0  3518 
-log(dose):suppVC 0.0  1.0  2228 
-sigma            0.0  1.0  3287 
-mean_PPD         0.0  1.0  3814 
-log-posterior    0.0  1.0  1532 
+(Intercept)      0.0  1.0  3518 
+log(dose)        0.0  1.0  2362 
+suppVC           0.0  1.0  3357 
+log(dose):suppVC 0.0  1.0  2237 
+sigma            0.0  1.0  2919 
+mean_PPD         0.0  1.0  3978 
+log-posterior    0.0  1.0  1646 
 
 For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 </div>
@@ -523,12 +523,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1
-[1,] 20.77221
-[2,] 18.83305
-[3,] 21.98316
-[4,] 22.32233
-[5,] 26.07635
-[6,] 24.27471</code></pre>
+[1,] 19.21064
+[2,] 25.45747
+[3,] 26.41099
+[4,] 25.14948
+[5,] 22.36921
+[6,] 24.17799</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -567,7 +567,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.43 to 30.43.</p>
+<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.05 to 30.58.</p>
 <p>Remember we previously estimated both the <em>expected values</em> and the <em>predicted values</em> for this condition. Our 95% range for the <em>expected values</em> were <code>20.27</code> to <code>24.19</code> (or thereabouts), whereas our 95% range for the <em>predicted values</em> were (by design) wider, at <code>15.34</code> to <code>30.11</code>. The 95% uncertainty interval above is therefore of <em>predicted values</em>, which include fundamental variation due to the ancillary parameters <span class="math inline">\(\sigma\)</span>, rather than <em>expected values</em>, which result from parameter uncertainty alone.</p>
 <p>There are a couple of other functions in <code>rstanarm</code> we can look at: <code>predictive_error()</code> and <code>predictive_interval()</code></p>
 <p>First here’s <code>predictive_interval</code>. It is a convenience function that the posterior distribution generated previously, <code>predictions</code>, and returns an uncertainty interval:</p>
@@ -580,7 +580,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        5%      95%
-1 16.69349 29.05531</code></pre>
+1 16.23789 29.12007</code></pre>
 </div>
 </div>
 <p>We can see by default the intervals returned are from 5% to 95%, i.e.&nbsp;are the 90% intervals rather than the 95% intervals considered previously. We can change the intervals requested with the <code>prob</code> argument:</p>
@@ -593,8 +593,8 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>     2.5%    97.5%
-1 15.4265 30.43036</code></pre>
+<pre><code>      2.5%   97.5%
+1 15.04618 30.5805</code></pre>
 </div>
 </div>
 <p>As expected, this requested interval returns an interval closer to (but not identical to) the interval estimated using the quantile function.</p>
@@ -610,7 +610,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%    97.5%
-1 15.11731 30.55786</code></pre>
+1 15.03094 30.19958</code></pre>
 </div>
 </div>
 <p>Yes. This approach works too. The values aren’t identical as, no doubt, a more sophisticated approach is used by <code>predictive_interval</code> to estimate the interval than simply arranging the posterior estimates in order using <code>quantile</code>.</p>
@@ -629,7 +629,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.28523 22.76868 24.18860 </code></pre>
+21.21876 22.73040 24.21310 </code></pre>
 </div>
 </div>
 <p>For comparison, the expected value 95% interval we obtained from the Frequentist model was 21.3 to 24.2 when drawing from the quasi-posterior distribution, and 22.7 to 24.2 when using the <code>predict()</code> function with the <code>interval</code> argument set to <code>"confidence"</code>.</p>
@@ -651,12 +651,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1        2
-[1,] 17.93171 16.86254
-[2,] 24.39394 23.92767
-[3,] 18.56057 18.35896
-[4,] 26.48170 15.89969
-[5,] 28.02787 24.13167
-[6,] 23.31118 24.31465</code></pre>
+[1,] 26.56821 11.24285
+[2,] 25.06455 13.14789
+[3,] 17.89908 19.18774
+[4,] 21.42328 23.06747
+[5,] 24.01504 25.29607
+[6,] 16.55644 25.65109</code></pre>
 </div>
 </div>
 <p>The <code>newdata</code> argument to posterior_predict now has two rows, one for the OJ supplement and the other for the VC supplement scenario. And the predictions matrix returned by <code>posterior_predict</code> now has two columns: one for each scenario (row) in <code>predictors_fd</code>. We can look at the distribution of both of these columns, as well as the rowwise comparisions between columns, which will give our distribution of first differences for the <em>predicted</em> values:</p>
@@ -702,7 +702,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--13.408757  -2.840162   7.735231 </code></pre>
+-13.912144  -2.980828   7.950461 </code></pre>
 </div>
 </div>
 <p>The 95% intervals for first differences in <em>predicted</em> values is from -13.6 to +7.9, with the median estimate at -3.0. As expected, the median is similar to the equivalent value from using expected values (-2.9) but the range is wider.</p>
@@ -720,12 +720,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <div class="cell-output cell-output-stdout">
 <pre><code>          
 iterations        1        2
-      [1,] 21.61327 19.65342
-      [2,] 22.93263 20.08664
-      [3,] 22.13452 20.23250
-      [4,] 22.72122 19.53675
-      [5,] 22.99010 18.95640
-      [6,] 22.93655 20.92789</code></pre>
+      [1,] 22.00406 19.74149
+      [2,] 21.73480 18.47468
+      [3,] 23.57842 20.16130
+      [4,] 23.42395 18.53456
+      [5,] 22.46223 20.05998
+      [6,] 23.07494 19.96308</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -768,8 +768,8 @@ iterations        1        2
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(preds_fd_df_ev<span class="sc">$</span>fd, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.500</span>, <span class="fl">0.975</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>     2.5%       50%     97.5% 
--5.020744 -2.859493 -0.738625 </code></pre>
+<pre><code>      2.5%        50%      97.5% 
+-4.9104973 -2.8572241 -0.7550476 </code></pre>
 </div>
 </div>
 <p>We now have a 95% interval for the first difference in expected values of -4.9 to -0.7. By contrast, the equivalent range estimated using the Frequentist model in part 12 was -4.8 to -0.8. So, although they’re not identical, they do seem to be very similar.</p>
