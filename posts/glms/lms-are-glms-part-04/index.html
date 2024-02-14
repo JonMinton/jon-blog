@@ -686,6 +686,12 @@ Number of Fisher Scoring iterations: 8</code></pre>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>Linear regression tends to give a false impression about how straightforward it is to use a model to answer questions of the form “What is the effect of x on y?”. This is because, for linear regression, but few other model specifications, the answer to this question is in the <span class="math inline">\(\beta\)</span> coefficients themselves. For other model specifications, like the logistic regression example above, the correct-but-uninformative answer tends to be “it depends”, and potentially more informative answers tend to require a bit more work to derive and interpret.</p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p>This post concludes the first section of this blog series. We showed the importance of producing predictions from models, rather than just staring at tables of coefficients and producing qualitative ‘stargazing’ summaries of their statistical significance and direction of effect. Statistical significance of individual coefficients almost never answers questions of <em>substantive significance</em>, which instead come from model predictions.</p>
+<p>However in the predictions so far, we’ve accidentially pretended to know more than we do. For each prediction, despite imperfect knowledge, we’ve presented point estimates, a single prediction, implying our estimates are sometimes perfectly precise. To be more honest to the user, we should instead present a <em>range</em> of estimates that takes into account all the sources of uncertainty in our modelling which lead to uncertainty in our predictions.</p>
+<p>Section two of this blog series, <a href="../../../posts/glms/lms-are-glms-part-05/index.html">starting with part five</a>, takes us through the material necessary to go from presenting the kind of dishonest certainty of point estimates in predictions, to honest uncertainty in predictive intervals. This involves covering a lot of theoretical and methodological territory, and is fairly challenging. However we do this in order to make it <em>easier</em> for the end user of statistical models, decision makers, to get the kind of information they need and value most from models.</p>
 
 
 

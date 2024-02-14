@@ -232,6 +232,11 @@ div.csl-indent {
 
 
 
+<section id="recap" class="level2">
+<h2 class="anchored" data-anchor-id="recap">Recap</h2>
+<p>The <a href="../../../posts/glms/lms-are-glms-part-04/index.html">last part of the series</a> ended by showing how, except for linear regression, the kinds of answers users need from models aren’t in tables of model coefficients, but in model predictions. However, we only showed predictions as point estimates, giving the false and unreasonable impression that the model predicts with perfect accuracy.</p>
+<p>This post, start of the the second section of the series, provides the theoretical and methodological background necessary to produce model predictions which are more <em>honest</em>, providing predictions with uncertainty intervals relating both to uncertainty about how the model has been fit, and fundamental variability in the stochastic processes that the statistical models aim to simulate. It’s likely to be the most challenging part of the blog series, but worth sticking with.</p>
+</section>
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">Aim</h2>
 <p>In <a href="../../../posts/glms/lms-are-glms-part-01/index.html">the first part of this series</a>, I stated that statistical model fitting, within the generalised model framework presented in <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span>, involves adjusting candidate values for elements of <span class="math inline">\(\beta = \{\beta_0, \beta_1, ..., \beta_K \}\)</span> such that the difference between what the model predicts given some predictor values, <span class="math inline">\(Y_i | X_i\)</span>, and what has been observed alongside the predictors, <span class="math inline">\(y_i\)</span>, is minimised on average<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in some way.</p>
