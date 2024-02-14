@@ -353,8 +353,8 @@ F-statistic:  64.5 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 0.000812 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 8.12 seconds.
+Chain 1: Gradient evaluation took 0.000213 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.13 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -371,9 +371,9 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.031 seconds (Warm-up)
-Chain 1:                0.03 seconds (Sampling)
-Chain 1:                0.061 seconds (Total)
+Chain 1:  Elapsed Time: 0.033 seconds (Warm-up)
+Chain 1:                0.029 seconds (Sampling)
+Chain 1:                0.062 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
@@ -396,15 +396,15 @@ Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.03 seconds (Warm-up)
-Chain 2:                0.035 seconds (Sampling)
-Chain 2:                0.065 seconds (Total)
+Chain 2:  Elapsed Time: 0.032 seconds (Warm-up)
+Chain 2:                0.032 seconds (Sampling)
+Chain 2:                0.064 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 8e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+Chain 3: Gradient evaluation took 6e-06 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -422,14 +422,14 @@ Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
 Chain 3:  Elapsed Time: 0.031 seconds (Warm-up)
-Chain 3:                0.031 seconds (Sampling)
-Chain 3:                0.062 seconds (Total)
+Chain 3:                0.033 seconds (Sampling)
+Chain 3:                0.064 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 7e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+Chain 4: Gradient evaluation took 4e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -446,9 +446,9 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.031 seconds (Warm-up)
-Chain 4:                0.033 seconds (Sampling)
-Chain 4:                0.064 seconds (Total)
+Chain 4:  Elapsed Time: 0.03 seconds (Warm-up)
+Chain 4:                0.035 seconds (Sampling)
+Chain 4:                0.065 seconds (Total)
 Chain 4: </code></pre>
 </div>
 <details>
@@ -470,10 +470,10 @@ Model Info:
 Estimates:
                    mean   sd   10%   50%   90%
 (Intercept)      20.7    0.7 19.7  20.7  21.6 
-log(dose)         9.3    1.2  7.7   9.3  10.8 
+log(dose)         9.2    1.2  7.8   9.2  10.8 
 suppVC           -3.7    1.0 -4.9  -3.7  -2.4 
-log(dose):suppVC  3.9    1.7  1.6   3.9   6.1 
-sigma             3.8    0.4  3.3   3.8   4.3 
+log(dose):suppVC  3.9    1.7  1.7   3.9   6.1 
+sigma             3.8    0.4  3.4   3.8   4.3 
 
 Fit Diagnostics:
            mean   sd   10%   50%   90%
@@ -483,13 +483,13 @@ The mean_ppd is the sample average posterior predictive distribution of the outc
 
 MCMC diagnostics
                  mcse Rhat n_eff
-(Intercept)      0.0  1.0  3169 
-log(dose)        0.0  1.0  2496 
-suppVC           0.0  1.0  2959 
-log(dose):suppVC 0.0  1.0  2375 
-sigma            0.0  1.0  3084 
-mean_PPD         0.0  1.0  3880 
-log-posterior    0.0  1.0  1895 
+(Intercept)      0.0  1.0  3403 
+log(dose)        0.0  1.0  2403 
+suppVC           0.0  1.0  3515 
+log(dose):suppVC 0.0  1.0  2582 
+sigma            0.0  1.0  3323 
+mean_PPD         0.0  1.0  3825 
+log-posterior    0.0  1.0  1830 
 
 For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 </div>
@@ -523,12 +523,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1
-[1,] 28.50066
-[2,] 20.15562
-[3,] 20.45402
-[4,] 26.08534
-[5,] 29.12837
-[6,] 15.49782</code></pre>
+[1,] 19.89542
+[2,] 23.28631
+[3,] 22.06280
+[4,] 23.77704
+[5,] 23.87368
+[6,] 20.21068</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -567,7 +567,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.06 to 30.34.</p>
+<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.2 to 30.18.</p>
 <p>Remember we previously estimated both the <em>expected values</em> and the <em>predicted values</em> for this condition. Our 95% range for the <em>expected values</em> were <code>20.27</code> to <code>24.19</code> (or thereabouts), whereas our 95% range for the <em>predicted values</em> were (by design) wider, at <code>15.34</code> to <code>30.11</code>. The 95% uncertainty interval above is therefore of <em>predicted values</em>, which include fundamental variation due to the ancillary parameters <span class="math inline">\(\sigma\)</span>, rather than <em>expected values</em>, which result from parameter uncertainty alone.</p>
 <p>There are a couple of other functions in <code>rstanarm</code> we can look at: <code>predictive_error()</code> and <code>predictive_interval()</code></p>
 <p>First here’s <code>predictive_interval</code>. It is a convenience function that the posterior distribution generated previously, <code>predictions</code>, and returns an uncertainty interval:</p>
@@ -579,8 +579,8 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>       5%      95%
-1 16.2636 29.03856</code></pre>
+<pre><code>        5%      95%
+1 16.42768 29.02461</code></pre>
 </div>
 </div>
 <p>We can see by default the intervals returned are from 5% to 95%, i.e.&nbsp;are the 90% intervals rather than the 95% intervals considered previously. We can change the intervals requested with the <code>prob</code> argument:</p>
@@ -594,7 +594,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%    97.5%
-1 15.05729 30.33854</code></pre>
+1 15.19772 30.17762</code></pre>
 </div>
 </div>
 <p>As expected, this requested interval returns an interval closer to (but not identical to) the interval estimated using the quantile function.</p>
@@ -610,7 +610,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%    97.5%
-1 15.34399 30.40463</code></pre>
+1 15.07605 30.37426</code></pre>
 </div>
 </div>
 <p>Yes. This approach works too. The values aren’t identical as, no doubt, a more sophisticated approach is used by <code>predictive_interval</code> to estimate the interval than simply arranging the posterior estimates in order using <code>quantile</code>.</p>
@@ -629,7 +629,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.18202 22.72192 24.20477 </code></pre>
+21.22808 22.72064 24.22469 </code></pre>
 </div>
 </div>
 <p>For comparison, the expected value 95% interval we obtained from the Frequentist model was 21.3 to 24.2 when drawing from the quasi-posterior distribution, and 22.7 to 24.2 when using the <code>predict()</code> function with the <code>interval</code> argument set to <code>"confidence"</code>.</p>
@@ -651,12 +651,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1        2
-[1,] 26.90072 19.69489
-[2,] 21.58717 18.35886
-[3,] 21.02857 15.72120
-[4,] 22.28869 19.48555
-[5,] 22.91820 16.69831
-[6,] 24.38392 20.05763</code></pre>
+[1,] 19.95535 17.95599
+[2,] 25.62064 17.70681
+[3,] 19.87592 18.50150
+[4,] 25.11641 15.13195
+[5,] 25.30212 21.03036
+[6,] 21.41904 13.41292</code></pre>
 </div>
 </div>
 <p>The <code>newdata</code> argument to posterior_predict now has two rows, one for the OJ supplement and the other for the VC supplement scenario. And the predictions matrix returned by <code>posterior_predict</code> now has two columns: one for each scenario (row) in <code>predictors_fd</code>. We can look at the distribution of both of these columns, as well as the rowwise comparisions between columns, which will give our distribution of first differences for the <em>predicted</em> values:</p>
@@ -702,7 +702,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--13.778787  -2.755908   7.938932 </code></pre>
+-13.228935  -2.813999   7.441739 </code></pre>
 </div>
 </div>
 <p>The 95% intervals for first differences in <em>predicted</em> values is from -13.6 to +7.9, with the median estimate at -3.0. As expected, the median is similar to the equivalent value from using expected values (-2.9) but the range is wider.</p>
@@ -720,12 +720,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <div class="cell-output cell-output-stdout">
 <pre><code>          
 iterations        1        2
-      [1,] 23.71434 19.34144
-      [2,] 23.20460 19.61849
-      [3,] 22.33082 19.28975
-      [4,] 23.08361 20.07933
-      [5,] 23.30973 18.84344
-      [6,] 23.17445 20.53640</code></pre>
+      [1,] 21.54420 20.34831
+      [2,] 23.09774 20.24537
+      [3,] 23.21726 20.59756
+      [4,] 21.68165 18.71769
+      [5,] 21.67221 19.50048
+      [6,] 21.95758 18.74499</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -769,7 +769,7 @@ iterations        1        2
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.8747125 -2.8504356 -0.7048753 </code></pre>
+-4.8883290 -2.8013491 -0.7927822 </code></pre>
 </div>
 </div>
 <p>We now have a 95% interval for the first difference in expected values of -4.9 to -0.7. By contrast, the equivalent range estimated using the Frequentist model in part 12 was -4.8 to -0.8. So, although they’re not identical, they do seem to be very similar.</p>
