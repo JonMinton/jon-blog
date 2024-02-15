@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-02-15">
 
-<title>Jon Minton’s Blog - Statistical Modelling: Theory and Practice</title>
+<title>Jon Minton’s Blog - On the background to my statistical inference series</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Statistical Modelling: Theory and Practice">
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - On the background to my statistical inference series">
 <meta name="twitter:description" content="">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -121,17 +90,17 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./glms.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../glms.html" rel="" target="">
  <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tardy-tuesday.html" rel="" target="">
+    <a class="nav-link" href="../../tardy-tuesday.html" rel="" target="">
  <span class="menu-text">Tardy Tuesdays</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -163,202 +132,67 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">On the background to my statistical inference series</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">training</div>
+                <div class="quarto-category">education</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 15, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Statistical Modelling: Theory and Practice</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This page lists all posts I’ve written on statistical modelling and inference, originally framed around ‘generalised linear models’ (<code>glm</code> in R) but quite a bit broader than that. I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in <a href="./posts/background-to-my-stats-series/index.html">this post here</a>.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<p><a href="../../glms.html">My blog series on statistical inference and modelling</a> has, at the time of writing, 13 parts, and a feature-length reading time. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’ve been strongly motivated to write this because it covers what I consider the essential theory and practice necessary to be a competent user of statistical methods. In this post I’ll go a bit more into my own background, and how I came to pick up this knowledge.</p>
+<p>My first degree was in the applied physical sciences: electronic engineering. From this I learned two things: firstly, not to be afraid of algebra and coding; secondly, that I didn’t want to do electronic engineering as a career. So I moved into the social sciences, and this move took me to the health sciences, demography and epidemiology.</p>
+<p>The move from the applied physical to the social and health sciences made me realise I’d learned something else from the engineering course: a pair of expectations about methods training. The first expectation was that the methods taught should allow the substantive questions of interest in the field to be addressed. The second expectation was that methods should be taught with sufficient rigour and formalism to ensure students attending the same course, and being sufficiently attentive in that course, leave with a common understanding of what’s been taught and exactly how they are applied.</p>
+<p>I wish I could honestly say otherwise, but in my experience the methods taught in much of the social sciences in the UK fell short of the standards of rigour and application that are just taken as given in an engineering course. Qualitative methods courses tend to trade in abstract nouns and unfalsifiable declarations - how does one really know whether one’s employing a feminist methodology, or a critical realist epistemology, or a post-structuralist framing, when asking people why they’re so sad, or angry, or poor? And most of the quantitative methods training, at least when I first encountered them, took the form of telling people what buttons to click, in which order, after opening up a copy of SPSS. <em>Press this button, then this button, then this button, then look at this number here, and check it’s under 0.05, and look for the number of stars in this row</em>, and so on.</p>
+<p>When I started a PhD in the quantitative social sciences I was highly unskilled. I sat in on some general social science methods courses, some econometrics, some first year probability and statistics courses run by the maths departments, but still didn’t feel I knew how to use the methods of quantitative research with the same level of rigour and understanding that I’d been used to in the engineering course. So I kept searching.</p>
+<p>The training course that finally changed this was <a href="https://projects.iq.harvard.edu/gov2001/home">Gov 2001</a>, a course that’s been run annually by Harvard university for decades, and seems to have become something of an institution. The course teaches statistical inference from the ground up, from the first principles of likelihood and probability, but also doesn’t scrimp on the practicalities of application. It’s also highly applied, with students evaluated on whether they can, at the end of the course, <em>replicate and improve upon</em> an article that’s already been published. It also emphasises the family resemblances between statistical models, the way almost all specific models are just different versions of an underlying ‘mother model’ (my term) which comprises two linked equations.</p>
+<p>I took the course as a distance student over a decade ago, and still find its contents immensely valuable. The blog post series listed below is largely based on that course, though with my own idiosyncratic spin and emphasis. It’s quite technical in places, but the juice is worth the squeeze. If you follow along you will know and understand more about statistical models and their application than almost any UK graduate in a field other than statistics. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-<th>
-Reading Time
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1704041017393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part One: Model fitting as parameter calibration" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 28, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-01/index.html" class="title listing-title">Part One: Model fitting as parameter calibration</a>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics" data-listing-date-sort="1701388800000" data-listing-file-modified-sort="1704041032180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part Two: Systematic components and link functions" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 1, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-02/index.html" class="title listing-title">Part Two: Systematic components and link functions</a>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1701475200000" data-listing-file-modified-sort="1704043139377" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Part Three: glm is just fancy lm" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 2, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-03/index.html" class="title listing-title">Part Three: glm is just fancy lm</a>
-</td>
-<td>
-<span class="listing-reading-time">4 min</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1703894400000" data-listing-file-modified-sort="1707928771433" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-title-sort="Part Four: why only betas just look at betas" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 30, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-04/index.html" class="title listing-title">Part Four: why only betas just look at betas</a>
-</td>
-<td>
-<span class="listing-reading-time">18 min</span>
-</td>
-</tr>
-<tr data-index="4" data-categories="statistics,R" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1707929126040" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Five: Traversing the Likelihood Landscape" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-05/index.html" class="title listing-title">Part Five: Traversing the Likelihood Landscape</a>
-</td>
-<td>
-<span class="listing-reading-time">9 min</span>
-</td>
-</tr>
-<tr data-index="5" data-categories="statistics,R" data-listing-date-sort="1704240000000" data-listing-file-modified-sort="1704446733326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Part Six: The Robo-Chauffeur" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-06/index.html" class="title listing-title">Part Six: The Robo-Chauffeur</a>
-</td>
-<td>
-<span class="listing-reading-time">7 min</span>
-</td>
-</tr>
-<tr data-index="6" data-categories="statistics,R" data-listing-date-sort="1704326400000" data-listing-file-modified-sort="1707929218030" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Seven: Feeling Uncertain" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-07/index.html" class="title listing-title">Part Seven: Feeling Uncertain</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="7" data-categories="statistics,R" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707929274525" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-08/index.html" class="title listing-title">Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="8" data-categories="statistics,R" data-listing-date-sort="1705708800000" data-listing-file-modified-sort="1707929440013" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 20, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-09/index.html" class="title listing-title">Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="9" data-categories="statistics,R" data-listing-date-sort="1706313600000" data-listing-file-modified-sort="1707929496408" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Part Ten: Log Likelihood estimation for Logistic Regression" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 27, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-10/index.html" class="title listing-title">Part Ten: Log Likelihood estimation for Logistic Regression</a>
-</td>
-<td>
-<span class="listing-reading-time">8 min</span>
-</td>
-</tr>
-<tr data-index="10" data-categories="statistics,R" data-listing-date-sort="1706918400000" data-listing-file-modified-sort="1707930011340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Eleven: Honest Predictions the easier way" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-11/index.html" class="title listing-title">Part Eleven: Honest Predictions the easier way</a>
-</td>
-<td>
-<span class="listing-reading-time">14 min</span>
-</td>
-</tr>
-<tr data-index="11" data-categories="statistics,R" data-listing-date-sort="1707004800000" data-listing-file-modified-sort="1707929701419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twelve: Honest Predictions the slightly-less easier way" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-12/index.html" class="title listing-title">Part Twelve: Honest Predictions the slightly-less easier way</a>
-</td>
-<td>
-<span class="listing-reading-time">13 min</span>
-</td>
-</tr>
-<tr data-index="12" data-categories="statistics,R" data-listing-date-sort="1707523200000" data-listing-file-modified-sort="1707670463816" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-title-sort="Part Thirteen: On Marbles and Jumping Beans" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 10, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-13/index.html" class="title listing-title">Part Thirteen: On Marbles and Jumping Beans</a>
-</td>
-<td>
-<span class="listing-reading-time">21 min</span>
-</td>
-</tr>
-</tbody>
 
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Much of this reading may be messages generated by R functions, however.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A statement based on a great deal of personal experience, sadly. Statistical inference is still generally quite poorly explained, poorly understood, and poorly applied in much of the UK, especially when it comes to model building, comparision, interpretation and use for prediction.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -706,6 +540,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
