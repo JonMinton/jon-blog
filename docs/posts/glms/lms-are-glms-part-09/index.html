@@ -149,7 +149,7 @@ div.csl-indent {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../../glms.html" rel="" target="">
- <span class="menu-text">Generalised Linear Models</span></a>
+ <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../tardy-tuesday.html" rel="" target="">
@@ -235,7 +235,7 @@ div.csl-indent {
 <section id="recap" class="level2">
 <h2 class="anchored" data-anchor-id="recap">Recap</h2>
 <p>The last eight posts in this series have taken us into some fairly arcane territory, including concepts like the use of link functions and statistical families within GLM, the likelihood theory of inference and its relation to Bayes’ Rule, and how models are fit in practice using optimisation algorithms. In the last couple of posts we showed how <code>optim()</code>, R’s standard optimisation function, can be used to recover not just the maximum likelihood (point) estimates of a series of parameters to be estimated, but also estimates of how much uncertainty there is about these estimates: both singularly, which gives rise to measures like standard errors, Z scores and P-values - the place where sadly all too many statistical analyses stop at; and jointly, through the calculation of the Hessian and corresponding variance-covariance matrix of uncertainty about the parameter vector.</p>
-<p>In the last post, we showed how known uncertainty about the parameter values in the statistical model can be represented by using the point estimates <span class="math inline">\(\dot{\theta}\)</span> and variance-covariance measure of uncertainty <span class="math inline">\(\Sigma\)</span> can be used to produce a long series of plausible joint estimates of <span class="math inline">\(\tilde{\theta}\)</span> (the parameter estimates <em>with</em> uncertainty) by passing the above as parameters to the multivariate normal distribution and taking repeated draws.</p>
+<p>In <a href="../../../posts/glms/lms-are-glms-part-08/index.html">the last post</a>, we showed how known uncertainty about the parameter values in the statistical model can be represented by using the point estimates <span class="math inline">\(\dot{\theta}\)</span> and variance-covariance measure of uncertainty <span class="math inline">\(\Sigma\)</span> can be used to produce a long series of plausible joint estimates of <span class="math inline">\(\tilde{\theta}\)</span> (the parameter estimates <em>with</em> uncertainty) by passing the above as parameters to the multivariate normal distribution and taking repeated draws.</p>
 </section>
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">Aim</h2>
@@ -503,6 +503,10 @@ E(Y) = \mu_i = x_i \beta
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>This post is hopefully where our toy dataset, which we’ve been hauling with us since post five, can finally retire, happy in the knowledge that it’s taken us through some of the toughest parts of this blog series. The ideas developed over the last few posts can now finally be applied to answering some questions that are actually (or arguably) <em>interesting</em>!</p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p><a href="../../../posts/glms/lms-are-glms-part-10/index.html">The next post</a> covers the same kind of exercise we’ve performed for standard linear regression - specifying the likelihood function, and fitting it using <code>optim()</code> - but for logistic regression instead. This same kind of exercise could be repeated for all kinds of other model types. But hopefully this one additional example is sufficient.</p>
 
 
 

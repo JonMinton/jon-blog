@@ -20,7 +20,7 @@ Unfortunately, we're still in section two. The material below aims to repeat the
 
 ## Log likelihood for logistic regression 
 
-Previously we focused on the log likelihood for standard linear regression. Let's now do the same for logistic regression. According to [the relevant section of the Zelig website](https://docs.zeligproject.org/articles/zelig_logit.html#model-definition):
+[Previously](../lms-are-glms-part-09/index.qmd) we focused on the log likelihood for standard linear regression. Let's now do the same for logistic regression. According to [the relevant section of the Zelig website](https://docs.zeligproject.org/articles/zelig_logit.html#model-definition):
 
 **Stochastic component**
 $$
@@ -212,7 +212,7 @@ Though this wasn't as straightforward as I was hoping for, I'm presenting it war
 
 ## Coming up
 
-In the next few posts, I'll finally be moving off 'section two', with its algebra and algorithms, and showing some tools that can be used to make honest prediction and projections with models, but without all the efforts undertaken here and in the last few posts.
+In [the next post](../lms-are-glms-part-11/index.qmd), I'll finally be moving off 'section two', with its algebra and algorithms, and showing some tools that can be used to make honest prediction and projections with models, but without all the efforts undertaken here and in the last few posts.
 
 [^1]: By 'loss function' I mean a function that takes one or more numeric inputs and returns a single numeric output. The aim of the algorithm is to find the combination of inputs that minimises (or maximises) the function's output. 
 

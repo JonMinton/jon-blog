@@ -9,6 +9,12 @@ categories: [statistics, R]
 bibliography: references.bib
 ---
 
+## Recap
+
+The [last part of the series](../lms-are-glms-part-04/index.qmd) ended by showing how, except for linear regression, the kinds of answers users need from models aren't in tables of model coefficients, but in model predictions. However, we only showed predictions as point estimates, giving the false and unreasonable impression that the model predicts with perfect accuracy. 
+
+This post, start of the the second section of the series, provides the theoretical and methodological background necessary to produce model predictions which are more *honest*, providing predictions with uncertainty intervals relating both to uncertainty about how the model has been fit, and fundamental variability in the stochastic processes that the statistical models aim to simulate. It's likely to be the most challenging part of the blog series, but worth sticking with. 
+
 ## Aim 
 
 In [the first part of this series](../lms-are-glms-part-01/index.qmd), I stated that statistical model fitting, within the generalised model framework presented in @KinTomWit00, involves adjusting candidate values for elements of $\beta = \{\beta_0, \beta_1, ..., \beta_K \}$ such that the difference between what the model predicts given some predictor values, $Y_i | X_i$, and what has been observed alongside the predictors, $y_i$, is minimised on average[^1] in some way.

@@ -1,0 +1,142 @@
+---
+title: "Tidy Tuesday on Valentine's Day"
+author: 
+  - "Brendan Clarke"
+  - "Jon Minton"
+  - "Gatz Osorio"
+  - "Kennedy Owuso-Afrije"
+  
+date: "2024-02-14"
+code-fold: true
+warning: false
+message: false
+categories: [R, tidy tuesday, Valentine's Day]
+---
+
+## Introduction
+
+The most recent TidyTuesday dataset is on [Valentine's Day: sales and engagement in the United States](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-02-13/readme.md)
+
+We were joined by Gatz Osorio, who has a lot of experience with data science in Python, so much of the discussion at the outset was about package management in R compared with Python. We then looked at some of the trends data in Valentine's Day sales and spend. 
+
+## Packages in R 
+
+- We discussed `tidyverse`, which is a kind of meta-packages, loading a range of specific tidyverse package. 
+   - We said using tidyverse is like going into a **shed**. 
+- We then talked about some of the specific packages loaded by the `tidyverse` package, like `dplyr` and `readr`. 
+   - We said each of these individual tidyverse packages is like a **toolbox**. 
+- We then talked about the `::` (scope) operator in R. This allows us to specify a specific function in a package to use, without loading the entire package. 
+   - For example, `dplyr::mutate()` accesses the `mutate()` function in the `dplyr` package, without loading the entire `dplyr` package. 
+   - We said this is like getting out **a single tool** from a **toolbox**, without emptying or opening the entire toolbox. 
+   - Another example where this is useful is where two packages have different functions with the same name, and we need to be clear which one. For example [both the `MASS` package and the `dplyr` package have a function called `select()`](https://stackoverflow.com/questions/24202120/dplyrselect-function-clashes-with-massselect). If we are using both packages we can use the scope/namespace operator to specify exactly which function we want to use. For example, `dplyr::select()` if we want to use the `dplyr` function, and `MASS::select()` if we want to use the `MASS` function.  
+
+## Package version management in R 
+
+We briefly discussed how R is often less specific than Python and other languages as to exactly which version of a package we want to use. For example if we did some analysis in 2021, and run the script again in 2024, the script may not work as it did previously because some of the packages and functions used may have changed in the meantime. 
+
+We briefly discussed [the `renv` package](https://rstudio.github.io/renv/articles/renv.html) for helping to address such issues. `renv` makes a snapshot of the versions of the packages we used when first running some code, and allows these versions (rather than the latest versions) to be restored when running the script at a later date. 
+We saw that `renv` has different ways of trying to do this, which involve different tradeoffs between file size and reliability:
+
+- lowest file size, most scope for problems: `renv` takes snapshots of package versions etc. On `restore()` `renv` tries to download the package versions used at the time. This should work most of the time, but if a package or package version is no longer available on CRAN or similar this may fail.
+   - This is like maintaining a detailed **recipe** of exactly what tools etc used when the script was first run.
+- medium file size, less scope for problems: `renv` uses `packrat` (a precursor to `renv`) to save all package versions alongside the project and scripts, rather than just the recipe. This means there could be hundreds of megabytes of package content to support a few kilobytes of script. 
+   - This is like carrying around the **lab** in which an experiment was conducted in order to be able to repeat the experiment in almost identical conditions to when the experiment was first conducted. 
+- largest file size, least scope for problems: `renv` can create a docker image to house the scripts/analysis in. A docker image is a virtual environment/machine, which will be identical on everyone's computer. This will help avoid issues associated with one user running the script on a PC, another on a linux server, and a third running the script on a Macbook. 
+   - This is like carrying around the **building and street** in which the **lab** is based, as well as the lab itself! 
+
+
+## Tidytuesday challenge itself
+
+There were three files as part of the Tidytuesday dataset, one with a time breakdown, a second with an age breakdown, and a third with a gender breakdown. We only looked at the time breakdown file
+
+We loaded the data using the `tidytuesdayR` package. However in the script below we will just load it directly to avoid the tidy tuesday API denying requests. 
+
+```{r}
+# load packages 
+library(tidyverse)
+library(RColorBrewer)
+
+# Brendan introduced `pacman`, and the following line of code to ensure pacman is always loaded
+# install.packages(setdiff("pacman", rownames(installed.packages())))
+
+# The following loads the datasets using the tidytuesdayR package:
+# tidytuesdayR::tt_load('2024-02-13') 
+# tuesdata <- tidytuesdayR::tt_load('2024-02-13')
+# historical_spending <- tuesdata$historical_spending
+# gifts_age <- tuesdata$gifts_age
+# gifts_gender <- tuesdata$gifts_gender
+
+historical_spending <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-13/historical_spending.csv')
+
+```
+
+We first looked at whether the percentage of people doing something involving Valentine's Day had changed over time
+
+
+```{r}
+historical_spending |>
+  glimpse() |>
+  filter(!is.na(PercentCelebrating)) |>
+  glimpse() |>
+  ggplot(aes(x = Year, y = PercentCelebrating)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth() +
+  # ylim(0, NA) + # ylim and expand_limits seem equivalent in this case
+  expand_limits(y = 0) +
+  scale_x_continuous(breaks = 2010:2022)
+```
+
+It looks like the share has decreased over time, from around 60% to 50%. 
+
+
+
+We next decided to look at how the relative share of spend on different item categories had changed over time. 
+
+We realised this involved: 
+- Pivoting some of the columns (individual item spend) onto wide format
+- Seeing whether the individual item spend categories add up to the total spend reported
+- Creating an additional spend category for other items which are not part of the standard categories listed
+
+Data before:
+
+```{r}
+historical_spending
+
+```
+
+After pivoting and tidying:
+
+```{r}
+
+historical_spending_pivoted <- historical_spending |>
+  pivot_longer(!c(Year, PercentCelebrating, PerPerson)) |>
+  group_by(Year) |>
+  mutate(sum = sum(value), 
+         other_spend = PerPerson-sum
+  ) |>
+  select(-sum) |>
+  pivot_wider() |>
+  pivot_longer(!c(Year, PercentCelebrating, PerPerson))
+
+historical_spending_pivoted
+```
+
+We then used the tidied and pivoted dataset to produce an area chart with a nicer and more accessible colour scheme for fill colours:
+
+```{r}
+historical_spending_pivoted |>
+  ggplot(aes(x = Year, y = value, fill = name)) +
+  geom_area(position = "fill") +
+  theme_dark() +
+  scale_x_continuous(breaks = 2010:2022) +
+  scale_fill_brewer(palette = "Paired") +
+  scale_y_continuous(labels = scales::percent) +
+  ylab("Cumulative percentage of annual total spend") +
+  ggtitle("Valentine's day spending by category")
+
+
+```
+
+Jon recommended the `Paired` colour scheme in ColorBrewer. Brendan checked this improved the accessibility of the colours using [the contrastchecker website](https://contrastchecker.com/). This showed the ColorBrewer colour scheme was much more accessible than ggplot's default colours. 
+

@@ -149,7 +149,7 @@ div.csl-indent {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../../glms.html" rel="" target="">
- <span class="menu-text">Generalised Linear Models</span></a>
+ <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../../tardy-tuesday.html" rel="" target="">
@@ -430,12 +430,12 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept) log(dose)    suppVC log(dose):suppVC
-[1,]    20.87538  9.689866 -2.836542         1.723545
-[2,]    19.43247  8.859462 -2.908695         4.902105
-[3,]    20.04414 10.951369 -2.337728         1.553765
-[4,]    20.08595  9.444338 -3.747288         4.100071
-[5,]    20.38512  7.122832 -2.729296         4.390524
-[6,]    20.26225 10.424484 -2.907097         1.458138</code></pre>
+[1,]    20.94078 10.472272 -5.104424      -0.01286336
+[2,]    20.12848  8.379597 -2.890160       3.22001417
+[3,]    20.51167  8.533110 -4.551441       6.20179932
+[4,]    20.56742 11.252963 -3.646873       1.29973377
+[5,]    20.43586  7.624446 -2.979613       7.61304278
+[6,]    21.75989 10.271595 -4.676590       2.92165979</code></pre>
 </div>
 </div>
 <p>Let’s first look at each of these parameters individually:</p>
@@ -587,7 +587,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_ev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.03761 21.40940 22.48786 22.19340 21.97454 22.58840</code></pre>
+<pre><code>[1] 23.27760 21.99833 22.41578 23.07845 22.13721 24.05193</code></pre>
 </div>
 </div>
 <p>Let’s now get a 95% credible interval:</p>
@@ -598,7 +598,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.31398 22.71939 24.14458 </code></pre>
+21.27924 22.72922 24.19010 </code></pre>
 </div>
 </div>
 <p>So, the 95% interval for the expected value is between <code>21.31</code> and <code>24.14</code>, with a middle (median) estimate of <code>22.73</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s check this against estimates from the <code>predict()</code> function:</p>
@@ -630,7 +630,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_pv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 25.66925 28.20725 28.10618 18.29734 22.02755 24.62414</code></pre>
+<pre><code>[1] 23.72120 23.13082 19.51765 25.10035 19.90430 23.09212</code></pre>
 </div>
 </div>
 <p>Let’s get the 95% interval from the above using quantile</p>
@@ -641,7 +641,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-15.35227 22.72828 30.31997 </code></pre>
+15.12925 22.66189 30.03233 </code></pre>
 </div>
 </div>
 <p>As expected, the interval is now much wider, with a 95% interval from <code>15.34</code> to <code>30.11</code>. The central estimate should in theory, with an infinite number of runs, be the same, however because of random variation it will never be <em>exactly</em> the same to an arbitrary number of decimal places. In this case, the middle estimate is <code>22.75</code>, not identical to the central estimate from the expected values distribution of <code>22.72</code>. The number of simulations can <em>always</em> be increased to produce greater precision if needed.</p>
@@ -703,16 +703,16 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <pre><code># A tibble: 10,000 × 3
       x0    x1    fd
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  23.0  20.6 -2.45
- 2  21.4  19.6 -1.81
- 3  22.5  20.5 -1.99
- 4  22.2  19.4 -2.83
- 5  22.0  20.2 -1.75
- 6  22.6  20.0 -2.58
- 7  23.8  19.1 -4.74
- 8  23.1  19.8 -3.32
- 9  22.6  20.2 -2.40
-10  22.8  20.6 -2.21
+ 1  23.3  18.2 -5.11
+ 2  22.0  19.8 -2.17
+ 3  22.4  19.2 -3.17
+ 4  23.1  19.7 -3.36
+ 5  22.1  20.9 -1.28
+ 6  24.1  20.0 -4.02
+ 7  22.5  20.7 -1.80
+ 8  21.8  19.8 -2.05
+ 9  22.1  19.8 -2.28
+10  22.9  19.6 -3.30
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
@@ -758,7 +758,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.8391048 -2.8440436 -0.8101429 </code></pre>
+-4.8570543 -2.8593842 -0.8175495 </code></pre>
 </div>
 </div>
 <p>So, 95% of estimates of the first difference are between <code>-4.85</code> and <code>-0.81</code>, with the middle of this distribution (on this occasion) being <code>-2.83</code>.</p>
@@ -769,6 +769,10 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>In this post we’ve finally combined all the learning we’ve developed over the 11 previous posts to answer three specific ‘what if?’ questions: one on expected values, one on predicted values, and one on first differences. These are what <span class="citation" data-cites="KinTomWit00">King, Tomz, and Wittenberg (<a href="#ref-KinTomWit00" role="doc-biblioref">2000</a>)</span> refer to as <em>quantities of interest</em>, and I hope you agree these are more organic and reasonable types of question to ask of data and statistical models than simply looking at coefficients and p-values and reporting which ones are ‘statistically significant’.</p>
 <p>If you’ve been able to follow everything in these posts, and can generalise the approach shown above to other types of statistical model, then <strong>congratulations!</strong> You’ve learned the framework for answering meaningful questions using statistical models which is at the heart of <a href="https://projects.iq.harvard.edu/gov2001/home">one of the toughest methods courses for social scientists offered by one of the most prestigious universities in the world</a>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p><a href="../../../posts/glms/lms-are-glms-part-13/index.html">The next post</a> uses the same dataset and model we’ve developed and applied, but shows how it can be implemented using a Bayesian rather than Frequentist modelling approach. In some ways it’s very familar, but in others it introduces a completely new paradigm to how models are fit and run.</p>
 
 
 

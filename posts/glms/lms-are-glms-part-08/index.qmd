@@ -11,7 +11,7 @@ bibliography: references.bib
 
 ## Recap
 
-The previous post, perhaps the toughest of the series, showed how some special settings within R's numerical optimisation `optim()` function can be used to estimate how much uncertainty there is in our estimates of the the model parameters $\beta$. We covered the concept that *information* and *uncertainty* are inversely related: the more information we have, the less uncertain we are, and vice versa. We estimated parameter uncertainty around the point that maximised (log) likelihood by asking the algorithm to take small steps from this highest point in different directions (dimensions, in effect variables), and report how steep the fall is in different directions. Steeper falls along a dimension imply less uncertainty and so more more information and narrower confidence intervals; as usual, the converse is also true. The component returned by `optim()` which reports the results of this 'stepping out' is a square matrix called the Hessian, which can be inverted to produce estimates of the variances and covarainces of each of the parameters being estimated in our model. 
+[The previous post](../lms-are-glms-part-07/index.qmd), perhaps the toughest of the series, showed how some special settings within R's numerical optimisation `optim()` function can be used to estimate how much uncertainty there is in our estimates of the the model parameters $\beta$. We covered the concept that *information* and *uncertainty* are inversely related: the more information we have, the less uncertain we are, and vice versa. We estimated parameter uncertainty around the point that maximised (log) likelihood by asking the algorithm to take small steps from this highest point in different directions (dimensions, in effect variables), and report how steep the fall is in different directions. Steeper falls along a dimension imply less uncertainty and so more more information and narrower confidence intervals; as usual, the converse is also true. The component returned by `optim()` which reports the results of this 'stepping out' is a square matrix called the Hessian, which can be inverted to produce estimates of the variances and covarainces of each of the parameters being estimated in our model. 
 
 ## Aim
 
@@ -219,6 +219,6 @@ This post has shown how `optim()`, which in its vanilla state only returns point
 
 More importantly, it can be used to generate draws of plausible combinations of parameter values, something denoted as $\tilde{\theta}$ earlier. This is something especially useful for producing *honest quantities of interest*, which both tell users of models something they want to know, while also representing how uncertain we are in this knowledge. 
 
-We'll cover that in the next post... [^5]
+We'll cover that in [the next post...](../lms-are-glms-part-09/index.qmd) [^5]
 
 [^5]: I was expecting to cover it in the current post, but this is probably enough content for now!

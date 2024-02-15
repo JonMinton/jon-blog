@@ -1,10 +1,10 @@
 ---
-title: "Generalised Linear Models"
+title: "Statistical Modelling: Theory and Practice"
 listing: 
   contents: posts/glms/**/**.qmd
   sort: "date"
   type: table
-  fields: [date, title]
+  fields: [date, title, reading-time]
   categories: false
   sort-ui: false
   filter-ui: false
@@ -12,10 +12,5 @@ page-layout: full
 title-block-banner: false
 ---
 
-## Introduction
-
-This page lists a series of posts I've written which attempt to demystify generalised linear models (GLMs), by first reintroducing linear models as a specific type of GLM.
-
-
-
+This page lists all posts I've written on statistical modelling and inference, originally framed around 'generalised linear models' (`glm` in R) but quite a bit broader than that. I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in [this post here](posts/background-to-my-stats-series/index.qmd). 
 
