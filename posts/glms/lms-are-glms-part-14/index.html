@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-02-19">
 
-<title>Jon Minton’s Blog - Statistical Modelling: Theory and Practice</title>
+<title>Jon Minton’s Blog - Part Fourteen: A non-technical but challenging introduction to causal inference…</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,26 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Statistical Modelling: Theory and Practice">
-<meta name="twitter:description" content="">
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Fourteen: A non-technical but challenging introduction to causal inference…">
+<meta name="twitter:description" content="…and the heroism or villainy of Henry Dundas">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/glms/lms-are-glms-part-14/dundas-observed.png">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image-height" content="647">
+<meta name="twitter:image-width" content="572">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -121,17 +93,17 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./glms.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../../glms.html" rel="" target="">
  <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tardy-tuesday.html" rel="" target="">
+    <a class="nav-link" href="../../../tardy-tuesday.html" rel="" target="">
  <span class="menu-text">Tardy Tuesdays</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -163,213 +135,129 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Part Fourteen: A non-technical but challenging introduction to causal inference…</h1>
+            <p class="subtitle lead">…and the heroism or villainy of Henry Dundas</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">history</div>
+                <div class="quarto-category">causality</div>
+                <div class="quarto-category">Edinburgh</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 19, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Statistical Modelling: Theory and Practice</h1>
+
+
+
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dundas-observed.png" class="img-fluid figure-img" alt="Henry Dundas, as observed"></p>
+<figcaption class="figure-caption">Henry Dundas, as observed</figcaption>
+</figure>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This page lists all posts I’ve written on statistical modelling and inference, originally framed around ‘generalised linear models’ (<code>glm</code> in R) but quite a bit broader than that. I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in <a href="./posts/background-to-my-stats-series/index.html">this post here</a>.</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-<th>
-Reading Time
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1704041017393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part One: Model fitting as parameter calibration" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 28, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-01/index.html" class="title listing-title">Part One: Model fitting as parameter calibration</a>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics" data-listing-date-sort="1701388800000" data-listing-file-modified-sort="1704041032180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part Two: Systematic components and link functions" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 1, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-02/index.html" class="title listing-title">Part Two: Systematic components and link functions</a>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1701475200000" data-listing-file-modified-sort="1704043139377" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Part Three: glm is just fancy lm" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 2, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-03/index.html" class="title listing-title">Part Three: glm is just fancy lm</a>
-</td>
-<td>
-<span class="listing-reading-time">4 min</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1703894400000" data-listing-file-modified-sort="1707928771433" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-title-sort="Part Four: why only betas just look at betas" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 30, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-04/index.html" class="title listing-title">Part Four: why only betas just look at betas</a>
-</td>
-<td>
-<span class="listing-reading-time">18 min</span>
-</td>
-</tr>
-<tr data-index="4" data-categories="statistics,R" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1707929126040" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Five: Traversing the Likelihood Landscape" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-05/index.html" class="title listing-title">Part Five: Traversing the Likelihood Landscape</a>
-</td>
-<td>
-<span class="listing-reading-time">9 min</span>
-</td>
-</tr>
-<tr data-index="5" data-categories="statistics,R" data-listing-date-sort="1704240000000" data-listing-file-modified-sort="1704446733326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Part Six: The Robo-Chauffeur" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-06/index.html" class="title listing-title">Part Six: The Robo-Chauffeur</a>
-</td>
-<td>
-<span class="listing-reading-time">7 min</span>
-</td>
-</tr>
-<tr data-index="6" data-categories="statistics,R" data-listing-date-sort="1704326400000" data-listing-file-modified-sort="1707929218030" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Seven: Feeling Uncertain" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-07/index.html" class="title listing-title">Part Seven: Feeling Uncertain</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="7" data-categories="statistics,R" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707929274525" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-08/index.html" class="title listing-title">Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="8" data-categories="statistics,R" data-listing-date-sort="1705708800000" data-listing-file-modified-sort="1707929440013" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 20, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-09/index.html" class="title listing-title">Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="9" data-categories="statistics,R" data-listing-date-sort="1706313600000" data-listing-file-modified-sort="1707929496408" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Part Ten: Log Likelihood estimation for Logistic Regression" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 27, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-10/index.html" class="title listing-title">Part Ten: Log Likelihood estimation for Logistic Regression</a>
-</td>
-<td>
-<span class="listing-reading-time">8 min</span>
-</td>
-</tr>
-<tr data-index="10" data-categories="statistics,R" data-listing-date-sort="1706918400000" data-listing-file-modified-sort="1707930011340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Eleven: Honest Predictions the easier way" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-11/index.html" class="title listing-title">Part Eleven: Honest Predictions the easier way</a>
-</td>
-<td>
-<span class="listing-reading-time">14 min</span>
-</td>
-</tr>
-<tr data-index="11" data-categories="statistics,R" data-listing-date-sort="1707004800000" data-listing-file-modified-sort="1707929701419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twelve: Honest Predictions the slightly-less easier way" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-12/index.html" class="title listing-title">Part Twelve: Honest Predictions the slightly-less easier way</a>
-</td>
-<td>
-<span class="listing-reading-time">13 min</span>
-</td>
-</tr>
-<tr data-index="12" data-categories="statistics,R" data-listing-date-sort="1707523200000" data-listing-file-modified-sort="1707670463816" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-title-sort="Part Thirteen: On Marbles and Jumping Beans" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 10, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-13/index.html" class="title listing-title">Part Thirteen: On Marbles and Jumping Beans</a>
-</td>
-<td>
-<span class="listing-reading-time">21 min</span>
-</td>
-</tr>
-<tr data-index="13" data-categories="history,causality,Edinburgh" data-listing-date-sort="1708300800000" data-listing-file-modified-sort="1708381740892" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Part Fourteen: A non-technical but challenging introduction to causal inference..." data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 19, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-14/index.html" class="title listing-title">Part Fourteen: A non-technical but challenging introduction to causal inference…</a>
-</td>
-<td>
-<span class="listing-reading-time">5 min</span>
-</td>
-</tr>
-</tbody>
-
-</table>
-<div class="listing-no-matching d-none">
-No matching items
 </div>
-</div></main> <!-- /main -->
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dundas-good-counterfactual.png" class="img-fluid figure-img" alt="Henry Dundas: the unobserved good counterfactual"></p>
+<figcaption class="figure-caption">Henry Dundas, the unobserved good counterfactual</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dundas-bad-counterfactual.png" class="img-fluid figure-img" alt="Henry Dundas: the unobserved bad counterfactual"></p>
+<figcaption class="figure-caption">Henry Dundas, the unobserved bad counterfactual</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>After finishing my main series on statistical inference, I took to LinkedIn and (X)Twitter for further suggestions. On both platforms Causal Inference led the pack, with around 60% of votes cast.</p>
+<p>This is the first of a short sub-series on the important topic of causal inference. Whereas later posts in this series will be more technical, this first post aims to be non-technical, introducing the key points through words alone.</p>
+<p>However, given the particular example I’ve selected to introduce the concept of causal inference, the post may still be considered challenging on content grounds.</p>
+<section id="henry-dundas-hero-or-villain" class="level2">
+<h2 class="anchored" data-anchor-id="henry-dundas-hero-or-villain">Henry Dundas: Hero or Villain?</h2>
+<p>A few minutes’ walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the <a href="https://en.wikipedia.org/wiki/Melville_Monument">Melville Monument</a>, a 40 metre tall column, on which stands a statue of <a href="https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville">Henry Dundas, 1st Viscount Melville</a>.</p>
+<p>Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edimburgh Council chose to add more context to Dundas’ legacy by unveiling <a href="https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg">a plaque</a> with the following message::</p>
+<blockquote class="blockquote">
+<p>At the top of this neoclassial column stands a statue of Hentry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic.</p>
+</blockquote>
+<p>So, the claim of the council plaque was that Dundas <em>caused</em> the enslavement of hundreds of thousands of Africans, by promoting a gradualist policy of abolition.</p>
+<p>The descendents of Dundas contested these claims, however, <a href="https://www.edinburghnews.scotsman.com/heritage-and-retro/retro/dundas-plaque-row-descendants-of-dundas-surprised-and-disappointed-at-false-plaque-wording-3172579">instead arguing</a>:</p>
+<blockquote class="blockquote">
+<p>The claim that Henry Dundas caused the enslavement of more than half a million Africans is patently false. The truth is: Dundas was the first MP to advocate in Parliament for the emancipation of slaves in the British territories along with the abolition of the slave trade. Dundas’s efforts resulted in the House of Commons voting in favour of ending the Atlantic slave trade for the first time in its history.</p>
+</blockquote>
+<p>So, the claim of the descendents was that Dundas <em>prevented</em> the enslavement of (at least) hundreds of thousands of Africans, by promoting a gradualist policy of abolition.</p>
+<p>How can the same agreed-upon historical facts lead to such diametrically opposing interpretations of the effects of Dundas and his actions?</p>
+<p>The answer to this question is at the heart of causal inference, and an example of why, when trying to estimate causal effects, <em>at least half of the data are always missing</em>.</p>
+</section>
+<section id="the-unobserved-counterfactual" class="level2">
+<h2 class="anchored" data-anchor-id="the-unobserved-counterfactual">The unobserved counterfactual</h2>
+<p>Both parties in the Dundas debate have, as mentioned, access to the same historical facts. They agree on the same observed historical reality. And both are making bold claims about the impact of Dundas in relation to the Transatlantic slave trade. In doing this, they are both comparing this observed historical reality with something else: <strong>the unobserved counterfactual</strong>.</p>
+<p>The unobserved counterfactual is <em>the data that would have been observed if what had happened, hadn’t happened</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> However, what happened <em>did</em> happen, so this data <em>isn’t</em> observed. So, as it hasn’t been observed, it doesn’t exist in any historic facts. Instead, the unobserved counterfactual has to be <em>imputed</em>, or <em>inferred</em>… in effect, <em>made up</em>.</p>
+<p>Causal inference <em>always</em> involves some kind of comparison between an observed reality and an unobserved counterfactual. The issue at heart of the Dundas debate is that both parties have compared the observed reality with a different unobserved counterfactual, and from this different Dundas effects have been inferred.</p>
+<p>For the council, the unobserved counterfactual appears to be something like the following:</p>
+<blockquote class="blockquote">
+<p>Dundas doesn’t propose a gradualist amendment to a bill in parliament. The more radical and rapid version of the bill passes, and slavery is abolished earlier, leading to fewer people becoming enslaved.</p>
+</blockquote>
+<p>Whereas for the descendents, the unobserved counterfactual appears to be something like this:</p>
+<blockquote class="blockquote">
+<p>Dundas doesn’t propose a gradualist amendment to a bill in parliament. Because of this, the more radical version of the bill doesn’t have enough support in parliament (perhaps because it would be acting too much against the financial interests of some parliamentarians and powerful business interests), and so is defeated. As a result of this, the abolition of slavery is delayed, leading to more people becoming enslaved.</p>
+</blockquote>
+<p>So, by having the same observed historical facts, the observed Dundas, but radically different counterfactuals, the two parties have used the same methodology to derive near antithetical estimates of the ‘Dundas Effect’.</p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p>Later posts will explore and expand on the above idea - that causal inference relies on counterfactuals, but counterfactuals are by definition unobserved - and give a more technical treatment about the challenges and techniques involved in trying to grapple with causal effect estimation in statistical models.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The data that would have been observed if what hadn’t happened, had happened, is the other type of unobserved counterfactual.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -717,6 +605,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
