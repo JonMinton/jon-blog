@@ -1,0 +1,76 @@
+---
+title: "Part Fourteen: A non-technical but challenging introduction to causal inference..."
+subtitle: "...and the heroism or villainy of Henry Dundas"
+author: "Jon Minton"
+date: "2024-02-19"
+code-fold: true
+warning: false
+message: false
+categories: [history, causality, Edinburgh]
+---
+
+::: {layout-ncol=3}
+
+![Henry Dundas, as observed](dundas-observed.png){fig-alt="Henry Dundas, as observed"}
+
+![Henry Dundas, the unobserved good counterfactual](dundas-good-counterfactual.png){fig-alt="Henry Dundas: the unobserved good counterfactual"}
+
+![Henry Dundas, the unobserved bad counterfactual](dundas-bad-counterfactual.png){fig-alt="Henry Dundas: the unobserved bad counterfactual"}
+
+:::
+
+
+# Introduction
+
+After finishing my main series on statistical inference, I took to LinkedIn and (X)Twitter for further suggestions. On both platforms Causal Inference led the pack, with around 60% of votes cast. 
+
+This is the first of a short sub-series on the important topic of causal inference. Whereas later posts in this series will be more technical, this first post aims to be non-technical, introducing the key points through words alone. 
+
+However, given the particular example I've selected to introduce the concept of causal inference, the post may still be considered challenging on content grounds. 
+
+## Henry Dundas: Hero or Villain?
+
+A few minutes' walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the [Melville Monument](https://en.wikipedia.org/wiki/Melville_Monument), a 40 metre tall column, on which stands a statue of [Henry Dundas, 1st Viscount Melville](https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville). 
+
+Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edimburgh Council chose to add more context to Dundas' legacy by unveiling [a plaque](https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg) with the following message:: 
+
+> At the top of this neoclassial column stands a statue of Hentry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic. 
+
+So, the claim of the council plaque was that Dundas *caused* the enslavement of hundreds of thousands of Africans, by promoting a gradualist policy of abolition. 
+
+The descendents of Dundas contested these claims, however, [instead arguing](https://www.edinburghnews.scotsman.com/heritage-and-retro/retro/dundas-plaque-row-descendants-of-dundas-surprised-and-disappointed-at-false-plaque-wording-3172579):
+
+> The claim that Henry Dundas caused the enslavement of more than half a million Africans is patently false. The truth is: Dundas was the first MP to advocate in Parliament for the emancipation of slaves in the British territories along with the abolition of the slave trade. Dundas's efforts resulted in the House of Commons voting in favour of ending the Atlantic slave trade for the first time in its history.
+
+So, the claim of the descendents was that Dundas *prevented* the enslavement of (at least) hundreds of thousands of Africans, by promoting a gradualist policy of abolition. 
+
+How can the same agreed-upon historical facts lead to such diametrically opposing interpretations of the effects of Dundas and his actions? 
+
+The answer to this question is at the heart of causal inference, and an example of why, when trying to estimate causal effects, *at least half of the data are always missing*. 
+
+## The unobserved counterfactual 
+
+Both parties in the Dundas debate have, as mentioned, access to the same historical facts. They agree on the same observed historical reality. And both are making bold claims about the impact of Dundas in relation to the Transatlantic slave trade. In doing this, they are both comparing this observed historical reality with something else: **the unobserved counterfactual**.
+
+The unobserved counterfactual is *the data that would have been observed if what had happened, hadn't happened* [^1] However, what happened *did* happen, so this data *isn't* observed. So, as it hasn't been observed, it doesn't exist in any historic facts. Instead, the unobserved counterfactual has to be *imputed*, or *inferred*... in effect, *made up*. 
+
+Causal inference *always* involves some kind of comparison between an observed reality and an unobserved counterfactual. The issue at heart of the Dundas debate is that both parties have compared the observed reality with a different unobserved counterfactual, and from this different Dundas effects have been inferred. 
+
+For the council, the unobserved counterfactual appears to be something like the following:
+
+> Dundas doesn't propose a gradualist amendment to a bill in parliament. The more radical and rapid version of the bill passes, and slavery is abolished earlier, leading to fewer people becoming enslaved. 
+
+Whereas for the descendents, the unobserved counterfactual appears to be something like this:
+
+> Dundas doesn't propose a gradualist amendment to a bill in parliament. Because of this, the more radical version of the bill doesn't have enough support in parliament (perhaps because it would be acting too much against the financial interests of some parliamentarians and powerful business interests), and so is defeated. As a result of this, the abolition of slavery is delayed, leading to more people becoming enslaved.
+
+So, by having the same observed historical facts, the observed Dundas, but radically different counterfactuals, the two parties have used the same methodology to derive near antithetical estimates of the 'Dundas Effect'. 
+
+## Coming up
+
+Later posts will explore and expand on the above idea - that causal inference relies on counterfactuals, but counterfactuals are by definition unobserved - and give a more technical treatment about the challenges and techniques involved in trying to grapple with causal effect estimation in statistical models.
+
+
+[^1]: The data that would have been observed if what hadn't happened, had happened, is the other type of unobserved counterfactual. 
+
+
