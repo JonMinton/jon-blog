@@ -68,7 +68,7 @@ So, by having the same observed historical facts, the observed Dundas, but radic
 
 ## Coming up
 
-Later posts will explore and expand on the above idea - that causal inference relies on counterfactuals, but counterfactuals are by definition unobserved - and give a more technical treatment about the challenges and techniques involved in trying to grapple with causal effect estimation in statistical models.
+[The next post](../lms-are-glms-part-15/index.qmd) offers more of a technical treatment of the key concept introduced here: namely that causal effect estimation depends on comparing observed with counterfactual data, and as the counterfactual is unobserved, causal effect estimation is fundamentally a missing data problem. 
 
 
 [^1]: The data that would have been observed if what hadn't happened, had happened, is the other type of unobserved counterfactual. 
