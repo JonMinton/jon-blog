@@ -6,11 +6,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Kennedy Owusu-Afriyie">
+<meta name="author" content="Antony Clark">
+<meta name="author" content="Brendan Clarke">
 <meta name="author" content="Jon Minton">
 <meta name="author" content="Nick Christofides">
-<meta name="dcterms.date" content="2023-11-29">
+<meta name="author" content="Steph Curtis">
+<meta name="author" content="Gats Osorio">
+<meta name="author" content="Andrew Saul">
+<meta name="author" content="Myrian Scansetti">
+<meta name="dcterms.date" content="2024-02-22">
 
-<title>Jon Minton’s Blog - Tidy Tuesday on Dr Who</title>
+<title>Jon Minton’s Blog - Tidy Tuesday: 20 Feb 2024 - R Grants</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,9 +108,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Tidy Tuesday on Dr Who">
+<meta name="twitter:title" content="Jon Minton’s Blog - Tidy Tuesday: 20 Feb 2024 - R Grants">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/tardy-tuesday/tidy-tuesday-dr-who/index_files/figure-html/unnamed-chunk-2-1.png">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/tardy-tuesday/tidy-tuesday-r-grants/index_files/figure-html/unnamed-chunk-2-1.png">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
@@ -173,11 +180,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tidy Tuesday on Dr Who</h1>
+      <h1 class="title">Tidy Tuesday: 20 Feb 2024 - R Grants</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
                 <div class="quarto-category">tidy tuesday</div>
-                <div class="quarto-category">Dr Who</div>
+                <div class="quarto-category">funding</div>
               </div>
                   </div>
   </div>
@@ -188,15 +195,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Authors</div>
       <div class="quarto-title-meta-contents">
+               <p>Kennedy Owusu-Afriyie </p>
+               <p>Antony Clark </p>
+               <p>Brendan Clarke </p>
                <p>Jon Minton </p>
                <p>Nick Christofides </p>
+               <p>Steph Curtis </p>
+               <p>Gats Osorio </p>
+               <p>Andrew Saul </p>
+               <p>Myrian Scansetti </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 29, 2023</p>
+        <p class="date">February 22, 2024</p>
       </div>
     </div>
     
@@ -214,177 +228,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="tidy-tuesday-challenge" class="level2">
-<h2 class="anchored" data-anchor-id="tidy-tuesday-challenge">Tidy Tuesday challenge</h2>
-<p>First we load the packages</p>
-<p>The tidyverse equivalent of pacman is now pak.</p>
-<p>The latest dataset is <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-28">here</a>, and the specific files to work.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-02-20/readme.md">TidyTuesday session</a> investigated the funding of intrastructure steering committee grants from the R consortium over time, and was led by Kennedy Owuso-Afriyie.</p>
+</section>
+<section id="data-loading" class="level2">
+<h2 class="anchored" data-anchor-id="data-loading">Data loading</h2>
+<p>We looked at two options for loading the dataset: one using the <code>tidytuesdayR</code> package; the other linking to the url directly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dta_list <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="at">x =</span> <span class="st">"2023-11-28"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>--- Compiling #TidyTuesday Information for 2023-11-28 ----
---- There are 3 files available ---
---- Starting Download ---</code></pre>
-</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: tidytuesdayR package </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages("tidytuesdayR")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># tuesdata &lt;- tidytuesdayR::tt_load('2024-02-20')</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ## OR</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tuesdata &lt;- tidytuesdayR::tt_load(2024, week = 8)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># isc_grants &lt;- tuesdata$isc_grants</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Read directly from GitHub</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>isc_grants <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-20/isc_grants.csv'</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>isc_grants</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-    Downloading file 1 of 3: `drwho_episodes.csv`
-    Downloading file 2 of 3: `drwho_directors.csv`
-    Downloading file 3 of 3: `drwho_writers.csv`</code></pre>
+<pre><code># A tibble: 85 × 7
+    year group title                          funded proposed_by summary website
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                           &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;  
+ 1  2023     1 The future of DBI (extension …  10000 "Kirill Mü… "This … &lt;NA&gt;   
+ 2  2023     1 Secure TLS Communications for…  10000 "Charlie G… "The p… &lt;NA&gt;   
+ 3  2023     1 volcalc: Calculate predicted …  12265 "Kristina … "This … &lt;NA&gt;   
+ 4  2023     1 autotest: Automated testing o…   3000 "Mark Padg… "The p… &lt;NA&gt;   
+ 5  2023     1 api2r: An R Package for Auto-…  15750 "Jon Harmo… "This … &lt;NA&gt;   
+ 6  2022     2 D3po: R Package for Easy Inte…   8000 "Mauricio … "The D… &lt;NA&gt;   
+ 7  2022     2 Tooling and Guidance for Tran…   8000 "Maëlle Sa… "Tooli… &lt;NA&gt;   
+ 8  2022     2 Online Submission and Review …  22000 "Simon Urb… "The O… &lt;NA&gt;   
+ 9  2022     2 Upgrading SatRdays Website Te…   6000 "Ben Ubah"  "The U… &lt;NA&gt;   
+10  2022     2 Building the “Spatial Data Sc…  25000 "Orhun Ayd… "The B… &lt;NA&gt;   
+# ℹ 75 more rows</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>--- Download complete ---</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dta_eps <span class="ot">&lt;-</span> dta_list[[<span class="st">"drwho_episodes"</span>]]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dta_wrt <span class="ot">&lt;-</span> dta_list[[<span class="st">"drwho_writers"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Let’s see how the viewship changed over time</p>
+<p>Some questions we initially thought about asking:</p>
+<ul>
+<li>Are there any keywords that stand out in the titles or summaries of awarded grants?</li>
+<li>Have the funded amounts changed over time?</li>
+</ul>
+<p>As a fairly new user to R, Kennedy focused on the second question, creating a bar plot of funding over time using <code>ggplot</code>. Meanwhile, Clarke and Clark investigated and proposed some approaches for addressing the first question.</p>
+</section>
+<section id="graph-of-funding-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="graph-of-funding-over-time">Graph of funding over time</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dta_eps_season <span class="ot">&lt;-</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dta_eps <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(season_number) <span class="sc">|&gt;</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_viewers =</span> <span class="fu">mean</span>(uk_viewers),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_date =</span> <span class="fu">mean</span>(first_aired)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>dta_eps_season <span class="sc">|&gt;</span> </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> first_aired, <span class="at">y =</span> uk_viewers)) <span class="sc">+</span> </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_date, <span class="at">y =</span> mean_viewers), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span> </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 years"</span>, <span class="at">labels =</span> \(x) <span class="fu">format</span>(x, <span class="st">"%Y"</span>)) <span class="sc">+</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"First aired"</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"UK Viewers (millions)"</span>,</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Viewers over time for Dr Who"</span>,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"People don't watch TV like they used to..."</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">make_date</span>(<span class="dv">2015</span>), <span class="at">y =</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="st">"What happened here?!"</span>) <span class="sc">+</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> lubridate<span class="sc">::</span><span class="fu">make_date</span>(<span class="dv">2014</span>), <span class="at">y=</span> <span class="dv">8</span>, <span class="at">label =</span> <span class="st">"Smartphone strangling the TV from now"</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span> </span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
-</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>funding_by_year <span class="ot">&lt;-</span> isc_grants <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_funded =</span> <span class="fu">sum</span>(funded)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>funding_by_year <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>year, <span class="at">y=</span>total_funded)) <span class="sc">+</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"total funded in dollars"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total funding by year"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"source: TidyTuesday"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"2018 is a bit weird"</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Let’s now look at writers by season</p>
+<p>We discussed piping with the <code>%&gt;%</code> operator, and the value this has for being able to develop code step-by-step in a way similar to human languages.</p>
+<ul>
+<li>We said, when we see <code>&lt;-</code> or <code>-&gt;</code>, this should be read as ‘is assigned to’.</li>
+<li>And we said, when we see the <code>%&gt;%</code> (or <code>|&gt;</code>) operator in a script, this should be read as, <code>and then</code>.</li>
+<li>We noted how R can tell when it encounters an incomplete expression, and so doesn’t evaluate, just as when someone hears a sentence that ends ‘and then’, they know it’s not really the end of the sentence.</li>
+</ul>
+<p>We also discussed how when making a graph, we should consider how objective or how subjective we should be when presenting the image to the viewer. This will depend on the audience. In our example, the x axis, y axis, title and caption labels are all just objective information. However the subtitle is more subjective, and so more our opinion rather than something no one could reasonably disagree with.</p>
+</section>
+<section id="tidy-text-to-get-important-key-words" class="level2">
+<h2 class="anchored" data-anchor-id="tidy-text-to-get-important-key-words">Tidy Text to get important key words</h2>
+<p>Brendan offered the following code chunk to explore the content of the free text summary field in the dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dta_eps_wrt <span class="ot">&lt;-</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dta_eps <span class="sc">|&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(dta_wrt, <span class="at">by =</span> <span class="st">"story_number"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>How many episodes by writer?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dta_eps_wrt <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(writer) <span class="sc">|&gt;</span>  </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_written =</span> <span class="fu">n</span>()</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_written))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidytext")</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("SnowballC")</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SnowballC) <span class="co"># for wordStem</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>isc_grants <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, summary) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stem =</span> <span class="fu">wordStem</span>(word))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 40 × 2
-   writer           n_written
-   &lt;chr&gt;                &lt;int&gt;
- 1 Steven Moffat           45
- 2 Russell T Davies        31
- 3 Chris Chibnall          29
- 4 Mark Gatiss              9
- 5 Toby Whithouse           7
- 6 Gareth Roberts           5
- 7 Helen Raynor             4
- 8 Jamie Mathieson          4
- 9 Peter Harness            4
-10 Matthew Graham           3
-# ℹ 30 more rows</code></pre>
+<pre><code># A tibble: 6,242 × 8
+    year group title                      funded proposed_by website word  stem 
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;
+ 1  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    prop… prop…
+ 2  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    most… most…
+ 3  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    focu… focus
+ 4  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    main… main…
+ 5  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    supp… supp…
+ 6  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    dbi   dbi  
+ 7  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    dbit… dbit…
+ 8  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    test  test 
+ 9  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    suite suit 
+10  2023     1 The future of DBI (extens…  10000 Kirill Mül… &lt;NA&gt;    three three
+# ℹ 6,232 more rows</code></pre>
 </div>
 </div>
-<p>So Moffat wrote most episodes, then Davies, then Chibnall</p>
-<p>And what about popularity by writer?</p>
+<p>This pulled out words (other than stopwords<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) from the summary field, and identified the stem of these words. This potentially means the number of unique stems can be compared, rather than the number of unique words.</p>
+<p>Antony suggested that, as the summaries are all about supporting a technical programing language, some additional words are also so common they should also be considered stopwords. He also produced a wordcloud visualisation showing the most common non-stopwords in the corpus of summary text”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dta_eps_wrt <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(writer) <span class="sc">|&gt;</span>  </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_written =</span> <span class="fu">n</span>()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_written <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(writer, rating), <span class="at">y=</span> rating)) <span class="sc">+</span> </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Distribution of ratings"</span>,</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Writer"</span>, </span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Rating distribution by writer"</span>,</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Writers who wrote at least five episodes"</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidytext with SnowballC ----</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize the text</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>my_stop_words <span class="ot">&lt;-</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_stopwords</span>(),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">word =</span> <span class="fu">c</span>(<span class="st">"r"</span>,<span class="st">"package"</span>,<span class="st">"data"</span>,<span class="st">"users"</span>,<span class="st">"project"</span>,<span class="st">"cran"</span>,<span class="st">"community"</span>,<span class="st">"use"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>               <span class="st">"development"</span>,<span class="st">"documentation"</span>,<span class="st">"can"</span>,<span class="st">"also"</span>,<span class="st">"system"</span>,<span class="st">"new"</span>,<span class="st">"code"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>               <span class="st">"available"</span>,<span class="st">"existing"</span>,<span class="st">"support"</span>,<span class="st">"make"</span>,<span class="st">"two"</span>,<span class="st">"build"</span>),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">lexicon =</span> <span class="st">"tony's custom stop words"</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>my_stop_words <span class="ot">&lt;-</span> </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  my_stop_words <span class="sc">%&gt;%</span> </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stem =</span> <span class="fu">wordStem</span>(word))</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>tokens <span class="ot">&lt;-</span> </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  isc_grants <span class="sc">%&gt;%</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, summary) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stem =</span> <span class="fu">wordStem</span>(word)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(my_stop_words, <span class="at">by =</span> <span class="st">"stem"</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>token_frequency <span class="ot">&lt;-</span> tokens <span class="sc">%&gt;%</span> <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>n)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># View the processed stems</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>wordcloud<span class="sc">::</span><span class="fu">wordcloud</span>(<span class="at">words =</span> token_frequency<span class="sc">$</span>word, </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">freq =</span> token_frequency<span class="sc">$</span>n, <span class="at">min.freq =</span> <span class="dv">1</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">max.words =</span> <span class="dv">20</span>, <span class="at">random.order =</span> <span class="cn">FALSE</span>, <span class="at">rot.per =</span> <span class="fl">0.35</span>, </span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>          <span class="at">colors =</span> RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">"Dark2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>When were the different writers active?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>major_writers_active <span class="ot">&lt;-</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dta_eps_wrt <span class="sc">|&gt;</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(writer) <span class="sc">|&gt;</span>  </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">n_written =</span> <span class="fu">n</span>()</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(n_written <span class="sc">&gt;=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(writer) <span class="sc">|&gt;</span> </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">started_writing =</span> <span class="fu">min</span>(first_aired),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">finished_writing =</span> <span class="fu">max</span>(first_aired),</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">n_written =</span> n_written[<span class="dv">1</span>]</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">yr_start =</span> <span class="fu">year</span>(started_writing),</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">yr_end =</span> <span class="fu">year</span>(finished_writing)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>major_writers_active <span class="sc">|&gt;</span> </span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(started_writing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  writer           started_writing finished_writing n_written yr_start yr_end
-  &lt;chr&gt;            &lt;date&gt;          &lt;date&gt;               &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-1 Russell T Davies 2005-03-26      2010-01-01              31     2005   2010
-2 Mark Gatiss      2005-04-09      2017-06-10               9     2005   2017
-3 Steven Moffat    2005-05-21      2017-12-25              45     2005   2017
-4 Toby Whithouse   2006-04-29      2017-06-03               7     2006   2017
-5 Gareth Roberts   2007-04-07      2011-09-24               5     2007   2011
-6 Chris Chibnall   2007-05-19      2022-10-23              29     2007   2022</code></pre>
-</div>
-</div>
-<p>Here we see the tenure of different major writers. Russell T Davies and Steven Moffatt are the major players.</p>
-</section>
-<section id="coda" class="level2">
-<h2 class="anchored" data-anchor-id="coda">Coda</h2>
-<p>Neither of us know much about Dr Who!</p>
-<p>But hopefully we now know a bit more!</p>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Stop words are terms that are so common within sentences they don’t really add much unique information. They’re words like ‘and’, ‘the’, ‘an’, and so on.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

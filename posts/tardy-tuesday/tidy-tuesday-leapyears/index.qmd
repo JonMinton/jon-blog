@@ -1,0 +1,342 @@
+---
+title: "Tidy Tuesday 27 Feb 2024: Leap Years"
+author: 
+  - "Myriam Scansetti"
+  - "Antony Clark"
+  - "Jon Minton"
+  - "Nicoloas Christofidis"
+  - "Brendan Clarke"
+  - "Kennedy Owuso-Afriyie"
+  - "Emu the cat"
+date: "2024-02-28"
+code-fold: false
+warning: false
+message: false
+categories: [R, tidy tuesday, leap years]
+---
+
+## Introduction
+
+The latest TidyTuesday dataset was on births, deaths and other historical events that occurred in leap years, i.e. those years that include 29 February (such as 2024!). Further details are [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-02-27). 
+
+Myriam led the session, and Antony provided additional code for performing text field analysis after the session. 
+
+Also, Emu the cat had the following contribution to make:
+
+> 43e'/;£@@@@@@@@@@.[^1]
+
+[^1]: I don't think even regex can help us with this one. 
+
+## The session
+
+We started by loading some packages
+
+```{r}
+# Option 1: tidytuesdayR package 
+## install.packages("tidytuesdayR")
+## install.packages("waldo")
+## install.packages("tidytext")
+## install.packages("textdata")
+ 
+library(tidytuesdayR)
+library(tidyverse)
+library(waldo)
+library(tidytext)
+library(textdata)
+ 
+```
+
+We then had two ways of loading the data, in this case three datasets. As usual I'm switching to the url-based approach for the blog post
+
+```{r}
+# tuesdata <- tidytuesdayR::tt_load('2024-02-27')
+# ## OR
+# tuesdata <- tidytuesdayR::tt_load(2024, week = 9)
+ 
+# events <- tuesdata$events
+# births <- tuesdata$births
+# deaths <- tuesdata$deaths
+ 
+# Option 2: Read directly from GitHub
+ 
+events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-27/events.csv')
+births <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-27/births.csv')
+deaths <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-27/deaths.csv')
+ 
+```
+
+We noticed the births data include mention of at least one Pope. We wanted to explore more and less robust ways of finding popes in the `births` and `deaths` dataset
+
+We could start by just looking for whether the word `Pope` is in the person field of `births`
+```{r}
+str_detect(births$person, "Pope")
+
+```
+
+We then used a little expression to make the query not case sensitive:
+```{r}
+deaths %>% filter(str_detect(person, "(?i)Pope"))
+```
+
+Another approach is to use `ignore_case` in the `regex()` function:
+```{r}
+deaths %>% filter(str_detect(person, regex("pope", ignore_case = TRUE)))
+```
+
+The only persons with `pope` in their name appear to be actual popes, not people who just happen to have the letters 'pope' in their surname.
+
+
+Next we looked at number of events by year. We used two tidyverse approaches to producing this, one using `group_by` and `summarise`, the other using `count`. 
+
+```{r}
+number_events <- events %>% 
+  group_by(year) %>% 
+  summarise(n= n())
+number_events
+```
+
+```{r}
+number_events_2 <- events %>% 
+  count(year)
+number_events_2
+```
+
+We then tried different comparator functions to see if they all agreed the contents were identical, with some mixed and confusing results:
+```{r}
+waldo::compare(number_events, number_events_2)
+```
+
+`waldo` says they are the same.
+```{r}
+identical(number_events, number_events_2)
+```
+
+`identical` says they are not identical
+
+```{r}
+setequal(number_events, number_events_2)
+```
+
+But `setequal` doesn't find differences
+
+
+```{r}
+all.equal(number_events, number_events_2)
+```
+
+All equal reports a number of differences, related to the attributes (metadata) between the two objects being compared. 
+
+Curiouser and Curiouser... 
+
+Now let's plot the number of events over time 
+
+```{r}
+number_events %>% 
+  ggplot(aes(x = year, y = n))+
+  geom_col()
+```
+
+We wanted to know if there was anyone who was both recorded as being born and dying in a leap year:
+
+```{r}
+person_bd <- births %>% 
+  inner_join(deaths, by = "person")
+
+person_bd
+```
+
+One person (born in Scotland!)
+
+We then looked text analysis, and in particular sentiment analysis of the content of the descriptio field:
+
+```{r}
+births %>% 
+  unnest_tokens(word, description) %>% 
+  anti_join(get_stopwords()) %>% 
+  left_join(get_sentiments("afinn"))
+```
+
+```{r}
+events %>% 
+  unnest_tokens(word, event) %>% 
+  anti_join(get_stopwords()) %>% 
+  left_join(get_sentiments("afinn"))
+```
+
+Here's the words in the `afinn` object with the highest (most positive) sentiment
+```{r}
+get_sentiments("afinn") %>% 
+  arrange(desc(value)) 
+```
+
+And here's an exploration of average sentiment by (leap)year based on the events description field:
+
+```{r}
+events |>
+  unnest_tokens(word, event) |>
+  anti_join(get_stopwords()) |>
+  right_join(get_sentiments("afinn")) |>
+  group_by(year) |>
+  summarise(mean_sentiment = mean(value)) |>
+  ggplot(aes(x = year, y = mean_sentiment)) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+## Antony's script
+
+Load libraries
+```{r}
+library(tidyverse)
+library(lubridate)
+library(countrycode)
+```
+some extra data sets re nationalities 
+
+```{r}
+demonym <- readr::read_csv("https://raw.githubusercontent.com/knowitall/chunkedextractor/master/src/main/resources/edu/knowitall/chunkedextractor/demonyms.csv",
+                           col_names = c("demonym","geography"))
+
+demonym$demonym <- tolower(demonym$demonym)
+demonym$geography <- tolower(demonym$geography)
+country <- tibble(country=countrycode::codelist$country.name.en)
+```
+
+Load data
+```{r}
+# tuesdata <- tidytuesdayR::tt_load('2024-02-27')
+
+# list2env(tuesdata,.GlobalEnv)
+
+glimpse(events)
+glimpse(births)
+glimpse(deaths)
+
+```
+
+
+Which cohort of leap day births is most represented in Wikipedia's data? 
+
+Are any years surprisingly underrepresented compared to nearby years? 
+
+What other patterns can you find in the data?
+
+how many popes?
+```{r}
+births %>% 
+  mutate(is_pope = grepl("pope",tolower(paste(person,description)))) %>% 
+  count(is_pope)
+
+```
+
+
+count births by century ----
+
+```{r}
+getCenturyCorrected <- function(year) {
+  if (year %% 100 == 0) {
+    century <- year / 100
+  } else {
+    century <- ceiling(year / 100)
+  }
+  return(century)
+}
+
+getCenturyCorrected(1900)
+getCenturyCorrected(1901)
+```
+
+
+```{r}
+births %>% 
+  mutate(century=sapply(year_birth,getCenturyCorrected)) %>% 
+  count(century)
+```
+
+
+do count() and summarise(n=n()) give identical dataframes? Not always ----
+```{r}
+x <- births %>% count(year_birth)
+y <- births %>% group_by(year_birth) %>% summarise(n=n())
+
+identical(attributes(x), attributes(y))
+
+names(x)==names(y)
+
+identical(
+  x,
+  y
+)
+```
+
+
+a rough stab (clearly flawed) at parsing nationality ----
+```{r}
+births_nationality <-
+  bind_rows(
+    births %>%
+      tidytext::unnest_tokens(word, description) %>%
+      anti_join(tidytext::get_stopwords(), "word") %>%
+      left_join(
+        demonym,
+        by = c(word = "geography"),
+        relationship = "many-to-many"
+      ) %>%
+      left_join(demonym, by = "demonym"),
+    
+    births %>%
+      tidytext::unnest_tokens(word, description) %>%
+      anti_join(tidytext::get_stopwords(), "word") %>%
+      left_join(demonym, c(word = "demonym")) %>%
+      left_join(demonym, "geography", relationship = "many-to-many")
+  )
+
+births_nationality %>% count(geography) %>% arrange(-n)
+```
+
+Now a pretty wordcloud
+```{r}
+
+events %>% 
+  unnest_tokens(word, event) %>% 
+  anti_join(get_stopwords(),"word") %>% 
+  count(word) %>% 
+  {wordcloud::wordcloud(words = .$word, 
+            freq = .$n, min.freq = 1,
+            max.words = 20, random.order = FALSE, rot.per = 0.35, 
+            colors = RColorBrewer::brewer.pal(8, "Dark2"))}
+
+```
+
+A neutral word should have a sentiment score of 0, not NA. Let's make that change...
+
+```{r}
+
+afinn_sentiments <- get_sentiments('afinn')
+
+events %>% 
+  unnest_tokens(word, event) %>% 
+  anti_join(get_stopwords(),"word") %>% 
+  left_join(afinn_sentiments,"word") %>% 
+  # filter(!is.na(value)) %>% 
+  replace_na(list(value=0)) %>% 
+  mutate(century = sapply(year,getCenturyCorrected)) %>% 
+  group_by(century) %>% 
+  summarise(mean_sentiment = mean(value)) %>% 
+  ggplot(aes(x=century,y=mean_sentiment))+geom_line()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

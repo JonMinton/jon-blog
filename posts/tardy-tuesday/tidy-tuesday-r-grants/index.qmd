@@ -1,0 +1,146 @@
+---
+title: "Tidy Tuesday: 20 Feb 2024 - R Grants"
+author: 
+  - "Kennedy Owusu-Afriyie"
+  - "Antony Clark"
+  - "Brendan Clarke"
+  - "Jon Minton"
+  - "Nick Christofides"
+  - "Steph Curtis"
+  - "Gats Osorio"
+  - "Andrew Saul"
+  - "Myrian Scansetti"
+date: "2024-02-22"
+code-fold: true
+warning: false
+message: false
+categories: [R, tidy tuesday, funding]
+---
+
+## Introduction
+
+This [TidyTuesday session](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-02-20/readme.md) investigated the funding of intrastructure steering committee grants from the R consortium over time, and was led by Kennedy Owuso-Afriyie. 
+
+## Data loading 
+
+We looked at two options for loading the dataset: one using the `tidytuesdayR` package; the other linking to the url directly. 
+
+```{r}
+# Option 1: tidytuesdayR package 
+## install.packages("tidytuesdayR")
+ 
+library(tidyverse)
+library(tidytuesdayR)
+ 
+ 
+# tuesdata <- tidytuesdayR::tt_load('2024-02-20')
+# ## OR
+# tuesdata <- tidytuesdayR::tt_load(2024, week = 8)
+ 
+# isc_grants <- tuesdata$isc_grants
+ 
+# Option 2: Read directly from GitHub
+ 
+isc_grants <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-02-20/isc_grants.csv')
+ 
+isc_grants
+```
+
+Some questions we initially thought about asking: 
+
+- Are there any keywords that stand out in the titles or summaries of awarded grants? 
+- Have the funded amounts changed over time?
+
+As a fairly new user to R, Kennedy focused on the second question, creating a bar plot of funding over time using `ggplot`. Meanwhile, Clarke and Clark investigated and proposed some approaches for addressing the first question. 
+
+## Graph of funding over time
+
+```{r}
+funding_by_year <- isc_grants %>% 
+  group_by(year) %>% 
+  summarise(total_funded = sum(funded)) %>% 
+  ungroup()
+ 
+funding_by_year %>% 
+  ggplot(aes(x=year, y=total_funded)) + 
+  geom_col() + 
+  labs(
+    x = "Year", 
+    y = "total funded in dollars",
+    title = "Total funding by year",
+    caption = "source: TidyTuesday",
+    subtitle = "2018 is a bit weird" 
+  )
+```
+
+We discussed piping with the `%>%` operator, and the value this has for being able to develop code step-by-step in a way similar to human languages. 
+
+- We said, when we see `<-` or `->`, this should be read as 'is assigned to'.
+- And we said, when we see the `%>%` (or `|>`) operator in a script, this should be read as, `and then`. 
+- We noted how R can tell when it encounters an incomplete expression, and so doesn't evaluate, just as when someone hears a sentence that ends 'and then', they know it's not really the end of the sentence. 
+
+We also discussed how when making a graph, we should consider how objective or how subjective we should be when presenting the image to the viewer. This will depend on the audience. In our example, the x axis, y axis, title and caption labels are all just objective information. However the subtitle is more subjective, and so more our opinion rather than something no one could reasonably disagree with. 
+
+## Tidy Text to get important key words 
+
+Brendan offered the following code chunk to explore the content of the free text summary field in the dataset:
+
+```{r}
+ 
+#install.packages("tidytext")
+#install.packages("SnowballC")
+library(tidytext)
+library(SnowballC) # for wordStem
+ 
+isc_grants |>
+  unnest_tokens(word, summary) |>
+  anti_join(get_stopwords()) |>
+  mutate(stem = wordStem(word))
+```
+
+This pulled out words (other than stopwords[^1]) from the summary field, and identified the stem of these words. This potentially means the number of unique stems can be compared, rather than the number of unique words. 
+
+[^1]: Stop words are terms that are so common within sentences they don't really add much unique information. They're words like 'and', 'the', 'an', and so on. 
+
+Antony suggested that, as the summaries are all about supporting a technical programing language, some additional words are also so common they should also be considered stopwords. He also produced a wordcloud visualisation showing the most common non-stopwords in the corpus of summary text"
+
+```{r}
+# tidytext with SnowballC ----
+
+# Tokenize the text
+
+
+my_stop_words <- 
+  bind_rows(
+    get_stopwords(),
+    tibble(
+      word = c("r","package","data","users","project","cran","community","use",
+               "development","documentation","can","also","system","new","code",
+               "available","existing","support","make","two","build"),
+      lexicon = "tony's custom stop words"
+    )
+  )
+
+my_stop_words <- 
+  my_stop_words %>% 
+  mutate(stem = wordStem(word))
+
+tokens <- 
+  isc_grants %>%
+  unnest_tokens(word, summary) %>% 
+  mutate(stem = wordStem(word)) %>% 
+  anti_join(my_stop_words, by = "stem")
+
+
+token_frequency <- tokens %>% count(word) %>% arrange(-n)
+
+
+
+# View the processed stems
+wordcloud::wordcloud(words = token_frequency$word, 
+          freq = token_frequency$n, min.freq = 1,
+          max.words = 20, random.order = FALSE, rot.per = 0.35, 
+          colors = RColorBrewer::brewer.pal(8, "Dark2"))
+
+```
+

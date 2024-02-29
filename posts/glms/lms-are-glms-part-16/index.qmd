@@ -1,0 +1,102 @@
+---
+title: "Part Sixteen: Causal Inference: How to try to do the impossible"
+author: "Jon Minton"
+date: "2024-02-28"
+code-fold: true
+warning: false
+message: false
+categories: [statistics, causality, R]
+---
+
+## Introduction
+
+This is the third post in a short mini-series on causal inference, which extends a much longer series on statistical theory and practice. After introducing the fundamental issue of causal inference, namely that the counterfactual is unobserved, through description alone in [part 14](../lms-are-glms-part-14/index.qmd), [part 15](../lms-are-glms-part-15/index.qmd) provided a more technical treatment of the same issues. We described the **Platinum [^1] Standard** of data required for causal inference as involving observing the same individuals in two different scenarios - **treated**[^2] and **untreated**[^3] - which is not possible; and the **Gold Standard** as being a randomised controlled trial (RCT), which is sometimes possible, but tends to be time and resource intensive. The RCT is a mechanism for breaking the association between assignment to treatment $Z_i$ and both known/included covariates $X^*_i$ and unknown/unincluded characteristics $W_i$; this link-breaking is described as *orthogonality* and represented algebraically as $Z_i \perp X_i^*$ and $Z_i \perp W^*_i$. 
+
+The purpose of this post is to introduce some of the statistical approaches used when the only data available are observational, and so do not meet the special properties required for robust causal inference estimation of an RCT. 
+
+[^1]: pronounced 'unobtainium' 
+[^2]: AKA 'exposed'
+[^3]: AKA 'unexposed'
+
+## Method One: 'Controlling for' variables 
+
+The most familiar approach for trying to estimate the causal effect of treatment $Z$ on outcome $Y$ is to construct a multivariate [^4] regression model. Here we make sure to include those 'nuisance parameters' $X^*$ on the predictor side of the model's equation, along with our treatment parameter of interest $Z$. For each individual $i$ in the dataset $D$ we can therefore use the model, calibrated on the data, to produce a prediction of the outcome $Y_i$ under both the treated scenario $Z_i = 1$ and the untreated scenario $Z_i = 0$. As [post four](../lms-are-glms-part-04/index.qmd) discussed, in the specific case of linear regression, but few other model specifications, this causal effect estimate of treatment $Y_i | Z=1 - Y_i | Z = 0$ can be gleamed directly from the $\beta$ coefficient for $Z$. As post four also makes clear, for other model specifications, the process for estimating causal effects can be more involved.  
+
+[^4]: Or *multivariable*, if we wish to reserve the term *multivariate* to models with multiple response columns.
+
+It is worth pointing out that, when using models in this way, we are really 'just' producing estimates of **first differences**, the quantity of interest which we focused on in posts [11](../lms-are-glms-part-11/index.qmd), [12](../lms-are-glms-part-12/index.qmd), and [13](../lms-are-glms-part-13/index.qmd). The model prediction approach is not fundamentally any different to that discussed previously, except for two things: firstly, that we will usually be averaging across first differences for multiple observations rather a single scenario; and secondly, that we will be *interpreting* the first differences (or rather their aggregation) as being a causal effect estimate. 
+
+There are actually two types of causal effect estimate we can produce using this approach, the **Average Treatment Effect (ATE)**, and the **Average Treatment Effect on the Treated (ATT)**. [^5] The difference between ATE and ATT is that, for ATE, the counterfactuals are simulated for all observations in the dataset $D$, and that these counterfactuals will be both for individuals which were observed as treated $Z=1$ and untreated $Z=0$. By contrast, for ATT, only those observations in the data which were observed as treated $Z=1$ are included in the causal effect estimation,[^6] meaning that the counterfactual being modelled will always be of the scenario $Z=0$. 
+
+[^5]: Logically, we should assume there is also an **Average Treatment Effect on the Untreated (ATU)**, but this is seldom discussed in practice. 
+
+[^6]: This might be represented as something like $D^{(T)} \subset D \iff Z_i = 1$, i.e. the data used are filtered based on the value of $Z$ matching a condition.  
+
+So, what are the potential problems with modelling in this way? 
+
+- **Unobserved and unincluded covariates**. Remember in the previous part we introduced the term $W_i^*$? This refers to those factors which could affect assignment $Z_i$ but which are not included in our model. They could either be: i) covariates that exist in the dataset $D$ but we *chose* not to include in the model $M$; or ii) covariates that are simply not recorded in the dataset $D$, so even if we wanted to, we couldn't include them. In an RCT, the random allocation mechanism breaks both the $X^* \rightarrow Z$ *and* the $W \rightarrow Z$ causal paths; we don't have to observe or even know what these factors $W$ might be for an RCT to block their influence. But a regression model can only really operate to attempt to attenuate the $X^* \rightarrow Z$ pathway. 
+- **Insufficient or improper controls**. Returning to our [hamster tooth growth example of post 11](../lms-are-glms-part-11/index.qmd), recall we looked at a number of different model specifications. Our starter model specification included 'controls for' both dosage and supplement, and so did our final model specification. But does this mean either model is equally good at 'controlling for' these factors? I'd suggest they aren't, as though our final model specification included the same covariates $X$ as the initial model specification, it represented the relationship between the predictor and response variables in a qualitatively different way. For the final model specification, the `dosage` variable was transformed by logging it; additionally, an interaction term was included between (transformed) dosage and supplement. The reasons for this were justified by the observed relationships and by measures of penalised model fit, but we do not know if this represents the 'best possible' model specification. And the specification used, and the assumptions contained and represented by the model specification, **will** affect the predictions the model produces, including the first differences used to produce the ATE and ATT causal effect estimates. 
+
+Overall, just remember that, when a researcher states in a paper that they have used a model to 'control for' various factors and characteristics, this can often be more a statement of what the researcher *aspired to do* with the model rather than *managed to do*. There are often a great many **researcher degrees of freedom** in terms of how a particular observational dataset can be used to produce modelled estimates of causal effects, and these can markedly affect the effect estimates produced. 
+
+So, what are some alternatives?
+
+## Method Two: Matching methods 
+
+Remember the Platinum Standard: For each individual, with their own personal characteristics ($X_i^*$), we known if they were treated $Z_i = 1$ or untreated $Z_i = 0$. In the sci-fi scenario of the genuine Platinum Standard, we are able to observe a **clone** of each of these individuals in the parallel universe of the unobserved counterfactual. 
+
+Obviously we can't do that in reality. But maybe was can do something, with the data we have, which allows us to do *something like* the Platinum Standard, individual level pairwise comparison, $Y_i | Z_i = 1 - Y_i | Z_i = 0$, even though we only precisely observe each individual $i$ in one of the two scenarios $Z=1$ or $Z=0$. 
+
+We can do this by relaxing the requirement that the counterfactual be of a **clone** of the observed individual, and so identical in every way except for treatment status, and instead allow them to be compared to someone who's merely *similar to* them. 
+
+Let's think through an example: 
+
+> Billy is 72 years old, male, overweight but not obese, works part time as a carpenter but is largely retired, married for five years but before that a widower for three, hypertensive; scores in the 85th percentile for conscentiousness, and 40th percentile for openness, in the Big Five Personality scale; owns his own home, worked in a factory in his twenties, likes baked beans with his biweekly fish suppers, enjoys war films but also musicals, liked holidaying in Spain back in the 1990s when his children were still children; owns a thirteen year old dog with advancing arthritis, who when younger used to *take him* on regular brisk walks, but now has to be cajoled to leave the house, especially when it's cold and wet outside. He lives in the North East of England, and when that young woman - who seemed friendly but a bit nervous and had that weird piece of metal through the middle of her nose -  from the survey company knocked on the door four months ago, and asked him to rate his level of agreement to the statement, "I am satisfied with my life" on a seven point scale, he answered with '6 - agree', but pursed his lips and took five seconds to answer this question. 
+
+Obviously we have a lot of information about Billy. But that doesn't mean the survey company, and thus our dataset $D$, knows all that we now know. So, some of the information in the above is contained in $X^*_i$, but others is part of $W_i$. 
+
+And what's our treatment, and what's our outcome? Let's say the outcome is the response to the life satisfaction question, and the treatment is UK region, with the South East excluding London as the 'control' region. 
+
+So, how do matching methods work? Well, they can of course only work with the data available to them, $D$. The basic approach is as follows:
+
+- For each person like Billy, who's in the 'treatment' group $Z = 1$ ('treated' to living in the North of England), we know various recorded characteristics about them $X_j^*$, and so we want to look for one or more people on the 'control' group $Z=0$ who are like the treated individual. 
+- So, for Billy, we're looking for someone in the part of the dataset where $Z=0$ whose characteristics other than treatment assignment, i.e. $X^*$ not $Z$, are *similar* to Billy's. Let's say that, on paper, the person who's most similar to Billy in the dataset is Mike, who's 73 (just one year older), also owns his own home, also married, has a BMI of 26.3 (Billy's is 26.1), and also diagnosed with hypertension. But, whereas Billy lives in the North of England, Mike lives in the South East. 
+- We then compare the recorded response for Billy (`6 - agree`) with the recorded response for Mike (`5 - mildly agree`), to get an estimated treatment effect for Billy. [^7]
+- We then repeat the exercise for everyone else who, like Billy, is in the treatment/exposure group, trying to match them up with one or more individuals in the control group pool. 
+- Once we've done that, we then average up the paired differences in responses - between each treated individual, and each person the've been paired up with - to produce an average treatment effect on the treated (**ATT**) estimate. 
+
+[^7]: This data is really *ordinal*, meaning we know 'agree' is *higher* than 'mildly agree', but don't know *how much higher*, so should really be modelled as such, with something like an ordered logit or ordered probit model specification. However it's often either treated as *cardinal* - 1, 2, 3, 4, 5, 6, 7 - with something like a linear regression, or collapsed into two categories (agree/ don't agree) so standard logit or probit regression could be used. 
+
+How do we go about about matchmaking Billy and other treated individuals? There are a variety of approaches, and as with using regression to 'control for' variables quite a lot of **researcher degrees of freedom**, different ways of matching, that can lead to different causal effect estimates. These include:
+
+- **Exact matching**: Find someone for all available characteristics other than assignment is exactly the same as the individual in the treated group to be matched. Obviously this is seldom possible, so an alternative is: 
+- **Coarsened Exact Matching**: Lump the characteristics into broader groups, such as 10 year age groups rather than age in single years, and match on someone who's *exactly roughly the same*, i.e. matches the target within the more lumped/aggregated categories rather than exactly the same to the finest level of data resolution agailable. 
+- **Propensity Score Matching**: Use the known characteristics of individiduals to predict their probability of being in the treatment group, then use these predicted probabilities to try to balance the *known* characteristics of the populations in both treatment and control arms. 
+- **Synthetic Controls**: Combine and 'mix' observed characteristics from multiple untreated/unexposed individuals so that their average/admixed/combined characteristics is closely similar to those of individuals in the treated/exposed population. 
+
+These approaches are neither exhaustive nor mutually exclusive, and there are a great many ways that they could be applied in practice. One of the general aims of matching approaches is to reduce the extent to which ATT or ATE estimates depend on the specific modelling approach adopted, [^8] and for Propensity Score Matching, it's often to try to break the $X^* \rightarrow Z$ link, and so achieve orthogonality ($X^* \perp Z$). However, it can't necessarily do the same with unobserved characteristics ($W \rightarrow Z$). 
+
+[^8]: Even `B-A` is a modelling approach, to an extent. 
+
+## Method Three: Utilise 'natural experiments'
+
+The idea with a 'natural experiment' is that *something happens* in the world that *just happens* to break the links between individual characteristics and assignment to exposure/treatment. The world has therefore created a situation for us where the orthogonality assumptions $W \perp Z$ and $X^* \perp Z$ which are safe to assume when working with RCT data can also, probably, possibly, be made with certain types of observational data too. When such factors are proposed and used by economists, they tend to call them **instrumental variables**. Some examples include: 
+
+- **Lottery winnings to estimate the effect of money on happiness**: A lottery win is an increase in money available to someone that 'just happens' (at least amongst lottery players). Do lottery winners' subjective wellbeing scores increase following a win? If so for how long? Why is this preferable to just looking at the relationship between income/assets and happiness? Well, the causality could go the other way: perhaps happier people work harder, increasing their income. Or perhaps a common underlying personality factor - something like 'conscientious stoicism', which isn't measured - affects both income and happiness. By utilising the randomness of a big win allocation to just a small minority of players, [^9] such alternative explanations for why there are differences between populations being compared can be more safely discounted. 
+- **Comparing educational outcomes for pupils who only just got into, and only just got rejected from, selective schools and universities**: Say a selective school runs its own standardised entry exam, for which a pass mark of 70 or higher is required to be accepted. An applicant who achieves a mark of 69 isn't really that different in their aptitude than one who achieves a of 70, but this one point difference sadly appears to make the world of difference for the applicant with a 69, and gladly appears to make the world of difference for the applicant with a 70. For years afterwards, the 70-scoring applicant will have access to a fundemntally different educational environment than the 69-scoring applicant. And presumably both applicants [^10] both applied because they thought the selective educational institution really would make a substantial and positive difference for their long-term educational outcomes. But does it really? By following the actual educational outcomes of pupils *just north* of the selection boundary, and of non-pupils *just south* of the selection boundaries, we have *something like* a **treatment** and **control** group, whose only main difference is that some are in the selective school and some are not. 
+
+Note that neither of these examples are *perfect* substitutes for an RCT. Perhaps the people who win lotteries, or win big, are different enough from those who don't that the winner/non-winner group's aren't similar in important ways. And perhaps the way people process and feel about money they get through lottery winnings isn't the same as they they receive through earnings or social security, so the idea of there being a single money-to-happiness pathway isn't valid. For the second example there are other concerns: of course applicants only one mark apart won't be very different to each other, but there won't be many of these, meaning the precision of the estimate will tend to be low. So how about expanding the 'catchment' to each arm, either side of the boundary line, to 2 marks, 3 marks, 5 marks? Now there should be more people in both the control and treatment arms, but they'll also be more different to each other. [^11]
+
+As you might expect, if using instrumental variables, the quality of the instrument matters a lot. But generally the quality of the instrument isn't something that can be determined through any kind of formal or statistical test. It tends to be, for want of a better term, a matter of **story telling**. If the story the researcher can tell their audience, about the instrument and why it's able to break the causal links it needs to break, is convincing to the audience, then the researcher and audience will both be more willing to assume that the estimates produced at the end of the analysis are causal. 
+
+## Summing up 
+
+So, three methods for trying to do something technically impossible: using observational data to estimate causal effects. These methods aren't mutually exclusive, nor are they likely to be exhaustive, and nor are any of them failsafe. 
+
+In the absence of being able to really know, to peak behind the veil and *see* the causal chains working their magic, a good pragmatic strategy tends to be to try multiple approaches. At its extreme, this can mean asking multiple teams of researchers the same question, and giving them access to the same dataset, and encouraging each team to not contact any other teams until they've finished their analysis, then compare the results they produce. If many different teams, with many different approaches, all tend to produce similar estimates, then *maybe* the estimates are really tapping into genuine causal effects, and not just reflecting some of the assumptions and biases built into the specific models and methods we're using?
+
+
+
+[^9]: It *could* be you. But it probably won't be. 
+[^10]: Or their pushy parents...
+[^11]: An example of a bias/variance trade-off
