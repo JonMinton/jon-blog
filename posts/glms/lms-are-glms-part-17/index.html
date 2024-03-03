@@ -747,7 +747,36 @@ Discarded       0       0</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This crude paired comparison suggests an average difference that’s slightly positive, of $894.37</p>
+<p>This crude paired comparison suggests an average difference that’s slightly positive, of $894.37.</p>
+<p>This is not a particularly sophisticated or ‘kosher’ approach however. Instead the vignette suggests calculating the treatment effect estimate as follows:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"marginaleffects"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(re78 <span class="sc">~</span> treat <span class="sc">*</span> (age <span class="sc">+</span> educ <span class="sc">+</span> race <span class="sc">+</span> married <span class="sc">+</span> nodegree <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>             re74 <span class="sc">+</span> re75), <span class="at">data =</span> m.data, <span class="at">weights =</span> weights)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_comparisons</span>(fit,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">variables =</span> <span class="st">"treat"</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">vcov =</span> <span class="sc">~</span>subclass,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">newdata =</span> <span class="fu">subset</span>(m.data, treat <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">wts =</span> <span class="st">"weights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Term Contrast Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+ treat    1 - 0     1121        752 1.49    0.136 2.9  -354   2596
+
+Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
+Type:  response </code></pre>
+</div>
+</div>
+<p>Using the recommended approach, the ATT estimate is now $1121. Not statistically significant at the conventional 95% threshold, but also more likely to be positive than negative.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this post we have largely followed along with the introductionary vignette from the <code>MatchIt</code> package, in order to go from the fairly cursory theoretical overview in the previous post, to showing how some of the ideas and methods relating to multiple regression and matching methods work in practice. There are a great many ways that both matching, and multiple regression, can be implemented in practice, and both are likely to affect any causal effect estimates we produce. However, the aspiration of using matching methods is to somewhat reduce the dependency that causal effect estimates have on the specific model specifications we used.</p>
 
 
 
