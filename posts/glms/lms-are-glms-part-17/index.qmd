@@ -1,0 +1,270 @@
+---
+title: "Part Seventeen: Causal Inference: Controlling and Matching Approaches"
+author: "Jon Minton"
+date: "2024-03-02"
+code-fold: true
+warning: false
+message: false
+categories: [statistics, causality, R, matching, regression]
+bibliography: references.bib
+---
+
+## Recap and aim
+
+[The previous post](../lms-are-glms-part-16/index.qmd) (re)introduced three ways to try to allow causal effect estimation using observational data: i) 'controlling for' variables using multiple regression; ii) matching methods; iii) Identifying possible 'natural experiments' in observational datasets. The fundamental challenge of using observational data to estimate causal effects is that we cannot be sure either the observed ($X^*$) or unobserved ($W$) characteristics of observations do not influence allocation to exposure/treatment, i.e. cannot rule out $X^* \rightarrow Z$ or $W \rightarrow Z$, meaning that statistical estimates of the effect of Z on the outcome $Z \rightarrow y_i$ may be biased.
+
+The first two approaches will, within limits, generally attenuate the link between $X^*$ and $Z$, but can do little to break the link between $W$ and $Z$, as $W$ is by definition those features of observational units that are not contained in the dataset $D$, and so any statistical method will be 'blind' to. The last approach, if the instrumental variable possesses the properties we expect and hope it will, should be able to break the $W \rightarrow Z$ link too. But unfortunately that can be a **big if**: the instrument may not have the properties we hope it does.
+
+This post will go explore some application of the first two approaches: controlling for variables using multiple regression; and using matching methods. A fuller consideration of the issues is provided in @Ho_Imai_King_Stuart_2007, and the main package and dataset used will be that of the associated `MatchIt` package @MatchIt and [vignette using the `lalonde` dataset](https://cran.r-project.org/web/packages/MatchIt/vignettes/MatchIt.html).
+
+## Getting started
+
+We start by loading the `Matchit` package and exploring the `lalonde` dataset.
+
+```{r}
+library(tidyverse)
+library(MatchIt)
+unmatched_data <- tibble(lalonde)
+
+unmatched_data
+```
+
+## Data
+
+The description of the `lalonde` dataset is as follows:
+
+```{r}
+help(lalonde)
+
+```
+
+> ### Description
+>
+> This is a subsample of the data from the treated group in the National Supported Work Demonstration (NSW) and the comparison sample from the Population Survey of Income Dynamics (PSID). This data was previously analyzed extensively by Lalonde (1986) and Dehejia and Wahba (1999).
+>
+> ### Format
+>
+> A data frame with 614 observations (185 treated, 429 control). There are 9 variables measured for each individual.
+>
+> -   "treat" is the treatment assignment (1=treated, 0=control).
+>
+> -   "age" is age in years.
+>
+> -   "educ" is education in number of years of schooling.
+>
+> -   "race" is the individual's race/ethnicity, (Black, Hispanic, or White). Note previous versions of this dataset used indicator variables `black` and `hispan` instead of a single race variable.
+>
+> -   "married" is an indicator for married (1=married, 0=not married).
+>
+> -   "nodegree" is an indicator for whether the individual has a high school degree (1=no degree, 0=degree).
+>
+> -   "re74" is income in 1974, in U.S. dollars.
+>
+> -   "re75" is income in 1975, in U.S. dollars.
+>
+> -   "re78" is income in 1978, in U.S. dollars.
+>
+> "treat" is the treatment variable, "re78" is the outcome, and the others are pre-treatment covariates.
+
+Let's look at the data to get a sense of it:
+
+```{r}
+unmatched_data |>
+    mutate(treat = as.factor(treat)) |>
+    filter(re78 < 25000) |>
+    ggplot(aes(y = re78, x = re75, shape = treat, colour = treat)) + 
+geom_point() + 
+geom_abline(intercept = 0, slope = 1) +
+coord_equal() + 
+stat_smooth(se = FALSE, method = "lm")
+```
+
+Clearly this is quite complicated data, where the single implied control, wages in 1975 (`re75`) is not sufficient. There are also a great many observations where wages in either of both years were 0, hence the horizontal and vertical streaks apparent.
+
+The two lines are the linear regression lines for the two treatment groups as a function of earlier wage. The lines are not fixed to have the same slope, so the differences in any crude treatment effect estimate vary by earlier wage, but for most previous wages the wages in 1978 appear to be lower in the treatment group (blue), than the control group (red). This would suggest either that the treatment may be harmful to wages... or that there is severe imbalance between the characteristics of persons in both treatment conditions.
+
+Let's now start to use a simple linear regression to estimate an average treatment effect, before adding more covariates to see how these model-derived estimates change
+
+
+```{r}
+# Model of treatment assignment only
+mod_01 <- lm(re78 ~ treat, unmatched_data)
+summary(mod_01) 
+
+```
+
+On average the treated group had (annual?) wages $635 lower than the control group. However the difference is not statistically significant.
+
+Now let's add previous wage from 1975
+
+```{r}
+mod_02 <- lm(re78 ~ re75 + treat, unmatched_data)
+summary(mod_02)
+
+```
+
+Previously observed wage is statistically significant and positive. The point estimate on treatment is smaller, and even less 'starry'. 
+
+Now let's add all possible control variables and see what the treatment effect estimate produced is: 
+
+```{r}
+mod_03 <- lm(re78 ~ re75 + age + educ + race + married + nodegree + re74 + treat, unmatched_data)
+summary(mod_03)
+
+```
+
+With all of these variables as controls, the effect of treatment is now statistically significant and positive, associated with on average an increase of $155 over the control group. 
+
+However, we should probably be concerned about how dependent this estimate is on the specific model specification we used. For example, it is fairly common to try to 'control for' nonlinearities in age effects by adding a squared term. If modeller decisions like this don't make much difference, then its addition shouldn't affect the treatment effect estimate. Let's have a look:
+
+```{r}
+mod_04 <- lm(re78 ~ re75 + poly(age, 2) + educ + race + married + nodegree + re74 + treat, unmatched_data)
+summary(mod_04)
+```
+
+The inclusion of the squared term to age has changed the point estimate of treatment from around $1550 to $1370. However it has also changed the statistical significance of the effect from p < 0.05 to p < 0.10, i.e. from 'statistically significant' to 'not statistically significant'. If we were playing the stargazing game, this might be the difference between a publishable finding and an unpublishable finding. 
+
+And what if we excluded age, because none of the terms are statistically significant at the standard level? 
+
+```{r}
+mod_05 <- lm(re78 ~ re75 + educ + race + married + nodegree + re74 + treat, unmatched_data)
+summary(mod_05)
+
+```
+
+Now the exclusion of this term, which the coefficient tables suggested wasn't statistically significant, but intuitively we recognise as an important determinant of labour market activity, has led to yet another point estimate. It's switched back to 'statistically significant' again, but now the point estimate is about $1565 more. Such estimates aren't vastly different, but they definitely aren't the same, and come from just a tiny same of the potentially hundreds of different model specifications we could have considered and decided to present to others. 
+
+
+## Matching with MatchIt
+
+As the title of @Ho_Imai_King_Stuart_2007 indicates, matching methods are presented as a way of *preprocessing* the data to reduce the kind of model dependence we've just started to explore. Let's run the first example they present in [the MatchIt vignette](https://cran.r-project.org/web/packages/MatchIt/vignettes/MatchIt.html) then discuss what it means:
+
+
+```{r}
+m.out0 <- matchit(treat ~ age + educ + race + married + 
+                   nodegree + re74 + re75, data = lalonde,
+                 method = NULL, distance = "glm")
+summary(m.out0)
+```
+
+With `method = NULL`, the `matchit` function presents some summary estimates of differences in characteristics between the Treatment and Control groups. For example, the treated group has an average age of around 25, compared with 28 in the control group, have a slightly higher education score, are more likely to be Black, less likely to be Hispanic, and much less likely to be White (all important differences in the USA context, especially perhaps of the 1970s). They are also less likely to be married, more likely to have no degree, and have substantially earlier wages in both 1974 and 1975. Clearly a straightforward comparision between average outcomes is far from a like-with-like comparisons between groups. The inclusion of other covariates ($X^*$) does seem to have made a difference, switching the reported direction of effect and its statistical significance, but if we could find a subsample of the control group whose characteristics better match those of the treatment groups, we would hopefully get a more precise and reliable estimate of the effect of the labour market programme. 
+
+The next part of the vignette shows MatchIt working with some fairly conventional settings:
+
+```{r}
+m.out1 <- matchit(treat ~ age + educ + race + married + 
+                   nodegree + re74 + re75, data = lalonde,
+                 method = "nearest", distance = "glm")
+m.out1
+```
+
+The propensity score, i.e. the probability of being in the treatment group, has been predicted using the other covariates, and using logistic regression. For each individual in the treatment group, a 'nearest neighbour' in the control group has been identified with the most similar propensity score, which we hope also will also mean the characteristics of the treatment group, and *matched* pairs from the control group, will be more similar too. 
+
+We can start to see what this means in practice by looking at the summary of the above object
+
+```{r}
+summary(m.out1)
+
+```
+
+Previously, there were 185 people in the treatment group, and 429 people in the control group. After matching there are 185 people in the treatment group... and also 185 people in the control group. So, each of the 185 people in the treatment group has been matched up with a 'data twin' in the control group, so the ATT should involve more of a like-with-like comparison. 
+
+The summary presents covariate-wise differences between the Treatment and Control groups for All Data, then for Matched Data. We would hope that, in the Matched Data, the differences are smaller for each covariate, though this isn't necessarily the case. After matching, for example, we can see that the Black proportion in the Control group is now 0.47 rather than 0.20, and that the earlier income levels are lower, in both cases bringing the values in the Control group closer to, but not identical to, those in the Treatment group. Another way of seeing how balancing has changed things is to look at density plots:
+
+```{r}
+plot(m.out1, type = "density", interactive = FALSE,
+     which.xs = ~age + married + re75+ race + nodegree + re74)
+
+```
+
+In these density charts, the darker lines indicate the Treatment group and the lighter lines the Control groups. The matched data are on the right hand side, with All data on the left. We are looking to see if, on the right hand side, the two sets of density lines are more similar than they are on the right. Indeed they do appear to be, though we can also tell they are far from identical.
+
+
+## Estimating Treatment Effect Sizes *after* matching 
+
+Historically, the MatchIt package was designed to work seamlessly with [Zelig](https://gking.harvard.edu/zelig), which made it much easier to use a single library and framework to produce 'quantities of interest' using multiple model structures. However Zelig has since been deprecated, meaning the vignette now recommends using the `marginaleffects` package. We'll follow their lead: 
+
+First the vignette recommends extracting matched data from the matchit output: 
+
+
+```{r}
+m.data <- match.data(m.out1)
+
+m.data <- as_tibble(m.data)
+m.data
+```
+
+Whereas the unmatched data contains 614 observations, the matched data contains 370 observations. Note that the Treatment group contained 185 observations, and that 370 is 185 times two. So, the matched data contains one person in the Control group for each person in the Treatment group. 
+
+We can also see that, in addition to the metrics originally included, the matched data contains three additional variables: 'distance', 'weights' and 'subclass'. The 'subclass' field is perhaps especially useful for understanding the intuition of the approach, because it helps show which individual in the Control group has been paired with which individual in the Treatment group. Let's look at the first three subgroups:
+
+```{r}
+m.data |> filter(subclass == '1')
+
+```
+
+So, for the first subclass, a 37 year old married Black person with no degree has been matched to a 22 year old Black married person with no degree. 
+
+```{r}
+m.data |> filter(subclass == '2')
+
+```
+
+For the second subclass a 33 year old married White person with a degree has been paired with a 39 year old White person with a degree.
+
+```{r}
+m.data |> filter(subclass == '3')
+
+```
+
+For the third subclass, a 31 year old unmarried Hispanic person with no degree has been paired with a 16 year old White person with no degree. 
+
+In each case, we can see the pairings are similar in some ways but (as with the last example) quite dissimilar in others. The matching algorithm is trying to do the best it can with the data available, especially with the constraint[^1] that once a person in the Control group has been paired up once to someone in the Treatment group, they can't be paired up again with someone else in the Treatment group. 
+
+[^1]: I think this is implied by the use of `method = "nearest"`, which is the default, meaning 'greedy nearest neighbour matching'.
+
+The identification of these specific pairings suggests we can used a fairly crude strategy to produce an estimate of the ATT: namely just compare the outcome across each of these pairs. Let's have a look at this:
+
+```{r}
+trt_effects <- 
+    m.data |>
+        group_by(subclass) |>
+        summarise(
+            ind_treat_effect = re78[treat == 1] - re78[treat == 0]
+        ) |> 
+        ungroup()
+
+trt_effects |>
+    ggplot(aes(ind_treat_effect)) + 
+    geom_histogram(bins = 100) + 
+    geom_vline(xintercept = mean(trt_effects$ind_treat_effect), colour = "red") + 
+    geom_vline(xintercept = 0, colour = 'lightgray', linetype = 'dashed')
+
+```
+
+This crude paired comparison suggests an average difference that's slightly positive, of $`r round(mean(trt_effects$ind_treat_effect), 2)`. 
+
+This is not a particularly sophisticated or 'kosher' approach however. Instead the vignette suggests calculating the treatment effect estimate as follows:
+
+
+```{r}
+library("marginaleffects")
+
+fit <- lm(re78 ~ treat * (age + educ + race + married + nodegree + 
+             re74 + re75), data = m.data, weights = weights)
+
+avg_comparisons(fit,
+                variables = "treat",
+                vcov = ~subclass,
+                newdata = subset(m.data, treat == 1),
+                wts = "weights")
+
+
+```
+
+Using the recommended approach, the ATT estimate is now $1121. Not statistically significant at the conventional 95% threshold, but also more likely to be positive than negative. 
+
+
+## Summary 
+
+In this post we have largely followed along with the introductionary vignette from the `MatchIt` package, in order to go from the fairly cursory theoretical overview in the previous post, to showing how some of the ideas and methods relating to multiple regression and matching methods work in practice. There are a great many ways that both matching, and multiple regression, can be implemented in practice, and both are likely to affect any causal effect estimates we produce. However, the aspiration of using matching methods is to somewhat reduce the dependency that causal effect estimates have on the specific model specifications we used. 

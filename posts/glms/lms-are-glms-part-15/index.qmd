@@ -117,9 +117,9 @@ This doesn't mean that, for any particular trial, there will be zero correlation
 
 A key point to note is that, when analysing a properly conducted RCT to estimate a treatment effect, the ATE formula shown above, which is naive and likely to be biased when working with observational data, *is likely to produce an unbiased estimate of the treatment effect*. Because the trial design is sophisticated in the way it breaks the link between $Z$ and everything else, the statistical analysis does not have to be sophisticated. 
 
-The flip side of this, however, is that when the data are observational, and it would be naive (as with the urinals and waiting times example) to assume that $Z$ is unlinked to everything else known ($X^*$) and unknown ($W^*$), then more careful and bespoke statistical modelling approaches are likely to be required to recover non-biased causal effects. Such modelling approaches need to be mindful of both the platinum and gold standards presented above, and rely on modelling assumptions to try to simulate what the treatment effects would be if these unobtainable (platinum) and unobtained (gold) standards had been obtained. 
+The flip side of this, however, is that when the data are observational, and it would be naive (as with the urinals and waiting times example) to assume that $Z$ is unlinked to everything else known ($X^*$) and unknown ($W^*$), then more careful and bespoke statistical modelling approaches are likely to be required to recover non-biased causal effects. Such modelling approaches need to be mindful of both the platinum and gold standards presented above, and rely on modelling and other assumptions to try to simulate what the treatment effects would be if these unobtainable (platinum) and unobtained (gold) standards had been obtained. 
 
-The next post will start to delve into some of these modelling approaches. 
+[The next post](../lms-are-glms-part-16/index.qmd) will start to delve into some of these approaches. 
 
 [^3]: In practice, issues like methodological variation, and publication bias, mean that meta-analyses of RCTs are unlikely to provide as accurate and unbiased an estimate of treatment effect as we would hope for. 
 

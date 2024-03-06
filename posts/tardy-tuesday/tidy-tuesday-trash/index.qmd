@@ -1,0 +1,63 @@
+---
+title: "Tidy Tuesday Trash"
+draft: true
+---
+
+
+## Example of factor analysis with trash data 
+
+
+```{r}
+library(tidyverse)
+# library(lavaan)
+
+df <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-03-05/trashwheel.csv')
+
+
+```
+
+Want to know if we can produce an SEM using lavaan to work out the relative contribution of different types of trash to either volume or weight collected
+
+
+```{r}
+f_1 <- factanal(~ PlasticBottles + Polystyrene + CigaretteButts + GlassBottles + PlasticBags + Wrappers + SportsBalls, data = df, factors = 1)
+
+f_1
+```
+
+
+```{r}
+f_2 <- factanal(~ PlasticBottles + Polystyrene + CigaretteButts + GlassBottles + PlasticBags + Wrappers + SportsBalls, data = df, factors = 2, scores = "regression")
+
+f_2
+
+```
+
+```{r}
+df2 <- df %>%
+    filter(complete.cases(.)) |>
+    mutate(
+        plastic_dumping_score = f_2$scores[,1],
+        drinking_smoking_score = f_2$scores[,2]
+    )
+
+```
+
+```{r}
+df2 |>
+    mutate(density = Weight / Volume) |>
+    ggplot(aes(x = plastic_dumping_score, y = drinking_smoking_score)) + 
+    geom_point(aes(alpha = density)) + 
+    facet_wrap(~ Year)
+
+
+```
+
+This is a four dimensional plot! 
+
+It looks like, over time, the type of trash collected has changed, and involves less of both plastic-based, and drinking/smoking-based types of trash. 
+
+```{r}
+# write_csv(df2, "df_with_factor_scores.csv")
+
+```
