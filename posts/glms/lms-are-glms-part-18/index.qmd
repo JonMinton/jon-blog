@@ -1,0 +1,195 @@
+---
+title: "Part Eighteen: Causal Inference: Some closing thoughts"
+subtitle: "Including why I've not written about DAGs"
+date: "2024-03-16"
+author: "Jon Minton"
+code-fold: true
+warning: false
+message: false
+categories: [statistics, causality, causal inference, DAGs]
+bibliography: references.bib
+---
+
+## Introduction: Correcting an 'oversight' in discussing causality
+
+Over posts [14](../lms-are-glms-part-14/index.qmd) through to [17](../lms-are-glms-part-17/index.qmd) I've discussed causal inference. However, readers who've been involved and interested in the topic of causal inference over the last few years might be less surprised by what I have covered than by what I've not, namely the causal inference framework developed by Judea Pearl, and (somewhat) popularised by his co-authored book, **The Book of Why: The New Science of Cause and Effect**. (@pearl2018book)
+
+This 'oversight' in posts so far has been intentional, but in this post the Pearl framework will finally be discussed. I'll aim to: i) give an overview of the two primary ways of thinking about causal inference: either as a missing data problem; or as a 'do-logic' problem; ii) discuss the concept of the omitted variable vs post treatment effect bias trade-off as offering something of a bridge between the two paradigms; iii) give some brief examples of directed acyclic graphs (DAGs) and do-logic, two important ideas from the Pearl framework, as described in @pearl2018book; iv) make some suggestions about the benefits and uses of the Pearl framework; and finally v) advocate for epistemic humility when it comes to trying to draw causal inferences from observational data, even where a DAG has been clearly articulated and agreed upon within a research community. [^1] Without further ado, let's begin:
+
+[^1]: I might not cover these areas in the order listed above, and thinking about this further this might be too much territory for a single post. Let's see how this post develops...
+
+## Causal Inference: Two paradigms
+
+In the posts so far, I've introduced and kept returning to the idea that *the fundamental problem of causal inference is that at least half of the data is always missing*. i.e., for each individual observation, who has either been treated or not treated, if they had been treated then we do not observe them in the untreated state, and if they had not been treated we do not observe them in the treated state. It's this framing of the problem which 
+
+In introducing causal inference from this perspective, I've 'taken a side' in an ongoing debate, or battle, or even war, between two clans of applied epistemologists. Let's call them the *Rubinites*, and the *Pearlites*. Put crudely, the **Rubinites** adopt a *data-centred* framing of the challenge of causal inference, whereas the **Pearlites** adopt a *model-centred* framing of the challenge of causal inference. For the Rubinites, the data-centred framing leads to an intepretation of causal inference as a *missing data* problem, for which the solution is therefore to perform some kind of *data imputation*. For the Pearlites, by contrast, the solution is focused on developing, describing and drawing out *causal models*, which describe how we believe *one thing leads to another* and the paths of effect and influence that one variable has on each other variable. 
+
+It is likely no accident that the broader backgrounds and interests of Rubin and Pearl align with type of solution each proposes. Rubin's other main interests are in data imputation more generally, including methods of multiple imputation which allow 'missing values' to be filled in stochastically, rather than deterministically, to allow some representation of uncertainty and variation in the missing values to be indicated by the range of values that are generated for a missing hole in the data. Pearl worked as a computer scientist, whose key contribution to the field was the development of *Bayesian networks*, which share many similarities with *neural networks*. For both types of network, there are **nodes**, and there are **directed links**. The nodes have values, and these values can be influenced and altered by the values of other nodes that are connected to the node in question. This influence that each node has on other nodes, through the paths indicated in the directed links, is perhaps more likely to be described as *updating* from the perspective of a Bayesian network, and *propagation* from the perspective of a neural network. But in either case, it really *is correct* to say that one node really does *cause* another node's value to change through the *causal pathway* of the directed link. The main graphical tool Pearl proposes for reasoning about causality in obervational data is the **directed acyclic graph (DAG)**, and again it should be unsurprising that DAGs look much like Bayesian networks. 
+
+## The Omitted Variable Bias vs Post Treatment Bias Trade-off as a potential bridge between the two paradigms
+
+The school of inference I'm most familiar with is that of Gary King, a political scientist, methodologist and (in the hallowed halls of Harvard) populariser of statistical methods in the social sciences. In the crude paradigmatic split I've sketched out above, King is a **Rubinite**, and so I guess - mainly through historical accident but partly through conscious decision - I am too. However, I have read @pearl2018book (maybe not recently enough nor enough times to fully digest it), consider it valuable and insightful in many places, and think there's at least one place where the epistemic gap between the two paradigms can be bridged. 
+
+The bridge point on the Rubinite side,[^2] I'd suggest, comes from thinking carefully about the sources of bias enumerated in section 3.2 of @KinZen06, which posits that: 
+
+$$
+bias = \Delta_o + \Delta_p + \Delta_i + \Delta_e
+$$
+
+[^2]: The bridge point on the Pearlite side might be a recognition of the apparent *bloody obviousness* of the fact that, if an observational unit was treated, we don't observe untreated, and vice versa. The kind of table with missing cells, as shown in [part fifteen](../lms-are-glms-part-15/index.qmd), would appear to follow straightforwardly from conceding this point. However, @pearl2018book includes an example of this kind of table (table 8.1; p. 273), and argues forcefully against this particular framing.
+
+This section states:
+
+> These four terms denote exactly the four sources of bias in using observational data, with the subscripts being mnemonics for the components ... . The bias components are due to, respectively, **omitted variable bias** ($\Delta_o$), **post-treatment bias** ($\Delta_p$), interpolation bias ($\Delta_i$) and extrapolation bias ($\Delta_e$). [Emphases added]
+
+Of the four sources of bias listed, it's the first two which appear to offer a potential link between the two paradigms, and so suggest to Rubinites why some engagement with the Pearlite approach may be valuable. The section continues: 
+
+> Briefly, $\Delta_o$ is the bias due to omitting relevant variables such as *common causes* of both the treatment and the outcome variables [whereas] $\Delta_p$ is bias due to controlling for the *consequences* of the treatment. [Emphases added]
+
+From the Rubinite perspective, it seems that omitted variable bias and post-treatment bias are recognised, in combination, as constituting a **wicked problem**. This is because the inclusion of an specific variable can simultaneously affect both types of bias: reducing omitted variable bias, but also potentially increasing post treatment bias. *You're doomed if you do, but you're also doomed if you don't.* 
+
+## With apologies to economists and epidemiologists alike...
+
+Of the two sources of bias, omitted variable bias seems to be the more discussed. And historically, it seems different social and health science disciplines have placed a different weight of addressing these two sources of bias. In particular, at least in the UK context, it's seemed that economists tend to be more concerned about omitted variable bias, leading to the inclusion of a large number of variables in their statistical models, whereas epidemiologists (though they might not be familiar with and use the term) tend to be more concerned about post-treatment bias, leading a statistical models with fewer variables. 
+
+The issue of post treatment bias is especially important to consider in the context of root or fundamental causes, which again is often something more of interest to epidemiologists than economists. And the importance of the issue comes into sharp relief if considering factors like sex or race. An economist/econometrician, if asked to estimate the effect of race on (say) the probability of a successful job application to an esteemed organisation, might be very liable to try to include many additional covariates, such as previous work experience and job qualifications, as 'control variables' in a statistical model in addition to race. From this, they might find that the covariate associated with race is neither statistically nor substantively, and from this conclude that there is no evidence of (say) racial discrimination in employment, because any disparities in outcomes between racial groups appear to be 'explained by' other factors like previous experience and job qualifications. 
+
+To this, a methodologically minded epidemiologist might counter - very reasonably - that the econometrician's model is *over-controlling*, and that the inclusion of factors like educational outcomes and previous work experience in the model risks introducing **post treatment bias**. If there were discrimination on the basis of race, or sex, it would be unlikely to *just* affect the specific outcome on the response side of the model. Instead, discrimination (or other race-based factors) would also likely affect the kind of education available to people of different races, and the kinds of educational expectations placed on people of different racial groups. This would then affect the level of educational achievement by group as well. Similarly, both because of prior differences in educational achievement, and because of concurrent effects of discrimination, race might also be expected to affect job history too. Based on this, the epidemiologist might choose to omit both qualifications and job history from the model, because both are presumed to be causallly downstream of the key factor of interest, race. 
+
+So which type of model is correct? The epidemiologist's more parsimonious model, which is mindful of post-treatment bias, or the economist's more complicated model, which is mindful of omitted variable bias? The conclusion from the four-biases position laid out above is that *we don't know*, but that all biases potentially exist in observational data, and neither model specification can claim to be free from bias. *Perhaps* both kinds of model can be run, and *perhaps* looking at the estimates from both models can give something like a plausible range of possible effects. But fundamentally, we don't know, and can't know, and ideally we should seek better quality data, run RCTs and so on. 
+
+@pearl2018book  argues that Rubinites don't see much (or any) value in causal diagrams, stating "The Rubin causal model treats counterfactuals as abstract mathematical objects that are managed by algebraic machinery but not derived from a model." [p. 280] Though I think this characterisation is broadly *consciously* correct, the recognition within the Rubinite community that such things as post-treatment bias and omitted variables *exist* suggests to me that, *unconsciously*, even Rubinites employ something like path-diagram reasoning when considering which sources of bias are likely to affect their effect estimates. Put simply: I don't see how claims of either omitted variable or post treatment bias could be made or believed but for the kind of graphical, path-like thinking at the centre of the Pearlite paradigm. 
+
+Let's draw the two types of statistical model implied in the discussion above. Firstly the economist's model: 
+
+```{mermaid}
+flowchart LR
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race -->|Z| accept
+qual -->|X*| accept
+hist -->|X*| accept 
+
+```
+
+And now the epidemiologist's model:
+
+```{mermaid}
+flowchart LR 
+
+race(race)
+accept(job offer)
+
+race -->|Z| accept
+
+```
+
+Employing a DAG-like causal path diagram would at the very least allow both the economist and epidemiologist to discuss whether or not they agree that the underlying causal pathways are more likely to be something like the follows: 
+
+```{mermaid}
+flowchart LR
+
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race --> qual
+qual --> hist
+hist --> accept
+
+race --> hist
+qual --> accept
+race --> accept
+
+```
+
+If, having drawn out their presumed causal pathways like this, the economist and epidemiologist end up with the same path diagram, then the Pearlian framework offers plenty of suggestions about how, subject to various assumptions about the types of effect each node has on each downstream node, statistical models based on observational data should be specified, and how the values of various coefficients in the statistical model should be combined in order to produce an overall estimate of the left-most node on the right-most node. Even a Rubinite who does not subscribe to some of these assumptions may still find this kind of graphical, path-based reasoning helpful for thinking through what their concerns are relating to both omitted variable and post-treatment biases are, and whether there's anything they can do about it. In the path diagram above, for example, the importance of temporal sequence appears important: *first* there's education and qualification; *then* there's initial labour market experience; *and then* there's contemporary labour market experience. This appreciation of the sequence of events might suggest that, perhaps, data employing a longitudinal research design might be preferred to one using only cross-sectional data; and/or that what appeared intially to be only a single research question, investigated through a single statistical model, is actually a series of linked, stepped research questions, each employing a different statistical model, breaking down the cause-effect question into a series of smaller steps. 
+
+## Summary thoughts: on social complexity and the need for epistemic humility
+
+As mentioned before, I probably lean somewhat more towards the Rubinite than the Pearlite framework. A lot of this is simply because this is the causal effect framework I was first introduced to, but some of it comes from more fundamental concerns I have about how some users and advocates of the Pearlite framework seem to think, or suggest, it can solve issues of causal inference from observational data that, fundamentally, I don't think it may be possible to address. 
+
+One clue about what the Pearlite framework can and cannot do comes from the 'A' in DAG: 'acyclic'. This means that causal pathways of the following form can be specified: 
+
+```{mermaid}
+flowchart LR
+A(A)
+B(B)
+
+A --> B
+```
+
+But causal pathways of the following form cannot:
+
+```{mermaid}
+flowchart LR
+
+A(A)
+B(B)
+
+A --> B
+B --> A
+
+```
+
+Unfortunately, cyclic relationships between two or more factors, in which the pathways of influence go in both directions, are likely extremely common in social and economic systems, because such systems are *complex* rather than merely *complicated*. [^3] One approach to trying to fit a representation of a complex coupled system into a DAG-like framework would be to use time to try to break the causal paths:
+
+[^3]: The economist's model is more *complicated* than the epidemiologist's model, but both are equally *complex*, i.e. not complex at all, because they don't involve any pathways going from right to left. 
+
+```{mermaid}
+flowchart LR
+
+c0(Chicken at T0)
+e1(Egg at T1)
+c2(Chicken at T2)
+e3(Egg at T3)
+
+c0 --> e1
+e1 --> c2
+c2 --> e3
+
+```
+
+But another way of reasoning about such localised coupled complexity might be to use something like factor analysis to identify patterns of co-occurence of variables which may be consistent with this kind of localised complex coupling:
+
+
+```{mermaid}
+flowchart LR
+
+ce((ChickenEgg))
+e[egg]
+c[chicken]
+
+ce --> e
+ce --> c
+
+```
+
+
+Within the above diagram, based on structural equation modelling, the directed arrows have a different meaning. They're not claims of causal effects, but instead of membership. The circle is an underlying proposed 'latent variable', the **ChickenEgg**, which is presumed to manifest through the two observed/manifest variables **egg** and **chicken** represented by the rectangles. In places with a lot of **ChickenEgg**, such as a hen house, we would expect to observe a lot of both **chicken**s and **egg**s. The statistical model in the above case is a *measurement model*, rather than a *causal model*, but in this case is one which is informed by an implicit recognition of continual causal influence operating within members of a complex, paired, causal system. 
+
+So, I guess my first concern relating to DAGs is that, whereas they *can* be really useful in allowing researchers to express some form of causal thinking and assumptions about paths of influence between factors, their *acyclic* requirement can also lead researchers to disregard or underplay the role of complexity even when considering inherently complex systems. In summary, they offer the potential both to *expand*, but also to *restrict*, our ability to reason effectively about causal influence. 
+
+My second, related, concern about the potential over-use or over-reach of DAG-like thinking comes from conventional assumptions built into the paths of influence between nodes. We can get to the heart of this latter concern by looking at , and carefully considering the implications of, something called a **double pendulum**, a video of which is shown below:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d0Z8wLLPNE0?si=l8IjyVKIxdbGPHfy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+A double pendulum is not a *complicated* system, but it is a *complex* system, and also a *chaotic* system. The variables at play include two length variables, two mass variables, a gravity variable, and time. The chaotic complexity of the system comes from the way the length and mass of the first arm interact with the length and and mass of the second arm. This complex interaction is what leads to the position of the outer-most part of the second arm (the grey ball) at any given time. 
+
+Now imagine trying to answer a question of the form "what is *the* effect of the first arm's mass on the grey ball's position?" This kind of question is one that it's simply not meaningful to even ask. It's the complex interaction between all components of the system that *jointly* determines the ball's position, and attempting to decompose the causal effect of any one variable in the system is simply not a fruitful way of trying to understand the system as a whole. 
+
+This does not mean, however, that we cannot develop a useful understanding of the double pendulum. We know, for example, that the ball cannot be further than the sum of the length of the two arms from the centre of the system. If we were thinking about placing another object near the double pendulum, for example, this would help us work out how far apart from the pendulum we should place it. Also, if one of the arms is much longer or more massive than the other, then maybe we could approximate it with a simple pendulum too. Additionally, all double pendulums tend to behave in similar ways during their initial fall. But the nature of this kind of complex system also means some types of causal question are beyond the realm of being answerable. 
+
+
+The double pendulum, for me, is an object lesson on the importance of *epistemic humility*. My overall concern relating to causal inference applies nearly equally to Rubinites and Pearlites alike, and is that excessive engagement with or enthusiasm for any kind of method or framework can lead to us believing we know more than we really know more about *how one thing affects another*. This can potentially lead both to errors of judgement - such as not planning sufficiently for eventualities our models suggest cannot happen - and potentially to intolerance towards those who 'join the dots' in a different way to ourselves. [^4]
+
+
+In short: stay methodologically engaged, but also stay epistemically modest.
+
+[^4]: A majority of political disagreement, for example, seems to occur when people agree on the facts, but disagree about the primary causal pathway. 

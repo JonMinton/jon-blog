@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-03-13">
 
-<title>Jon Minton’s Blog - Statistical Modelling: Theory and Practice</title>
+<title>Jon Minton’s Blog - Can we go Dutch? (And should we?)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Statistical Modelling: Theory and Practice">
-<meta name="twitter:description" content="">
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Can we go Dutch? (And should we?)">
+<meta name="twitter:description" content="Some thoughts post Amsterdam">
+<meta name="twitter:image" content="https://cdn.britannica.com/30/180130-138-4FC01CDD/Overview-Amsterdam.jpg?w=800&amp;h=450&amp;c=crop">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -121,17 +91,17 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./glms.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../glms.html" rel="" target="">
  <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tardy-tuesday.html" rel="" target="">
+    <a class="nav-link" href="../../tardy-tuesday.html" rel="" target="">
  <span class="menu-text">Tardy Tuesdays</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -163,257 +133,82 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Can we go Dutch? (And should we?)</h1>
+            <p class="subtitle lead">Some thoughts post Amsterdam</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">cities</div>
+                <div class="quarto-category">Europe</div>
+                <div class="quarto-category">Holland</div>
+                <div class="quarto-category">UK</div>
+                <div class="quarto-category">cycling</div>
+                <div class="quarto-category">Amsterdam</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 13, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Statistical Modelling: Theory and Practice</h1>
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.britannica.com/30/180130-138-4FC01CDD/Overview-Amsterdam.jpg?w=800&amp;h=450&amp;c=crop" class="img-fluid figure-img" alt="A stereotypical image of Amsterdam"></p>
+<figcaption class="figure-caption">Amsterdam: Not all flowers, bikes and canals (But <em>largely</em> flowers, bikes, and canals!)</figcaption>
+</figure>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This page lists all posts I’ve written on statistical modelling and inference, originally framed around ‘generalised linear models’ (<code>glm</code> in R) but quite a bit broader than that. I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in <a href="./posts/background-to-my-stats-series/index.html">this post here</a>.</p>
+<p>I’m not good at going on holidays. Ideally I’d rather live somewhere I like living enough, and work somewhere I enjoy working enough, that planning and dreaming of living and doing something else for one month a year isn’t what sustains me through the other eleven.</p>
+<p>This hopefully goes some way to explain why I’m now back from a short holiday to Amsterdam first planned for Winter 2019.</p>
+<p>To the extent I like breaks, I like city breaks, because I like cities. Cities are to people as hives are to bees, dams are to beavers, and palatial mounds are to termites. They’re the ultimate extended phenotype of <em>Homo Sapiens sapiens</em>, a way of terraforming a piece of the planet into something that more efficiently meets human wants and needs than any other part of the Earth (and by extension the known universe). I don’t see cities as something that contrasts with nature, but something that beautifully <em>expresses</em> human nature. And I think Amsterdam is perhaps an especially beautiful and complete expression of this nature, or at least some of the potential that exists within this nature.</p>
+<p>My suspicion is that, for various complex reasons, the British just don’t tend to <em>do</em> cities as well as most of our Continential European neighbours. Perhaps the key to the mystery why is locked up in that self description of England and its “green and pleasant lands”, which in <a href="https://en.wikipedia.org/wiki/And_did_those_feet_in_ancient_time">Blake’s poem</a> is contrasted with the “dark satanic mills” of industry, and in that oddly disease-like term, <em>bucolic</em>. England has placed its dreams in an idealised past - fields, village greens, rugged white cliffs; sketches and icons which found full expression in <a href="https://www.bbc.co.uk/news/magazine-11095490">the 2010 UK passport design</a>, as it happens - and the big, livable city has had no place in this iconography. The other UK nations, in this very unequal nation of nations, has then been taken along for the ride, to dreaming of ‘escaping to the country’ rather than seeking out the city.</p>
+<p>So, as we don’t like living in cities, and our dreams aren’t in and of cities, we don’t dream big when it comes to designing our cities to be more livable. So, we don’t make wholesale efforts to encourage cycling and mass transit, <a href="https://inkspire.org/post/amsterdam-was-a-car-loving-city-in-the-1970s-what-changed/">as Amsterdam did in the 1970s</a>. We have less active travel, more disease related to sedentary living, more suburbanisation, more traffic jams, more time spent going from, through and into places rather than being in places.</p>
+<p>The British aversion to cities may help to explain why an apparently universal empirical ‘law’ of cities, known as <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">Zipf’s Law</a>, doesn’t seem to apply as strongly in the UK as in most other affluent nations. Zipf’s Law states that, if the log of the rank of a city (ordered from most to least populous) is plotted against the log of the size of the city, the points plotted should form a straight line. For most continental European nations, this ‘law’ seems to hold. <a href="https://www.flickr.com/photos/dullhunk/26811772547">But for the UK, it doesn’t</a>: either the first city (London) is too large, or the other cities (Manchester, Birmingham, and so on) are too small.</p>
+<p>In a very crude sense, a city reaches its population limit when the positive effects of population density get to be fully cancelled out by the negative effects of population density. Negative density effects are generally known as <em>congestion effects</em> (which includes but is not limited to traffic congestion) and positive density effects are referred to as agglomeration <em>effects</em>. Both congestion effects and agglomeration effects only go up with density, but at different rates, leading to a net density effect schedule that’s likely to be somewhat upside-down-U-shaped. The challenge of making a successful livable city - somewhere people want to go to rather than escape from - is to make the marginal agglomeration effect schedule steeper than the corresponding marginal congestion effect schedule. In practice it’s probably more important for city planners to focus on flattening out the congestion effects than on trying to capitalise further on the agglomeration effects.</p>
+<p>And how does this relate to Amsterdam? Well, a bicycle takes up less of a city and its streets than a car, and a person takes up less of a city than a bicycle. So, if more people could be encouraged to walk, or cycle, or use other forms of mass transit, then the congestion effect schedules become flatter. It seemed that, in the Netherlands, there was a recognition by the 1970s that the car-is-king philosophy that took off in the post-war decades were making Amsterdam a less pleasant experience for those living in and visiting the city. By making a large number of large scale infrastructure changes all at once, the congestion effect schedule got flattened, and so the optimal density peak got pushed back further to the right (possibly to a limit more dependent on how high buildings could be built, rather than how fast people could move within the city), and the city became livable once again.</p>
+<p>Of course, another thing the Netherlands, and especially Amsterdam, has become internationally renowned for is its permissive attitudes to illicit drug use and sex. Though this may at first seem unrelated to the above, perhaps it’s not. Perhaps these came about, in part, as solutions to other, less directly tangible, kinds of agglomoration/congestion effect challenge? For someone who’s crudely libertarian in outlook, of course, a city is a musterpoint for markets, and markets exist for all kind of good and service, so surely permitting rather than inhibiting markets in the wide range of goods and services denizens wish to offer and consume is just another way of increasing the steepness of the agglomeration schedule of cities and allowing people who live and work together to serve each other’s needs more effectively. From this crude libertarian perspective, the criminalisation of some goods and services then just adversely distorts and degrades these markets, making it harder for people to service each other’s wants and needs.</p>
+<p>The impression I had of Amsterdam, however, was that the drug-and-sex permissiveness comes less from purely free-market libertarian ideology, focused on maximising agglomeration effects, and more from a sense of urban pragmatism, focused on minimising social and cultural congestion effects. When lots of people, from many different backgrounds, come to share the same finite physical space, there will be lots of different things they will want, not all of which we may <em>want</em> for them to want. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> By simply permitting people to indulge and avail themselves of goods and services that might be risky or harmful, we at least reduce the potentially greater risks and harms that may come from attempting to prohibit or inhibit their use. Amsterdam, it appears to me, <em>tolerates</em> the trade in some drugs and sex, rather than <em>celebrates</em> it.</p>
+<p>The closest UK analogy is probably vape shops: Of course, it would from first principles, from a health perspective, be better if no one sought out nicotine products, nor became nicotine dependent. But if we were to live in the real world, where tens of millions of people <em>are</em> nicotine addicts, it is surely less harmful they meet this need through vaping than smoking? So, beyond some level, the prohibition or restriction of vape shops is likely to be net harmful, because it is likely to reduce the level of switching from (more harmful) cigarette smoking to (less harmful) vaping. This argument does not mean <em>vaping is great</em>, nor that <em>vape shops are harmless</em> (especially when and if they encourage switching from <em>not smoking</em> to <em>vaping</em>, for example in school-aged populations), but it does mean that trying to stop this growing market risks doing more harm than good.</p>
+<p>The analogy seems to work in another way too: though the growth of vape shops in the UK over the last decade or so has been substantial, only a relatively small proportion of shops are vape shops, and the rate of growth in this kind of establishment seems to be slowing. Similarly, in Amsterdam, shops selling cannabis and psilocybin products <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> are not uncommon, but at the same time are far from the only shop in Amsterdam: cafes <em>greatly</em> outnumber ‘coffeeshops’. Supply found equilibrium with demand, and did not overshoot. ‘Sin goods’ exist, and in Amsterdam appear to peacefully coexist with the many other markets that a large city can support. If we were to stretch the concept of ‘congestion effects’ to any kind of adverse harm that groups of people meeting can cause to each other, and include drug-related deaths in this concept, then - according to <a href="https://ourworldindata.org/grapher/death-rate-from-drug-use-disorders-for-15--to-49-year-olds?country=USA~CAN~DEU~FRA~ITA~GBR~NLD">Our World In Data</a> at least - this particular form of <em>social</em> congestion effect appears to be around five times worse in the UK than in the Netherlands. So it seems it’s not just our roads that are needlessly congested from failing to think pragmatically about the challenges of urban living; our morgues are too.</p>
 
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-<th>
-Reading Time
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1704041017393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part One: Model fitting as parameter calibration" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 28, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-01/index.html" class="title listing-title">Part One: Model fitting as parameter calibration</a>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics" data-listing-date-sort="1701388800000" data-listing-file-modified-sort="1704041032180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part Two: Systematic components and link functions" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 1, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-02/index.html" class="title listing-title">Part Two: Systematic components and link functions</a>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1701475200000" data-listing-file-modified-sort="1704043139377" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Part Three: glm is just fancy lm" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 2, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-03/index.html" class="title listing-title">Part Three: glm is just fancy lm</a>
-</td>
-<td>
-<span class="listing-reading-time">4 min</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1703894400000" data-listing-file-modified-sort="1707928771433" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-title-sort="Part Four: why only betas just look at betas" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 30, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-04/index.html" class="title listing-title">Part Four: why only betas just look at betas</a>
-</td>
-<td>
-<span class="listing-reading-time">18 min</span>
-</td>
-</tr>
-<tr data-index="4" data-categories="statistics,R" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1707929126040" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Five: Traversing the Likelihood Landscape" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-05/index.html" class="title listing-title">Part Five: Traversing the Likelihood Landscape</a>
-</td>
-<td>
-<span class="listing-reading-time">9 min</span>
-</td>
-</tr>
-<tr data-index="5" data-categories="statistics,R" data-listing-date-sort="1704240000000" data-listing-file-modified-sort="1704446733326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Part Six: The Robo-Chauffeur" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-06/index.html" class="title listing-title">Part Six: The Robo-Chauffeur</a>
-</td>
-<td>
-<span class="listing-reading-time">7 min</span>
-</td>
-</tr>
-<tr data-index="6" data-categories="statistics,R" data-listing-date-sort="1704326400000" data-listing-file-modified-sort="1707929218030" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Seven: Feeling Uncertain" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-07/index.html" class="title listing-title">Part Seven: Feeling Uncertain</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="7" data-categories="statistics,R" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707929274525" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-08/index.html" class="title listing-title">Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="8" data-categories="statistics,R" data-listing-date-sort="1705708800000" data-listing-file-modified-sort="1707929440013" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 20, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-09/index.html" class="title listing-title">Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="9" data-categories="statistics,R" data-listing-date-sort="1706313600000" data-listing-file-modified-sort="1707929496408" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Part Ten: Log Likelihood estimation for Logistic Regression" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 27, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-10/index.html" class="title listing-title">Part Ten: Log Likelihood estimation for Logistic Regression</a>
-</td>
-<td>
-<span class="listing-reading-time">8 min</span>
-</td>
-</tr>
-<tr data-index="10" data-categories="statistics,R" data-listing-date-sort="1706918400000" data-listing-file-modified-sort="1707930011340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Eleven: Honest Predictions the easier way" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-11/index.html" class="title listing-title">Part Eleven: Honest Predictions the easier way</a>
-</td>
-<td>
-<span class="listing-reading-time">14 min</span>
-</td>
-</tr>
-<tr data-index="11" data-categories="statistics,R" data-listing-date-sort="1707004800000" data-listing-file-modified-sort="1707929701419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twelve: Honest Predictions the slightly-less easier way" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-12/index.html" class="title listing-title">Part Twelve: Honest Predictions the slightly-less easier way</a>
-</td>
-<td>
-<span class="listing-reading-time">13 min</span>
-</td>
-</tr>
-<tr data-index="12" data-categories="statistics,R" data-listing-date-sort="1707523200000" data-listing-file-modified-sort="1707670463816" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-title-sort="Part Thirteen: On Marbles and Jumping Beans" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 10, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-13/index.html" class="title listing-title">Part Thirteen: On Marbles and Jumping Beans</a>
-</td>
-<td>
-<span class="listing-reading-time">21 min</span>
-</td>
-</tr>
-<tr data-index="13" data-categories="history,causality,Edinburgh" data-listing-date-sort="1708300800000" data-listing-file-modified-sort="1708590565499" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Part Fourteen: A non-technical but challenging introduction to causal inference..." data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 19, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-14/index.html" class="title listing-title">Part Fourteen: A non-technical but challenging introduction to causal inference…</a>
-</td>
-<td>
-<span class="listing-reading-time">5 min</span>
-</td>
-</tr>
-<tr data-index="14" data-categories="statistics,causality" data-listing-date-sort="1708560000000" data-listing-file-modified-sort="1709372026546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Fifteen: Causal Inference: The platinum and gold standards" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 22, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-15/index.html" class="title listing-title">Part Fifteen: Causal Inference: The platinum and gold standards</a>
-</td>
-<td>
-<span class="listing-reading-time">10 min</span>
-</td>
-</tr>
-<tr data-index="15" data-categories="statistics,causality,R" data-listing-date-sort="1709078400000" data-listing-file-modified-sort="1709140017082" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="Part Sixteen: Causal Inference: How to try to do the impossible" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 28, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-16/index.html" class="title listing-title">Part Sixteen: Causal Inference: How to try to do the impossible</a>
-</td>
-<td>
-<span class="listing-reading-time">16 min</span>
-</td>
-</tr>
-<tr data-index="16" data-categories="statistics,causality,R,matching,regression" data-listing-date-sort="1709337600000" data-listing-file-modified-sort="1709400168341" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Seventeen: Causal Inference: Controlling and Matching Approaches" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Mar 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-17/index.html" class="title listing-title">Part Seventeen: Causal Inference: Controlling and Matching Approaches</a>
-</td>
-<td>
-<span class="listing-reading-time">13 min</span>
-</td>
-</tr>
-<tr data-index="17" data-categories="statistics,causality,causal inference,DAGs" data-listing-date-sort="1710547200000" data-listing-file-modified-sort="1710615802410" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="Part Eighteen: Causal Inference: Some closing thoughts" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Mar 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-18/index.html" class="title listing-title">Part Eighteen: Causal Inference: Some closing thoughts</a>
-</td>
-<td>
-<span class="listing-reading-time">16 min</span>
-</td>
-</tr>
-</tbody>
-
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<ol>
+<li id="fn1"><p>Another aspect of this is that cities tend to disproportionately draw younger adults, and single people, rather than older adults and familities; both factors likely associated with greater risk appetites/lower risk aversion.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Sales of ‘harder drugs’ appear more strongly prohibited. If pushing the vehicle congestion analogy perhaps this is like permitting the sale of unleaded petrol but prohibiting the sale of leaded petrol?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -761,6 +556,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 

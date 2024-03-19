@@ -1,23 +1,44 @@
 ---
 title: "Tidy Tuesday Trash"
-draft: true
+subtitle: "Into the pythonverse!"
+author: 
+    - "Gatz Osario"
+    - "Jon Minton"
+    - "Antony Clark"
+    - "Brendan Clarke"
+    - "Kennedy Owusu-Afriyie"
+    - "Kate Pyper"
+    - "Andrew Saul"
+    - "Myriam Scansetti"
+date: "2024-03-06"
+jupyter: python3
 ---
 
+## Introduction
 
-## Example of factor analysis with trash data 
+[The latest TidyTuesday dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-03-05) is on trash collected as part of the Mr Trash Wheel Baltimore Healthy Harbor Initiative.
 
+This session was led by Gatz Osario, and different to previous TardyTuesday sessions in that both Gatz and Jon looked at the dataset and prepared some materials ahead of the session.
+
+Gatz provided an expert introduction to using Python for data science and data visualisation, using the Plotly libraries for interactive visualisation. Gatz used [Google Colab](https://colab.research.google.com/) for the session itself, which allows jupyter notebooks to be created and run online. In this post the same python chunks are run within Quarto.
+
+Gatz used a subset of the data containing 2 factor regression scores Jon generated in R. The R code for generating this derived dataset is shown below but was not presented at the (already packed) session.
+
+## Factor Analysis in R
+
+Jon started by loading tidyverse and the most recent dataset
 
 ```{r}
 library(tidyverse)
-# library(lavaan)
 
 df <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-03-05/trashwheel.csv')
 
-
+glimpse(df)
 ```
 
-Want to know if we can produce an SEM using lavaan to work out the relative contribution of different types of trash to either volume or weight collected
+The dataset contains the numbers of different types of item extracted each time the barge went to collect trash. These items aren't in comparable units (i.e. they weren't by weight or volume, which could be compared).
 
+Jon looked at one and two factor solutions to see if there are relationships between the types of items that tend to be collected together. First one factor
 
 ```{r}
 f_1 <- factanal(~ PlasticBottles + Polystyrene + CigaretteButts + GlassBottles + PlasticBags + Wrappers + SportsBalls, data = df, factors = 1)
@@ -25,6 +46,11 @@ f_1 <- factanal(~ PlasticBottles + Polystyrene + CigaretteButts + GlassBottles +
 f_1
 ```
 
+A single factor has a loading of 3.2, meaning (roughly) that it contains about three variables' worth of informaiton.
+
+Polystyrene, Plastic Bags and Wrappers all had strong factor loadings. The most unique item (i.e. the one least well captured by the factor) was SportsBalls.
+
+Now two factor solution:
 
 ```{r}
 f_2 <- factanal(~ PlasticBottles + Polystyrene + CigaretteButts + GlassBottles + PlasticBags + Wrappers + SportsBalls, data = df, factors = 2, scores = "regression")
@@ -32,6 +58,10 @@ f_2 <- factanal(~ PlasticBottles + Polystyrene + CigaretteButts + GlassBottles +
 f_2
 
 ```
+
+The first factor has a strong loading on Polysytrene, Plastic bags, and Wrappers. The secton factor has a strong loading for glass bottles and cigarette butts. (So, smoking and drinking related trash?)
+
+The argument `scores = "regression"` was added to allow the scores of each factor to be returned and attached to all rows in the original dataframe where it could be calculated.
 
 ```{r}
 df2 <- df %>%
@@ -43,21 +73,265 @@ df2 <- df %>%
 
 ```
 
+The following shows how the contents returned by the trash barge varied in terms of these two factor scores by year
+
 ```{r}
 df2 |>
     mutate(density = Weight / Volume) |>
     ggplot(aes(x = plastic_dumping_score, y = drinking_smoking_score)) + 
     geom_point(aes(alpha = density)) + 
-    facet_wrap(~ Year)
+    facet_wrap(~ Year) +
+    geom_vline(xintercept = 0) + 
+    geom_hline(yintercept = 0)
 
 
 ```
 
-This is a four dimensional plot! 
+Originally there seemed to be more variation in the types of item returned by the barge, and more glass bottles and cigarettes. Over the first few years the amount of plastic waste returned seemed to increase, but declined afer peaking in 2017.
 
-It looks like, over time, the type of trash collected has changed, and involves less of both plastic-based, and drinking/smoking-based types of trash. 
+To make it easier for python to read the file with factor scores we generated, I (Jon) will save it as a csv file
 
 ```{r}
-# write_csv(df2, "df_with_factor_scores.csv")
+write_csv(df2,  here::here("posts", "tardy-tuesday", "tidy-tuesday-trash", "df_with_factor_scores.csv"))
 
 ```
+
+## Data manipulation and visualisation in Python
+
+First Gatz imported the relevant libraries
+
+```{python}
+import pandas as pd
+import datetime
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.express as px
+pd.options.display.max_colwidth = 300
+
+```
+
+Just checking python works in the quarto document:
+
+```{python}
+
+1 + 1
+
+```
+
+Load the data
+
+```{python}
+df = pd.read_csv("df_with_factor_scores.csv")
+df['Date'] = pd.to_datetime(df['Date'], format = "%m/%d/%Y", errors = 'coerce')
+print(df.shape)
+df.head(3)
+
+```
+
+More information
+
+```{python}
+df.info()
+```
+
+Convert year to integer
+
+```{python}
+df['Year'] = df['Year'].astype(int)
+
+```
+
+Check no missing observations
+
+```{python}
+df.isna().sum()
+```
+
+Drop NAs (there aren't any)
+
+```{python}
+df = df.dropna()
+print(df.shape)
+df.isna().sum()
+```
+
+Sort by date
+
+```{python}
+df.sort_values(by=['Date'], inplace=True)
+```
+
+### Visualisation
+
+Produce list of theme options and select the third
+
+```{python}
+options = ["plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", "simple_white"]
+template = options[2]
+
+```
+
+Look at the new query syntax
+
+```{python}
+df.query("Year < 2017")
+```
+
+Produce the first plot
+
+```{python}
+dftemp = df.query("Year < 2017").copy()
+fig = px.box(dftemp, x='Year',y='Volume',color = 'ID')
+fig.update_layout(
+    title = "<b>Plot 1: Volume per Id box plot",
+    xaxis = dict(title='Years available'),
+    yaxis = dict(title='Volume (m3)'),
+    template=template
+)
+fig.show()
+```
+
+Second figure
+
+```{python}
+dftemp = df[['Date','ID','PlasticBottles']].copy()
+dftemp['Yearmonth'] = dftemp['Date'].apply(lambda x: x.strftime('%Y-%m'))
+del dftemp['Date']
+dftemp=dftemp.groupby(['Yearmonth','ID']).sum()
+dftemp.reset_index(inplace=True)
+fig_line = px.line(dftemp, x = 'Yearmonth',y = 'PlasticBottles',color = 'ID',
+  labels = {'PlasticBottles': 'N of bottles', 'ID': 'Identifier', 'Yearmonth': 'Year and month'},template=template
+)
+fig_line.update_layout(
+    title = "<b>Plot 2: N of bottles per year and month</b>",
+    xaxis = dict(title='Time series'),
+    yaxis = dict(title='Amount (units)')
+)
+fig_line.show()
+```
+
+Check which unique years we have
+
+```{python}
+df["Year"].unique()
+```
+
+Produce a subplot for different years
+
+```{python}
+fig = make_subplots(rows=1, cols=2)
+c = 1
+for year in df["Year"].unique():
+  if year > 2014 and year < 2017:
+    dftemp = df.query("Year == {}".format(year)).copy()
+    dftemp["Month"] = dftemp["Date"].apply(lambda x: x.strftime('%m'))
+    dftemp = dftemp[['Year','Month','PlasticBottles']].copy()
+    dftemp = dftemp.groupby(['Year','Month']).sum()
+    dftemp.reset_index(inplace=True)
+    fig.add_trace(go.Scatter(x=dftemp.Month, y=dftemp.PlasticBottles, name=str(year)), row=1, col=c)
+    c = c + 1
+fig.update_layout(title_text="<b>Plot 3: Side By Side Subplots</b>", template=template)
+fig.show()
+```
+
+Stacked subplots
+
+```{python}
+fig = make_subplots(rows=2, cols=1)
+r = 1
+for year in df["Year"].unique():
+  if year > 2014 and year < 2017:
+    dftemp = df.query("Year == {}".format(year)).copy()
+    dftemp["Month"] = dftemp["Date"].apply(lambda x: x.strftime('%m'))
+    dftemp = dftemp[['Year','Month','PlasticBottles']].copy()
+    dftemp = dftemp.groupby(['Year','Month']).sum()
+    dftemp.reset_index(inplace=True)
+    fig.append_trace(go.Scatter(x=dftemp.Month, y=dftemp.PlasticBottles, name=str(year)), row=r, col=1)
+    r = r + 1
+fig.update_layout(title_text="<b>Plot 4: Stacked Subplots</b>", template=template)
+fig.show()
+```
+
+Gridded subplots with made-up data:
+
+```{python}
+fig = make_subplots(rows=2, cols=2)
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6]), row=1, col=1)
+fig.add_trace(go.Scatter(x=[20, 30, 40], y=[50, 60, 70]), row=1, col=2)
+fig.add_trace(go.Scatter(x=[300, 400, 500], y=[600, 700, 800]), row=2, col=1)
+fig.add_trace(go.Scatter(x=[4000, 5000, 6000], y=[7000, 8000, 9000]), row=2, col=2)
+fig.update_layout(title_text="Grid Subplots", template=template)
+fig.show()
+
+```
+
+There's only one barge at the moment. I guess they're hoping to get more?
+
+```{python}
+df["Name"].unique()
+```
+
+```{python}
+dftemp = df[['Date','plastic_dumping_score','Name']].copy()
+dftemp['Yearmonth'] = df['Date'].apply(lambda x: x.strftime('%Y-%m'))
+del dftemp['Date']
+dftemp=dftemp.groupby(['Yearmonth','Name']).sum()
+dftemp.reset_index(inplace=True)
+fig_area = px.area(dftemp, x = 'Yearmonth',y = 'plastic_dumping_score',color = 'Name', template=template)
+fig_area.update_layout(
+    title = "<b>Plot 4: Dumping score per year and name</b>",
+    xaxis = dict(title='Year and Month'),
+    yaxis = dict(title='Total dumping score')
+)
+fig_area.show()
+```
+
+An interactive treemap
+
+```{python}
+dftemp = df[['Month','Year','PlasticBottles']].copy()
+dftemp=dftemp.groupby(['Month','Year']).sum()
+dftemp.reset_index(inplace=True)
+fig_tree_maps = px.treemap(dftemp, path= ['Year','Month'],values ='PlasticBottles',color_continuous_scale='RdBu', template=template)
+fig_tree_maps.update_layout(
+    title = "<b>Plot 7: Tree map about bottles per year and month</b>"
+)
+fig_tree_maps.show()
+```
+
+And a 3D plot!
+
+```{python}
+dftemp = df[['Year','drinking_smoking_score','plastic_dumping_score','ID']].copy()
+dftemp=dftemp.groupby(['Year','ID']).mean()
+dftemp.reset_index(inplace=True)
+fig_scatter3D = px.scatter_3d(dftemp,x = 'Year',y='drinking_smoking_score', z = 'plastic_dumping_score', color = 'ID',opacity=0.7, template=template)
+fig_scatter3D.update_layout(title = "<b>Plot 8: Year and plastic and drinking scores</b>")
+fig_scatter3D.show()
+```
+
+And a pie chart:
+
+```{python}
+dftemp = df[['Year','PlasticBags']].copy()
+dftemp=dftemp.groupby(['Year']).sum()
+dftemp.reset_index(inplace=True)
+fig = go.Figure(
+    data=[go.Pie(
+        labels=dftemp['Year'],
+        values=dftemp['PlasticBags'],
+        sort=False)
+    ])
+fig.update_layout(title  = "<b>Plot 7: Plastic bags per year</b>", template=template)
+fig.show()
+```
+
+## Reflections
+
+-   Google colab appears a good way of getting a jupyter notebook up and running, and accessible on many devices without installing python and dependencies first.
+
+-   There were actually more issues (related to date formatting and package versions) in running both R and python code in this quarto markdown document. Definitely a learning experience!
+
+-   Katie Pyper had questions about rules-of-thumb/conventions for defining and using outliers (as shown in the box plots) in regressions etc. An important separate topic!
+
+-   The same colab/python training will hopefully be of interest to a broader NHS audience
