@@ -268,3 +268,7 @@ Using the recommended approach, the ATT estimate is now $1121. Not statistically
 ## Summary 
 
 In this post we have largely followed along with the introductionary vignette from the `MatchIt` package, in order to go from the fairly cursory theoretical overview in the previous post, to showing how some of the ideas and methods relating to multiple regression and matching methods work in practice. There are a great many ways that both matching, and multiple regression, can be implemented in practice, and both are likely to affect any causal effect estimates we produce. However, the aspiration of using matching methods is to somewhat reduce the dependency that causal effect estimates have on the specific model specifications we used. 
+
+## Coming up
+
+The [next post](../lms-are-glms-part-18/index.qmd) concludes this series on causal inference, by discussing in more detail a topic many users of causal inference will assume I should have started with: the Pearlean school of causal inference. In brief: the approach to causal inference I'm used to interprets the problem, fundamentally, as a missing data problem; whereas the Pearlean approach interprets it more as a modelling problem. I see value in both sides, as well as some points of overlap, but in general I'm both more used to, and more comfortable with, the missing data interpretation. 

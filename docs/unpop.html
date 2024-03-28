@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2023-12-05">
 
-<title>Jon Minton’s Blog - Beavis and Butt-Head: When a physics graduate dons Dumbface</title>
+<title>Jon Minton’s Blog - Unpop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,24 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,24 +63,54 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
 
-<link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Beavis and Butt-Head: When a physics graduate dons Dumbface">
+    const options = {
+      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Unpop">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p24278427_b_h9_ab.jpg">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -91,17 +121,21 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../glms.html" rel="" target="">
+    <a class="nav-link" href="./glms.html" rel="" target="">
  <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../tardy-tuesday.html" rel="" target="">
+    <a class="nav-link" href="./tardy-tuesday.html" rel="" target="">
  <span class="menu-text">Tardy Tuesdays</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
+    <a class="nav-link active" href="./unpop.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -133,68 +167,141 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Beavis and Butt-Head: When a physics graduate dons Dumbface</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">cartoons</div>
-                <div class="quarto-category">stories</div>
-                <div class="quarto-category">eugenics</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Jon Minton </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">December 5, 2023</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="USA">USA <span class="quarto-category-count">(1)</span></div><div class="category" data-category="archetypes">archetypes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="books">books <span class="quarto-category-count">(3)</span></div><div class="category" data-category="cartoons">cartoons <span class="quarto-category-count">(1)</span></div><div class="category" data-category="comedy">comedy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="engineering">engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="eugenics">eugenics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="fiction">fiction <span class="quarto-category-count">(1)</span></div><div class="category" data-category="films">films <span class="quarto-category-count">(2)</span></div><div class="category" data-category="games">games <span class="quarto-category-count">(1)</span></div><div class="category" data-category="gaming">gaming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="genres">genres <span class="quarto-category-count">(1)</span></div><div class="category" data-category="humour">humour <span class="quarto-category-count">(1)</span></div><div class="category" data-category="identity">identity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="mathematics">mathematics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="mindfulness">mindfulness <span class="quarto-category-count">(1)</span></div><div class="category" data-category="myth">myth <span class="quarto-category-count">(1)</span></div><div class="category" data-category="neurodiversity">neurodiversity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="psychology">psychology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sci-fi">sci-fi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sitcoms">sitcoms <span class="quarto-category-count">(1)</span></div><div class="category" data-category="stories">stories <span class="quarto-category-count">(5)</span></div><div class="category" data-category="television">television <span class="quarto-category-count">(1)</span></div><div class="category" data-category="utopia">utopia <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p24278427_b_h9_ab.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Mike Judge’s Beavis and Butt-Head</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Unpop</h1>
 </div>
-<p>A second season of “Mike Judge’s Beavis &amp; Butt-Head” is now available on Paramount+, continuing a series that began on MTV in the early 1990s. I’ve been watching it, generally enjoying it, but feeling a gnawing sense of discomfort while doing so. Here’s why.</p>
-<p>Mike Judge is a physics graduate, whose other credits include: <a href="https://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)">Silicon Valley</a>, a sitcom about tech startups; <a href="https://en.wikipedia.org/wiki/King_of_the_Hill">King of the Hill</a>, a surprisingly gentle and sympathetic animated sitcom about a lower middle class social conservative family; and <a href="https://en.wikipedia.org/wiki/Idiocracy">Idiocracy</a>, a feature length science fiction comedy whose premise is that, “People are getting dumber; society’s getting dumber; at this rate someone who’s average now will be considered a genius a few generations from now.”</p>
-<p>In Idiocracy, the proposed mechanism for the world’s dumbing down is a kind of dysgenic selective breeding. Whereas smarter people, with their careful planning and fantastic career opportunities, equivocate and defer the decision to have children, dumber and more feckless people, who don’t tend to do much thinking or planning, and wouldn’t be giving up on any great opportunities, continue to breed like rabbits, or even viruses. Dumber people have a higher R number, so will outbreed smarter people until almost everyone in society’s dumb. From an evolutionary perspective, dumb is the winning strategy.</p>
-<p>If this sounds like the kind of plotline a eugenicist might come up with, I think you might be right. The alternative is that Judge is a black pilled cynic, a <em>wannabe</em> eugenicist, who just wishes, like Marxism, it would only work in practice. Watching a Judge film or TV show is being invited to judge, to find others inferior and wanting, and so feel superior. But that short-term feeling of superiority is fleeting; what lingers is the sense of loneliness, of being ‘the only adult in the room’, the hell of other people, when the other people are idiots.</p>
-<p>The intellectual elitism, and sneering at the dumb, that finds most full expression in Idiocracy, has always been present in Beavis &amp; Butt-Head. To an extent that’s the entire plot. Beavis &amp; Butt-Head’s lack of intellect is extrapolated to such an extent it becomes grotesquely surreal. And they combine this lack of intelligence with a lack of almost any detectable virtues or redeeming qualities, with the possible exception of Beavis’ sense of loyalty to Butt-Head, a loyalty that is often presented as misplaced, enabling the pair’s co-dependence and Butt-Head’s constant physical and emotional abuse of Beavis, his only friend in the world.</p>
-<p>Other targets of Beavis &amp; Butt-Head’s humour are those characters who overestimate the two title characters, treat them with kindness, and try to help them. This includes their hippy teacher, Mr Van Driessen, who is frequently seen to permit delinquency and disruption from the titular pair, apparently to the detriment both of the pair themselves, and the rest of the class. Other recent episodes feature a kindly middle-aged couple, who happily provide the pair with provisions with which their own home will be attacked; someone who heroically rescues them from a sewer (which the pair mistakenly believe is Hell, as in their illiteracy they misread ‘Department of Sanitation’ as ‘De Apartment of Satan’); and their ever forgiving and kindly neighbour (and Hank Hill prototype?) Mr Anderson, whose property the pair damage and steal without apparent repercussion (except of the karmic variety).</p>
-<p>Perhaps the most depressing segments in the recent Beavis and Butt-Head are those titled <em>Old</em> Beavis and Butt-Head. Breaking a forth wall in long-run cartoon series, the premise of these segments is that we might expect that someone who was a teenager in the early 1990s might be middle aged (or ‘old’, from their former teenage self’s perspective) in the 2020s. And so these age-appropriate versions of the characters are presented. By now, the segments suggest, Butt-Head is jobless, obese, and living off disability payments. Beavis is wrinkly and crag-toothed, but has at least managed, after decades of (not) trying, to get a job, working as Butt-Head’s full time (taxdollar funded) carer.</p>
-<p>Mike Judge, as well as creating the series, also voices both characters. In doing so, and in the context of his own academic achievements, just how wretchedly they are drawn, and his other outputs, I think he does the vocal equivalent of ‘donning Dumbface’. Beavis and Butt-Head aren’t just incapable and inferior along narrowly intellectual or academic lines, but in every conceivable way. Every thing they say (with the exception of some of their commentary segments), every thing they do, every scrape and escapade they put themselves in, is yet more evidence of their incorrigible worthlessness, and every attempt to help them as coming from a well-intentioned but misplaced belief that they could ever be better than they are. If we can’t <em>get rid</em> of people like them, the show seems to be suggesting, the best we can do is laugh at them mercilessly. (Maybe behind their backs, just to be safe.)</p>
-<p>As mentioned, I’ve been watching the new series, and against my better nature enjoying it. It’s a guilty pleasure. Hopefully the above goes to illustrate just <em>how</em> guilty.</p>
 
 
 
-</main> <!-- /main -->
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>I tend to take ‘unserious’ things seriously (as well as ‘serious’ things unseriously). Often if I’m watching, listening to or reading something, something nominally ‘unserious’ or ‘lowbrow’ or ‘poppy’, it will trigger a cascade of broader ideas, thoughts and concepts. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>As well as an extensive series of posts on statistical theory, I’ve also written some posts inspired by various specific pop cultural artefacts, such as specific books, films, TV shows and games. In this section I’ve aimed to collate these disparate reflections into a single place. I’ve called it ‘unpop’ because - though many of the things I’m writing about are part of pop culture, I’m probably not picking them up when they’re most popular, and neither am I treating them in a way that’s particular conventional or ‘poppy’.</p>
+<p>Often, the posts in this emergent series are going to be less technical than in the technical series. However, that doesn’t mean I can promise these posts will be free of technical content, concepts or ideas. If you’re scared of algebra, graphs, big words or code, this whole blogsite probably isn’t for you!</p>
+
+
+
+</section>
+
+
+<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Date
+</th>
+<th>
+Title
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="stories,films" data-listing-date-sort="1701216000000" data-listing-file-modified-sort="1701247424837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Robocop (1987) is wonderfully childish" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Nov 29, 2023</span>
+</td>
+<td>
+<a href="./posts/unpop/robocop-is-wonderfully-childish/index.html" class="title listing-title">Robocop (1987) is wonderfully childish</a>
+</td>
+</tr>
+<tr data-index="1" data-categories="cartoons,stories,eugenics" data-listing-date-sort="1701734400000" data-listing-file-modified-sort="1701799246144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Beavis and Butt-Head: When a physics graduate dons Dumbface" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Dec 5, 2023</span>
+</td>
+<td>
+<a href="./posts/unpop/beavis-and-butthead-is-dumbface/index.html" class="title listing-title">Beavis and Butt-Head: When a physics graduate dons Dumbface</a>
+</td>
+</tr>
+<tr data-index="2" data-categories="stories,sitcoms,archetypes,mathematics" data-listing-date-sort="1702771200000" data-listing-file-modified-sort="1702825560464" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="The Eerie Familiarity of Frasier (2023)" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Dec 17, 2023</span>
+</td>
+<td>
+<a href="./posts/unpop/new-frasiers-eerie-familiarity/index.html" class="title listing-title">The Eerie Familiarity of Frasier (2023)</a>
+</td>
+</tr>
+<tr data-index="3" data-categories="books,mindfulness,comedy,humour" data-listing-date-sort="1704499200000" data-listing-file-modified-sort="1704559673086" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="David Sederis: Humourists as Unrepentent Observational Confessionals" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Jan 6, 2024</span>
+</td>
+<td>
+<a href="./posts/unpop/unrepentent-confessional/index.html" class="title listing-title">David Sederis: Humourists as Unrepentent Observational Confessionals</a>
+</td>
+</tr>
+<tr data-index="4" data-categories="genres,television,stories" data-listing-date-sort="1706745600000" data-listing-file-modified-sort="1706962176072" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="On Sweary Soap Operas: A Concealed Television Genre" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Feb 1, 2024</span>
+</td>
+<td>
+<a href="./posts/unpop/on-sweary-soaps/index.html" class="title listing-title">On Sweary Soap Operas: A Concealed Television Genre</a>
+</td>
+</tr>
+<tr data-index="5" data-categories="stories,fiction,engineering,utopia,neurodiversity" data-listing-date-sort="1708732800000" data-listing-file-modified-sort="1708797870601" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Why can't we just get on with making and fixing stuff?" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Feb 24, 2024</span>
+</td>
+<td>
+<a href="./posts/unpop/andy-weir-utopian-engfi/index.html" class="title listing-title">Why can’t we just get on with making and fixing stuff?</a>
+</td>
+</tr>
+<tr data-index="6" data-categories="sci-fi,myth,films,books" data-listing-date-sort="1709424000000" data-listing-file-modified-sort="1709495856190" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="My thoughts on Dune (Part 1)" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Mar 3, 2024</span>
+</td>
+<td>
+<a href="./posts/unpop/dune-pt-1-after-dune-pt-2/index.html" class="title listing-title">My thoughts on Dune (Part 1)</a>
+</td>
+</tr>
+<tr data-index="7" data-categories="games,psychology,gaming" data-listing-date-sort="1711065600000" data-listing-file-modified-sort="1711121114817" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Levelling up... forever. On Gaming's Shepherd's Tone and the Fremium Trap" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Mar 22, 2024</span>
+</td>
+<td>
+<a href="./posts/unpop/fractal-game-mechanics-and-the-illusion-of-progress/index.html" class="title listing-title">Levelling up… forever. On Gaming’s Shepherd’s Tone and the Fremium Trap</a>
+</td>
+</tr>
+<tr data-index="8" data-categories="books,identity,USA" data-listing-date-sort="1711411200000" data-listing-file-modified-sort="1711552473122" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Thoughts on Dreams from My Father" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Mar 26, 2024</span>
+</td>
+<td>
+<a href="./posts/unpop/obama-dialectic-identity/index.html" class="title listing-title">Thoughts on Dreams from My Father</a>
+</td>
+</tr>
+</tbody>
+
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>It’s an occupational hazard of being me.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -542,8 +649,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
