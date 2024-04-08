@@ -1,0 +1,177 @@
+---
+title: "Double Tardy Tuesday"
+subtitle: "Mea Culpa"
+date: "2024-04-02"
+author: "Jon Minton"
+categories: [Tidy Tuesday, Tardy, Data Science]
+---
+
+## Introduction 
+
+I've been exceptionally tardy updating the Tardy Tuesday blog the last couple of weeks. So there are a couple of weeks worth of code to update with at once. Unlike previous times I'm going to list only myself as the author of this blog, as none of the contributors deserve any blame for my tardiness! 
+
+Additionally, the scripts will be presented more 'as-is' than on previous occasions, without as much additional discussion or amendments. 
+
+## Common package dependencies
+
+```{r}
+library(tidyverse)
+
+```
+
+## Mutant Moneyball 
+
+[This TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-03-19) dataset involved understanding the relationship between the value of old Mavel comics and the appearance of particular characters in those comics. I'm not sure it was a good or bad thing that we didn't know the names of most of the characters...
+
+The session was led by Brendan, who wrote (with our support) the script below:
+
+```{r}
+
+
+tidytuesdayR::tt_load('2024-03-19') 
+
+mutant_moneyball <- tidytuesdayR::tt_load('2024-03-19') |>
+  pluck(1)
+
+str(mutant_moneyball)
+
+# filter by totalIssueCheck == TotalIssues for missing issues, then remove both
+
+mutant_moneyball |>
+  filter(totalIssueCheck != TotalIssues) |>
+  nrow()
+
+# split TotalIssues and Member into issues data
+
+appearances <- mutant_moneyball |>
+  select(Member, contains("ssues")) |>
+  pivot_longer(!Member) |>
+  mutate(first = str_to_title(str_extract(Member, "^[[:lower:]]*"))) |>
+  mutate(last = str_remove(Member, "^[[:lower:]]*" )) |>
+  mutate(Member = paste(first, last), .keep="unused") 
+
+appearances |>
+  filter(name == "TotalIssues") |>
+  arrange(desc(value))
+
+best_xm <- appearances |>
+  slice_max(value, n=10) |>
+  pull(Member)
+
+appearances |>
+  mutate(first = str_to_title(str_extract(Member, "^[[:lower:]]*"))) |>
+  mutate(last = str_remove(Member, "^[[:lower:]]*" )) |>
+  mutate(Member = paste(first, last), .keep="unused") 
+
+dates <- tribble(
+  ~start, ~end, ~decade,
+  1963, 1969, 60,
+  1970, 1979, 70,
+  1980, 1989, 80,
+  1990, 1992, 90
+)
+
+plot <- appearances |>
+  mutate(decade = as.numeric(str_extract(name, "\\d{2}"))) |>
+  filter(!is.na(decade)) |>
+  left_join(dates) |>
+  mutate(year_range = 1 + end - start) |>
+  mutate(rate = value / year_range) |>
+  relocate(last_col()) |>
+  filter(Member %in% best_xm) |>
+  ggplot(aes(x = start, y = rate, colour = Member)) +
+  geom_line() +
+  geom_point() +
+  theme(legend.position = "bottom")
+
+plotly::ggplotly(plot)
+
+```
+
+
+### Recollections
+
+For this session we focused more on regex than perhaps we thought we would, with a particular focus on how to produce nicely readable names for different characters. We also focused on producing metrics like appearances per year, given that some of the time periods were full decades, but others were just of a few years within the decade.
+
+## NCAA Men's March Madness
+
+This session was based around [data from a basketball competition](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-03-26). It had information both on how well different teams performed against each other, and also how well various members of the public thought they would perform, meaning it can be used to assess how well expectations match with reality. 
+
+This particular session was led by Nic, who supplied the code below. 
+
+```{r}
+if (is.na(utils::packageVersion("pacman"))){
+  install.packages("pacman")
+}
+library(pacman)
+p_load(tidytuesdayR)
+ 
+### Download last tuesday's data
+ 
+tt_data <- tt_load('2024-03-26')
+tt_data
+ 
+### Assign the datasets to our global environment
+ 
+list2env(tt_data, globalenv())
+ 
+ 
+# Load packages -----------------------------------------------------------
+ 
+p_load(tidyverse, # The tidyverse
+       cheapr, # Cheap (fast & efficient) functions
+       cppdoubles, # Floating-point comparisons
+       timeplyr, # Date-Time manipulation
+       tidytext, # Text manipulation
+       phsmethods, phsstyles) # PHS functions
+ 
+ 
+# Exploratory -------------------------------------------------------------
+ 
+ 
+overview(`team-results`)
+overview(`public-picks`)
+ 
+ 
+`public-picks` |>
+  pivot_longer(R64:FINALS) |> 
+  group_by(YEAR, TEAMNO) |> 
+  mutate(stage = row_number()) %>%
+  mutate(perc = as.numeric(str_remove(value, "%")),
+         perc = perc / 100) %>%
+  ggplot(aes(x = stage, y = perc)) + 
+  geom_line(aes(group = paste(YEAR, TEAM)))
+  # geom_col()
+```
+
+
+
+```{r} 
+top_predicted_teams <- `public-picks` |>
+  pivot_longer(R64:FINALS) |> 
+  group_by(YEAR, TEAMNO) |> 
+  mutate(stage = row_number()) %>%
+  mutate(perc = as.numeric(str_remove(value, "%")),
+         perc = perc / 100) %>%
+  filter(stage == 6) %>%
+  arrange(desc(perc)) %>%
+  ungroup() %>%
+  slice(1:5)
+
+`team-results` %>%
+  count(CHAMP)
+ 
+`team-results` %>%
+  count(CHAMP)
+ 
+`team-results` %>%
+  filter(F2 >= 2)
+ 
+top_predicted_teams %>%
+  inner_join(`team-results`, by = "TEAM")
+
+```
+
+### Shoutouts 
+
+Please check out Nic's [timeplyr package](https://cran.r-project.org/web/packages/timeplyr/index.html), which is now on CRAN and was masterfully presented at a [previous EdinbR R users' group meeting](http://edinbr.org/edinbr/2024/01/11/January-meeting.html).  
