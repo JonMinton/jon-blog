@@ -1,0 +1,164 @@
+---
+title: "Tidy Tuesday: Solar Eclipses"
+date: "2024-04-11"
+author:
+  - "Myriam Scansetti"
+  - "Nick Christofides"
+  - "Wei Fan"
+  - "Kennedy Owusu-Afriyie"
+  - "Jon Minton"
+categories: [R, Tidy Tuesday]
+---
+
+The most recent TidyTuesday session looked at data about solar eclipses in the USA, and was led by Myriam. The repo readme is [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-04-09)
+
+## Loading the data 
+
+```{r}
+library(tidyverse)
+
+# Let's use the tidytuesdayR load package
+
+all_data <- tidytuesdayR::tt_load('2024-04-09')
+
+```
+
+
+## Tidying the data
+
+The data are a list of dataframes. Each dataframe has a similar data structure. We decided to spend some time tidying these dataframes, then combining them again into a single dataframe with additional attributes 
+
+```{r}
+eclipse_annular_2023 <- all_data$eclipse_annular_2023 |>
+    mutate(year = 2023, type = "annular") |>
+    pivot_longer(contains("eclipse"), names_to = "event_number", values_to = "event_datetime")
+eclipse_total_2024 <- all_data$eclipse_total_2024 |>
+    mutate(year = 2024, type = "total") |>
+    pivot_longer(contains("eclipse"), names_to = "event_number", values_to = "event_datetime")
+eclipse_partial_2023 <- all_data$eclipse_partial_2023 |>
+    mutate(year = 2023, type = "partial") |>
+    pivot_longer(contains("eclipse"), names_to = "event_number", values_to = "event_datetime")
+eclipse_partial_2024 <- all_data$eclipse_partial_2024 |>
+    mutate(year = 2024, type = "partial") |>
+    pivot_longer(contains("eclipse"), names_to = "event_number", values_to = "event_datetime")
+
+data_tidied <- bind_rows(
+    list(eclipse_annular_2023, eclipse_partial_2023, eclipse_total_2024, eclipse_partial_2024)
+) |>
+    mutate(event_number = str_remove(event_number, "eclipse_") %>% as.numeric())
+
+data_tidied
+
+```
+
+
+## Graphing the data 
+
+As we do not expect cities/towns to move between years, we thought if we plotted the `lon` and `lat` as points we will get an impression of the USA 
+
+```{r}
+data_tidied |> 
+    ggplot(aes(lon, lat)) + 
+    geom_point()
+
+```
+
+Indeed we do! Though we thought it might be more straightforward to focus on the main US territory
+
+```{r}
+data_tidied |>
+    filter(
+        between(lon, -150, -50),
+        between(lat, 22, 50)
+    ) |>
+    ggplot(aes(lon, lat)) + 
+    geom_point()
+
+
+```
+
+We now have an indirect map/signal of population density in the USA! 
+
+## Eclipse type in 2024
+
+We explored the four different datasets using filtering. For 2024 the types were `total` and `partial`. They look as follows:
+
+```{r}
+data_tidied |>
+    filter(
+        between(lon, -150, -50),
+        between(lat, 22, 50)
+    ) |>
+    filter(year == 2024) |>
+    filter(event_number == 1) |>
+    ggplot(aes(lon, lat)) + 
+    geom_point() + 
+    facet_wrap(~type)
+
+```
+
+We realised `total` is a swathe of locations cut through the rest of the USA. We therefore thought it might be good to show the points coloured by whether they are flagged as `total` or `partial` in eclipse type
+
+```{r}
+data_tidied |>
+    filter(
+        between(lon, -150, -50),
+        between(lat, 22, 50)
+    ) |>
+    filter(year == 2024) |>
+    filter(event_number == 1) |>
+    mutate(is_total = type == "total") |>
+    ggplot(aes(lon, lat)) + 
+    geom_point(aes(colour = is_total))
+
+```
+
+And that's where we got to. We recombined two datasets to show which parts of the USA were in the path of the total eclipse. (Nick mentioned that he'd seen data suggesting AirBnB prices were especially high for properties in this swathe!)
+
+
+## Going further 
+
+We could have looked at doing something similar with the `annular` and `partial` data for 2023:
+
+```{r}
+data_tidied |>
+    filter(
+        between(lon, -150, -50),
+        between(lat, 22, 50)
+    ) |>
+    filter(year == 2023) |>
+    filter(event_number == 1) |>
+    mutate(is_annular = type == "annular") |>
+    ggplot(aes(lon, lat)) + 
+    geom_point(aes(colour = is_annular))
+
+```
+
+This shows how the swathe the 2023 eclipse epicentre cut through the USA was different to the 2024 eclipse path.
+
+We could also have made use of the datetime column to show how the eclipse happened at different times in different parts of the USA:
+
+```{r}
+
+data_tidied |>
+    filter(
+        between(lon, -150, -50),
+        between(lat, 22, 50)
+    ) |>
+    filter(year == 2024) |>
+    filter(event_number == 1) |>
+    mutate(is_total = type == "total") |>
+    mutate(start_time = min(event_datetime)) |>
+    mutate(time_since_start = event_datetime - start_time) |>
+    ggplot(aes(lon, lat)) + 
+    geom_point(aes(colour = time_since_start, alpha = is_total)) + 
+    scale_alpha_manual(values = c(`FALSE` = 0.01, `TRUE` = 1))
+
+
+```
+
+We can see from this that the event seemed to start on the west coast and move east. 
+
+Finally, we could have looked at adding a basemap.  
+
+I tried following [this tutorial](https://builtin.com/data-science/ggmap) to get a basemap using `ggmap`. Unfortunately, `ggmap` now requires registering API keys (and credit card details) with Google. So this exercise is as yet incomplete!

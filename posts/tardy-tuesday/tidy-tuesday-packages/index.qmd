@@ -1,0 +1,344 @@
+---
+title: "Tidy Tuesday Extra - Packages and recursive searching"
+author: 
+  - "Jon Minton"
+date: "2024-04-20"
+---
+
+
+## Introduction 
+
+[The latest tidytuesday dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-04-16) contains information on R packages and how they're related to each other. The relationship information they contain poses some interesting challenges and opportunities. I (Jon), foolishly and/or sadistically, suggested trying to build a recursive algorithm which, given a given package, traces out the other packages that either depends on it, or that it depends on. 
+
+We didn't quite get where we were hoping to, but hopefully in this post I'll be able to unpack some of the challenges and opportunities this approach could bring.
+
+Unlike most tidy tuesday challenges, my (horrible) suggestion brought us into the land of computer science, rather than the data science challenges that most tidy tuesday sessions tend to be focused on. Rather than cover what we did and didn't achieve in that session, this post is largely my attempt to think through the challenge of building and developing a recursive function in R for allowing us to trace through a tree starting from a given node. The post isn't intended to *solve* the challenge I initially suggested, but to lay out some of the conceptual groundwork required to do so later. 
+
+## Recursion as a concept 
+
+A [recursive function](https://www.geeksforgeeks.org/recursive-functions/) is a function that conditionally evokes itself. It's a beautiful and horrifying idea -  coding Inception - and as the link above suggests is often used when a more complex problem needs to be broken down into ever smaller steps. The fifth example in the above link says that it's great for exploring and parsing tree and graph structures. And indeed that's the kind of application I was thinking about when I saw the TidyTuesday dataset. 
+
+I've only found reason to build a recursive algorithm in R once before, perhaps around a decade ago. My problem was that I had a two dimensional regular matrix of values, but some of the cells contained missing values. I wanted to build a function that, for any missing value in the matrix, would impute a value for the missing cell given the average of the values in the eight cells that surrounded it, something known as a [Moore Neighbourhood](https://en.wikipedia.org/wiki/Moore_neighborhood). The Wikipedia example image used is as follows:
+
+![Moore Neighbourhood](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Moore_neighborhood_with_cardinal_directions.svg/1920px-Moore_neighborhood_with_cardinal_directions.svg.png)
+
+If each missing cell $C$ was surrounded only by non-missing cells, then there would have been no need for recursion. However there were examples in the data where two or more *contiguous*/neighbouring cells cells were missing. I used recursion to solve this problem by calling the imputation function on any missing neighbours (Say $NE$) of the missing target cell $C$. The missing neighbour cell would then become the new target cell $C$, and if any of this target cell's neighbours were missing, then the imputation function would be called once again, with the last stage's neighbour cell now the new target cell. Only if the condition that a target cell has no missing neighbours would the imputation function actually impute. 
+
+In effect, this use of recursion meant that, for a *patch* of missing cells, the imputation would occur *outside-to-inside*, i.e. from the cell with the most non-missing neighbours to the cell with the fewest. 
+
+Anyway, with that example in mind, let's look at the data.
+
+## Loading the data
+
+```{r}
+library(tidyverse)
+library(tidytuesdayR)
+
+dta_list <- tidytuesdayR::tt_load(2024, week = 16)
+
+dta_main <- dta_list$shiny_revdeps
+dta_main
+```
+
+Of course we didn't notice the dataset was focused on shiny! 
+
+## Exploration
+
+What are the types of dependency listed?
+
+```{r}
+unique(dta_main$dependency_type)
+
+```
+
+So, where the parent is shiny, how many types of each dependency are there? 
+
+```{r}
+dta_main %>% 
+  filter(parent == "shiny") %>% 
+  count(dependency_type)
+
+```
+
+Is shiny its own parent?
+
+```{r}
+dta_main %>% 
+  filter(parent == "shiny") |>
+  filter(child == "shiny")
+
+```
+
+No, fortunately. 
+
+Does the dataset contain examples where shiny is neither the parent nor the child?
+
+```{r}
+dta_main |>
+  filter(parent != "shiny" & child != "shiny")
+
+```
+
+Yes it does. 
+
+## Defining a problem 
+
+As we've finally looked enough at the dataset and documentation to know that shiny is the root, let's work out how many packages are children where dependency type is imports and parent is shiny.
+
+```{r}
+dta_main |>
+  filter(parent == "shiny" & dependency_type == "imports") |>
+  count(child) |>
+  nrow()
+
+```
+
+There appear to be 793 packages that have this relationship. 
+
+Let's say we want to take this list of 793 packages and find all packages that have them as children.
+
+
+```{r}
+get_children <- function(parent_name) {
+    dta_main |> 
+    filter(parent == parent_name) |> 
+    filter(dependency_type == "imports") |> 
+    pull(child) |> 
+    unique()
+}
+
+child_shiny <- get_children("shiny")
+
+length(child_shiny)
+```
+
+There are almost 15000 packages with this relationship as children. 
+
+We can now start to think about the recursive search problem by running the get_children function for each child package, with the name of the child now the name of the parent. 
+
+Let's start with the five first packages who are direct children of shiny. 
+```{r}
+some_shiny_children <- child_shiny[1:5]
+
+some_shiny_grandchildren <- some_shiny_children |>
+  map(~get_children(.))
+
+some_shiny_children
+
+some_shiny_grandchildren
+
+```
+
+For packages 1, 2, 3 and 5 there are no further children. However for package four there are four packages that are children. 
+
+Let's see if the children of package 4 themselves have children.
+
+```{r}
+great_grandchildren <- some_shiny_grandchildren[[4]] |>
+  map(~get_children(.))
+
+great_grandchildren
+```
+
+Two of the great grandchildren have children. 
+
+## Recursive search with a toy example
+
+Let's try to think through the fundamentals of a recursive function using a toy example. 
+
+```{r}
+
+toy_data <- tribble(
+    ~parent, ~child, 
+    "A", "B",
+    "A", "C",
+    "A", "D",
+    "B", "E",
+    "C", "F",
+    "C", "G",
+    "G", "J",
+    "E", "H",
+    "E", "I"
+)
+
+```
+
+This dataset shows the following set of relationships:
+
+
+```{mermaid}
+flowchart TB
+
+A --> B
+A --> C
+A --> D
+B --> E
+C --> F
+C --> G
+G --> J
+E --> H
+E --> I
+
+
+```
+
+Let's first see if we can identify which of these nodes are roots. i.e. nodes that are children but have no parents. 
+
+```{r}
+is_root <- function(df, node_label){
+    res <- df |> filter(parent == node_label) |> nrow()
+
+    if(res == 0){
+        return(TRUE)
+    } else {
+        return(FALSE)
+    }
+}
+
+```
+
+Let's test this for each of the nodes in the toy dataset. 
+
+```{r}
+all_nodes <- unique(c(toy_data$parent, toy_data$child))
+
+
+# run manually for a couple of examples:
+
+is_root(toy_data, "A")
+is_root(toy_data, "B")
+is_root(toy_data, "D")
+is_root(toy_data, "F")
+
+# run using functional programming 
+
+roots <-  
+  sapply(all_nodes, function(x) is_root(toy_data, x))
+
+roots
+```
+
+Next we want to use the is_root() function inside a find_roots() function that will return all the roots in a dataset.
+
+```{r}
+
+find_roots <- function(df){
+    all_nodes <- unique(c(df$parent, df$child))
+    
+    roots <-  
+      sapply(all_nodes, function(x) is_root(df, x))
+    
+    return(all_nodes[roots])
+}
+
+find_roots(toy_data)
+
+```
+
+
+## Recursive Root Finding Function
+
+Let's now think through a `trace_to_root` function, that uses recursion, and how it will work. 
+
+- If `trace` is null, then start trace with `node`
+- If `node` is root, then return trace
+- If `node` is not root, then add each child to a trace, and rerun `trace_to_root` with the current node and trace parameters.
+
+As part of debugging and development, I've added an option `verbose`, which reports on what the function is doing at each step. 
+
+```{r}
+
+trace_to_root <- function(node, trace = NULL, df, verbose = FALSE){
+    if (verbose){
+      message("Current node is ", node)
+      message("Current trace is ", trace)
+    }
+   
+    if (is.null(trace)){
+        trace <- list(node)
+    }
+
+    if (is_root(df, node)){
+        if (verbose) {
+          message("node ", node, " is a root, so returning trace")
+        }
+        return(trace)
+    } else {
+        if (verbose) {
+          message("node ", node, " is not a root, so continuing")
+        }
+
+        children <- df |> filter(parent == node) |> pull("child")
+
+        if (verbose) {
+          message("have found ", length(children), " children of ", node)
+        }
+
+        pass_down <- function(child, trace, verbose = TRUE) {
+            if (verbose) {message("current child is ", child)}
+            trace <- c(trace, child)
+            if (verbose) {message("trace is ", trace)}
+            return(trace_to_root(child, trace, df = df, verbose = verbose))
+        }
+        # This is where recursion happens
+        return(
+          map2(children, trace, pass_down)
+        )
+
+    }
+}
+```
+
+As with many complex functions, this was developed through a number of steps, most of which involved extensive debugging and brow-furrowing. The use of the toy example and the graph, along with the verbose mode, made it easier to see whether the function was doing what I wanted it to, even if what it returns isn't necessarily in the nicest format. 
+
+Let's start with node 'H', which should be identified as a root, with no further children. This should mean the number of operations performed and reported should be short:
+
+```{r}
+trace_to_root("H", df = toy_data, verbose = TRUE)
+```
+
+This seems to work as expected. Node 'D' should be similarly simple:
+
+```{r}
+trace_to_root("D", df = toy_data, verbose = TRUE)
+
+```
+
+One step up in complexity/number of operations should be node G, which will be the first use-case that will involve some recursion.
+
+
+```{r}
+trace_to_root("G", df = toy_data, verbose = TRUE)
+```
+
+The list returned contains two elements, the first of which is G, and the second of which is J. This is the correct trace sequence. 
+
+Now let's look at node E
+
+```{r}
+trace_to_root("E", df = toy_data, verbose = TRUE)
+```
+
+This time the outer list is of length two, each of whcih containing two elements. The first sublist denotes the path E to H, and the second the path E to I. Once again this first with what we know about the part of the tree starting at E: it splits into two paths. 
+
+Now node C:
+
+```{r}
+trace_to_root("C", df = toy_data, verbose = TRUE)
+
+```
+
+The list object contains two sublists. The first sublist indicates the path C to F. The second sublist itself contains two sublists: one denoting a path C to J; the second of which denotes a path G to J. 
+
+Now let's look at the tree as a whole, i.e. start at node A:
+
+```{r}
+trace_to_root("A", df = toy_data, verbose = TRUE)
+```
+
+This structure is more complex. At the outer level there is a list of length three. 
+
+
+## Conclusion
+
+Broadly, it appears the information contained in the list structures would allow the tree structure to be recovered. However, currently no trace returned is of length greater than 2. Before applying a recursive algorithm to the real data, more work should probably be done on defining exactly what type of output should be returned, and then implementing this return type. However, the function does appear to use recursion effectively, delving into various tree structures until roots of the trees are found, rather than either just stopping at an arbitrary depth, or never stopping and evaluating. 
