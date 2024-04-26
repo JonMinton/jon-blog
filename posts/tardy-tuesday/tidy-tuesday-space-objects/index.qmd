@@ -1,0 +1,159 @@
+---
+title: "Tidy Tuesday 23 April 2024: Space objects"
+author: 
+    - "Myriam Scansetti"
+    - "Brendan Clarke"
+    - "Tricia Govindasamy"
+    - "Jon Minton"
+    - "Andrew Saul"
+    - "Gatz Osorio"
+    - "Kennedy Owusu-Afriyie"
+date: "2024-04-26"
+code-fold: true
+warning: false
+message: false
+categories: [tidy tuesday, space]
+---
+
+The most recent [TidyTuesday dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-04-23) was taken from [Our World In Data](https://ourworldindata.org/grapher/yearly-number-of-objects-launched-into-outer-space), and showed the number of objects launched into space by different entities by year. Myriam led this week's session. 
+
+## Data preparation and exploration
+
+```{r}
+# Option 1: tidytuesdayR package 
+#install.packages("tidytuesdayR")
+library(tidyverse)
+library(janitor)
+```
+
+```{r, cache = TRUE}
+tuesdata <- tidytuesdayR::tt_load('2024-04-23')
+ 
+outer_space_object <- tuesdata$outer_space_objects
+unique(outer_space_object$Entity)
+```
+
+We wanted to know what the entities referred to:
+```{r}
+outer_space_object %>% 
+  filter(!is.na(Code)) %>% 
+  pull(Entity) %>% 
+  unique()
+```
+
+Generally, when an entity has a 'code', it is a country (though contains some other aggregations, like whole world, as well)
+```{r}
+outer_space_object %>% 
+  filter(!is.na(Code)) %>% 
+  distinct(Entity) %>% 
+  arrange(desc(Entity))
+```
+
+We decided to use `janitor::clean_names` to avoid having to remember the case of columns. 
+```{r}
+outer_space_objects <- outer_space_object %>% 
+  clean_names()
+outer_space_objects
+```
+
+## Visualisation 
+
+How many objects released into space by the world by year? 
+
+```{r}
+outer_space_objects %>% 
+  filter(entity == "World") %>% 
+  group_by(year) %>% 
+  summarise(num_objects = sum(num_objects)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = year, y =num_objects))+
+  geom_line()
+```
+
+We thought maybe there's been, and been periods of, exponential growth, so looked at this with a log y scale too:
+
+```{r}
+outer_space_objects %>% 
+  filter(entity == "World") %>% 
+  group_by(year) %>% 
+  summarise(num_objects = sum(num_objects)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = year, y =num_objects))+
+  geom_line()+
+  scale_y_log10()
+```
+
+Here it's more obvious there were broadly two 'regimens' globally of objects released into space. 
+
+
+Which countries released most objects into space over the whole period covered by the dataset?
+
+```{r}
+top_10 <- outer_space_objects %>% 
+  filter(entity != "World", entity != "European Space Agency") %>% 
+  count(entity, wt = num_objects, name = "amount") %>% 
+  slice_max(order_by = amount, n = 10) %>% 
+  pull(entity)
+top_10
+```
+
+For these top 10 countries, we decided to look at trends over time:
+
+
+```{r}
+outer_space_objects %>% 
+  filter(entity %in% top_10) %>% 
+  ggplot(aes(x = year, y =num_objects, colour = entity))+
+  geom_line()+
+  scale_y_log10()+
+  facet_wrap(~entity, scales = "free_y")
+```
+
+Tricia suggested we ordered these facets by the total number of objects released over the whole period. For this we used the `forcats` package, with a bit of trial and error. 
+
+```{r}
+# This use of fct_reorder looks like it's worked, but it hasn't
+outer_space_objects %>%
+  filter(entity %in% top_10) %>%
+  mutate(entity = fct_reorder(entity, num_objects, .desc = TRUE)) %>%
+  ggplot(aes(x = year, y =num_objects, colour = entity))+
+  geom_line()+
+  scale_y_log10()+
+  facet_wrap(~entity, scales = "free_y")
+```
+This version looks initially that it's worked, but it hasn't. We can confirm this with the following: 
+
+
+```{r}
+# This confirms the ordering is wrong in the above
+outer_space_objects %>%
+  filter(entity %in% top_10) %>%
+  group_by(entity) %>%
+  summarise(num_objects = sum(num_objects)) %>%
+  ungroup() %>%
+  arrange(desc(num_objects))
+```
+
+
+So we use `group_by` but with `mutate`, not `summarise`, to create the `total_num_objects` column, which is then used by `fct_reorder` to create something that can be faceted correctly
+
+```{r}
+outer_space_objects %>%
+  filter(entity %in% top_10) %>%
+  group_by(entity) %>%
+  mutate(total_num_objects = sum(num_objects)) %>%
+  ungroup() %>%
+  mutate(entity = fct_reorder(entity, total_num_objects, .desc = TRUE)) %>%
+  ggplot(aes(x = year, y =num_objects, colour = entity))+
+  geom_line()+
+  scale_y_log10()+
+  facet_wrap(~entity, scales = "free_y") + 
+  labs(
+    title = "Number of objects in outer space by top 10 countries",
+    subtitle = "Arranged by total number of objects put in outer space"
+  )
+
+
+```
+
+We can see, for example, that China, Japan and India's number of objects sent into space has been growing exponentially for a long time. The USA, and UK, appear to be having more of a recent exponential growth spurt. Russia's object release rate declined with the collapse of the USSR. 
