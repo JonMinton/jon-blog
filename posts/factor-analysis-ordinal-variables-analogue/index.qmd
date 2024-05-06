@@ -1,0 +1,37 @@
+---
+title: "Factor analysis with ordinal variables"
+subtitle: "An Analogue Explanation"
+author: "Jon Minton"
+date: "2024-05-04"
+categories: [statistics, factor analysis, ordinal variables, analogue]
+---
+
+For all of the software and tooling available on a computer, sometimes the best way to start thinking and describing complex ideas is with a notepad and pen. No need to think through which graphics software to use: it's a pen. No need to think about typography and formatting: it's a pen! Undo buttons? A strike through with a pen. And what if it looks crap? Doesn't matter. With a pen (and my handwriting) it's *guaranteed* to look crap. Just don't worry about it. Just focus on getting the idea out, from brain to pen to paper.
+
+Recently I've been thinking about an application of factor analysis with ordinal variables. With R's `lavaan` package, for instance, if the manifest items (rectangles) which go into determining a latent factor (ovals) are ordinal factors, then a method known as polychoric correlation is used. This allows a relaxation of the assumption made implicitly when using ordinal variables, such as those using a Likert scale, which is that each response level is an *equal distance* apart from the adjacent levels. i.e. something like:
+
+| Response Category          | Value |
+|----------------------------|-------|
+| Strongly Disagree          | -2    |
+| Disagree                   | -1    |
+| Neither Disagree nor Agree | 0     |
+| Agree                      | 1     |
+| Strongly Agree             | 2     |
+
+: Equal distance treatment of Likert scale
+
+Instead, with enough good indicators for a latent factor, and enough data, the equal distance assumption can be dropped.
+
+Here's my handwritten introduction to *how*:
+
+![Page 1](p_01.jpeg)
+
+![Page 2](p_02.jpeg)
+
+![Page 3](p_03.jpeg)
+
+![Page 4](p_04.jpeg)
+
+![Page 5](p_05.jpeg)
+
+![Page 6](p_06.jpeg)
