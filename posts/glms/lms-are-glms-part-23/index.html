@@ -459,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">year</span>(Month) <span class="sc">&gt;=</span> <span class="dv">1990</span>) <span class="sc">|&gt;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">STL</span>(Employed <span class="sc">~</span> <span class="fu">trend</span>(<span class="at">window =</span> <span class="dv">7</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">season</span>(<span class="at">window =</span> <span class="dv">91</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">season</span>(<span class="at">window =</span> <span class="dv">5</span>),</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">robust =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">components</span>() <span class="sc">|&gt;</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -468,6 +468,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>In the above I’ve reduced the season window size (by default it’s infinite). Whereas before this seasonal pattern was forced to be constant for the whole time period, this time we an see that it changes, or ‘evolves’, over the course of the time series. We can also see that the remainder component, though looking quite random, now looks especially ‘spiky’, suggesting that the kinds of residuals left are somewhat further from Guassian white noise than in the first example.</p>
+<section id="section-concluding-thoughts" class="level3">
+<h3 class="anchored" data-anchor-id="section-concluding-thoughts">Section concluding thoughts</h3>
+<p>STL decomposition is one of a number of strategies for decomposition available to us. Other examples are described here. However the aims and principles of decomposition are somewhat similar no matter what approach is used.</p>
+<p>Having performed a decomposition on time series data, we <em>could</em> potentially apply something like an ARIMA model to the <strong>trend</strong> component of the data alone for purposes of projection. If using a constant seasonal component, we could then add this component onto forecast values from the trend component, along with noise consistent with the properties of the remainder component. However, there is a variant of the ARIMA model specification that can work with this kind of seasonal data directly. Let’s look at that now</p>
+</section>
+</section>
+<section id="approach-three-sarima" class="level2">
+<h2 class="anchored" data-anchor-id="approach-three-sarima">Approach Three: SARIMA</h2>
+<p>SARIMA stands for <a href="https://otexts.com/fpp2/seasonal-arima.html">‘Seasonal ARIMA’</a> (where of course ARIMA stands for Autoregressive-Integrated-Moving Average). Whereas an ARIMA model has a specification shorthand <code>ARIMA(p, d, q)</code>, a SARIMA model has an extended specification: <code>SARIMA(p, d, q) (P, D, Q)_S</code>. This means that whereas <code>ARIMA</code> has three parameters to specify, a SARIMA model has seven. This might appear like a big jump in model complexity, but the gap from ARIMA to SARIMA is smaller than it first appears.</p>
+<p>To see this it’s first noticing that, as well as terms <code>p</code>, <code>d</code> and <code>q</code>, there are also terms <code>P</code>, <code>D</code> and <code>Q</code>. This would suggest that whatever Autoregressive (<code>p</code>), integration (<code>d</code>) and moving average (<code>q</code>) processes are involved in standard ARIMA are also involved in another capacity in SARIMA. And what’s this other capacity? The clue to this is in the <code>S</code> term.</p>
+<p><code>S</code> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> stands for the <strong>seasonal</strong> component of the model, and specifies the number of observations that are expected to include a repeating seasonal cycle. As most seasonal cycles are annual, this means <code>S</code> will be <code>12</code> if the data are monthly, <code>4</code> if the data are quarterly, and so on.</p>
+<p>The UPPERCASE <code>P</code>, <code>D</code> and <code>Q</code> terms then specify which standard ARIMA processes should be modelled as occurring every <code>S</code> steps in the data series. Although algebraically this means SARIMA models may look a lot more complicated than standard ARIMA models, it’s really the same process, and the same intuition, applied twice: to characterising the seasonal ‘signals’ in the time series, and to characteristing the non-seasonal ‘signals’ in the time series.</p>
+<p>Although there are important diagnostic charts and heuristics to use when determining and judging which SARIMA specification may be most appropriate for modelling seasonal data, such as the PACF and ACF, we can still use the auto.arima() function to see if the best SARIMA specification can be identified algorithmically:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>best_sarima_model <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(<span class="fu">as.ts</span>(us_retail_employment, <span class="st">"Employed"</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>best_sarima_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: as.ts(us_retail_employment, "Employed") 
+ARIMA(1,1,2)(2,1,2)[12] 
+
+Coefficients:
+         ar1      ma1     ma2     sar1     sar2    sma1     sma2
+      0.8784  -0.8428  0.1028  -0.6962  -0.0673  0.2117  -0.3873
+s.e.  0.0374   0.0481  0.0332   0.0977   0.0691  0.0937   0.0776
+
+sigma^2 = 1442:  log likelihood = -4832.08
+AIC=9680.16   AICc=9680.31   BIC=9719.06</code></pre>
+</div>
+</div>
+<p>Here <code>auto.arima()</code> produced an <code>ARIMA(1, 1, 2) (2, 1, 2)_12</code> specification, meaning <code>p=1</code>, <code>d=1</code>, <code>q=2</code> for the non-seasonal part; and <code>P=2</code>, <code>D=1</code>, <code>Q=2</code> for the seasonal part.</p>
+<p>What kind of forecasts does this produce?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>best_sarima_model <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">48</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see the forecasts tend to repeat the seasonal pattern apparent throughout the observed data, and also widen in the usual way the further we move from the observed data.</p>
+</section>
+<section id="summing-up" class="level2">
+<h2 class="anchored" data-anchor-id="summing-up">Summing up</h2>
+<p>In this post we have looked at three approaches for working with seasonal data: aggregating seasonality away; decomposition; and SARIMA. These are far from an exhaustive list, but hopefully illustrate some common strategies for working with this kind of data.</p>
 
 
 </section>
@@ -478,6 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol>
 <li id="fn1"><p>Occasionally, we might also see repeated patterns over non-annual timescales. For example, we might see the apparent population size of a country shifting abruptly every 10 years, due to information from national censuses run every decade being incorporated into the population estimates. Or if we track sales by day we might see a weekly cycle, because trade during the weekends tends to be different than during the weekdays.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>How this works is due to the acronym-in-the-acronym: LOESS, meaning <em>local estimation</em>. Effectively for each data point a local regression slope is calculated based on values a certain number of observations ahead and behind the value in question. The number of values ahead and behind considered is the ‘window’ size.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Sometimes <code>m</code> is used instead of S.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
