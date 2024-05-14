@@ -4,7 +4,7 @@ listing:
   contents: posts/unpop/**/**.qmd
   sort: "date"
   type: table
-  fields: [date, title]
+  fields: [date, title, reading-time]
   categories: true
   sort-ui: false
   filter-ui: false
