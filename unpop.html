@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
@@ -215,6 +215,9 @@ Date
 <th>
 Title
 </th>
+<th>
+Reading Time
+</th>
 </tr>
 </thead>
 <tbody class="list">
@@ -225,6 +228,9 @@ Title
 <td>
 <a href="./posts/unpop/robocop-is-wonderfully-childish/index.html" class="title listing-title">Robocop (1987) is wonderfully childish</a>
 </td>
+<td>
+<span class="listing-reading-time">5 min</span>
+</td>
 </tr>
 <tr data-index="1" data-categories="cartoons,stories,eugenics" data-listing-date-sort="1701734400000" data-listing-file-modified-sort="1701799246144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Beavis and Butt-Head: When a physics graduate dons Dumbface" data-listing-filename-sort="index.qmd">
 <td>
@@ -232,6 +238,9 @@ Title
 </td>
 <td>
 <a href="./posts/unpop/beavis-and-butthead-is-dumbface/index.html" class="title listing-title">Beavis and Butt-Head: When a physics graduate dons Dumbface</a>
+</td>
+<td>
+<span class="listing-reading-time">5 min</span>
 </td>
 </tr>
 <tr data-index="2" data-categories="stories,sitcoms,archetypes,mathematics" data-listing-date-sort="1702771200000" data-listing-file-modified-sort="1702825560464" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="The Eerie Familiarity of Frasier (2023)" data-listing-filename-sort="index.qmd">
@@ -241,6 +250,9 @@ Title
 <td>
 <a href="./posts/unpop/new-frasiers-eerie-familiarity/index.html" class="title listing-title">The Eerie Familiarity of Frasier (2023)</a>
 </td>
+<td>
+<span class="listing-reading-time">10 min</span>
+</td>
 </tr>
 <tr data-index="3" data-categories="books,mindfulness,comedy,humour" data-listing-date-sort="1704499200000" data-listing-file-modified-sort="1704559673086" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="David Sederis: Humourists as Unrepentent Observational Confessionals" data-listing-filename-sort="index.qmd">
 <td>
@@ -248,6 +260,9 @@ Title
 </td>
 <td>
 <a href="./posts/unpop/unrepentent-confessional/index.html" class="title listing-title">David Sederis: Humourists as Unrepentent Observational Confessionals</a>
+</td>
+<td>
+<span class="listing-reading-time">4 min</span>
 </td>
 </tr>
 <tr data-index="4" data-categories="genres,television,stories" data-listing-date-sort="1706745600000" data-listing-file-modified-sort="1706962176072" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="On Sweary Soap Operas: A Concealed Television Genre" data-listing-filename-sort="index.qmd">
@@ -257,6 +272,9 @@ Title
 <td>
 <a href="./posts/unpop/on-sweary-soaps/index.html" class="title listing-title">On Sweary Soap Operas: A Concealed Television Genre</a>
 </td>
+<td>
+<span class="listing-reading-time">4 min</span>
+</td>
 </tr>
 <tr data-index="5" data-categories="stories,fiction,engineering,utopia,neurodiversity" data-listing-date-sort="1708732800000" data-listing-file-modified-sort="1708797870601" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Why can't we just get on with making and fixing stuff?" data-listing-filename-sort="index.qmd">
 <td>
@@ -264,6 +282,9 @@ Title
 </td>
 <td>
 <a href="./posts/unpop/andy-weir-utopian-engfi/index.html" class="title listing-title">Why can’t we just get on with making and fixing stuff?</a>
+</td>
+<td>
+<span class="listing-reading-time">10 min</span>
 </td>
 </tr>
 <tr data-index="6" data-categories="sci-fi,myth,films,books" data-listing-date-sort="1709424000000" data-listing-file-modified-sort="1709495856190" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="My thoughts on Dune (Part 1)" data-listing-filename-sort="index.qmd">
@@ -273,6 +294,9 @@ Title
 <td>
 <a href="./posts/unpop/dune-pt-1-after-dune-pt-2/index.html" class="title listing-title">My thoughts on Dune (Part 1)</a>
 </td>
+<td>
+<span class="listing-reading-time">13 min</span>
+</td>
 </tr>
 <tr data-index="7" data-categories="games,psychology,gaming" data-listing-date-sort="1711065600000" data-listing-file-modified-sort="1711121114817" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Levelling up... forever. On Gaming's Shepherd's Tone and the Fremium Trap" data-listing-filename-sort="index.qmd">
 <td>
@@ -280,6 +304,9 @@ Title
 </td>
 <td>
 <a href="./posts/unpop/fractal-game-mechanics-and-the-illusion-of-progress/index.html" class="title listing-title">Levelling up… forever. On Gaming’s Shepherd’s Tone and the Fremium Trap</a>
+</td>
+<td>
+<span class="listing-reading-time">10 min</span>
 </td>
 </tr>
 <tr data-index="8" data-categories="books,identity,USA" data-listing-date-sort="1711411200000" data-listing-file-modified-sort="1711552473122" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Thoughts on Dreams from My Father" data-listing-filename-sort="index.qmd">
@@ -289,6 +316,9 @@ Title
 <td>
 <a href="./posts/unpop/obama-dialectic-identity/index.html" class="title listing-title">Thoughts on Dreams from My Father</a>
 </td>
+<td>
+<span class="listing-reading-time">13 min</span>
+</td>
 </tr>
 <tr data-index="9" data-categories="books,mental health,inequalities,economics,distinction,banking" data-listing-date-sort="1711670400000" data-listing-file-modified-sort="1711723339974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="The Trading Mind Game" data-listing-filename-sort="index.qmd">
 <td>
@@ -296,6 +326,9 @@ Title
 </td>
 <td>
 <a href="./posts/unpop/trading-mind-game/index.html" class="title listing-title">The Trading Mind Game</a>
+</td>
+<td>
+<span class="listing-reading-time">9 min</span>
 </td>
 </tr>
 <tr data-index="10" data-categories="films,cybercrime,altruistic punishment,gender,myth" data-listing-date-sort="1711756800000" data-listing-file-modified-sort="1711877918660" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-title-sort="Jason Statham vs the Nepobaby Cyberscammers" data-listing-filename-sort="index.qmd">
@@ -305,6 +338,9 @@ Title
 <td>
 <a href="./posts/unpop/jason-statham-vs-the-nepobaby-cyberscammers/index.html" class="title listing-title">Jason Statham vs the Nepobaby Cyberscammers</a>
 </td>
+<td>
+<span class="listing-reading-time">15 min</span>
+</td>
 </tr>
 <tr data-index="11" data-categories="neurodiversity,film,television,creativity,spiritualism,religiousity" data-listing-date-sort="1715468400000" data-listing-file-modified-sort="1715670958460" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="David Lynch: All-American Shaman" data-listing-filename-sort="index.qmd">
 <td>
@@ -312,6 +348,9 @@ Title
 </td>
 <td>
 <a href="./posts/unpop/david-lynch-all-american-shaman/index.html" class="title listing-title">David Lynch: All-American Shaman</a>
+</td>
+<td>
+<span class="listing-reading-time">10 min</span>
 </td>
 </tr>
 </tbody>
