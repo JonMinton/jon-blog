@@ -1,0 +1,135 @@
+---
+title: "Quarto for Technical blogging"
+subtitle: "For blogging without thinking too much about blogging"
+author: "Jon Minton"
+date: "2024-05-21"
+format: 
+    revealjs:
+        theme: beige
+---
+
+## Background and motivation 
+
+- Data Scientist Curious About Software Development
+   - ~ 20 years using R 
+   - Inscrutible [Shiny](https://www.rstudio.com/products/shiny/)
+        - Software development at a distance
+   - [Codeclan Software Development](https://www.bbc.co.uk/news/uk-scotland-scotland-business-66407025) (Cohort E63) 2023
+        - Python
+        - Javascript
+
+## Separating the Challenges
+
+:::: {.columns}
+
+::: {.column width="40%"}
+- [**Website**](https://jonminton.net/)
+    - Written in React
+    - Semantic HTML 
+    - Hand coded CSS 
+    - Little touched
+:::
+
+::: {.column width="60%"}
+- [**Blog**](https://jonminton.github.io/jon-blog/)
+    - Written in Quarto
+    - Not perfectly customised but 'good enough'
+    - Can focus on *what* I'm writing about, not *how* I'm writing it 
+    - Updated most weeks (Currently around 80 posts)
+:::
+
+::::
+
+## What's Quarto? {.scrollable}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+- Successor to [RMarkdown](https://rmarkdown.rstudio.com/)
+- Adjacent to [Jupyter Notebooks](https://jupyter.org/)
+:::
+
+::: {.column width="30%"}
+- **Language invariant**
+    - R
+    - Python
+    - Julia
+    - Observable.js
+- IDE invariant
+    - RStudio
+    - Visual Studio Code
+:::
+
+::: {.column width="30%"}
+- **Output invariant**
+    - file formats
+        - html
+        - pdf
+        - word
+    - product types
+        - Scientific notebooks
+        - Manuscripts
+        - Slide decks (including this, using reveal.js)
+        - Generic websites and online books
+        - Blogs
+:::
+
+::::
+
+## Chunks and Fences
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+- **Chunks** *for computing* 
+    - Mermaid
+    - latex
+    - Python
+    - R
+    - observable etc
+
+:::
+
+::: {.column width="40%"}
+
+- **Fences** *for styling* 
+    - Columns
+    - Sidebars
+    - Formatting and colouring
+
+:::
+
+::::
+
+## Getting started
+
+- Excellent how-tos on [website](https://quarto.org/)
+    - [Blog set-up](https://quarto.org/docs/websites/website-blog.html)
+    - Including [how to deploy](https://quarto.org/docs/publishing/) 
+
+## Customising
+
+- **All about the YAML/Frontmatter**
+
+- Code chunk options
+- Styles/themes through [bootstrap/bootswatch](https://quarto.org/docs/dashboards/theming.html)
+- Search
+    - Default
+    - Algolia integration
+    - [Listing/Collection pages](https://quarto.org/docs/websites/website-listings.html)
+
+## In practice
+
+- [The site](https://jonminton.github.io/jon-blog/) 
+- [The github repo](https://github.com/jonminton/jon-blog)
+
+## Concluding thoughts
+
+- *Good enough* blogging platform
+- Low barrier to reentry
+- Abstracts away enough software dev complexity, allowing more focus on data science complexity
+    - Back to software dev at a distance (only now more through choice). 
+
+
+
