@@ -1,0 +1,22 @@
+---
+title: "Time series application: life expectancy trends as time series"
+author: "Jon Minton"
+date: "2024-05-20"
+draft: true
+categories: [life expectancy, time series]
+---
+
+## Introduction
+
+Depending on how this post develops, it'll either be suitable as a last part of my mini-series on time series, or should really be somewhere else. 
+
+The aims of this post are two-fold:
+
+- To consider life expectancy change as a time series process
+- To start to extend some of the principles of standard autoregressive (`AR(.)` type) models to be multivariate (in the proper sense)
+
+Often I discover I've been over-ambitious in what I've been planning to cover in a post, so we might get to the second aim in a separate post. 
+
+## Data
+
+I'm going to use the good old human mortality database, extracting records for life expectancy at birth for 
