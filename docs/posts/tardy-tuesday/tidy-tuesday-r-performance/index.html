@@ -6,8 +6,16 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="author" content="Gatz Osorio">
+<meta name="author" content="Kennedy Owuso-Afrije">
+<meta name="author" content="Imran Chowdhuy">
+<meta name="author" content="Myriam Scansetti">
+<meta name="author" content="Kate Pyper">
+<meta name="author" content="Andrew Saul">
+<meta name="dcterms.date" content="2024-02-22">
 
-<title>Jon Minton’s Blog - Tardy Tuesdays</title>
+<title>Jon Minton’s Blog - Tidy Tuesday R performance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +31,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +69,25 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Tardy Tuesdays">
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Tidy Tuesday R performance">
 <meta name="twitter:description" content="">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -121,21 +98,21 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./glms.html" rel="" target="">
+    <a class="nav-link" href="../../../glms.html" rel="" target="">
  <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./tardy-tuesday.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../../tardy-tuesday.html" rel="" target="">
  <span class="menu-text">Tardy Tuesdays</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./unpop.html" rel="" target="">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
  <span class="menu-text">Unpop</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -167,180 +144,84 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Tidy Tuesday R performance</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">tidy tuesday</div>
+                <div class="quarto-category">R performance</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Authors</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+               <p>Gatz Osorio </p>
+               <p>Kennedy Owuso-Afrije </p>
+               <p>Imran Chowdhuy </p>
+               <p>Myriam Scansetti </p>
+               <p>Kate Pyper </p>
+               <p>Andrew Saul </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 22, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Tardy Tuesdays</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>For the last couple of years, I’ve run an informal weekly R training session to support people who want to develop and maintain their R skills in matters of data tidying and analysis. By default the sessions are based around the <a href="https://github.com/rfordatascience/tidytuesday">weekly TidyTuesday data challenges</a> developed to support people using R through the <a href="https://www.tidyverse.org/">tidyverse</a> paradigm promoted in <a href="https://r4ds.hadley.nz/">R for Data Science</a>. Each week, TidyTuesday makes a new open source dataset available; we give ourselves one hour, with no preparation, to see what we can learn from the data.</p>
-<p>Because, due to scheduling conflicts, Tuesdays tend to be especially busy, the sessions actually take place first thing on Wednesday mornings. Hence, <strong>Tardy Tuesdays</strong>! The scripts developed since I’ve been using Quarto for blogging, with attendees listed as authors (generally in alphabetical order) are shown below:</p>
-
+<p>We used a 1GB reviews dataset wich is available on <a href="https://drive.google.com/drive/folders/12nJHh-XNFP7WMolIzeJbAewTvW57e98B?usp=drive_link">datareviews: books review</a></p>
+<p>There are some examples to test performance which is available on<a href="https://github.com/gsandrof66/Rprofile.git">R markdown file:First_test.Rmd</a></p>
+<p>This is a very interesting link with more examples <a href="https://www.datacamp.com/tutorial/five-tips-r-code-improve">Reference link:More examples</a></p>
+</section>
+<section id="content" class="level2">
+<h2 class="anchored" data-anchor-id="content">Content</h2>
+<ul>
+<li>We discussed <code>microbenchmark</code>, which helps to test and compare time execution.
+<ul>
+<li>Example to calculate number of week between 2 variables (casting as dates vs strings) using difftime</li>
+<li>Example to calculate mean based on a grouped column using (Base r aggregate vs dplyr group_by and summarise_at)</li>
+<li>Example to compare vector initialisation (x &lt;- c() vs x &lt;- vector(“integer”, n)) to calculate acumulative addition.</li>
+<li>Example to calculate mean in a dataframe column (mean(dt[dt<span class="math inline">\(b &gt; .5, ]\)</span>a) vs mean(dt<span class="math inline">\(a[dt\)</span>b &gt; .5]))</li>
+<li>Example to compare 1:n and seq(n)</li>
+<li>Example to compare old pipe and new pipe</li>
+</ul></li>
+<li>We discussed <code>data.table</code>, which speeds up data manipulation.</li>
+<li>We discussed different file format ‘csv’, ‘RDS’ and ‘Parquet’, their compatibilities, vulnerabilities and storage compression.
+<ul>
+<li>We discussed ‘arrow’ package Parquet compression types: ‘gzip’, ‘snappy’ and ‘uncompressed’.</li>
+</ul></li>
+</ul>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="R,tidy tuesday,Dr Who" data-listing-date-sort="1701216000000" data-listing-file-modified-sort="1701251703182" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Tidy Tuesday on Dr Who" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 29, 2023</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-dr-who/index.html" class="title listing-title">Tidy Tuesday on Dr Who</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="R,tidy tuesday,Life Expectancy" data-listing-date-sort="1701820800000" data-listing-file-modified-sort="1701873771514" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Tidy Tuesday on Life Expectancy" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 6, 2023</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-life-expectancy/index.html" class="title listing-title">Tidy Tuesday on Life Expectancy</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="R,tidy tuesday,Life Expectancy" data-listing-date-sort="1702425600000" data-listing-file-modified-sort="1708600925727" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Tidy Tuesday on Life Expectancy - Part Two" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 13, 2023</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-more-life-expectancy/index.html" class="title listing-title">Tidy Tuesday on Life Expectancy - Part Two</a>
-</td>
-</tr>
-<tr data-index="3" data-listing-date-sort="1703116800000" data-listing-file-modified-sort="1708601971347" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Tidy Tuesday: Christmas films" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Dec 21, 2023</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-christmas-films/index.html" class="title listing-title">Tidy Tuesday: Christmas films</a>
-</td>
-</tr>
-<tr data-index="4" data-categories="R,Education,Tidy Tuesday" data-listing-date-sort="1706140800000" data-listing-file-modified-sort="1708600943429" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Tidytuesday 2024-01-23" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jan 25, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-education-townsize/index.html" class="title listing-title">Tidytuesday 2024-01-23</a>
-</td>
-</tr>
-<tr data-index="5" data-categories="R,Tidy Tuesday,North America" data-listing-date-sort="1706832000000" data-listing-file-modified-sort="1708600935803" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Tidy Tuesday 30 Jan 2024: Groundhogs" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 2, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-groundhogs/index.html" class="title listing-title">Tidy Tuesday 30 Jan 2024: Groundhogs</a>
-</td>
-</tr>
-<tr data-index="6" data-categories="R,tidy tuesday,Valentine" s="" day'="" data-listing-date-sort="1707868800000" data-listing-file-modified-sort="1708711922208" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-title-sort="Tidy Tuesday on Valentine's Day" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 14, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-valentines-day/index.html" class="title listing-title">Tidy Tuesday on Valentine's Day</a>
-</td>
-</tr>
-<tr data-index="7" data-categories="R,tidy tuesday,funding" data-listing-date-sort="1708560000000" data-listing-file-modified-sort="1708600914155" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Tidy Tuesday: 20 Feb 2024 - R Grants" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 22, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-r-grants/index.html" class="title listing-title">Tidy Tuesday: 20 Feb 2024 - R Grants</a>
-</td>
-</tr>
-<tr data-index="8" data-categories="R,tidy tuesday,R performance" data-listing-date-sort="1708560000000" data-listing-file-modified-sort="1716468197162" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Tidy Tuesday R performance" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 22, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-r-performance/index.html" class="title listing-title">Tidy Tuesday R performance</a>
-</td>
-</tr>
-<tr data-index="9" data-categories="R,tidy tuesday,leap years" data-listing-date-sort="1709078400000" data-listing-file-modified-sort="1709198896739" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Tidy Tuesday 27 Feb 2024: Leap Years" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Feb 28, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-leapyears/index.html" class="title listing-title">Tidy Tuesday 27 Feb 2024: Leap Years</a>
-</td>
-</tr>
-<tr data-index="10" data-listing-date-sort="1709683200000" data-listing-file-modified-sort="1709731055063" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-title-sort="Tidy Tuesday Trash" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Mar 6, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-trash/index.html" class="title listing-title">Tidy Tuesday Trash</a>
-</td>
-</tr>
-<tr data-index="11" data-categories="Tidy Tuesday,Tardy,Data Science" data-listing-date-sort="1712012400000" data-listing-file-modified-sort="1712062646068" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Double Tardy Tuesday" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Apr 2, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-double/index.html" class="title listing-title">Double Tardy Tuesday</a>
-</td>
-</tr>
-<tr data-index="12" data-categories="R,Tidy Tuesday" data-listing-date-sort="1712790000000" data-listing-file-modified-sort="1712836549667" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Tidy Tuesday: Solar Eclipses" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Apr 11, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-eclipse/index.html" class="title listing-title">Tidy Tuesday: Solar Eclipses</a>
-</td>
-</tr>
-<tr data-index="13" data-listing-date-sort="1713567600000" data-listing-file-modified-sort="1713616165460" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Tidy Tuesday Extra - Packages and recursive searching" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Apr 20, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-packages/index.html" class="title listing-title">Tidy Tuesday Extra - Packages and recursive searching</a>
-</td>
-</tr>
-<tr data-index="14" data-categories="tidy tuesday,space" data-listing-date-sort="1714086000000" data-listing-file-modified-sort="1714128781409" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Tidy Tuesday 23 April 2024: Space objects" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Apr 26, 2024</span>
-</td>
-<td>
-<a href="./posts/tardy-tuesday/tidy-tuesday-space-objects/index.html" class="title listing-title">Tidy Tuesday 23 April 2024: Space objects</a>
-</td>
-</tr>
-</tbody>
-
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -688,6 +569,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
