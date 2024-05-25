@@ -438,7 +438,7 @@ Training set error measures:
 Training set 123.1317 934.6956 724.6794 -5.484572 12.91378 0.5490357 -0.169863</code></pre>
 </div>
 </div>
-<p>In this case, a <code>lambda</code> value of about <code>0.54</code> has been identified, and a different ARIMA model specification selected. Let’s check the residuals for this model:</p>
+<p>In this case, a <code>lambda</code> value of about <code>0.54</code> has been identified, and a different ARIMA model specification selected. This specification is listed as ARIMA(0,1,0) <em>with drift</em>. This <em>with drift</em> term means the series are recognised as non-stationary, but where (after transformation) there is an average (in this case) constant amount upwards drift in the values as we progress through the series. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Let’s check the residuals for this model:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -549,12 +549,22 @@ Training set 268.7263 1039.34 758.5374 4.777142 10.02628 0.5746874 -0.2848601</c
 Training set 123.1317 934.6956 724.6794 -5.484572 12.91378 0.5490357 -0.169863</code></pre>
 </div>
 </div>
-<p>What’s returned by <code>accuracy()</code> comprises one row (labelled <code>Training set</code>) and seven columns, each for a different accuracy metric. A common (and relatively easy-to-understand) accuracy measure is <code>RMSE</code>, which stands for (square) root mean squared error. According to this measure, the Box-Cox transformed ARIMA model outperforms the untransformed (by double-differenced) ARIMA model, so perhaps it should be preferred.</p>
+<p>What’s returned by <code>accuracy()</code> comprises one row (labelled <code>Training set</code>) and seven columns, each for <a href="https://otexts.com/fpp2/accuracy.html">a different accuracy metric</a>. A common (and relatively easy-to-understand) accuracy measure is <code>RMSE</code>, which stands for (square) root mean squared error. According to this measure, the Box-Cox transformed ARIMA model outperforms the untransformed (by double-differenced) ARIMA model, so perhaps it should be preferred.</p>
 <p>However, as the act of transforming the data in effect changes (by design) the units of the data, perhaps <code>RMSE</code> is not appropriate to use for comparison. Instead, there is a measure called <code>MAPE</code>, which stands for “mean absolute percentage error”, that might be more appropriate to use because of the differences in scales. According to this measure, the Box-Cox transformed specification has a <em>higher</em> error score than the no-lambda specification (around 13% instead of around 10%), suggesting instead the no-lambda specification should be preferred instead.</p>
 <p>So what to do? Once again, the ‘solution’ is probably just to employ some degree of informed subjective judgement, along with a lot of <em>epistemic humility</em>. The measures above can help inform our modelling decisions, but they cannot make these decisions for us.</p>
-
-
 </section>
+</section>
+<section id="discussion-and-coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="discussion-and-coming-up">Discussion and coming up</h2>
+<p>For the first three posts in this time-series miniseries, we looked mainly at the theory of the three components of the ARIMA time series modelling approach. This is the first approach where we’ve used ARIMA in practice. Hopefully you got a sense of two different things:</p>
+<ul>
+<li>That because of packages like <code>forecast</code>, getting R to produce and forecast from an ARIMA model is relatively quick and straightforward to do in practice.</li>
+<li>That even in this brief applied example of applied time series, we started to learn about a range of concepts - such as the auto-correlation function (ACF), the Box-Cox transformation, and alternative measures of accuracy - which were not mentioned in the previous three posts on ARIMA.</li>
+</ul>
+<p>Indeed, if you review <a href="https://otexts.com/fpp2/">the main book associated with the forecasting package</a>, you can see that ARIMA comprises just a small part of the overall time series toolkit. There’s a lot more that can be covered, including some methods that are simpler to ARIMA, some methods (in particular SARIMA) which are further extensions of ARIMA, some methods that are alternatives to ARIMA, and some methods that are decidedly more complicated than ARIMA. By focusing on the theory of ARIMA in the last three posts, I’ve aimed to cover something in the middle-ground of the overall toolbox.</p>
+<p>Coming up: to be determined!</p>
+
+
 </section>
 
 
@@ -562,6 +572,7 @@ Training set 123.1317 934.6956 724.6794 -5.484572 12.91378 0.5490357 -0.169863</
 
 <ol>
 <li id="fn1"><p>The information appears to be ‘overdeterimined’, as one of the metadata fields should be inferrable given the other pieces of information. I suspect this works as something like a ‘checksum’ test, to ensure the data are as intended.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Autoregressive terms <code>p</code> can be included as part of non-stationary series, and there can be an arbitrary number of differencing operations <code>d</code>, but the moving average term <code>q</code> is only suitable for stationary series. So, for example, ARIMA(1,0,0) with drift can be possible, as can ARIMA(1,1,0) with drift, but ARIMA(0,0, 1) with drift is not a legitimate specification.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

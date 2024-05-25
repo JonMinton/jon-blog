@@ -434,12 +434,12 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept) log(dose)    suppVC log(dose):suppVC
-[1,]    20.85558 10.021332 -4.378469        3.3556009
-[2,]    20.08151  8.746960 -2.236998        4.4727340
-[3,]    21.15105  8.650604 -4.547222        0.8057012
-[4,]    21.66202 10.083014 -3.606979        4.6726622
-[5,]    21.67423  8.210322 -4.212794        4.5967231
-[6,]    20.84906  8.735121 -5.177153        4.1244460</code></pre>
+[1,]    20.99015  7.897605 -4.013488         6.791536
+[2,]    21.02027  8.133206 -5.249055         4.534249
+[3,]    19.77708  9.994712 -2.875419         5.218099
+[4,]    20.74144  9.941955 -3.593448         2.732989
+[5,]    20.28834 10.271369 -3.186828         2.781565
+[6,]    19.25830  8.843443 -2.185999         4.982025</code></pre>
 </div>
 </div>
 <p>Let’s first look at each of these parameters individually:</p>
@@ -591,7 +591,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_ev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.09177 22.03333 23.08138 23.91198 23.50631 22.79824</code></pre>
+<pre><code>[1] 22.75245 22.83514 22.00734 22.95993 22.58033 21.23166</code></pre>
 </div>
 </div>
 <p>Let’s now get a 95% credible interval:</p>
@@ -602,7 +602,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.31045 22.73304 24.16366 </code></pre>
+21.24854 22.73427 24.21095 </code></pre>
 </div>
 </div>
 <p>So, the 95% interval for the expected value is between <code>21.31</code> and <code>24.14</code>, with a middle (median) estimate of <code>22.73</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s check this against estimates from the <code>predict()</code> function:</p>
@@ -634,7 +634,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_pv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.07850 25.26917 28.17762 22.58254 17.50121 27.95209</code></pre>
+<pre><code>[1] 17.03557 18.12966 21.16245 27.91106 25.50849 26.05703</code></pre>
 </div>
 </div>
 <p>Let’s get the 95% interval from the above using quantile</p>
@@ -645,7 +645,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-15.29923 22.70530 30.17912 </code></pre>
+15.30658 22.75498 30.17878 </code></pre>
 </div>
 </div>
 <p>As expected, the interval is now much wider, with a 95% interval from <code>15.34</code> to <code>30.11</code>. The central estimate should in theory, with an infinite number of runs, be the same, however because of random variation it will never be <em>exactly</em> the same to an arbitrary number of decimal places. In this case, the middle estimate is <code>22.75</code>, not identical to the central estimate from the expected values distribution of <code>22.72</code>. The number of simulations can <em>always</em> be increased to produce greater precision if needed.</p>
@@ -707,16 +707,16 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <pre><code># A tibble: 10,000 × 3
       x0    x1    fd
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1  23.1  19.5 -3.63
- 2  22.0  20.8 -1.24
- 3  23.1  18.7 -4.37
- 4  23.9  21.3 -2.56
- 5  23.5  20.3 -3.19
- 6  22.8  18.5 -4.26
- 7  23.0  19.4 -3.60
- 8  22.5  20.8 -1.61
- 9  23.5  18.3 -5.21
-10  23.5  19.8 -3.72
+ 1  22.8  20.3 -2.50
+ 2  22.8  18.6 -4.24
+ 3  22.0  20.3 -1.71
+ 4  23.0  20.0 -2.98
+ 5  22.6  20.0 -2.57
+ 6  21.2  20.2 -1.07
+ 7  22.7  19.8 -2.91
+ 8  24.3  19.5 -4.80
+ 9  23.1  19.3 -3.81
+10  21.7  19.0 -2.74
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
@@ -762,7 +762,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.8532647 -2.8318918 -0.8241219 </code></pre>
+-4.9362826 -2.8247969 -0.8003168 </code></pre>
 </div>
 </div>
 <p>So, 95% of estimates of the first difference are between <code>-4.85</code> and <code>-0.81</code>, with the middle of this distribution (on this occasion) being <code>-2.83</code>.</p>
