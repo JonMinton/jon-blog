@@ -271,6 +271,9 @@ both_series <-
   bind_rows(e0_pct_growth) |>
   select(year, series, pct_change, period)
 
+if (!exists("both_series.csv")) {
+  write.csv(both_series, "both_series.csv")
+}
 
 both_series |>
   ggplot(aes(year, pct_change)) + 
