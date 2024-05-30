@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-02-28">
+
+<title>Jon Minton’s Blog - Part Sixteen: Causal Inference: How to try to do the impossible</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Sixteen: Causal Inference: How to try to do the impossible">
+<meta name="twitter:description" content="">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Generalised Linear Models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Part Sixteen: Causal Inference: How to try to do the impossible</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">causality</div>
+                <div class="quarto-category">R</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 28, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This is the third post in a short mini-series on causal inference, which extends a much longer series on statistical theory and practice. After introducing the fundamental issue of causal inference, namely that the counterfactual is unobserved, through description alone in <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-14/index.html">part 14</a>, <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-15/index.html">part 15</a> provided a more technical treatment of the same issues. We described the <strong>Platinum <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Standard</strong> of data required for causal inference as involving observing the same individuals in two different scenarios - <strong>treated</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and <strong>untreated</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> - which is not possible; and the <strong>Gold Standard</strong> as being a randomised controlled trial (RCT), which is sometimes possible, but tends to be time and resource intensive. The RCT is a mechanism for breaking the association between assignment to treatment <span class="math inline">\(Z_i\)</span> and both known/included covariates <span class="math inline">\(X^*_i\)</span> and unknown/unincluded characteristics <span class="math inline">\(W_i\)</span>; this link-breaking is described as <em>orthogonality</em> and represented algebraically as <span class="math inline">\(Z_i \perp X_i^*\)</span> and <span class="math inline">\(Z_i \perp W^*_i\)</span>.</p>
+<p>The purpose of this post is to introduce some of the statistical approaches used when the only data available are observational, and so do not meet the special properties required for robust causal inference estimation of an RCT.</p>
+</section>
+<section id="method-one-controlling-for-variables" class="level2">
+<h2 class="anchored" data-anchor-id="method-one-controlling-for-variables">Method One: ‘Controlling for’ variables</h2>
+<p>The most familiar approach for trying to estimate the causal effect of treatment <span class="math inline">\(Z\)</span> on outcome <span class="math inline">\(Y\)</span> is to construct a multivariate <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> regression model. Here we make sure to include those ‘nuisance parameters’ <span class="math inline">\(X^*\)</span> on the predictor side of the model’s equation, along with our treatment parameter of interest <span class="math inline">\(Z\)</span>. For each individual <span class="math inline">\(i\)</span> in the dataset <span class="math inline">\(D\)</span> we can therefore use the model, calibrated on the data, to produce a prediction of the outcome <span class="math inline">\(Y_i\)</span> under both the treated scenario <span class="math inline">\(Z_i = 1\)</span> and the untreated scenario <span class="math inline">\(Z_i = 0\)</span>. As <a href="../lms-are-glms-part-04/index.qmd">post four</a> discussed, in the specific case of linear regression, but few other model specifications, this causal effect estimate of treatment <span class="math inline">\(Y_i | Z=1 - Y_i | Z = 0\)</span> can be gleamed directly from the <span class="math inline">\(\beta\)</span> coefficient for <span class="math inline">\(Z\)</span>. As post four also makes clear, for other model specifications, the process for estimating causal effects can be more involved.</p>
+<p>It is worth pointing out that, when using models in this way, we are really ‘just’ producing estimates of <strong>first differences</strong>, the quantity of interest which we focused on in posts <a href="../lms-are-glms-part-11/index.qmd">11</a>, <a href="../lms-are-glms-part-12/index.qmd">12</a>, and <a href="../lms-are-glms-part-13/index.qmd">13</a>. The model prediction approach is not fundamentally any different to that discussed previously, except for two things: firstly, that we will usually be averaging across first differences for multiple observations rather a single scenario; and secondly, that we will be <em>interpreting</em> the first differences (or rather their aggregation) as being a causal effect estimate.</p>
+<p>There are actually two types of causal effect estimate we can produce using this approach, the <strong>Average Treatment Effect (ATE)</strong>, and the <strong>Average Treatment Effect on the Treated (ATT)</strong>. <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> The difference between ATE and ATT is that, for ATE, the counterfactuals are simulated for all observations in the dataset <span class="math inline">\(D\)</span>, and that these counterfactuals will be both for individuals which were observed as treated <span class="math inline">\(Z=1\)</span> and untreated <span class="math inline">\(Z=0\)</span>. By contrast, for ATT, only those observations in the data which were observed as treated <span class="math inline">\(Z=1\)</span> are included in the causal effect estimation,<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> meaning that the counterfactual being modelled will always be of the scenario <span class="math inline">\(Z=0\)</span>.</p>
+<p>So, what are the potential problems with modelling in this way?</p>
+<ul>
+<li><strong>Unobserved and unincluded covariates</strong>. Remember in the previous part we introduced the term <span class="math inline">\(W_i^*\)</span>? This refers to those factors which could affect assignment <span class="math inline">\(Z_i\)</span> but which are not included in our model. They could either be: i) covariates that exist in the dataset <span class="math inline">\(D\)</span> but we <em>chose</em> not to include in the model <span class="math inline">\(M\)</span>; or ii) covariates that are simply not recorded in the dataset <span class="math inline">\(D\)</span>, so even if we wanted to, we couldn’t include them. In an RCT, the random allocation mechanism breaks both the <span class="math inline">\(X^* \rightarrow Z\)</span> <em>and</em> the <span class="math inline">\(W \rightarrow Z\)</span> causal paths; we don’t have to observe or even know what these factors <span class="math inline">\(W\)</span> might be for an RCT to block their influence. But a regression model can only really operate to attempt to attenuate the <span class="math inline">\(X^* \rightarrow Z\)</span> pathway.</li>
+<li><strong>Insufficient or improper controls</strong>. Returning to our <a href="../lms-are-glms-part-11/index.qmd">hamster tooth growth example of post 11</a>, recall we looked at a number of different model specifications. Our starter model specification included ‘controls for’ both dosage and supplement, and so did our final model specification. But does this mean either model is equally good at ‘controlling for’ these factors? I’d suggest they aren’t, as though our final model specification included the same covariates <span class="math inline">\(X\)</span> as the initial model specification, it represented the relationship between the predictor and response variables in a qualitatively different way. For the final model specification, the <code>dosage</code> variable was transformed by logging it; additionally, an interaction term was included between (transformed) dosage and supplement. The reasons for this were justified by the observed relationships and by measures of penalised model fit, but we do not know if this represents the ‘best possible’ model specification. And the specification used, and the assumptions contained and represented by the model specification, <strong>will</strong> affect the predictions the model produces, including the first differences used to produce the ATE and ATT causal effect estimates.</li>
+</ul>
+<p>Overall, just remember that, when a researcher states in a paper that they have used a model to ‘control for’ various factors and characteristics, this can often be more a statement of what the researcher <em>aspired to do</em> with the model rather than <em>managed to do</em>. There are often a great many <strong>researcher degrees of freedom</strong> in terms of how a particular observational dataset can be used to produce modelled estimates of causal effects, and these can markedly affect the effect estimates produced.</p>
+<p>So, what are some alternatives?</p>
+</section>
+<section id="method-two-matching-methods" class="level2">
+<h2 class="anchored" data-anchor-id="method-two-matching-methods">Method Two: Matching methods</h2>
+<p>Remember the Platinum Standard: For each individual, with their own personal characteristics (<span class="math inline">\(X_i^*\)</span>), we known if they were treated <span class="math inline">\(Z_i = 1\)</span> or untreated <span class="math inline">\(Z_i = 0\)</span>. In the sci-fi scenario of the genuine Platinum Standard, we are able to observe a <strong>clone</strong> of each of these individuals in the parallel universe of the unobserved counterfactual.</p>
+<p>Obviously we can’t do that in reality. But maybe was can do something, with the data we have, which allows us to do <em>something like</em> the Platinum Standard, individual level pairwise comparison, <span class="math inline">\(Y_i | Z_i = 1 - Y_i | Z_i = 0\)</span>, even though we only precisely observe each individual <span class="math inline">\(i\)</span> in one of the two scenarios <span class="math inline">\(Z=1\)</span> or <span class="math inline">\(Z=0\)</span>.</p>
+<p>We can do this by relaxing the requirement that the counterfactual be of a <strong>clone</strong> of the observed individual, and so identical in every way except for treatment status, and instead allow them to be compared to someone who’s merely <em>similar to</em> them.</p>
+<p>Let’s think through an example:</p>
+<blockquote class="blockquote">
+<p>Billy is 72 years old, male, overweight but not obese, works part time as a carpenter but is largely retired, married for five years but before that a widower for three, hypertensive; scores in the 85th percentile for conscentiousness, and 40th percentile for openness, in the Big Five Personality scale; owns his own home, worked in a factory in his twenties, likes baked beans with his biweekly fish suppers, enjoys war films but also musicals, liked holidaying in Spain back in the 1990s when his children were still children; owns a thirteen year old dog with advancing arthritis, who when younger used to <em>take him</em> on regular brisk walks, but now has to be cajoled to leave the house, especially when it’s cold and wet outside. He lives in the North East of England, and when that young woman - who seemed friendly but a bit nervous and had that weird piece of metal through the middle of her nose - from the survey company knocked on the door four months ago, and asked him to rate his level of agreement to the statement, “I am satisfied with my life” on a seven point scale, he answered with ‘6 - agree’, but pursed his lips and took five seconds to answer this question.</p>
+</blockquote>
+<p>Obviously we have a lot of information about Billy. But that doesn’t mean the survey company, and thus our dataset <span class="math inline">\(D\)</span>, knows all that we now know. So, some of the information in the above is contained in <span class="math inline">\(X^*_i\)</span>, but others is part of <span class="math inline">\(W_i\)</span>.</p>
+<p>And what’s our treatment, and what’s our outcome? Let’s say the outcome is the response to the life satisfaction question, and the treatment is UK region, with the South East excluding London as the ‘control’ region.</p>
+<p>So, how do matching methods work? Well, they can of course only work with the data available to them, <span class="math inline">\(D\)</span>. The basic approach is as follows:</p>
+<ul>
+<li>For each person like Billy, who’s in the ‘treatment’ group <span class="math inline">\(Z = 1\)</span> (‘treated’ to living in the North of England), we know various recorded characteristics about them <span class="math inline">\(X_j^*\)</span>, and so we want to look for one or more people on the ‘control’ group <span class="math inline">\(Z=0\)</span> who are like the treated individual.</li>
+<li>So, for Billy, we’re looking for someone in the part of the dataset where <span class="math inline">\(Z=0\)</span> whose characteristics other than treatment assignment, i.e.&nbsp;<span class="math inline">\(X^*\)</span> not <span class="math inline">\(Z\)</span>, are <em>similar</em> to Billy’s. Let’s say that, on paper, the person who’s most similar to Billy in the dataset is Mike, who’s 73 (just one year older), also owns his own home, also married, has a BMI of 26.3 (Billy’s is 26.1), and also diagnosed with hypertension. But, whereas Billy lives in the North of England, Mike lives in the South East.</li>
+<li>We then compare the recorded response for Billy (<code>6 - agree</code>) with the recorded response for Mike (<code>5 - mildly agree</code>), to get an estimated treatment effect for Billy. <a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></li>
+<li>We then repeat the exercise for everyone else who, like Billy, is in the treatment/exposure group, trying to match them up with one or more individuals in the control group pool.</li>
+<li>Once we’ve done that, we then average up the paired differences in responses - between each treated individual, and each person the’ve been paired up with - to produce an average treatment effect on the treated (<strong>ATT</strong>) estimate.</li>
+</ul>
+<p>How do we go about about matchmaking Billy and other treated individuals? There are a variety of approaches, and as with using regression to ‘control for’ variables quite a lot of <strong>researcher degrees of freedom</strong>, different ways of matching, that can lead to different causal effect estimates. These include:</p>
+<ul>
+<li><strong>Exact matching</strong>: Find someone for all available characteristics other than assignment is exactly the same as the individual in the treated group to be matched. Obviously this is seldom possible, so an alternative is:</li>
+<li><strong>Coarsened Exact Matching</strong>: Lump the characteristics into broader groups, such as 10 year age groups rather than age in single years, and match on someone who’s <em>exactly roughly the same</em>, i.e.&nbsp;matches the target within the more lumped/aggregated categories rather than exactly the same to the finest level of data resolution agailable.</li>
+<li><strong>Propensity Score Matching</strong>: Use the known characteristics of individiduals to predict their probability of being in the treatment group, then use these predicted probabilities to try to balance the <em>known</em> characteristics of the populations in both treatment and control arms.</li>
+<li><strong>Synthetic Controls</strong>: Combine and ‘mix’ observed characteristics from multiple untreated/unexposed individuals so that their average/admixed/combined characteristics is closely similar to those of individuals in the treated/exposed population.</li>
+</ul>
+<p>These approaches are neither exhaustive nor mutually exclusive, and there are a great many ways that they could be applied in practice. One of the general aims of matching approaches is to reduce the extent to which ATT or ATE estimates depend on the specific modelling approach adopted, <a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> and for Propensity Score Matching, it’s often to try to break the <span class="math inline">\(X^* \rightarrow Z\)</span> link, and so achieve orthogonality (<span class="math inline">\(X^* \perp Z\)</span>). However, it can’t necessarily do the same with unobserved characteristics (<span class="math inline">\(W \rightarrow Z\)</span>).</p>
+</section>
+<section id="method-three-utilise-natural-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="method-three-utilise-natural-experiments">Method Three: Utilise ‘natural experiments’</h2>
+<p>The idea with a ‘natural experiment’ is that <em>something happens</em> in the world that <em>just happens</em> to break the links between individual characteristics and assignment to exposure/treatment. The world has therefore created a situation for us where the orthogonality assumptions <span class="math inline">\(W \perp Z\)</span> and <span class="math inline">\(X^* \perp Z\)</span> which are safe to assume when working with RCT data can also, probably, possibly, be made with certain types of observational data too. When such factors are proposed and used by economists, they tend to call them <strong>instrumental variables</strong>. Some examples include:</p>
+<ul>
+<li><strong>Lottery winnings to estimate the effect of money on happiness</strong>: A lottery win is an increase in money available to someone that ‘just happens’ (at least amongst lottery players). Do lottery winners’ subjective wellbeing scores increase following a win? If so for how long? Why is this preferable to just looking at the relationship between income/assets and happiness? Well, the causality could go the other way: perhaps happier people work harder, increasing their income. Or perhaps a common underlying personality factor - something like ‘conscientious stoicism’, which isn’t measured - affects both income and happiness. By utilising the randomness of a big win allocation to just a small minority of players, <a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> such alternative explanations for why there are differences between populations being compared can be more safely discounted.</li>
+<li><strong>Comparing educational outcomes for pupils who only just got into, and only just got rejected from, selective schools and universities</strong>: Say a selective school runs its own standardised entry exam, for which a pass mark of 70 or higher is required to be accepted. An applicant who achieves a mark of 69 isn’t really that different in their aptitude than one who achieves a of 70, but this one point difference sadly appears to make the world of difference for the applicant with a 69, and gladly appears to make the world of difference for the applicant with a 70. For years afterwards, the 70-scoring applicant will have access to a fundemntally different educational environment than the 69-scoring applicant. And presumably both applicants <a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> both applied because they thought the selective educational institution really would make a substantial and positive difference for their long-term educational outcomes. But does it really? By following the actual educational outcomes of pupils <em>just north</em> of the selection boundary, and of non-pupils <em>just south</em> of the selection boundaries, we have <em>something like</em> a <strong>treatment</strong> and <strong>control</strong> group, whose only main difference is that some are in the selective school and some are not.</li>
+</ul>
+<p>Note that neither of these examples are <em>perfect</em> substitutes for an RCT. Perhaps the people who win lotteries, or win big, are different enough from those who don’t that the winner/non-winner group’s aren’t similar in important ways. And perhaps the way people process and feel about money they get through lottery winnings isn’t the same as they they receive through earnings or social security, so the idea of there being a single money-to-happiness pathway isn’t valid. For the second example there are other concerns: of course applicants only one mark apart won’t be very different to each other, but there won’t be many of these, meaning the precision of the estimate will tend to be low. So how about expanding the ‘catchment’ to each arm, either side of the boundary line, to 2 marks, 3 marks, 5 marks? Now there should be more people in both the control and treatment arms, but they’ll also be more different to each other. <a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>As you might expect, if using instrumental variables, the quality of the instrument matters a lot. But generally the quality of the instrument isn’t something that can be determined through any kind of formal or statistical test. It tends to be, for want of a better term, a matter of <strong>story telling</strong>. If the story the researcher can tell their audience, about the instrument and why it’s able to break the causal links it needs to break, is convincing to the audience, then the researcher and audience will both be more willing to assume that the estimates produced at the end of the analysis are causal.</p>
+</section>
+<section id="summing-up" class="level2">
+<h2 class="anchored" data-anchor-id="summing-up">Summing up</h2>
+<p>So, three methods for trying to do something technically impossible: using observational data to estimate causal effects. These methods aren’t mutually exclusive, nor are they likely to be exhaustive, and nor are any of them failsafe.</p>
+<p>In the absence of being able to really know, to peak behind the veil and <em>see</em> the causal chains working their magic, a good pragmatic strategy tends to be to try multiple approaches. At its extreme, this can mean asking multiple teams of researchers the same question, and giving them access to the same dataset, and encouraging each team to not contact any other teams until they’ve finished their analysis, then compare the results they produce. If many different teams, with many different approaches, all tend to produce similar estimates, then <em>maybe</em> the estimates are really tapping into genuine causal effects, and not just reflecting some of the assumptions and biases built into the specific models and methods we’re using?</p>
+</section>
+<section id="coming-up" class="level2">
+<h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
+<p>The <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-17/index.html">next post</a> attempts to apply matching methods to a relatively complex dataset on an economic intervention, using the <code>MatchIt</code> package. The post largely follows an introductory example from the package, but at some points goes ‘off piste’. I hope it does so, however, in ways that are interesting, useful, and help bridge the gaps between the theoretical discussions in this and previous posts, with the practical challenges involved in applying such theory.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>pronounced ‘unobtainium’<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>AKA ‘exposed’<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>AKA ‘unexposed’<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Or <em>multivariable</em>, if we wish to reserve the term <em>multivariate</em> to models with multiple response columns.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Logically, we should assume there is also an <strong>Average Treatment Effect on the Untreated (ATU)</strong>, but this is seldom discussed in practice.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>This might be represented as something like <span class="math inline">\(D^{(T)} \subset D \iff Z_i = 1\)</span>, i.e.&nbsp;the data used are filtered based on the value of <span class="math inline">\(Z\)</span> matching a condition.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>This data is really <em>ordinal</em>, meaning we know ‘agree’ is <em>higher</em> than ‘mildly agree’, but don’t know <em>how much higher</em>, so should really be modelled as such, with something like an ordered logit or ordered probit model specification. However it’s often either treated as <em>cardinal</em> - 1, 2, 3, 4, 5, 6, 7 - with something like a linear regression, or collapsed into two categories (agree/ don’t agree) so standard logit or probit regression could be used.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Even <code>B-A</code> is a modelling approach, to an extent.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>It <em>could</em> be you. But it probably won’t be.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Or their pushy parents…<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>An example of a bias/variance trade-off<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

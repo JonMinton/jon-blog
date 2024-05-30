@@ -66,20 +66,132 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-section-01-intro .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-section-01-intro'] = new List('listing-section-01-intro', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-section-02-theory .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-section-02-theory'] = new List('listing-section-02-theory', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-section-03-worked-example .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-section-03-worked-example'] = new List('listing-section-03-worked-example', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-causal-inference-section .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-causal-inference-section'] = new List('listing-causal-inference-section', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-time-series-section .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-time-series-section'] = new List('listing-time-series-section', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -120,14 +232,21 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./glms.html" rel="" target="" aria-current="page">
- <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="./glms.html" rel="" target="">
+ <span class="dropdown-text">Generalised Linear Models</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./tardy-tuesday.html" rel="" target="">
- <span class="menu-text">Tardy Tuesdays</span></a>
+        <li>
+    <a class="dropdown-item" href="./tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -191,19 +310,17 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This page lists all posts I’ve written on statistical modelling and inference, originally framed around ‘generalised linear models’ (<code>glm</code> in R) but quite a bit broader than that. I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in <a href="./posts/background-to-my-stats-series/index.html">this post here</a>.</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
+<p>Here are posts so far on statistical modelling, now arranged by section/grouping for easier navigation.</p>
+<section id="core-material-principles-of-statistical-inference-and-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="core-material-principles-of-statistical-inference-and-simulation">Core material: Principles of Statistical Inference and Simulation</h2>
+<section id="section-1-introduction" class="level3">
+<h3 class="anchored" data-anchor-id="section-1-introduction">Section 1: Introduction</h3>
+<p>A reintroduction to statistics from the perspective of generalised linear modelling.</p>
+<div id="listing-section-01-intro" class="quarto-listing quarto-listing-container-table">
 
 <table class="quarto-listing-table table">
 <thead>
 <tr>
-<th>
-Date
-</th>
 <th>
 Title
 </th>
@@ -213,265 +330,301 @@ Reading Time
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1704041017393" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part One: Model fitting as parameter calibration" data-listing-filename-sort="index.qmd">
+<tr data-index="0" data-categories="statistics" data-listing-date-sort="1701129600000" data-listing-file-modified-sort="1717006368730" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part One: Model fitting as parameter calibration" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Nov 28, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-01/index.html" class="title listing-title">Part One: Model fitting as parameter calibration</a>
+<a href="./posts/glms/intro-to-glms/lms-are-glms-part-01/index.html" class="title listing-title">Part One: Model fitting as parameter calibration</a>
 </td>
 <td>
 <span class="listing-reading-time">3 min</span>
 </td>
 </tr>
-<tr data-index="1" data-categories="statistics" data-listing-date-sort="1701388800000" data-listing-file-modified-sort="1704041032180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part Two: Systematic components and link functions" data-listing-filename-sort="index.qmd">
+<tr data-index="1" data-categories="statistics" data-listing-date-sort="1701388800000" data-listing-file-modified-sort="1717006379383" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-title-sort="Part Two: Systematic components and link functions" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Dec 1, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-02/index.html" class="title listing-title">Part Two: Systematic components and link functions</a>
+<a href="./posts/glms/intro-to-glms/lms-are-glms-part-02/index.html" class="title listing-title">Part Two: Systematic components and link functions</a>
 </td>
 <td>
 <span class="listing-reading-time">3 min</span>
 </td>
 </tr>
-<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1701475200000" data-listing-file-modified-sort="1704043139377" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Part Three: glm is just fancy lm" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1701475200000" data-listing-file-modified-sort="1717006398381" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-title-sort="Part Three: glm is just fancy lm" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Dec 2, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-03/index.html" class="title listing-title">Part Three: glm is just fancy lm</a>
+<a href="./posts/glms/intro-to-glms/lms-are-glms-part-03/index.html" class="title listing-title">Part Three: glm is just fancy lm</a>
 </td>
 <td>
 <span class="listing-reading-time">4 min</span>
 </td>
 </tr>
-<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1703894400000" data-listing-file-modified-sort="1707928771433" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-title-sort="Part Four: why only betas just look at betas" data-listing-filename-sort="index.qmd">
+<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1703894400000" data-listing-file-modified-sort="1717006410105" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-title-sort="Part Four: why only betas just look at betas" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Dec 30, 2023</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-04/index.html" class="title listing-title">Part Four: why only betas just look at betas</a>
+<a href="./posts/glms/intro-to-glms/lms-are-glms-part-04/index.html" class="title listing-title">Part Four: why only betas just look at betas</a>
 </td>
 <td>
 <span class="listing-reading-time">18 min</span>
 </td>
 </tr>
-<tr data-index="4" data-categories="statistics,R" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1707929126040" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Five: Traversing the Likelihood Landscape" data-listing-filename-sort="index.qmd">
+</tbody>
+
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="section-2-likelihood-and-simulation-theory" class="level3">
+<h3 class="anchored" data-anchor-id="section-2-likelihood-and-simulation-theory">Section 2: Likelihood and simulation theory</h3>
+<p>A deep dive into the core principles and concepts underlying statistical modelling using likelihood, and how to use models for honest prediction and simulation</p>
+<div id="listing-section-02-theory" class="quarto-listing quarto-listing-container-table">
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Reading Time
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="statistics,R" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1716999968829" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Five: Traversing the Likelihood Landscape" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Jan 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-05/index.html" class="title listing-title">Part Five: Traversing the Likelihood Landscape</a>
+<a href="./posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-05/index.html" class="title listing-title">Part Five: Traversing the Likelihood Landscape</a>
 </td>
 <td>
 <span class="listing-reading-time">9 min</span>
 </td>
 </tr>
-<tr data-index="5" data-categories="statistics,R" data-listing-date-sort="1704240000000" data-listing-file-modified-sort="1704446733326" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Part Six: The Robo-Chauffeur" data-listing-filename-sort="index.qmd">
+<tr data-index="1" data-categories="statistics,R" data-listing-date-sort="1704240000000" data-listing-file-modified-sort="1717000054050" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-title-sort="Part Six: The Robo-Chauffeur" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Jan 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-06/index.html" class="title listing-title">Part Six: The Robo-Chauffeur</a>
+<a href="./posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-06/index.html" class="title listing-title">Part Six: The Robo-Chauffeur</a>
 </td>
 <td>
 <span class="listing-reading-time">7 min</span>
 </td>
 </tr>
-<tr data-index="6" data-categories="statistics,R" data-listing-date-sort="1704326400000" data-listing-file-modified-sort="1707929218030" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Seven: Feeling Uncertain" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1704326400000" data-listing-file-modified-sort="1707929218030" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Seven: Feeling Uncertain" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Jan 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-07/index.html" class="title listing-title">Part Seven: Feeling Uncertain</a>
+<a href="./posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-07/index.html" class="title listing-title">Part Seven: Feeling Uncertain</a>
 </td>
 <td>
 <span class="listing-reading-time">10 min</span>
 </td>
 </tr>
-<tr data-index="7" data-categories="statistics,R" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707929274525" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet" data-listing-filename-sort="index.qmd">
+<tr data-index="3" data-categories="statistics,R" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707929274525" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Jan 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-08/index.html" class="title listing-title">Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet</a>
+<a href="./posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-08/index.html" class="title listing-title">Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet</a>
 </td>
 <td>
 <span class="listing-reading-time">10 min</span>
 </td>
 </tr>
-<tr data-index="8" data-categories="statistics,R" data-listing-date-sort="1705708800000" data-listing-file-modified-sort="1707929440013" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values" data-listing-filename-sort="index.qmd">
+<tr data-index="4" data-categories="statistics,R" data-listing-date-sort="1705708800000" data-listing-file-modified-sort="1717000227156" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Jan 20, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-09/index.html" class="title listing-title">Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values</a>
+<a href="./posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-09/index.html" class="title listing-title">Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values</a>
 </td>
 <td>
 <span class="listing-reading-time">10 min</span>
 </td>
 </tr>
-<tr data-index="9" data-categories="statistics,R" data-listing-date-sort="1706313600000" data-listing-file-modified-sort="1707929496408" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Part Ten: Log Likelihood estimation for Logistic Regression" data-listing-filename-sort="index.qmd">
+<tr data-index="5" data-categories="statistics,R" data-listing-date-sort="1706313600000" data-listing-file-modified-sort="1717000352827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="Part Ten: Log Likelihood estimation for Logistic Regression" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Jan 27, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-10/index.html" class="title listing-title">Part Ten: Log Likelihood estimation for Logistic Regression</a>
+<a href="./posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-10/index.html" class="title listing-title">Part Ten: Log Likelihood estimation for Logistic Regression</a>
 </td>
 <td>
 <span class="listing-reading-time">8 min</span>
 </td>
 </tr>
-<tr data-index="10" data-categories="statistics,R" data-listing-date-sort="1706918400000" data-listing-file-modified-sort="1716980217162" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Eleven: Honest Predictions the easier way" data-listing-filename-sort="index.qmd">
+</tbody>
+
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="section-3-a-complete-example" class="level3">
+<h3 class="anchored" data-anchor-id="section-3-a-complete-example">Section 3: A complete example</h3>
+<p>The application of the above material to a specific dataset, starting with model fitting and simple prediction functions, and ending with Bayesian modelling</p>
+<div id="listing-section-03-worked-example" class="quarto-listing quarto-listing-container-table">
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Reading Time
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="statistics,R" data-listing-date-sort="1706918400000" data-listing-file-modified-sort="1717001058534" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Eleven: Honest Predictions the easier way" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Feb 3, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-11/index.html" class="title listing-title">Part Eleven: Honest Predictions the easier way</a>
+<a href="./posts/glms/complete-simulation-example/lms-are-glms-part-11/index.html" class="title listing-title">Part Eleven: Honest Predictions the easier way</a>
 </td>
 <td>
 <span class="listing-reading-time">14 min</span>
 </td>
 </tr>
-<tr data-index="11" data-categories="statistics,R" data-listing-date-sort="1707004800000" data-listing-file-modified-sort="1707929701419" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twelve: Honest Predictions the slightly-less easier way" data-listing-filename-sort="index.qmd">
+<tr data-index="1" data-categories="statistics,R" data-listing-date-sort="1707004800000" data-listing-file-modified-sort="1717004708311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twelve: Honest Predictions the slightly-less easier way" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Feb 4, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-12/index.html" class="title listing-title">Part Twelve: Honest Predictions the slightly-less easier way</a>
+<a href="./posts/glms/complete-simulation-example/lms-are-glms-part-12/index.html" class="title listing-title">Part Twelve: Honest Predictions the slightly-less easier way</a>
 </td>
 <td>
 <span class="listing-reading-time">13 min</span>
 </td>
 </tr>
-<tr data-index="12" data-categories="statistics,R" data-listing-date-sort="1707523200000" data-listing-file-modified-sort="1707670463816" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-title-sort="Part Thirteen: On Marbles and Jumping Beans" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-categories="statistics,R" data-listing-date-sort="1707523200000" data-listing-file-modified-sort="1717004961730" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-title-sort="Part Thirteen: On Marbles and Jumping Beans" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Feb 10, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-13/index.html" class="title listing-title">Part Thirteen: On Marbles and Jumping Beans</a>
+<a href="./posts/glms/complete-simulation-example/lms-are-glms-part-13/index.html" class="title listing-title">Part Thirteen: On Marbles and Jumping Beans</a>
 </td>
 <td>
 <span class="listing-reading-time">21 min</span>
 </td>
 </tr>
-<tr data-index="13" data-categories="history,causality,Edinburgh" data-listing-date-sort="1708300800000" data-listing-file-modified-sort="1711617272873" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Part Fourteen: A non-technical but challenging introduction to causal inference..." data-listing-filename-sort="index.qmd">
+</tbody>
+
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="notes-on-core-section" class="level3">
+<h3 class="anchored" data-anchor-id="notes-on-core-section">Notes on core section</h3>
+<p>I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in <a href="./posts/background-to-my-stats-series/index.html">this post here</a>.</p>
+</section>
+</section>
+<section id="additional-materials" class="level2">
+<h2 class="anchored" data-anchor-id="additional-materials">Additional Materials</h2>
+<p>Deep dives into specific topic areas. These sections can be approached in any order, so long as the core section has been read and understood first.</p>
+<section id="causal-inference" class="level3">
+<h3 class="anchored" data-anchor-id="causal-inference">Causal Inference</h3>
+<p>An opinionated discussion of the topic and challenges of causal inference.</p>
+<div id="listing-causal-inference-section" class="quarto-listing quarto-listing-container-table">
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Reading Time
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="history,causality,Edinburgh" data-listing-date-sort="1708300800000" data-listing-file-modified-sort="1711617272873" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-title-sort="Part Fourteen: A non-technical but challenging introduction to causal inference..." data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Feb 19, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-14/index.html" class="title listing-title">Part Fourteen: A non-technical but challenging introduction to causal inference…</a>
+<a href="./posts/glms/causal-inference/lms-are-glms-part-14/index.html" class="title listing-title">Part Fourteen: A non-technical but challenging introduction to causal inference…</a>
 </td>
 <td>
 <span class="listing-reading-time">5 min</span>
 </td>
 </tr>
-<tr data-index="14" data-categories="statistics,causality" data-listing-date-sort="1708560000000" data-listing-file-modified-sort="1709372026546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Fifteen: Causal Inference: The platinum and gold standards" data-listing-filename-sort="index.qmd">
+<tr data-index="1" data-categories="statistics,causality" data-listing-date-sort="1708560000000" data-listing-file-modified-sort="1709372026546" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Fifteen: Causal Inference: The platinum and gold standards" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Feb 22, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-15/index.html" class="title listing-title">Part Fifteen: Causal Inference: The platinum and gold standards</a>
+<a href="./posts/glms/causal-inference/lms-are-glms-part-15/index.html" class="title listing-title">Part Fifteen: Causal Inference: The platinum and gold standards</a>
 </td>
 <td>
 <span class="listing-reading-time">10 min</span>
 </td>
 </tr>
-<tr data-index="15" data-categories="statistics,causality,R" data-listing-date-sort="1709078400000" data-listing-file-modified-sort="1711617078465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="Part Sixteen: Causal Inference: How to try to do the impossible" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-categories="statistics,causality,R" data-listing-date-sort="1709078400000" data-listing-file-modified-sort="1711617078465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="Part Sixteen: Causal Inference: How to try to do the impossible" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Feb 28, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-16/index.html" class="title listing-title">Part Sixteen: Causal Inference: How to try to do the impossible</a>
+<a href="./posts/glms/causal-inference/lms-are-glms-part-16/index.html" class="title listing-title">Part Sixteen: Causal Inference: How to try to do the impossible</a>
 </td>
 <td>
 <span class="listing-reading-time">16 min</span>
 </td>
 </tr>
-<tr data-index="16" data-categories="statistics,causality,R,matching,regression" data-listing-date-sort="1709337600000" data-listing-file-modified-sort="1711616850317" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Seventeen: Causal Inference: Controlling and Matching Approaches" data-listing-filename-sort="index.qmd">
+<tr data-index="3" data-categories="statistics,causality,R,matching,regression" data-listing-date-sort="1709337600000" data-listing-file-modified-sort="1711616850317" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-title-sort="Part Seventeen: Causal Inference: Controlling and Matching Approaches" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Mar 2, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-17/index.html" class="title listing-title">Part Seventeen: Causal Inference: Controlling and Matching Approaches</a>
+<a href="./posts/glms/causal-inference/lms-are-glms-part-17/index.html" class="title listing-title">Part Seventeen: Causal Inference: Controlling and Matching Approaches</a>
 </td>
 <td>
 <span class="listing-reading-time">14 min</span>
 </td>
 </tr>
-<tr data-index="17" data-categories="statistics,causality,causal inference,DAGs" data-listing-date-sort="1710547200000" data-listing-file-modified-sort="1710615802410" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="Part Eighteen: Causal Inference: Some closing thoughts" data-listing-filename-sort="index.qmd">
+<tr data-index="4" data-categories="statistics,causality,causal inference,DAGs" data-listing-date-sort="1710547200000" data-listing-file-modified-sort="1710615802410" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-title-sort="Part Eighteen: Causal Inference: Some closing thoughts" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Mar 16, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-18/index.html" class="title listing-title">Part Eighteen: Causal Inference: Some closing thoughts</a>
+<a href="./posts/glms/causal-inference/lms-are-glms-part-18/index.html" class="title listing-title">Part Eighteen: Causal Inference: Some closing thoughts</a>
 </td>
 <td>
 <span class="listing-reading-time">16 min</span>
 </td>
 </tr>
-<tr data-index="18" data-categories="statistics,time series" data-listing-date-sort="1713654000000" data-listing-file-modified-sort="1713794593724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nineteen: Time Series: Introduction and Autoregression" data-listing-filename-sort="index.qmd">
+</tbody>
+
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="time-series" class="level3">
+<h3 class="anchored" data-anchor-id="time-series">Time Series</h3>
+<p>An introduction to time series, focused around the ARIMA modelling framework.</p>
+<div id="listing-time-series-section" class="quarto-listing quarto-listing-container-table">
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Reading Time
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="statistics,time series" data-listing-date-sort="1713654000000" data-listing-file-modified-sort="1713794593724" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Part Nineteen: Time Series: Introduction and Autoregression" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Apr 21, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-19/index.html" class="title listing-title">Part Nineteen: Time Series: Introduction and Autoregression</a>
+<a href="./posts/glms/time-series/lms-are-glms-part-19/index.html" class="title listing-title">Part Nineteen: Time Series: Introduction and Autoregression</a>
 </td>
 <td>
 <span class="listing-reading-time">10 min</span>
 </td>
 </tr>
-<tr data-index="19" data-categories="statistics,time series" data-listing-date-sort="1713740400000" data-listing-file-modified-sort="1713803106851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-title-sort="Part Twenty: Time Series: Integration" data-listing-filename-sort="index.qmd">
+<tr data-index="1" data-categories="statistics,time series" data-listing-date-sort="1713740400000" data-listing-file-modified-sort="1713803106851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-title-sort="Part Twenty: Time Series: Integration" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Apr 22, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-20/index.html" class="title listing-title">Part Twenty: Time Series: Integration</a>
+<a href="./posts/glms/time-series/lms-are-glms-part-20/index.html" class="title listing-title">Part Twenty: Time Series: Integration</a>
 </td>
 <td>
 <span class="listing-reading-time">12 min</span>
 </td>
 </tr>
-<tr data-index="20" data-categories="statistics,time series" data-listing-date-sort="1714086000000" data-listing-file-modified-sort="1714212427432" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Twenty One: Time Series: The Moving Average Model" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-categories="statistics,time series" data-listing-date-sort="1714086000000" data-listing-file-modified-sort="1714212427432" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Twenty One: Time Series: The Moving Average Model" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Apr 26, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-21/index.html" class="title listing-title">Part Twenty One: Time Series: The Moving Average Model</a>
+<a href="./posts/glms/time-series/lms-are-glms-part-21/index.html" class="title listing-title">Part Twenty One: Time Series: The Moving Average Model</a>
 </td>
 <td>
 <span class="listing-reading-time">9 min</span>
 </td>
 </tr>
-<tr data-index="21" data-categories="statistics,time series" data-listing-date-sort="1714431600000" data-listing-file-modified-sort="1714661937726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Twenty Two: Time Series - ARIMA in practice" data-listing-filename-sort="index.qmd">
+<tr data-index="3" data-categories="statistics,time series" data-listing-date-sort="1714431600000" data-listing-file-modified-sort="1714661937726" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Part Twenty Two: Time Series - ARIMA in practice" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">Apr 30, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-22/index.html" class="title listing-title">Part Twenty Two: Time Series - ARIMA in practice</a>
+<a href="./posts/glms/time-series/lms-are-glms-part-22/index.html" class="title listing-title">Part Twenty Two: Time Series - ARIMA in practice</a>
 </td>
 <td>
 <span class="listing-reading-time">9 min</span>
 </td>
 </tr>
-<tr data-index="22" data-categories="time series,seasonality,statistics" data-listing-date-sort="1714950000000" data-listing-file-modified-sort="1715284009712" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twenty Three: Time series and seasonality" data-listing-filename-sort="index.qmd">
+<tr data-index="4" data-categories="time series,seasonality,statistics" data-listing-date-sort="1714950000000" data-listing-file-modified-sort="1715284009712" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twenty Three: Time series and seasonality" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">May 6, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-23/index.html" class="title listing-title">Part Twenty Three: Time series and seasonality</a>
+<a href="./posts/glms/time-series/lms-are-glms-part-23/index.html" class="title listing-title">Part Twenty Three: Time series and seasonality</a>
 </td>
 <td>
 <span class="listing-reading-time">13 min</span>
 </td>
 </tr>
-<tr data-index="23" data-categories="life expectancy,time series,vector autoregression,multivariate regression,statistics" data-listing-date-sort="1716678000000" data-listing-file-modified-sort="1716796400947" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twenty Four: Time series - Vector Autoregression and multivariate models" data-listing-filename-sort="index.qmd">
+<tr data-index="5" data-categories="life expectancy,time series,vector autoregression,multivariate regression,statistics" data-listing-date-sort="1716678000000" data-listing-file-modified-sort="1716999698571" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-title-sort="Part Twenty Four: Time series - Vector Autoregression and multivariate models" data-listing-filename-sort="index.qmd">
 <td>
-<span class="listing-date">May 26, 2024</span>
-</td>
-<td>
-<a href="./posts/glms/lms-are-glms-part-24/index.html" class="title listing-title">Part Twenty Four: Time series - Vector Autoregression and multivariate models</a>
+<a href="./posts/glms/time-series/lms-are-glms-part-24/index.html" class="title listing-title">Part Twenty Four: Time series - Vector Autoregression and multivariate models</a>
 </td>
 <td>
 <span class="listing-reading-time">13 min</span>
@@ -483,7 +636,14 @@ Reading Time
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div></main> <!-- /main -->
+</div>
+
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

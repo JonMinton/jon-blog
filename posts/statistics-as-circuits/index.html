@@ -92,14 +92,21 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../glms.html" rel="" target="">
- <span class="menu-text">Statistical Modelling: Theory and Practice</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Generalised Linear Models</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../tardy-tuesday.html" rel="" target="">
- <span class="menu-text">Tardy Tuesdays</span></a>
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -237,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="simulating-trials" class="level3">
 <h3 class="anchored" data-anchor-id="simulating-trials">Simulating ‘trials’</h3>
-<p>Once the fundamentals of simulation using statistical model simulations are understood, it’s just a small step to producing hypothetical simulation-based ‘trials’. Just apply two different input datasets <span class="math inline">\(X_0\)</span> and <span class="math inline">\(X_1\)</span> to the same model <span class="math inline">\(M\)</span>. These two datasets should differ only in terms of a specific exposure variable of interest <span class="math inline">\(Z\)</span>, with all other inputs kept the same. This is equivalent to magicking up the hypothetical ‘platinum standard’<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> discussed in <a href="../../posts/glms/lms-are-glms-part-15/index.html">this post on causal inference</a>: imagine exactly the same individual being observed in two different worlds, where only one thing (exposed/not exposed, or treated/not treated) is different.</p>
+<p>Once the fundamentals of simulation using statistical model simulations are understood, it’s just a small step to producing hypothetical simulation-based ‘trials’. Just apply two different input datasets <span class="math inline">\(X_0\)</span> and <span class="math inline">\(X_1\)</span> to the same model <span class="math inline">\(M\)</span>. These two datasets should differ only in terms of a specific exposure variable of interest <span class="math inline">\(Z\)</span>, with all other inputs kept the same. This is equivalent to magicking up the hypothetical ‘platinum standard’<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> discussed in <a href="../glms/lms-are-glms-part-15/index.qmd">this post on causal inference</a>: imagine exactly the same individual being observed in two different worlds, where only one thing (exposed/not exposed, or treated/not treated) is different.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="IMG_2907 Large.jpeg" class="img-fluid figure-img"></p>
@@ -264,8 +271,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Simulation methods involving normal approximations for frequentist-based models</li>
 <li>Use the converged Bayesian posterior distribution.</li>
 </ul>
-<p>In the figure, the Bayesian approach is shown on the right, and the simulation approach is shown on the left. A Bayesian converged posterior distribution is a distribution of plausible parameter values after the calibration process has been run enough times. It’s ideal for doing simulation with honest uncertainty, and was discussed back in <a href="../../posts/glms/lms-are-glms-part-13/index.html">the marbles-and-jumping-beans post</a>. The downside is Bayesian models can take longer to run, and require more specialist software and algorithms to be installed/used.</p>
-<p>The simulation approach for frequentist statistics was the focus of <a href="../../posts/glms/lms-are-glms-part-12/index.html">the 12th post</a> of the series, with its rationale developed over a few earlier posts. The basic aim of this approach is to generate an approximate analogue to the Bayesian posterior distribution, and this usually involves <em>using a model to make inputs to feed into another model</em>. It’s not quite models-all-the-way-down, but is a bit more meta than it may first appear!</p>
+<p>In the figure, the Bayesian approach is shown on the right, and the simulation approach is shown on the left. A Bayesian converged posterior distribution is a distribution of plausible parameter values after the calibration process has been run enough times. It’s ideal for doing simulation with honest uncertainty, and was discussed back in <a href="../glms/lms-are-glms-part-13/index.qmd">the marbles-and-jumping-beans post</a>. The downside is Bayesian models can take longer to run, and require more specialist software and algorithms to be installed/used.</p>
+<p>The simulation approach for frequentist statistics was the focus of <a href="../glms/lms-are-glms-part-12/index.qmd">the 12th post</a> of the series, with its rationale developed over a few earlier posts. The basic aim of this approach is to generate an approximate analogue to the Bayesian posterior distribution, and this usually involves <em>using a model to make inputs to feed into another model</em>. It’s not quite models-all-the-way-down, but is a bit more meta than it may first appear!</p>
 </section>
 </section>
 <section id="conclusion" class="level2">
@@ -279,7 +286,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>One crucial difference between the frequentist and Bayesian approaches is that, in the frequentist approach, a final set of parameter estimates is identified, equivalent to the dials on the panels being set a particular way and then never touched again. By contrast with the Bayesian approach the parameter set never quite stops changing, though it does tend to change less than it did at the start. The Bayesian approach is like a music producer who’s never quite satisfied with his desk, always tweaking this and that dial, though usually not by much. The technical definition is that frequentist parameter estimation <em>converges to a point</em> (hopefully), whereas Bayesian parameter estimation <em>converges to a distribution</em> (hopefully). This is what I was trying to express through the marble/jumping bean distinction back in <a href="../../posts/glms/lms-are-glms-part-13/index.html">post 13</a> of my main stats series. The marble finds a position of rest; the jumping bean does not.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>One crucial difference between the frequentist and Bayesian approaches is that, in the frequentist approach, a final set of parameter estimates is identified, equivalent to the dials on the panels being set a particular way and then never touched again. By contrast with the Bayesian approach the parameter set never quite stops changing, though it does tend to change less than it did at the start. The Bayesian approach is like a music producer who’s never quite satisfied with his desk, always tweaking this and that dial, though usually not by much. The technical definition is that frequentist parameter estimation <em>converges to a point</em> (hopefully), whereas Bayesian parameter estimation <em>converges to a distribution</em> (hopefully). This is what I was trying to express through the marble/jumping bean distinction back in <a href="../glms/lms-are-glms-part-13/index.qmd">post 13</a> of my main stats series. The marble finds a position of rest; the jumping bean does not.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Though we can set a random number seed to make sure the different answers are the same each time.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>If you’re a fan of the niche genre of sci-fi-rom-coms, you could also think of these as “sliding door moments”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
