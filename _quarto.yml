@@ -7,8 +7,14 @@ website:
     site: "@jonminton"
   navbar:
     left: 
-      - glms.qmd
-      - tardy-tuesday.qmd
+      - text: "Statistics & Data Science"
+        menu:
+          - text: "Statistical Theory and Applications"
+            href: glms.qmd
+          - text: "Tardy Tuesday"
+            href: tardy-tuesday.qmd
+          - text: "Hand-drawn Statistics"
+            href: hand-drawn-statistics.qmd
     right:
       - unpop.qmd
       - about.qmd

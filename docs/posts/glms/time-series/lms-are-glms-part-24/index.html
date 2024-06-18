@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-05-26">
+
+<title>Jon Minton’s Blog - Part Twenty Four: Time series - Vector Autoregression and multivariate models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Twenty Four: Time series - Vector Autoregression and multivariate models">
+<meta name="twitter:description" content="">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Part Twenty Four: Time series - Vector Autoregression and multivariate models</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">life expectancy</div>
+                <div class="quarto-category">time series</div>
+                <div class="quarto-category">vector autoregression</div>
+                <div class="quarto-category">multivariate regression</div>
+                <div class="quarto-category">statistics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 26, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="time-series-recap" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-recap">Time Series recap</h2>
+<p>So far in this short series on time series, we’ve looked at time series modelling from some first principles, learning how the types of data and challenge in time series analysis both are similar and different from those of statistical modelling more generally. We started by <a href="../../../../posts/glms/time-series/lms-are-glms-part-19/index.html">looking at the concept of auto-regression</a>, then <a href="../../../../posts/glms/time-series/lms-are-glms-part-20/index.html">differentiation and integration</a>, and then <a href="../../../../posts/glms/time-series/lms-are-glms-part-21/index.html">the moving average model specification</a>, before combining these three components - <code>AR</code>, <code>I</code>, and <code>MA</code> - to produce <a href="../../../../posts/glms/time-series/lms-are-glms-part-22/index.html">the ARIMA model specification</a> common in time series analysis. Afterwards, we then extended the ARIMA specification slightly to deal with seasonally varying data, the ARIMA specification begetting <a href="../../../../posts/glms/time-series/lms-are-glms-part-23/index.html">the Seasonal ARIMA modelling framework, or SARIMA</a>. As part of the post on Seasonality, we also looked at time series decomposition, using the STL decomposition framework.</p>
+</section>
+<section id="aim-of-this-post" class="level2">
+<h2 class="anchored" data-anchor-id="aim-of-this-post">Aim of this post</h2>
+<p>In this post, we’ll take time series in a different direction, to show an application of <strong>multivariate regression</strong> common in time series, called <strong>vector autoregression</strong> (VAR). VAR is both simpler in some ways, and more complex in other ways, than SARIMA modelling. It’s simpler in that, as the name suggests, moving average (<code>MA</code>) terms tend to not be part of VAR models; we’ll also not be considering seasonality either. But it’s more complicated in the sense that we are jointly modelling two outcomes at the same time.</p>
+</section>
+<section id="model-family-tree" class="level2">
+<h2 class="anchored" data-anchor-id="model-family-tree">Model family tree</h2>
+<p>The following figure aims to show the family resemblances between model specifications and challenges:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB 
+    uvm(univariate models)
+    mvm(multivariate models)
+
+    ar("AR(p)")
+    i("I(d)")
+    ma("MA(q)")
+    arima("ARIMA(p, d, q)")
+    sarima("ARIMA(p, d, q)[P, D, Q]_s")
+    var(VAR)
+
+    ar --&gt; var
+    mvm --&gt; var
+
+    i -.-&gt; var
+
+    uvm -- autoregression --&gt; ar
+    uvm -- differencing --&gt; i
+    uvm -- moving average --&gt; ma
+    ar &amp; i &amp; ma --&gt; arima
+
+    arima -- seasonality --&gt;  sarima
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>So, the VAR model is an extension of the autoregressive component of a standard, univariate <code>AR(p)</code> specification models to multivariate models. It can also include both predictor and response variables that are differenced, hence the the dashed line from <code>I(d)</code> to VAR.</p>
+</section>
+<section id="so-what-is-a-multivariate-model" class="level2">
+<h2 class="anchored" data-anchor-id="so-what-is-a-multivariate-model">So what is a multivariate model?</h2>
+<p>You might have seen the term <em>multivariate model</em> before, and think you’re familiar with what it means.</p>
+<p>In particular, you might have been taught that whereas a univariate regression model looks something like this:</p>
+<p><span class="math display">\[
+y = \beta_0 + \beta_1 x_1 + \epsilon
+\]</span></p>
+<p>A multivariate regression model looks more like this:</p>
+<p><span class="math display">\[
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
+\]</span></p>
+<p>i.e.&nbsp;You might have been taught that, if the predictors include one term for the <em>intercept</em> (the <span class="math inline">\(\beta_0\)</span> term) and one term for the <em>slope</em> (the <span class="math inline">\(\beta_1\)</span> term), then this is a <em>univariate model</em>. But if there are two or more terms that can claim to be ‘the slope’ then this is a <em>multivariate model</em>.</p>
+<p>However, this isn’t the real distinction between a univariate model and a multivariate model. To see this distinction we have to return, for the umpeenth time, to the ‘grandmother model’ specification first introduced at the start of <a href="../lms-are-glms-part-01/index.qmd">the very first post</a>:</p>
+<p><strong>Stochastic Component</strong></p>
+<p><span class="math display">\[
+Y \sim f(\theta, \alpha)
+\]</span></p>
+<p><strong>Systematic Component</strong></p>
+<p><span class="math display">\[
+\theta = g(X, \beta)
+\]</span></p>
+<p>Now, both the response data, <span class="math inline">\(Y\)</span>, and the predictor data, <span class="math inline">\(X\)</span>, are both taken from the same rectangular dataset, <span class="math inline">\(D\)</span>. Let’s say this dataset, <span class="math inline">\(D\)</span>, has six rows and five columns. As a matrix it would look something like this:</p>
+<p><span class="math display">\[
+D =
+\begin{pmatrix}
+d_{1,1} &amp; d_{1,2} &amp; d_{1,3} &amp; d_{1, 4} &amp; d_{1,5} \\
+d_{2,1} &amp; d_{2,2} &amp; d_{2,3} &amp; d_{2, 4} &amp; d_{2,5} \\
+d_{3,1} &amp; d_{3,2} &amp; d_{3,3} &amp; d_{3, 4} &amp; d_{3,5} \\
+d_{4,1} &amp; d_{4,2} &amp; d_{4,3} &amp; d_{4, 4} &amp; d_{4,5} \\
+d_{5,1} &amp; d_{5,2} &amp; d_{5,3} &amp; d_{5, 4} &amp; d_{5,5} \\
+d_{6,1} &amp; d_{6,2} &amp; d_{6,3} &amp; d_{6, 4} &amp; d_{6,5}
+\end{pmatrix}
+\]</span></p>
+<p>Here the dataset <span class="math inline">\(D\)</span> is made up of a whole series of elements <span class="math inline">\(d_{i,j}\)</span>, where the first subset value indicates the row number <span class="math inline">\(i\)</span> and the second subset value indicates the column number <span class="math inline">\(j\)</span>. So, for example, <span class="math inline">\(d_{5, 2}\)</span> indicates the value of the 5th row and 2nd column, whereas <span class="math inline">\(d_{2, 5}\)</span> indicates the value of the 2nd row and 5th column.</p>
+<p>Fundamentally, the first challenge in building a model is deciding which <em>columns</em> from <span class="math inline">\(D\)</span> we put in the predictor matrix <span class="math inline">\(X\)</span>, and which parts we put into the response matrix <span class="math inline">\(Y\)</span>. For example, if we wanted to predict the third column <span class="math inline">\(j=3\)</span> given the fifth column <span class="math inline">\(j=5\)</span> our predictor and response matrices would look as follows:</p>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span class="math display">\[
+Y = \begin{pmatrix}
+d_{1,3} \\
+d_{2,3} \\
+d_{3,3} \\
+d_{4,3} \\
+d_{5,3} \\
+d_{6,3}  
+\end{pmatrix}
+\]</span></p>
+</div><div class="column" style="width:25%;">
+<p><span class="math display">\[
+X = \begin{pmatrix}
+1 &amp; d_{1,5} \\
+1 &amp; d_{2,5} \\
+1 &amp; d_{3,5} \\
+1 &amp; d_{4,5} \\
+1 &amp; d_{5,5} \\
+1 &amp; d_{6,5}  
+\end{pmatrix}
+\]</span></p>
+</div>
+</div>
+<p>Where does the column of 1s come from? This is how we specify, in matrix notation, that we want an intercept term to be calculated. Models don’t <em>have</em> to have intercept terms, but in almost all cases we’re likely to be familiar with, they tend to.</p>
+<p>Let’s say we now want to include two columns, 2 and 5, from <span class="math inline">\(D\)</span> in the predictor matrix, leading to what’s commonly (and wrongly) called a ‘multivariate regression’. This means that <span class="math inline">\(Y\)</span> stays the same, but X is now as follows:</p>
+<p><span class="math display">\[
+X = \begin{pmatrix}
+1 &amp; d_{1,2}  &amp; d_{1,5}\\
+1 &amp; d_{2,2}  &amp; d_{2,5}\\
+1 &amp; d_{3,2}  &amp; d_{3,5}\\
+1 &amp; d_{4,2}  &amp; d_{4,5}\\
+1 &amp; d_{5,2}  &amp; d_{5,5}\\
+1 &amp; d_{6,2}  &amp; d_{6,5}
+\end{pmatrix}
+\]</span></p>
+<p>No matter now many columns we include in the predictor matrix, X, however, we still don’t have a real <strong>multivariate regression</strong> model specification. Even if X had a hundred columns, or a thousand, it would still not be a <strong>multivariate regression</strong> in the more technical sense of the term.</p>
+<p>Instead, <em>here’s</em> an example of a <strong>multivariate regression</strong> model:</p>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span class="math display">\[
+Y = \begin{pmatrix}
+d_{1,1} &amp; d_{1,3} \\
+d_{2,1} &amp; d_{2,3} \\
+d_{3,1} &amp; d_{3,3} \\
+d_{4,1} &amp; d_{4,3} \\
+d_{5,1} &amp; d_{5,3} \\
+d_{6,1} &amp; d_{6,3}  
+\end{pmatrix}
+\]</span></p>
+</div><div class="column" style="width:25%;">
+<p><span class="math display">\[
+X = \begin{pmatrix}
+1 &amp; d_{1,5} \\
+1 &amp; d_{2,5} \\
+1 &amp; d_{3,5} \\
+1 &amp; d_{4,5} \\
+1 &amp; d_{5,5} \\
+1 &amp; d_{6,5}  
+\end{pmatrix}
+\]</span></p>
+</div>
+</div>
+<p>This is an example of a <strong>multivariate regression model</strong>. We encountered it before when we used the multivariate normal distribution <a href="../lms-are-glms-part-13/index.qmd">in post 13</a>, and when we draw from the posterior distribution of Bayesian models <a href="../lms-are-glms-part-14/dundas-bad-counterfactual.png">in post 14</a>, but this is the first time we’ve considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it’s the first example of multivariate regression we’ve encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they’ve been <em>univariate</em> regression models in the sense that the response component <span class="math inline">\(Y\)</span> has always only contained one column only.</p>
+<p>So, with this definition of multivariate regression, let’s now look at VAR as a particular application of multivariate regression used in time series.</p>
+</section>
+<section id="vector-autoregression" class="level2">
+<h2 class="anchored" data-anchor-id="vector-autoregression">Vector Autoregression</h2>
+<p>Let’s start with a semi-technical definition:</p>
+<blockquote class="blockquote">
+<p>In vector autoregression (VAR) the values of two or more outcomes, <span class="math inline">\(\{Y_1(T), Y_2(T)\}\)</span>, are predicted based on previous values of those same outcomes <span class="math inline">\(\{Y_1(T-k), Y_2(T-k)\}\)</span>, for various lag periods <span class="math inline">\(k\)</span>.</p>
+</blockquote>
+<p>Where <span class="math inline">\(Y\)</span> has two columns, and an <code>AR(1)</code> specification (i.e.&nbsp;<code>k</code> is just 1), how is this different from simply running two separate <code>AR(1)</code> regression models, one for <span class="math inline">\(Y_1\)</span>, and the other for <span class="math inline">\(Y_2\)</span>?</p>
+<p>Well, graphically, two separate <code>AR(1)</code> models proposes the following paths of influence:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+Y1_T["Y1(T)"]
+Y2_T["Y2(T)"]
+
+Y1_T1["Y1(T-1)"]
+Y2_T1["Y2(T-1)"]
+
+Y1_T1 --&gt; Y1_T
+Y2_T1 --&gt; Y2_T
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>By contrast, the paths implied and allowed in the corresponding <code>VAR(1)</code> model look more like the following:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+Y1_T["Y1(T)"]
+Y2_T["Y2(T)"]
+
+Y1_T1["Y1(T-1)"]
+Y2_T1["Y2(T-1)"]
+
+Y1_T1 &amp; Y2_T1 --&gt; Y1_T &amp; Y2_T
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>So, each of the two outcomes at time T <em>is influenced both by its own previous value, but also by the previous value of the other outcome</em>. This <em>other outcome</em> influence is what is represented in the figure above by the diagonal lines: from <code>Y2(T-1)</code> to <code>Y1(T)</code>, and from <code>Y1(T-1)</code> to <code>Y2(T)</code>.</p>
+<p>Expressed verbally, if we imagine two entities - <strong>self</strong> and <strong>other</strong> - tracked through time, <strong>self</strong> is influenced both by <em>self’s history</em>, but also by <em>other’s history</em> too.</p>
+</section>
+<section id="example-and-application-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="example-and-application-in-r">Example and application in R</h2>
+<p>In <a href="../../still-the-economy/index.qmd">a more substantivelly focused post</a>, I discussed how I suspect economic growth and longevity growth trends are correlated. What I proposed doesn’t exactly lend itself to the simplest kind of <code>VAR(1)</code> model specification, because I suggested a longer lag between the influence of economic growth on longevity growth, and a change in the fundamentals of growth in both cases. However, as an example of VAR I will ignore these complexities, and use the data I prepared for that post:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gdp_growth_pct_series <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../../../still-the-economy/both_series.csv"</span>) </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gdp_growth_pct_series</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 147 × 5
+    ...1  year series            pct_change period
+   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt; 
+ 1     1  1949 1. Per Capita GDP     NA     Old   
+ 2     2  1950 1. Per Capita GDP      2.20  Old   
+ 3     3  1951 1. Per Capita GDP      2.92  Old   
+ 4     4  1952 1. Per Capita GDP      1.36  Old   
+ 5     5  1953 1. Per Capita GDP      5.07  Old   
+ 6     6  1954 1. Per Capita GDP      3.87  Old   
+ 7     7  1955 1. Per Capita GDP      3.55  Old   
+ 8     8  1956 1. Per Capita GDP      1.28  Old   
+ 9     9  1957 1. Per Capita GDP      1.49  Old   
+10    10  1958 1. Per Capita GDP      0.815 Old   
+# ℹ 137 more rows</code></pre>
+</div>
+</div>
+<p>We need to do a certain amount of reformatting to bring this into a useful format:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wide_ts_series <span class="ot">&lt;-</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gdp_growth_pct_series <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">`</span><span class="at">...1</span><span class="st">`</span>, period)) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">short_series =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            series <span class="sc">==</span> <span class="st">"1. Per Capita GDP"</span> <span class="sc">~</span> <span class="st">'gdp'</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            series <span class="sc">==</span> <span class="st">"2. Life Expectancy at Birth"</span> <span class="sc">~</span> <span class="st">'e0'</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>series) <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> short_series, <span class="at">values_from =</span> pct_change) <span class="sc">|&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">lag_gdp =</span> <span class="fu">lag</span>(gdp),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">lag_e0 =</span> <span class="fu">lag</span>(e0)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">complete.cases</span>(.))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>wide_ts_series</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 5
+    year   gdp      e0 lag_gdp  lag_e0
+   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1  1951 2.92  -0.568    2.20   0.763 
+ 2  1952 1.36   1.89     2.92  -0.568 
+ 3  1953 5.07   0.388    1.36   1.89  
+ 4  1954 3.87   0.530    5.07   0.388 
+ 5  1955 3.55  -0.0570   3.87   0.530 
+ 6  1956 1.28   0.385    3.55  -0.0570
+ 7  1957 1.49   0.170    1.28   0.385 
+ 8  1958 0.815  0.255    1.49   0.170 
+ 9  1959 3.70   0.184    0.815  0.255 
+10  1960 5.72   0.268    3.70   0.184 
+# ℹ 61 more rows</code></pre>
+</div>
+</div>
+<p>So, we can map columns to parts of the VAR specification as follows:</p>
+<ul>
+<li><code>Y1</code>: gdp</li>
+<li><code>Y2</code>: e0 (life expectancy at birth)</li>
+<li><code>period T</code>: <code>gdp</code> and <code>e0</code></li>
+<li><code>period T-1</code>: <code>lag_gdp</code> and <code>lag_e0</code></li>
+</ul>
+<p>To include two or more variables as the response part, <span class="math inline">\(Y\)</span>, of a linear model we can use the <code>cbind()</code> function to combine more than one variable to the left hand side of the linear regression formula for <code>lm</code> or <code>glm</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>var_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(gdp, e0) <span class="sc">~</span> lag_gdp <span class="sc">+</span> lag_e0,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> wide_ts_series</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>var_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = cbind(gdp, e0) ~ lag_gdp + lag_e0, data = wide_ts_series)
+
+Coefficients:
+             gdp       e0      
+(Intercept)   1.99440   0.28108
+lag_gdp       0.06173   0.01179
+lag_e0       -0.48525  -0.33063</code></pre>
+</div>
+</div>
+<p>We can see here that the model reports a small matrix of coefficients: three rows (one for each coefficient term) and two columns: one for each of the response variables. This is as we should expect.</p>
+<p>Back in <a href="../lms-are-glms-part-12/index.qmd">part 12 of the series</a>, we saw we could extract the coefficients, variance-covariance matrix, and error terms of a linear regression model using the functions <code>coefficients</code>, <code>vcov</code>, and <code>sigma</code> respectively.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s use those functions here too:</p>
+<p>First the coefficients</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(var_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    gdp          e0
+(Intercept)  1.99439587  0.28108028
+lag_gdp      0.06172721  0.01178781
+lag_e0      -0.48524808 -0.33062640</code></pre>
+</div>
+</div>
+<p>And now the variance-covariance matrix:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcov</span>(var_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                gdp:(Intercept)   gdp:lag_gdp    gdp:lag_e0 e0:(Intercept)
+gdp:(Intercept)    0.1804533467 -0.0272190933 -0.1129646084   0.0039007790
+gdp:lag_gdp       -0.0272190933  0.0164590434 -0.0180517467  -0.0005883829
+gdp:lag_e0        -0.1129646084 -0.0180517467  0.6290771233  -0.0024419053
+e0:(Intercept)     0.0039007790 -0.0005883829 -0.0024419053   0.0037904364
+e0:lag_gdp        -0.0005883829  0.0003557878 -0.0003902165  -0.0005717391
+e0:lag_e0         -0.0024419053 -0.0003902165  0.0135984779  -0.0023728303
+                   e0:lag_gdp     e0:lag_e0
+gdp:(Intercept) -0.0005883829 -0.0024419053
+gdp:lag_gdp      0.0003557878 -0.0003902165
+gdp:lag_e0      -0.0003902165  0.0135984779
+e0:(Intercept)  -0.0005717391 -0.0023728303
+e0:lag_gdp       0.0003457235 -0.0003791783
+e0:lag_e0       -0.0003791783  0.0132138133</code></pre>
+</div>
+</div>
+<p>And finally the error terms</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(var_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      gdp        e0 
+2.6906051 0.3899529 </code></pre>
+</div>
+</div>
+<p>The coefficients returns the same kind of 3x2 matrix we saw previously: two models run simultaneously. The error terms is now a vector of length 2: one for each of these models. The variance-covariance matrix is a square matrix of dimension 6: i.e.&nbsp;6 rows and 6 columns. This is the number of predictor coefficients in each model (the number of columns of <span class="math inline">\(X\)</span>, i.e.&nbsp;3) <em>times</em> the number of models simultaneously run, i.e.&nbsp;2.</p>
+<p><span class="math inline">\(6^2\)</span> is <code>36</code>, which is the number of elements in the variance-covariance matrix of this VAR model. By contrast, if we had run two independent models - one for gdp and the other for e0 - we would have two 3x3 variance-variance matrices, producing a total of 18 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> terms. This should provide some reassurance that, when we run a multivariate regression model of two outcomes, we’re not <em>just</em> doing the equivalent of running separate regression models for each outcome, but in slightly fewer lines.</p>
+<p>Now, let’s look at the model summary:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(var_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response gdp :
+
+Call:
+lm(formula = gdp ~ lag_gdp + lag_e0, data = wide_ts_series)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-12.679  -1.061   0.143   1.483   6.478 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.99440    0.42480   4.695 1.34e-05 ***
+lag_gdp      0.06173    0.12829   0.481    0.632    
+lag_e0      -0.48525    0.79314  -0.612    0.543    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.691 on 68 degrees of freedom
+Multiple R-squared:  0.007555,  Adjusted R-squared:  -0.02163 
+F-statistic: 0.2588 on 2 and 68 DF,  p-value: 0.7727
+
+
+Response e0 :
+
+Call:
+lm(formula = e0 ~ lag_gdp + lag_e0, data = wide_ts_series)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.45680 -0.19230 -0.00385  0.24379  1.38706 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.28108    0.06157   4.565 2.15e-05 ***
+lag_gdp      0.01179    0.01859   0.634  0.52823    
+lag_e0      -0.33063    0.11495  -2.876  0.00537 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.39 on 68 degrees of freedom
+Multiple R-squared:  0.1086,    Adjusted R-squared:  0.08243 
+F-statistic: 4.144 on 2 and 68 DF,  p-value: 0.02003</code></pre>
+</div>
+</div>
+<p>The summary is now reported for each of the two outcomes: first <code>gdp</code>, then <code>e0</code>.</p>
+<p>Remember that the outcome is percentage annual change in the outcome of interest from the previous year. i.e.&nbsp;both series have already been ‘differenced’ to produce approximately stationary series. It also means that the intercept terms are especially important, as they indicate the long-term trends observed in each series.</p>
+<p>In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As <a href="../../still-the-economy/index.qmd">the post this relates to</a> makes clear, however, these long-term trends may no longer apply.</p>
+<p>Of the four lag (<code>AR(1)</code>) terms in the model(s), three are not statistically significant; not even close. The exception is the <code>lag_e0</code> term for the <code>e0</code> response model, which is statistically significant and negative. Its coefficient is also of similar magnitude to the intercept too.</p>
+<p>What does this mean in practice? In effect, that annual mortality improvement trends have a tendency to <em>oscillate</em>: a better-than-average year tends to be followed by a worse-than-average year, and a worse-than-average year to be followed by a better-than-average year, in both cases at higher-than-chance rates.</p>
+<p>What could be the cause of this oscillatory phenomenon? When it comes to longevity, the phenomenon is somewhat well understood (though perhaps not widely enough), and referred to as either ‘forward mortality displacement’ or, more chillingly, ‘harvesting’. This outcome likely comes about because, if there were an exceptionally bad year in terms of (say) influenza mortality, the most frail and vulnerable are likely to be those who die disproportionately from this additional mortality event. This means that the ‘stock’ of people remaining the following year have been selected, on average, to be slightly less frail and vulnerable than those who started the previous year. Similarly, an exceptionally ‘good’ year can mean that the average ‘stock’ of the population in the following year is slightly more frail than in an average year, so more susceptible to mortality. And so, by this means, comparatively-bad-years tend to be followed by comparatively-good-years, and comparatively-good-years by comparatively-bad-years.</p>
+<p>Though this general process is not pleasant to think about or reason through, statistical signals such as the negative <code>AR(1)</code> coefficient identified here tend to keep appearing, whether we are looking for them or not.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this post we’ve both concluded the time series subseries, and returned to and expanded on a few posts earlier in the series. This includes the very first post, where we were first introduced to the <code>grandmother formulae</code>, the posts on statistical modelling using both frequentist and Bayesian methods, and a substantive post linking life expectancy with economic growth.</p>
+<p>Although we’ve now first encountered multivariate regression models in the context of time series, they are a much more general phenomenon. Pretty much any type of model we can think of and apply in a univariate fashion - where <span class="math inline">\(Y\)</span> has just a single column - can conceivably be expanded to two mor more columns, leading to their more complicated multiple regression variants.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>A primary aim extracting these components from a linear regression in this way is to allow something approximating a Bayesian posterior distribution of coefficients to be generated, using a multivariate normal distribution (the first place we actually encountered a multivariate regression), without using a Bayesian modelling approach. This allows for the estimating and propagation of ‘honest uncertainty’ in predicted and expected outcomes. However, as we saw in <a href="../lms-are-glms-part-13/index.qmd">part 13</a>, it can sometimes be as or more straightforward to just use a Bayesian modelling approach.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>i.e.&nbsp;two times three squared.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

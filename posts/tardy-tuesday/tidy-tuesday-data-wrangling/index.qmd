@@ -1,0 +1,136 @@
+---
+title: "Tidy Tuesday: Self-generated data challenge"
+author: 
+    - "Jon Minton"
+    - "Kate Pyper"
+    - "Kennedy Owusu-Afriyie"
+    - "Brendan Clarke"
+    - "Imran Chowdhury"
+    - "Andrew Saul"
+date: "2024-05-29"
+warning: false
+message: false
+categories: [R, tidy tuesday, data wrangling]
+---
+
+## Introduction
+
+For this session we chose to focus on a data wrangling challenge that Andrew brought to the table, rather than the most recent dataset. The challenge involved converting slightly messy data structure from the first format seen below, to the second (tidy) structure:
+
+```{r}
+library(tidyverse)
+
+df <-   tribble(~`...1`, ~`...2`, ~`...3`, ~`...4`, ~`...5`, ~`...6`, ~`...7`, ~`...8`, ~`...9`,
+          NA,NA, NA, "House Stats in Nov", NA, "Flat Stats in Nov", NA, "All Stats in Nov", NA,
+          "Region", "LA", "LACode", "Count", "Sold", "Count", "Sold", "Count", "Sold",
+          "Scotland",  "Minyip", "M394932", "1000", "900", "600", "300", "1600", "1200")
+
+df
+
+# desired output
+tribble(~"region",  ~"la", ~"la_code", ~"house_count", ~"house_sold", ~"flat_count", ~"flat_sold", ~"all_count", ~"all_sold",
+        "Scotland",  "Minyip", "M394932", "1000", "900", "600", "300", "1600", "1200") 
+
+```
+
+Andrew had a prepared solution. But Kate led the session by developing another solution from scratch
+
+## Katie's solution
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(fillr)
+ 
+df <- 
+  tribble(~`...1`, ~`...2`, ~`...3`, ~`...4`, ~`...5`, ~`...6`, ~`...7`, ~`...8`, ~`...9`,
+          NA,NA, NA, "House Stats in Nov", NA, "Flat Stats in Nov", NA, "All Stats in Nov", NA,
+          "Region", "LA", "LACode", "Count", "Sold", "Count", "Sold", "Count", "Sold",
+          "Scotland",  "Minyip", "M394932", "1000", "900", "600", "300", "1600", "1200")
+ 
+nm1 <- unlist(df[1,])
+nm2 <- unlist(df[2,])
+nm1
+nm2
+ 
+nm1 <- str_extract(nm1, "\\w*(?=\\s)")
+nm1 <- fill_missing_previous(nm1)
+nm1[is.na(nm1)] <- ""
+nm1
+ 
+nms <- paste(nm1, nm2)
+ 
+names(df) <- nms
+ 
+df <- clean_names(df[-(1:2),])
+df
+
+```
+
+This solution involved a mixture of tidyverse and base R expressions. Brendan made the point that tidyverse is great at doing 80% of the work needed quickly, but sometimes base R is needed to complete the remaining 20%. 
+
+## Other solutions
+
+Andrew proposed the following function for doing the data cleaning. 
+
+```{r}
+merge_rows <- function(df){ # eg. lst[[1]]
+
+  # convert rows1&2 into columns
+  row1 <- df[1, ] |> t() 
+  row2 <- df[2, ] |> t() 
+  # remove selected text then fill down NAs
+  row1 <- str_remove(row1, " Stats in Nov") |> 
+    as_tibble() |> 
+    fill(value) |> 
+    pull() |> replace_na("")
+
+  row3 <- str_c(row1, " ", row2) |> 
+    str_trim()
+  # create same header vector as original df
+  header_vec <- character()
+  for (i in seq_along(df)){
+    header_vec[i] <- str_c("...", i)
+  }
+  # create tibble with header and 1st row of df
+  tib <-
+    t(row3) |> 
+    as_tibble() |> 
+    set_names(header_vec) 
+  return(tib)
+}
+ 
+create_header_df <- function(df) {
+  merge_rows(df) |> 
+    bind_rows(df) |> 
+    janitor::row_to_names(1) |> 
+    clean_names()
+}
+ 
+create_header_df(df) |> 
+  slice(-c(1:2))
+
+```
+
+And Brendan suggested the following tidyverse solution:
+
+
+```{r}
+nice_names <- tibble(one = unlist(df[1,]), 
+       two = unlist(df[2,])) |>
+  mutate(one = str_replace_all(one,  "Stats in Nov", "")) |>
+  fill(one) |>
+  mutate(three = str_replace_all(paste(one, two), "NA ", "")) |>
+  pull(three)
+
+names(df) <- nice_names
+df |>
+  janitor::clean_names()
+
+```
+
+## Discussion
+
+After Kate solved Andrew's problem with lots of time to spare, she then ran through a real-world example that makes use of some similar approaches. The use of `unlist()` to extract vectors to work on was a big part of both solutions. 
+
+We all agreed Kate was excellent with these kinds of data wrangling challenges, despite coding with no prior warning of the challenge and wet hair. 

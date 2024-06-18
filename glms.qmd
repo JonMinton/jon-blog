@@ -1,16 +1,92 @@
 ---
 title: "Statistical Modelling: Theory and Practice"
 listing: 
-  contents: posts/glms/**/**.qmd
-  sort: "date"
-  type: table
-  fields: [date, title, reading-time]
-  categories: false
-  sort-ui: false
-  filter-ui: false
+  - id: section-01-intro
+    contents: "posts/glms/intro-to-glms/**/*.qmd"
+    type: table
+    fields: [title, reading-time]
+    categories: false
+    sort: "part-id"
+    sort-ui: false
+    filter-ui: false   
+  - id: section-02-theory
+    contents: "posts/glms/likelihood-and-simulation-theory/**/*.qmd"
+    type: table
+    fields: [title, reading-time]
+    categories: false
+    sort: "date"
+    sort-ui: false
+    filter-ui: false 
+  - id: section-03-worked-example
+    contents: "posts/glms/complete-simulation-example/**/*.qmd"
+    type: table
+    fields: [title, reading-time]
+    categories: false
+    sort: "date"
+    sort-ui: false
+    filter-ui: false
+  - id: causal-inference-section
+    contents: "posts/glms/causal-inference/**/*.qmd"
+    type: table
+    fields: [title, reading-time]
+    sort: "date"
+    sort-ui: false
+    filter-ui: false
+  - id: time-series-section
+    contents: "posts/glms/time-series/**/*.qmd"
+    type: table
+    fields: [title, reading-time]
+    sort: "date"
+    sort-ui: false
+    filter-ui: false
 page-layout: full
 title-block-banner: false
 ---
 
-This page lists all posts I've written on statistical modelling and inference, originally framed around 'generalised linear models' (`glm` in R) but quite a bit broader than that. I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in [this post here](posts/background-to-my-stats-series/index.qmd). 
+Here are posts so far on statistical modelling, now arranged by section/grouping for easier navigation.
+
+## Core material: Principles of Statistical Inference and Simulation
+
+### Section 1: Introduction
+
+A reintroduction to statistics from the perspective of generalised linear modelling.
+
+:::{#section-01-intro}
+:::
+
+### Section 2: Likelihood and simulation theory
+
+A deep dive into the core principles and concepts underlying statistical modelling using likelihood, and how to use models for honest prediction and simulation
+
+:::{#section-02-theory}
+:::
+
+### Section 3: A complete example
+
+The application of the above material to a specific dataset, starting with model fitting and simple prediction functions, and ending with Bayesian modelling
+
+:::{#section-03-worked-example}
+:::
+
+### Notes on core section
+
+I consider the production of this material something of a public service. More on the background to the series, which includes my own background, is available in [this post here](posts/background-to-my-stats-series/index.qmd). 
+
+## Additional Materials
+
+Deep dives into specific topic areas. These sections can be approached in any order, so long as the core section has been read and understood first.
+
+### Causal Inference
+
+An opinionated discussion of the topic and challenges of causal inference.
+
+:::{#causal-inference-section}
+:::
+
+### Time Series
+
+An introduction to time series, focused around the ARIMA modelling framework.
+
+:::{#time-series-section}
+:::
 

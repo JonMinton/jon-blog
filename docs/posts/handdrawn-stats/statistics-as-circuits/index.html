@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-05-28">
+
+<title>Jon Minton’s Blog - Statistics as circuit boards</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Statistics as circuit boards">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/handdrawn-stats/statistics-as-circuits/IMG_2903 Large.jpeg">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Statistics as circuit boards</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">simulation</div>
+                <div class="quarto-category">systems</div>
+                <div class="quarto-category">hand written</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 28, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The general approach I advocate for thinking about statistics in my ever-expanding series is, for me, predicated on a series of related mental models for thinking about statistical inference and what we can do with statistical models. And these mental models are both graphical, and have some similarity with circuit board schematics, or more generally graphical representations of complex systems. To the extent these mental models have been useful for me, I hope they’ll be useful to others as well.</p>
+<p>In the handwritten notes below I’ll try to show some of these mental models, and how they can help demystify some of the processes and opportunities involved in statistical inference</p>
+</section>
+<section id="terminology" class="level2">
+<h2 class="anchored" data-anchor-id="terminology">Terminology</h2>
+<section id="data-for-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="data-for-the-model">Data for the model</h3>
+<p>As I recently discussed in a post relating to multivariate models, ultimately almost all models work with a big rectangle of data: each row an observation, each column a variable. We can call this big rectangle <span class="math inline">\(D\)</span>. Then, we need to imagine a way of splitting out this rectangle into two pieces: the model inputs (or predictor matrix), which we call <span class="math inline">\(X\)</span>, and the model outputs (or response matrix) which we call <span class="math inline">\(y\)</span>.</p>
+<p>To try to represent this, I first thought about a big piece of square-lined paper, with a vertical perforation on it. Tear along this vertical perforation, and one of the pieces of paper is the output <span class="math inline">\(y\)</span>, and the other the input <span class="math inline">\(X\)</span>.</p>
+<p>However, I then realised the <span class="math inline">\(X\)</span>/<span class="math inline">\(y\)</span> distinction is probably clearer to express symbolically as two complementary shapes: the input <span class="math inline">\(X\)</span> being basically a rectangle with a right-facing chevron, and the output <span class="math inline">\(y\)</span> being a rectangle with a chevron-shaped section missing from it on the left.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="IMG_2903 Large.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Symbols</figcaption>
+</figure>
+</div>
+</section>
+<section id="model-components" class="level3">
+<h3 class="anchored" data-anchor-id="model-components">Model components</h3>
+<p>At a high enough level of generalisation, there are basically two component types that statistical models contain: stochastic components, denoted <span class="math inline">\(f(.)\)</span>, and deterministic components, denoted <span class="math inline">\(g(.)\)</span>. Within the figure, I’m referring to the deterministic components as <strong>transformers</strong> and the stochastic components as <strong>noisemakers</strong>. I decided to draw the <strong>transformers as triangles</strong>, and the <strong>noisemakers as ribbons</strong>.</p>
+</section>
+</section>
+<section id="model-fittingcalibration" class="level2">
+<h2 class="anchored" data-anchor-id="model-fittingcalibration">Model fitting/calibration</h2>
+<p>Both <strong>transformers</strong> and <strong>noisemakers</strong> require specific parameters. Imagine these as a series of dials on two separate panels. The parameters for the <strong>transformers</strong> are usually referred to as <span class="math inline">\(\beta\)</span> (‘beta’), which can be either (and rarely) a single value, or a vector of values. And the parameters for the <strong>noisemakers</strong> are usually referred to as <span class="math inline">\(\alpha\)</span> (‘alpha’). There are many possible values of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span> that a model can accept - many different ways the dials on the two panels can be set - and the main challenge of fitting a statistical model is to decide on the best configuration of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span> to set the model to.</p>
+<p>And what does ‘best’ mean? Broadly, that the discrepancy between what comes out of the model, <span class="math inline">\(Y\)</span>, and the corresponding outcome values in the dataset, <span class="math inline">\(y\)</span>, is minimised in some way. Essentially, this discrepancy, <span class="math inline">\(\delta\)</span>, is calculated with the current configuration of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span>, and then some kind of algorithm is applied to make a decision about how to adjust the dials. With the dials now adjusted, new model predictions <span class="math inline">\(Y\)</span> are produced, leading to a new discrepancy value <span class="math inline">\(\delta\)</span>. If necessary, then the calibration algorithm is applied once again, so the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> parameters adjusted, and so the parameter operationalisation loop is repeated, until some kind of condition is met defining when the parameters identified are <em>good enough</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="IMG_2905 Large.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Model fitting</figcaption>
+</figure>
+</div>
+<p>There are a number of possible ways of arriving at the ‘best’ parameter configuration. One approach is to employ an analytical solution, such as with the least-squares or generalised least-squares methods. In these cases some kind of algebraic ‘magic’ is performed and - <em>poof!</em> - the parameters just drop out instantly from the solution, meaning no repeated interation. In all other cases, however, it’s likely the predict-compare-calibrate cycle will be repeated many times, either until the error is deemed small enough, or until some kind of resource-based stopping condition - such as “stop after 10,000 tries” - has been reached.</p>
+<p>This iterative cyclic quality of model fitting applies regardless of whether frequentist models - using maximum likelihood estimation - or Bayesian models - employing something like Hamiltonian Monte-Carlo estimation - have been employed. Both involve trying to minimise a loss function, i.e.&nbsp;the error <span class="math inline">\(\delta\)</span> though updating the current best estimate of the parameter set <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span>. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</section>
+<section id="model-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="model-simulation">Model simulation</h2>
+<section id="simple-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="simple-simulation">Simple simulation</h3>
+<p>Once the model <span class="math inline">\(M\)</span> has been calibrated, i.e.&nbsp;the best possible set of parameters <span class="math inline">\(\beta\)</span> (for the transformer, <span class="math inline">\(g(.)\)</span>) and <span class="math inline">\(\alpha\)</span> (for the noisemaker, <span class="math inline">\(f(.)\)</span>) have been identified in the calibration set, the model can now be used for prediction, projection, interpolation, extrapolation, and simulation more generally.</p>
+<p>The challenges are two-fold: knowing how to ‘ask the model questions’; and knowing how to interpret the answers the model gives.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="IMG_2906 Large.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Model prediction</figcaption>
+</figure>
+</div>
+<p>To ‘ask the model questions’, we need to specify some input data, <span class="math inline">\(X\)</span>, to put into the model. This input data could be taken from the same dataset used to calibrate the model in the first place. But it doesn’t have to be. We could ask the model to produce a prediction for configurations of input the model has never seen before. In <a href="../../../posts/glms/complete-simulation-example/lms-are-glms-part-11/index.html">post 11</a> of the statistics series, we asked the model to predict levels of tooth growth where the dosage was <em>between</em> the dosage values in the dataset; this is an example of <em>interpolation</em>. In the same dataset we also saw examples of <em>extrapolation</em>, including dosage levels that were predicted/projected to lead to <em>negative tooth growth</em>, i.e.&nbsp;impossible values. So, a key challenge in asking questions of the model, through proposing an input predictor matrix <span class="math inline">\(X\)</span>, is to know which questions are and are not sensible to ask.</p>
+<p>Knowing how to interpret the answers from the model is the second part of the challenge. If we run the model in its entirety, the values from the systematic component (<strong>transformer</strong>) are passed to the stochastic component (<strong>noisemaker</strong>), meaning we’ll get different answers each time.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> For some types of model, we can just extract the results of the transformer part alone, and so produce expected values. If we pass the values from the transformer to the noisemaker, however, we’ll end up with a distribution of values from the model, even though the calibration parameters <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span>, and input data <span class="math inline">\(X\)</span> are non-varying. So, we may need to choose a way to summarise this distribution. For example, we may want to know the proportion of occasions/draws that exceed a particular threshold value <span class="math inline">\(\tau\)</span>. Or may want to calculate the median and a prediction interval.</p>
+</section>
+<section id="simulating-trials" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-trials">Simulating ‘trials’</h3>
+<p>Once the fundamentals of simulation using statistical model simulations are understood, it’s just a small step to producing hypothetical simulation-based ‘trials’. Just apply two different input datasets <span class="math inline">\(X_0\)</span> and <span class="math inline">\(X_1\)</span> to the same model <span class="math inline">\(M\)</span>. These two datasets should differ only in terms of a specific exposure variable of interest <span class="math inline">\(Z\)</span>, with all other inputs kept the same. This is equivalent to magicking up the hypothetical ‘platinum standard’<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> discussed in <a href="../../../posts/glms/causal-inference/lms-are-glms-part-15/index.html">this post on causal inference</a>: imagine exactly the same individual being observed in two different worlds, where only one thing (exposed/not exposed, or treated/not treated) is different.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="IMG_2907 Large.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Simulated ‘trial’</figcaption>
+</figure>
+</div>
+<p>When it comes to intepretating the outputs, the job is now to compare between the outputs generated when <span class="math inline">\(X_0\)</span> is passed to <span class="math inline">\(M\)</span>, and when <span class="math inline">\(X_1\)</span> is passed to <span class="math inline">\(M\)</span>. Call these outputs <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_0\)</span> respectively; our treatment or exposure effect estimate is therefore the difference: <span class="math inline">\(Y_1 - Y_0\)</span>.</p>
+</section>
+<section id="simulating-with-honest-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="simulating-with-honest-uncertainty">Simulating with honest uncertainty</h3>
+<p>Once you’re familiar with the last couple of steps - how to ‘ask models questions’, and how to ‘perform simulated trials’, the last challenge is how to do so <em>honestly</em>.</p>
+<p>By <em>honestly</em>, I mean <em>with appropriate acknowledgement of the effect that parameter uncertainty has on uncertainty in model outputs</em>. We don’t really <em>know</em> the ‘true’ values of the parameter values <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span>; we’ve just <em>estimated</em> them. And because they’re estimated, we’re not certain of their true value.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="IMG_2908 Large.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Simulation with uncertainty</figcaption>
+</figure>
+</div>
+<p>So, in order to represent the effect this parameter uncertainty has on the model outputs, there needs to be a way of generating and passing lots of ‘plausible parameter values’, <span class="math inline">\(\theta = \{ \beta, \alpha \}\)</span>, to the model. This means there’s a collection, or ensemble, of parameter values for the model, <span class="math inline">\(\tilde{\theta}\)</span>, and so an ensemble of models - each with a slightly different parameter configuration - that the predictor matrix <span class="math inline">\(X\)</span> goes into.</p>
+<p>And this then means that there’s an ensemble of model outputs, and so again a need to think about to summarise the distribution of outputs. Note that, because the variation in outputs comes about because of variation in the model parameters, a distribution of <span class="math inline">\(Y\)</span> is generated even if the noisemakers (<span class="math inline">\(f(.)\)</span>) are turned off, i.e.&nbsp;even if estimating for expected values rather than predicted values.</p>
+<p>And how is the ensemble of parameter values produced? There are basically three approaches:</p>
+<ul>
+<li>Analytical approximate solutions using something called <a href="https://en.wikipedia.org/wiki/Delta_method">the Delta Method</a>: Not discussed here</li>
+<li>Simulation methods involving normal approximations for frequentist-based models</li>
+<li>Use the converged Bayesian posterior distribution.</li>
+</ul>
+<p>In the figure, the Bayesian approach is shown on the right, and the simulation approach is shown on the left. A Bayesian converged posterior distribution is a distribution of plausible parameter values after the calibration process has been run enough times. It’s ideal for doing simulation with honest uncertainty, and was discussed back in <a href="../../../posts/glms/complete-simulation-example/lms-are-glms-part-13/index.html">the marbles-and-jumping-beans post</a>. The downside is Bayesian models can take longer to run, and require more specialist software and algorithms to be installed/used.</p>
+<p>The simulation approach for frequentist statistics was the focus of <a href="../../../posts/glms/complete-simulation-example/lms-are-glms-part-12/index.html">the 12th post</a> of the series, with its rationale developed over a few earlier posts. The basic aim of this approach is to generate an approximate analogue to the Bayesian posterior distribution, and this usually involves <em>using a model to make inputs to feed into another model</em>. It’s not quite models-all-the-way-down, but is a bit more meta than it may first appear!</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This post aimed to re-introduce many of the key intuitions I’ve tried to develop in my main stats post series, but with a focus on the graphical intuition and concepts involved in statistical simulation, rather than just the algebra and R code examples. I hope this provides a useful complementary set of materials for thinking about statistical inference and statistical simulation. As mentioned at the start of the post, this is largely how I tend to think about statistical modelling, and so hopefully this way of thinking is useful for others who want to use statistical models more effectively too.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>One crucial difference between the frequentist and Bayesian approaches is that, in the frequentist approach, a final set of parameter estimates is identified, equivalent to the dials on the panels being set a particular way and then never touched again. By contrast with the Bayesian approach the parameter set never quite stops changing, though it does tend to change less than it did at the start. The Bayesian approach is like a music producer who’s never quite satisfied with his desk, always tweaking this and that dial, though usually not by much. The technical definition is that frequentist parameter estimation <em>converges to a point</em> (hopefully), whereas Bayesian parameter estimation <em>converges to a distribution</em> (hopefully). This is what I was trying to express through the marble/jumping bean distinction back in <a href="../../../posts/glms/complete-simulation-example/lms-are-glms-part-13/index.html">post 13</a> of my main stats series. The marble finds a position of rest; the jumping bean does not.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Though we can set a random number seed to make sure the different answers are the same each time.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>If you’re a fan of the niche genre of sci-fi-rom-coms, you could also think of these as “sliding door moments”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,19 @@
+---
+title: "Hand-drawn Statistics"
+listing: 
+  contents: posts/handdrawn-stats/**/**.qmd
+  sort: "date"
+  type: table
+  fields: [date, title]
+  categories: true
+  sort-ui: false
+  filter-ui: true
+page-layout: full
+title-block-banner: false
+---
+
+Sometimes it can be easiest to think about complex ideas without having to think too much about the tooling to use to express and represent these ideas. Instead of having to deal with R code, mermaid uml syntax, latex equations and so on, sometimes the right tool for expressing an idea is just a pen and paper, and the right tool for presenting it to others is just take a picture with my camera phone. 
+
+At some point these hand drawn notes may become the basis of 'proper' blog posts. But for now I hope they're legible and comprehensible enough to be useful resources to others in the mean time.
+
+

@@ -1,0 +1,80 @@
+---
+title: "Time series: Some closing remarks"
+subtitle: "...Including why time series isn't not rocket science"
+author: "Jon Minton"
+date: "2024-06-09"
+message: false
+warning: false
+code-fold: true
+categories: [statistics, time series]
+---
+
+## Recap
+
+In the last few posts I've walked through some of the key concepts in time series, but focused on a particular modelling framework: the ARIMA model specification. Let's recap what we've covered: 
+
+- In [post one](../lms-are-glms-part-19/index.qmd), we discussed **autoregression**, and more generally the way that data including repeated measures of a single observation, or just a few observations, can still be treated largely like other types of data suitable for statistical modelling, through the inclusion of enough previous values as predictors that, once included, the observations can be considered as approximately independent of each other. 
+- In [post two](../lms-are-glms-part-20/index.qmd), we discussed **differencing and integration**: an operation for trying to make non-stationary data stationary; and a reverse operation for starting to build forecasts based on such differenced data. 
+- In [post three](../lms-are-glms-part-21/index.qmd), we discussed the intuition behind **the moving average model**: a way of thinking about time series as something analogous to a noisy singing bowl: a system that 'wants' to return to a position of either rest or a fundamental 'tone', but which is forever being subjected both to contemporary disturbances, and the influence of past disturbances. 
+- In [post four](../lms-are-glms-part-22/index.qmd), we integrated the components of the first three posts - autoregression `AR(p)`, integration `I(d)`, and moving averages `MA(q)` - to produce **the basic `ARIMA(p, d, q)` model specification**, and saw some examples of trying to run and use this specification in practice. 
+- In [post five](../lms-are-glms-part-23/index.qmd), we covered **the topic of seasonality**: repeated patterns over time that repeat in predictable ways over known and predictable time periods. We looked at both seasonal decomposition of such data into seasonal, trend, and (heuristically) 'leftover' components using the STL approach; and extending the ARIMA model specification to incorporate seasonality using the Seasonal ARIMA, or SARIMA, modelling framework. 
+- In [post six](../lms-are-glms-part-24/index.qmd), we took some of the ideas covered in posts one and two and extended then in another way, to build the intuitions behind a **vector autoregressive (or VAR) model specification**. This post can be considered both an extension of some of the aspects covered elsewhere in the time series series, but also an extension of the discussions in our series on generalised modelling in general, and using models for prediction and simulation, as it was the first time we encountered **multivariate models**, i.e. models in which we aim to fit more than one outcome or response at a single time. 
+
+## What's missing? 
+
+In choosing to focus on the ARIMA modelling specification, we necessarily didn't cover some other approaches to time series. This is similar to our series on causal inference, which stuck largely to one of the two main frameworks for thinking about the problems of causal inference - Rubin's Missing Data framework - and only gave some brief coverage and attempt at consiliation of the other framework - the Pearlean graph-based framework - in the final post. 
+
+So, like the final post of the Causal Inference series, let's discuss a couple of key areas that I've not covered in the series so far: state space models; and demographic models.
+
+
+## State Space Models and ETS
+
+Borrowing concepts from control theory - literally rocket science! - and requiring an unhealthy level of knowledge of linear algebra to properly understand and articulate, state space models represent a 1990s statistical formalisation of - mainly - a series of model specifications first developed in the 1950s. In this sense they seem to bookend ARIMA model specifications, which were first developed in the 1970s. The 1950s models were based around the concept of exponential smoothing: the past influences the present, but the recent past influences the present more than the distant past. [^1] 
+
+[^1]: In some ways, this idea seems equivalent to Tobler's First Law of Geography, but applied to temporal rather than spatial distance. 
+
+State space models involve solving (or getting a computer to solve) a series of simultaneous equations that link observed values over time $y_t$ to a series of largely unobserved and unobservable model parameters. The key conceptual link between state space models and control theory is that these observed parameters are allowed to change/evolve over time, in response to the degree of error between predicted and observed values at different points in time. 
+
+To conceptualise what's going on, think of a rocket trying to hit another moving target: the target the rocket's guidance system is tracking keeps changing, as does the position of the rocket relative to its target. So, the targetting parameters used by the rocket to ensure it keeps track of the target need to keep getting updated too. And more recent observations of the target's location are likely to be more important to determining where the rocket should move, and so how its parameters should be updated, than older observations. Also, the older observations are already in a sense incorporated into the system, as they influenced past decisions about the rocket's parameters, and so its trajectory in the past, and so its current position. So, given the rocket's current position, the most recent target position may be the only information needed, now, to decide how much to update the parameters. 
+
+To add [^2] to the analogy (which in some use-cases may have not been an analogy), we could imagine having some parameters which determine how quickly or slowly other parameters get updated. Think of a dial that affects the stiffness of another dial: when this first dial is turned down, the second dial can be moved clockwise or counterclockwise very quickly in response to the moving target; when the first dial is turned up, the second dial is more resistant to change, so takes longer to turn: this is another way of thinking about what exponential smoothing means in practice. There's likely to be a sweet spot when it comes to this first type of dial: too stiff is bad, as it means the system takes a long time to adjust to the moving target; but too responsive is bad too, as it means the system could become very unstable very quickly. Both excess stiffness and excess responsiveness can contribute to the system (i.e. our model predictions) getting further and further away from its target, and so to greater error. 
+
+[^2]: Possibly confusion
+
+In practice, with the excellent packages associated with [Hyndman and Athanasopoulos's excellent Forecasting book](https://otexts.com/fpp3/ets-estimation.html), we can largely ignore some of the more technical aspects of using state space models for time series forecasting with exponential smoothing, and just think of such models by analogy with ARIMA models, as model frameworks with a number of parameters to either select, or use heuristic or algorithmic methods to select for us. With ARIMA with have three parameters: for autoregression (`p`), differencing (`d`), and moving average (`q`); and with Seasonal ARIMA each of these receives a seasonal pair: `p` pairs with its seasonal analogue, `P`; `d` pairs with its seasonal analogue `D`; and `q` with its seasonal analogue `Q`. 
+
+The exponential smoothing analogue of the ARIMA framework is known as ETS, which stands for error-trend-season. Just as ARIMA model frameworks take three 'slots' - an `AR()` slot, an `I()` slot, and a `MA()` slot - ETS models also have three slots to be filled. However, these three slots don't take numeric values, but [the following arguments](https://otexts.com/fpp3/taxonomy.html):
+
+- The error slot `E()`: takes `N` for 'none', `A` for 'additive', or `M` for 'multiplicative'
+- The trend slot `T()`: takes `N` for 'none', `A` for 'additive', or `A_d` for 'additive-damped'
+- The seasonal slot `S()`: takes `N` for 'none', `A` for 'additive', or `M` for 'multiplicative'. 
+
+So, regardless of their different backgrounds, we can use ETS models as an alternative to, and in a very similar way to, ARIMA and SARIMA models.[^3]
+
+[^3]: A complicating coda to this is that state space modelling approaches can also be applied to ARIMA models.
+
+
+## Demographic forecasting models 
+
+Another (more niche) type of forecasting model I've not covered in this series are those used in demographic forecasting, such as the [Lee-Carter model](https://en.wikipedia.org/wiki/Lee%E2%80%93Carter_model) specification and its derivatives. When forecasting life expectancy, we could simply model life expectancy directly... or we could model each of its components together: the mortality rates at each specific year of age, and then derive future life expectancies from what the forecast age specific life expectancies at different ages imply the resultant life expectancy should be (i.e. perform a life table calculation on the projected/forecast values for a given future year, much as we do for observed data). This is our second example of multivariate regression, which we were first introduced to in [the post on vector autoregression VAR](../lms-are-glms-part-24/index.qmd). However, Lee-Carter style models can involve projecting forward dozens, if not over a hundred, response values at the same time, whereas in the VAR model example we just had two response values. 
+
+Lee-Carter style models represent an intersection between forecasting and factor analysis, due to the way the observed values of many different age-specific mortality rates are assumed to be influenced by, and provide information that can inform, an underlying latent variable known as the drift parameter. Once (something like) factor analysis is used to determine this drift parameter, the (logarithm of the) mortality rates at each specific age are assumed to follow this drift approximately, subject to some random variation, meaning the time series specification they follow is random-walk-with-drift (RWD), which (I think) is an ARIMA(0, 1, 0) specification. This assumption of a single underlying latent drift parameter influencing all ages has [been criticised as perhaps too strong a structural assumption, leading both to the suggestion that each age-specific mortality rate should be forecast independently with RWD](https://gking.harvard.edu/files/abs/lc-abs.shtml), or that the Lee-Carter assumptions implicit in its specification be relaxed in a more piecemeal fashion, leading to some of the alternative longevity forecasting models summarised and evaluated in [this paper](https://www.demographic-research.org/volumes/vol15/9/15-9.pdf), and [this paper](https://www.actuaries.org/AFIR/Colloquia/Rome2/Cairns_Blake_Dowd.pdf).  
+
+The overlap between general time series and demographic forecasting is less tenuous than it might first appear, when you consider that one of the authors of the first of the two papers above is none other than Rob Hyndman, whose forecasting book I've already referenced and made use of many times in this series. Hyndman is also the maintainer of R's [`demography` package](https://cran.r-project.org/web/packages/demography/demography.pdf). So, much of what can be learned about time series can be readily applied to demography too. 
+
+Finally, demographic forecasting models in which age-specific mortality over time is modelled open up another way of thinking about the problem: that of spatial statistics. Remember that with exponential smoothing models the assumed information value of models declines exponentially with time? As mentioned in an earlier footnote this is largely what's known as [Tobler's First Law of Geography](https://en.wikipedia.org/wiki/Tobler%27s_first_law_of_geography), but applied to just a single dimension (time) rather than two spatial dimensions such as latitude and longitude. Well, with spatial models there are two spatial dimensions, both of which have the same units (say, metres, kilometres, etc). Two points can be equally far apart, but along different spatial dimensions. Point B could be 2km east of point A, or 2km north of point A, or 2km north-east of point A.[^4] In each case, the distance between points is the same, and so the amount of downweighting of the information value of point B as to the true value of point A would be the same. 
+
+Well, with the kind of data used by Lee-Carter style models, we have mortality rates that are double indexed: $m_{x,t}$, where $x$ indexes the age in years, and $t$ indexes the time in years. Note the phrase *in years*: both age and time are in the same unit, much as latitude and longitude are in the same unit. So it makes sense to think of two points on the surface - $m_{a,b}$ and $m_{c,d}$ - as being a known distance apart from each other,[^5] and so for closer observations to be more similar or informative about each other than more distant values. This kind of as-if-spatial reasoning leads to thinking about how a surface of mortality rates might be smoothed appropriately, with estimates for each point being a function of the observed value of that point, plus some kind of exponentially weighted average of more and less proximately neighbouring points. (See, for example, [Girosi & King's framework](https://gking.harvard.edu/files/abs/smooth-abs.shtml))
+
+## Summing up 
+
+In this last post, we've scratched the surface on a couple of areas related to time series that the main post series didn't cover: state space modelling and demographic forecasting models. Although hopefully we can agree that they're both interesting topics, they've also helped to illustrate why the main post series has been anchored around the ARIMA modelling framework. Time series is a complex area, and so by sticking with ARIMA, we've managed to avoid getting too far adrift. 
+
+
+[^4]: Using a little trigonometry, this would be about 1.41 km east of point A, and 1.41km north of point A. 
+
+[^5]: Again, a little trigomometry tells us that the Cartesian distance between two points $m_{a,b}$ and $m_{c,d}$ should be $d = \sqrt{(c-a)^2 + (d-b)^2}$. In practice with spatial statistics two elements are often encoded in terms of adjacency: `1` if two elements are contiguous (next to each other); `0` if they are not.  
+
+
+
+

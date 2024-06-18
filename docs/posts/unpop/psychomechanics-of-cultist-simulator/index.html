@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-06-17">
+
+<title>Jon Minton’s Blog - The Game of Life Beyond</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Game of Life Beyond">
+<meta name="twitter:description" content="On the Psychological Mechanics of Cultist Simualtor">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Game of Life Beyond</h1>
+            <p class="subtitle lead">On the Psychological Mechanics of Cultist Simualtor</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">psychology</div>
+                <div class="quarto-category">games</div>
+                <div class="quarto-category">fantasy</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 17, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="warningpreamble" class="level2">
+<h2 class="anchored" data-anchor-id="warningpreamble">Warning/Preamble</h2>
+<p><em>This post contains mild-to-moderate spoilers for the game <a href="https://en.wikipedia.org/wiki/Cultist_Simulator">Cultist Simulator</a>, which is available on <a href="https://store.steampowered.com/app/718670/Cultist_Simulator/">Steam</a>, <a href="https://www.nintendo.com/en-gb/Games/Nintendo-Switch-download-software/Cultist-Simulator-Initiate-Edition-1904068.html">Switch</a>, and likely other platforms besides. If you want to experience Cultist Simulator without these spoilers, please buy the game, play it for between ten and twenty hours, then return to this post. If you’ve already played it, have no interest in playing it, or aren’t particularly bothered by spoilers, then please read on…</em></p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The first time I became aware of Cultist Simulator was through a Youtube video. And when I first saw it, I thought it was either a joke, or at most highly unfinished. But I was wrong.</p>
+<p>Cultist Simulator has no tutorial, a big virtual table (sitting atop ethereal nothingness), many cards, and some counters (that ‘accept’ cards). Superficially, there’s nothing else to it. Everything in the game happens on the table, and involves cards and counters. You can’t get up, you don’t see anyone, there’s no dialogue, no cut-scenes or grand cinematics, and in a sense nothing to do except move cards and counters around on a board.</p>
+<p>But within this highly limited player canvas, Cultist Simulator is an incredible game, narratively rich, mechanically complex, hypnotic, engaging, brutal, cruel, relaxing, philosophical, psychological, literary, purposeful and intelligent. The simplicity and limitations in the ways that the player can interact with the game, and the game can feed back to the player, belie the underlying complexity and richness of the game’s storytelling and mechanics.</p>
+<p>So, what is Cultist Simulator? Here’s three answers:</p>
+<ol type="1">
+<li>HP Lovecraft Solitaire</li>
+<li>A rogue-like indie game</li>
+<li>A human purpose and motivation simulator</li>
+</ol>
+<p>In this post, I’m going to focus on the third of these three answers. Through the medium of virtual cards, and virtual counters, on a virtual board, Cultist Simulator offers a simplified and stylised representation of <em>real</em> human psychological and physiological needs. So, even if you have no interest in games, this aspect of this game might still be of interest to you.</p>
+</section>
+<section id="starting-off" class="level2">
+<h2 class="anchored" data-anchor-id="starting-off">Starting off</h2>
+<p>When you first start <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Cultist Simulator you have one card, and one counter. The card says <strong>menial employment</strong>, and the counter, which is larger than the card, says <strong>work</strong>. If you move the counter onto the card, nothing happens. But if you move the card onto the counter, a dialogue box opens showing the card - <strong>menial employment</strong> - embedded in the activity of <strong>work</strong>, the counter. You then have the option to undo this association, by moving the card out of the counter dialogue box, or to <strong>commit</strong> this action: <em>do</em> <strong>work</strong> with <strong>menial employment</strong>.</p>
+<p>So, you learn that, broadly speaking <strong>the counters are verbs (or actions)</strong> whereas <strong>the cards are nouns (or things)</strong>.</p>
+<p>Next, you learn that <em>actions take time</em>. Once you execute work with menial employment, a timer appears on the work counter, counting down to new events. You learn your job is a hospital porter, it pays poorly, brings you into contact with sickness and death, and that it’s precarious.</p>
+<p>Very precarious: as then you’re made redundant. As part of your redundancy package you receive some new cards, and some new counters:</p>
+<ul>
+<li>cards:
+<ul>
+<li>a bequest</li>
+<li>reason</li>
+<li>coins</li>
+</ul></li>
+<li>counters:
+<ul>
+<li>study</li>
+</ul></li>
+</ul>
+<p>Before too long, you realise some of the cards relate to resources. These are:</p>
+<ul>
+<li>coin</li>
+<li>reason</li>
+<li>passion</li>
+<li>health</li>
+</ul>
+<p>And the range of counters (actions) available to you expands to:</p>
+<ul>
+<li>work</li>
+<li>study</li>
+<li>dream</li>
+<li>explore</li>
+<li>talk</li>
+</ul>
+<p>The human purpose and motivation simulation component of the game comes from a) realising that the four card resources above are aspects of the self that need to be effectively managed to survive; and b) realising that your own mind and body plays actions (generates counters) against you. You are, in this game, in a sense completing against yourself!</p>
+</section>
+<section id="early-endings" class="level2">
+<h2 class="anchored" data-anchor-id="early-endings">Early endings</h2>
+<p>What does this mean in practice? Let’s consider some in-game scenarios.</p>
+<ul>
+<li><strong>Scenario 1</strong>: After having been made redundant, you use your <strong>reason</strong> to seek employment, and find <strong>clerical work</strong> (under the critical and watchful gaze of Mr Glover Sr., the proprietor). You keep going to work, using - but never testing or developing - your <strong>reason</strong> to work to the required standards. This gives you enough <strong>money</strong> to fend off starvation, and a little more to pursue a sideline in occult literature. However, as you repeat the same quotidian cycle - sleep, work, sleep, work - you develop a sense of <strong>restlessness</strong>, of wanting or striving to do… <em>something</em> that’s not what you’re doing. You try to ignore this sense of <strong>restlessness</strong>, keep with the routine and ritual criticism of Mr Glover, but then eventually this <strong>restlessness</strong> turns into <strong>dread</strong> - what if <em>this</em> is all I’ll ever be? Most of the time, you are able to eventually shrug off this sense of <strong>dread</strong>, wait out for this feeling to dissipate. But - as the nights get ever longer - you become more receptive to dark thoughts, and this sense of <strong>dread</strong> starts to build up, until it overwhelms you. This accumulation of <strong>dread</strong> develops into an existential black hole of <strong>despair</strong> from which you are unable to recover, and your story ends.</li>
+<li><strong>Scenario 2</strong>: You use your <strong>reason</strong> to find <strong>clerical work</strong>, but are also willing to listen to your heart. When you encounter <strong>restlessness</strong>, you recognise that as a signal to break from your hum-drum routine. One day, instead of going to work in the office, you use your <strong>passion</strong> to work on your <strong>restlessness</strong>, and produce passionate but poorly disciplined artworks fuelled by this restless energy. The artworks have a striking immediacy, and novel, vibrant creativity expressed within them, and manage to achieve a market value that covers your basic subsistence needs. However, in the time taken to pursue this restless passion, your tardiness at work has been noticed. You have been fired. You have the option to use your <strong>passion</strong> to beg for your old job back, but are too prideful to do this. Instead you decide to become an artist full time. However, without training and discipline in the arts, and without that burning restlessness that fuelled that initial artwork, your outputs are now lacking in both restless energy and talent, so they go unsold. Although you get some psychological succour from the process of making art, they do not pay the bills, and so do not provide succour for the body as well as the soul. So, penniless, your body slowly succumbs to <strong>starvation</strong>, and you die. Your story is at an end.</li>
+<li><strong>Scenario 3</strong>: You vigilantly and diligently attend your reasonably paying (but belittling and soul destroying) clerical job, but seek pharmaceutical solutions to your spiritual yearnings. You let your <strong>restlessness</strong> go unanswered, until it transforms into <strong>dread</strong>. But in the darkest months, when you are most at most susceptible to totalising melancholia, you use some of your licit earnings to buy illicit pharmacopeia, and try to find chemical <strong>contentment</strong> with which you can battle your lingering sense of <strong>dread</strong>. Unfortunately, this ‘solution’ is both expensive and harmful: You use so much of your earnings to try to anaesthetise the dark clouds of your unfulfilled yearnings that you have little or no monies left to broaden your mind or meet basic needs; and eventually your dalliances with drugs bring sickness: a sickness that, without the <strong>vitality</strong> of a healthy body or even more <strong>money</strong> to pay for treatment, leads to your death. Your story is at an end.</li>
+<li><strong>Scenario 4</strong>: You decide that work for you should mean labour, physical labour. You rent your body, your skeleton and muscles, to the highest bidder, and become an unskilled manual labourer. Your work doesn’t pay much, meaning you have little resource to pursue any additional hobbies and passions, but it’s <em>honest</em> work, that just about pays the bills. Your body gets stronger, but your mind and soul remain undeveloped. Eventually, you have some bad fortune, and become injured at work. Unfortunately, with your injury you cannot work, and without savings you cannot acquire the medicines needed to bring you back to health. And once again, without being able to work, you cannot pay the bills, and eventually die of both decrepitude and starvation. Your story is at an end.</li>
+<li><strong>Scenario 5</strong>: You manage to juggle your time successfully between the clerical job that pays the bills, and developing your interests and and understanding of hidden worlds and realities. You become a frequent visitor to Morland’s, a bookseller specialising in esoterica. Your shelves groan with arcane knowledge and speculation, in particular about a hidden world called the Mansus, a reality beyond our reality accessible only through dreams and incantations. Your habit in bibliography becomes as expensive to maintain as your chemically-dependent cousin’s was on that past journey. Superficially, at least, it appears less harmful. With your new-found enthusiasm for the arcane and esoteric, you can’t help but discuss your interests with others; your colleagues at work start to find you strange and odd, but at least you’re reliable, and seem oddly well connected to management, so they tolerate your eccentricities. You also meet likeminded journey-men and -women, who share many of your exotic interests. Along the way, you also attract the ‘wrong kind of attention’, from the ‘authorities’, who look at your interests with suspicion and concern. However, though they find your interests strange, they never manage to prove that your interests are illegal or dangerous. So, once again you seem to be safe, pursuing this double life of bookkeeping and occultism. Unfortunately, you start to find the contours of the Mansus, sketched piecemeal and imperfectly from your growing collection, <em>too</em> interesting, <em>too</em> seductive. Eventually, your <strong>fascination</strong> with the Mansus becomes all-consuming, this world of dreams more real, more purposive, more meaningful, than this fiction the unenlightened masses believe to be the ‘real world’. You become unable to think about anything else, and so unable to function. You are insane, driven mad by your own passions. Your story is at an end.</li>
+</ul>
+<p>Each of the above represents a way the game can end early, due to a psychological or physiological challenge being made to you at certain points (or seasons) in the game, which you then fail to manage to meet. Without being attended to, each of these challenges will lead to a premature demise. And the way each challenge is overcome is by finding cards that function as <em>antidotes</em> to the psychological or physiological <em>poisons</em> that are the at heart of each challenge.</p>
+</section>
+<section id="the-challenges-of-the-seasons" class="level2">
+<h2 class="anchored" data-anchor-id="the-challenges-of-the-seasons">The Challenges of the Seasons</h2>
+<p>Let’s look, in particular, at the two seasons that relate most strongly to psychological wellbeing:</p>
+<table class="table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 27%">
+<col style="width: 11%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Season</th>
+<th>Challenge</th>
+<th>Poison</th>
+<th>Antidote</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Season of Despair: Bleak Thoughts</td>
+<td>Avoid Accumulating Three Dread</td>
+<td><strong>Dread</strong></td>
+<td><strong>Contentment</strong></td>
+</tr>
+<tr class="even">
+<td>Season of Visions: A Trembling in the air</td>
+<td>Avoid Accumulating Three Fascination</td>
+<td><strong>Fascination</strong></td>
+<td><strong>Dread</strong> or <strong>Fleeting Reminiscence</strong> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+</tr>
+</tbody>
+</table>
+<p>The first seasonal challenge is the challenge failed to reach scenario 1 above, whereas the second seasonal challenge is the challenge failed to reach scenario 5 above. Note the (anti)symmetry between the two seasons: <strong>dread</strong>, which is the <em>poison</em> in the contest of the <strong>Season of Despair</strong>, works as a potential <em>antidote</em> in the context of the <strong>Season of Visions</strong>. Put more simply, the psychological game mechanics seem to be suggesting: <em>too much dread weights you down so heavily you can no longer move, but some dread (or at least concern and anxiety about worldly things) can be what keeps you grounded and sane.</em> The complexity of this aspect of the game comes from this mechanic, the ways that thoughts and feelings that can be poisons in some contexts can be antidotes in other contexts, and the ways that trading off actions and rewards to balance these two central seasonal challenges leads to second order seasonal challenges that themselves need to be balanced: As mentioned, an ‘easy’ way to accumulate less dread and acquire more contentment is to become a full time artist, but in doing so you struggle to pay the bills, and so have enough resource to feed the body (Scenario 2); and an ‘easy’ way acquire contentment to combat the dread that accumulates from not pursuing your passions is through illicit pharmacopeia (dreaming on a ‘tincture of opium’), but this route is both expensive and harmful to your body (Scenario 3).</p>
+</section>
+<section id="cultist-simulator-as-heightened-psychological-realism" class="level2">
+<h2 class="anchored" data-anchor-id="cultist-simulator-as-heightened-psychological-realism">Cultist Simulator as ‘heightened’ psychological realism?</h2>
+<p>The two seasonal challenges - of the <strong>Season of Despair</strong>, and the <strong>Season of Visions</strong> - appear an effective way to use game mechanics to represent - in a stylised, simplified, ideal typologised way - the dual psychological maladies of, respectively, <strong>depression</strong> and <strong>mania</strong>. For individuals diagnosed with Bipolar Disorder, there is a clear need to seek and maintain an even psychological keel between these two psychological poles: an individual experiencing mania does not (so far as I understand it) simultaneously experience depression; and while that same individual is experiencing depression, they are not simultaneously experiencing mania. Both depression and mania can be thought of as maladies of excess, but of qualitatively different, and in some senses opposing, types of excess.</p>
+<p>As human psychology exists on a continuum, however, it is worth considering and contemplating the ways that this core psychological dilemma - the need to balance ‘low’ and ‘high’ moods - is something that just about everyone experiences to some varying extent, even though for most people this extent does not meet any clinical diagnostic thresholds. We forever need to make some effort to keep ourselves either from doing the psychological equivalent both of crashing into the ground, or soaring too high and burning up in the outer atmosphere.</p>
+</section>
+<section id="settling-as-an-anti-victory" class="level2">
+<h2 class="anchored" data-anchor-id="settling-as-an-anti-victory">Settling as an ‘anti-Victory’</h2>
+<p>But if the psychological mechanics of Cultist Simulator evoke a quality of constantly trying to maintain an appropriate affective altitude while flying the vehicle of our own minds, the question this metaphor raises is: “What is our destination?” In Cultist Simulator, if we manage to successfully avoid the premature endings outlines in the five scenarios above, there are a number of destinations we can reach, and that lead to ‘true’ (rather than premature) game ending. And these ‘true endings’ are themselves categorised into ‘Anti-Victories’ and ‘Victories’.</p>
+<p>The Anti-Victories you can reach depend on the sort of character you start with. For the basic character, known as The Aspirant, the path of this Anti-Victory is broadly as follows:</p>
+<ul>
+<li>You diligently attend your office job at Glover &amp; Glover; day after day, week after week. Your attendance remains broadly punctual, and you exhaust your Reason each day to ensure you meet the exacting standards of Glover Sr.&nbsp;Through your diligence, punctuality and hard work, you manage to receive promotions at work, and with this greater financial security and reduced scrutiny. The job becomes less unpleasant, as well as better paid. One day, you are given the chance to offer not just your Reason to your job, but also to give your Passion to the role. On doing so, you come to identify not just your body and your mind with the job, but also your soul. You have stopped struggling, stopped striving or believing that you are or are meant to be something other than someone who works in an office and completes paperwork. You have achieved a form of peace, and a kind of purpose, amid the forms and filing cabinets. You quietly put away your foolish, childish hopes and dreams - of being something more, of finding something grander or more meaningful in the world. Your job is now your vocation. Your story is at an end.</li>
+</ul>
+<p>For other character types, there are equivalent Anti-Victories, each based around the primary occupational role you were first encouraged to fulfil: as a Detective, you can successfully lock up undesirables, rather than attempting to understand, explore, and risk becoming seduced by the ideologies that drive them; and as a Dancer, you can use your physical prowess not to seek cosmic connection with the world of dreams, but to seduce a rich (but dull) suitor whom you agree to marry. In each case, you have managed to been successful in staying on the main road you started on, but been unsuccessful in not turning onto routes less travelled.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>So, despite its apparent simplicity, Cultist Simulator is - in addition to being beautifully designed and well written - a stylised human psychology and purpose simulator, with complex game mechanics for trying to represent the need to handle the ups-and-downs of the everyday, but also the need to strive for purpose and meaning beyond the merely functional and conventional, and that bring you closer to your dreams.</p>
+<p>Of course, Cultist Simulator is <em>fantasy</em>, and the particular courses offered in the game as to how to achieve ‘true’ endings that are not Anti-Victories are not available to us in real life. But the psychological and physiological dilemmas and challenges presented to the player in Cultist Simulator appear to represent <em>real</em> (albeit simplified and stylised) dilemmas and challenges that every one of us, to varying extents, will have encountered, be encountering, and forever be attempting to navigate as best we can.</p>
+<p>As mentioned near the start, Cultist Simulator does not have a tutorial. And neither does life.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In Cultist Simulator, the previous game endings affect how the next game starts, in particular the role you are initially assigned. The very first role is known as The Aspirant, and this is what I’m describing here.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Fleeting Reminiscence is a card that can be obtained by using your Health to Explore. In effect it is the result of attempting to become a <em>flaneur</em>, mindfully observing the world as it really is, rather than as you dream it to be. However this same action can (I believe) also generate cards with opposing effects, which degenerate into Fascination.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

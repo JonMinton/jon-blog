@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-03-16">
+
+<title>Jon Minton’s Blog - Part Eighteen: Causal Inference: Some closing thoughts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Eighteen: Causal Inference: Some closing thoughts">
+<meta name="twitter:description" content="Including why I’ve not written about DAGs">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Part Eighteen: Causal Inference: Some closing thoughts</h1>
+            <p class="subtitle lead">Including why I’ve not written about DAGs</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">causality</div>
+                <div class="quarto-category">causal inference</div>
+                <div class="quarto-category">DAGs</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 16, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction-correcting-an-oversight-in-discussing-causality" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-correcting-an-oversight-in-discussing-causality">Introduction: Correcting an ‘oversight’ in discussing causality</h2>
+<p>Over posts <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-14/index.html">14</a> through to <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-17/index.html">17</a> I’ve discussed causal inference. However, readers who’ve been involved and interested in the topic of causal inference over the last few years might be less surprised by what I have covered than by what I’ve not, namely the causal inference framework developed by Judea Pearl, and (somewhat) popularised by his co-authored book, <strong>The Book of Why: The New Science of Cause and Effect</strong>. (<span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span>)</p>
+<p>This ‘oversight’ in posts so far has been intentional, but in this post the Pearl framework will finally be discussed. I’ll aim to: i) give an overview of the two primary ways of thinking about causal inference: either as a missing data problem; or as a ‘do-logic’ problem; ii) discuss the concept of the omitted variable vs post treatment effect bias trade-off as offering something of a bridge between the two paradigms; iii) give some brief examples of directed acyclic graphs (DAGs) and do-logic, two important ideas from the Pearl framework, as described in <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span>; iv) make some suggestions about the benefits and uses of the Pearl framework; and finally v) advocate for epistemic humility when it comes to trying to draw causal inferences from observational data, even where a DAG has been clearly articulated and agreed upon within a research community. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Without further ado, let’s begin:</p>
+</section>
+<section id="causal-inference-two-paradigms" class="level2">
+<h2 class="anchored" data-anchor-id="causal-inference-two-paradigms">Causal Inference: Two paradigms</h2>
+<p>In the posts so far, I’ve introduced and kept returning to the idea that <em>the fundamental problem of causal inference is that at least half of the data is always missing</em>. i.e., for each individual observation, who has either been treated or not treated, if they had been treated then we do not observe them in the untreated state, and if they had not been treated we do not observe them in the treated state. It’s this framing of the problem which</p>
+<p>In introducing causal inference from this perspective, I’ve ‘taken a side’ in an ongoing debate, or battle, or even war, between two clans of applied epistemologists. Let’s call them the <em>Rubinites</em>, and the <em>Pearlites</em>. Put crudely, the <strong>Rubinites</strong> adopt a <em>data-centred</em> framing of the challenge of causal inference, whereas the <strong>Pearlites</strong> adopt a <em>model-centred</em> framing of the challenge of causal inference. For the Rubinites, the data-centred framing leads to an intepretation of causal inference as a <em>missing data</em> problem, for which the solution is therefore to perform some kind of <em>data imputation</em>. For the Pearlites, by contrast, the solution is focused on developing, describing and drawing out <em>causal models</em>, which describe how we believe <em>one thing leads to another</em> and the paths of effect and influence that one variable has on each other variable.</p>
+<p>It is likely no accident that the broader backgrounds and interests of Rubin and Pearl align with type of solution each proposes. Rubin’s other main interests are in data imputation more generally, including methods of multiple imputation which allow ‘missing values’ to be filled in stochastically, rather than deterministically, to allow some representation of uncertainty and variation in the missing values to be indicated by the range of values that are generated for a missing hole in the data. Pearl worked as a computer scientist, whose key contribution to the field was the development of <em>Bayesian networks</em>, which share many similarities with <em>neural networks</em>. For both types of network, there are <strong>nodes</strong>, and there are <strong>directed links</strong>. The nodes have values, and these values can be influenced and altered by the values of other nodes that are connected to the node in question. This influence that each node has on other nodes, through the paths indicated in the directed links, is perhaps more likely to be described as <em>updating</em> from the perspective of a Bayesian network, and <em>propagation</em> from the perspective of a neural network. But in either case, it really <em>is correct</em> to say that one node really does <em>cause</em> another node’s value to change through the <em>causal pathway</em> of the directed link. The main graphical tool Pearl proposes for reasoning about causality in obervational data is the <strong>directed acyclic graph (DAG)</strong>, and again it should be unsurprising that DAGs look much like Bayesian networks.</p>
+</section>
+<section id="the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms" class="level2">
+<h2 class="anchored" data-anchor-id="the-omitted-variable-bias-vs-post-treatment-bias-trade-off-as-a-potential-bridge-between-the-two-paradigms">The Omitted Variable Bias vs Post Treatment Bias Trade-off as a potential bridge between the two paradigms</h2>
+<p>The school of inference I’m most familiar with is that of Gary King, a political scientist, methodologist and (in the hallowed halls of Harvard) populariser of statistical methods in the social sciences. In the crude paradigmatic split I’ve sketched out above, King is a <strong>Rubinite</strong>, and so I guess - mainly through historical accident but partly through conscious decision - I am too. However, I have read <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span> (maybe not recently enough nor enough times to fully digest it), consider it valuable and insightful in many places, and think there’s at least one place where the epistemic gap between the two paradigms can be bridged.</p>
+<p>The bridge point on the Rubinite side,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> I’d suggest, comes from thinking carefully about the sources of bias enumerated in section 3.2 of <span class="citation" data-cites="KinZen06">King and Zeng (<a href="#ref-KinZen06" role="doc-biblioref">2006</a>)</span>, which posits that:</p>
+<p><span class="math display">\[
+bias = \Delta_o + \Delta_p + \Delta_i + \Delta_e
+\]</span></p>
+<p>This section states:</p>
+<blockquote class="blockquote">
+<p>These four terms denote exactly the four sources of bias in using observational data, with the subscripts being mnemonics for the components … . The bias components are due to, respectively, <strong>omitted variable bias</strong> (<span class="math inline">\(\Delta_o\)</span>), <strong>post-treatment bias</strong> (<span class="math inline">\(\Delta_p\)</span>), interpolation bias (<span class="math inline">\(\Delta_i\)</span>) and extrapolation bias (<span class="math inline">\(\Delta_e\)</span>). [Emphases added]</p>
+</blockquote>
+<p>Of the four sources of bias listed, it’s the first two which appear to offer a potential link between the two paradigms, and so suggest to Rubinites why some engagement with the Pearlite approach may be valuable. The section continues:</p>
+<blockquote class="blockquote">
+<p>Briefly, <span class="math inline">\(\Delta_o\)</span> is the bias due to omitting relevant variables such as <em>common causes</em> of both the treatment and the outcome variables [whereas] <span class="math inline">\(\Delta_p\)</span> is bias due to controlling for the <em>consequences</em> of the treatment. [Emphases added]</p>
+</blockquote>
+<p>From the Rubinite perspective, it seems that omitted variable bias and post-treatment bias are recognised, in combination, as constituting a <strong>wicked problem</strong>. This is because the inclusion of an specific variable can simultaneously affect both types of bias: reducing omitted variable bias, but also potentially increasing post treatment bias. <em>You’re doomed if you do, but you’re also doomed if you don’t.</em></p>
+</section>
+<section id="with-apologies-to-economists-and-epidemiologists-alike" class="level2">
+<h2 class="anchored" data-anchor-id="with-apologies-to-economists-and-epidemiologists-alike">With apologies to economists and epidemiologists alike…</h2>
+<p>Of the two sources of bias, omitted variable bias seems to be the more discussed. And historically, it seems different social and health science disciplines have placed a different weight of addressing these two sources of bias. In particular, at least in the UK context, it’s seemed that economists tend to be more concerned about omitted variable bias, leading to the inclusion of a large number of variables in their statistical models, whereas epidemiologists (though they might not be familiar with and use the term) tend to be more concerned about post-treatment bias, leading a statistical models with fewer variables.</p>
+<p>The issue of post treatment bias is especially important to consider in the context of root or fundamental causes, which again is often something more of interest to epidemiologists than economists. And the importance of the issue comes into sharp relief if considering factors like sex or race. An economist/econometrician, if asked to estimate the effect of race on (say) the probability of a successful job application to an esteemed organisation, might be very liable to try to include many additional covariates, such as previous work experience and job qualifications, as ‘control variables’ in a statistical model in addition to race. From this, they might find that the covariate associated with race is neither statistically nor substantively, and from this conclude that there is no evidence of (say) racial discrimination in employment, because any disparities in outcomes between racial groups appear to be ‘explained by’ other factors like previous experience and job qualifications.</p>
+<p>To this, a methodologically minded epidemiologist might counter - very reasonably - that the econometrician’s model is <em>over-controlling</em>, and that the inclusion of factors like educational outcomes and previous work experience in the model risks introducing <strong>post treatment bias</strong>. If there were discrimination on the basis of race, or sex, it would be unlikely to <em>just</em> affect the specific outcome on the response side of the model. Instead, discrimination (or other race-based factors) would also likely affect the kind of education available to people of different races, and the kinds of educational expectations placed on people of different racial groups. This would then affect the level of educational achievement by group as well. Similarly, both because of prior differences in educational achievement, and because of concurrent effects of discrimination, race might also be expected to affect job history too. Based on this, the epidemiologist might choose to omit both qualifications and job history from the model, because both are presumed to be causallly downstream of the key factor of interest, race.</p>
+<p>So which type of model is correct? The epidemiologist’s more parsimonious model, which is mindful of post-treatment bias, or the economist’s more complicated model, which is mindful of omitted variable bias? The conclusion from the four-biases position laid out above is that <em>we don’t know</em>, but that all biases potentially exist in observational data, and neither model specification can claim to be free from bias. <em>Perhaps</em> both kinds of model can be run, and <em>perhaps</em> looking at the estimates from both models can give something like a plausible range of possible effects. But fundamentally, we don’t know, and can’t know, and ideally we should seek better quality data, run RCTs and so on.</p>
+<p><span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span> argues that Rubinites don’t see much (or any) value in causal diagrams, stating “The Rubin causal model treats counterfactuals as abstract mathematical objects that are managed by algebraic machinery but not derived from a model.” [p.&nbsp;280] Though I think this characterisation is broadly <em>consciously</em> correct, the recognition within the Rubinite community that such things as post-treatment bias and omitted variables <em>exist</em> suggests to me that, <em>unconsciously</em>, even Rubinites employ something like path-diagram reasoning when considering which sources of bias are likely to affect their effect estimates. Put simply: I don’t see how claims of either omitted variable or post treatment bias could be made or believed but for the kind of graphical, path-like thinking at the centre of the Pearlite paradigm.</p>
+<p>Let’s draw the two types of statistical model implied in the discussion above. Firstly the economist’s model:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race --&gt;|Z| accept
+qual --&gt;|X*| accept
+hist --&gt;|X*| accept 
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>And now the epidemiologist’s model:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR 
+
+race(race)
+accept(job offer)
+
+race --&gt;|Z| accept
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Employing a DAG-like causal path diagram would at the very least allow both the economist and epidemiologist to discuss whether or not they agree that the underlying causal pathways are more likely to be something like the follows:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+
+race(race)
+qual(qualifications)
+hist(job history)
+accept(job offer)
+
+race --&gt; qual
+qual --&gt; hist
+hist --&gt; accept
+
+race --&gt; hist
+qual --&gt; accept
+race --&gt; accept
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>If, having drawn out their presumed causal pathways like this, the economist and epidemiologist end up with the same path diagram, then the Pearlian framework offers plenty of suggestions about how, subject to various assumptions about the types of effect each node has on each downstream node, statistical models based on observational data should be specified, and how the values of various coefficients in the statistical model should be combined in order to produce an overall estimate of the left-most node on the right-most node. Even a Rubinite who does not subscribe to some of these assumptions may still find this kind of graphical, path-based reasoning helpful for thinking through what their concerns are relating to both omitted variable and post-treatment biases are, and whether there’s anything they can do about it. In the path diagram above, for example, the importance of temporal sequence appears important: <em>first</em> there’s education and qualification; <em>then</em> there’s initial labour market experience; <em>and then</em> there’s contemporary labour market experience. This appreciation of the sequence of events might suggest that, perhaps, data employing a longitudinal research design might be preferred to one using only cross-sectional data; and/or that what appeared intially to be only a single research question, investigated through a single statistical model, is actually a series of linked, stepped research questions, each employing a different statistical model, breaking down the cause-effect question into a series of smaller steps.</p>
+</section>
+<section id="summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility" class="level2">
+<h2 class="anchored" data-anchor-id="summary-thoughts-on-social-complexity-and-the-need-for-epistemic-humility">Summary thoughts: on social complexity and the need for epistemic humility</h2>
+<p>As mentioned before, I probably lean somewhat more towards the Rubinite than the Pearlite framework. A lot of this is simply because this is the causal effect framework I was first introduced to, but some of it comes from more fundamental concerns I have about how some users and advocates of the Pearlite framework seem to think, or suggest, it can solve issues of causal inference from observational data that, fundamentally, I don’t think it may be possible to address.</p>
+<p>One clue about what the Pearlite framework can and cannot do comes from the ‘A’ in DAG: ‘acyclic’. This means that causal pathways of the following form can be specified:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+A(A)
+B(B)
+
+A --&gt; B
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>But causal pathways of the following form cannot:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+A(A)
+B(B)
+
+A --&gt; B
+B --&gt; A
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Unfortunately, cyclic relationships between two or more factors, in which the pathways of influence go in both directions, are likely extremely common in social and economic systems, because such systems are <em>complex</em> rather than merely <em>complicated</em>. <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> One approach to trying to fit a representation of a complex coupled system into a DAG-like framework would be to use time to try to break the causal paths:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+c0(Chicken at T0)
+e1(Egg at T1)
+c2(Chicken at T2)
+e3(Egg at T3)
+
+c0 --&gt; e1
+e1 --&gt; c2
+c2 --&gt; e3
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>But another way of reasoning about such localised coupled complexity might be to use something like factor analysis to identify patterns of co-occurence of variables which may be consistent with this kind of localised complex coupling:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+ce((ChickenEgg))
+e[egg]
+c[chicken]
+
+ce --&gt; e
+ce --&gt; c
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Within the above diagram, based on structural equation modelling, the directed arrows have a different meaning. They’re not claims of causal effects, but instead of membership. The circle is an underlying proposed ‘latent variable’, the <strong>ChickenEgg</strong>, which is presumed to manifest through the two observed/manifest variables <strong>egg</strong> and <strong>chicken</strong> represented by the rectangles. In places with a lot of <strong>ChickenEgg</strong>, such as a hen house, we would expect to observe a lot of both <strong>chicken</strong>s and <strong>egg</strong>s. The statistical model in the above case is a <em>measurement model</em>, rather than a <em>causal model</em>, but in this case is one which is informed by an implicit recognition of continual causal influence operating within members of a complex, paired, causal system.</p>
+<p>So, I guess my first concern relating to DAGs is that, whereas they <em>can</em> be really useful in allowing researchers to express some form of causal thinking and assumptions about paths of influence between factors, their <em>acyclic</em> requirement can also lead researchers to disregard or underplay the role of complexity even when considering inherently complex systems. In summary, they offer the potential both to <em>expand</em>, but also to <em>restrict</em>, our ability to reason effectively about causal influence.</p>
+<p>My second, related, concern about the potential over-use or over-reach of DAG-like thinking comes from conventional assumptions built into the paths of influence between nodes. We can get to the heart of this latter concern by looking at , and carefully considering the implications of, something called a <strong>double pendulum</strong>, a video of which is shown below:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d0Z8wLLPNE0?si=l8IjyVKIxdbGPHfy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+</iframe>
+<p>A double pendulum is not a <em>complicated</em> system, but it is a <em>complex</em> system, and also a <em>chaotic</em> system. The variables at play include two length variables, two mass variables, a gravity variable, and time. The chaotic complexity of the system comes from the way the length and mass of the first arm interact with the length and and mass of the second arm. This complex interaction is what leads to the position of the outer-most part of the second arm (the grey ball) at any given time.</p>
+<p>Now imagine trying to answer a question of the form “what is <em>the</em> effect of the first arm’s mass on the grey ball’s position?” This kind of question is one that it’s simply not meaningful to even ask. It’s the complex interaction between all components of the system that <em>jointly</em> determines the ball’s position, and attempting to decompose the causal effect of any one variable in the system is simply not a fruitful way of trying to understand the system as a whole.</p>
+<p>This does not mean, however, that we cannot develop a useful understanding of the double pendulum. We know, for example, that the ball cannot be further than the sum of the length of the two arms from the centre of the system. If we were thinking about placing another object near the double pendulum, for example, this would help us work out how far apart from the pendulum we should place it. Also, if one of the arms is much longer or more massive than the other, then maybe we could approximate it with a simple pendulum too. Additionally, all double pendulums tend to behave in similar ways during their initial fall. But the nature of this kind of complex system also means some types of causal question are beyond the realm of being answerable.</p>
+<p>The double pendulum, for me, is an object lesson on the importance of <em>epistemic humility</em>. My overall concern relating to causal inference applies nearly equally to Rubinites and Pearlites alike, and is that excessive engagement with or enthusiasm for any kind of method or framework can lead to us believing we know more than we really know more about <em>how one thing affects another</em>. This can potentially lead both to errors of judgement - such as not planning sufficiently for eventualities our models suggest cannot happen - and potentially to intolerance towards those who ‘join the dots’ in a different way to ourselves. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>In short: stay methodologically engaged, but also stay epistemically modest.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-KinZen06" class="csl-entry" role="listitem">
+King, Gary, and Langche Zeng. 2006. <span>“The Dangers of Extreme Counterfactuals.”</span> <em>Political Analysis</em> 14: 131159.
+</div>
+<div id="ref-pearl2018book" class="csl-entry" role="listitem">
+Pearl, J., and D. Mackenzie. 2018. <em>The Book of Why: The New Science of Cause and Effect</em>. Basic Books. <a href="https://books.google.co.uk/books?id=BzM0DwAAQBAJ">https://books.google.co.uk/books?id=BzM0DwAAQBAJ</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>I might not cover these areas in the order listed above, and thinking about this further this might be too much territory for a single post. Let’s see how this post develops…<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The bridge point on the Pearlite side might be a recognition of the apparent <em>bloody obviousness</em> of the fact that, if an observational unit was treated, we don’t observe untreated, and vice versa. The kind of table with missing cells, as shown in <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-15/index.html">part fifteen</a>, would appear to follow straightforwardly from conceding this point. However, <span class="citation" data-cites="pearl2018book">Pearl and Mackenzie (<a href="#ref-pearl2018book" role="doc-biblioref">2018</a>)</span> includes an example of this kind of table (table 8.1; p.&nbsp;273), and argues forcefully against this particular framing.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The economist’s model is more <em>complicated</em> than the epidemiologist’s model, but both are equally <em>complex</em>, i.e.&nbsp;not complex at all, because they don’t involve any pathways going from right to left.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>A majority of political disagreement, for example, seems to occur when people agree on the facts, but disagree about the primary causal pathway.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

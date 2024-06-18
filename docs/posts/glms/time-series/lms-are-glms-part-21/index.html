@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-04-26">
+
+<title>Jon Minton’s Blog - Part Twenty One: Time Series: The Moving Average Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Part Twenty One: Time Series: The Moving Average Model">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://m.media-amazon.com/images/I/91nliey9YoS._AC_SX679_.jpg">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Part Twenty One: Time Series: The Moving Average Model</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">time series</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 26, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="recap" class="level2">
+<h2 class="anchored" data-anchor-id="recap">Recap</h2>
+<p>In the last couple of posts, we looked first at <a href="../../../../posts/glms/time-series/lms-are-glms-part-19/index.html">autoregression</a> (the <code>AR(p)</code> model), then <a href="../../../../posts/glms/time-series/lms-are-glms-part-20/index.html">integration</a> (represented by the term <code>d</code>), as part of a more general strategy for modelling time series data. In this post, we’ll complete the trilogy, by looking at the Moving Average (<code>MA(q)</code>) model.</p>
+</section>
+<section id="the-moving-average-model-in-context-of-arima" class="level2">
+<h2 class="anchored" data-anchor-id="the-moving-average-model-in-context-of-arima">The Moving Average Model in context of ARIMA</h2>
+<p>As with the post on autoregression, it’s worth returning to what I’ve been calling The Mother Model (a general way of thinking about statistical models), and how <code>AR</code> and <code>I</code> relate to it:</p>
+<p><strong>Stochastic Component</strong></p>
+<p><span class="math display">\[
+Y_i \sim f(\theta_i, \alpha)
+\]</span></p>
+<p><strong>Systematic Component</strong></p>
+<p><span class="math display">\[
+\theta_i = g(X_i, \beta)
+\]</span></p>
+<p>To which we might also imagine adding a transformation or preprocessing step, <span class="math inline">\(h(.)\)</span> on the dataset <span class="math inline">\(D\)</span></p>
+<p><span class="math display">\[
+Z = h(D)
+\]</span></p>
+<p>The process of <strong>differencing</strong> the data is the transformation step employed most commonly in time series modelling. This changes the types of values that go into both the data <em>input</em> slot of the mother model, <span class="math inline">\(X\)</span>, and the <em>output</em> slot of the mother model, <span class="math inline">\(Y\)</span>. The type of data transformer, however, is <strong>deterministic</strong>, hence the use of the <span class="math inline">\(=\)</span> symbol. This means an inverse transform function, <span class="math inline">\(h^{-1}(.)\)</span> can be applied to the transformed data to convert it back to the original data:</p>
+<p><span class="math display">\[
+D = h^{-1}(Z)
+\]</span></p>
+<p>The process of <strong>integrating the differences</strong>, including a series of forecast values from the time series models, constitutes this inverse transform function in the context of time series modelling, as we saw in the <a href="../../../../posts/glms/time-series/lms-are-glms-part-20/index.html">last post</a>, on integration.</p>
+<p>Autoregression is a technique for working with either the untransformed data, <span class="math inline">\(D\)</span>, or the transformed data <span class="math inline">\(Z\)</span>, which operates on the <strong>systematic component</strong> of the mother model. For example, an <code>AR(3)</code> autoregressive model, working on data which have been differenced once (<span class="math inline">\(Z_t = Y_t - Y_{t-1}\)</span>), may look as follows:</p>
+<p><span class="math display">\[
+Z_t \sim N(\mu, \sigma^2)
+\]</span> <span class="math display">\[
+\mu = \beta_0 + \beta_1 Z_{t-1} + \beta_2 Z_{t-2} + \beta_3 Z_{t-3}
+\]</span></p>
+<p>Which more commonly will look like something like:</p>
+<p><span class="math display">\[
+Z_t =  \mu + \beta_1 Z_{t-1} + \beta_2 Z_{t-2} + \beta_3 Z_{t-3} + \epsilon
+\]</span></p>
+<p>Note that these two approaches, <code>AR</code> and <code>I</code>, have involved operating on the <strong>systematic component</strong> and the <strong>preprocessing step</strong>, respectively. This gives us a clue about how the Moving Average (<code>MA</code>) modelling strategy is fundamentally different. <strong>Whereas <code>AR</code> models work on the systematic component (<span class="math inline">\(g(.)\)</span>), MA models work on the stochastic component (<span class="math inline">\(f(.)\)</span>).</strong> The following table summarises the distinct roles each technique plays in the general time series modelling strategy:</p>
+<table class="table">
+<caption>AR, I, and MA in the context of ‘the Mother Model’</caption>
+<colgroup>
+<col style="width: 28%">
+<col style="width: 41%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Technique</th>
+<th>Works on…</th>
+<th>ARIMA letter shorthand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Integration (<code>I</code>)</td>
+<td>Data Preprocessing <span class="math inline">\(h(.)\)</span></td>
+<td><code>d</code></td>
+</tr>
+<tr class="even">
+<td>Autoregression (<code>AR</code>)</td>
+<td>Systematic Component <span class="math inline">\(g(.)\)</span></td>
+<td><code>p</code></td>
+</tr>
+<tr class="odd">
+<td>Moving Average (<code>MA</code>)</td>
+<td>Stochastic Component <span class="math inline">\(f(.)\)</span></td>
+<td><code>q</code></td>
+</tr>
+</tbody>
+</table>
+<p>In the above, I’ve spoiled the ending! The Autoregressive (<code>AR</code>), Integration (<code>I</code>), and Moving Average (<code>MA</code>) strategies are commonly combined into a single model framework, called ARIMA. ARIMA is a framework for specifying a family of models, rather than a single model, which differ by the amount of differencing (<code>d</code>), or autoregression terms (<code>p</code>), or moving average terms (<code>q</code>) which the model contains.</p>
+<p>Although in the table above, I’ve listed integration/differencing first, as it’s the data preprocessing step, the more conventional way of specifying an ARIMA model is in the order indicated in the acronym:</p>
+<ul>
+<li>AR: <code>p</code></li>
+<li>I: <code>d</code></li>
+<li>MA: <code>q</code></li>
+</ul>
+<p>This means ARIMA models are usually specified with a three value shorthand <code>ARIMA(p, d, q)</code>. For example:</p>
+<ul>
+<li><code>ARIMA(1, 1, 0)</code>: <code>AR(1)</code> with <code>I(1)</code> and <code>MA(0)</code></li>
+<li><code>ARIMA(0, 2, 2)</code>: <code>AR(0)</code> with <code>I(2)</code> and <code>MA(2)</code></li>
+<li><code>ARIMA(1, 1, 1)</code>: <code>AR(1)</code> with <code>I(1)</code> and <code>MA(1)</code></li>
+</ul>
+<p>Each of these models is fundamentally different. But each is a type of ARIMA model.</p>
+<p>With this broader context, about how MA models fit into the broader ARIMA framework, let’s now look at the Moving Average model:</p>
+</section>
+<section id="the-sound-of-a-moving-average" class="level2">
+<h2 class="anchored" data-anchor-id="the-sound-of-a-moving-average">The sound of a Moving Average</h2>
+<p>The intuition of a <code>MA(q)</code> model is in some ways easier to develop by starting not with the model equations, but with the following image:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://m.media-amazon.com/images/I/91nliey9YoS._AC_SX679_.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tibetan Singing Bowl</figcaption>
+</figure>
+</div>
+<p>This is a Tibetan Singing Bowl, available from all good stockists (and <a href="https://www.amazon.co.uk/Meditation-Hammered-Mindfulness-Healing-balancing/dp/B08Y8HTSVL?th=1">Amazon</a>), whose product description includes:</p>
+<ul>
+<li><strong>Ergonomic Design</strong>: The 3 inch singing bowl comes with a wooden striker and hand-sewn cushion which flawlessly fits in your hand. The portability of this bowl makes it possible to carry it everywhere you go.</li>
+<li><strong>Holistic Healing</strong> : Our singing bowls inherently produces a deep tone with rich quality. The resonance emanated from the bowl revitalizes and rejuvenates all the body, mind and spirit. It acts as a holistic healing tool for overall well-being.</li>
+</ul>
+<p>Notwithstanding the claims about health benefits and ergonomics, the bowl is something meant to be hit by a wooden striker, and once hit makes a sound. This sound sustains over time (‘sings’), but as time goes on the intensity decays. As a sound wave, this might look something like the following:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A0 <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>decay_rate <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>periodicity <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">t =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="fl">0.001</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">H_t =</span> <span class="fu">ifelse</span>(t <span class="sc">&lt;</span> delay, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">A_t =</span> A0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>(decay_rate <span class="sc">*</span> (t <span class="sc">-</span> delay))),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">c_t =</span> <span class="fu">cos</span>((<span class="dv">1</span><span class="sc">/</span>periodicity) <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> (t <span class="sc">-</span> delay)),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">f_t =</span> H_t <span class="sc">*</span> A_t <span class="sc">*</span> c_t</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(t, f_t)) <span class="sc">+</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"f(t)"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"t"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Intensity over time"</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> delay, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In this figure, the red dashed line indicates when the wooden striker strikes the bowl. Before this time, the bowl makes no sound. Directly after the strike, the bowl is loudest, and over time the intensity of the sound waves emanating from the bowl decays. The striker can to some extent determine the maximum amplitude of the bowl, whereas it’s largely likely to be the properties of the bowl itself which determines how quickly or slowly the sound decays over time.</p>
+<p>How does this relate to the Moving Average model? Well, if we look at the Interpretation section of <a href="https://en.wikipedia.org/wiki/Moving-average_model">the moving average model wikipedia page</a>, we see the cryptic statement “The moving-average model is essentially a finite impulse response filter applied to white noise”. And if we then delve into the <a href="https://en.wikipedia.org/wiki/Finite_impulse_response">finite impulse response page</a> we get the definition “a finite impulse response (FIR) filter is a filter whose impulse response (or response to any finite length input) is of <em>finite</em> duration, because it settles to zero in finite time”. Finally, if we go one level deeper into the wikirabbit hole, and enter the <a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a> page, we get the following definition:</p>
+<blockquote class="blockquote">
+<p>[The] <strong>impulse response</strong>, or <strong>impulse response function (IRF)</strong>, of a dynamic system is its output when presented with a brief input signal, called an impulse.</p>
+</blockquote>
+<p>In the singing bowl example, <em>the striker is the impulse, and the ‘singing’ of the bowl is its response</em>.</p>
+</section>
+<section id="the-moving-average-equation" class="level2">
+<h2 class="anchored" data-anchor-id="the-moving-average-equation">The moving average equation</h2>
+<p>Now, finally, let’s look at the general equation for a moving average model:</p>
+<p><span class="math display">\[
+X_t = \mu + \sum_{i=1}^{q} \theta_i \epsilon_{t-i} + \epsilon_t
+\]</span></p>
+<p>For a <code>MA(q=2)</code> model, for example, this would look like:</p>
+<p><span class="math display">\[
+X_t = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2}
+\]</span></p>
+<p>Here is something like the fundamental value or quality of the time series system. For the singing bowl, <span class="math inline">\(\mu = 0\)</span>, but it can take any value. <span class="math inline">\(\epsilon_t\)</span> is intended to capture something like a ‘shock’ or impulse <em>now</em> which would cause its manifested value to differ from its fundamental, <span class="math inline">\(\epsilon_{t-1}\)</span> a ‘shock’ or impulse one time unit ago, and <span class="math inline">\(\epsilon_{t-2}\)</span> a ‘shock’ or impulse two time units ago.</p>
+<p>The values <span class="math inline">\(\theta_i\)</span> are similar to the way the intensity of the singing bowl’s sound decays over time. They are intended to represent <em>how much</em> influence past ‘shocks’, from various recent points in history, have on the present value manifested. Larger values of <span class="math inline">\(\theta\)</span> indicate past ‘shocks’ that have larger influence on the present value, and smaller <span class="math inline">\(\theta\)</span> values less influence.</p>
+</section>
+<section id="autoregression-and-moving-average-the-long-and-the-short-of-it" class="level2">
+<h2 class="anchored" data-anchor-id="autoregression-and-moving-average-the-long-and-the-short-of-it">Autoregression and moving average: the long and the short of it</h2>
+<p>Autoregressive and moving average models are intended to be complementary in their function in describing a time series system: whereas Autoregressive models allow for <strong>long term influence of history</strong>, which can change the fundamentals of the system, Moving Average models are intended to represent <strong>transient, short term disturbances</strong> to the system. For an AR model, the system evolves in response to its past states, and so to itself. For a MA model, the system, fundamentally, never changes. It’s just constantly being ‘shocked’ by external events.</p>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding remarks</h2>
+<p>So, that’s the basic intuition and idea of the Moving Average model. A system fundamentally never changes, but external things keep ‘happening’ to it, meaning it’s almost always different to its true, fundamental value. A boat at sea will fundamentally have a height of sea level. But locally sea level is always changing, waves from every direction, and various intensities, buffetting the boat up and down - above and below the fundamental sea level average at every moment.</p>
+<p>And the ‘sound’ of a moving average model is almost invariably likely to be less sonorous than that of a singing bowl. Instead of a neat sine wave, each shock is a random draw from a noisemaker (typically the Normal distribution). In this sense a more accurate analogy might not be a singing bowl, but a guitar amplifier, with a constant hum, but also with dodgy connections, constantly getting moved and adjusted, with each adjustment causing a short belt of white noise to be emanated from the speaker. A moving average model is noise layered upon noise.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
