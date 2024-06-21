@@ -1,0 +1,129 @@
+---
+title: "Tidy Tuesday: Roaming US Holidays"
+author: 
+    - "Brendan Clarke"
+    - "Kate Pyper"
+    - "Kennedy Owusu-Afriyie"
+    - Myriam Scansetti
+    - "Andrew Saul"
+    - "Jon Minton"
+date: "2024-06-19"
+categories: [R, USA, holidays, Tidy Tuesday]
+---
+
+For this Tardy Tuesday session we looked at [the following Tidy Tuesday data challenge](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-06-18), which involved identifying the date when various public holidays in the USA (a rare thing) are expected to occur each year.
+
+Brendan led/'scribed' the session
+
+## Analysis
+
+We used the `tidytuesdayR` package to load the data, then pushed these to the global environment using `list2env`.
+```{r}
+library(tidyverse)
+
+tidytuesdayR::tt_load('2024-06-18') |>
+  list2env(envir = .GlobalEnv)
+```
+
+Our main dataset looked as follows:
+
+```{r}
+federal_holidays
+
+```
+
+We were interested in those 'roaming holidays' where the date column contains a range of dates, and the date definition contains information on the criterion used to determine the specific date for a given year. 
+
+We decided to try to solve the problem manually for MLK day, which should be the third monday in January. 
+
+
+```{r}
+# find 3rd monday of january 202x
+wday("2024-06-17")
+date_range <- "January 15–21"
+year <- 2024
+
+# find monday (2) in date range
+
+start_date <- "January 15 2024"
+end_date <- "January 21 2024"
+mdy(start_date)
+
+str_split(date_range, "–")
+
+month <- str_extract(date_range, "[a-zA-Z]+") 
+
+dates <- str_extract_all(date_range, "[0-9]+") |>
+  unlist()
+
+start_end <- ymd(paste(year, month, dates))
+
+# ymd("2024-01-16") %within% interval(start_end[1], start_end[2])
+
+dates_between <- seq(from = start_end[1], to = start_end[2], by = 1)
+
+dates_between[wday(dates_between) == 2]
+
+```
+
+Then, we generalised this slightly by producing a function that finds the date of MLK day for different given years:
+
+```{r}
+mlk_day <- function(year){
+  date_range <- "January 15–21"
+  
+  month <- stringr::str_extract(date_range, "[a-zA-Z]+") 
+  
+  dates <- stringr::str_extract_all(date_range, "[0-9]+") |>
+    unlist()
+  
+  start_end <- lubridate::ymd(paste(year, month, dates))
+  
+  dates_between <- seq(from = start_end[1], to = start_end[2], by = 1)
+  
+  dates_between[wday(dates_between) == 2] # update day for general
+}
+
+mlk_day(2025)
+
+map_vec(1983:2025, mlk_day)
+
+```
+
+Finally, we generalised this further with a function to find the date of roaming holidays for many different types of holiday and years:
+
+
+```{r}
+any_day <- function(year, date, date_definition){
+  
+  day <- stringr::str_extract(date_definition, " .+$") |>
+    str_trim() 
+  
+  weekdays <- paste0(c("sun", "mon", "tues", "wednes", "thurs", "fri", "satur"), "day")
+  
+  day_no <- which(weekdays == day)
+  
+  month <- stringr::str_extract(date, "[a-zA-Z]+") 
+  
+  dates <- stringr::str_extract_all(date, "[0-9]+") |>
+    unlist()
+  
+  start_end <- lubridate::ymd(paste(year, month, dates))
+  
+  dates_between <- seq(from = start_end[1], to = start_end[2], by = 1)
+  
+  dates_between[wday(dates_between) == day_no] # update day for general
+}
+
+any_day(2024, "January 15–21", "3rd monday")
+
+movers <- federal_holidays |>
+  filter(date_definition != "fixed date") |>
+  expand_grid(year = 1983:2024) 
+
+movers <- movers |>
+  bind_cols(actual_date = pmap_vec(list(year = movers$year, date = movers$date, date_definition = movers$date_definition), any_day))
+
+movers
+
+```
