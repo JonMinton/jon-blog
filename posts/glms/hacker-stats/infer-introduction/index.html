@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-07-16">
 
 <title>Jon Minton’s Blog - Getting started with the infer package</title>
 <style>
@@ -103,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../../../styles.css">
 <meta name="twitter:title" content="Jon Minton’s Blog - Getting started with the infer package">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/glms/one-off/infer-introduction/index_files/figure-html/unnamed-chunk-4-1.png">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/glms/hacker-stats/infer-introduction/index_files/figure-html/unnamed-chunk-4-1.png">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
@@ -189,7 +190,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Getting started with the infer package</h1>
-                      </div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">r</div>
+                <div class="quarto-category">hypothesis tests</div>
+                <div class="quarto-category">resampling</div>
+                <div class="quarto-category">bootstrapping</div>
+                <div class="quarto-category">hacker stats</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -202,6 +211,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             </div>
     </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 16, 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -217,7 +232,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>In a previous post introducing bootstrapping, I showed how the approach can be used to perform something like hypothesis tests for quantities of interest that aren’t as easily amenable as means to being assessed parametrically, such as differences in medians. At the end of the post I mentioned <a href="https://infer.netlify.app/">the infer package</a>, which makes use of both bootstrapping, and the broader family of resampling methods that contains bootstrapping, to produce plausible distributions of quantities of interest under the null hypothesis, alongside more commonly used parametric methods for producing the null distribution.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This post continues a short series on resampling methods, sometimes also known as ‘Hacker Stats’, for hypothesis testing. To recap: resampling <em>with replacement</em> is known as <strong>bootstrapping</strong>. Resampling <em>without replacement</em> can be used for <strong>permutation tests</strong>: testing whether <em>apparent</em> patterns in the data, including <em>apparent</em> associations between variables in the data, could likely have emerged from the Null distribution.</p>
+<p>In <a href="../../../../posts/glms/hacker-stats/bootstrapping/index.html">a previous post introducing bootstrapping</a>, I showed how the approach can be used to perform something like hypothesis tests for quantities of interest that aren’t as easily amenable as means to being assessed parametrically, such as differences in medians. In <a href="../../../../posts/glms/hacker-stats/permutation-with-base-r/index.html">the next post, on resampling and permutation tests</a>, I described the intuition and methodology behind resampling with replacement to produce Null distributions, and how to implement the procedure using base R.</p>
+<p>In this post, I show how <a href="https://infer.netlify.app/">the infer package</a>, can be used to perform both bootstrapping and permutation testing in a way that’s slightly easier, and more declarative in the context of a general hypothesis testing framework.</p>
+</section>
 <section id="setting-up" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up">Setting up</h2>
 <p>Let’s install the <code>infer</code> packge and try a couple of examples from the documentation.</p>
@@ -238,17 +258,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="the-infer-package" class="level2">
+<h2 class="anchored" data-anchor-id="the-infer-package">The infer package</h2>
 <p>From <a href="https://infer.netlify.app/articles/infer">the vignette page</a> we can see that <code>infer</code>’s workflow is framed around four verbs:</p>
 <ul>
-<li><code>specify()</code> allows you to specify the variable, or relationship between variables, that you’re interested in.</li>
-<li><code>hypothesize()</code> allows you to declare the null hypothesis.</li>
-<li><code>generate()</code> allows you to generate data reflecting the null hypothesis.</li>
-<li><code>calculate()</code> allows you to calculate a distribution of statistics from the generated data to form the null distribution.</li>
+<li><strong><code>specify()</code></strong> allows you to specify the variable, or relationship between variables, that you’re interested in.</li>
+<li><strong><code>hypothesize()</code></strong> allows you to declare the null hypothesis.</li>
+<li><strong><code>generate()</code></strong> allows you to generate data reflecting the null hypothesis.</li>
+<li><strong><code>calculate()</code></strong> allows you to calculate a distribution of statistics from the generated data to form the null distribution.</li>
 </ul>
 <p>The package describes the problem of hypothesis testing as being somewhat generic, regardless of the specific test, hypothesis, or dataset being used:</p>
 <blockquote class="blockquote">
 <p>Regardless of which hypothesis test we’re using, we’re still asking the same kind of question: is the effect/difference in our observed data real, or due to chance? To answer this question, we start by assuming that the observed data came from some world where “nothing is going on” (i.e.&nbsp;the observed effect was simply due to random chance), and call this assumption our <em>null hypothesis</em>. (In reality, we might not believe in the null hypothesis at all—the null hypothesis is in opposition to the <em>alternate hypothesis</em>, which supposes that the effect present in the observed data is actually due to the fact that “something is going on.”) We then calculate a <em>test statistic</em> from our data that describes the observed effect. We can use this test statistic to calculate a <em>p-value</em>, giving the probability that our observed data could come about if the null hypothesis was true. If this probability is below some pre-defined <em>significance level <span class="math inline">\(\alpha\)</span></em>, then we can reject our null hypothesis.</p>
 </blockquote>
+</section>
+<section id="the-gss-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="the-gss-dataset">The gss dataset</h2>
 <p>Let’s look through - and in some places adapt - the examples used. These mainly make use of the <code>gss</code> dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -299,6 +325,9 @@ $ weight  &lt;dbl&gt; 0.8960034, 1.0825000, 0.5501000, 1.0864000, 1.0825000, 1.0
 2 female   237     39.9</code></pre>
 </div>
 </div>
+</section>
+<section id="our-first-testable-hypothesis-using-permutation-testingsampling-without-replacement" class="level2">
+<h2 class="anchored" data-anchor-id="our-first-testable-hypothesis-using-permutation-testingsampling-without-replacement">Our first testable hypothesis (using permutation testing/sampling without replacement)</h2>
 <p>The mean age is <code>40.6</code> for males and <code>39.9</code> for females, a difference of about <code>0.7</code> years of age. Could this have occurred by chance?</p>
 <p>There are <code>263</code> male observations, and <code>237</code> female observations, in the dataset. Imagine that the ages are values, and the sexes are labels that are added to these values.</p>
 <p>One approach to operationalising the concept of the Null Hypothesis is to ask: <em>If we shifted around the labels assigned to the values, so there were still as many male and female labels, but they were randomly reassigned, what would the difference in mean age between these two groups be? What would happen if we did this many times?</em></p>
@@ -319,16 +348,16 @@ Null Hypothesis: independence
 # Groups:   replicate [10,000]
      age sex    replicate
    &lt;dbl&gt; &lt;fct&gt;      &lt;int&gt;
- 1    58 male           1
- 2    38 female         1
- 3    44 male           1
- 4    27 male           1
- 5    24 male           1
- 6    34 female         1
- 7    39 female         1
- 8    48 female         1
- 9    24 female         1
-10    30 female         1
+ 1    35 male           1
+ 2    40 female         1
+ 3    31 male           1
+ 4    58 male           1
+ 5    21 male           1
+ 6    54 female         1
+ 7    59 female         1
+ 8    27 female         1
+ 9    61 female         1
+10    28 female         1
 # ℹ 4,999,990 more rows</code></pre>
 </div>
 </div>
@@ -374,6 +403,8 @@ Null Hypothesis: independence
 <pre><code>[1] 0.7463541</code></pre>
 </div>
 </div>
+<section id="a-two-sided-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="a-two-sided-hypothesis">A two-sided hypothesis</h3>
 <p>Let’s now show where the observed difference in means falls along the distribution of differences in means generated by this permutation-based Null distribution:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
@@ -397,92 +428,9 @@ Null Hypothesis: independence
 </div>
 </div>
 <p>The p value is much, much greater than 0.05, suggesting there’s little evidence to reject the Null hypothesis, that in this dataset age is not influenced by sex.</p>
-<p>Although in the sex to age example, we might not have considered the Alternative hypothesis, of a systematic difference, to be particularly plausible, we might expect there to be a systematic difference in average weight (because males tend to be taller on average than females, and taller people tend to weigh more than shorter people).</p>
-<p>This would be an example of a one-sided hypothesis:</p>
-<ul>
-<li>Alternative: Males are on average heavier than females</li>
-<li>Null: Males are on average not heavier than females</li>
-</ul>
-<p>Let’s now use the same kind of approach to perform this kind of hypothesis test:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(weight <span class="sc">~</span> sex) <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">'independence'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">10000</span>, <span class="at">type =</span> <span class="st">'permute'</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>diff_means <span class="ot">&lt;-</span> tmp<span class="sc">$</span>mean_weight[tmp<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"male"</span>] <span class="sc">-</span> tmp<span class="sc">$</span>mean_weight[tmp<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"female"</span>]</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>diff_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.05244304</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visualize</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> diff_means, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Here the difference in means still seems to be not especially large, suggesting again we may not be able to reject the null hypothesis. Let’s get the p-value to quantify this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> diff_means, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  p_value
-    &lt;dbl&gt;
-1   0.127</code></pre>
-</div>
-</div>
-<p>In this case, the p-value is 0.13, which still doesn’t meet conventional thresholds for rejecting the Null hypothesis.</p>
-<p>We could of course operationalise the same question but looking at difference in medians:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(weight <span class="sc">~</span> sex) <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">'independence'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">10000</span>, <span class="at">type =</span> <span class="st">'permute'</span>)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> gss <span class="sc">|&gt;</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">median_weight =</span> <span class="fu">median</span>(weight))</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>diff_medians <span class="ot">&lt;-</span> tmp<span class="sc">$</span>median_weight[tmp<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"male"</span>] <span class="sc">-</span> tmp<span class="sc">$</span>median_weight[tmp<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"female"</span>]</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>diff_medians</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.0109</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in medians"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visualize</span>() <span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> diff_medians, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in medians"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> diff_medians, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  p_value
-    &lt;dbl&gt;
-1   0.816</code></pre>
-</div>
-</div>
-<p>Here the evidence against rejecting the Null hypothesis is even weaker, even further from p &lt; 0.05.</p>
-<p>However, even if it were stronger evidence, because we are now looking at multiple hypotheses, we may not wish to keep using the p &lt; 0.05 threshold, and use something like a Bonferroni correction to move the required p value to account for the multiple tests we are performing.</p>
-<p>In the above we have looked at using non-theoretical, permutation-based approaches to formulate a Null distribution, from which - along with the observed summary statistic - we calculate a corresponding p-value.</p>
-<p>It is more common in most cases to use a <em>theoretical</em> distribution to compare the observed value to.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
