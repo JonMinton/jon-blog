@@ -1,0 +1,165 @@
+---
+title: "Tidy Tuesday: Women's Football"
+date: "2024-07-17"
+author:
+    - "Kate Pyper"
+    - "Brendan Clarke"
+    - "Kennedy"
+    - "Imran"
+    - "Abram"
+    - "Jon"
+code-fold: true
+warning: false
+message: false
+categories: [statistics, tidy tuesday, sports, football]
+---
+
+After a bit of a (in Jon's view) dearth of interesting datasets within Tidy Tuesday, this week brought something worth looking at to the table: datasets on women's football over the last few years, including changes in its popularity, as measured by attendance. 
+
+Kate led this session. 
+
+## Setting up 
+
+```{r}
+library(tidyverse)
+library(broom)
+
+tuesdata <- tidytuesdayR::tt_load(2024, week = 29)
+
+ewf_appearances <- tuesdata$ewf_appearances
+ewf_matches <- tuesdata$ewf_matches
+ewf_standings <- tuesdata$ewf_standings
+
+```
+
+## Questions, questions...
+
+Firstly, we decided to look at growth attendance over time: 
+
+```{r}
+ewf_matches %>% 
+  group_by(season) %>% 
+  summarise(attendance = median(attendance, na.rm = TRUE)) %>% 
+  ggplot() +
+  geom_col(aes(x = season, y = attendance)) +
+  theme(axis.text.x = element_text(angle = 90))
+
+```
+
+For *some* reason, there was no attendance in the 2020-2021 season. Definitely something unexpected that we should investigate further, as 2020 was a completely normal year in every way
+
+What about trends in season, e.g. are the first matches more popular than the rest, much like the first episodes of TV series tend to be watched more than the rest of the series? 
+
+```{r}
+ewf_matches %>% 
+  group_by(season) %>% 
+  mutate(match_no = order(date)) %>% 
+  ggplot(aes(x = match_no, y = attendance, colour = season, group = season)) +
+  geom_point() +
+  facet_wrap(~ tier, scales = "free") +
+  scale_y_log10()
+```
+
+Note we used a log y scale as attendance seems to be very variable between matches. However we couldn't see any obvious trend within season.
+
+We also decided just to focus on tier 1 
+
+```{r}
+ewf_matches %>% 
+  filter(tier == 1) %>% 
+  group_by(season) %>% 
+  mutate(match_no = order(date)) %>% 
+  ggplot(aes(x = match_no, y = attendance, colour = season, group = season)) +
+  geom_point() +
+  scale_y_log10()
+```
+
+
+## Modelling 
+
+We then decided to try to model factors that could predict (log) attendance. First a model predicting log-attendance on home team id, match number, and season, but without interaction terms. And then a model with interaction terms:
+
+```{r}
+ewf_matches %>% 
+  filter(tier == 1) %>% 
+  group_by(season) %>% 
+  mutate(match_no = order(date)) %>% 
+  lm(log10(attendance) ~ home_team_id + match_no + season, data = .) ->
+  mod1
+
+ewf_matches %>% 
+  filter(tier == 1) %>% 
+  group_by(season) %>% 
+  mutate(match_no = order(date)) %>% 
+  lm(log10(attendance) ~ home_team_id + match_no + season + season*match_no, data = .) ->
+  mod2
+```
+
+How to compare? Well, as `mod1` can be considered as a *restricted* version of `mod2` (the interaction term coefficents set to 0) we can use ANOVA to see if the additional complexity of the unrestricted model, `mod2`, is 'worth it':
+
+```{r}
+anova(mod2)
+anova(mod1, mod2) # same as above but pulls out specific test that we are interested in
+```
+
+We concluded: 
+
+    Interaction term not significant - proceed with mod1
+
+Now to look at the coefficients on `mod1`:
+
+```{r}
+summary(mod1)
+```
+
+We had some fun trying to find the most and least popular teams. The reference team, team 1, happens to be about the most popular team. 
+
+```{r}
+ewf_appearances %>% 
+  filter(season == "2023-2024") %>% 
+  select(team_id, team_name) %>% 
+  distinct() %>%
+  arrange(team_id) |>
+  view()
+```
+  
+We thought we could do more to visualise the difference in apparent popularity between teams, producing some 'tie fighter' graphs (also known as blobograms, apparently)
+
+```{r}
+tidy(mod1) %>% 
+  filter(str_detect(term, "home_team")) %>% 
+  mutate(term = str_remove(term, "home_team_id")) %>% 
+  ggplot() +
+  geom_point(aes(x = estimate, y = term)) +
+  geom_errorbarh(aes(xmin = estimate - 2*std.error, xmax = estimate + 2*std.error, y = term)) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed")
+```
+
+Poor old team 13! (Everton Women)
+
+Compared with the reference team (Arsenal Women) only 3 teams looked similarly popular: team 8 (Chelsea Women), team 20 (Manchester City), and team 21 (Manchester United).
+
+
+
+Then we decided to do the same kind of thing for season, which should showing growing popularity over time:
+
+```{r}
+tidy(mod1) %>% 
+  filter(str_detect(term, "season")) %>% 
+  mutate(term = str_remove(term, "season")) %>% 
+  ggplot() +
+  geom_point(aes(x = estimate, y = term)) +
+  geom_errorbarh(aes(xmin = estimate - 2*std.error, xmax = estimate + 2*std.error, y = term)) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed")
+```
+
+
+Up, up and away! (mostly...)
+
+
+## Conclusion
+
+Some places to go:
+
+- Why the decline in 2016, 2017, 2018?
+- What caused the jumps in 2015, 2019, 2022?

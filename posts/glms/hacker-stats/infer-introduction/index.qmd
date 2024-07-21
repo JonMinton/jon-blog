@@ -1,0 +1,162 @@
+---
+title: "Getting started with the infer package"
+author: "Jon Minton"
+draft: true
+date: "2024-07-16"
+categories: [statistics, r, hypothesis tests, resampling, bootstrapping, hacker stats]
+---
+
+## Introduction 
+
+This post continues a short series on resampling methods, sometimes also known as 'Hacker Stats', for hypothesis testing. To recap: resampling *with replacement* is known as **bootstrapping**. Resampling *without replacement* can be used for **permutation tests**: testing whether *apparent* patterns in the data, including *apparent* associations between variables in the data, could likely have emerged from the Null distribution. 
+
+In [a previous post introducing bootstrapping](../bootstrapping/index.qmd), I showed how the approach can be used to perform something like hypothesis tests for quantities of interest that aren't as easily amenable as means to being assessed parametrically, such as differences in medians. In [the next post, on resampling and permutation tests](../permutation-with-base-r/index.qmd), I described the intuition and methodology behind resampling with replacement to produce Null distributions, and how to implement the procedure using base R. 
+
+In this post, I show how [the infer package](https://infer.netlify.app/), can be used to perform both bootstrapping and permutation testing in a way that's slightly easier, and more declarative in the context of a general hypothesis testing framework. 
+
+## Setting up
+
+Let's install the `infer` packge and try a couple of examples from the documentation. 
+
+
+```{r}
+# install.packages("infer") # First time around
+library(tidyverse)
+library(infer)
+
+```
+
+
+## The infer package 
+
+From [the vignette page](https://infer.netlify.app/articles/infer) we can see that `infer`'s workflow is framed around four verbs:
+
+- **`specify()`** allows you to specify the variable, or relationship between variables, that you’re interested in.
+- **`hypothesize()`** allows you to declare the null hypothesis.
+- **`generate()`** allows you to generate data reflecting the null hypothesis.
+- **`calculate()`** allows you to calculate a distribution of statistics from the generated data to form the null distribution.
+
+The package describes the problem of hypothesis testing as being somewhat generic, regardless of the specific test, hypothesis, or dataset being used: 
+
+> Regardless of which hypothesis test we’re using, we’re still asking the same kind of question: is the effect/difference in our observed data real, or due to chance? To answer this question, we start by assuming that the observed data came from some world where “nothing is going on” (i.e. the observed effect was simply due to random chance), and call this assumption our *null hypothesis*. (In reality, we might not believe in the null hypothesis at all—the null hypothesis is in opposition to the *alternate hypothesis*, which supposes that the effect present in the observed data is actually due to the fact that “something is going on.”) We then calculate a *test statistic* from our data that describes the observed effect. We can use this test statistic to calculate a *p-value*, giving the probability that our observed data could come about if the null hypothesis was true. If this probability is below some pre-defined *significance level $\alpha$*, then we can reject our null hypothesis.
+
+
+## The gss dataset
+
+Let's look through - and in some places adapt - the examples used. These mainly make use of the `gss` dataset.
+
+```{r}
+data(gss)
+```
+
+```{r}
+glimpse(gss)
+
+```
+
+Let's go slightly off piste and say we are interested in seeing if there is a relationship between age, a cardinal variable, and sex, a categorical variable. We can start by stating our null and alternative hypotheses explicitly:
+
+- **Null hypothesis**: There is no difference between age and sex
+- **Alt hypothesis**: There is a difference between age and sex
+
+Let's see if we can start by just looking at the data to see if, informally, it looks like it might better fit the Null or Alt hypothesis. 
+
+```{r}
+gss |> 
+    ggplot(aes(x=age, group = sex, colour = sex)) + 
+    geom_density()
+
+```
+
+
+It looks like the densities of age distributions are similar for both sexes. However, they're not identical. Are the differences more likely to be due to chance, or are they more structural? 
+
+We can start by calculating, say, the differences in average ages between males and females:
+
+```{r}
+gss |>
+    group_by(sex) |>
+    summarise(n = n(), mean_age = mean(age))
+
+```
+
+## Our first testable hypothesis (using permutation testing/sampling without replacement)
+
+The mean age is `40.6` for males and `39.9` for females, a difference of about `0.7` years of age. Could this have occurred by chance?
+
+There are `263` male observations, and `237` female observations, in the dataset. Imagine that the ages are values, and the sexes are labels that are added to these values. 
+
+One approach to operationalising the concept of the Null Hypothesis is to ask: *If we shifted around the labels assigned to the values, so there were still as many male and female labels, but they were randomly reassigned, what would the difference in mean age between these two groups be? What would happen if we did this many times?*
+
+This is the essence of building a Null distribution using a permutation test, which is similar to a bootstrap except it involves resampling with replacement rather than without replacement. 
+
+We can perform this permutation test using the infer package as follows: 
+
+```{r}
+model <- gss |>
+    specify(age ~ sex) |>
+    hypothesize(null = 'independence') |>
+    generate(reps = 10000, type = 'permute')
+
+model
+```
+
+The infer package has now arbitrarily shifted around the labels assigned to the age values 10000 times. Each time is labelled with a different replicate number. Let's take the first nine replicates and show what the densities by sex look like: 
+
+
+```{r}
+model |>
+    filter(replicate <= 9) |>
+    ggplot(aes(x=age, group = sex, colour = sex)) + 
+    geom_density() + 
+    facet_wrap(~replicate)
+
+```
+
+What if we now look at the differences in means apparent in each of these permutations
+
+```{r}
+model |>
+    calculate(stat = "diff in means", order = c("male", "female")) |>
+    visualize()
+
+```
+
+Here we can see the distribution of differences in means follows broadly a normal distribution, which appears to be centred on 0. 
+
+Let's now calculate and save the observed difference in means.
+
+```{r}
+tmp <- gss |>
+    group_by(sex) |>
+    summarise(mean_age = mean(age))
+
+tmp 
+
+diff_means <- tmp$mean_age[tmp$sex == "male"] - tmp$mean_age[tmp$sex == "female"]
+
+diff_means
+```
+
+### A two-sided hypothesis
+
+Let's now show where the observed difference in means falls along the distribution of differences in means generated by this permutation-based Null distribution:
+
+```{r}
+model |>
+    calculate(stat = "diff in means", order = c("male", "female")) |>
+    visualize() +
+    shade_p_value(obs_stat = diff_means, direction = "two-sided")
+
+```
+
+The observed difference in means appears to be quite close to the centre of mass for the distribution of differences in means generated by the Null distribution. So it appears very likely that this observed difference could be generated from a data generating process in which there's no real difference in mean ages between the two groups. We can formalise this slightly by calcuating a p-value:
+
+```{r}
+model |>
+    calculate(stat = "diff in means", order = c("male", "female")) |>
+    get_p_value(obs_stat = diff_means, direction = "two-sided")
+```
+
+The p value is much, much greater than 0.05, suggesting there's little evidence to reject the Null hypothesis, that in this dataset age is not influenced by sex. 
+

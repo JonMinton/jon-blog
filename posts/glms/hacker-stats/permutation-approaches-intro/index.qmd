@@ -1,0 +1,194 @@
+---
+title: "Hacker Stats: Intro and overview"
+date: "2024-07-21"
+author: "Jon Minton"
+code-fold: true
+warning: false
+message: false
+categories: [R, statistics, inference, hacker stats, bootstrapping, permutation tests, post-stratification]
+---
+
+## Introduction
+
+This is the first post in a small series on resampling approaches to statistical inference. [^1] Resampling approaches are a powerful and highly adaptable set of approaches for trying to get 'good enough' estimates of how statistically significant some observed value or summary of observed values is likely to be, or equivalently how likely what one's observed is to have been observed by chance. They can also be extended and applied to performing post-stratification, which allows samples of the population with known biases to be adjusted in ways that aim to mitigate such biases, and so produce summary estimates more representative of the population of interest. 
+
+[^1]: Though it wasn't written as the first post in the series, so a challenge for me is to figure out how to present these in something other than date order! 
+
+## Resampling as Hacker Stats
+
+Resampling methods are sometimes called **Hacker Stats**, which might be a slightly derogatory term, but is also an informative one. Broadly, Resampling Methods: 
+
+- Substitute meat brain effort (deriving and recalling analytic solutions) for silicon brain effort (i.e. they're computationally intensive rather than human knowledge and reasoning intensive). 
+- Are theoretically and methodologically *thin* rather than theoretically and methodologically *fat*.
+- Are approximate, stochastic and general; rather than precise, deterministic and specialist. 
+
+Put another way, Hacker Stats are methods that data scientists and more casual users of statistics can use to get *good enough* approximations of the kinds of careful, analytic solutions and tests that, with many years of specialist training and memorisation, a degree in statistics would provide. They're a good example of the 80:20 Principle: part of the 20% of stats know-how that's used for 80% of the tasks. 
+
+## Types of permutation method
+
+The following flowchart shows the 'family tree' of types of resampling method: 
+
+```{mermaid}
+flowchart TB
+    sd[Sample Data]
+    us(Uniform Sampling)
+    nus(Non-Uniform Sampling)
+    pt[Permutation Testing]
+    bs[Bootstrapping]
+    ps[Post-Stratification]
+
+    pw[Population Weights]
+
+    dec1{Equal Probability?}
+    dec2{With Replacement?}
+
+    sd --sampling--> dec1
+
+    us --> dec2
+
+    dec1 --Yes--> us
+    dec1 --No--> nus
+    nus --> ps
+
+    dec2 --Yes--> bs
+    dec2 --No--> pt
+
+    pw --> nus
+
+
+
+```
+
+n.b. Bootstrapping and permutation testing can be applied to post-stratified data too! 
+
+## The thin-but-deep theories
+
+Both Bootstrapping, which is resampling *with* replacement, and Permutation Testing, which is resampling *without* replacement, use computation to explore the implications of two distinct, simple, and important theories about the sample data, and any observations we may think we've observed within it. Let's try to talk through these two thin-but-deep theories:
+
+### Bootstrapping 
+
+Bootstrapping starts and ends with something like the following claim:
+
+>    *Every observation in our dataset is equally likely.* 
+    
+Why is this? 
+
+> *Because each specific observation in our dataset has been observed the same number of times.* 
+
+Why do you say that? 
+
+> *Because each observation in the dataset has been observed exactly one time, and `1=1`!*
+
+And why does this matter? 
+
+> *Because, if we can accept the above, we can say that another dataset, made up by resampling the real sample data, so that each observation (row) is as likely to be picked as every other one, is as likely as the dataset we actually observed. And so long as this other dataset has the same number of observations as the original dataset, then it's also as precise as the original dataset.*
+
+It's this line of reasoning - and the two conditions for another dataset: **equally likely**; and **equally precise** - which lead to the justification, in bootstrapping, for *resampling with replacement*. 
+
+### Permutation Tests
+
+Say we have a sample dataset, $D$, which is a big rectangle of data with rows (observations) and columns (variables). To simplify, imagine $D$ comprises five observations and two variables, so it looks like this:
+
+$$
+D = 
+\begin{pmatrix}
+d_{1,1} & d_{1,2} \\
+d_{2,1} & d_{2,2} \\
+d_{3,1} & d_{3,2} \\
+d_{4,1} & d_{4,2} \\
+d_{5,1} & d_{5,2}  
+\end{pmatrix}
+$$
+
+There are a number of different ways of describing and thinking about this kind of data, which is really just a structured collection of elements. One approach is to think about from the perspective of **observations**, which leads to a *row-wise* interpretation of the dataset:
+
+$$
+D = 
+\begin{pmatrix}
+d_{1} = \{d_{1,1} , d_{1,2}\} \\
+d_{2} = \{d_{2,1} , d_{2,2}\} \\
+d_{3} = \{d_{3,1} , d_{3,2}\} \\
+d_{4} = \{d_{4,1} , d_{4,2}\} \\
+d_{5} = \{d_{5,1} , d_{5,2}\}  
+\end{pmatrix}
+$$
+
+And another way of thinking about the data is from the perspective of **variables**, which leads to a *column-wise* interpretation of the data: 
+
+$$
+D = \{X, Y\} 
+$$
+
+$$
+X = \{d_{1,1}, d_{2,1}, d_{3, 1}, d_{4, 1}, d_{5, 1}\}
+$$
+
+$$
+Y = \{d_{1,2}, d_{2,2}, d_{3, 2}, d_{4, 2}, d_{5, 2}\}
+$$
+
+Now, imagine we've looked at our dataset, and we *think* there's an *association* between the two variables $X$ and $Y$. What would be a very generalisable way of testing for whether we're correct in assuming this association? 
+
+The key piece of reasoning behind resampling without replacement for permutation testing is as follows: 
+
+> If there is a real association between the variables then the way values are paired up as observations matters, and should be preserved. If there's no real association between the variables then the pairing up of values into observations doesn't matter, so we can break this pairing and still get outcomes similar to what we actually observed. 
+
+There's another term for *resampling with replacement*: **shuffling**. We can break-up the observational pairing seen in the dataset by *shuffling* one or both of the variables, then putting back the data into the same kind of rectangular structure it was before.
+
+For instance, say we shuffle variable $Y$, and end up with the following new vector of observations: 
+
+$$
+Y^{shuffled} = \{ d_{2,2}, d_{5, 2}, d_{3, 2}, d_{1,2}, d_{4, 2} \}
+$$
+
+We could then make a new fake dataset, with all the same values as in the original dataset, but not necessarily in the same order: 
+
+$$
+X = \{d_{1,1}, d_{2,1}, d_{3, 1}, d_{4, 1}, d_{5, 1}\}
+$$
+
+$$
+Y^{shuffled} = \{d_{4,2}, d_{2,2}, d_{1, 2}, d_{3, 2}, d_{5, 2}\}
+$$
+
+$$
+D^{fake} = \{X, Y^{shuffled}\} 
+$$
+
+$$
+D^{fake} = 
+\begin{pmatrix}
+d_{1}^{fake} = \{d_{1,1} , d_{4,2}\} \\
+d_{2}^{fake} = \{d_{2,1} , d_{2,2}\} \\
+d_{3}^{fake} = \{d_{3,1} , d_{1,2}\} \\
+d_{4}^{fake} = \{d_{4,1} , d_{3,2}\} \\
+d_{5}^{fake} = \{d_{5,1} , d_{5,2}\}  
+\end{pmatrix}
+$$
+
+So, in $D^{fake}$ the observed (row-wise) association between each $X$ and corresponding $Y$ value has broken, even though the same values $d_{i,j}$ are present. 
+
+However, if the assumption/'*hunch*' about there being an association between $X$ and $Y$ from the real dataset $D$ was justified through some kind of summary statistic, such as a correlation coefficient, $r(X, Y)$, then we calculate the same summary statistic for the fake dataset too, $r(X, Y^{fake})$. 
+
+In fact (and in practice) we can repeat the fakery, permuting the values again and again, and each time calculating the summary statistic of interest. This produces a *distribution* of values for this summary statistic, against which we can compare the *observed* value of this summary statistic. 
+
+This *distribution of summary statistics* produced from a large selection of permutated (fake) datasets is the distribution we would expect to see under the **Null Hypothesis**, which is that the apparent association is illusionary, and that no *real* association exists: the appearance of association comes from chance alone.
+
+
+## Post-stratification 
+
+Resampling methods can also be used as a method for post-stratification, reweighting sample data to try to make it more representative of the population of interest. Consider two scenarios where this might be important: 
+
+> **Intentional Oversampling**: Say we know that 95% of people working in a particular occupation tend to be female, and 5% male. We are interested both in the typical characteristics of people who work in this occupation, but also in properly understanding the characteristics of males and females separately, and the differences between males and females within the occupation. And we know that, if we take a purely random sample of the population, we'll only get, on average, 5% of the sample being males, which won't give us enough precision/resolution to properly understand males in the population. So, we *intentionally oversample* from the male population, meaning our sample contains 20% males and 80% females, even though this isn't representative of the population as a whole. 
+
+> **Unintentional Undersampling**: Say we are interested in political party voting intentions at an upcoming election. However for reasons of convenience we decide only to poll people who play console games, by asking someone about to play a game if they're more likely to vote for the Blue Party or the Red Party. We know that our sample has very different characteristics to the population at large. However we also know so many people play console games that we have a reasonably large (and so sufficiently precise) set of estimates for each of the main demographic stratas of interest to us. So what do we do to convert the very biased sample data into unbiased population estimates? [^2]
+
+[^2]: This isn't a made-up example, but broadly the approach used by [Wang et al 2014](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/forecasting-with-nonrepresentative-polls.pdf) to produce pretty accurate estimates of a then-upcoming US election
+
+In either case resampling methods can be applied. Just go from *equal probability sampling* to *weighted probability sampling*, in which samples from our dataset is more likely to be selected if they are under-represented in the sample dataset compared with the population, and less likely to be selected if they are under-represented in the sample dataset compared with the population.  
+
+## Summary
+
+In this post we've discussed the key ideas behind resampling methods, AKA `Hacker Stats`. These approaches are computationally intensive as compared with analytical solutions, which would have been a big barrier to their use until, perhaps, the mid 1980s. However *computationally intensive* these days might just mean it takes five seconds to perform many times, whereas the analytic solution takes five microseconds: still a large relative difference in computing time, but practically both kinds of approaches are similarly fast to perform. 
+
+These days, whether you know an analytic approximation for performing the test or calculation of interest, or whether you don't, the `Hacker Stats` approach is still worth trying out. Even at their slowest, the worst case scenario with `Hacker Stats` is your computer might whirr a bit more loudly than usual, and you'll finally have a good excuse to get that much-deserved tea- or coffee-break!
