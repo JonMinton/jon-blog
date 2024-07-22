@@ -39,6 +39,13 @@ listing:
     sort: "date"
     sort-ui: false
     filter-ui: false
+  - id: hacker-stats-section
+    contents: "posts/glms/hacker-stats/**/*.qmd"
+    type: table
+    fields: [title, reading-time]
+    sort: "resampling-order"
+    sort-ui: false
+    filter-ui: false
 page-layout: full
 title-block-banner: false
 ---
@@ -90,3 +97,9 @@ An introduction to time series, focused around the ARIMA modelling framework.
 :::{#time-series-section}
 :::
 
+### Resampling Methods/Hacker Stats
+
+An introduction to resampling methods (AKA 'Hacker Stats'), including bootstrapping and permutation testing.
+
+:::{#hacker-stats-section}
+:::

@@ -1,8 +1,8 @@
 ---
 title: "Getting started with the infer package"
 author: "Jon Minton"
-draft: true
 date: "2024-07-16"
+resampling-order: 4
 categories: [statistics, r, hypothesis tests, resampling, bootstrapping, hacker stats]
 ---
 
@@ -54,6 +54,8 @@ glimpse(gss)
 
 ```
 
+## Example 1: Categorical Predictor; Continuous Response
+
 Let's go slightly off piste and say we are interested in seeing if there is a relationship between age, a cardinal variable, and sex, a categorical variable. We can start by stating our null and alternative hypotheses explicitly:
 
 - **Null hypothesis**: There is no difference between age and sex
@@ -80,7 +82,7 @@ gss |>
 
 ```
 
-## Our first testable hypothesis (using permutation testing/sampling without replacement)
+### Our first testable hypothesis (using permutation testing/sampling without replacement)
 
 The mean age is `40.6` for males and `39.9` for females, a difference of about `0.7` years of age. Could this have occurred by chance?
 
@@ -160,3 +162,127 @@ model |>
 
 The p value is much, much greater than 0.05, suggesting there's little evidence to reject the Null hypothesis, that in this dataset age is not influenced by sex. 
 
+
+## Example 2: Categorical Predictor; Categorical Response
+
+Now let's look at the two variables `college` and `partyid`:
+
+- **college**: Can be `degree` or `no degree`
+- **partyid**: Can be `ind` `rep`, `dem`, `other`
+
+The simplest type of hypothesis to state is probably something like:
+
+- **Null Hypothesis**: There is *no* relationship between `partyid` and `college`
+- **Alt Hypothesis**: There *is* a relationship between `partyid` and `college`
+
+We can then consider more specific and targetted hypotheses at a later date. 
+
+Let's see how we could use `infer` to help decide between these hypotheses, using a permutation test:
+
+```{r}
+model <- gss |>
+    specify(partyid ~ college) |>
+    hypothesize(null = 'independence') |>
+    generate(reps = 10000, type = 'permute')
+
+model
+
+```
+
+Let's visualise the relationship between `partyid` and `college` in the first nine replicates:
+
+```{r}
+model |>
+    filter(replicate <= 9) |>
+    ggplot(aes(x = college, fill = partyid)) + 
+    geom_bar(position = "fill") + 
+    facet_wrap(~replicate) +
+    labs(title = "Permuted (fake) datasets")
+
+```
+
+And how does this compare with the observed dataset? 
+
+```{r}
+gss |>
+    ggplot(aes(x = college, fill = partyid)) + 
+    geom_bar(position = "fill") + 
+    labs(title = "Relationship in real dataset")
+
+```
+
+But what summary statistic can we use for comparing the observed level of extremeness of any apparent association between the two variables, with summary statistics under the Null hypothesis (i.e. using permutation testing)? The standard answer is to calculate the [Chi-squared statistic](https://en.wikipedia.org/wiki/Chi-squared_distribution), as detailed [here](https://cran.r-project.org/web/packages/infer/vignettes/observed_stat_examples.html#two-categorical-2-level-chi-squared-test-of-independence). 
+
+First, what's the Chi-squared value we get from the observed data?
+```{r}
+Chisq_obs <- gss |>
+    specify(partyid ~ college) |>
+    hypothesize(null = "independence") |>
+    calculate(stat = "Chisq")
+
+Chisq_obs
+```
+
+So, the value is `4.15`. Is this a big or a small value? 
+
+To answer that let's calculate the same statistic from the Null distribution
+
+```{r}
+chi_dist_null <- model |>
+    calculate(stat = "Chisq")
+
+chi_dist_null
+```
+
+So, is the observed value something that could have been plausibly generated from the Null distribution? We can answer this by seeing how extreme the observed Chi-squared value is compared with the distribution of values under the Null:
+
+```{r}
+visualise(chi_dist_null) +
+    shade_p_value(obs_stat = Chisq_obs, direction = "greater")
+```
+
+So, it looks like it's *fairly likely* that the value we observed could have been observed under the Null, a scenario in which there's no true relationship between the variables. But how likely? 
+
+```{r}
+chi_dist_null |>
+    get_p_value(obs_stat = Chisq_obs, direction = "greater")
+
+```
+
+Around a quarter of Chi-squared values under the Null are as greater or greater than that observed in the real dataset. So there's not great evidence of there being a relationship between having a degree and distribution of party affiliations. 
+
+Infer makes it fairly straightforward to calculate the extremeness of our observed test statistic using the analytic/theoretical approach too, using the `assume()` verb: 
+
+```{r}
+null_dist_theory <- gss %>%
+    specify(partyid ~ college) |>
+    assume(distribution = "Chisq")
+
+visualize(null_dist_theory) +
+  shade_p_value(obs_stat = Chisq_obs, direction = "greater")
+
+```
+
+```{r}
+null_dist_theory |>
+    get_p_value(obs_stat = Chisq_obs, direction = "greater")
+```
+
+Here the theoretical distribution suggests the observed value is even more likely to have been observed by chance under the Null, than using the permutation-based approach. 
+
+And we can show both approaches together: 
+
+```{r}
+chi_dist_null |>
+    visualise(method = "both") +
+    shade_p_value(obs_stat = Chisq_obs, direction = "greater")
+
+```
+
+Here we can see the resampling-based distribution (the histogram) has more values lower than the observed value, and fewer values higher than the observed value, than the theoretical distribution (the density line), which helps to explain the difference in p-values calculated. 
+
+## Summing up 
+
+So, that's a brief introduction to the `infer` package. It provides a clear and opinionated way of thinking about and constructing hypothesis tests using a small series of verbs, and as part of this handles a lot of the code for performing permutation tests, visualising data, and comparing resampling-based estimates of the Null distribution with theoretical estimates of the same quantities. And, though both of the examples I've shown above are about permutation testing, it also allows for bootstrapped calculations to be performed too. 
+
+In some ways, `infer` seems largely intended as a pedagogic/teaching tool, for understanding the intuition behind the concept of the Null hypothesis and distribution, and so what a p-value actually means. However you can see that it does abstract away some of the computational complexity involved in producing Null distributions using both resampling and 'traditional' approaches. In previous posts we showed that it's not necessarily too difficult to produce resampled distributions without this, but there's still potentially some quality-of-life benefits to using it. 

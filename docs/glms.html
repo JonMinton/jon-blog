@@ -203,6 +203,34 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-hacker-stats-section .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-hacker-stats-section'] = new List('listing-hacker-stats-section', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
   </script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -640,6 +668,63 @@ Reading Time
 </td>
 <td>
 <span class="listing-reading-time">11 min</span>
+</td>
+</tr>
+</tbody>
+
+</table>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="resampling-methodshacker-stats" class="level3">
+<h3 class="anchored" data-anchor-id="resampling-methodshacker-stats">Resampling Methods/Hacker Stats</h3>
+<p>An introduction to resampling methods (AKA ‘Hacker Stats’), including bootstrapping and permutation testing.</p>
+<div id="listing-hacker-stats-section" class="quarto-listing quarto-listing-container-table">
+
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+<th>
+Title
+</th>
+<th>
+Reading Time
+</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr data-index="0" data-categories="R,statistics,inference,hacker stats,bootstrapping,permutation tests,post-stratification" data-listing-date-sort="1721516400000" data-listing-file-modified-sort="1721647146658" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-title-sort="Hacker Stats: Intro and overview" data-listing-filename-sort="index.qmd">
+<td>
+<a href="./posts/glms/hacker-stats/permutation-approaches-intro/index.html" class="title listing-title">Hacker Stats: Intro and overview</a>
+</td>
+<td>
+<span class="listing-reading-time">9 min</span>
+</td>
+</tr>
+<tr data-index="1" data-categories="bootstrapping,statistics,non-parametric" data-listing-date-sort="1719529200000" data-listing-file-modified-sort="1721647199244" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-title-sort="A brief introduction to bootstrapping" data-listing-filename-sort="index.qmd">
+<td>
+<a href="./posts/glms/hacker-stats/bootstrapping/index.html" class="title listing-title">A brief introduction to bootstrapping</a>
+</td>
+<td>
+<span class="listing-reading-time">8 min</span>
+</td>
+</tr>
+<tr data-index="2" data-categories="hypothesis testing,permutation,R,statistics" data-listing-date-sort="1720652400000" data-listing-file-modified-sort="1721647211831" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-title-sort="Permutation Testing, and the intuition of the Null hypothesis, with Base R" data-listing-filename-sort="index.qmd">
+<td>
+<a href="./posts/glms/hacker-stats/permutation-with-base-r/index.html" class="title listing-title">Permutation Testing, and the intuition of the Null hypothesis, with Base R</a>
+</td>
+<td>
+<span class="listing-reading-time">11 min</span>
+</td>
+</tr>
+<tr data-index="3" data-categories="statistics,r,hypothesis tests,resampling,bootstrapping,hacker stats" data-listing-date-sort="1721084400000" data-listing-file-modified-sort="1721662543789" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Getting started with the infer package" data-listing-filename-sort="index.qmd">
+<td>
+<a href="./posts/glms/hacker-stats/infer-introduction/index.html" class="title listing-title">Getting started with the infer package</a>
+</td>
+<td>
+<span class="listing-reading-time">10 min</span>
 </td>
 </tr>
 </tbody>
