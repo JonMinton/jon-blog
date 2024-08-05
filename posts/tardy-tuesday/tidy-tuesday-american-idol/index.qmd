@@ -1,0 +1,135 @@
+---
+title: "Tardy Tuesday: American Idol"
+date: "2024-07-24"
+categories: [tidy tuesday, R, American Idol]
+author: 
+    - "Abram"
+    - "Kate"
+    - "Andrew"
+    - "Imran"
+    - "Nic"
+    - "Kennedy"
+    - "Aoife"
+    - "Jon"
+---
+
+This session looked at [data on American Idol](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-07-23/readme.md). Abram had already made a head-start with the analysis so (with some encouragement) led the session:
+
+## Preparation
+
+Loading the package
+
+```{r}
+library(tidyverse)
+library(magrittr)
+library(plotly)
+library(janitor)
+library(lubridate)
+# install.packages("styler")
+# library(styler)
+
+```
+
+Loading the data
+
+```{r}
+auditions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-07-23/auditions.csv')
+eliminations <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-07-23/eliminations.csv')
+finalists <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-07-23/finalists.csv')
+ratings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-07-23/ratings.csv')
+seasons <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-07-23/seasons.csv')
+songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-07-23/songs.csv')
+```
+
+Abram made use of the slightly exotic `%<>%` pipe, which passes its output back to its first argument. 
+
+Some data tidying and basic exploration: 
+
+```{r}
+songs %<>% mutate(artist = if_else(artist == "*NSYNC", "NSYNC", artist))
+songs_n <- songs %>% group_by(artist, song) %>% summarise(n = n()) %>% arrange(-n)
+artists_n <- songs %>% group_by(artist) %>% summarise(n = n()) %>% arrange(-n)
+winning_songs <- songs %>% group_by(artist, song, result) %>% summarise(n = n())
+```
+
+## Exploration
+
+First we looked at viewing figures by show number and by season
+
+```{r}
+ratings %>% filter(!is.na(viewers_in_millions)) %>%
+  ggplot(aes(x = show_number, y = viewers_in_millions)) + geom_point() + geom_line() + facet_wrap(vars(season), scales = "free_y")
+```
+
+Then some preparation of the date column to get it in date format:
+
+```{r}
+ratings %<>% mutate(airdate = if_else(season == 13, paste0(airdate, ", 2014"), airdate),
+                    proper_airdate = mdy(airdate))
+```
+
+Then a visualisation over time 
+
+```{r}
+ratings %>% ggplot(aes(x = proper_airdate, y = viewers_in_millions)) + geom_point() +
+  expand_limits(y = 0) + stat_smooth()
+```
+
+Tabulation:
+
+```{r}
+tabyl(ratings$season)
+```
+
+Now average views
+
+```{r}
+average_views <- ratings %>% group_by(season) %>% summarise(avg_views = mean(viewers_in_millions, na.rm = TRUE))
+```
+
+We saw a jump in most seasons at the very end, so decided to look at how big a proportional jump this was:
+
+```{r}
+rel_views <- ratings %>% group_by(season) %>% slice_tail(n=2) %>%
+  summarise(relative_views = viewers_in_millions[2]/viewers_in_millions[1])
+```
+
+```{r}
+rel_views %>% ggplot(aes(x = season, y = relative_views)) + geom_point()
+```
+
+Then average views
+
+```{r}
+average_views %>% ggplot(aes(season, avg_views)) + geom_line() + expand_limits(y = 0)
+```
+
+Now to join average views (over whole season) to with jump at the end (rel_views) to see if any obvious relationship:
+
+```{r}
+full_join(average_views, rel_views) %>% ggplot(aes(x = avg_views, y = relative_views)) + geom_point()
+```
+
+Nope..
+
+Another pattern we saw was that the first episode in a season seemed to be about the most popular, then there was a drop-off over time 
+
+```{r}
+ratings %<>% group_by(season) %>% arrange(show_number) %>%
+  mutate(share_of_first = viewers_in_millions / viewers_in_millions[1])
+
+ratings %>%
+  ggplot(aes(show_number, share_of_first, group = season, color = as.factor(season))) +
+  geom_line()
+```
+
+Finally, we looked at an interactive visualising using the `ggplotly()` convenience function using the `plotly` package:
+
+```{r}
+gg<- ratings %>% filter(season >= 3) %>%
+  ggplot(aes(show_number, share_of_first, group = season, color = as.factor(season))) +
+  geom_point() + scale_y_log10()
+
+ggplotly(gg)
+
+```

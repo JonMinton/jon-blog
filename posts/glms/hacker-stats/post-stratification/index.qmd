@@ -1,0 +1,261 @@
+---
+title: "Resampling for post-stratification"
+author: "Jon Minton"
+date: "2024-07-23"
+resampling-order: 5
+categories: [statistics, r, hypothesis tests, resampling, bootstrapping, post-stratification, hacker stats]
+code-fold: true
+warning: false
+message: false
+---
+
+## Introduction
+
+In [the introductionary post](../resampling-approaches-intro/index.qmd) in this series on Hacker Stats, I mentioned that resampling methods can be used to perform post-stratification, meaning reweighting of observations from a sample in such a way as to make them more representative of the population of interest to us. Let's look at this using a  variation of the [red coin/blue coin](../permutation-with-base-r/index.qmd) example from a couple of posts ago.
+
+## Red Coin/Blue Coin
+
+Imagine we have a **population** of two types of coin:
+
+-   **Red Coins**, which come up heads 65% of the time
+-   **Blue Coins**, which come up heads 47% of the time
+
+Within our *population*, we know 75% of the coins are **Blue coins**, and 25 of the coins are **Red Coins**.
+
+However, our sample contains 20 red coins, and 20 blue coins. i.e. the distribution of coin types in our sample is different to that in our population.
+
+Let's first create this sample dataset:
+
+```{r}
+
+library(tidyverse)
+
+set.seed(9)
+
+draws_red <- rbinom(n=20, size = 1, prob = 0.65)
+draws_blue <- rbinom(n=20, size = 1, prob = 0.47)
+
+coin_colour <- c(
+    rep("red", 20),
+    rep("blue", 20)
+)
+
+real_sample_data <- data.frame(
+    coin_colour = coin_colour, 
+    outcome = c(draws_red, draws_blue)
+)
+
+rm(draws_red, draws_blue, coin_colour)
+
+head(real_sample_data)
+```
+
+What's the expected probability of heads in the sample?
+
+```{r}
+mean(real_sample_data$outcome)
+
+real_sample_data |>
+    group_by(coin_colour) |>
+    summarise(prop = mean(outcome))
+```
+
+Overall, 65% of the sample - 20 reds, 20 blues - are heads. The proportion of blues is 50%, and of reds is 80%. So, it so happens that, with this random number seed, the proportions in the sample of both reds and blues are higher than the theoretical average (the `prob` value arguments in the code above).
+
+Let's now try to use bootstrapping to calculate a distribution around the sample mean:
+
+```{r}
+bootstrap_means <- function(x, nReps = 10000){
+    out <- vector("numeric", nReps) 
+
+    for (i in 1:nReps){
+        this_resample <- sample(
+            x=x, 
+            size = length(x), 
+            replace = TRUE # This is what makes it bootstrapping
+        )
+        out[i] <- mean(this_resample)
+    }
+    out
+}
+
+bootstrapped_means <- bootstrap_means(real_sample_data$outcome)
+
+head(bootstrapped_means)
+```
+
+What does this look like as a histogram?
+
+```{r}
+tibble(value = bootstrapped_means) |>
+    ggplot(aes(x = value)) + 
+    geom_histogram(bins = 50)
+
+```
+
+We can see the familiar bell-shaped distribution of values here. What about for blues and reds separately?
+
+```{r}
+
+bootstrapped_means_reds <- bootstrap_means(
+    real_sample_data |>
+        filter(coin_colour == "red") |>
+        pull('outcome')  
+    )
+
+bootstrapped_means_blues <- bootstrap_means(
+    real_sample_data |>
+        filter(coin_colour == "blue") |>
+        pull('outcome')  
+    )
+
+
+
+
+head(bootstrapped_means_reds)
+head(bootstrapped_means_blues)
+```
+
+And what do these two distributions look like?
+
+```{r}
+tibble(
+    rep = 1:length(bootstrapped_means_reds),
+    red = bootstrapped_means_reds,
+    blue = bootstrapped_means_blues
+) |>
+    pivot_longer(
+        cols = c(red, blue),
+        names_to = "colour",
+        values_to = "value"
+    ) |>
+    ggplot(aes(x = value, fill = colour)) + 
+    geom_histogram(bins = 50, position = "dodge")
+
+```
+
+So it's clear the distributions for mean values of the two different coin types are different, even though there's some overlap.
+
+Let's now look at doing some post-stratification, where we sample from the two groups in proportion to the relative probabilities of encountering observations from the two groups in *the population* as compared with *the sample*. Let's think through what this means:
+
+| Group      | Sample | Population | Ratio |
+|------------|--------|------------|-------|
+| Blue       | 0.5    | 0.75       | $3/2$ |
+| Red        | 0.5    | 0.25       | $1/2$ |
+| Column Sum | 1.00   | 1.00       |       |
+
+: Proportions by group in sample and population
+
+In this table, the ratio is the row-wise ratio of the population value divided by the sample value. Note that the ratios have a common denominator, 2, which we can drop in defining the probability weights, leaving us with `3` for `blue` and `1` for `red`.
+
+We can adapt the standard bootstrapping approach by using the `prob` argument in the `sample()` function, using these weights:
+
+```{r}
+sample_weights <- 
+    tibble(
+        coin_colour = c("blue", "red"),
+        wt = c(3, 1)
+    )
+
+real_sample_data_wt <- 
+    left_join(
+        real_sample_data, sample_weights
+    )
+
+real_sample_data_wt
+```
+
+And now a slightly modified version of the bootstrapping function: 
+
+```{r}
+bootstrap_means_wt <- function(x, wt, nReps = 10000){ #wt is the weighting
+    out <- vector("numeric", nReps) 
+
+    for (i in 1:nReps){
+        this_resample <- sample(
+            x=x, 
+            size = length(x), 
+            prob = wt, # This is the new argument
+            replace = TRUE # This is what makes it bootstrapping
+        )
+        out[i] <- mean(this_resample)
+    }
+    out
+}
+
+```
+
+And to run:
+
+```{r}
+bootstrapped_means_poststratified <- bootstrap_means_wt(
+    x = real_sample_data_wt$outcome,
+    wt = real_sample_data_wt$wt
+)
+
+head(bootstrapped_means_poststratified)
+
+```
+
+Now, analytically, we can calculate what the mean of the population should be given the proportion of blues and reds, and the proportion of blues that are heads, and proportion of reds that are heads: 
+
+
+```{r}
+heads_if_blue <- 0.47
+heads_if_red <- 0.65
+
+expected_pop_prop_heads <- (3/4) * heads_if_blue + (1/4) * heads_if_red
+
+expected_pop_prop_heads
+```
+
+So within the population we would expect 51.5% of coins to come up heads. 
+
+Let's now look at the bootstrapped and reweighted distribution to see where 0.515 fits within this distribution:
+
+
+```{r}
+ggplot() + 
+    geom_histogram(aes(x = bootstrapped_means_poststratified), bins=50) + 
+    geom_vline(aes(xintercept = expected_pop_prop_heads), linewidth = 1.2, colour = "purple")
+
+```
+
+So we can see that the true population mean falls within the reweighted bootstrapped distribution of the values of the mean estimated. How about if we had not performed reweighting on the sample?
+
+```{r}
+tibble(value = bootstrapped_means) |>
+    ggplot() + 
+    geom_histogram(aes(x = value), bins=50) + 
+    geom_vline(aes(xintercept = expected_pop_prop_heads), linewidth = 1.2, colour = "purple")
+
+```
+
+So, although on this occasion, the true population value is also within the range of the un-reweighted bootstrapped distribution, it is further from the centre of this distribution's mass. 
+
+Let's give some numbers to the above. What proportion of the bootstrapped values are below the true population value?
+
+First without reweighting:
+
+```{r}
+mean(bootstrapped_means < expected_pop_prop_heads)
+
+```
+
+Only about 3.4% of the means from the unweighted bootstrapping were more extreme than the true population value. 
+
+And now with reweighting:
+
+```{r}
+mean(bootstrapped_means_poststratified < expected_pop_prop_heads)
+
+```
+
+Now 22.4% of values of the means from the reweighted/post-stratified bootstrapped distribution are below the true value. This is the difference between the true value being in the 90% central interval or not. 
+
+
+## Summary
+
+In this post we've illustrated the importance of post-stratifying data were we know a sample is biased in terms of the relative weight given to the strata it contains as compared with the population. We've also shown, using Base R functions alone, how to perform this post-stratification using just two additional changes: a vector of weights, which was fairly straightforward to calculate; and the passing of this vector of weights to the `prob` argument in the `sample()` function. 
+
+In this post we've focused on a hypothetical example, and built the requisite functions and code from scratch. In practice, packages like [`survey` can be used to perform post-stratification in fewer lines](https://stats.oarc.ucla.edu/r/faq/how-do-i-analyze-survey-data-with-stratification-after-sampling-poststratification/), [`svrep`](https://cran.r-project.org/web/packages/svrep/vignettes/bootstrap-replicates.html), and [boot](https://cran.r-project.org/web/packages/boot/index.html) can make the process much more straightforward. 
