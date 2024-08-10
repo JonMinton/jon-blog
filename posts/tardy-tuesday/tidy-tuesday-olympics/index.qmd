@@ -1,0 +1,134 @@
+---
+title: "Tardy Tuesday: Olympics"
+date: "2024-08-07"
+author: 
+    - "Andrew"
+    - "Brendan"
+    - "Abram"
+    - "Kennedy"
+    - "Imran"
+    - "Gatz"
+    - "Jon"
+code-fold: true
+warning: false
+categories: [tidy tuesday, R, olympics]
+---
+
+The most recent Tidy Tuesday contained [various types of data on previous Olympics](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-08-06). Andrew led the session, with some additional contributions from Brendan. 
+
+## Andrew's script
+
+Load packages and data
+```{r}
+library(tidyverse)
+
+tt_list <- tidytuesdayR::tt_load("2024-08-06")
+
+list2env(tt_list, envir = .GlobalEnv)
+```
+
+Take a glimpse:
+
+```{r}
+glimpse(olympics)
+```
+
+How many sports of which kinds?
+
+```{r}
+olympics %>% 
+  count(sport, sort=T) 
+```
+
+Events within the sport of athletics
+
+```{r}
+olympics %>% 
+  filter(sport == "Athletics") %>% 
+  count(event, sort=T) 
+```
+
+A visualisation: we wanted to show how long different sports have been running:
+
+```{r}
+plot_obj <- 
+  olympics %>% 
+  filter(sport == "Athletics") %>% 
+  group_by(event) %>% 
+  summarise(Earliest_year = min(year),
+            Latest_year = max(year),
+            n = n()) %>%  
+  arrange(desc(n)) %>% 
+  mutate(year_range = Latest_year - Earliest_year+1,
+         event = fct_reorder(event, year_range)) %>% 
+  mutate(Sex = case_when(str_detect(str_to_lower(event), "women") ~ "Female",
+                         str_detect(str_to_lower(event), "men") ~ "Male",
+                         .default = "Other")) %>% 
+  mutate(event_status = if_else(Latest_year == 2016, "Live", "Dead"))
+
+plot_obj %>%
+  slice(1:20) %>% 
+  ggplot(aes(y=event, color = Sex))+
+  geom_errorbarh(aes(xmin=Earliest_year, xmax=Latest_year, height=0))
+```
+
+What about just Female events?
+
+
+```{r}
+plot_obj %>%
+#  slice(1:20) %>% 
+  filter(Sex == "Female") %>% 
+  ggplot(aes(y=event))+
+  geom_errorbarh(aes(xmin=Earliest_year, xmax=Latest_year, height=0))+
+  scale_x_continuous(breaks = seq(1920, 2020, by=10))
+```
+
+Slight modification to indicate whether events are still running:
+
+```{r}
+plot_obj %>%
+  #  slice(1:20) %>% 
+  filter(Sex == "Female") %>% 
+  ggplot(aes(y=event))+
+  geom_errorbarh(aes(xmin=Earliest_year, xmax=Latest_year, height=0,
+                     linetype = event_status))+
+  scale_x_continuous(breaks = seq(1920, 2020, by=10)) + 
+    scale_linetype_manual(values = c("dashed", "solid"))
+
+```
+
+
+## Brendan's script
+
+```{r}
+olympics_dec <- olympics |>
+    mutate(decade = round(year, -1)) |>
+    mutate(bmi = weight / (height/100)^2) |>
+    filter(!is.na(bmi)) |> 
+    group_by(event, sex, decade) |>
+    summarise(mean_bmi = mean(bmi), 
+              min_bmi = min(bmi),
+              max_bmi = max(bmi)) |>
+    arrange(desc(mean_bmi))
+
+olympics_dec |>
+    distinct(event)
+
+```
+
+Have shotputters got heavier or lighter over time?
+
+```{r}
+olympics_dec |>
+    filter(str_detect(event, "Shot")) |>
+    add_count(event) |>
+    filter(n > 3) |>
+    ggplot(aes(y = mean_bmi, x = decade, color = event)) +
+    geom_smooth() +
+    geom_linerange(aes(ymin = min_bmi, ymax = max_bmi)) +
+    facet_wrap(~sex, ncol = 1) +
+    theme(legend.position = "none")
+```
+
+Maybe a little heavier, but for men it seems to have plateaued. For women it looks like a trend towards increased heaviness is still continuing.
