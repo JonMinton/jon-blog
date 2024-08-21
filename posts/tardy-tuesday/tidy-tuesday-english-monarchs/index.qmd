@@ -1,7 +1,7 @@
 ---
 title: "Tidy Tuesday: English Monarchs"
 date: "2024-08-21"
-category: ["tidy tuesday", "monarchs", "ggplot2", "tidyverse", "history", "regex"]
+categories: [tidy tuesday, monarchs, ggplot2, tidyverse, history, regex]
 author:
     - Jon
     - Kate
@@ -120,7 +120,7 @@ mar_tidy |>
   coord_equal(xlim = c(0, 65), ylim = c(0, 65)) +
   geom_abline(intercept =0, slope = 1, linetype = "dashed") +
   facet_wrap(~king_name) + 
-  labels(
+  labs(
     x = "Age of king",
     y = "Age of consort",
     title = "Ages of kings and consorts for multiple-marrying kings"
