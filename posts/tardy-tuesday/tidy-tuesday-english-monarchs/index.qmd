@@ -1,0 +1,143 @@
+---
+title: "Tidy Tuesday: English Monarchs"
+date: "2024-08-21"
+category: ["tidy tuesday", "monarchs", "ggplot2", "tidyverse", "history", "regex"]
+author:
+    - Jon
+    - Kate
+    - Andrew
+    - Brendan
+    - Nic
+    - Kennedy
+    - Miryiam
+    - Gatz
+code-fold: true
+---
+
+The most recent Tidy Tuesday dataset was about [English kings](https://github.com/rfordatascience/tidytuesday/tree/master/data/2024/2024-08-20) (including female kings - there should be a word for that) and their consorts. 
+
+For a change, Jon led the session. 
+
+Load the data:
+
+```{r}
+
+library(tidyverse)
+
+
+english_monarchs_marriages_df <- readr::read_csv(
+  'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-08-20/english_monarchs_marriages_df.csv'
+  )
+```
+
+Data tidying - a lot of missing age information for older records, especially for the consorts:
+
+```{r}
+mar_tidy <-
+  english_monarchs_marriages_df |> 
+    mutate(
+      king_age = str_remove_all(king_age, "\\?|\\–|\\(|\\)") %>% as.numeric(),
+      consort_age = str_remove_all(consort_age, "\\?|\\–|\\(|\\)") %>% as.numeric(),
+      year_of_marriage= str_remove_all(year_of_marriage, "\\?|\\–|\\(|\\)") %>% as.numeric()
+    )
+```
+
+First plot: age of 'king' against age of consort:
+```{r}
+mar_tidy |> 
+  ggplot(aes(x = king_age, y = consort_age)) +
+  geom_point() +
+  labs(title = "King Age vs Consort Age",
+       x = "King Age",
+       y = "Consort Age",
+       subtitle = "Most kings were older than their consorts. QE2 Highlighted"
+  ) +
+  coord_equal(xlim = c(0, 65), ylim = c(0, 65)) +
+  geom_abline(intercept =0, slope = 1, linetype = "dashed") +
+  geom_vline(xintercept = 16, linetype = "dashed") + 
+  geom_point(aes(x = king_age, y = consort_age), shape = 17, size = 3, colour = "purple", data = 
+               mar_tidy |> filter(king_name == "Elizabeth II")
+             )
+```
+
+We added a special royal purple triangle for QE2.
+
+We wanted to know
+
+> Were the 'kings' whose consorts were older than them actually Queens?
+
+
+```{r}
+mar_tidy |> 
+  filter(king_age < consort_age) |> 
+  select(king_name, consort_name, king_age, consort_age, year_of_marriage) |> 
+  distinct() |> 
+  arrange(king_age, consort_age)
+```
+
+Female 'kings' are over-represented but not the majority
+
+Now difference between king and consort age by year of marriage 
+
+```{r}
+mar_tidy |> 
+  mutate(age_diff = king_age - consort_age) |>
+  ggplot(aes(x = year_of_marriage, y = age_diff)) +
+  geom_point() +
+  labs(title = "Difference between King and Consort Age by Year of Marriage",
+       x = "Year of Marriage",
+       y = "Difference between King and Consort Age"
+  ) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  geom_smooth()
+```
+
+The age gap between kings and consorts appears to have been falling from around 1500. 
+(Note: neither of King Charles' consorts are in the dataset as he was not a king at the time of either marriage)
+
+Was there any obvious tendency for English Kings to have multiple wives, and - like Leo DeCaprio - keep partnering with young women as they age? 
+
+```{r}
+mar_tidy |> 
+  group_by(king_name) |> 
+  mutate(king_count = n()) |> 
+  filter(king_count > 1) |> 
+  filter(year_of_marriage > 1000) 
+```
+
+For many marriages the ages of the consorts weren't known (the records are from hundreds of years ago, so maybe that's to be expected). 
+
+```{r}
+mar_tidy |> 
+  group_by(king_name) |> 
+  mutate(king_count = n()) |> 
+  filter(king_count > 1) |> 
+  filter(!is.na(consort_age)) |>
+  ggplot(aes(x = king_age, y = consort_age)) +
+  geom_line() +
+  geom_point() +
+  coord_equal() + 
+  coord_equal(xlim = c(0, 65), ylim = c(0, 65)) +
+  geom_abline(intercept =0, slope = 1, linetype = "dashed") +
+  facet_wrap(~king_name) + 
+  labels(
+    x = "Age of king",
+    y = "Age of consort",
+    title = "Ages of kings and consorts for multiple-marrying kings"
+  )
+```
+
+Henry VIII is clearly an outlier in terms of the number of marriages he had. But there's no clear tendency for English kings to marry with Hollywood tendencies. 
+
+Even where some kings have been married multiple times, the age of the consorts might only have been recorded one or zero times. 
+
+For many of the older records honourifics (and in some cases dishonourifics) were applied to the name. These were identified by the king name having the word 'the' in them:
+
+```{r}
+mar_tidy |>
+  filter(str_detect(king_name, " the ")) |> 
+  pull(king_name) |>
+  unique()
+```
+
+Better to be 'unready' or a 'martyr'? (probably best to be unready to be a martyr!)
