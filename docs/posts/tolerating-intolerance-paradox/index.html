@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2024-08-25">
+<meta name="dcterms.date" content="2024-09-28">
 
-<title>Jon Minton’s Blog - Brian May: Gentleman Ecoscientist</title>
+<title>Jon Minton’s Blog - The Paradox of Tolerating Intolerance: Position A and Position B</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,19 +63,13 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Brian May: Gentleman Ecoscientist">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Paradox of Tolerating Intolerance: Position A and Position B">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/brian-may-gentleman-ecoscientist/may-badger.png">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:image-height" content="1632">
-<meta name="twitter:image-width" content="2696">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -156,12 +150,11 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Brian May: Gentleman Ecoscientist</h1>
+      <h1 class="title">The Paradox of Tolerating Intolerance: Position A and Position B</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">epidemiology</div>
-                <div class="quarto-category">television</div>
-                <div class="quarto-category">science</div>
-                <div class="quarto-category">agriculture</div>
+                <div class="quarto-category">paradoxes</div>
+                <div class="quarto-category">ethics</div>
+                <div class="quarto-category">culture</div>
               </div>
                   </div>
   </div>
@@ -179,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 25, 2024</p>
+        <p class="date">September 28, 2024</p>
       </div>
     </div>
     
@@ -197,133 +190,41 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="may-badger.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Brian May: The Badgers, The Farmers and Me</figcaption>
-</figure>
-</div>
-<p>I managed to find an interesting programme on BBC iPlayer last night (not always easy): <a href="https://www.bbc.co.uk/programmes/m0022710">Brian May: The Badgers, the Farmers and me</a>. Though it contains distressing scenes, I found it much more hopeful than I was expecting.</p>
-<p>Around fifteen or more years ago, Anne Brunner, a conservationist, appeared on Brian May’s property with a hedgehog, asking whether this and other rescued wild animals could be released on his property. This led, for May, to an interest in local ecology and animal welfare, and through this to particular concerns for the plight of tbe badger in England &amp; Wales.</p>
-<section id="existing-transmission-model" class="level2">
-<h2 class="anchored" data-anchor-id="existing-transmission-model">Existing Transmission Model</h2>
-<p>In England &amp; Wales, more so in the south than the north, Bovine TB affects cattle, and through this the livelihood of farmers who raise livestock. Farmers are both mandated to conduct a skin test on their cows every 60 days and - if the test is positive for a cow - to declare the cow a ‘reactor’ and (let’s not use euphamism) kill the animal.</p>
-<p>A long held belief amongst farmers and government agricultural scientists was that Bovine TB, like TB in people, is primarily a respiratory infection, and transmitted primarily through air and water.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-reactor["Infectious cow ('Reactor')"]
-s["Susceptible cow"]
-
-reactor --air--&gt; s
-reactor --water--&gt; s
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-<p>However, even once all cows that test positive for TB using the standard skin test are killed, bovine TB still, sadly, often seems to recur in farms previous afflicted. This led to the assumption that another vector of infection was responsible, wild badgers, who get close to cows, share water and air with them, and so are presumed to infect them</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-cw[Cows]
-reactor["Infectious cow ('Reactor')"]
-r2["newly infectious cow (hidden reactor)"]
-sc["Susceptible cow"]
-ib["Infectious badger"]
-st{"Skin test"}
-cw --&gt; st
-kl&gt;killed]
-st --positive--&gt;reactor --&gt; kl
-ib --infects--&gt; sc
-st --negative--&gt;sc
-sc --becomes--&gt; r2
-r2 --&gt; cw
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="badger-culling" class="level2">
-<h2 class="anchored" data-anchor-id="badger-culling">Badger Culling</h2>
-<p>Based on this transmission, it follows that culling (killing) only infectious cows isn’t enough to stop herds becoming infected. Badgers also have to be culled (killed). And because testing is expensive, and the farmers don’t own or profit from the badgers, the approach taken was to assume all badgers were <em>potentially</em> infected and infectious, and cull (kill) any found near farms ‘just in case’.</p>
-<p>This mass culling (killing) of badgers was something that struck May as immensely inhumane and unfair, a presumption of guilt and imposition of a death sentence on an entire class of animal. In May’s words:</p>
+<p>Here’s something I’ve been thinking about for some time.</p>
+<p>It’s something I call <em>The Paradox of Tolerating Intolerance</em>, and arises because there seem to be two correct, but mutually exclusive, ways of completing the following sentence:</p>
 <blockquote class="blockquote">
-<p>As a species that inhabited Britain long before humans, and who have an equal right to be here, they are now being brutally persecuted, for a crime - I believe - they didn’t commit.</p>
+<p>Tolerating intolerance promotes …</p>
 </blockquote>
-</section>
-<section id="first-response-activism" class="level2">
-<h2 class="anchored" data-anchor-id="first-response-activism">First Response: Activism</h2>
-<p>Over a decade ago, May’s response was to petition vocally for the rights of badgers to exist, and for the government to change their policy regarding the culling of badgers. This brought him allies and attentions, but also set him in opposition to government, and to farmers, who both believed in the model of transmission outlined above. This approach engorged hearts that were already bleeding, but ultimately did little to change policy, and so the extent of badger culling in England &amp; Wales.</p>
-</section>
-<section id="second-response-scientific-research" class="level2">
-<h2 class="anchored" data-anchor-id="second-response-scientific-research">Second Response: Scientific Research</h2>
-<p>So, May changed tack. He sought to find flaws in the above disease transmission model, to become - in effect - an epidemiologist, and as part of this to work with farmers.</p>
-<p>May’s hope was that a new disease transmission model could be demonstrated, one in which badgers do not constitute a predominant vector of transmission. Of course, hope is just that, and May is clear in stating that - even if he wrong about this - he would still oppose the mass culling of badgers on ethical grounds.</p>
-</section>
-<section id="approach" class="level2">
-<h2 class="anchored" data-anchor-id="approach">Approach</h2>
-<p>So, what did May do? He worked with a farmer, and a vet. The vet devised an <strong>enhanced test</strong>, actually a composite of three tests: the skin test currently used, and two other - more expensive (and intrusive) - tests. The suspicion was that the skin test alone was not, from a diagnostic perspective, the <strong>Gold Standard</strong> it was assumed to be: some cows who test positive may not be infected or infectious (a <em>false positive</em>), and some cows who test negative may be infected or infectious (a <em>false negative</em>). By using enhanced testing, May sought to get closer the <em>true</em> <strong>Gold Standard</strong> we might hope for (especially when a positive test is a death sentence for a cow), rather than the <strong>Fool’s Gold Standard</strong> May, and the vet, were starting to suspect the Skin Test was in reality.</p>
-<p>And why does this matter? Because if there are <em>false negatives</em> in a tested herd, then there are <em>hidden reactors</em>, i.e.&nbsp;cows within the stock that, despite testing negative, are still infectious to other cows. This would mean that an apparently ‘clean’ herd, in which all apparently infectious cows have been removed, actually still contained some infectious animals, who could then infect the rest of the herd.</p>
-<p>The difference in implication is massive: if the Skin Test were a <em>true</em> <strong>Gold Standard</strong> then any new infections in cows would have to be due to an <em>exogenous</em> cause (hence, badgers). If instead the Skin Test were a <strong>Fool’s Gold Standard</strong>, then the cause of new apparent infection could be <em>endogenous</em>: the cows were infecting the other cows, and no exogenous infection from badgers was needed to be assumed.</p>
-<p>By performing more enhanced testing of the cows, a much higher proportion of the infectious cows (‘reactors’) were identified, and so there were far fewer reactors left in the herd to infect other cows. Sadly this of course meant more cows were killed as a result of this test in the short term, but - if the endogenous infection hypothesis were true - would mean far fewer would be killed prematurely in the longer term.</p>
-<p>Using PCR tests, May and the vet were also able to successfully test for the pathogen responsible for Bovine TB, <em>M Bovis</em>, in various candidate transmission vectors. In particular, they were able to identify that cow faeces contains much higher levels of <em>M Bovis</em> than previously thought, and so that faeces was a much more potent transmission vector than previously assumed.</p>
-<p>By first enhancing the tests for Bovine TB at the test farm, and then by increasing the standards of hygiene for the herd - in particular greatly reducing the scope for faecal transmission - May, the vet, and the farmer were able to <em>stop</em> transmission at the test farm within a decade.</p>
-<p>A slightly unfortunate natural experiment may have also helped their case: they were unable to acquire permission to vaccinate the local wild badger population, meaning - when tested - they still carried Bovine TB. So, even though a <em>potentially</em> infectious pool of <em>M Bovis</em> still existed in the local wild badger population, the test farm itself still did not become infected.</p>
-</section>
-<section id="changed-model" class="level2">
-<h2 class="anchored" data-anchor-id="changed-model">Changed Model</h2>
-<p>In short, they had developed fairly strong evidence <em>against</em> the following transmission model:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-
-badger --air--&gt; cow
-badger --water--&gt; cow
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-<p>And <em>for</em> the following transimission model:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-
-cow --faeces--&gt; cow
-cow --faeces--&gt; trough
-trough --water--&gt; cow
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="gentleman-ecoscientism" class="level2">
-<h2 class="anchored" data-anchor-id="gentleman-ecoscientism">Gentleman Ecoscientism</h2>
-<p>The epilogue of the documentary suggests that, by collecting the above evidence, running the above tests, engaging with farmers - especially skeptical and previously hostile farmers - May was successfully able to change the <em>minds</em> of those whose minds needed to be changed to prevent further mass cullings. This research took around a decade to produce, and by the sounds of it came at some substantial cost to May, both financially, and reputationally amongst those ‘<em>hearts</em>’ who had previously supported him as an activist, but were wary of his efforts to engage with those farmers that - some activists at least - saw as ‘the enemy’.</p>
-<p>By the sounds of it, May’s efforts as scientist may now finally turn out to be successful, not despite but because, though motivated by <em>heart</em>, they spoke to <em>mind</em>. At the age of 77, May may now finally be successful in preventing the killing of hundreds of thousands of wild animals unnecessarily, and stopping the potential extinction of badgers in large swathes of England &amp; Wales.</p>
-<p>But of course May was only able to engage in such a long-standing effort because of three things: his passion, his scientific acumen, and his wealth.</p>
-<p>So, in this sense, May’s research seems almost like a return to the Gentleman Scientists of the Victorian and previous eras, a kind of atavistic return to the inequitable, but sometimes productive, roots of scientific research more generally, in which independently wealthy eccentrics devoted decades of their otherwise unstructured lives to pursuing personal interests and obsessions, with the birth of scientific journals themselves emerging as collections of correspondence between similarly minded Gentlemen Scientists, collated by elite institutions (like the Royal Society) where such (mostly) Gentlemen could meet, fraternise, and share their passions and interests with similarly minded (and well-heeled) folk.</p>
-<p>I don’t know quite what to make of this from a broader socioeconomic perspective… but at least, thanks to May, the badgers’ future in England &amp; Wales is now a bit more secure!</p>
+<p>The two positions:</p>
+<ul>
+<li>Position A) Tolerating intolerance promotes <em>tolerance</em></li>
+<li>Position B) Tolerating intolerance promotes <em>intolerance</em></li>
+</ul>
+<p>Let’s say there’s a conversation between Alice and Bob.</p>
+<p>Alice says something that expresses intolerance towards some kind of outgroup, of which neither Alice nor Bob are members. Bob does not hold the intolerant position towards this outgroup that Alice expressed.</p>
+<p>If Bob objects to Alice’s intolerance, he would be acting according to Position B.</p>
+<p>If Bob does not object to Alice’s intolerance, he would be acting according to Position A.</p>
+<p>In not objecting, Bob would himself be acting with tolerance, which could be seen as a promoting tolerance. But at the same time the lack of objection could lead Alice to believe her intolerant views are more widely held than they are, to implicitly be seen to condone and normalise such views, meaning Alice is more likely to continue to hold and express such views in the future. So Bob’s action (or inaction) of not objecting could also be seen to promote intolerance (Position B).</p>
+<p>By contrast, if Bob objects to Alice, the direct act of objecting to an intolerant view being expressed is itself an act of intolerance: Alice believed Bob was someone with whom she could speak freely and honestly. But Bob’s act of censuring Alice’s expression of her views means she may now no longer consider Bob someone about whom she can speak freely and honestly. At the same time, the fact and experience of being censured over her views may cause Alice to question her views - and her rationale for intolerance - more carefully, as well as reassess how commonly held she considers her position to be. If Bob is one of Alice’s friends, but Bob does not hold the same intolerant position that Alice holds, perhaps other frinds of Alice, Bob, or both will tend not to hold that position too?</p>
+<p>So, Position A seems to be something like a <em>first order act of tolerance</em>, because Bob is accepting of (if not supporting of) Alice’s position; but potentially also a <em>second order act of intolerance</em>, because it causes Alice to feel more confident and assured both in having and expressing her intolerant view.</p>
+<p>By contrast Position B seems the opposite: a <em>first order act of intolerance</em>, because Bob explicitly opposes Alice, but potentially a <em>second order act of tolerance</em>, if it causes Alice to reevaluate her positions on both having and expressing an intolerant viewpoint.</p>
+<p>To re-iterate: this really does seem to be a paradox. There’s no right answer. But at the same time, whichever position a person holds - Position A or Position B - that person would not really be acting with any kind of moral consistency if they were to switch positions randomly: there are probably Position A people, and Position B people.</p>
+<p>So, if both positions are internally consistent, and there’s no outside factor that ‘proves’ one position is better than the other, then what determines whether someone tends towards Position A or Position B?</p>
+<p>Personality is surely going to be a factor. For example, the act of openly disagreeing with someone may be easier for someone with higher disagreeability (almost by definition), lower neuroticism <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and possibly higher conscientiousness than the converse. On the other hand, the (in)act of not disagreeing when encountering views that are both intolerant and contrary to one’s own could be due to higher openness - more curiousity about how others think and reason about the world. Or it could due to more long-term/strategic thinking about how best to engage with someone who holds intolerant positions: Instead of openly disagreeing and censuring someone immediately for saying something intolerant, it may be (from experience) more effectively to initially say nothing, but then ask a series of questions that, hopefully, lead the person expressing such views to be more introspective and self-questioning about why they hold such views, which may then lead them to genuinely change their mind. This is what might be called the <em>third order</em> effect of adopting Position A as opposed to Position B when encountering intolerance.</p>
+<p>Another complex of factors is likely to be cultural. In particular, the changing implicit norms and mores that change and shift over time (period effects), and the norms and mores that were predominant around formative periods in individuals’ cultural and attitudinal development: such as childhood and (in particular) early adulthood (i.e.&nbsp;cohort effects). As well as age effects (there may be views that are easier to hold while young than while old, and vice versa), period and cohort effects in cultural exposure could also be important factors in shaping whether someone tends more towards Position A or Position B, and the relative share of Position A and Position B behaviours expressed within the overall population, and population strata.</p>
+<p>My own default is quite strongly towards Position A: <em>Tolerating intolerance promotes tolerance</em>. But anecdotally I sense there’s been a cultural shift towards Position B: <em>Tolerating intolerance promotes intolerance</em>. My guess is such a shift occurred around the 2010s, and has both period and cohort (generational) components to it, with those who entered adulthood over the 2010s showing perhaps the most pronounced shift towards Position B tendencies as compared with earlier generations of young adults.</p>
+<p>From my own Position A default a shift towards a Position B default has felt like something of a retrograde step towards genuinely addressing and ameliorating intolerance and prejudice. My intuition is that Position A is not only acting tolerantly from a first order perspective (<em>I</em> am acting with tolerance), but also from a third order perspective: allowing a place for intolerance to be expressed is giving a space for the roots, reasoning and habits of thought that gave rise to intolerant attitudes having developed, and so a space for critical enquiry along broadly Socratic lines - as to <em>why</em> someone believes what they believe, and what would have to change for them to believe (and act) otherwise - to take place.</p>
+<p>However, just as I believe much of the evolving default towards Position B may have been culturally influenced - the position held being a function of the salient norms of time and place - I can’t claim my own strong preference towards Position A is really derived deductively from first principles, or objectively proven to be superior, either. I’m just as much a product of nature and nurture, and the complex interplay and ongoing negotiation between the two, as anyone else. I believe and hope that acting according to my Position A instincts tends to be the better strategy when it comes to promoting tolerance, especially when considering higher order effects, but ultimately, that’s all it is: belief and hope.</p>
 
 
-</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The opposite argument could also be made regarding this factor: someone may find an intolerant position held by someone so inherently noxious that they will be willing to do anything to avoid being exposed to it, whether that be walking out (or online logging off) from a conversation with a proponent of such a postion, through to speaking out almost in instinct against it. And so the driver of speaking out could be high neuroticism, where in this case (and many others) neuroticism should really be thought of as something like ‘threat sensitivity’, and for the listener the speaker’s intolerant position is genuinely perceived as an acute threat, akin to a violent act.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
