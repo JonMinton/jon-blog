@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-10-25">
+
+<title>Jon Minton’s Blog - The Book of Nigel</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Book of Nigel">
+<meta name="twitter:description" content="">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Book of Nigel</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">life</div>
+                <div class="quarto-category">death</div>
+                <div class="quarto-category">happiness</div>
+                <div class="quarto-category">stories</div>
+                <div class="quarto-category">faith</div>
+                <div class="quarto-category">health</div>
+                <div class="quarto-category">fiction</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 25, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="the-death-of-my-father" class="level2">
+<h2 class="anchored" data-anchor-id="the-death-of-my-father">The Death of my Father</h2>
+<p>My father, <a href="https://www.linkedin.com/in/nigel-minton-39306a4/">Nigel</a>, died on Wednesday 16 October, after a series of strokes that began late that evening. He had been released from hospital the previous day, Tuesday 15 October, with a box of medication and information, after an angiogram the day before - Monday 14 October - that revealed three narrowed arteries, for each of which a stent was fitted.</p>
+<p>He was in hospital because, six days prior to his release, starting around midnight on Wednesday 9 October, he experienced a heart attack, which he initially attributed to indigestion. I was first alerted to him being in hospital late morning on Thursday 10 October.</p>
+<p>Before that, my father was fit and well, with no obvious health issues that impaired his ability to live a full and active life whatsoever.</p>
+<p>Up until Tuesday 8 October, my father had been planning to drive himself and my mother for five or more hours from the Midlands to my flat in Edinburgh on Friday 18 October, with a view to watching the <a href="https://en.wikipedia.org/wiki/The_Book_of_Mormon_(musical)">The Book of Mormon</a> at 2.30pm with me on Saturday 19 October, with tickets he had bought much earlier in the year, and sent to me soon after. My partner, and my mother, both have even stronger instinctive aversions to musicals as a genre than I do, an aversion I was willing to put aside for the Book of Mormon given the show’s subject matter and its apparent provenance as a continuation of ideas first explored in the South Park episode <a href="https://en.wikipedia.org/wiki/All_About_Mormons">All About Mormons</a> in 2003.</p>
+<p>Fortunately, my partner was willing to overcome her aversion to musicals under the circumstances, and attend The Book of Mormon with me in my father’s stead. Though declaring she would walk out if there were even a whiff of audience participation, fortunately there was none, and midway through the first half her arms uncrossed and she began laughing at some of the more vulgar and body-horrific aspects of the story.</p>
+</section>
+<section id="the-book-of-mormon-faith-myth-and-meaning-spoiler-alert" class="level2">
+<h2 class="anchored" data-anchor-id="the-book-of-mormon-faith-myth-and-meaning-spoiler-alert">The Book of Mormon: Faith, Myth and Meaning (<em>Spoiler Alert</em>)</h2>
+<p><a href="https://en.wikipedia.org/wiki/The_Book_of_Mormon_(musical)">The Book of Mormon</a> (the musical, not the book) continues exploring a theme apparent in <a href="https://en.wikipedia.org/wiki/All_About_Mormons">All About Mormons</a>: namely that practices and beliefs may be absurd in theory but wholesome and beneficial in practice. In All About Mormons a forensic, skeptical treatment of the veridity of the Book of Mormon (the book, not the musical) in terms of its claims to divine provenance is developed and prosecuted throughout most of the episode, and one of the child avatars of the show, Stan, takes up the mantel of proscecutionary skeptic, raising questions about logically inconsistent and implausible claims related to The Book to his new Morman friend, Gary, who is both unerringly polite but also bound by his religious upbringing to accept the tenets of his faith without doubt or evidence. The Wikipedia summary of the conclusion of this episode is as follows:</p>
+<blockquote class="blockquote">
+<p>Stan ends up shouting at the Mormons that they are ridiculous for believing in it without proof; they smile and patiently explain that it is a matter of faith, while Stan argues that it should be a matter of empirical evidence. He further lashes out at them for acting unusually nice all the time, claiming it blindsides stupid people like his father into believing in Mormonism (to which Randy Marsh responds with a determined “Yeah!”).</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Stan’s anger does not upset anyone in the Mormon family other than Gary, who confronts Stan and the other boys the next day, pointing out that he believes his religion does not need to be factually true because it still supports good family values and helping the poor. Gary also condemns their bigotry and ignorance in language that is normal for the main characters but extremely surprising and powerful coming from Gary, as he ends his dialogue telling Stan to “suck my balls”. He walks away, leaving the boys in utter shock. The episode ends as Cartman, with a new-found respect for Gary, says “Damn, that kid is cool, huh?”.</p>
+</blockquote>
+<p>In The Book of Mormon, the musical, the argument is implicitly made that The Book emerged as a kind of ethnocentrist fan fiction to The Bible - part three to a sacred text that most Christians consider to have strictly only two parts (the New and Old Testament), and Jews to have just a single part (The Old Testament). This fan fiction, written by White European migrants(/‘colonisers’) to North America, continued the story of parts one and two by claiming that Jesus later visited North America, and that people who looked and acted much like the White Europeans who were the main readers (and in truth but not Truth authors) of the new part are a new Chosen People, much like the Israelites in part one and all followers of Jesus in part two. Mormonism, despite not making much sense as a series of literal claims, nevertheless came to function as a powerful binding mythos for persons who heard and became inspired by the stories, creating a distinct religious community that, despite (or possibly because of) much cultural conservatism and quirky behaviours, ultimately has kindness, commonwealth, conscientiousness and compassion at its heart.</p>
+<p>In the musical, two young adult Mormon elders, Kevin and Arnold, are dispatched to spread The Word to a location of the Church’s (and not their) choosing. Their chosen destination: deepest Uganda. Whereas Elder Kevin is tall, slim, popular and knows The Book by heart, Elder Arnold is shorter, plumper, less popular and prone to spontaneous and uncontrollable fits of confabulation. With his short attention span and childlike love of popular sci-fi, we eventually come to learn that Elder Kevin has not actually read the book they are tasked with prosethytising. However, he is deeply enthusiastic about their mission, because it means having a popular new best friend who’s duty bound to not leave him for two years.</p>
+<p>We then come to meet the villagers in Uganda, and the ranks of Mormon missionaries already stationed at the lodge. The other missionaries have a rolling tally of the number of Ugandan villagers they have successfully managed to baptise into the Church over the years: zero. Zero here, zero there, zero everywhere. No one in Uganda is interested in becoming a Mormon. The villagers have their own, more immediate problems: infectious diseases, insects that hatch and eat them from the inside, no functioning government and a tryannical warlord who enforces female genital mutilation at gunpoint, lack of clean water and dyssentry. The only God the villagers can bring themselves to believe in is one worthy of hatred and contempt, as surely no loving God would inflict such deep and relentless misery on them.</p>
+<p>On the few occasions the villagers grant the missionaries an opportunity to read something from The Book, it doesn’t speak to the villagers the way the missionaries thought it would: the villagers are not interested in discussing how to quell and salve the stirrings of the soul when their bellies are rumbling, and any stirring sensations they feel inside are likely to be due to worm or maggot infestation. When the villagers ask the missionaries how The Book will help them with various challenges of staying alive and intact, the missionaries can find no useful advice to offer.</p>
+<p>After the more learned missionaries have tried and failed to enthuse the villagers, a comedy of errors and misunderstanding leads Arnold alone, who has not actually read The Book of Mormon, to explain its teachings. As Arnold reads the book aloud, villagers listening attentively, he quickly comes to realise just how little its precise words, events and stories resonate with the villagers and their concerns and experiences. To avoid disappointing the villagers with the dull, dry - and in places patently racist - words as written in the book, Arnold finds himself compelled to confabulate, blending Mormon characters and tropes with those borrowed from the villagers’ lived experienced, and Arnold’s own interior life of sci-fi fandom.</p>
+<p>Over many weeks Arnold, knowingly, and the villagers, unknowingly, transform The Book of Mormon into something almost entirely new. A new story where Joseph Smith dies of dysentry, becoming a Christ-like African martyr, where the Golden Plates become dinnerwear, and where Boba Fett, space torpedos, Darth Vader, and sacrificial groin frogs become important parts of the new iconography.</p>
+<p>The villagers, believing in the stories that Arnold and (inavertantly) they had developed, and believing that they now believed in The Book Of Mormon, then present their telling of the stories to senior visitors from the Mormon church, who have travelled to Uganda after hearing about the fabulous turn-around in baptism rates. The senior Mormons are first enthused, then shocked, then appalled, declaring the villagers, Arnold, and the rest of the missionaries apostates of the Church of Mormon.</p>
+<p>The play ends with a new variant of the opening song. The villagers, and the former Mormon elders, ring and knock on house doors, carrying a book whose Good News they wish to enthuse to others. This book, revealed in the final beat of the play: The Book of Arnold. So, the fanfic of the Book of Mormon now has a fanfic of its own. Arnold and the villagers, by departing from the precise details of the Book of Mormon, have nevertheless recreated its origins and rediscovered its original purpose: as a series of strange and fanciful stories that give meaning and succor to people experiencing particular forms of hardship, and that serve as a binding mythos and means of making life more tolerable and meaningful.</p>
+</section>
+<section id="the-book-of-nigel-spoiler-alert" class="level2">
+<h2 class="anchored" data-anchor-id="the-book-of-nigel-spoiler-alert">The Book of Nigel (<em>Spoiler Alert</em>)</h2>
+<p>I’ve never had a father die before. Of course no one has until it’s happened. So I had no idea how I would respond and react to this news. Many people are quite compartmentalised in the ways they separate their professional, vocational and personal spheres of being, meaning if their behaviours were looked at as a whole they would appear quite inconsistent. <a href="https://warfarehistorynetwork.com/article/bomber-harris-and-his-royal-air-force-bomber-command/">This anecdote</a>, of an Air Commander being stopped for speeding by a police officer who told him, “You could have killed someone”, and responding, “I kill thousands of people every night”, is an example of someone acting with consistency across spheres, to such an extent as to appear pathological.</p>
+<p>I’ve discovered that I, too, appear to be pathologically consistent across spheres. Much of my professional life has involved analysing mortality statistics; thinking about circulatory disease, neoplasms, infectious diseases and dementias as the four main classes of competing cause that kill the vast majority of those who have survived infancy and fatal accidents; and when working as a health economist building models to better understand the risks and trade-offs that different forms of interventions can have on people’s lives and experience of illness. One of my first experiences as a health economist was in evaluating a disease model made in Excel. The model was interactive, allowing parameters to be tweaked to allow structural sensitivity analyses to be performed. One option given, in the form of a checkbox that could be switched on or off, was labelled with the words “Allow WTD?”. “What’s WTD?”, I asked a colleague. “Worse than death”, he replied, meaning allow the model to include scenarios in which a person’s quality of life to be so low as to be negative, meaning each moment they lived in such a state counted against their aggregate quality-adjusted lifeyears.</p>
+<p>My father lived to 97% of the latest published UK male life expectancy. I’ve calculated this. The life expectancy figures were for 2022, so it’s possible once 2024 life expectancies are available the comparison may be a little less favourable: 95% perhaps. But 97% of average is what the latest available data implies.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>But almost all of that 97% of UK male life expectancy was spent in good health, often very good health, apparently. Fairly recently he had been treated for a cancer, but of all places one could have a cancer, if one has to have a cancer, it was in just about the best location imaginable: the tip of one of his ears. One day he went to a hospital to have a short surgical procedure, in which a bit of his ear was removed, and the same day he was released. As he was a Star Trek fan I suggested a slightly pointier ear might be more a feature than a bug. No problems after that, just six monthly outpatient appointments.</p>
+<p>The term ‘healthy life expectancy’ (HLE) is used to distinguish those years lived in very good or good health, from those years lived overall (i.e.&nbsp;life expectancy, LE). <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/between2011to2013and2020to2022#:~:text=Healthy%20life%20expectancy%20(HLE)%20at,%2C%2060.3%20years%20for%20females">According to the ONS</a> the HLE for males is 62.4 years, as compared with <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/healthandlifeexpectancies/bulletins/healthstatelifeexpectanciesuk/between2011to2013and2020to2022#:~:text=Healthy%20life%20expectancy%20(HLE)%20at,%2C%2060.3%20years%20for%20females">a LE of 78.6 years</a>. This implies that, <em>on average, the last 20.6% of men’s life are spent with poor and failing health.</em> By contrast, for my father, HLE and LE were almost identical.</p>
+<p>When I worked as a what most of the UK calls a health economist, the official name of my role was ‘operational researcher’. At my employer, the term ‘health economist’ was reserved for a different sort of role, focused on accurately and consistently estimating quality of life, and the effects that various diseases and conditions can have on it. This type of health economist often run experiments, including what’s known as ‘discrete choice experiments’ (DCE). DCE are really another name for asking a barrage of ‘would you rather?’ questions, and a framework for interpreting the responses in a consistent way. Here’s an example:</p>
+<blockquote class="blockquote">
+<p>Would you rather:</p>
+</blockquote>
+<blockquote class="blockquote">
+<ol type="A">
+<li>Live for 100% of average life expectancy, spending the last 20% of your life in poor health?</li>
+</ol>
+</blockquote>
+<blockquote class="blockquote">
+<ol start="2" type="A">
+<li>Live for 97% of average life expectancy, spending the last 0.2% of your life in poor health?</li>
+</ol>
+</blockquote>
+<p>This choice wasn’t something my father was explicitly offered. But fate selected Option B for him. Maybe this is a latent coping mechanism speaking, but if I had to make this choice I would prefer Option B to Option A. The greatly increased amount of life lived in good health seems to more than adequately compensate for the slight decrement in overall longevity. The ‘indifference curve’ - the point at which people can’t easily decide between the two options - would likely only be found if the 97% in Option B were tuned down to a value, perhaps, in the high 80% to low 90% range. As Hobson’s Choices go, the Option B that was selected for my father seems much better than the statistical average of Option A.</p>
+<p>More poetically, I like the term <strong>‘shadow life’</strong> to refer to the gap between LE and HLE. These are the years in which the functional horizon of one’s existence slowly dwindle, from thousands and hundreds of miles (more than comfortable going on international flights and travelling, including driving, for six or more hours), to tens of miles, then eventually to just single inches (i.e.&nbsp;being bedbound and unable to walk).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> My father experienced no shadow life, and for that I’m extremely grateful.</p>
+<p>There’s another, related term I’ve been thinking about a lot in recent days: <strong>‘living death’</strong>. Living death is what I refer to when, especially due to ‘heroic’ medical intervention, someone who would otherwise have died definitively due to a condition or incident, instead is ‘rescued’ from death, only to be stuck, suspended, in a durable but precarious state between life and death, in which the quality of life really is or can be negative (‘WTD’), and the only real prognosis is towards further tortuous and torturious progression towards death itself. Often, living death is more than just a metaphor: the death of parts of a brain due to oxygen starvation in the case of a stroke, for example; and the death (necrosis) of parts of a body in the case of advanced diabetes (often resulting in amputation of dead flesh from a body otherwise trying to stay alive); and the starving out of healthy parts of the body to feed the rampent growth of metastatising tumours in the case of cancers.</p>
+<p>When I was first told my father had experienced a heart attack, one of my first questions was to clarify it wasn’t a stroke. ‘Surviving’ a stroke can leave the ‘survivor’ in a state of living death. <a href="https://www.mdcalc.com/calc/1890/modified-rankin-scale-neurologic-disability">The modified Rankin scale (MRS)</a> is a common measure for describing different severities of outcome following a stroke, and is reproduced below:</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 36%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">DALY decrement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td style="text-align: left;">No symptoms at all</td>
+<td style="text-align: left;">0.000</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td style="text-align: left;">No significant disability despite symptoms; able to carry out all usual duties and activities</td>
+<td style="text-align: left;">0.046</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td style="text-align: left;">Slight disability; unable to carry out all previous activities, but able to look after own affairs without assistance</td>
+<td style="text-align: left;">0.212</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td style="text-align: left;">Moderate disability; requiring some help, but able to walk without assistance</td>
+<td style="text-align: left;">0.331</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td style="text-align: left;">Moderately severe disability; unable to walk and attend to bodily needs without assistance</td>
+<td style="text-align: left;">0.652</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td style="text-align: left;">Severe disability; bedridden, incontinent and requiring constant nursing care and attention</td>
+<td style="text-align: left;">0.944</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td style="text-align: left;">Dead</td>
+<td style="text-align: left;">1.000</td>
+</tr>
+</tbody>
+</table>
+<p>The values in the last column are disability weights reported in <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2788070/">this paper</a>, with values of 1 indicating no quality of life, and 0 indicating no decrement in quality of life. The mRS describes, in medical terms, a secular analogue of the concentric circles of Hell, with levels 4 and 5 (especially) describing the infliction of a type of existence that only a sadist or a psychopath would wish to inflict on even the worst in society. If a populist politician proposed intentionally disabling rapists and murderers to the levels described in levels 4 or 5 of the mRS, they would quite rightly be condemned as more evil and dangerous than Nazis and fascists. But all too often, when someone is admitted to a hospital with a severe stroke, out of instinct friends and family tend to hope for any outcome other than mRS level 6.</p>
+<p>I didn’t. When I heard that my father was having a stroke my hope was for <em>any outcome other than mRS levels 4 and 5</em>. I’ve known two people who have been rendered at these disablement levels: a grandfather, previously a very successful entrepreneur, who was left in this state for months on end; and a retired GP, with an insatiable curiosity and enthusiasm for learning new things, who ran a discussion and non fiction book group I was part of in Glasgow, who spent over a year in this state. I don’t believe anyone really acting and thinking with considered compassion would hope for a loved one to be left to suffer in this state. It’s not a final chapter I would ever be cruel enough to wish for the father I loved.</p>
+<p>And that’s why, when I heard, slightly before midnight, that the series of events that started after 6pm had killed my father outright, rather than left him to suffer the kind of unconscionable living death for an indetermine period as described above, I was shocked, and I was sad. But I was also relieved.</p>
+<p>The Book of Nigel, unlike the books of perhaps the majority of lives, did not include at or near the end a chapter titled ‘shadow life’, detailing slow and progressive decline. And unlike a sizeable and unfortunate minority of people, did not end with a short but brutal ‘living death’ chapter in which the hero of the story is imprisoned in their own body, then tortured without mercy until they expire.</p>
+<p>No.&nbsp;The Book of Nigel was <em>almost</em> of standard length, but unlike most standard length books contained almost no bad chapters. My father’s life ended, but unlike most lives of its duration, included almost no shadow life or living death. My father was healthy, active, happy, enjoying life. And then, about a week later, he wasn’t.</p>
+</section>
+<section id="life-is-short" class="level2">
+<h2 class="anchored" data-anchor-id="life-is-short">Life is short</h2>
+<p>Sometimes things I find profound are also profane, or incidental, or even bathetic. One thing that’s stuck with me for decades is <a href="https://youtu.be/ELPRVu0GxYo?si=2mUxCwgSQ2CbwchI">an advert from the 1990s</a>. As I remember it:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> a mother is giving birth in a hospital, screaming. With a forceful, painful push her infant is ejected from her womb, and starts flying in an upwards parabola, screaming. The infant smashes through the hospital window and ages into a boy, still screaming. Then as he continues to shoot through the air he becomes a young man, then starts to descend and becomes middle aged, then old, and then frail. All the while, screaming. As he heads back to the ground, his skin wrinkles and his teeth fall out, and he’s still screaming. Finally, he crashes into a freshly dug grave, and only then falls silent. In the silence the following text appears: <em>“Life is short. Play more.”</em></p>
+<p>The advert received many complaints. Many found it offensive. It may even have been pulled off television prematurely. But to me, in five words, it expresses a premise and conclusion I wholeheartedly believe in. Of course, there are people who might disagree with the premise: compared with cats and dogs, we do live a long time. And there might also be people who agree with the premise but draw the opposite conclusion: “Life is short. Play less.” And although this is of course subjective such people are categorically wrong. A Calvinist hangover at best; a pathological compulsion to starve joy from a finite existence at worst. Play <em>more</em>, not less.</p>
+<p>My father was fortunate to have worked hard, then retired early, taking advantage of a ‘manpower reduction’ initiative to start receiving his pension at the age of 60 rather than 65. He spent over sixteen years keeping busy with generous and productive play: volunteering for a charity that promoted the social virtues of music and art; volunteering for another charity focused on promoting happiness and the good life; offering mentorship to those at earlier life stages to help them live more fulfilling and happier lives; planning at-least-annual holidays with both his wife and broader family at home and abroad, including to New Zealand and Australia, places that he loved visiting; running a small business, and taking up a trustree role at a pension fund; planning and executing all manner of home improvement, including major renovation of his own property, as well as the supporting the purchase and development of a house I lived in as a student; playing golf regularly and developing close-knit bonds with other other seniors at a nearby club.</p>
+</section>
+<section id="the-books-of-nigel" class="level2">
+<h2 class="anchored" data-anchor-id="the-books-of-nigel">The Books of Nigel</h2>
+<p>But the most consistent source of play my father engaged in was through the worlds he invited into his head. A science fiction enthusiast from a young age, my father was hyperlexic and voracious in his consumption of doorstop-sized space operas, swashbucklers, fantasies, narrativised thought experiments and allegories. He was around 200 pages into 800 page science fiction book when he died; the challenge of finishing the book he started was given to our oldest cousin, whose own extensive book collection was dwarfed by my father’s. A few years ago, as part of a home extension, my father acquired wood flooring in the attic, allowing the top of the house to finally become his personal library, with his collection on private display on shelves, instead of buried in storage boxes. For the most part, the collection remained largely contained in the attic, but a wall of bookcases one side of the exercise equipment proudly displays many of his hardbacks, and on the other side of the same room sits a largely complete collection of a British sci-fi short story magazine that was most active in those post-war decades of techno-optimism, when sci-fi was more preoccupied with utopia and expanding frontiers than, as perhaps after the oil crises of the mid 1970s, with dystopia and collapsing societies.</p>
+<p>In those with playful minds like my father, the possibly millions of pages of stories that my father acquired throughout his lifetime could live again. The worlds that my father visited decades ago, the epic stories he experienced through his inhaled streams of black-on-white text, are those that potentially hundreds of other likeminded folk could become lost in for many thousands of hours. I would love to see this aspect of my father’s life, alone, having an afterlife, a legacy of influence, a way of changing and becoming part of other’s lives and minds, that could itself continue to impact on others for potentially decades longer. <em>A book is a seed and the mind is its soil.</em> Through The Books of Nigel, my father can continue to enrich the lives of others he never met, much as he greatly enriched the lives of those who knew and loved him directly.</p>
+<p>Though I think my father might have found The Book of Mormon unnecessarily crude (because it is), its implicit but insistent claim that stories - even and especially fantastical and fanciful stories - are vital to living and living well, is something that he spent his lifetime agreeing with. He didn’t get the chance to see the show, but he already knew the gist of it without realising.</p>
+<p><strong>Nigel William Minton, 1948-2024.</strong> <em>May he continue to live long and happily in our thoughts.</em></p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Since I started writing this post, the ONS estimates for 2021-2023 have become available. But please forgive me for choosing not to update this calculation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I remember a talk by, I think, a nursing lecturer, on the types of question that work best for estimating how frail people are, given their responses in the affirmative or negative to questions on whether they can do X, Y and Z unaided. Apparently the item on whether a person can cut their own toenails is quite a strong indicator of frailty overall. If you can’t cut your toenails unaided you may already be living a shadow life.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This description was written before reviewing the advert as shown in the link, then not modified aftwards. I seem to have remembered most of the details, except in the advert the screaming only starts after childhood; and I had presumed that the text appears over the final image of the grave, when instead it appears after first fading to black.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
