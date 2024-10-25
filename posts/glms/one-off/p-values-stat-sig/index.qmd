@@ -163,7 +163,7 @@ Given more observations for each model coefficient tends to be better, we now ha
 
 So, can we? Get away with it, I mean? What does 'get away with it' even mean? 
 
-To a large extent, the whole hypothesis testing framework can be thought of as a way of formalising this concept of 'getting away with' using a simpler model instead of a more complex model. When can we decide that the simpler model is *good enough*, and that we can use it instead of the more complex model, allowing us to spread our data budget a bit further? 
+To a large extent, the whole hypothesis testing framework 9as presented in standard statistical model summary tables0 can be thought of as a way of formalising this concept of 'getting away with' using a simpler model instead of a more complex model. When can we decide that the simpler model is *good enough*, and that we can use it instead of the more complex model, allowing us to spread our data budget a bit further? 
 
 ## Restrictions and Nests 
 
@@ -187,7 +187,7 @@ The fundamental role of the standard hypothesis tests reported in a statistical 
 
 ## Restricted and Unrestricted Models
 
-Within the terminology of model testing and comparison, the model of specification A is referred to as the **unrestricted model**, and the model of specification B is referred to as the **restricted model**. Additionally, model B is said to be **nested within** model A. For model A, there are *three* parameters whose coefficient values are determined by the data: the data budget is spent three ways; for model B, there are *two* parameters whose coefficient values are determined by the data: the data budget is spent two ways. Model B is known as a **restricted models** because the coefficient on the third variable, `thing_two`, is not determined by (fitted using) the data, but instead *imposed* - forced to be zero - by who-ever or what-ever specified this model. 
+Within the terminology of model testing and comparison, the model of specification A is referred to as the **unrestricted model**, and the model of specification B is referred to as the **restricted model**. Additionally, model B is said to be **nested within** model A. For model A, there are *three* parameters whose coefficient values are determined by the data: the data budget is spent three ways; for model B, there are *two* parameters whose coefficient values are determined by the data: the data budget is spent two ways. Model B is known as a **restricted model** because the coefficient on the third variable, `thing_two`, is not determined by (fitted using) the data, but instead *imposed* - forced to be zero - by who-ever or what-ever specified this model. 
 
 Note that, whenever we do not include a variable in a dataset in a model specification used to represent that dataset, we are automatically, implicitly, applying model restrictions and constraints of the form above: not including a term in a model is always equivalent to assuming the value of the model coefficient of that term is exactly zero. Because of this, we can almost always think of a given model as both a restricted version of a more complicated model, and as an unrestricted version of a less complicated model. 
 
@@ -268,7 +268,7 @@ Both the estimates and standard errors appear identical.
 
 ### Calculating the t values
 
-How do we then produce the t values shown in the summary tables? These are simple the number (and direction) of standard errors that the estimate value is away from the value of zero. We can produce this simply by dividing one number by the other:
+How do we then produce the t values shown in the summary tables? These are simply *the number (and direction) of standard errors* that the estimate value is away from the value of zero. We can produce this simply by dividing one number by the other:
 
 ```{r}
 our_t_values <- our_estimates / our_ses
@@ -290,7 +290,7 @@ Again, the t values we have calculated are identical to those reported in the su
 
 Finally, how do we calculate the associated P value? This is the probability of a t distribution generating a t value as or more extreme as the t value we have observed for that coefficient. The t distribution requires two parameters: the t value itself, and the number of degrees of freedom, which as discussed previously is the difference between the number of observations in the dataset and the number of parameters in the model. 
 
-The default type of test reported in the summary table is a two-sided test, meaning t values much lower than zero, and t values much higher than zero, count as deviations potentially inconsistent with the implied Null hypothesis, that the true t value is really zero. Because of this, the P value involves doubling the complement of (1 minus) the cumulative probability probability of a t distribution up to and including the absolute value of the t statistic observed...
+The default type of test reported in the summary table is a two-sided test, meaning t values much lower than zero, and t values much higher than zero, count equally as deviations potentially inconsistent with the implied Null hypothesis, that the true t value is really zero. Because of this, the P value involves doubling the complement of (1 minus) the cumulative probability probability of a t distribution up to and including the *absolute value* of the t statistic observed...
 
 Got that? Don't worry! The code required to do this is shown below: 
 
@@ -322,7 +322,7 @@ Again, other than the p values being reported to slightly more significant figur
 
 ## Reflection
 
-Does what the statistical summary table produces, and the way it's derived, surprise you? Are the hypotheses it tests hypotheses that actually interest you from a substantive point of view? Given the P values are really just rules of thumb about whether you might 'get away with' using a slightly simpler model, rather than really informed hypotheses about the world as it might be if a relationship you think you see between two variables were not observed (i.e. a Null distribution derived from first principles), what's usually tested in statistical summary tables, and the P values reported, are often not as meaningful or relevant as many (ab)users of statistic model outputs tend to assume. 
+Does what the statistical summary table produces, and the way it's derived, surprise you? Are the hypotheses it tests hypotheses that actually interest you from a substantive point of view? Given the P values here are really just rules of thumb about whether you might 'get away with' using a slightly simpler model, rather than really informed hypotheses about the world as it might be if a relationship you think you see between two variables were not observed (i.e. a Null distribution derived from first principles), what's usually tested in statistical summary tables, and the P values reported, are often not as meaningful or relevant as many (ab)users of statistic model outputs tend to assume. 
 
 One thing the summary model does seem to be suggesting is that, maybe, we can 'get away' with a model that drops the term `Sepal.Width`; this is because this is the only term in the coefficients table with a P value of less than 0.01. (If we were to use the standard p value threshold of 0.05 then there are no candidate terms for dropping.) A model without `Sepal.Width` would be an example of a restricted model, excluding the less statistically significant term, where the unrestricted model would then be the model we currently have. Let's construct this restricted model: 
 
@@ -359,11 +359,11 @@ Here the `anova()` function:
 - reports that two models are being compared;
 - numbers these models model 1 and model 2;
 - reports the residual sum of squares (RSS) for both models (i.e. a summary statistic of the error between observed and predicted response variables);
-- Reports the degrees of freedom for both models;
-- Notes the difference between the degrees of freedom between the models
-- Notes the difference between the RSS of the two models (this is reported in the column `Sum of Sq`);
-- Calculates an observed F statistic given the above information;
-- Performs an F test with this information, and reports a P value
+- reports the degrees of freedom for both models;
+- notes the difference between the degrees of freedom between the models
+- notes the difference between the RSS of the two models (this is reported in the column `Sum of Sq`);
+- calculates an observed F statistic given the above information;
+- performs an F test with this information, and reports a P value
 
 Note the P value reported from this F test here. Let's compare it with the P value on the `Sepal.Width` coefficient from the F test. We can extract and compare these P values as follows:
 
@@ -383,11 +383,11 @@ identical(p_from_t, p_from_f)
 
 ```
 
-They're not exactly identical, but they seem very close to the number of decimal points presented, and would lead to the same conclusions about whether to exclude the `Sepal.Width` variable: If we are using a `P < 0.05` threshold as our decision rule about whether to keep or exclude a variable from a model, then both approaches essentially lead to the same conclusion: keep this variable. 
+They're not *exactly* identical, but they seem very close to the number of decimal points presented, and would lead to the same conclusions about whether to exclude the `Sepal.Width` variable: If we are using a `P < 0.05` threshold as our decision rule about whether to keep or exclude a variable from a model, then both approaches essentially lead to the same conclusion: keep this variable. 
 
 So, in this example, the row-wise t tests on the coefficients of the full model provide a useful shortcut means of assessing whether to keep or drop a variable, without having to build as many restricted models as there are coefficients, and then running F tests on the full model against each of the restricted models. Back when the level of computing time required to fit each model was substantial - such as when it took teams of people employed as computers days to perform the calculations necessary - the t test on the full model would have helped save a lot of resource. 
 
-For at least the last two or three decades, however, the practical savings involved in relying on t tests of one model, rather than actually performing a series of pairwise restricted/unrestricted model comparisons, are tiny: maybe a couple of minutes of code-writing time, and a second or two of computing time. However, the standard statistical model outputs have been around long enough that, for better or worse (hint: for worse), star gazing on p values based on t tests of coefficients of the unrestricted model has assumed a kind of totemic status in statistical analysis. It's become seen as *the way* of doing robust quantitative scientific research on all manner of topics, in a way that provides *dispositive proof* for against a particular claim of *significance*. As mentioned previously, this is the cult of statistical significance. 
+For at least the last two or three decades, however, the practical savings involved in relying on t tests of one model, rather than actually performing a series of pairwise restricted/unrestricted model comparisons, are tiny: maybe a couple of minutes of code-writing time, and a second or two of computing time. However, the standard statistical model outputs have been around long enough that, for better or worse (hint: for worse), star gazing on P values based on t tests of coefficients of the unrestricted model has assumed a kind of totemic status in statistical analysis. It's become seen as *the way* of doing robust quantitative scientific research on all manner of topics, in a way that provides *dispositive proof* for against a particular claim of *significance*. As mentioned previously, this is the cult of statistical significance. 
 
 
 
@@ -406,7 +406,7 @@ What the `step()` function did is largely equivalent to running a series of F te
 - 2) to generalise the intuition of F tests beyond standard linear regression, by using a summary statistic based on log-likelihood; 
 - 3) to allow for comparison between models that are not nested. 
 
-The AIC is a summary measure of how well the model fits the data *as well as* model complexity. Given a single dataset $D$ an ensemble of potentially viable model specifications $\{M_1, M_2, M_3, .., M_K\}$ could be fit to it. Each of these models will differ both in terms of model fit and model complexity. The formula for AIC is `-2log-likelihood + 2n`, where n is the number of parameters in the model. The key observation here is that better fit of the model to the data, as represented by log likelihood, counts negatively to the AIC value, whereas more model complexity, repesented by the number of parameters, count positively to the score. What this means is that the quality of the fit, and the complexity of the model, pull the overall AIC score in opposite directions. 
+The AIC is a summary measure of how well the model fits the data *as well as* model complexity. Given a single dataset $D$ an ensemble of potentially viable model specifications $\{M_1, M_2, M_3, .., M_K\}$ could be fit to it. Each of these models will differ both in terms of model fit and model complexity. The formula for AIC is `-2log-likelihood + 2n`, where n is the number of parameters in the model. The key observation here is that better fit of the model to the data, as represented by log likelihood, counts negatively to the AIC value, whereas more model complexity, repesented by the number of parameters, count positively to the score. Quality of fit and model complexity therefore tug the AIC score in opposite directions. 
 
 Note that, whereas with the F test the decision rule is based on a Null distribution and a P value below a critical threshold, and so is a form of statistical significance test, when using AIC the decision rule is usually simpler: *pick the smallest number*. 
 
@@ -423,7 +423,7 @@ As a result of this, the `step()` procedure has decided to stop: it cannot ident
 
 ## Discussion
 
-In this post, we've shown how the standard statistical summary outputs for linear regression model are derived, and presented a framework for thinking about the role of such model outputs in helping us consider whether we can 'get away' with a slightly simpler model specification. The role of statistical model outputs within this framework - in which they constitute just one step and piece of interative process - is a far cry from the way such model outputs are often interpreted: as an authoritative source of 'truth' as to whether one thing is or is not (substantively) 'significant'. In some cases, such as within a well designed and well conducted randomised control trial, the statistical significance of a coefficient may well answer the question of interest authoritatively; but in many cases the results from these statistical model summaries are vastly (and routinely) overinterpreted. 
+In this post, we've shown how the standard statistical summary outputs for linear regression model are derived, and presented a framework for thinking about the role of such model outputs in helping us consider whether we can 'get away' with a slightly simpler model specification. The role of statistical model outputs within this framework - in which they constitute just one step and piece of an interative process - is a far cry from the way such model outputs are often interpreted: as an authoritative source of 'truth' as to whether one thing is or is not (substantively) 'significant'. In some cases, such as within a well designed and well conducted randomised control trial, the statistical significance of a coefficient may well answer the question of interest authoritatively; but in many cases the results from these statistical model summaries are vastly (and routinely) overinterpreted. 
 
 Having derived the components of standard statistical model outputs, we can hopefully see at least two problems with star-gazing such tables: 
 
