@@ -1,0 +1,74 @@
+---
+title: "Sanders to Trump? Some thoughts on voter types"
+author: "Jon Minton"
+date: "2024-11-09"
+categories: [election, voters]
+---
+
+Following the recent US presidential election result I was trying to work out if I had anything potentially useful to contribute on the outcome. Something comparatively non-partisan. Something hopefully generalisable. 
+
+The one thing I can think of is a potential explanation for why some voters switched, over around eight years, from support for Bernie Sanders, seen as a far left socialist, to Donald Trump, who clearly isn't.
+
+## A policy position line
+
+To start with, let's imagine a number line representing policy positions: 
+
+> -3, -2, -1, 0, 1, 2, 3
+
+Here `0` indicates a policy offer of the status quo. The absolute value of the numbers by contrast indicate policy positions representing varying magitudes of change from the status quo, with `1` indicating mild change, `2` indicating moderate change, and `3` indicating substantial change. 
+
+The other component of the number is the presence or absence of a negative sign affixed to the number. Whereas the absolute value of the number represents the proposed *magnitude* of change, the presence or absence of a `-` symbol represents the *direction* of change.[^1] For simplicity, we can imagine all values with a negative sign affixed to them as representing *left wing* policy positions; and all values without a negative as representing *right wing* policy positions. 
+
+[^1]: Policy positions across a two dimensional space - such along orthogonal left-right and authoritarian/libertarian axes - can be represented as complex numbers, in which both the vector of travel and magnitude of travel can be separately extracted. For more than two dimensions then matrix algebra's eigenvectors and eigenvalues can be used to represent these two components. The key insight is that these are two qualitatively different aspects of the numbers. 
+
+## Tribal and non-tribal voter types
+
+With just this simple splitting of real numbers into magnitude and direction subcomponents, we can start to come up with some voter preference typologies: 
+
+- **Radical Left without nonvoting threshold**: Pick the policy option that is negative whose absolute value is greatest. (If no policy option is negative then abstain). 
+- **Radical Left with nonvoting threshold**: Pick the policy option that is negative whose absolute value is greatest, so long as the absolute value exceeds a threshold value. (I.e. don't bother voting if the most left-wing option isn't left-wing enough). 
+- **Centre left**: Pick the policy option that is closest to 0 while still being negative
+- **Centrist**: Pick the policy option that is closest to 0.
+- **Centre right**: Pick the policy option that is closest to 0 while still being positive. 
+- **Radical Right with nonvoting threshold**: Pick the policy option that is positive whose absolute value is greatest, so long as the absolute value exceeds a threshold value. (I.e. don't bother voting if the most right-wing option isn't right-wing enough). 
+- **Radical Right without nonvoting threshold**: Pick the policy option that is positive whose absolute value is greatest. (If no policy option is positive then abstain). 
+
+Note that of these voter types, only one, the Centrist voter type, is *non-tribal* in the sense of being willing to countenance voting for either a left-wing (negative marked) or right-wing (positive marked) policy option. The Centrist voter rule is the the simplest of the above, being being something like `choose min(|Z|)` (where Z refers to a collection of policy options, and `|.|` to extracting the absolute value of these options), whereas all other options involve an additional conditional clause as part of the rule. 
+
+There are two other voter types I've not listed above: 
+
+- **Rationalist**: Select the policy option that is closest to one's own overall policy position. 
+- **Radicalist**: Select the policy option whose absolute value is *greatest*.
+
+Both the Rationalist and Radicalist voter types, like the Centrist, are also *non-tribal*, as they do not employ additional conditional rules based on the sign (positive or negative) of the policy options. The Rationalist voter is likely the most cognitively demanding of the positions, as it involves individuals both knowing what views they hold on specific political issues, and the corresponding position implied by different policy packages, as well as how strongly they weight each of these individual issues in making an overall decision. Although the Rationalist voter may be how (say) economists assume most people vote, I expect it to be rarely held and followed in practice. 
+
+## Radicalist voter behaviours
+
+So that leaves the Radicalist voter type. Say in one election the policy options are between A: `-3` and B: `+0.5`: the Radicalist voter would select option A, as its absolute value is the larger of the two (`3` compared with `0.5`). But then say in the next elections the `-3` option is no longer offered. Instead the options are between A: `-1` and B: `+2.5`. The Radicalist voter would now select option B, again as its absolute value is greatest (`2.5` compared with `1`). 
+
+From the perspective of someone who thinks first and foremost tribally, in terms of the signs, or rationally, in terms of deltas (the difference between `-3` and `+2.5` along the real number line being almost the entirety of the real number range offered), the voting behaviour of the Radicalist voter may appear simply not to make sense. But if the Radicalist voter type is simply assumed and accepted on its own terms, then of course vote switching from far left to far right (and back again) appears entirely consistent.
+
+## Two party systems: Left/Right or Stick/Change?
+
+Whereas throughout the twentieth century, within two party systems, voters are seen as being offered a choice between 'left' and 'right', from both the Centrist and Radicalist perspectives the choices are likely perceived as between 'consistency' and 'change'. For the Centrist, seeking consistency, it makes sense to signal this preference by selecting the policy option with the lowest absolute value, whether that option happens to tilt more negative or positive. But equally for the Radicalist, seeking 'change', it makes sense to signal their preference by selecting the policy option with the *highest* absolute value, even if this gives the appearance of swinging wildly and inconsistently across political positions. 
+
+I suspect the consistency/change dichotomy, rather than the left/right dichotomy, may be the more obdurate of the two in two party systems. In the UK, the clue's in the name of one of the two main parties: *Conservative*. It's also in the adjective *whiggish*, as in having perhaps an overly optimistic evaluation of the benefits and disbenefits of change rather than consistency; the progressive Whigs and the conservationist Tories of course being the two main UK parties in Westminster, until the Labour Party replaced the Whigs as the second party in around the 1920s. In a two party system, in which electoral rules tend to encourage dominance of a single voice - such as first-past-the-post and the electoral college system in the US [^2] - the choice between consistency and change may be only real choice voters are offered, with the name of the consistency candidate or party, and the change candidate or party, potentially changing from one year and decade to the next. 
+
+[^2]: I don't wish to imply here I misunderstand first-past-the-post (FPTP) and the electoral college (EC) to be alternatives. Instead EC in the US appears to represent an additional layer of anti-democratic distortion when it comes to selecting presidential candidates, *on top of* FPTP. i.e. FPTP means that each aggregate unit, i.e. state, contributes either 100% or 0% of their votes to candidates; whereas the EC component means that the number of votes provided by each aggregate unit is biased away from population proportionality, to instead have something of a rural, or at least 'small state', bias. This latter component seems to come from a kind of 'plus one' rule in the determination of electoral college votes per state, with each state having a number of electoral college votes broadly proportional to each state's share of the total US population, *plus one* additional vote per state. This one additional vote per state therefore effectively boosts the vote shares of persons living in the least populous states the most, and those in the most populous states the least, much as 1/(1+1) is much greater than 1/(1+50).
+
+If systems like the above tend to force people towards binary voting, and the binary decision on which people have been asked to vote tends to be between change and consistency, even if the change is commonly presented or understood to have been between left and right, then perhaps the purest dichotomy of voter types is between centrists, with a bias towards consistency, and radicalists, with a bias towards change, rather than be between left tribalists and right tribalists. If so, then what looks like inconsistency over time in terms of phenomena like switching from Sanders to Trump, is instead explained by a consistency at a deeper level: a consistency in expressing a desire for change over a desire to maintain the status quo. 
+
+## Changing is Changeable; Sticking isn't Sticky
+
+Another consideration, of course, is that not everyone is going to be consistent over time in their preference for either change or consistency. Though I might assume rationality will have less of an influence on political preference than the economists might assume, I don't assume it to be irrelevant. In particular, I would assume that when the status quo suits, or is perceived to suit, less of the electorate, then more of the electorate will be drawn to instead voicing their support for change rather than consistency, even when the only type of change being offered or insinuated is qualitatively different from the types of change previously presented as on the table. In the example of the recent US presidential election, the main factor affecting the extent to which the status quo appeals is likely to be high inflation, which has apparently led to exceptionally poor support for incumbencies in recent elections across the world. 
+
+## The Pipe Dream of Proportionality
+
+Personally, I think systems designed to distort the relationship between vote shares and outcomes are bad democratic systems. In Trump 2024's case, 50.5% of the popular vote became 100% of the presidency. Of course, as with any race there cannot be fractional winners. But that fact itself suggests roles such as head of state should, as a rule, be appointments made by houses of represented elected through less flawed, more democratic and more proportional systems. Advocates of systems like FPTP tend to point to the definitiveness of the results they tend to produce, and see this definitiveness as also implying stability. But the UK experience of the 20th and 21st century has shown that such systems in fact produce something more like punctuated equilibria: periods of many decades in which there appear to be only two horses in the running - call them Left or Right; or Stick or Change - separated by a few months and years of gross instability in which a new insurgent force crosses the magical thresholds at which votes start converting heavily into seats. In the first quarter of the 20th century, this insurgent force was Labour in most of the UK, as well as (if I remember correctly) Sinn Fein in Ireland, supplanting the Whigs (and in Ireland the Whigs and Tories) as one of the two main parties. In the first couple of decades of the 21st century this insurgent force was the SNP in Scotland, knocking Labour into the second party position, and the Conservatives into an irrelevance. And at the most recent UK general election the Reform party looks to have come perilously close to supplanting the Conservatives as the second party (again, except in Scotland), leading to substantial splitting of the right-wing vote and so a short term 'boost' to seats-per-vote achieved by the Labour party. 
+
+In an electoral system in which representation really is proportional to numbers of votes - a system that can actually be justified and demonstrated from first principles to be truly democratic and pluralistic - then a much larger number of voices, positions and parties are likely to find representation in such a system. No overall majority from any single party is likely, and so coalitions, based around common goals and interests, and where necessary a willingness to compromise on second and third order issues, tend to become the only way to govern. Appointed leaders from such coalitions are therefore likely to be selected on their ability to find unity and common ground, and to make decisions that the majority of coalition members are willing to accept, rather than those that the most substantial minority find ecstatically appealing. More importantly, no matter where people live, and no matter what party the majority of those living nearby tend to support, a voter should be able to vote for the package of positions, i.e. the party or candidate, who most represents their own proferences, rather than having to second guess, strategise, compromise, or simply not vote. 
+
+## Final Thoughts
+
+A system of proportional representation for houses, then appointment (rather than direct election) of leaders based on their ability to build consensus and find compromise, is vanishingly unlikely to select a leader such as Donald Trump, who appears to instill crazed loyalty in his supporters but crazed fear in his opponents. However, in the absence of a more intrinsically representative system, it should not be surprising that many voters interpreted the candidate options as a choice between stasis and change, and made their choices accordingly. 
+

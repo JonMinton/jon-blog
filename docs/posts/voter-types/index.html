@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-11-09">
+
+<title>Jon Minton’s Blog - Sanders to Trump? Some thoughts on voter types</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Sanders to Trump? Some thoughts on voter types">
+<meta name="twitter:description" content="">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Sanders to Trump? Some thoughts on voter types</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">election</div>
+                <div class="quarto-category">voters</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 9, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Following the recent US presidential election result I was trying to work out if I had anything potentially useful to contribute on the outcome. Something comparatively non-partisan. Something hopefully generalisable.</p>
+<p>The one thing I can think of is a potential explanation for why some voters switched, over around eight years, from support for Bernie Sanders, seen as a far left socialist, to Donald Trump, who clearly isn’t.</p>
+<section id="a-policy-position-line" class="level2">
+<h2 class="anchored" data-anchor-id="a-policy-position-line">A policy position line</h2>
+<p>To start with, let’s imagine a number line representing policy positions:</p>
+<blockquote class="blockquote">
+<p>-3, -2, -1, 0, 1, 2, 3</p>
+</blockquote>
+<p>Here <code>0</code> indicates a policy offer of the status quo. The absolute value of the numbers by contrast indicate policy positions representing varying magitudes of change from the status quo, with <code>1</code> indicating mild change, <code>2</code> indicating moderate change, and <code>3</code> indicating substantial change.</p>
+<p>The other component of the number is the presence or absence of a negative sign affixed to the number. Whereas the absolute value of the number represents the proposed <em>magnitude</em> of change, the presence or absence of a <code>-</code> symbol represents the <em>direction</em> of change.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> For simplicity, we can imagine all values with a negative sign affixed to them as representing <em>left wing</em> policy positions; and all values without a negative as representing <em>right wing</em> policy positions.</p>
+</section>
+<section id="tribal-and-non-tribal-voter-types" class="level2">
+<h2 class="anchored" data-anchor-id="tribal-and-non-tribal-voter-types">Tribal and non-tribal voter types</h2>
+<p>With just this simple splitting of real numbers into magnitude and direction subcomponents, we can start to come up with some voter preference typologies:</p>
+<ul>
+<li><strong>Radical Left without nonvoting threshold</strong>: Pick the policy option that is negative whose absolute value is greatest. (If no policy option is negative then abstain).</li>
+<li><strong>Radical Left with nonvoting threshold</strong>: Pick the policy option that is negative whose absolute value is greatest, so long as the absolute value exceeds a threshold value. (I.e. don’t bother voting if the most left-wing option isn’t left-wing enough).</li>
+<li><strong>Centre left</strong>: Pick the policy option that is closest to 0 while still being negative</li>
+<li><strong>Centrist</strong>: Pick the policy option that is closest to 0.</li>
+<li><strong>Centre right</strong>: Pick the policy option that is closest to 0 while still being positive.</li>
+<li><strong>Radical Right with nonvoting threshold</strong>: Pick the policy option that is positive whose absolute value is greatest, so long as the absolute value exceeds a threshold value. (I.e. don’t bother voting if the most right-wing option isn’t right-wing enough).</li>
+<li><strong>Radical Right without nonvoting threshold</strong>: Pick the policy option that is positive whose absolute value is greatest. (If no policy option is positive then abstain).</li>
+</ul>
+<p>Note that of these voter types, only one, the Centrist voter type, is <em>non-tribal</em> in the sense of being willing to countenance voting for either a left-wing (negative marked) or right-wing (positive marked) policy option. The Centrist voter rule is the the simplest of the above, being being something like <code>choose min(|Z|)</code> (where Z refers to a collection of policy options, and <code>|.|</code> to extracting the absolute value of these options), whereas all other options involve an additional conditional clause as part of the rule.</p>
+<p>There are two other voter types I’ve not listed above:</p>
+<ul>
+<li><strong>Rationalist</strong>: Select the policy option that is closest to one’s own overall policy position.</li>
+<li><strong>Radicalist</strong>: Select the policy option whose absolute value is <em>greatest</em>.</li>
+</ul>
+<p>Both the Rationalist and Radicalist voter types, like the Centrist, are also <em>non-tribal</em>, as they do not employ additional conditional rules based on the sign (positive or negative) of the policy options. The Rationalist voter is likely the most cognitively demanding of the positions, as it involves individuals both knowing what views they hold on specific political issues, and the corresponding position implied by different policy packages, as well as how strongly they weight each of these individual issues in making an overall decision. Although the Rationalist voter may be how (say) economists assume most people vote, I expect it to be rarely held and followed in practice.</p>
+</section>
+<section id="radicalist-voter-behaviours" class="level2">
+<h2 class="anchored" data-anchor-id="radicalist-voter-behaviours">Radicalist voter behaviours</h2>
+<p>So that leaves the Radicalist voter type. Say in one election the policy options are between A: <code>-3</code> and B: <code>+0.5</code>: the Radicalist voter would select option A, as its absolute value is the larger of the two (<code>3</code> compared with <code>0.5</code>). But then say in the next elections the <code>-3</code> option is no longer offered. Instead the options are between A: <code>-1</code> and B: <code>+2.5</code>. The Radicalist voter would now select option B, again as its absolute value is greatest (<code>2.5</code> compared with <code>1</code>).</p>
+<p>From the perspective of someone who thinks first and foremost tribally, in terms of the signs, or rationally, in terms of deltas (the difference between <code>-3</code> and <code>+2.5</code> along the real number line being almost the entirety of the real number range offered), the voting behaviour of the Radicalist voter may appear simply not to make sense. But if the Radicalist voter type is simply assumed and accepted on its own terms, then of course vote switching from far left to far right (and back again) appears entirely consistent.</p>
+</section>
+<section id="two-party-systems-leftright-or-stickchange" class="level2">
+<h2 class="anchored" data-anchor-id="two-party-systems-leftright-or-stickchange">Two party systems: Left/Right or Stick/Change?</h2>
+<p>Whereas throughout the twentieth century, within two party systems, voters are seen as being offered a choice between ‘left’ and ‘right’, from both the Centrist and Radicalist perspectives the choices are likely perceived as between ‘consistency’ and ‘change’. For the Centrist, seeking consistency, it makes sense to signal this preference by selecting the policy option with the lowest absolute value, whether that option happens to tilt more negative or positive. But equally for the Radicalist, seeking ‘change’, it makes sense to signal their preference by selecting the policy option with the <em>highest</em> absolute value, even if this gives the appearance of swinging wildly and inconsistently across political positions.</p>
+<p>I suspect the consistency/change dichotomy, rather than the left/right dichotomy, may be the more obdurate of the two in two party systems. In the UK, the clue’s in the name of one of the two main parties: <em>Conservative</em>. It’s also in the adjective <em>whiggish</em>, as in having perhaps an overly optimistic evaluation of the benefits and disbenefits of change rather than consistency; the progressive Whigs and the conservationist Tories of course being the two main UK parties in Westminster, until the Labour Party replaced the Whigs as the second party in around the 1920s. In a two party system, in which electoral rules tend to encourage dominance of a single voice - such as first-past-the-post and the electoral college system in the US <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> - the choice between consistency and change may be only real choice voters are offered, with the name of the consistency candidate or party, and the change candidate or party, potentially changing from one year and decade to the next.</p>
+<p>If systems like the above tend to force people towards binary voting, and the binary decision on which people have been asked to vote tends to be between change and consistency, even if the change is commonly presented or understood to have been between left and right, then perhaps the purest dichotomy of voter types is between centrists, with a bias towards consistency, and radicalists, with a bias towards change, rather than be between left tribalists and right tribalists. If so, then what looks like inconsistency over time in terms of phenomena like switching from Sanders to Trump, is instead explained by a consistency at a deeper level: a consistency in expressing a desire for change over a desire to maintain the status quo.</p>
+</section>
+<section id="changing-is-changeable-sticking-isnt-sticky" class="level2">
+<h2 class="anchored" data-anchor-id="changing-is-changeable-sticking-isnt-sticky">Changing is Changeable; Sticking isn’t Sticky</h2>
+<p>Another consideration, of course, is that not everyone is going to be consistent over time in their preference for either change or consistency. Though I might assume rationality will have less of an influence on political preference than the economists might assume, I don’t assume it to be irrelevant. In particular, I would assume that when the status quo suits, or is perceived to suit, less of the electorate, then more of the electorate will be drawn to instead voicing their support for change rather than consistency, even when the only type of change being offered or insinuated is qualitatively different from the types of change previously presented as on the table. In the example of the recent US presidential election, the main factor affecting the extent to which the status quo appeals is likely to be high inflation, which has apparently led to exceptionally poor support for incumbencies in recent elections across the world.</p>
+</section>
+<section id="the-pipe-dream-of-proportionality" class="level2">
+<h2 class="anchored" data-anchor-id="the-pipe-dream-of-proportionality">The Pipe Dream of Proportionality</h2>
+<p>Personally, I think systems designed to distort the relationship between vote shares and outcomes are bad democratic systems. In Trump 2024’s case, 50.5% of the popular vote became 100% of the presidency. Of course, as with any race there cannot be fractional winners. But that fact itself suggests roles such as head of state should, as a rule, be appointments made by houses of represented elected through less flawed, more democratic and more proportional systems. Advocates of systems like FPTP tend to point to the definitiveness of the results they tend to produce, and see this definitiveness as also implying stability. But the UK experience of the 20th and 21st century has shown that such systems in fact produce something more like punctuated equilibria: periods of many decades in which there appear to be only two horses in the running - call them Left or Right; or Stick or Change - separated by a few months and years of gross instability in which a new insurgent force crosses the magical thresholds at which votes start converting heavily into seats. In the first quarter of the 20th century, this insurgent force was Labour in most of the UK, as well as (if I remember correctly) Sinn Fein in Ireland, supplanting the Whigs (and in Ireland the Whigs and Tories) as one of the two main parties. In the first couple of decades of the 21st century this insurgent force was the SNP in Scotland, knocking Labour into the second party position, and the Conservatives into an irrelevance. And at the most recent UK general election the Reform party looks to have come perilously close to supplanting the Conservatives as the second party (again, except in Scotland), leading to substantial splitting of the right-wing vote and so a short term ‘boost’ to seats-per-vote achieved by the Labour party.</p>
+<p>In an electoral system in which representation really is proportional to numbers of votes - a system that can actually be justified and demonstrated from first principles to be truly democratic and pluralistic - then a much larger number of voices, positions and parties are likely to find representation in such a system. No overall majority from any single party is likely, and so coalitions, based around common goals and interests, and where necessary a willingness to compromise on second and third order issues, tend to become the only way to govern. Appointed leaders from such coalitions are therefore likely to be selected on their ability to find unity and common ground, and to make decisions that the majority of coalition members are willing to accept, rather than those that the most substantial minority find ecstatically appealing. More importantly, no matter where people live, and no matter what party the majority of those living nearby tend to support, a voter should be able to vote for the package of positions, i.e.&nbsp;the party or candidate, who most represents their own proferences, rather than having to second guess, strategise, compromise, or simply not vote.</p>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h2>
+<p>A system of proportional representation for houses, then appointment (rather than direct election) of leaders based on their ability to build consensus and find compromise, is vanishingly unlikely to select a leader such as Donald Trump, who appears to instill crazed loyalty in his supporters but crazed fear in his opponents. However, in the absence of a more intrinsically representative system, it should not be surprising that many voters interpreted the candidate options as a choice between stasis and change, and made their choices accordingly.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Policy positions across a two dimensional space - such along orthogonal left-right and authoritarian/libertarian axes - can be represented as complex numbers, in which both the vector of travel and magnitude of travel can be separately extracted. For more than two dimensions then matrix algebra’s eigenvectors and eigenvalues can be used to represent these two components. The key insight is that these are two qualitatively different aspects of the numbers.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I don’t wish to imply here I misunderstand first-past-the-post (FPTP) and the electoral college (EC) to be alternatives. Instead EC in the US appears to represent an additional layer of anti-democratic distortion when it comes to selecting presidential candidates, <em>on top of</em> FPTP. i.e.&nbsp;FPTP means that each aggregate unit, i.e.&nbsp;state, contributes either 100% or 0% of their votes to candidates; whereas the EC component means that the number of votes provided by each aggregate unit is biased away from population proportionality, to instead have something of a rural, or at least ‘small state’, bias. This latter component seems to come from a kind of ‘plus one’ rule in the determination of electoral college votes per state, with each state having a number of electoral college votes broadly proportional to each state’s share of the total US population, <em>plus one</em> additional vote per state. This one additional vote per state therefore effectively boosts the vote shares of persons living in the least populous states the most, and those in the most populous states the least, much as 1/(1+1) is much greater than 1/(1+50).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
