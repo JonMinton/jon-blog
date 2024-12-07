@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2024-12-07">
+
+<title>Jon Minton’s Blog - Poecilia parae: A lover, and a fighter</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Poecilia parae: A lover, and a fighter">
+<meta name="twitter:description" content="Gentes in The Genetic Book of The Dead">
+<meta name="twitter:image" content="https://JonMinton.github.io/jon-blog/posts/gentes-lover-and-a-fighter/figures/gentes.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="1024">
+<meta name="twitter:image-width" content="768">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title"><em>Poecilia parae</em>: A lover, and a fighter</h1>
+            <p class="subtitle lead"><em>Gentes</em> in The Genetic Book of The Dead</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">evolution</div>
+                <div class="quarto-category">dawkins</div>
+                <div class="quarto-category">sex differences</div>
+                <div class="quarto-category">natural selection</div>
+                <div class="quarto-category">sexual selection</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 7, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/gentes.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Five Boys</figcaption>
+</figure>
+</div>
+<p>I went to see Richard Dawkins, <em>in conversation</em>, in Glasgow, on 31 October, as part of a tour to promote his latest book, <em>The Genetic Book of the Dead: A Darwinian Reverie</em>, <span class="citation" data-cites="dawkins2024">(<a href="#ref-dawkins2024" role="doc-biblioref">Dawkins and Lenzová 2024</a>)</span> beautifully illustrated by Jana Lenzova, who previously translated <em>The God Delusion</em> to Slovak. The talk was… fine. But as the tour was to promote the book, I thought I’d buy that alongside the ticket. And the book is much better than fine. It’s fantastic. Dawkins is a good speaker, a sometimes gauche tweeter (or is it now Xer?), but an excellent writer of long-form content.</p>
+<p>Though he did not play up the association, or possibly did not even notice or consider it important, there is a fascinating link between a chapter framed around cuckoos (chapter 10: The Backward Gene’s Eye View, pp 214-238), and the subsequent chapter (chapter 11: More Glances in the Rear-View Mirror, pp 240-259), which includes the following (slightly fanciful and highly simplified) genetic tree showing the level of common ancestry between humans and our closest living relatives.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/chimpanzees.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Family Tree</figcaption>
+</figure>
+</div>
+<p>This figure suggests that, on average, chimps and bonobos are the closest living relatives of each other, as well as the closest living relatives of humans. This is relatively well known, and the reason why Jared Diamond referred to humans as ‘the third chimpanzee’ in one of his most famous books <span class="citation" data-cites="diamond_third_2006">(<a href="#ref-diamond_third_2006" role="doc-biblioref">Diamond 2006</a>)</span>.</p>
+<p>The social differences between chimps (as labeled here) and bonobos are often played up by popular science writers focused on our evolutionary endowment, especially in relation to questions of humans’ innate propensity to violence and to gender inequality. Chimps and bonobos are sometimes presented competing ideal types, with something like a moral refrain that we should be <em>more like</em> the peaceful bonobos, and <em>less like</em> the warmongering chimps. The steps of reasoning, as I understand them, are something as follows:</p>
+<p>The reproductive success of an individual animal, and so its genes’ probability of being replicated along the germline, is influenced both by <em>natural selection</em>, ‘fitness’ to the broader environment, and <em>sexual selection</em>, that ‘game-within-a-game’ in which the specific reproductive challenges of the individual are the mate-guarding propensities and mate-selecting preferences of same- and opposite-sex members of the same species. Sometimes, natural selection and sexual selection can exert competing influence on the ‘fitness’ of different genes through the phenotypes they encode. Most famously, the exuberant, iridescent and expensive plumage of the male peacock tilts its phenotype against something optimised for the broader environment, making it both more visible to and harder to escape from predators. But exuberant plumage increases its success in the subgame of sexual selection, making it more likely to be selected by the (comparatively dull) female peahen (slightly paradoxically in part because the ability to survive the natural environment <em>despite</em> the handicap of unwieldy plumage itself to some extent suggests master of the natural environment and the capacity to find surplus calories).</p>
+<p>In most mammal species, females have larger gametes, and much larger minimal parental investment, which militates towards greater choosiness in mate selection. If gross differentials in minimal parental investment tend to militate towards females as ‘choosers’, then this forms the first layer of sexual selection pressures within a species. But mate guarding behaviours amongst males then emerge as a subsequent layer in this game. Mate guarding is when a male of a species acts so as to limit the choice of females, by keeping other males away. This is usually achieved by a male being larger and (often) more aggressive than other males, with an incidental outcome of this being that, in species that practice mate guarding, males are also somewhat larger than females. Especially visible and notable examples of mate guarding occur in elephant seals (p.&nbsp;242), in which an extreme minority of especially large and violent male ‘beachmasters’ impregnate the vast majority of females.</p>
+<p>I think it was within Diamond’s <em>The Rise and Fall of the Third Chimpanzee</em> that the argument was made that, if an evolutionary biologist from another planet were to appear on earth, knowledgeable of evolutionary theory but not of the specifics of earthly fauna, they would be able to reasonably estimate the relative influence of mate-guarding-based sexual selection in a species by comparing the average size of males to females within a species: the larger the male is relative to the female, on average, the greater the role of mate-guarding-based sexual selection in genetic selection. Based on this, I think the argument went, as human males are perhaps a fifth larger than human females on average, with even larger relative differentials in upper body strength, there is clear evidence of at least some level of mate-guarding based sexual selection in humans.</p>
+<p>The sex-based size disparity is even larger in chimpanzees, with chimpanzee males being on average around a third larger than females, compared with the one fifth difference in humans, suggesting an even larger degree of mate-guarding based sexual selection in this distant ‘cousin’ of ours. Similarly, male chimpanzees appear even to have an even stronger tendency towards violence than humans. To the extent the term is useful, chimpanzee groupings or bands can be thought of as patrilineal, even patriarchal.</p>
+<p>By contrast, there is no apparent sex difference in sizes between male and female bonobos: males and females are roughly the same size. And relatedly, there is in bonobos no clear evidence of male mate-guarding in the usual sense. Bonobos are also considered to have a much lower propensity to violence more generally than chimpanzees. Their groupings or bands tend to be matrilineal, even matriarchal.</p>
+<p>Although male bonobos aren’t larger overall compared with female bonobos, their is one part of their anatomy that is disproportionately large given their size. Male bonobos have disproportionately large testicles, containing disproportionately large amounts of sperm, and they have disproportionately large amounts of sex with a disproportionately large variety of female bonobos.</p>
+<p>So, the contrast as implied in the above account is between the patriarchal, violence-prone <em>fighter</em> species of the chimpanzees; and the matriarchial, matrilineal <em>lover</em> species of the bonobos. The slightly elegaic refrain then follows: why can’t we be more like the bonobos, and less like the chimpanzees? Evolutionary arms races went down the big bodies and violence route for the chimpanzee, and the big balls and free-love route for the bonobo, and though humans are neither bonobo nor chimpanzee, the fifth-larger size of average males compared with females, and even more disproportionate sex differentials in upper body strength, suggests that humans are somewhat more biased towards the chimpanzee path than the bonobo path.</p>
+<p>So, in chimpanzees, bonobos, and humans, evolution made choices for us regarding sexual selection, which reinforced and imprinted themselves on our bodies and behaviours: fighter males <em>or</em> lover males. The two options are <em>mutually exclusive</em>. But what chapter 10 of the same book revealed is that, in some species, the <em>lover/fighter</em> male strategy split is <em>not mutually exclusive</em>, but instead can coexist.</p>
+<p>The coexistence of apparently mutually exclusive phenotypes can occur in species if one of the sexes exhibits a number of discrete categories of phenotypic form, and these categories of form tend not to converge or blend over time. Imagine a species where males tend to either be all red, all green, or all blue; if a child is born of a red ancestral and blue ancestral parent, however, they will not be purple (a colour mix of the two parents), but instead either fully red or fully blue. The primary colours - these phenotypic forms - tend not to diminish or blend in the ways they are expressed. Instead, if one were to monitor the relative proportions of reds, greens and blues over time, one would see some degree of fluctuation over time, but likely around a stable relative proportion: say one-third red, one-third green, and one-third blue.</p>
+<p>The factor which determines the category of phenotypic variation of a child is the <em>gens</em> of one of its parents, and which of its parents - male or female - is always the same. A <em>gens</em> (plural <em>gentes</em>), as I understand it, is a cluster of sex-specific genetic instructions that produce a series of phenotypic features that ‘work’ together, but which instruct and exist only in one sex of a <em>gentes</em>-exhibiting species. When comparing across species, such clusters of genetic instructions and phenotypic features are easier to think about: long canines and short intestines and front-facing eyes are three phenotypic features that ‘work’ together to produce a <em>carnivore</em> phenotype; whereas short canines and banks of molars and long intestines and side-facing eyes are alternative phenotypic features that ‘work’ together to produce a <em>herbivore</em> phenotype. But with standard speciation, the clustering of features that ‘work’ together, and so co-selection of particular selections of genes, tends to lead to the entire species towards strategic exclusivity: either optimise gene selection for the carnivore phenotype, or for the herbivore phenotype, but don’t try to mix-and-match. The fitness landscape across multiple features tends to feature many more hills and mountains than broad plateaus and aqueducts.</p>
+<p>The opening example of a <em>gentes</em>-exhibiting species given by Dawkins is the Cuckoo. Cuckoos have an overall strategy that involves laying eggs that impersonate the eggs of other species, but there are many other species, and so many styles and patterns of eggs to try to impersonate. In cuckoos, it’s the females that are the <em>gentes</em>-exhibiting sex in the species, as they produce the eggs that need to blend in with the other eggs of the species in whose nest they have laid. Say there are two types of ‘victim’ birds: V1, who lays grey speckled eggs, and V2, who lays blue unspeckled eggs. Female cuckoos then, over many generations, specialise into two separate <em>gentes</em>: one <em>gens</em> that optimises towards impersonating V1’s eggs, and other <em>gens</em> that optimises towards impersonating V2’s eggs. Male cuckoos do not discriminate in mate selection in females from different <em>gentes</em>: a male whose mother was from the V1-optimised lineage will freely mate with females from the V2-optimised lineage, and vice-versa. We can think of the female <em>gentes</em> as distinct vertical columns, becoming no closer or further apart from each other, whereas the male cuckoos’ genetic contributions as like darting diagonal strings that either wrap around (V1/V1, V2/V2) or dart between (V1/V2, V2/V1) the columnar female <em>gentes</em>. It’s the males’ cross-mating between <em>gentes</em> that keeps the cuckoos a single species, despite so much variation in egg phenotype.</p>
+<p>Which brings me to a remarkable <em>gentes</em>-exhibiting species of fish, <em>Peocilia parae</em>. Unlike the cuckoo, the <em>gentes</em>-exhibiting sex is male, not female: the males are the columns, and the females are the string binding them together. And although Dawkins’ description - reproduced below, in Dawkins’ typically non-diplomatic tone - focuses initially on colour variation between male <em>gentes</em>, it’s clear the phenotypic differences from <em>gens</em> to <em>gens</em> affect overall size and behaviour too:</p>
+<blockquote class="blockquote">
+<p>One species, <em>Poecilia parae</em>, has a remarkable colour <em>polymorphism</em>, which affects only the males. Polymorphism means that there are different genetically determined colour types coexisting in the population (in this case five colour patterns) and the proportions of the different types remain stable in the population through time. All five male morphes can be found swimming together in South American streams. There’s only one female morph: females look alike.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Since the polymorphism affects only one sex, we can call them five gentes, by analogy with the cuckoos, with the difference that in these fish it’s the males who are separated by gens. The picture shows the five male types plus a female at the bottom. Three of the five male types have two long stripes like tramlines. Between the tramlines there is colour, and I’ll call them reds, yellows, and blues respectively. These three ‘tramliners’ can, for many purposes, be lumped together. The fourth type has vertical stripes. They’re officially named ‘parae’, but confusingly that’s also the name of the whole species. I’ll call them ‘tigers’. The fifth type, ‘immaculata’, is relatively plain gray, like females but smaller, and I’ll call them ‘greys’.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Tigers are the largest. They behave aggressively, chasing rival males away, and copulating with females by force. Greys are the smallest, and they manage to copulated only by occasionally sneaking up on females opportunistically. When they can get away with it, it seems to be because otherwise aggressive males mistake them for females, which they do indeed resemble. Greys have the largest testes, presumably capable of producing the most sperm, perhaps to take advantage of their scarce opportunities to use it. Red, yellow, and blue tramliners are of intermediate size. Rather than rape or sneak, they court females in a civilised manner, displaying their respective coloured flanks.</p>
+</blockquote>
+<p>pp 228-230</p>
+<p>Although Dawkins used brusque and somewhat damning language in contrasting the ‘Tigers’ and the ‘Greys’, the descriptions suggest that the ‘Tigers’ come from a <em>gens</em> optimised on a <em>fighter</em> phenotype, including its larger size and more aggressive behaviour, whereas the ‘Greys’ from from a <em>gens</em> optimised on a <em>lover</em> phenotype, including is comparatively diminutive size and, crucially, larger testes.</p>
+<p>So, although it seems the choice between <em>fighter</em> and <em>lover</em> male phenotypes in humans and primates is mutually exclusive, and essentially locks in a species’ genetic endowment towards pursuit of just a single strategy, there’s at least one species of fish that is both a lover <em>and</em> a fighter.</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-dawkins2024" class="csl-entry" role="listitem">
+Dawkins, R., and J. Lenzová. 2024. <em>The Genetic Book of the Dead: A Darwinian Reverie</em>. Bloomsbury Publishing. <a href="https://books.google.co.uk/books?id=87sBEQAAQBAJ">https://books.google.co.uk/books?id=87sBEQAAQBAJ</a>.
+</div>
+<div id="ref-diamond_third_2006" class="csl-entry" role="listitem">
+Diamond, J. M. 2006. <em>The <span>Third</span> <span>Chimpanzee</span>: <span>The</span> <span>Evolution</span> and <span>Future</span> of the <span>Human</span> <span>Animal</span></em>. P.<span>S</span>. HarperCollins. <a href="https://books.google.co.uk/books?id=9TVNmDojtzUC">https://books.google.co.uk/books?id=9TVNmDojtzUC</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
