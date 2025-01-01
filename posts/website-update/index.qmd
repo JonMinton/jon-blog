@@ -1,0 +1,23 @@
+---
+title: "First website update since 2013!"
+author: "Jon Minton"
+date: "2025-01-01"
+categories: [updates, website, react]
+---
+
+I've updated my website for the first time since September 2023. Unlike this blog, which tends to be updated at least monthly, I hadn't touched the website in 2024, even though there were a few important things to update on. 
+
+The reasons for this are mainly that, as this blog is built using [Quarto](https://quarto.org/), and Quarto is a form of markdown, there's just much less web dev scaffolding to attend to. I can largely focus on figuring out what I want to write, rather than - for example - how to style and display text, graphics and other elements in a way that looks pleasing or professional.  
+
+By contrast, the website is made using [React](https://react.dev/), a javascript static site framework, and styled from scratch using many dozens of custom CSS styles I developed after marinating and confusing myself with around fifty hours of online website development courses, mainly through [Dave Gray's excellent youtube channel](https://www.youtube.com/@DaveGrayTeachesCode).
+
+Anyway, changes made include: 
+
+- Update footer copyright date to 2025 (skipping 2024!)
+- Updated to include my new job as a senior statistician at Smith & Nephew, which I've been doing since September. 
+- Opened up some present but previously hidden information about the kinds of things I do in my current and previous roles. (These were stored as json data structure elements, where I'd already written the content, but then not told react to do anything with it!)
+- Added mentions of statistics as a distinct area of expertise. (As distinct from data science)
+- Added links to the statistics website I developed, which grew out of sections of this blog. 
+
+Anyway, the updated website, like the previous website, is available [here](https://jonminton.net). 
+
