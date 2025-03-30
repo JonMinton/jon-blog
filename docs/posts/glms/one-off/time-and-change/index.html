@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-02-16">
+
+<title>Jon Minton’s Blog - Time and (state) change</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Time and (state) change">
+<meta name="twitter:description" content="Some thoughts on Survival Modelling and Friends">
+<meta name="twitter:image" content="index_files/figure-html/fig-markov-nonabsorbing-1.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Time and (state) change</h1>
+            <p class="subtitle lead">Some thoughts on Survival Modelling and Friends</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">modelling</div>
+                <div class="quarto-category">survival modelling</div>
+                <div class="quarto-category">Markov modelling</div>
+                <div class="quarto-category">absorbing states</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 16, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p><em>Things change.</em></p>
+<p>That’s the essence of a whole range of phenomena that people want answers to, and so statisticians and data scientists need to model. More specifically, we’re interested in situations where something changes from <em>one thing</em> to <em>another thing</em>, and the main factor that causes this change is time.</p>
+<p>In this post I’m going to outline some thoughts on different scenarios we might want to model involving things changing. This is very much an exercise in writing to think, so don’t expect what I’m going to cover to be exhaustive, nor necessarily organised how it would be if I weren’t exploring and developing ideas while I write them. Nonetheless, I hope this will be useful. Let’s begin.</p>
+<section id="this-and-that-then-and-now" class="level2">
+<h2 class="anchored" data-anchor-id="this-and-that-then-and-now">This and that; then and now</h2>
+<p>Let’s start with four cells, arranged in a two-by-two table.</p>
+<div id="tbl-two-by-two" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Four cells; two by two</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Y</th>
+<th>Not Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>Not X</td>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In <a href="#tbl-two-by-two">Table&nbsp;1</a>, we have four cells: <span class="math inline">\(M = {a, b, c, d}\)</span> separated by a row margin <span class="math inline">\(X \in \{1, 0\}\)</span> and a column margin <span class="math inline">\(Y \in \{1, 0 \}\)</span> . Imagine further these cell values take natural numbers, i.e.&nbsp;positive integers. How does this help us?</p>
+<p>Well, imagine now that one of the margins relates to one of two consecutive time periods <span class="math inline">\(T \in \{T_0, T_1\}\)</span> (Say, last week, and this week), and the other margin relates to two mutually exclusive states that a person can be, such as <em>sick</em> or <em>not sick</em>. In <a href="#tbl-two-by-two-time">Table&nbsp;2</a> we now have some data arranged in a simple structure that allows us to model some data where time has an influence on state change.</p>
+<div id="tbl-two-by-two-time" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2: Four cells; two by two. One margin is time-based</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Last Week</th>
+<th>This Week</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sick</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>Not Sick</td>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>What sorts of model? Well, with aggregate cells like this, we can run something like the Fisher Exact Test or Chi-Squared Test. This will answer questions like, <em>was last week really any different to this week</em> in terms of probability of being or becoming sick? Implicitly, this will work towards answering the question <em>Are the odds of becoming sick this week (<span class="math inline">\(b/d\)</span>) really any different from the odds of becoming sick last week (<span class="math inline">\(a/c\)</span>)?</em> They will do so by calculating an <strong>Odds Ratio</strong> (OR) (<span class="math inline">\(a/b/c/d\)</span>), and - for the Chi-Squared Test at least - comparing it to a theoretical distribution where no one margin has an excessive ‘pull’ on the value of cells in the other margin. This <em>can</em> be a useful thing to do. When the cells are small, just a few events can give the impression something has changed between last week and this week in terms of sickness ratios. But maybe nothing fundamentally has changed; we’ve just had some bad/good luck?</p>
+<p>Let’s now think about pivoting from this two-by-two cell in two different ways:</p>
+</section>
+<section id="same-model-more-states" class="level2">
+<h2 class="anchored" data-anchor-id="same-model-more-states">Same model; more states</h2>
+<p>One simple expansion of the above scenario is when the number of mutually exclusive states across one of the margins is more than two. For example, if the number of mutually exclusive states that an individual can be in is more than two, then we might want to expand one of the margins, as in <a href="#tbl-three-by-two-time">Table&nbsp;3</a>:</p>
+<div id="tbl-three-by-two-time" class="anchored">
+<table class="table">
+<caption>Table&nbsp;3: Six cells; three by two. One margin is time-based</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Last Week</th>
+<th>This Week</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Very Sick</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>Quite Sick</td>
+<td>c</td>
+<td>d</td>
+</tr>
+<tr class="odd">
+<td>Not Sick</td>
+<td>e</td>
+<td>f</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The same tests we used before can also help on this occasion. Compared to last week, the proportion of people who become sick in any way this week ((b+d)/(b+d+f)) might not be any different to last week ((a+c)/(a+c+d)), but the proportion of those who are sick who become very sick (b / (b+d) compared with a / (a+c)) might have changed in appreciable and detectable way. For example, maybe the virus that caused the sickness has got no better or worse at infecting people, but it’s better adapted to people, so once it’s infected them it tends to make them less sick?</p>
+<p>Once again, the same tests that work with two-by-two cells can also work with three-by-two cells. In fact they can work with an arbitrarily large number of cells; the only condition is that each margin partitioning the cells are mutually exclusive and exhaustive. So, they can work with three mutually exclusive time periods, leading to a three-by-three table shown in <a href="#tbl-three-by-three-time">Table&nbsp;4</a>:</p>
+<div id="tbl-three-by-three-time" class="anchored">
+<table class="table">
+<caption>Table&nbsp;4: Nine cells; three by three. One margin is time-based</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Two Weeks Ago</th>
+<th>Last Week</th>
+<th>This Week</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Very Sick</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+</tr>
+<tr class="even">
+<td>Quite Sick</td>
+<td>d</td>
+<td>e</td>
+<td>f</td>
+</tr>
+<tr class="odd">
+<td>Not Sick</td>
+<td>g</td>
+<td>h</td>
+<td>i</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In this example, the standard contingency table cells will ‘work’, though they might not be the best approaches to use anymore. There’s information we have that the modelling approach doesn’t incorporate. This is that the possible values each margin can take are <em>ordinal</em>: <em>very sick</em> is more sick than <em>quite sick</em>, and <em>quite sick</em> is more sick than <em>not sick</em>. Similarly, <em>last week</em> was more time ago than <em>this week</em>, and <em>two weeks ago</em> was more time ago than <em>last week</em>. So, we know that the margins are both <em>ordinal</em>, whereas most modelling approaches involving contingency tables (i.e.&nbsp;these tables to cells in margins) deal with <em>categorical data</em>. As <a href="https://en.wikipedia.org/wiki/Contingency_table">Wikipedia</a> states:</p>
+<blockquote class="blockquote">
+<p>The relation between ordinal variables, or between ordinal and categorical variables, may also be represented in contingency tables, although such a practice is rare. For more on the use of a contingency table for the relation between two ordinal variables, see Goodman and Kruskal’s gamma.</p>
+</blockquote>
+<p>Let’s now pivot things the other way.</p>
+</section>
+<section id="constant-change" class="level2">
+<h2 class="anchored" data-anchor-id="constant-change">Constant change</h2>
+<p>Let’s move back to a scenario where an observation can take only one of two mutually exclusive and exhaustive states, such such as sick or not sick. And say we’re fairly confident assuming that the probability of moving from one of these states to the other, over a fixed time period, doesn’t change over time. We can then start to think about modelling risks of something that accumulate over time.</p>
+<p>More concrete: let’s say we think the risk of someone who’s healthy becoming sick each week is 2%, and we’re interested in understanding the proportion of a population who become <em>ever sick</em> over time. Although the weekly risk of becoming sick doesn’t change, the cumulative risk of becoming ever sick keeps growing.</p>
+<p>Let’s adapt our thinking, and so our categories, slightly, to model this kind of question. Let’s start by imagining a population of people who are healthy at the start of a period of time, <span class="math inline">\(T = 0\)</span> AKA <span class="math inline">\(T_0\)</span>. Let’s say there are 10,000 people who start off healthy at <span class="math inline">\(T_0\)</span>. With a weekly risk of becoming sick of 2%, we know by <span class="math inline">\(T = 1\)</span> 2% of the 10,000 have become sick. They’re now no longer part of the ‘never sick’ (since the start of the observation period <span class="math inline">\(T=0\)</span>) population, so the never sick population has declined by 2%. Now as we move to the next time period, <span class="math inline">\(T = 2\)</span>, the weekly risk of becoming sick has stayed the same, but the population size of ‘never sick’ has fallen. To work out the proportion of the initially never sick population who were never sick we now need to apply the 2% getting sick risk to the <em>remaining</em> never-sick population. For later time periods we have to repeat, each time a constant percentage risk applying to an ever-diminishing never-sick population ‘stock’. Let’s call <span class="math inline">\(N_0\)</span> the initial population of never-sick persons, <span class="math inline">\(N(t)\)</span> the number never-sick at time period <span class="math inline">\(t\)</span>, and <span class="math inline">\(p\)</span> the proportion who become sick each time period.</p>
+<ul>
+<li><span class="math inline">\(N(0)\)</span>: <span class="math inline">\(N_0\)</span></li>
+<li><span class="math inline">\(N(1)\)</span>: <span class="math inline">\(N_0 (1 - p)\)</span></li>
+<li><span class="math inline">\(N(2)\)</span>: <span class="math inline">\(N_0 (1 - p)(1 - p)\)</span></li>
+<li><span class="math inline">\(N(3)\)</span>: <span class="math inline">\(N_0 (1 - p)(1 - p)(1 - p)\)</span></li>
+<li><span class="math inline">\(N(4)\)</span>: <span class="math inline">\(N_0 (1 - p)(1 - p)(1 - p)(1 - p)\)</span></li>
+</ul>
+<p>etc.</p>
+<p>Another way of presenting this is in terms of a process being applied to the last state:</p>
+<p><span class="math display">\[ N(t) = N(t-1)(1 - p)\]</span></p>
+<p>For <span class="math inline">\(t \ge 1\)</span>, and <span class="math inline">\(N(0) = N_0\)</span>. Here <span class="math inline">\(N(t-1)\)</span> refers to the value at the last state, and <span class="math inline">\((1 - p)\)</span> happens to be the process applied to the last state for each time period.</p>
+<p>And a third way involves simply recognising that all of the five statements in the expanding block above can be represented as follows:</p>
+<p><span class="math display">\[ N(t) = N_0 (1 - p)^t \]</span></p>
+<p>Each of the three above representations of the process over time highlight something different: the first makes it clearer that there’s a growing (expanding) influence of history on each further time period after <span class="math inline">\(t = 0\)</span>, as the number of terms involved in calculating each future period’s terms gets larger. The second makes it clearer that, conditional on knowing the last period’s value, and the starting value, the rule for calculating future values is consistent and straight forward. And the third representation has the benefit of algebraic simplicity and neatness; on this occasion the algebra are such that, even without having the calculate all intermediate values in the series, we can calculate <span class="math inline">\(N(t)\)</span> for any value of t.</p>
+</section>
+<section id="forgetting-deep-history" class="level2">
+<h2 class="anchored" data-anchor-id="forgetting-deep-history">Forgetting (Deep) History</h2>
+<p>Of the three representations shown above, the type that suggests an approach generalisable to other phenomena involving the influence of time is the second. I described this as representing ‘a process applied to the last state’, which we can represent in more general terms as something like the following:</p>
+<p><span class="math display">\[N(t) = f(.)N(t-1)\]</span></p>
+<p>Here <span class="math inline">\(N(t)\)</span> represents the state of something now, <span class="math inline">\(N(t-1)\)</span> the state of something in the recent past, and <span class="math inline">\(f(.)\)</span> represents the process applied to the recent past, such as to generate the present state. I’ve included a dot as a placeholder in this process function to make it clear that, potentially, this process can be heterogeneous in its effects, rather than, as with the present example, always the same over time. The process could, for example, be varying with regards to population characteristics <span class="math inline">\(X\)</span>, such as when different population subgroups are at different risk of becoming sick. It could also be varying over time, <span class="math inline">\(t\)</span>, such as a risk that either grows, declines, or varies non-monotonically with regards to time. This algebraic chassis is quite flexible in terms of the specific types of phenomena it can be used to model.</p>
+<p>The important feature of this kind of equation is that, to represent the state at any time <span class="math inline">\(t\)</span>, only the state at time <span class="math inline">\(t-1\)</span> needs to be known. This means that, from the perspective of the equation itself, the influence of history more than one chain or iteration in the past, <span class="math inline">\(t-2\)</span>, <span class="math inline">\(t-3\)</span> and so on, is known only through the value at time <span class="math inline">\(t-1\)</span>. In a sense, the equation has no longer term memory beyond the recent past; it takes things as they are and evolves them just one step further.</p>
+<p>There’s a name for this kind of process: <strong>Markovian</strong>, with a process of modelled change that represents the near future only in terms of the present, or the present only in terms of the recent past, being described as having <em>the Markov property</em>. If the Markovian assumption can be made, then the computation of future states can proceed mainly through short, simple steps of iterative influence along a chain. The computation burden becomes relatively small, with a trade-off being that the memory burden of tracking the chains generated by this process through time become much larger. This is even more so the case when working, as statisticians need to, with <em>stochastic processes</em> involving <em>uncertainty</em>. Both inherent stochasticity in a process of evolving change, and uncertainty about the true/best value to place inside the process part of the equation <span class="math inline">\(f(.)\)</span>, mean uncertainty and variation in the process being applied. For example, instead of the proportion becoming sick each cycle being exactly 2%, it could be some proportion that is 2% <em>on the average</em> (i.e.&nbsp;its <em>expected value</em> is 2%), but some times is higher, and sometimes is lower. This means that on each occasion chain is built connecting <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=T\)</span>, the period for which we want to estimate <span class="math inline">\(N(.)\)</span>, the chain will be different. Cute analytic solutions, such as the formula <span class="math inline">\(N(t) = N_0 (1 - p)^t\)</span>, won’t be readily available to help us, because, in this example, <span class="math inline">\(p\)</span> is now a series of draws from a distribution, rather than a fixed value. Because of this variation in the process function <span class="math inline">\(f(.)\)</span> being applied each time, the go-to approach for representing a plausible range of expected values of <span class="math inline">\(N(T)\)</span> is to generate a large number of chains from <span class="math inline">\(t=0\)</span> through to <span class="math inline">\(t=T\)</span> and summarise the range of the distribution of <span class="math inline">\(N(T)\)</span> produced, such as to show the median, mean, standard deviation, and 95% empirical intervals (the values 2.5% from the bottom and 2.5% from the top of the distribution of estimates).</p>
+<p>What we have here, in this part of the discussion, is a reintroduction to <strong>time series</strong> modelling, as covered extensively in previous posts. The simple autoregressive model <code>AR(1)</code> is a clear example of a Markovian process, but so are other specifications in the ARIMA family. ARIMA models, as discussed, can be more or less ‘forgetful’: they can have terms for states two or more periods ago, rather than just the last period, and with the SARIMA extension, they can also accommodate seasonal patterns in the data too. But at heart they all start with the kind of equation at the start of this section: a process was applied to how things were in the recent past, to make things as they are now.</p>
+</section>
+<section id="to-transition-or-to-absorb" class="level2">
+<h2 class="anchored" data-anchor-id="to-transition-or-to-absorb">To transition or to absorb?</h2>
+<p>Let’s return to the example where there are three mutually exclusive states that an observation can take for each time period. And say we also believe the probability of <em>moving to</em> each state at time T, <em>conditional on knowing the state</em> at time T-1, is non-varying. Let’s call <span class="math inline">\(Y(t)\)</span> the state at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(Y(t-1)\)</span> the state at time <span class="math inline">\(t-1\)</span>. And let’s say <span class="math inline">\(Y(.) \in \{a, b, c\}\)</span>, i.e.&nbsp;that all observations of Y, for all time periods, will always be one of either state a, state b, or state c.&nbsp;</p>
+<p>To start to turn this into a model of state change, we need some data arranged in something like a contingency table (<a href="#tbl-three-by-three-markov">Table&nbsp;5</a>), where one margin shows the possible states last period, the other margin shows the possible states this period, and the cells therefore show the counts of cells that were in the last period margin, and are in the this-period margin.</p>
+<div id="tbl-three-by-three-markov" class="anchored">
+<table class="table">
+<caption>Table&nbsp;5: Nine cells; three by three. Cells are counts; row margins are last period; column margins are this period</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a</td>
+<td><strong><span class="math inline">\(n_{aa}\)</span></strong></td>
+<td><span class="math inline">\(n_{ab}\)</span></td>
+<td><span class="math inline">\(n_{ac}\)</span></td>
+</tr>
+<tr class="even">
+<td>b</td>
+<td><span class="math inline">\(n_{ba}\)</span></td>
+<td><strong><span class="math inline">\(n_{bb}\)</span></strong></td>
+<td><span class="math inline">\(n_{ac}\)</span></td>
+</tr>
+<tr class="odd">
+<td>c</td>
+<td><span class="math inline">\(n_{ca}\)</span></td>
+<td><span class="math inline">\(n_{cb}\)</span></td>
+<td><strong><span class="math inline">\(n_{cc}\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If we refer to the row margins by the index <span class="math inline">\(i\)</span>, and the column margins by the index <span class="math inline">\(j\)</span>, then the subscripts of the cells are of the form <span class="math inline">\(n_{ij}\)</span>. This means that <span class="math inline">\(n_{ba}\)</span>, for example, is shorthand for ‘number of observations who were in state <span class="math inline">\(b\)</span> last period, and are in state <span class="math inline">\(a\)</span> this period’.</p>
+<p>Note there are fundamentally two different things that can happen over these two time periods: either the state can <em>stay the same</em>, or it can <em>change</em>. In the above, the cells <span class="math inline">\(n_{aa}\)</span>, <span class="math inline">\(n_{bb}\)</span>, and <span class="math inline">\(n_{cc}\)</span>, which are on the top-left-to-bottom-right-diagonal of the matrix, are examples where the state did not change between the two time periods, whereas all other cells, where the two subscripts are of different letters, represent <em>transitions</em> from one state to another.</p>
+<p>We can go from observed counts (the <span class="math inline">\(n\)</span>s) to <strong>transition probabilities</strong> by summing up the row margins, then dividing the cell counts by these margins. We can define these margins as follows:</p>
+<ul>
+<li><span class="math inline">\(N_{a} = n_{aa} + n_{ab} + n_{ac}\)</span></li>
+<li><span class="math inline">\(N_{b} = n_{ba} + n_{bb} + n_{bc}\)</span></li>
+<li><span class="math inline">\(N_{c} = n_{ca} + n_{cb} + n_{cc}\)</span></li>
+</ul>
+<p>The transition probabilities for each cell indexed <span class="math inline">\(\{i, j\}\)</span> are therefore the cell values divided by the corresponding row margin, i.e.&nbsp;<span class="math inline">\(p_{ij} = n_{ij} / N_i\)</span>. By definition, the sum of probabilities across any row is 1.</p>
+<p>The result of calculating all transition probabilities in this way, while preserving them in the three-by-three square matrix presented above, is called a <strong>transition matrix</strong>. Let’s call this <span class="math inline">\(\textbf{P}\)</span>:</p>
+<p><span class="math display">\[
+\textbf{P} =
+\begin{pmatrix}
+p_{1,1} &amp; p_{1,2} &amp; p_{1,3}  \\
+p_{2,1} &amp; p_{2,2} &amp; p_{2,3}  \\
+p_{3,1} &amp; p_{3,2} &amp; p_{3,3}
+\end{pmatrix}
+\]</span></p>
+<p>The transition matrix is something we can use with our process evolution equation <span class="math inline">\(N(t) = f(.)N(t-1)\)</span> introduced earlier, substituting in for <span class="math inline">\(f(.)\)</span>. To set it running, we need to specify a starting population <span class="math inline">\(N_{0}\)</span>, which on this occasion is not a single value, but a <em>vector</em> of values of length equal to the dimensions of <span class="math inline">\(\textbf{P}\)</span>; in this case, three:</p>
+<p><span class="math display">\[
+N_0 = \{n_{1, 0}, n_{2, 0}, n_{3, 0} \}
+\]</span></p>
+<p>With this initial population state specified, we now have a working version of the process evolution equation that we can iteratively apply to successive outputs in order to project the population distribution out to an arbitrarily large number of iterations ahead. This relies on some matrix algebra. In the code above I’ll try to provide an example of this in R</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">700</span>, <span class="dv">200</span>, <span class="dv">100</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.8</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span>, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>, </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>N_0 <span class="ot">&lt;-</span> init_pop</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>N_1 <span class="ot">&lt;-</span> N_0 <span class="sc">%*%</span> x_matrix <span class="co"># Note %*% is matrix multiplication</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>N_2 <span class="ot">&lt;-</span> N_1 <span class="sc">%*%</span> x_matrix </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>N_3 <span class="ot">&lt;-</span> N_2 <span class="sc">%*%</span> x_matrix </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>N_4 <span class="ot">&lt;-</span> N_3 <span class="sc">%*%</span> x_matrix </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>N_5 <span class="ot">&lt;-</span> N_4 <span class="sc">%*%</span> x_matrix </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>states_over_time <span class="ot">&lt;-</span> <span class="fu">rbind</span>(N_0, N_1, N_2, N_3, N_4, N_5)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>states_over_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       [,1]    [,2]    [,3]
+N_0 700.000 200.000 100.000
+    630.000 210.000 160.000
+    583.000 221.000 196.000
+    552.300 230.100 217.600
+    532.630 236.810 230.560
+    520.203 241.461 238.336</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(states_over_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> N_0                          
+1000 1000 1000 1000 1000 1000 </code></pre>
+</div>
+</div>
+<p>In the above, the first column shows the projected number in state a at the time period indicated by the row, with the first row being the initial population composition, the second the projected composition at T=1, and so on. The call to <code>rowSums()</code> confirms that, within each time period, the total population size stays the same, even though the subpopulation in each state keeps changing.</p>
+<p>The above process of iteratively evolving the subpopulation composition over time can be repeated an arbitrarily large number of times, which may lead to compositions converging towards a final state or equilibrium that depends much more on the transition matrix than the initial composition. In the code below I’m going to attempt to run the above for 100 cycles, rather than just five, and then plot the changing composition as an area chart.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">700</span>, <span class="dv">200</span>, <span class="dv">100</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.8</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span>, </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>pop_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>pop_matrix[<span class="dv">1</span>,] <span class="ot">&lt;-</span> init_pop</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pop_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>N_periods <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pop_matrix)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N_periods){</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    pop_matrix[i,] <span class="ot">=</span> pop_matrix[i<span class="dv">-1</span>,] <span class="sc">%*%</span> x_matrix</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> pop_matrix <span class="sc">%&gt;%</span> </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'t'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t =</span> <span class="fu">as.numeric</span>(t)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>t, <span class="at">names_to =</span> <span class="st">'state'</span>, <span class="at">values_to =</span> <span class="st">'n'</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> n, <span class="at">fill=</span>state)) <span class="sc">+</span> </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-markov-nonabsorbing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-markov-nonabsorbing-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Nonabsorbing three state Markov model</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-markov-nonabsorbing">Figure&nbsp;1</a> we can see that the proportion in each of the three mutually exclusive states converges to an equilibrium level fairly soon after the simulation has started, after around 10 of the 100 cycles in the model have run. It is usually the case, with Markov modelling, that in the long term the transition matrix matters more for the long-term population distribution than the initial population. As an example, here’s the same model run again, but where all of the population initially start off in state C:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1000</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.8</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span>, </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">3</span>, </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>pop_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>pop_matrix[<span class="dv">1</span>,] <span class="ot">&lt;-</span> init_pop</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pop_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>N_periods <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pop_matrix)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N_periods){</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    pop_matrix[i,] <span class="ot">=</span> pop_matrix[i<span class="dv">-1</span>,] <span class="sc">%*%</span> x_matrix</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> pop_matrix <span class="sc">%&gt;%</span> </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'t'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t =</span> <span class="fu">as.numeric</span>(t)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>t, <span class="at">names_to =</span> <span class="st">'state'</span>, <span class="at">values_to =</span> <span class="st">'n'</span>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> n, <span class="at">fill=</span>state)) <span class="sc">+</span> </span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-markov-nonabsorbing-alt-init" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-markov-nonabsorbing-alt-init-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Three state non-absorbing Markov model with different initial population distribution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Once again, the 100 cycles over which the simulation runs is more than enough for the effect of the initial population composition to ‘wash out’. (This is, by the way, similar to much Bayesian modelling relying on Markov Chains, in which an initial set of possible values for each of the parameters to be estimated has to be specified, the first ‘prior’, and there is a hope or expectation that, regardless of the initial values specified, parameter model chains will converge on the same distribution. For this reason it is common practice with Bayesian modelling to perform Bayesian modelling on multiple chains, each with different starting value sets, and check that the chains generated from each starting value have converged to the same distribution.)</p>
+<section id="absorbing-states" class="level3">
+<h3 class="anchored" data-anchor-id="absorbing-states">Absorbing states</h3>
+<p>Let’s now adapt the initial population vector and transition matrix very slightly, to include a 4th state, <span class="math inline">\(D\)</span>. Look carefully at the code below to see how the transition matrix this time differs from the transition matrix used previously.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">700</span>, <span class="dv">200</span>, <span class="dv">100</span> , <span class="dv">0</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>pAD <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>pBD <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>pCD <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span> <span class="sc">-</span> pAD) <span class="sc">*</span> <span class="fl">0.8</span>, (<span class="dv">1</span> <span class="sc">-</span> pAD) <span class="sc">*</span> <span class="fl">0.1</span>, (<span class="dv">1</span> <span class="sc">-</span> pAD) <span class="sc">*</span> <span class="fl">0.1</span>, pAD,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span> <span class="sc">-</span> pBD) <span class="sc">*</span> <span class="fl">0.3</span>, (<span class="dv">1</span> <span class="sc">-</span> pBD) <span class="sc">*</span> <span class="fl">0.6</span>, (<span class="dv">1</span> <span class="sc">-</span> pBD) <span class="sc">*</span> <span class="fl">0.1</span>, pBD,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span> <span class="sc">-</span> pCD) <span class="sc">*</span> <span class="fl">0.1</span>, (<span class="dv">1</span> <span class="sc">-</span> pCD) <span class="sc">*</span> <span class="fl">0.2</span>, (<span class="dv">1</span> <span class="sc">-</span> pCD) <span class="sc">*</span> <span class="fl">0.7</span>, pCD,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">4</span>, </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>pop_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">200</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>pop_matrix[<span class="dv">1</span>,] <span class="ot">&lt;-</span> init_pop</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pop_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>N_periods <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pop_matrix)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N_periods){</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    pop_matrix[i,] <span class="ot">=</span> pop_matrix[i<span class="dv">-1</span>,] <span class="sc">%*%</span> x_matrix</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> pop_matrix <span class="sc">%&gt;%</span> </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'t'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t =</span> <span class="fu">as.numeric</span>(t)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>t, <span class="at">names_to =</span> <span class="st">'state'</span>, <span class="at">values_to =</span> <span class="st">'n'</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> n, <span class="at">fill=</span>state)) <span class="sc">+</span> </span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-fourstate-markov-oneabsorbing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-fourstate-markov-oneabsorbing-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Four state Markov model with one absorbing state</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For <a href="#fig-fourstate-markov-oneabsorbing">Figure&nbsp;3</a> I’ve doubled the number of cycles, from 100 to 200. The initial population composition is exactly the same as in the example two chunks ago. But over time the proportion of the population that exists in the new state, D, keeps growing. If the number of cycles were increased further still, then by the end pretty much everyone would be in state D. Why is this?</p>
+<p>Let’s look carefully at the 4th row in the transition matrix, corresponding to the transition probabilities of moving to each of the four states in the next cycle conditional on being in state D in the current cycle. This row is written as <span class="math inline">\(\{0, 0, 0, 1\}\)</span>, meaning the conditional probability of moving from state D to any other state is 0. This wouldn’t matter, except there’s a <em>nonzero</em> (albeit low) probability of moving <em>to</em> state D from any other state. D is a state that, each cycle, some of the population can enter. But like the Hotel California, once they’ve checked into this state they can never leave.</p>
+<p>The technical term for a state with D’s transition matrix properties is an <strong>absorbing state</strong>; by this definition all other states can be referred to as <strong>nonabsorbing states</strong>. A more intuitive way of representing state transition relationships is through a diagram, where each state is represented as a circle or similar, and each transition probability represented as a line connecting the circles. For example, a diagram of the three state example, with no nonabsorbing states, would look something like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">%%{
+    'theme': 'darkMode'
+}%%
+    flowchart TD
+        A --&gt;|pAA| A 
+        A --&gt;|pAB| B 
+        A --&gt;|pAC| C  
+        B --&gt;|pBA| A
+        B --&gt;|pBB| B  
+        B --&gt;|pBC| C  
+        C --&gt;|pCA| A  
+        C --&gt;|pCB| B 
+        C --&gt;|pCC| C 
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>By contrast, the four state version, with absorbing state D, would look more like the following:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">%%{
+    'theme': 'darkMode'
+}%%
+    flowchart TD
+        A --&gt;|pAA| A 
+        A --&gt;|pAB| B 
+        A --&gt;|pAC| C  
+        A --&gt;|pAD| D
+        B --&gt;|pBA| A
+        B --&gt;|pBB| B  
+        B --&gt;|pBC| C
+        B --&gt;|pBD| D  
+        C --&gt;|pCA| A  
+        C --&gt;|pCB| B 
+        C --&gt;|pCC| C
+        C --&gt;|pCD| D
+        D --&gt;|pDD = 1| D 
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Here we can see that, though there are arrows going into D, the only arrow going out of D then goes to.. D, and has a probability of 1. State D takes, but never gives back.</p>
+</section>
+</section>
+<section id="survival-at-its-simplest" class="level2">
+<h2 class="anchored" data-anchor-id="survival-at-its-simplest">Survival at its simplest</h2>
+<p>A transition model can be specified with just two states - one absorbing; the other nonabsorbing - and with an initial population entirely in the nonabsorbing state. Let’s look at the following example of this:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10000</span>, <span class="dv">0</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>pAB <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span> <span class="sc">-</span> pAB, pAB,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span>, </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>pop_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>pop_matrix[<span class="dv">1</span>,] <span class="ot">&lt;-</span> init_pop</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pop_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>N_periods <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pop_matrix)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N_periods){</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    pop_matrix[i,] <span class="ot">=</span> pop_matrix[i<span class="dv">-1</span>,] <span class="sc">%*%</span> x_matrix</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> pop_matrix <span class="sc">%&gt;%</span> </span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'t'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t =</span> <span class="fu">as.numeric</span>(t)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>t, <span class="at">names_to =</span> <span class="st">'state'</span>, <span class="at">values_to =</span> <span class="st">'n'</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> n, <span class="at">fill=</span>state)) <span class="sc">+</span> </span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-survival-as-markov" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-survival-as-markov-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Simple survival modelling using Markov models</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Does this look familiar? It should, because it’s the same scenario described in the Constant Change section above. There are two states: A and B. Everyone (10,000 people) starts off in state A, each cycle there’s a 2% probability of transitioning from A to B, and B is an absorbing state. The state transition model above is just another way of representing the same phenomena, even though it’s seldom used in this way.</p>
+<p>And what’s the canonical example of a phenomena where the above properties hold: i.e.&nbsp;everyone starts off in one state, there are only two states, one of which is absorbing, and each time period there’s a probability of going from the nonabsorbing to the absorbing state? Well, that would be when we label the two states as follows:</p>
+<ul>
+<li><strong>A</strong>: <em>Alive</em></li>
+<li><strong>B</strong>: <em>Dead</em></li>
+</ul>
+<p>So, a two state transition model with one absorbing state <em>is</em> a simple case of survival modelling.</p>
+<p>Survival modelling, contrary to inital expectations, does not have to be applied only to matters of life and death; it can be applied to any two state scenario where one state <em>can be considered</em> absorbing. The operative term here is <em>can be considered</em>. Look carefuly again at the phrasing I used in the Constant Change section above:</p>
+<blockquote class="blockquote">
+<p>More concrete: let’s say we think the risk of someone who’s healthy becoming sick each week is 2%, and we’re interested in understanding the proportion of a population who become <em>ever sick</em> over time. Although the weekly risk of becoming sick doesn’t change, the cumulative risk of becoming ever sick keeps growing.</p>
+</blockquote>
+<p>Although health and sickness are transient, non-absorbing states, by defining the problem in terms of an initially healthy cohort of persons who become <em>ever sick</em>, I reframed the scenario into one in which survival modelling is appropriate. <em>Ever sick</em> is an <em>absorbing state</em>, because the alternative to this is <em>never sick</em>, and once someone has become sick once they are never <em>never sick</em> again, even though if their health were tracked again they would likely enter and leave periods of better and worse health.</p>
+<p>This reframing of transient events into absorbing states allows survival modelling to be applied to, of all things, events like becoming a parent. Imagine a cohort of 10,000 25 year old women, all initially childless (so not parents), and follow them for 10 years. Each year, some proportion have a child, and so become parents. Once they become a parent, they can never <em>un</em>become a parent again, even if over this decade some proportion become have one, two, three or even more children (whereas others have no children); in the binary gaze of the absorbing state a parent of three children is no more or less of a parent than a parent of one child.</p>
+<p>So, any transient event can be modelled using survival modelling by treating defining an absorbing state as occurring when that transient event <em>first</em> occurs. In the case of death, this clearly makes sense, as - brief moments of heart or brain death followed by successful heroic intervention notwithstanding - death truly is an absorbing state. In the case of becoming a parent the idea of treating this like an absorbing state - an event from which there’s no turning back - also makes quite a lot of sense, with parenthood being for most people who experience something that changes their lived experiences, attitudes and behaviour in an irreversible way. For other first events, the theoretical jusitifications may be less compelling: Is voting in an election something that irreconcilibly alters someone, for example? What about first getting a full time job? First getting a driving licence? First owning a house? For each of these defining an absorbing state as the first time a transient or repeated event occurs can be done, but does it always make as much sense, conceptually, to think about phenomena with survival modelling in mind?</p>
+</section>
+<section id="thin-slicing-from-probabilities-to-risks-and-hazards" class="level2">
+<h2 class="anchored" data-anchor-id="thin-slicing-from-probabilities-to-risks-and-hazards">Thin-slicing: from probabilities to risks and hazards</h2>
+<p>The Markov model structure is a nice framework with which to approach a lot of state change phenomena, and I think may be too little used pedagogically. But it has two downsides when it comes to survival modelling proper. Firstly, by default it assumes constant transition event probabilities, whereas the probabilities of entering an absorbing state may in reality change over time. Secondly, it involves defining a fixed cycle period, such as one week or one year.</p>
+<p>Regarding the first downside, there is a potential workaround: instead of having single transition matrix, there could be a slightly different transition matrix for each time period. For example, for an event risk that increases over time, the first transition matrix could apply an event probability of 0.001; the 100th transition matrix apply an event probability of 0.01, and each intermediate transition probability could be a linear (or log linear) interpolation between these two extreme event probabilities, such that each cycle the event probability is increased relative to the previous cycle. This would be an example of an <strong>accelerating risk</strong> model; and if the risk were successively lower in each cycle, then it would be a <strong>decelerating risk</strong> model. It <em>could</em> be done with Markov models, but it’s hardly ideal. Instead of having a single transition matrix, which contains <span class="math inline">\(K^2\)</span> cells (where <span class="math inline">\(K\)</span> is the number of states), we now have a third dimension, <span class="math inline">\(TK^2\)</span> (where T is the number of cycles): our pithy little square of cells has become a long and inelegant cuboid.</p>
+<p>Regarding the second downside: we know that many events don’t occur in or on a fixed schedule. If make the cycle length too large - such as per decade - than an individual may go from state A to state B to state C then back to state B within a single period, so which of the states it would be appropriate to define the individual as being in during that period is a bit arbitrary. Conversely, if the cycle length is too small - such as the millisecond or minute - then almost all cycles will be ones in which almost nothing occurs: the on-diagonal cells, <code>pkk</code> (where k is the state indicated by row k and column k in the transition matrix), will all be close to 1, and it will take a huge number of cycles - so a lot of computing power and memory - to simulate processes over enough of a time period to understand how things are likely to change over time. What can we do?</p>
+<p>When it comes to survival modelling, where there are just two states and one is absorbing, we can trade off the flexibility of the transition matrix in terms of representing more than two states for analytic solutions which solve both of the above issues. In the simplest example, in which the event risks neither increase nor decrease over time, we can instead make use of an <strong>exponential model</strong>. The intuition and derivation of the exponential model comes about by recognising there’s a certain arbitrariness in the choice of time interval implicit in the <strong>constant change</strong> section above. We’ve discussed ways of expressing an outcome for one time period in terms of the value of that state in the last time period; we’ve not discussed the length of the time period itself. Let’s call our time interval <span class="math inline">\(\tau\)</span>, and let’s imagine what would happen to our model if we kept altering <span class="math inline">\(\tau\)</span>; in particular, reducing it, until it <em>approaches</em> 0. This kind of thought experiment, where we take finite intervals and try to think what they would look like if they became infinitesimally small, is the domain of calculus. For a finite time interval, we have a <em>probability</em> of something happening in a <em>time interval</em> bounded by <span class="math inline">\(t\)</span> and <span class="math inline">\(t + \tau\)</span>. By contrast, as we make the time interval, the size of the time box, infinitesimally small, then we no longer speak in terms of <em>probabilities</em>, but instead <strong>hazards</strong>, and <strong>hazard rates</strong>. A hazard is the instantaneous analogue of a risk, a force of change occurring <em>right now</em>, not from time 1 to time 2. Over time, over any valid and specifiable period of time, some proportion of a stock of a susceptible population will have succumbed to this hazard. And when this hazard, that applies at all times, does not itself vary over time, then we can say (see section 7.1.2 of <a href="https://grodri.github.io/glms/notes/c7.pdf">this guide</a>, for example):</p>
+<p><span class="math display">\[
+S(t) = e^{- \lambda t}
+\]</span></p>
+<p>Where <span class="math inline">\(S(t)\)</span> is known as the <em>survival function</em>, and defines the share of the initially susceptible population that has not succumbed to the absorbing state between the start of a period of population and the time specified by <span class="math inline">\(t\)</span>. The only parameter other than time in this equation is <span class="math inline">\(\lambda\)</span>, which is the hazard. Unlike with the fixed interval Markov-style approaches discussed so far, this equation can be used to estimate survival proportions at any specifiable time period, and does not involve iteratively rerunning the same equation multiple times to get this cumulative probability.</p>
+</section>
+<section id="constantly-changing-hazards" class="level2">
+<h2 class="anchored" data-anchor-id="constantly-changing-hazards">(Constantly) Changing hazards</h2>
+<p>The survival function equation above is a specific case of a more generalisable form, <span class="math inline">\(h(t; \alpha) = \lambda\)</span> (where <span class="math inline">\(h(.)\)</span> refers to ‘hazard function’). Here I’ve listed time <span class="math inline">\(t\)</span> and additional parameters <span class="math inline">\(\alpha\)</span> as additional inputs that the hazard function could include, even though in the exponential case it’s just a single constant <span class="math inline">\(\lambda\)</span>. One simple extension of the hazard function would be if we assume the hazard either increases or decreases over time. This can be achieved using the <a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull Distribution</a>, which has up to three parameters - scale, shape, and location - for representing more complicated patterns of change in hazard over time. The way the Weibull distribution is represented mathematically, including whether the default distribution has two or three parameters, differs between fields of research and application. Regardless, it’s through the <em>shape parameter</em> that increasing or decreasing hazards can be representing, with (depending on parameterisation) values greater than 1 indicating *increasing hazards** over time, values less than one indicating <em>decreasing hazards</em> over time, and a value of 1 indicating constant hazard, i.e.&nbsp;the assumption implicit in the exponential distribution.</p>
+<p>As an example of this, the figure below shows the cumulative probability of a Weibull distribution, where t varies from 0 to 10, where the shape parameter is either set to <code>1</code>, indicating a constant hazard (black line); to <code>0.5</code>, indicatign a decreasing hazard (red line); or to <code>2.0</code>, indicating an increasing hazard (blue line). For reference, the exponential distribution is drawn with a green line (As this is identical to the Weibull distribution with shape = 1, the green line is drawn thicker than other lines so the black line is also visible).</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> pweibull, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>), <span class="at">colour =</span> <span class="st">'red'</span>) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> pweibull, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">2</span>), <span class="at">colour =</span> <span class="st">'blue'</span>) <span class="sc">+</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> pexp, <span class="at">colour =</span> <span class="st">'green'</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> pweibull, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">'t'</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">'Cumulative probability'</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">'Effect of shape parameter on cumulative probability of event in a Weibull distribution'</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">subtitle =</span> <span class="st">'Green: exponential. Black: Weibull(1). Red: Weibull(0.5). Blue: Weibull(2) '</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-weibull" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-weibull-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Examples of Weibull models with constant, accelerating and slowing hazards</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lifetables" class="level2">
+<h2 class="anchored" data-anchor-id="lifetables">Lifetables</h2>
+<p>The Weibull function allows for hazards that vary over time, but the flexibility of the function is not unlimited. They are an example of a <em>parametric</em> model. <a href="https://en.wikipedia.org/wiki/Life_table">Lifetables</a>, by contrast, are an example of a <em>nonparametric</em> model, that can show more complex patterns of variation between time and hazard; though the term ‘model’ may itself be giving the approach too much technical credit.</p>
+<p>A lifetable is, unsurprisingly, a table, with at least two columns: one for age, <span class="math inline">\(x\)</span>; and one for probability of reaching the next age, which we’ll call <span class="math inline">\(p(x)\)</span>. Like Markov models, lifetables represent time in discrete time intervals (unlike Markov and exponential models, where time is treated continuously); these intervals are often, but not always, of a fixed distance apart from each other. They are used in demography, public health, and the actuarial sciences, and have been used for hundreds of years in one form or another.</p>
+<p>To get familiar with lifetables, we’ll use the UK lifetables file available <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/datasets/nationallifetablesunitedkingdomreferencetables">here</a>. Within this, the latest lifetable available for males in the UK looks as follows:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: readxl</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># getwd()</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># list.files()</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>lifetable_male_latest <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># path = 'posts/glms/one-off/time-and-change/nltuk198020203.xlsx',</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">path =</span> <span class="st">'nltuk198020203.xlsx'</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sheet =</span> <span class="st">'2019-2021'</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">range =</span> <span class="st">'A6:F107'</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>lifetable_male_latest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 101 × 6
+     age       mx       qx      lx    dx    ex
+   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1     0 0.00431  0.00430  100000  430.   78.7
+ 2     1 0.000224 0.000224  99570.  22.3  78.0
+ 3     2 0.000137 0.000137  99548.  13.6  77.1
+ 4     3 0.000107 0.000107  99534.  10.7  76.1
+ 5     4 0.000071 0.000071  99523.   7.1  75.1
+ 6     5 0.000073 0.000073  99516.   7.3  74.1
+ 7     6 0.000077 0.000077  99509.   7.6  73.1
+ 8     7 0.00007  0.00007   99501.   7    72.1
+ 9     8 0.000068 0.000068  99494.   6.8  71.1
+10     9 0.000065 0.000065  99487.   6.4  70.1
+# ℹ 91 more rows</code></pre>
+</div>
+</div>
+<p>The ‘Notation’ tab decodes the above terms as follows:</p>
+<ul>
+<li><strong>mx</strong>: the central rate of mortality</li>
+<li><strong>qx</strong>: the mortality rate between age x and (x + 1), that is the probability that a person aged x exactly will die before reaching age (x + 1)</li>
+<li><strong>lx</strong>: is the number of survivors to exact age x of 100,000 live births of the same sex who are assumed to be subject throughout their lives to [the mortality hazards presented in the lifetables ]</li>
+<li><strong>ex</strong>: is the average period expectation of life at exact age x, that is the average number of years that those aged x exact[ly] will life thereafter based on [the lifetables]</li>
+</ul>
+<p><strong>mx</strong> and <strong>qx</strong> are subtly different, with <strong>qx</strong> a more empirical quantity, and <strong>mx</strong> a quantity slightly more dependent on model assumptions. Both are in practice very similar, except at the earliest ages. For our illustrations we’ll focus on <strong>qx</strong>, as this is more conceptually similar to the kinds of transition probabilities being modelled by Markov models and similar. If we plot age (<span class="math inline">\(x\)</span>) against qx (<span class="math inline">\(q(x)\)</span>) then we get the following:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lifetable_male_latest <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, qx)) <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-lifetable-qx-against-x" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-lifetable-qx-against-x-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: qx against x (age), for UK male lifetables for years 2019-2021.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This in practice looks largely like an exponentially increasing probability of mortality with age. However we can also see an elevated mortality risk in the first age. If the relationship is largely exponential then it should look more like a straight diagonal line, rather than a curve, if we use a log scale for the y axis; doing this might also reveal some other patterns in the data:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lifetable_male_latest <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, qx)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-lifetable-qx-against-x-logy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-lifetable-qx-against-x-logy-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: qx against x (age), for UK male lifetables for years 2019-2021. Log y axis</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For most ages in adulthood, from around about age 35 years onwards, the relationship does indeed look like a diagonal straight line, consistent with exponentially increasing risk. (i.e.&nbsp;something that a Weibull model with accelerating risk should be able to represent.) However once in the mid 70s the risk appears to increase a bit faster, and at some of the oldest ages appears then to slow down a bit again. The risk in the first year of age is much higher than a straight line relationship would project; the risk in much of childhood is much lower; and the risk in early adulthood is a bit higher. In the figure below I’ve extrapolated the line drawn through ages 40 to 80 both leftwards to younger ages, and rightwards to older ages.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lifetable_male_latest <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, qx)) <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_smooth</span>(<span class="fu">aes</span>(age, qx), <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> lifetable_male_latest <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">between</span>(age, <span class="dv">40</span>, <span class="dv">80</span>)),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">'lm'</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-lifetable-risk-extrap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-lifetable-risk-extrap-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: UK male lifetable qx with extrapolation from ages 40 to 80 years inclusive to earlier and later ages.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>So in <a href="#fig-lifetable-risk-extrap">Figure&nbsp;8</a> we have an empirical relationship that largely has features consistent with an assumption of simple exponential growth, but with some important differences. For some ages, and for some problems, therefore, a modelled stylisation of the relationship might be adequate; for other problems and ages it would not be.</p>
+<p>Implicitly, lifetables alone treat age and time as synonymous for the purposes of calculating life expectancies and so on. This comes both from issues of data availability (a topic we’ll focus on later), and also from the undeniable fact that individuals <em>age one year per year</em>. So, for example, a 50 year old in 1980 would be a 51 year old in 1981, a 52 year old in 1983, and so on. More symbolically: if <span class="math inline">\(x\)</span> becomes <span class="math inline">\(x + \tau\)</span>, then <span class="math inline">\(t\)</span> must become <span class="math inline">\(t + \tau\)</span>. Given this assumption (and it can be a strong assumption), we can use <span class="math inline">\(q(x)\)</span> (or its slightly nerdier cousin <span class="math inline">\(m(x)\)</span>) to calculate cumulative risk of death over the lifecourse if nothing happens over time except our getting older. This is largely what the quantity <span class="math inline">\(l(x)\)</span> shows (technically, it’s the opposite of this). Let’s try to calculate this cumulative hazard directly, and compare it with the pre-calculated quantity. (This is, incidentally, something a little bit easier to do with a spreadsheet, but easy enough to do with R too.)</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take just the two variables we need</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>mini_lifetable <span class="ot">&lt;-</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    lifetable_male_latest <span class="sc">%&gt;%</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="at">x =</span> age, qx)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of age periods </span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(mini_lifetable)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Cumulative survivorship vector</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>S_x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">'numeric'</span>, <span class="at">length =</span> N)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Everyone's alive at the start </span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>S_x[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply each age's hazard to the surviving population</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N){</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    S_x[i] <span class="ot">&lt;-</span> S_x[i<span class="dv">-1</span>] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> mini_lifetable<span class="sc">$</span>qx[i<span class="dv">-1</span>])</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Everyone is either alive or dead, so everyone who's not alive by a given age must be dead</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Cumulative mortality vector</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>H_x <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> S_x</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>mini_lifetable <span class="ot">&lt;-</span> </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    mini_lifetable <span class="sc">%&gt;%</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">S_x =</span> S_x, <span class="at">H_x =</span> H_x)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>mini_lifetable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 101 × 4
+       x       qx   S_x     H_x
+   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+ 1     0 0.00430  1     0      
+ 2     1 0.000224 0.996 0.00430
+ 3     2 0.000137 0.995 0.00453
+ 4     3 0.000107 0.995 0.00466
+ 5     4 0.000071 0.995 0.00477
+ 6     5 0.000073 0.995 0.00484
+ 7     6 0.000077 0.995 0.00491
+ 8     7 0.00007  0.995 0.00499
+ 9     8 0.000068 0.995 0.00506
+10     9 0.000065 0.995 0.00513
+# ℹ 91 more rows</code></pre>
+</div>
+</div>
+<p>Let’s look at the cumulative survivorship curve:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mini_lifetable <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, S_x)) <span class="sc">+</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">'Cumulative proportion alive by age x'</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">'Age x'</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">'Our cumulative survivorship'</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s now compare this with the quantity <span class="math inline">\(l(x)\)</span>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mini_lifetable <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        lifetable_male_latest <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(<span class="at">x =</span> age, lx)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">S_x =</span> <span class="dv">100000</span> <span class="sc">*</span> S_x) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(x, S_x, lx) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(S_x, lx), <span class="at">names_to =</span> <span class="st">'variable'</span>,) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y =</span> value, <span class="at">colour =</span> variable, <span class="at">group =</span> variable)) <span class="sc">+</span> </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> variable)) <span class="sc">+</span> </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">'Self-calculated and pre-generated cumulative survivorship'</span>, </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">'Age x'</span>, </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">'Cumulative survivorship by age x'</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(x)`</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see that these quantities are effectively identical. Additionally, they are both a type of survival function <span class="math inline">\(S(t)\)</span>, showing cumulatitve survival probability from time 0 through to time t, so long as we assume (again, a <em>strong</em> assumption) that x and t are effectively the same. The lifetable <span class="math inline">\(l(t)\)</span> is therefore an example of a <em>nonparametric</em> survival function <span class="math inline">\(S(t)\)</span> that operates with discrete time intervals (as with a Markov model), even though they are often used and applied by different fields to those where survival models are the bread-and-butter, leading to different terms and symbols often being used.</p>
+</section>
+<section id="absorption-is-inevitable.-understanding-censoring-in-survival-data" class="level2">
+<h2 class="anchored" data-anchor-id="absorption-is-inevitable.-understanding-censoring-in-survival-data">Absorption is Inevitable. Understanding Censoring in Survival data</h2>
+<p>Let’s circle back and join together a couple of points discussed previously:</p>
+<ul>
+<li>Back in <a href="#fig-fourstate-markov-oneabsorbing">Figure&nbsp;3</a> we first saw an example of a process being simulated forwards with one absorbing state. This was simplified further to the two state example of <a href="#fig-survival-as-markov">Figure&nbsp;4</a>, with one absorbing state. In both examples we saw that, as time marches on, the proportion of the population in the absorbing state keeps increasing. Given a long enough period of time, what proportion can we expect to be in the absorbing state? Well, clearly 100%.</li>
+<li>In the section on lifetables, we mentioned we are making a strong assumption in assuming age and time are equivalent, i.e.&nbsp;that the age-specific annual mortality probabilities as recorded are those that will be experienced by real-life cohorts of people.</li>
+</ul>
+<p>From the first point we can conclude that, for a two-state scenario with one absorbing state, we can describe the two possible states up to a particular time period either as:</p>
+<ul>
+<li>Absorbed</li>
+<li>Not Absorbed</li>
+</ul>
+<p>Or <em>equivalently</em> as:</p>
+<ul>
+<li>Absorbed</li>
+<li>Not Absorbed <em>yet</em>.</li>
+</ul>
+<p>The distinction between the first and second framing is subtle, slight, but important for understanding distinct feature of survival data structures and the models they are applied to. This feature is known as <strong>censoring</strong>, and is a reason survival modelling often <em>looks</em> more distinct, from many other types of model, than it really is.</p>
+<p>Let’s think again about the lifetable example. <em>For which birth cohort do the lifetable’s estimates of life expectancy and other conditional and cumulative survival estimates apply?</em> Technically, the answer is <em>no birth cohort that has ever lived, or ever will</em>. The lifetable’s estimates are for what’s known as a <em>synthetic cohort</em>, even though every estimate is produced using real-world data. Additionally, the unconditional (as in starting at birth) and conditional (as in starting from other ages) life expectancies are technically known as <em>period life expectancies</em>. This is in contrast to <em>cohort life expectancies</em>, which would be life expectancies that relate to specific, real-world birth cohorts. Ideally, we would like to know these cohort life expectancies. But unfortunately by the time we do they have stopped being useful. Why?</p>
+<p>To illustrate, let’s think about the amounts of data available to calculate age-specific mortality for three birth cohorts: the 1930 birth cohort, the 1960 birth cohort, and the 1990 birth cohort. For the 1930 birth cohort, we have observed their annual age-specific mortality probabilities for each complete year of age up to age 94 (2023 - 1930); for the 1960 birth cohort we have observed their annual age-specific mortality probabilities up to age 64; and for the 1990 birth cohort we have observed these values up to age 34. An implication of this is that we can <em>know</em> (rather than simply estimate) the mortality probability between ages 50 and 51 years (quantity <span class="math inline">\(q(50)\)</span> in lifetable jargon) for the 1930 and 1960 birth cohorts, but not the 1990 birth cohort. We have <span class="math inline">\(q(20)\)</span> for all three birth cohorts; we have <span class="math inline">\(q(80)\)</span> for only one of the birth cohorts (the 1930 birth cohort).</p>
+<p>The above is a sense a convoluted way of saying <em>we cannot know the future</em>, but also a way of thinking about how to frame it as a special kind of <em>missing data problem</em>, known as <strong>censoring</strong>.</p>
+<section id="censoring-and-other-types-of-missingness-a-cinematic-analogy" class="level3">
+<h3 class="anchored" data-anchor-id="censoring-and-other-types-of-missingness-a-cinematic-analogy">Censoring and other types of missingness: A cinematic analogy</h3>
+<p>There are different classes of missing data. Imagine you’re watching a film in a cinema, and part way through someone with two-foot bouffant hair sits right in front of you, blocking your view. However - both fortunately and not - Mr or Mx Bouffant can’t keep still, so a lot of the time you can see what’s on the screen; Bouffant’s not blocking. From the time Bouffant first sits in front of you, some of images will be missing to you. Worse: Bouffant is also a talker, or maybe a loud muncher, so there’ll also be times when you can’t hear the film either; sometimes you can neither hear nor see the film. Poor you!</p>
+<p>If the bits of the film you cannot hear, or see, the film are related in some way to the contents of the film itself, then (perhaps counterintuitively) Bouffant’s presence mean that, from your perspective, the bits of the film (sound and vision) that are missing to you are <strong>Missing at Random</strong> (MAR). For example, maybe Bouffant tends to munch a lot during establishing shots, or to sit up straight (<em>definitely</em> blocking your view) when there are car chases. In either case, there are bits of information you have access to (such as the visuals of the establishing shots, or the sounds of the car chases) that help you infer (more technically <em>impute</em>) the bits of information you’re not seeing or hearing.</p>
+<p>Missing at Random (MAR) is the more optimistic scenario. If instead there was absolutely no relationship or link between Bouffant’s obstructions of your sights and sounds of the film, and the film itself, then this is called <strong>Missing complately at random</strong> (MCAR). In this latter scenario there’s no pattern between what you’ve observed and not observed that you can use to work out what you might have missed. (In practice there’s little we can use to determine whether this kind of missingness is determined by a MAR or a MCAR process; often it seems to be assume missingness is MAR and hope it’s not MCAR!)</p>
+<p>The type of missingness covered by censoring, however, is different. Imagine, 70 minutes through a 110 minute film, the projector breaks down; the 40 minutes at the end of the film are <strong>censored</strong>. The missingness is all in one big lump at the end. You can <em>guess</em> what happens in the last third of the film, based on what happened during the first two thirds, but you can’t <em>know</em>.</p>
+<p>When it comes to survival modelling, you always know <em>what</em> will happen: eventually, everything gets absorbed into the absorbing state. But if you don’t have all the data, you can’t know <em>when</em> what will eventually, inevitably, happen will happen. You can’t know whether the hazard of absorption gets more or less severe over time, or exhibits (as with mortality data) a more complex pattern.</p>
+</section>
+<section id="popping-and-stopping" class="level3">
+<h3 class="anchored" data-anchor-id="popping-and-stopping">Popping and Stopping</h3>
+<p>Let’s start with another film-adjacent example: imagine you’re making popcorn. You pour 1000 unpopped kernels into a hot pan, and close the lid. Then you wait 30 seconds.</p>
+<p><em>None of the kernels have popped</em>.</p>
+<p>Does this mean the kernels will never pop? Of course not. You can assume that, so long as constant heat gets applied, then with more time one of the kernels will pop, then another, then another… until eventually pretty much all of the kernels will be popped.</p>
+<p>Now let’s imagine you’re a bit more patient. You’ve now weighted exactly five minutes, and you’ve made records of exactly when you heard a pop (say using a sound recorder). Initially it was just one pop, then a few seconds later another; at a certain time you hear a cacophony of popping; then the rate of popping starts to slow down. By the time you’ve stopped recording at five minutes the previous pop had been 10 seconds ago. Only 965 of the 1000 kernels have popped by the time you stop, though you’re confident if you waited even longer all 1000 kernels would pop eventually.</p>
+<p>If you turned the popcorn popping recording into survival modelling data, and even more magically/horrifically had tracked the time to popping of each individual kernel, your data might have something like the following structure:</p>
+<div id="tbl-surv-popcorn-example" class="anchored">
+<table class="table">
+<caption>Table&nbsp;6: Popcorn popping hypothetical data in Survival data structure</caption>
+<thead>
+<tr class="header">
+<th>kernel_id</th>
+<th>time (seconds)</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>50</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>297</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>197</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>300</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>204</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>199</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>241</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In this example, even kernel contributes exactly one observation, even though the kernels were evaluated as many different timepoints. Attached to each kernel is a time value, called <code>time</code>, and a binary flag, called <code>status</code>. Another, pithier, way this same data might be presented is:</p>
+<blockquote class="blockquote">
+<p><code>5, 50, 297, 197, 300+, 204, 199, 241</code></p>
+</blockquote>
+<p>In this pithier form the absence of a <code>+</code> appended to a time value indicates a status of <code>1</code>, whereas the presence of a <code>+</code> indicates a status of <code>0</code>.</p>
+<p>In either case the time is clearly a time <em>until</em>… <em>something</em>. What is this <em>something</em>? Well, if status is 1, the time is the time until the absorbing event occurred - in this case the kernel popping - whereas if the status is <code>0</code> the time recorded is the <em>time until censoring</em>. Five minutes is 300 seconds, and so no kernels were observed longer than 300 seconds. To reiterate: the kernel that didn’t pop by 300 seconds is not immune to heat and time. It’s not unpoppable; it just hasn’t popped <em>yet</em>.</p>
+<p>So, how is this kind of information useful for survival models? Well, knowing that a kernel hasn’t popped by 300 seconds is more of a testament to its survivability to popping than knowing that a kernel hasn’t popped by 30 seconds, and knowing that it hasn’t popped by 600 seconds would be more of a testament still. Although censored observations still don’t tell us when the absorbing event will happen, they do give us a lower bounds on when the event hasn’t happened by. Knowing that a kernel hasn’t popped by 300 seconds at least tells us that, when the pop does occur, it will occur after 300 seconds.</p>
+</section>
+<section id="dripfeeding-kernels" class="level3">
+<h3 class="anchored" data-anchor-id="dripfeeding-kernels">Dripfeeding kernels</h3>
+<p>In the above example, because the popping trial is stopped after 5 minutes (300 seconds), if the absorbing event hasn’t been observed yet, the censoring time will be identical for all kernels: 300 seconds. This is because in this first example we assumed all kernels entered the ‘trial’ (by fire) at exactly the same time. Now let’s think of a slightly modified scenario: imagine that, instead of all the kernels being dumped into the popcorn maker at the same time, they have to be added in more gradually, through a small funnel. If we say that t=0 is the time the machine is first turned on, then maybe the first kernel enters the machine at t=1.3, then the second at t=1.5, the third at t=1.6, and the forth at t=2.0. Let’s also imagine that, of the 1000 kernels poured slowly into the machine, the last kernel enters the machine at t=160.5 seconds. And let’s also imagine that, as in the earlier example, the trial (by fire) is stopped after exactly 5 minutes (300 seconds).</p>
+<p>If we imagine both the first and last kernel that entered the trial are unpopped, what does this tell us? Well, for the first kernel, we know that it did not pop in 298.5 seconds. And for the last kernel, we know that it did not pop in 160.5 seconds. Our survival data structure records for these two kernels would look like <code>298.5+, 160.5+</code> in the more concise form, and in the tabular form would look as follows:</p>
+<div id="tbl-surv-popcorn-example-2" class="anchored">
+<table class="table">
+<caption>Table&nbsp;7: First and last kernel unpopped data structure</caption>
+<thead>
+<tr class="header">
+<th>kernel_id</th>
+<th>time (seconds)</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>298.5</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1000</td>
+<td>160.5</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="real-world-relevance" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-relevance">Real-world relevance</h3>
+<p>This latter scenario, with the dispersed and gradual entry to the trial, is closer to the usual kinds of data generating processes for which survival modelling is likely to be used in practice. Imagine you are running a clinical trial, in which a surgical device is fitted, and you want to know the rate at which the device fails over a 10 year period. And for this trial you need 200 subjects. Of course, even if every subject could be recruited at the same time, not everyone could have the operation at the same time; it will depend on the limited availability of both the subjects, the surgical staff, and the operating rooms. So, each subject’s start date will be different, perhaps by weeks, or by months, or by years. Like the small funnel in the second popcorn maker these logistical factors mean the times subjects start their participation in the study are staggered. And as with any real life evidence like this it may often be the case that the effective censored dates are different too: a subject may move, and not give a forwarding address, so becomes last observed after two years; another subject may consent at one and five years, but withdraw their participation after seven years; in either case the subject is still able to contribute some data to the trial, even if it’s for a shorter duration than expected. Regardless of the complex variation in when subjects start and end their participation in a study, with the survival data structure - time, and status - usable information can be acquired from every subject’s participation.</p>
+</section>
+</section>
+<section id="its-one-thing-or-another-competing-absorbing-states" class="level2">
+<h2 class="anchored" data-anchor-id="its-one-thing-or-another-competing-absorbing-states">It’s one thing or another: competing absorbing states</h2>
+<p>Although most applications of survival modelling are of scenarios where there is a single absorbing state, and one non-absorbing state which a population exists in intially, we saw from the contingency tables and Markov models near the start - and know from our own experience - that there can be multiple absorbing states. Now, when there are multiple absorbing states, <em>the</em> outcome as we move through time is no longer inevitable, though <em>an</em> outcome is.</p>
+<p>As a more concrete example, in a healthy-sick-dead model, there is one absorbing state - dead - and so the final composition of the population is knowable in advance, regardless of initial population composition or individual transition state parameters. In the long run, to paraphrase Keyes, we’re all dead.</p>
+<p>This changes if we partition dead into two or more substates that are mutually exclusive but both still absorbing. For example, consider this four state model:</p>
+<ul>
+<li>non-smoker</li>
+<li>smoker</li>
+<li>dead - lung cancer</li>
+<li>dead - not lung cancer</li>
+</ul>
+<p>There are now <em>two</em> absorbing states - dead-lung cancer; and dead - not lung cancer - and two non-absorbing states: smoker and non-smoker. We likely have some strong intuitions about the relative transition probabilities linking these states. For example, we might expect both the non-smoker and smoker states to be quite ‘sticky’, meaning the probabilities of remaining in each state in each cycle is high. We might also expect the probability of entering dead-lung cancer from smoker to be higher than dead-lung cancer from non-smoker.</p>
+<p>In this latter, two absorbing state, example we both have the same kind of <em>structural certainty</em> we did when there was one aborbing state, but also much more <em>contingent uncertainty</em> about the exact proportions ending up in each absorbing state. More concretely: we know the entire population will eventually enter <em>an absorbing state</em>, but we cannot know from just looking at the scenario exactly what proportion will end up in each of the absorbing state. This will depend on other factors, such as the initial population composition (like the relative proportion of smokers and non-smokers), and the transition probabilities in the transition matrix. If we want to get the final relative proportions, we’ll likely have to build and run the model.</p>
+<p>As an example, let’s run a Markov model where the transition matrix is kept the same (see the code for the transition probabilities), and everyone starts off alive, but either (A) 10% of the population are smokers; or (B) 50% of the population are smokers. This is shown in <a href="#fig-fourstate-markov-twoabsorbing">Figure&nbsp;9</a>, with the code and comments in the code fold just before it.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>scenario_A_init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">900</span>, <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>scenario_B_init_pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">500</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>pAC <span class="ot">&lt;-</span> <span class="fl">0.01</span> <span class="co"># probability of non-smoker dying of lung cancer: 1% </span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>pAD <span class="ot">&lt;-</span> <span class="fl">0.04</span> <span class="co"># probability of non-smoker dying of other causes: 4% </span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>pBC <span class="ot">&lt;-</span> <span class="fl">0.20</span> <span class="co"># probability of smoker dying of lung cancer: 20%</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>pBD <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># probability of smoker dying of other causes: 5%</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span> <span class="sc">-</span> pAC <span class="sc">-</span> pAD) <span class="sc">*</span> <span class="fl">0.98</span>, (<span class="dv">1</span> <span class="sc">-</span> pAC <span class="sc">-</span> pAD) <span class="sc">*</span> <span class="fl">0.02</span>, pAC, pAD, </span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Each cycle, a non-smoker who does not die has a 2% probability of becoming a smoker </span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span> <span class="sc">-</span> pBC <span class="sc">-</span> pBD) <span class="sc">*</span> <span class="fl">0.98</span>, (<span class="dv">1</span> <span class="sc">-</span> pBC <span class="sc">-</span> pBD) <span class="sc">*</span> <span class="fl">0.02</span>, pBC, pBD, </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Each cycle, a smoker who does not die has a 2% probability of becoming a non-smoker</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="co"># First absorbing state: lung cancer death</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>  <span class="co"># Second absorbing state: other death</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">4</span>, </span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">byrow =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>pop_matrix_scenario_A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">200</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>pop_matrix_scenario_A[<span class="dv">1</span>,] <span class="ot">&lt;-</span> scenario_A_init_pop</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>pop_matrix_scenario_B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, <span class="at">nrow =</span> <span class="dv">200</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>pop_matrix_scenario_B[<span class="dv">1</span>,] <span class="ot">&lt;-</span> scenario_B_init_pop</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pop_matrix_scenario_A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alive:NonSmoker"</span>, <span class="st">"Alive:Smoker"</span>, <span class="st">"Dead:Lung"</span>, <span class="st">"Dead:NonLung"</span>)</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(pop_matrix_scenario_B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Alive:NonSmoker"</span>, <span class="st">"Alive:Smoker"</span>, <span class="st">"Dead:Lung"</span>, <span class="st">"Dead:NonLung"</span>)</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>N_periods <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pop_matrix_scenario_A)</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N_periods){</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>    pop_matrix_scenario_A[i,] <span class="ot">=</span> pop_matrix_scenario_A[i<span class="dv">-1</span>,] <span class="sc">%*%</span> x_matrix</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>    pop_matrix_scenario_B[i,] <span class="ot">=</span> pop_matrix_scenario_B[i<span class="dv">-1</span>,] <span class="sc">%*%</span> x_matrix</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>pop_df_scenario_A <span class="ot">&lt;-</span> pop_matrix_scenario_A <span class="sc">%&gt;%</span> </span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'t'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t =</span> <span class="fu">as.numeric</span>(t)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>t, <span class="at">names_to =</span> <span class="st">'state'</span>, <span class="at">values_to =</span> <span class="st">'n'</span>)</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>pop_df_scenario_B <span class="ot">&lt;-</span> pop_matrix_scenario_B <span class="sc">%&gt;%</span> </span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">'t'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">t =</span> <span class="fu">as.numeric</span>(t)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span>t, <span class="at">names_to =</span> <span class="st">'state'</span>, <span class="at">values_to =</span> <span class="st">'n'</span>)</span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> </span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a>        pop_df_scenario_A <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">'A'</span>),</span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a>        pop_df_scenario_B <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">scenario =</span> <span class="st">'B'</span>)</span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a>n_prop_scen_A <span class="ot">&lt;-</span> pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(t <span class="sc">==</span> <span class="dv">200</span>, scenario <span class="sc">==</span> <span class="st">'A'</span>, state <span class="sc">==</span> <span class="st">'Dead:Lung'</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(n) </span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a>n_prop_scen_B <span class="ot">&lt;-</span> pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(t <span class="sc">==</span> <span class="dv">200</span>, scenario <span class="sc">==</span> <span class="st">'B'</span>, state <span class="sc">==</span> <span class="st">'Dead:Lung'</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(n) </span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a>pop_df <span class="sc">%&gt;%</span> </span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> n, <span class="at">fill=</span>state)) <span class="sc">+</span> </span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_area</span>() <span class="sc">+</span></span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> scenario, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-fourstate-markov-twoabsorbing" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-fourstate-markov-twoabsorbing-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Four state Markov model with two absorbing states. Two scenarios</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In this example, in scenario A, where there are fewer smokers initially, 267 of the 1000 persons in the cohort are dead with lung cancer; in scenario B, where there were more smokers initially, 322 of the 1000 persons are dead with lung cancer.</p>
+</section>
+<section id="finally..-smooth-transitions-discrete-event-simulation-des" class="level2">
+<h2 class="anchored" data-anchor-id="finally..-smooth-transitions-discrete-event-simulation-des">Finally.. Smooth Transitions: Discrete Event Simulation (DES)</h2>
+<p>The above example, using Markov models, of course assumes non-varying transition probabilities over time, with no evolution over time between state transitions, and no allowance for prior characteristics of the population (such as different propensities to smoke, or to die, between males and females); as with other Markov it also assumes a fixed cycle length. However, we saw with Weibull modelling that the fixed cycle length assumption can potentially be dropped, along with the fixed hazard rate assumption. And we saw with the lifetable example that transition probabilities and hazards vary in a systematic but complex way with age (as well as, implicitly, by sex). So, how can models incorporating multiple absorbing states <em>also</em> work with continuous time (rather than fixed time cycles), and allow for more complex evolution of hazards with population characteristics (such as age), and time?</p>
+<p>A general purpose framework for relaxing the fixed cycles and fixed probability assumptions of Markov models, and the one-absorbing-state assumption of most survival modelling, is through extending the latter to model competing risks. And a fairly good framework for getting useful information out of such competing risks models is through <strong>discrete event simulation (DES)</strong>. Rather than attempt a formal definition at this stage, let’s dive in with an example.</p>
+<p>We saw from lifetable data (e.g. <a href="#fig-lifetable-qx-against-x-logy">Figure&nbsp;7</a>) that there is a high mortality hazard at the earliest ages, which then declines rapidly at an exponential rate from birth; and also a more steadily increasing mortality risk, which increases exponentially with a more gradual slope, from early adulthood onwards. These form, respectively, the <em>left side</em> and the <em>right side</em> of the bathtub curve. Further, we can imagine there being a constant, background mortality risk, of deaths due to accident. We can give different names to these three components of death: <strong>infantile death</strong>, on the left side; <strong>senescent death</strong>, on the right side; and <strong>accidental death</strong>, forming the underside. This is shown graphically in <strong>?@fig-compete-schedule-sketch</strong>.</p>
+<div id="fig-complete-schedule-sketch" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="competing-schedules.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Competing scedules</figcaption>
+</figure>
+</div>
+<p>We can see these three forms of mortality as <em>competing causes</em>: someone who dies from accidental causes has not died of infantile or senescent causes; someone who dies of infantile causes has not died of accidental or senescent causes; and someone who dies of senescent causes has not died of infantile or accidental causes. For this approach to modelling to work, we can also assume there is at least a theoretical hazard of dying of any of the three causes of death within any age range: someone between the ages of two and three years of age has <em>some</em> definable (if very small) risk of dying of accidental or senescent causes, as well as infantile causes; someone between the ages of 80 and 81 has some theoretical risk of dying of infantile or accidental causes as well as senescent causes.</p>
+<p>At a first approximation, each of these three competing causes can be represented by its own Weibull model: the infantile causes schedule by a model with declining hazard; the senescent causes schedule by a model with accelerating hazard; and the accidental causes schedule by a model with a Weibull model with invariant hazard (i.e.&nbsp;an exponential model).</p>
+<p>To create a DES using this model we would do the following:</p>
+<ul>
+<li>For each of (say) 10,000 times:
+<ul>
+<li>Generate a predicted value of x from H1 (the infantile model), a predicted value of x from H2 (the accident model), and a predicted value of x from H2 (the senescent model). For iteration <span class="math inline">\(i\)</span> in the loop let’s call this choice set <span class="math inline">\(S_i \in \{x_{i, 1}, x_{i, 2}, x_{i, 3}\}\)</span></li>
+<li>Assign the time and end state of individual <span class="math inline">\(i\)</span> to</li>
+</ul></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
