@@ -3,6 +3,8 @@ project:
   output-dir: docs
 website:
   title: "Jon Minton's Blog"
+  site-url: https://jonminton.github.io/jon-blog/
+  description: "Jon Minton's personal blog. All things random."
   twitter-card: 
     site: "@jonminton"
   navbar:
@@ -26,6 +28,8 @@ website:
         href: https://twitter.com/JonMinton
       - icon: linkedin
         href: https://uk.linkedin.com/in/jon-minton-09480b13a
+      - icon: rss
+        href: index.xml
 format:
   html:
     theme: 
