@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-08-24">
 
-<title>Jon Minton’s Blog - Hand-drawn Statistics</title>
+<title>Jon Minton’s Blog - Three quality-of-life upgrades</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Hand-drawn Statistics">
-<meta name="twitter:description" content="">
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Three quality-of-life upgrades">
+<meta name="twitter:description" content="RSS, wordcount, Repeated Measures">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -126,15 +95,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
         <li>
-    <a class="dropdown-item" href="./glms.html" rel="" target="">
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
  <span class="dropdown-text">Statistical Theory and Applications</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tardy-tuesday.html" rel="" target="">
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
  <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hand-drawn-statistics.html" rel="" target="">
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
  <span class="dropdown-text">Hand-drawn Statistics</span></a>
   </li>  
     </ul>
@@ -142,11 +111,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./unpop.html" rel="" target="">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
  <span class="menu-text">Unpop</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -170,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -183,97 +152,77 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Three quality-of-life upgrades</h1>
+            <p class="subtitle lead">RSS, wordcount, Repeated Measures</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">blog</div>
+                <div class="quarto-category">web development</div>
+                <div class="quarto-category">rss</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 24, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="analogue">analogue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="factor analysis">factor analysis <span class="quarto-category-count">(2)</span></div><div class="category" data-category="hand written">hand written <span class="quarto-category-count">(1)</span></div><div class="category" data-category="multi-level-modelling">multi-level-modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ordinal variables">ordinal variables <span class="quarto-category-count">(1)</span></div><div class="category" data-category="random-effects">random-effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="simulation">simulation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="systems">systems <span class="quarto-category-count">(1)</span></div><div class="category" data-category="testing">testing <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Hand-drawn Statistics</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>Sometimes it can be easiest to think about complex ideas without having to think too much about the tooling to use to express and represent these ideas. Instead of having to deal with R code, mermaid uml syntax, latex equations and so on, sometimes the right tool for expressing an idea is just a pen and paper, and the right tool for presenting it to others is just take a picture with my camera phone.</p>
-<p>At some point these hand drawn notes may become the basis of ‘proper’ blog posts. But for now I hope they’re legible and comprehensible enough to be useful resources to others in the mean time.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
+<p>Here’s a brief update to showcase three new improvements to this blog, along with a question (about RSSes), and some broader reflections:</p>
+<section id="rss-feed" class="level2">
+<h2 class="anchored" data-anchor-id="rss-feed">RSS Feed</h2>
+<p><a href="https://www.danolner.net/">Dan Olner</a>, who’s been blogging longer than me, and usually with more interesting contents, made a request on Linkedin to enable RSS on the blog. Thankfully he supplied <a href="https://quarto.org/docs/websites/website-blog.html#rss-feed">the relevant link too</a>, and it all seems quite straightforward. If you now look towards the top right of the blog, you should be able to see the standard RSS icon, and clicking on it does seem to do <em>something</em>. - <strong>Reflection</strong>: This blog largely began with two aims: to have a practical application for practicing web development skills, and to have a place to develop and showcase my knowledge of statistical methods and data science. I think it’s been successful on both fronts, but it’s also become my platform for trying to think deeply about less technical and work-related domains, such as with my unpop series, and more recently the first short story I’ve finished writing for a number of years. Though writing is a practice I find purposive and enjoyable, and my writing is on topics and ideas that are interesting to me, they might not be of as much interest to persons reading just for the more techical materials. - <strong>Question</strong>: There are ways of creating multiple RSS feeds - such as one for more technical posts, and another for less technical posts. <strong>Should I create separate RSS feeds for this blog?</strong> Any views on this are much appreciated.</p>
+</section>
+<section id="word-count" class="level2">
+<h2 class="anchored" data-anchor-id="word-count">Word Count</h2>
+<p>The subheader to the main blog page should now be procedurally updated to report the number of words the blog contains. At the time of writing the total estimated word count is slightly under 180,000 words, which if at all accurate means, since starting the blog in 2023, I’ve now put out around two books worth of content into the world.</p>
+<p>Here’s broadly how the word count works:</p>
+<ul>
+<li>The <code>_quarto.yml</code> file in the root now has a pre-render argument, meaning each time the blog is rendered or published an R script is run.</li>
+<li>The R script recursively searches for all .qmd (quarto) files inside the project folder and its subfolders. Within each .qmd file it looks for anything that looks to be a word (i.e.&nbsp;something made up of letters and numbers, surrounded by spaces or punctuation) and adds that to a running total, until all has run out of .qmd files.</li>
+<li>The R script then looks for the subtitle field in index.qmd, then inserts the new word count into the value component of that field.</li>
+</ul>
+<p>As with so much knowledge work, this solution was arrived at after asking a series of questions to an LLM. This time I tried Claude as I’d heard it was better at technical queries than most alternatives (though Claude are not Claude is: there are many versions). The solution I used was more inspired by, rather than derived directly from, any specific pieces of code it suggested. The subtle danger of using LLMs is that, though they promise to make coding tasks easier, they often instead just transfer the challenges from searching and writing code, to prompting and debugging code. Almost every code solution offered had bugs, and almost every suggested fix introduced new bugs. Knowing when to step away from just plugging in a new AI-generated code, and instead writing something loosely based on the code snippets, seems to be at least half the battle in using AI effectively.</p>
+</section>
+<section id="repeated-measures-header-image" class="level2">
+<h2 class="anchored" data-anchor-id="repeated-measures-header-image">Repeated Measures Header Image</h2>
+<p>My <a href="../../posts/handdrawn-stats/repeated-measures/index.html">article on repeated measures</a> is the first post I’ve written that’s entirely hand-written, and hand-drawn, using my <a href="https://remarkable.com/">Remarkable</a> tablet. This meant the post comprised one single image. And in Quarto blogs the first image in a post is used, along with the title and first paragraph, to show previews of that post in the main blog page. This in effect meant the entire repeated measures post was used as its own preview, creating one very long and awkward side image for the post in the main blog page view.</p>
+<p>I’ve now corrected this by adding a smaller image, copied out from the main image, at the start of the repeated measures post. This should hopefully ensure the preview for the post is a bit less ‘greedy’, and can be more easily scrolled through with other blog entries in the main blog page.</p>
+<p>I’m still trying to come up with the best way of using Remarkable. For <a href="../../posts/fiction/its-your-choice/index.html">my short story</a>, for example, the entire story was first drafted with the device, then transcribed (manually, not automatically, as I don’t trust the image-to-text conversion enough, especially for conveying formatting) onto a Quarto page. For the repeated measures blog, where I frequently swap between text and sketches, I think the Remarkable was fully appropriate. For the story, it was still useful because it meant I could take the tablet alone, without my computer, forcing myself to have fewer distractions while writing it.</p>
+<p>For the most recent post - my <a href="../unpop/the-what-is-a-genius-myth/9781787333246-jacket-large.webp">book review of The Genius Myth</a> - I instead adopted more of a hybrid approach from the get-go, writing most of the text in Quarto, then having the Remarkable by my side for drawing sketches to go alongside the text. As the Remarkable syncs quite nicely and quickly with my macbook, this hybrid approach seemed to work pretty well, though it did involve taking more, rather than less, electronic equipment with me.</p>
 
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics,factor analysis,ordinal variables,analogue" data-listing-date-sort="1714777200000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Factor analysis with ordinal variables" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 4, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/index.html" class="title listing-title">Factor analysis with ordinal variables</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics,factor analysis,testing" data-listing-date-sort="1714863600000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="How factor analysis is used in testing" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 5, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/index.html" class="title listing-title">How factor analysis is used in testing</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,simulation,systems,hand written" data-listing-date-sort="1716850800000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Statistics as circuit boards" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 28, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/statistics-as-circuits/index.html" class="title listing-title">Statistics as circuit boards</a>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,multi-level-modelling,random-effects" data-listing-date-sort="1750114800000" data-listing-file-modified-sort="1756029618459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Repeated Measures" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jun 17, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/repeated-measures/index.html" class="title listing-title">Repeated Measures</a>
-</td>
-</tr>
-</tbody>
 
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -621,6 +570,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
