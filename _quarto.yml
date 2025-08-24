@@ -1,43 +1,39 @@
 project:
   type: website
   output-dir: docs
+  pre-render: pre-render.R
 website:
-  title: "Jon Minton's Blog"
+  title: Jon Minton's Blog
   site-url: https://jonminton.github.io/jon-blog/
-  description: "Jon Minton's personal blog. All things random."
-  twitter-card: 
-    site: "@jonminton"
+  description: Jon Minton's personal blog. All things random.
+  twitter-card:
+    site: '@jonminton'
   navbar:
-    left: 
-      - text: "Statistics & Data Science"
-        menu:
-          - text: "Statistical Theory and Applications"
-            href: glms.qmd
-          - text: "Tardy Tuesday"
-            href: tardy-tuesday.qmd
-          - text: "Hand-drawn Statistics"
-            href: hand-drawn-statistics.qmd
+    left:
+    - text: Statistics & Data Science
+      menu:
+      - text: Statistical Theory and Applications
+        href: glms.qmd
+      - text: Tardy Tuesday
+        href: tardy-tuesday.qmd
+      - text: Hand-drawn Statistics
+        href: hand-drawn-statistics.qmd
     right:
-      - unpop.qmd
-      - about.qmd
-      - icon: window-fullscreen
-        href: https://jonminton.net 
-      - icon: github
-        href: https://github.com/JonMinton
-      - icon: twitter
-        href: https://twitter.com/JonMinton
-      - icon: linkedin
-        href: https://uk.linkedin.com/in/jon-minton-09480b13a
-      - icon: rss
-        href: index.xml
+    - unpop.qmd
+    - about.qmd
+    - icon: window-fullscreen
+      href: https://jonminton.net
+    - icon: github
+      href: https://github.com/JonMinton
+    - icon: twitter
+      href: https://twitter.com/JonMinton
+    - icon: linkedin
+      href: https://uk.linkedin.com/in/jon-minton-09480b13a
+    - icon: rss
+      href: index.xml
 format:
   html:
-    theme: 
+    theme:
       dark: slate
       light: cosmo
     css: styles.css
-
-
-
-
-
