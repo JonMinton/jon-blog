@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-10-09">
+
+<title>Jon Minton’s Blog - The Man Who Solved Intelligence</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Man Who Solved Intelligence">
+<meta name="twitter:description" content="Some thoughts on Demis Hassabis and The Thinking Game">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/unpop/the-man-who-solved-intelligence/thinking-game-image.jpg">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Man Who Solved Intelligence</h1>
+            <p class="subtitle lead">Some thoughts on Demis Hassabis and The Thinking Game</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">intelligence</div>
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">games</div>
+                <div class="quarto-category">protein-folding</div>
+                <div class="quarto-category">llm-dialectics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 9, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="thinking-game-image.jpg" class="img-fluid figure-img" alt="The thinking game documentary image"></p>
+<figcaption class="figure-caption">The thinking game</figcaption>
+</figure>
+</div>
+<p>Compared with OpenAI’s CEO Sam Altman, <a href="https://en.wikipedia.org/wiki/Demis_Hassabis">Demis Hassabis</a>, the cofounder of <a href="https://en.wikipedia.org/wiki/Google_DeepMind">DeepMind</a>, is perhaps less well know amongst the general public. However, after watching <a href="https://www.imdb.com/title/tt32150119/">The Thinking Game</a> recently, the 2024 documentary tracking DeepMind’s staggering progress towards Artifical General Intelligence (AGIs), Hassabis may well turn out to have been the more impactful in the course of human cultural and technological evolution. Founding the company in 2010 with the modest goal of ‘solving intelligence’, DeepMind was then acquired by Google in 2014 for an unfathonable amount of money, after being able to show remarkable success in teaching AIs to solve complex but well defined goal-orientated activities.</p>
+<p>These complex but well defined goal-orientated activities: playing computer games, where the goals can be as simple as ‘win points’, but means of achieving this are anywhere but simple. Starting from Atari games from the late 1970s and 1980s, Alpha, DeepMind’s insatiably improving megatech, initially struggled, like any infant, to even know how to move a paddle up or down on a screen. But before too long it had learned to play an increasingly complex array of 8 bit games to greater standards than any human.</p>
+<p>Hassabis is still fairly young, looks younger still, and appears to have lived many remarkable lives of precocious intellectual supremacy: a prize winning chess champion before the age of 10, completing secondary education a year early, and needing to wait a year before Oxford was legally permitted to admit him, he won a place at Peter Molyneux’ early 90s games powerhouse, Bullfrog, where he co-designed, and wrote the AI for, a game called Theme Park. He then turned down an offer of a million pounds to <em>not</em> attend university and continue coding games, because the Oxbridge degree was an essential part of his longer term vision.</p>
+<p>Step ahead to the late 2000s. Hassabis - game player, game developer, computer scientist, and now neuroscientist - calmly and quietly explains firstly that his company aims to ‘solve intelligence’, and ‘produce an Artificial General Intellgience’, and secondly the types of modelling approach he thinks will achieve this aim.</p>
+<p>Step ahead to 2020. Alpha has beaten the finest Go players in the world, a game recognised to be orders of magnitude harder for computers to master than Chess; it’s also almost unbeatable at StarCraft, a real time tactics game that has become an esports stalwart. Much more critically, it’s solved what may be the hardest game life has to offer: protein folding, predicting what kind of complex three dimensional structure is likely to emerge from a linear chain of amino acids, a problem that had represented a bottleneck on basic pharmaceutical and biological research for generations.</p>
+<p>Step forward to 2024. Hassabis is a recipient of the Nobel Prize in Chemistry. AlphaFold has predicted the protein structure of almost every protein ever discovered. Rather than hoarding such knowledge, perhaps equivalent to millennia of human endeavour, DeepMind releases all predictions.</p>
+<p>Although it may be OpenAI’s ChatGPT which showed the potential of AIs to the general public, to me the kinds of advances DeepMind have made seem much more impressive, and to offer a much stronger foundation for advancing towards a true <em>general</em> intelligence, based on very specific and measurable goals and aims, rather than in producing the kind of mellifluous sycophantic confabulation that LLMs tend to be (in)famous for. Real general intelligence, whether from ‘artificial’ origins or not, must be about more than the ability to endlessly produce sweet-sounding bullshit and uncanny slop.</p>
+<p>Maybe I was too harsh on LLMs just then. My apologies. As penance, here’s a kind of exploratory reverie I had with Claude, which gives the appearance of being comparatively low in confabulation and sycophancy - to help reflect on the documentary:</p>
+<hr>
+<blockquote class="blockquote">
+<p>What do protein folding problems entail? Why has this historically been such a challenge? What are the possible acceleration in scientific advances that should result over the next 1-10 years from Alpha’s work in this area?</p>
+</blockquote>
+<section id="the-protein-folding-problem" class="level1">
+<h1><strong>The Protein Folding Problem</strong></h1>
+<p>Protein folding is one of biology’s most fundamental puzzles: predicting how a protein’s amino acid sequence determines its three-dimensional structure. This matters because a protein’s shape dictates its function—enzymes, antibodies, structural components, and virtually every biological process depends on proteins adopting the correct 3D configuration.</p>
+<section id="what-the-problem-entails" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-problem-entails"><strong>What the Problem Entails</strong></h2>
+<p>The challenge has several layers:</p>
+<p><strong>The fundamental question</strong>: Given a linear sequence of amino acids (the primary structure), can we predict how it will fold into its final 3D shape (tertiary structure)? Proteins can fold into incredibly complex configurations with helices, sheets, loops, and intricate binding sites.</p>
+<p><strong>The astronomical complexity</strong>: A typical protein might have 100-300 amino acids. Even if each amino acid could adopt just 3 conformations, that’s 3^100 possible structures—more than the number of atoms in the universe. Yet proteins fold correctly in milliseconds to seconds inside cells.</p>
+<p><strong>The physics</strong>: Folding is driven by countless weak interactions—hydrogen bonds, hydrophobic effects, electrostatic forces, van der Waals interactions. Simulating all these forces accurately requires immense computational power, and even then, the timescales involved (microseconds to seconds) were beyond reach for most proteins.</p>
+</section>
+<section id="why-its-been-so-hard" class="level2">
+<h2 class="anchored" data-anchor-id="why-its-been-so-hard"><strong>Why It’s Been So Hard</strong></h2>
+<p>For decades, scientists faced multiple obstacles:</p>
+<p><strong>Experimental methods are slow and expensive</strong>: Determining protein structures through X-ray crystallography or cryo-electron microscopy takes months to years and doesn’t work for all proteins. Many important proteins (like membrane proteins) are extremely difficult to crystallize.</p>
+<p><strong>Computational approaches struggled</strong>: Traditional molecular dynamics simulations could model only microseconds of folding for small proteins. Ab initio prediction methods that tried to calculate structures from first principles were computationally intractable.</p>
+<p><strong>The gap between sequence and structure</strong>: By 2020, we knew sequences for hundreds of millions of proteins but had experimental structures for only about 170,000. This enormous gap limited our understanding of biology and medicine.</p>
+</section>
+<section id="alphafolds-breakthrough-and-future-impact" class="level2">
+<h2 class="anchored" data-anchor-id="alphafolds-breakthrough-and-future-impact"><strong>AlphaFold’s Breakthrough and Future Impact</strong></h2>
+<p>AlphaFold2 (2020) and AlphaFold3 (2024) have revolutionized this field by using deep learning to predict structures with near-experimental accuracy. Here’s what this enables over the next 1-10 years:</p>
+<p><strong>Drug discovery acceleration</strong>: Understanding protein structures allows pharmaceutical companies to design drugs that fit precisely into binding sites. This could compress drug development timelines from 10-15 years to potentially 5-7 years for some targets, and open up “undruggable” targets that were previously too difficult to work with.</p>
+<p><strong>Understanding disease mechanisms</strong>: Many diseases involve misfolded proteins (Alzheimer’s, Parkinson’s, cystic fibrosis). Predicting how mutations affect folding helps us understand pathology and design therapies. We’re already seeing this with personalized medicine approaches.</p>
+<p><strong>Enzyme engineering</strong>: Researchers can now design novel enzymes for industrial processes—breaking down plastics, producing biofuels, synthesizing chemicals more sustainably. What once required years of trial-and-error can now be guided by structural predictions.</p>
+<p><strong>Synthetic biology</strong>: Designing new proteins from scratch becomes feasible. Scientists are creating novel proteins for carbon capture, biosensors, and new materials. This could lead to programmable biological systems.</p>
+<p><strong>Antibody design</strong>: Faster development of therapeutic antibodies and vaccines. Understanding antibody-antigen interactions at atomic resolution accelerates development of treatments for cancer, autoimmune diseases, and infectious diseases.</p>
+<p><strong>Basic research acceleration</strong>: Biologists can now generate hypotheses about protein function instantly rather than waiting months for experimental structures. This fundamentally speeds up the research cycle across molecular biology, genetics, and biochemistry.</p>
+<p><strong>Structural proteomics</strong>: AlphaFold has already predicted structures for over 200 million proteins—essentially all known proteins. This creates a comprehensive map of the protein universe, revealing evolutionary relationships and functional patterns never before visible.</p>
+<p>The most profound impact may be how this changes the nature of biological research itself. Structure prediction becomes a routine computational step rather than a bottleneck, allowing scientists to ask bigger questions and test more hypotheses. Combined with other AI advances in protein design, gene editing, and systems biology, we’re entering an era where biology becomes more predictable and engineering-driven—potentially as transformative as the transition from alchemy to modern chemistry.</p>
+<blockquote class="blockquote">
+<p>When discussing ‘sites’/‘targets’, is the lock-and-key analogy appropriate, with the challenge being that given the amino acid sequence alone neither the lock nor key structure was previously known?</p>
+</blockquote>
+<p>Yes, the lock-and-key analogy is quite appropriate and captures the essence of the challenge beautifully!</p>
+</section>
+<section id="the-lock-and-key-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-lock-and-key-model"><strong>The Lock-and-Key Model</strong></h2>
+<p>The analogy works well for understanding molecular recognition. Proteins often have specific binding sites (the “lock”) where other molecules—drugs, substrates, other proteins, DNA, etc. (the “key”)—fit with high specificity. The shape complementarity, along with chemical properties like charge distribution and hydrophobicity, determines whether binding occurs and how strong it is.</p>
+</section>
+<section id="the-double-blind-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-double-blind-problem"><strong>The Double-Blind Problem</strong></h2>
+<p>Your insight about the double challenge is exactly right. Historically, drug designers faced a frustrating situation:</p>
+<p><strong>Without knowing the lock’s shape</strong>, you couldn’t rationally design a key. You’d have to try thousands or millions of chemical compounds hoping something would fit—essentially trying random keys in a lock you couldn’t see. This “high-throughput screening” approach is expensive, time-consuming, and often misses good candidates.</p>
+<p><strong>Even when you had a target sequence</strong>, you didn’t know what 3D structure it would adopt, so you couldn’t predict where the binding site would be, what shape it would have, or which chemical properties would matter for binding.</p>
+<p>It’s like being asked to design a key for a lock when all you have is the manufacturing instruction manual written in code, with no picture of the actual lock.</p>
+</section>
+<section id="how-alphafold-changes-the-game" class="level2">
+<h2 class="anchored" data-anchor-id="how-alphafold-changes-the-game"><strong>How AlphaFold Changes the Game</strong></h2>
+<p>Now with structure prediction, researchers can:</p>
+<ul>
+<li><p>See the lock’s shape from the amino acid sequence alone</p></li>
+<li><p>Identify binding pockets and cavities computationally</p></li>
+<li><p>Understand which amino acids line the binding site</p></li>
+<li><p>Design molecules that complement that specific geometry</p></li>
+</ul>
+<p>This transforms drug discovery from a “blind search” into a “rational design” problem.</p>
+</section>
+<section id="refining-the-analogy" class="level2">
+<h2 class="anchored" data-anchor-id="refining-the-analogy"><strong>Refining the Analogy</strong></h2>
+<p>That said, the lock-and-key metaphor has some limitations worth noting:</p>
+<p><strong>Induced fit</strong>: Proteins aren’t rigid locks. They’re often flexible and change shape when the key binds—more like a glove conforming to a hand than a rigid lock. This dynamic behavior adds complexity that AlphaFold is increasingly capturing.</p>
+<p><strong>Multiple conformations</strong>: Proteins can adopt different shapes (conformational states), essentially changing the lock’s shape depending on conditions. Some proteins have “open” and “closed” states, or undergo large structural rearrangements.</p>
+<p><strong>Allosteric sites</strong>: Sometimes the best “lock” isn’t the active site at all, but a distant site that, when bound, changes the protein’s shape or function. These regulatory mechanisms add another layer of sophistication.</p>
+<p>But fundamentally, yes—you’ve captured the core problem perfectly. AlphaFold reveals the lock’s structure from its genetic blueprint, making rational key design possible for the first time at scale.</p>
+<blockquote class="blockquote">
+<p>Given the suggested decline in drug development from 10-15 to 5-7 years, what are the remaining steps that take the 4-6 years?</p>
+</blockquote>
+<p>Great question! Even with perfect structural knowledge, drug development remains a lengthy, complex process. Here’s what fills those remaining 5-7 years:</p>
+</section>
+<section id="the-remaining-timeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-remaining-timeline"><strong>The Remaining Timeline</strong></h2>
+<p><strong>Lead Optimization (1-2 years)</strong> Even after identifying a molecule that fits the binding site, you need to optimize it. The initial “hit” might bind well but have terrible properties:</p>
+<ul>
+<li><p>Poor solubility (can’t dissolve in blood)</p></li>
+<li><p>Rapid metabolism (body breaks it down too quickly)</p></li>
+<li><p>Toxicity to human cells</p></li>
+<li><p>Inability to cross cell membranes or reach the target tissue</p></li>
+<li><p>Off-target effects (binds to unintended proteins)</p></li>
+</ul>
+<p>Medicinal chemists iterate through hundreds of variants, tweaking the structure to improve these properties while maintaining binding affinity. Structure prediction helps but doesn’t solve pharmacokinetics (how the drug moves through the body) or toxicity.</p>
+<p><strong>Preclinical Testing (1-2 years)</strong> Before human trials, extensive animal studies are required:</p>
+<ul>
+<li><p>Toxicology studies in multiple species</p></li>
+<li><p>Pharmacokinetics (absorption, distribution, metabolism, excretion)</p></li>
+<li><p>Safety profiling at various doses</p></li>
+<li><p>Efficacy testing in disease models</p></li>
+<li><p>Manufacturing process development</p></li>
+</ul>
+<p>These can’t be fully simulated—you must observe actual biological responses in living systems.</p>
+<p><strong>Phase I Clinical Trials (1-2 years)</strong> First tests in humans, usually 20-100 healthy volunteers:</p>
+<ul>
+<li><p>Is it safe at various doses?</p></li>
+<li><p>How does the human body process it?</p></li>
+<li><p>What are the side effects?</p></li>
+<li><p>What’s the maximum tolerated dose?</p></li>
+</ul>
+<p>About 70% of drugs fail here despite looking promising in animals.</p>
+<p><strong>Phase II Clinical Trials (1-2 years)</strong> Testing in 100-300 patients who actually have the disease:</p>
+<ul>
+<li><p>Does it work in humans?</p></li>
+<li><p>What’s the optimal dose?</p></li>
+<li><p>What are the side effects in sick patients?</p></li>
+<li><p>Early efficacy signals</p></li>
+</ul>
+<p>About 33% of drugs that passed Phase I fail here.</p>
+<p><strong>Phase III Clinical Trials (2-4 years)</strong> Large-scale trials with 300-3,000+ patients:</p>
+<ul>
+<li><p>Definitively prove efficacy compared to standard treatment or placebo</p></li>
+<li><p>Comprehensive safety data across diverse populations</p></li>
+<li><p>Long-term effects</p></li>
+<li><p>Statistical proof of benefit</p></li>
+</ul>
+<p>This is the most expensive phase—often costing hundreds of millions. Only about 25-50% of drugs entering Phase III get approved.</p>
+<p><strong>Regulatory Review (1-2 years)</strong> Submitting data to FDA/EMA and waiting for approval:</p>
+<ul>
+<li><p>Reviewing thousands of pages of data</p></li>
+<li><p>Addressing regulatory questions</p></li>
+<li><p>Inspecting manufacturing facilities</p></li>
+<li><p>Risk-benefit analysis</p></li>
+</ul>
+</section>
+<section id="why-these-steps-cant-be-dramatically-shortened" class="level2">
+<h2 class="anchored" data-anchor-id="why-these-steps-cant-be-dramatically-shortened"><strong>Why These Steps Can’t Be Dramatically Shortened</strong></h2>
+<p><strong>Biological complexity</strong>: AlphaFold tells you the lock’s shape, but not:</p>
+<ul>
+<li><p>Whether blocking/activating that protein actually treats the disease in humans</p></li>
+<li><p>How the drug affects other proteins and pathways (systems-level effects)</p></li>
+<li><p>Individual patient variability in response</p></li>
+<li><p>Long-term consequences</p></li>
+</ul>
+<p><strong>Safety requirements</strong>: You can’t simulate whether a drug causes liver damage, heart problems, or cancer over time. This requires observing actual patients for months or years.</p>
+<p><strong>Statistical rigor</strong>: Clinical trials need sufficient patient numbers and follow-up time to prove the drug works and is safe. A drug might show early promise but fail in larger populations or reveal rare but serious side effects.</p>
+<p><strong>Manufacturing scale-up</strong>: Making grams in a lab differs vastly from producing tons reliably and consistently. This process development happens in parallel but takes years.</p>
+<p><strong>Regulatory conservatism</strong>: After disasters like thalidomide, regulators rightfully demand extensive proof. The bar is high, and shortcuts have catastrophic consequences.</p>
+</section>
+<section id="where-ai-might-further-accelerate-things" class="level2">
+<h2 class="anchored" data-anchor-id="where-ai-might-further-accelerate-things"><strong>Where AI Might Further Accelerate Things</strong></h2>
+<p>Beyond structure prediction, AI could potentially compress timelines by:</p>
+<ul>
+<li><p>Predicting toxicity and drug properties computationally (reducing trial-and-error in optimization)</p></li>
+<li><p>Identifying biomarkers for patient selection (making trials more efficient)</p></li>
+<li><p>Optimizing trial design and patient recruitment</p></li>
+<li><p>Predicting drug-drug interactions and side effects</p></li>
+</ul>
+<p>But the irreducible core—proving safety and efficacy in actual human beings over time—remains. Biology is messy, patients are variable, and rare side effects only emerge in large populations.</p>
+<p>That said, going from 10-15 years to 5-7 years would be transformative. It means patients get treatments roughly twice as fast, development costs drop significantly (making more “niche” drugs economically viable), and pharmaceutical companies can tackle more targets with the same resources. The impact compounds across the entire healthcare ecosystem.</p>
+<blockquote class="blockquote">
+<p>Given this, should we expect pharmaceutical companies to grow in value faster than over the last 20-30 years?</p>
+</blockquote>
+<p>This is a fascinating question that cuts to the heart of whether scientific breakthroughs translate into investment returns. The answer is nuanced and probably <strong>not as straightforward as you might expect</strong>.</p>
+</section>
+<section id="arguments-for-faster-growth" class="level2">
+<h2 class="anchored" data-anchor-id="arguments-for-faster-growth"><strong>Arguments for Faster Growth</strong></h2>
+<p><strong>Improved R&amp;D productivity</strong>: The pharmaceutical industry has suffered from declining R&amp;D efficiency for decades—“Eroom’s Law” (Moore’s Law backwards). Despite spending more on R&amp;D, fewer drugs were approved per billion dollars spent. If AlphaFold and related AI tools reverse this trend, companies could get more successful drugs from the same investment.</p>
+<p><strong>Expanded druggable targets</strong>: Many disease-causing proteins were previously “undruggable” because we couldn’t understand their structure well enough to design inhibitors. Suddenly having access to 200+ million protein structures could open entirely new therapeutic areas—particularly in rare diseases and precision medicine.</p>
+<p><strong>Faster time-to-market</strong>: Getting drugs approved in 5-7 years instead of 10-15 years means:</p>
+<ul>
+<li><p>Earlier revenue generation</p></li>
+<li><p>Longer effective patent life (more years of exclusivity)</p></li>
+<li><p>Lower cost of capital (less money tied up for shorter periods)</p></li>
+<li><p>Ability to pursue more projects simultaneously</p></li>
+</ul>
+<p><strong>Better capital allocation</strong>: Companies can computationally filter out likely failures earlier, concentrating resources on more promising candidates.</p>
+</section>
+<section id="arguments-against-faster-growth-or-why-it-might-not-matter-as-much" class="level2">
+<h2 class="anchored" data-anchor-id="arguments-against-faster-growth-or-why-it-might-not-matter-as-much"><strong>Arguments Against Faster Growth (or Why It Might Not Matter as Much)</strong></h2>
+<p><strong>Competition intensifies equally</strong>: Every pharma company gets access to the same tools. If everyone becomes more efficient simultaneously, the competitive advantage disappears. This could lead to:</p>
+<ul>
+<li><p>More drugs reaching market (supply increase)</p></li>
+<li><p>Increased pricing pressure as multiple companies target the same diseases</p></li>
+<li><p>Faster erosion of market share as competitors develop alternatives more quickly</p></li>
+</ul>
+<p><strong>Value accrues elsewhere</strong>: The companies capturing value might not be traditional pharma:</p>
+<ul>
+<li><p>AI biotech startups using these tools</p></li>
+<li><p>Tech companies (Google/DeepMind, etc.) that own the platforms</p></li>
+<li><p>Contract research organizations (CROs) that offer AI-enabled services</p></li>
+<li><p>Generic manufacturers who can more quickly develop biosimilars</p></li>
+</ul>
+<p><strong>Regulatory and pricing pressure</strong>: Governments and insurers are increasingly aggressive about drug pricing. Even if companies develop drugs faster and cheaper, they may not be able to charge proportionally more. In fact, regulators might argue that lower development costs should mean lower prices.</p>
+<p><strong>The clinical trial bottleneck remains</strong>: As we discussed, 5-7 years of the timeline can’t be compressed much. So while early-stage productivity improves dramatically, the rate-limiting step (human trials) doesn’t change proportionally. The benefit is real but perhaps more incremental than revolutionary.</p>
+<p><strong>Market saturation</strong>: Many “easy” and lucrative targets (common diseases in wealthy populations) already have treatments. New drugs increasingly target:</p>
+<ul>
+<li><p>Rare diseases (smaller markets)</p></li>
+<li><p>Precision medicine (fragmented patient populations)</p></li>
+<li><p>Diseases more common in lower-income countries (pricing challenges)</p></li>
+</ul>
+<p><strong>The innovation paradox</strong>: As medicine advances, we’re left with harder problems. The remaining diseases are often more complex, multifactorial, or involve targets that are difficult to modulate without side effects.</p>
+</section>
+<section id="historical-context-the-last-20-30-years" class="level2">
+<h2 class="anchored" data-anchor-id="historical-context-the-last-20-30-years"><strong>Historical Context: The Last 20-30 Years</strong></h2>
+<p>Looking backward provides useful perspective:</p>
+<p><strong>Pharmaceutical stocks have grown, but inconsistently</strong>: Large-cap pharma has roughly tracked or slightly outperformed the broader market over 20-30 years, but with high volatility tied to patent cliffs, pipeline failures, and blockbuster approvals. Biotech has been more variable—spectacular winners but many complete failures.</p>
+<p><strong>The industry has consolidated</strong>: Much of the “growth” came through mergers and acquisitions rather than organic innovation, suggesting structural challenges in R&amp;D productivity.</p>
+<p><strong>Previous technological revolutions had mixed impacts</strong>:</p>
+<ul>
+<li><p>Genomics (Human Genome Project, 2003) was supposed to revolutionize drug discovery. Results have been real but slower than expected.</p></li>
+<li><p>High-throughput screening, combinatorial chemistry, and other tools improved efficiency but didn’t fundamentally change growth trajectories.</p></li>
+<li><p>Monoclonal antibodies and biologics created huge value, but much of it accrued to a few companies with platform advantages.</p></li>
+</ul>
+</section>
+<section id="the-realistic-scenario" class="level2">
+<h2 class="anchored" data-anchor-id="the-realistic-scenario"><strong>The Realistic Scenario</strong></h2>
+<p>My best guess is <strong>moderate acceleration rather than explosive growth</strong>:</p>
+<p><strong>Near-term (3-5 years)</strong>: Traditional pharma companies will see improved R&amp;D metrics—higher success rates, better target selection, reduced costs in early stages. Stock performance will likely improve modestly, but much of this may already be priced in by forward-looking investors.</p>
+<p><strong>Medium-term (5-10 years)</strong>: We’ll see the first wave of “AI-designed” drugs reaching market. Winners will be companies that:</p>
+<ul>
+<li><p>Integrated AI tools most effectively into their workflows</p></li>
+<li><p>Combined computational power with deep biological/clinical expertise</p></li>
+<li><p>Maintained or built strong data assets (patient data, trial results, etc.)</p></li>
+<li><p>Adapted organizational culture to new ways of working</p></li>
+</ul>
+<p>This could create differentiated returns—some companies pull ahead while others lag.</p>
+<p><strong>Long-term questions</strong>:</p>
+<ul>
+<li><p>Does value concentrate (a few winners dominate) or fragment (many specialized players)?</p></li>
+<li><p>Do tech companies enter pharma directly or just sell tools?</p></li>
+<li><p>How do regulatory frameworks and pricing policies adapt?</p></li>
+<li><p>Does AI-enabled drug development become commoditized (eliminating competitive advantage)?</p></li>
+</ul>
+</section>
+<section id="the-contrarian-take" class="level2">
+<h2 class="anchored" data-anchor-id="the-contrarian-take"><strong>The Contrarian Take</strong></h2>
+<p>There’s a scenario where pharmaceutical <em>stock returns</em> don’t improve much despite massive scientific progress:</p>
+<p>If development becomes much cheaper and faster, <strong>barriers to entry fall</strong>. More companies can afford to develop drugs. Competition increases. Pricing power decreases. The consumer/patient wins (more treatments, lower costs), but shareholders don’t necessarily benefit proportionally. The economic surplus gets distributed to patients and healthcare systems rather than captured by pharma companies.</p>
+<p>This has precedent—many technological revolutions (personal computers, solar panels, LED lighting) delivered enormous societal value but became commoditized industries with modest profit margins.</p>
+</section>
+<section id="bottom-line" class="level2">
+<h2 class="anchored" data-anchor-id="bottom-line"><strong>Bottom Line</strong></h2>
+<p>Scientific progress doesn’t automatically translate to outsized stock returns. The key questions are:</p>
+<ul>
+<li><p>Can individual companies create sustainable competitive advantages?</p></li>
+<li><p>How much of the value gets captured by pharma vs.&nbsp;distributed to other stakeholders?</p></li>
+<li><p>Does increased efficiency get competed away?</p></li>
+</ul>
+<p>I’d expect pharma to grow <strong>somewhat faster</strong> than the last 20-30 years—perhaps adding 1-3% annually to returns relative to historical performance—but not the explosive multiples you might expect from such a fundamental breakthrough. The biggest winners might be AI-native biotech companies and platforms rather than traditional pharma giants, though the latter have capital and infrastructure advantages for clinical development and commercialization.</p>
+<p>The real beneficiaries will be patients and society through better treatments arriving faster and more diseases becoming treatable. Whether that translates to proportional shareholder returns remains genuinely uncertain.</p>
+<blockquote class="blockquote">
+<p>Are allosteric sites essentially upstream sites in terms of causal influence on downstream protein structure, or is a different mental model more suited to understanding this?</p>
+</blockquote>
+<p>The “upstream causal influence” framing is partially correct but misses some key aspects. Let me offer a more nuanced mental model.</p>
+</section>
+<section id="why-upstream-works-sort-of" class="level2">
+<h2 class="anchored" data-anchor-id="why-upstream-works-sort-of"><strong>Why “Upstream” Works (Sort Of)</strong></h2>
+<p>Allosteric sites do exert causal influence on function, and there is a sense of information flow:</p>
+<ul>
+<li><p>Ligand binds to allosteric site → conformational change propagates → active site changes shape/activity</p></li>
+<li><p>This creates a regulatory pathway: the allosteric site acts as a control knob</p></li>
+</ul>
+<p>So yes, in terms of signal transduction and regulatory logic, “upstream” captures something real.</p>
+</section>
+<section id="why-upstream-is-misleading" class="level2">
+<h2 class="anchored" data-anchor-id="why-upstream-is-misleading"><strong>Why “Upstream” Is Misleading</strong></h2>
+<p><strong>It’s not strictly hierarchical</strong>: The relationship isn’t like a linear pathway where A causes B causes C. Instead, it’s more like a <strong>mechanical coupling</strong> or <strong>network of interactions</strong>. Think of it less like a signal cascade and more like:</p>
+<ul>
+<li><p><strong>A network of springs and struts</strong>: When you pull on one part of an interconnected structure, the strain propagates throughout, causing distant parts to shift position. The allosteric site doesn’t “send a signal” so much as it perturbs the entire mechanical/energetic landscape.</p></li>
+<li><p><strong>Energetic redistribution</strong>: Proteins exist in multiple conformational states, constantly fluctuating. The allosteric ligand doesn’t create new structures—it <em>shifts the equilibrium</em> between pre-existing conformations. It stabilizes certain states and destabilizes others, changing the probability distribution of shapes the protein adopts.</p></li>
+</ul>
+</section>
+<section id="better-mental-models" class="level2">
+<h2 class="anchored" data-anchor-id="better-mental-models"><strong>Better Mental Models</strong></h2>
+<p><strong>Conformational ensemble</strong>: Proteins aren’t static structures but dynamic populations. Imagine the protein as existing in multiple shapes simultaneously (like a quantum superposition, though the mechanism is classical):</p>
+<ul>
+<li><p>State A: 70% of molecules, active site “open”</p></li>
+<li><p>State B: 30% of molecules, active site “closed”</p></li>
+</ul>
+<p>An allosteric ligand binding might shift this to:</p>
+<ul>
+<li><p>State A: 20% (now disfavored)</p></li>
+<li><p>State B: 80% (now favored)</p></li>
+</ul>
+<p>The allosteric site doesn’t cause the closed state—it already existed—but it changes which state predominates.</p>
+<p><strong>Mechanical linkage</strong>: Think of proteins like intricate origami or mechanical linkages where:</p>
+<ul>
+<li><p>Different domains are connected by flexible hinges and rigid segments</p></li>
+<li><p>Binding at one site constrains certain degrees of freedom</p></li>
+<li><p>This constraint propagates through the structure via physical connections</p></li>
+<li><p>Distant regions adjust to accommodate the new constraints</p></li>
+</ul>
+<p>For example, many enzymes have domains connected by hinge regions. When an allosteric regulator binds, it might lock a hinge in place, forcing other domains to adopt specific relative orientations.</p>
+<p><strong>Energy landscapes</strong>: Proteins navigate a rugged energy landscape with multiple valleys (stable conformations) separated by hills (energy barriers). The allosteric ligand:</p>
+<ul>
+<li><p>Deepens some valleys (stabilizes certain conformations)</p></li>
+<li><p>Raises others (destabilizes alternative conformations)</p></li>
+<li><p>Changes the relative heights of barriers between states</p></li>
+</ul>
+<p>This shifts the protein’s exploration of conformational space without creating entirely new structures.</p>
+</section>
+<section id="spatial-relationships-matter-but-not-simply" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-relationships-matter-but-not-simply"><strong>Spatial Relationships Matter, But Not Simply</strong></h2>
+<p><strong>“Upstream” implies linear directionality</strong>, but allosteric effects can be:</p>
+<ul>
+<li><p><strong>Reciprocal</strong>: The active site’s state can also influence the allosteric site. It’s bidirectional coupling, not unidirectional causation.</p></li>
+<li><p><strong>Distance-independent in surprising ways</strong>: Sometimes allosteric sites are far from the active site (classic allostery), but sometimes they’re quite close—just positioned so that binding causes a localized distortion that propagates. Conversely, distant sites might have weak effects if they’re not mechanically coupled through the protein’s architecture.</p></li>
+<li><p><strong>Pathway-dependent</strong>: The conformational change might propagate through specific structural elements (alpha helices, beta sheets, loop regions) that act as “wires” transmitting strain. Different allosteric sites might use different pathways to influence the same active site.</p></li>
+</ul>
+</section>
+<section id="examples-that-clarify-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="examples-that-clarify-the-model"><strong>Examples That Clarify the Model</strong></h2>
+<p><strong>Hemoglobin</strong> (classic example):</p>
+<ul>
+<li><p>Four subunits arranged symmetrically</p></li>
+<li><p>Oxygen binding to one subunit makes it easier for others to bind</p></li>
+<li><p>Not “upstream/downstream” but rather <strong>cooperative coupling</strong>—binding at one site physically strains the interfaces between subunits, making the others more receptive</p></li>
+</ul>
+<p><strong>Kinases</strong> (signaling enzymes):</p>
+<ul>
+<li><p>Often have activation loops that block the active site</p></li>
+<li><p>Phosphorylation at an allosteric site causes the loop to swing away</p></li>
+<li><p>This is mechanical: the added negative charge creates electrostatic repulsion that destabilizes the “closed” conformation</p></li>
+</ul>
+<p><strong>G-protein coupled receptors</strong> (GPCRs):</p>
+<ul>
+<li><p>Have distinct “inactive” and “active” conformations</p></li>
+<li><p>Agonist binding at one site stabilizes the active state</p></li>
+<li><p>Inverse agonists stabilize the inactive state</p></li>
+<li><p>The binding site itself is arguably both the “active site” and “allosteric site”—these categories blur</p></li>
+</ul>
+</section>
+<section id="implications-for-drug-design" class="level2">
+<h2 class="anchored" data-anchor-id="implications-for-drug-design"><strong>Implications for Drug Design</strong></h2>
+<p>Understanding allostery as energetic/mechanical coupling rather than simple causal hierarchy matters because:</p>
+<p><strong>You can target multiple states</strong>: If you understand the conformational ensemble, you can design drugs that:</p>
+<ul>
+<li><p>Stabilize inactive conformations (inverse agonists)</p></li>
+<li><p>Stabilize active conformations (agonists)</p></li>
+<li><p>Lock the protein in intermediate states</p></li>
+<li><p>Prevent conformational transitions altogether</p></li>
+</ul>
+<p><strong>You can predict effects more accurately</strong>: AlphaFold and molecular dynamics simulations can now model:</p>
+<ul>
+<li><p>How binding at one site changes the energy landscape</p></li>
+<li><p>Which pathways transmit conformational changes</p></li>
+<li><p>Whether an allosteric effect will be activating or inhibiting</p></li>
+</ul>
+<p><strong>You can find better drug sites</strong>: Allosteric sites often have advantages:</p>
+<ul>
+<li><p>Less conserved across protein families (more selective)</p></li>
+<li><p>Less critical for function (mutations less likely to cause resistance)</p></li>
+<li><p>Can fine-tune activity rather than completely blocking it</p></li>
+</ul>
+</section>
+<section id="so-whats-the-right-mental-model" class="level2">
+<h2 class="anchored" data-anchor-id="so-whats-the-right-mental-model"><strong>So, What’s the Right Mental Model?</strong></h2>
+<p>I’d suggest thinking of allosteric regulation as <strong>mechanical-energetic coupling within a dynamic conformational ensemble</strong> rather than upstream/downstream causation. The protein is:</p>
+<ul>
+<li><p>A flexible structure exploring conformational space</p></li>
+<li><p>Mechanically coupled across its domains</p></li>
+<li><p>Constantly shifting between related shapes</p></li>
+<li><p>Stabilized in particular conformations by ligands that change the energy landscape</p></li>
+</ul>
+<p>The allosteric site doesn’t “control” the active site in a hierarchical sense—rather, they’re parts of an interconnected system where perturbations in one region necessarily affect the stability and dynamics of other regions.</p>
+<p>This model better captures the reciprocal nature, the role of protein dynamics, and why drugs targeting allosteric sites can have such diverse effects (activation, inhibition, modulation) depending on exactly how they reshape the conformational landscape.</p>
+<blockquote class="blockquote">
+<p>Considering the famous science video powers of ten, is the sense of awe associated with complex revealed structure at different scales more likely to be induced through consideration of micro scales (such as those at which protein structures are apparent) or macro scales such as those that are the focus of cosmology?</p>
+</blockquote>
+<p>What a beautiful question—it strikes at the heart of how scale shapes wonder. My intuition is that <strong>microscales may increasingly rival or even surpass macroscales</strong> in their capacity to induce awe, though the <em>type</em> of awe differs in important ways.</p>
+</section>
+<section id="the-traditional-dominance-of-cosmic-awe" class="level2">
+<h2 class="anchored" data-anchor-id="the-traditional-dominance-of-cosmic-awe"><strong>The Traditional Dominance of Cosmic Awe</strong></h2>
+<p>Historically, the macro has dominated our sense of sublime wonder:</p>
+<ul>
+<li><p>The “pale blue dot” photograph</p></li>
+<li><p>Galaxies stretching across billions of light-years</p></li>
+<li><p>The observable universe containing ~2 trillion galaxies</p></li>
+<li><p>Deep time—13.8 billion years of cosmic history</p></li>
+</ul>
+<p>This cosmic awe taps into something primal: our smallness against vastness, our insignificance within immensity. Pascal captured it: “The eternal silence of these infinite spaces frightens me.” There’s an almost spiritual quality to confronting scales that dwarf human comprehension.</p>
+<p><strong>Why macro-awe works so effectively:</strong></p>
+<ul>
+<li><p><strong>Visual immediacy</strong>: Space imagery is spectacular—Hubble photos, the Milky Way arcing overhead, total solar eclipses</p></li>
+<li><p><strong>Narrative simplicity</strong>: “Billions of galaxies” is conceptually graspable even if the numbers are incomprehensible</p></li>
+<li><p><strong>Existential resonance</strong>: It naturally triggers questions about meaning, purpose, our place in existence</p></li>
+<li><p><strong>Cultural embedding</strong>: Cosmic wonder is deeply embedded in human culture—religion, philosophy, art, science fiction</p></li>
+</ul>
+</section>
+<section id="the-emerging-power-of-microscopic-awe" class="level2">
+<h2 class="anchored" data-anchor-id="the-emerging-power-of-microscopic-awe"><strong>The Emerging Power of Microscopic Awe</strong></h2>
+<p>But something has shifted in recent decades. The molecular and quantum scales are becoming increasingly <strong>visceral and imaginatively accessible</strong> in ways they never were before:</p>
+<p><strong>Visualization breakthroughs</strong>: We can now <em>see</em> atoms, proteins, viruses, and cellular machinery:</p>
+<ul>
+<li><p>Cryo-EM structures showing molecular machines in exquisite detail</p></li>
+<li><p>AlphaFold’s entire protein structure database</p></li>
+<li><p>Real-time videos of molecular motors “walking” along cellular filaments</p></li>
+<li><p>Quantum microscopy revealing electron clouds</p></li>
+</ul>
+<p>These aren’t artist’s conceptions—they’re data-driven reconstructions showing actual structure and dynamics.</p>
+<p><strong>Functional complexity</strong>: The micro reveals not just structure but <strong>purposeful intricacy</strong>:</p>
+<ul>
+<li><p>Ribosomes as molecular 3D printers</p></li>
+<li><p>ATP synthase as a rotary motor</p></li>
+<li><p>DNA repair mechanisms that proofread and correct errors</p></li>
+<li><p>Immune receptors with millions of variants</p></li>
+<li><p>Enzymatic cascades with feedback loops</p></li>
+</ul>
+<p>This isn’t random complexity—it’s <strong>engineered</strong> complexity (by evolution, but the effect on our intuitions is similar). We recognize problem-solving, information processing, error correction. It feels designed, intentional, purposeful.</p>
+<p><strong>Personal stakes</strong>: The micro is literally <em>us</em>:</p>
+<ul>
+<li><p>These proteins are in your body right now, performing functions that keep you alive</p></li>
+<li><p>Mutations in these structures cause diseases affecting people you know</p></li>
+<li><p>Understanding them leads to treatments, cures, interventions</p></li>
+<li><p>You are, in a very real sense, a vast colony of molecular machines</p></li>
+</ul>
+<p>There’s an intimacy to microscopic awe that cosmic wonder can’t match. The universe is indifferent to us; our proteins are <em>constitutive</em> of us.</p>
+</section>
+<section id="different-flavors-of-awe" class="level2">
+<h2 class="anchored" data-anchor-id="different-flavors-of-awe"><strong>Different Flavors of Awe</strong></h2>
+<p>The two scales evoke qualitatively different experiences:</p>
+<p><strong>Cosmic awe</strong>:</p>
+<ul>
+<li><p>Characterized by smallness, insignificance, humility</p></li>
+<li><p>“We are nothing; the universe is everything”</p></li>
+<li><p>Often melancholic or anxiety-inducing</p></li>
+<li><p>Emphasizes <em>simplicity</em> at cosmic scales (physics reduces to elegant laws)</p></li>
+<li><p>Distance and alienness—we can never visit those places</p></li>
+</ul>
+<p><strong>Molecular awe</strong>:</p>
+<ul>
+<li><p>Characterized by intricacy, sophistication, marvel at engineering</p></li>
+<li><p>“We are everything; look at the complexity required to exist”</p></li>
+<li><p>Often exhilarating or empowering</p></li>
+<li><p>Emphasizes <em>complexity</em> and functional organization</p></li>
+<li><p>Intimacy—this is happening inside you right now</p></li>
+</ul>
+<p>I’d argue the molecular realm offers something the cosmic doesn’t: <strong>comprehensible complexity</strong>. The cosmic is vast but relatively simple (gravity, nuclear forces, expansion). The molecular is dense with <em>meaning</em>—information encoded, decoded, processed, acted upon.</p>
+</section>
+<section id="why-micro-awe-may-be-ascendant" class="level2">
+<h2 class="anchored" data-anchor-id="why-micro-awe-may-be-ascendant"><strong>Why Micro-Awe May Be Ascendant</strong></h2>
+<p>Several factors suggest microscopic wonder is gaining ground:</p>
+<p><strong>Accessibility</strong>: You can explore protein structures on your laptop. You can’t meaningfully explore distant galaxies. The democratization of molecular visualization tools makes this accessible to billions of people in ways cosmology cannot match.</p>
+<p><strong>Actionability</strong>: Understanding proteins leads to tangible outcomes—medicines, treatments, biotechnology. This creates a positive feedback loop: interest → understanding → application → renewed interest. Cosmology, for all its grandeur, rarely affects daily life.</p>
+<p><strong>Educational emphasis</strong>: Biology education increasingly focuses on molecular mechanisms. Children grow up seeing animations of molecular machines. This cultivates intuitions about the micro that previous generations lacked.</p>
+<p><strong>Technological mediation</strong>: We’re getting better at making the molecular world <em>feel real</em>:</p>
+<ul>
+<li><p>VR experiences of molecular environments</p></li>
+<li><p>Interactive protein folding games (Foldit)</p></li>
+<li><p>Real-time visualizations of cellular processes</p></li>
+<li><p>Even art and design inspired by molecular structures</p></li>
+</ul>
+<p><strong>The complexity gradient</strong>: We may be reaching the limits of cosmic surprise. We’ve mapped the observable universe’s large-scale structure. Discoveries continue, but the basic picture is established.</p>
+<p>By contrast, molecular biology feels <strong>pre-paradigmatic</strong> in comparison—we’re still discovering fundamental organizing principles. The complexity seems bottomless. Every protein structure reveals new ingenuity. Every pathway connects to others in unexpected ways.</p>
+</section>
+<section id="a-personal-anecdote-tells-the-story" class="level2">
+<h2 class="anchored" data-anchor-id="a-personal-anecdote-tells-the-story"><strong>A Personal Anecdote Tells the Story</strong></h2>
+<p>Carl Sagan’s <em>Cosmos</em> inspired a generation with cosmic wonder. But today’s equivalent might be David Goodsell’s molecular illustrations or the stunning cryo-EM structures winning Nobel Prizes. When AlphaFold2 was announced, I saw scientists literally weeping—not because of the cosmic implications, but because the molecular world had suddenly opened up.</p>
+<p>I suspect if you showed someone:</p>
+<ol type="1">
+<li><p>The Hubble Deep Field (thousands of galaxies)</p></li>
+<li><p>A rotating 3D structure of ATP synthase with annotations showing how it generates cellular energy</p></li>
+</ol>
+<p>…many would find (2) more genuinely astonishing. Why? Because it combines visual beauty with functional comprehension with personal relevance. It’s not just structure—it’s a <strong>machine that makes sense</strong>, operating at a scale that’s alien yet intimate.</p>
+</section>
+<section id="the-synthesis-different-people-different-awe" class="level2">
+<h2 class="anchored" data-anchor-id="the-synthesis-different-people-different-awe"><strong>The Synthesis: Different People, Different Awe</strong></h2>
+<p>Ultimately, this may be personality-dependent:</p>
+<p><strong>Cosmological temperaments</strong> are drawn to:</p>
+<ul>
+<li><p>Philosophical abstraction</p></li>
+<li><p>Grandeur and vastness</p></li>
+<li><p>Simplicity underlying complexity</p></li>
+<li><p>Existential questions</p></li>
+<li><p>The sublime and ineffable</p></li>
+</ul>
+<p><strong>Molecular temperaments</strong> are drawn to:</p>
+<ul>
+<li><p>Detailed mechanism</p></li>
+<li><p>Functional elegance</p></li>
+<li><p>Complexity serving purpose</p></li>
+<li><p>Practical understanding</p></li>
+<li><p>The intricate and intelligible</p></li>
+</ul>
+<p>But I’d wager that as molecular visualization improves, as education emphasizes these scales, and as biotechnology makes molecular understanding increasingly relevant, <strong>more people will find their deepest scientific awe in the micro rather than the macro</strong>.</p>
+<p>The Powers of Ten journey is bidirectional, but we may discover that the inward journey—from human scale down to atoms—is ultimately richer in wonder than the outward journey to galaxies. Not because the cosmic is less magnificent, but because the molecular is both magnificent <em>and</em> meaningful in ways the cosmic cannot be.</p>
+<p>We are, after all, not made of galaxies. We are made of proteins. And that may be the more profound truth.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-09-28">
+
+<title>Jon Minton’s Blog - Nine thoughts on Tim Berners-Lee’s This is for Everyone</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Nine thoughts on Tim Berners-Lee’s This is for Everyone">
+<meta name="twitter:description" content="">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Nine thoughts on Tim Berners-Lee’s <em>This is for Everyone</em></h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">internet</div>
+                <div class="quarto-category">connections</div>
+                <div class="quarto-category">bureaucracy</div>
+                <div class="quarto-category">web</div>
+                <div class="quarto-category">eccentricity</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 28, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>After reading, and writing my longest ever post about, Helen Lewis’ <em>The Genius Myth</em>, I entered a slightly fallow period in terms of reading engagement and motivation. I’d started reading <em>The Genius Myth</em> alongside Rutger Bregman’s <em>Moral Ambition</em>, but my interest in that book faded,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and I struggled to find something as engaging as the book I’d just finished.</p>
+<p>The fallow period finally ended about a week and a half ago, however, when I heard Tim Berners-Lee (TBL) being interviewed by Rory Stewart and Alastair Campbell in The Rest is Politics Leading podcast series, to promote his new autobiography, <em>This is for everyone</em>, which in a sense is also an autobiography of the world wide web, his invention. I’d ordered the book within a few minutes of the podcast ending, and finished reading it in about three days (which is fast for me).</p>
+<p>Here are nine thoughts I had prompted by (primarily) the book and the podcast:</p>
+<section id="idea-1-why-are-you-only-a-millionaire-not-a-billionaire" class="level2">
+<h2 class="anchored" data-anchor-id="idea-1-why-are-you-only-a-millionaire-not-a-billionaire">Idea 1: “Why are you only a millionaire, not a billionaire?”</h2>
+<p>This seemed to be the subtext of (what felt like) at least half a dozen questions from on the TRIP Leading podcast, especially from Rory Stewart. To Stewart and Campbell, and I’m sure many who swirl in their social circles, the web is an engine of supreme wealth generation, a place that has created a new billionaire class, whose products affect almost everyone on Earth every day of our lives in some ways. So Stewart and Campbell seemed perplexed that the creator of the web, someone who ‘ought’ to have had the supreme first mover advantage, was ‘only’ a millionaire and not a billionaire. Even more perplexing to Stewart and Campbell: why does TBL appear not to <em>want</em> to be a billionaire, and not appear in any way envious of those who used his technology to become thousands of times wealthier than he is? Linked to this - something Stewart warned and apologised to the listener for at the start of the podcast - why is TBL not the highly articulate and polished media performer ‘we’ (?) are now conditioned to expect from Silicon Valley?</p>
+<p>These questions weren’t, to my mind, hostile questions so much as questions orthogonal to TBL’s personality, pursuits and interests. To Stewart and Campbell, not seeking to use one’s ability to maximise wealth, power and influence appeared simply not to make sense. The best explanation they could come up with was simply that TBL is <em>an eccentric</em>, though really this is just a (borderline derogatory) label rather than an explanation.</p>
+<p>Having read the book, however, I think the real answer is that TBL is, was, and always will be deeply passionate about building and promoting systems that connect information, ideas, and people, and that so long as his material circumstances are never so adverse as to impinge on this lifelong calling, they will always be sufficient. Sometimes money helps, as with ensuring TBL’s web-standards body, W3O/W3C, remains financially afloat; but often it risks making the web ‘worse’, which to TBL seems to have consistently meant something like ‘able to allow free exchange of information’. One of TBL’s proudest achievements, for example, seems to have been to convince CERN to give the world http, in perpetuity, for free [p.&nbsp;103]; another was to fight, through W3C, for the web to never become <em>de-facto</em> proprietary through intentional disalignment on standards between browsers run by either Microsoft or Netscape, both of which wanted to introduce additions and features to ‘their version’ of the web which were incompatible with other providers. TBL doubtless had many opportunities to make decisions which would have have allowed him to own and profit from a more proprietary variant of the web (such as if he worked with Netscape to build ‘the new Netscape web’), but would have slowed down growth and access to the web: whenever given the choice between owning a larger share of a smaller pie, or owning but influencing a more vibrant and faster growing pie, he seems to have chosen the option that makes the web better, rather than himself richer. His vision, always, seems always to have been much grander than personal fortune or political power. If that’s ‘eccentric’ for Stewart and Campbell, then in a sense that speaks mainly to their lack of genuinely transcendent vision, rather than TBL’s inherent strangeness.</p>
+</section>
+<section id="idea-2-cern-and-http-is-organisational-efficiency-fundamentally-a-myth" class="level2">
+<h2 class="anchored" data-anchor-id="idea-2-cern-and-http-is-organisational-efficiency-fundamentally-a-myth">Idea 2: CERN and http: Is organisational efficiency fundamentally a myth?</h2>
+<p>I vaguely remember seeing and hearing an online lecture by TBL many years ago, where in his excitable, self-distracting, and frenetic style he said something like “I took my proposal [for http] to my line manager. He said ‘I don’t really understand what you’re talking about. Why not spend a few weeks working on it?’” Within the book I can’t find the exact same quote (which of course I might have confabulated), but there are still plenty of references to those around TBL have difficulty understanding his vision, and the proportionality and relevance of his proposals to his specific remit at CERN, but nevertheless recognising his passions and ability, and supporting him in developing his ideas into technologies.</p>
+<p>To this end, TBL writes of effectively being ‘protected’ by his bosses and his bosses’ bosses, despite them often having little understanding of what he was doing.</p>
+<p>What does this say for the very idea of organisational efficiency? Though there were likely some genuine benefits to developing http within CERN, the specific examples - such as being able to find people’s phone numbers, linked research publications, and brief biographies of fellow staff at CERN a bit more easily - may well have never, in a strict sense, have been proportionate to the cost of investment. If CERN had been a more ‘efficient’ organisation, an organisation where all costs and expenses have to be justified clearly within work programes and cost centres, and audited carefully to justify the organisation’s costs to the European tax payer, it may well have killed the web before it was ever born.</p>
+<p>Even considering the discovery of the Higgs Boson, however, the web is almost certainly the most important contribution CERN has made, or will ever made, to humanity. And it would never have done this if CERN were a truly ‘efficient’ organisation. Is the very idea of organisational efficiency therefore something of a dangerous myth?</p>
+<p>I suspect the answer’s both yes and no. Efficiency seems a useful concept when it’s clear what we want to maximise, but an horrific and crushing concept when we don’t. One idea I’ve been fascinated by for many years are fitness surface optimisaton algorithms, and the ways that the most ‘efficient’ algorithms tend to lead us to local optima, rather than global optima, when the fitness surface is complex rather than simple. The most efficient approaches are akin to ‘blind hill climbers’: place one of these devices on a hill within the landscape we want to explore, and it will detect locally the gradient around it, and start trundling to ever higher elevation, until the top of the hill is reached. Then it will stop. But if the hill on which the hill-climber is placed is an undulation in the shadow of a mountain, it won’t see or detect the mountain, and forever find itself stuck on the hill instead. At every step along the way, the hill-climber can report incremental improvement, but it will never understand the broader landscape, and the opportunities that might present themselves if it were less ‘efficient’ and allowed occasionally to simply ‘wonder around’.</p>
+<p>Any approach that allows the possibility of finding the global optima consistently will necessarily be less ‘efficient’. One approach is to employ an ensemble of hill-climbers, each dropped off in different locations of an invisible and unexplored landscape. (i.e.&nbsp;to give the algorithms different starting values.) If there were 10 hill climbers, and they all end up on the same place as a single hill climber, then ten times as much effort will have been spent on finding the same optima. Clearly very ‘inefficient’. But if one of the ten hill climbers happens to have started at the foot of the mountain, whereas the rest were all somewhere along the hill, and the mountain’s peak elevation is twenty times as that of the hill, then the reward will have been worth the additional effort.</p>
+<p>Another, related, related approach is to intentionally build into the algorithms an element of ‘forgetfulness’ and ‘play’, which clearly seems a very inefficient thing to do. Think of these algorithms as more like ladybirds, with both a ‘flying’ phase and a ‘crawling’ phase. 95% of the time (say) the algorithms are in the crawling phase, and behave just like the standard hill climbers. But then 5% of the time these algorithms suddenly start flying around, and land somewhere completely different. Often, this means that the apparent progress towards the top of the last hill’s peak has been lost - something that seems very wasteful - but <em>maybe</em> during the flying phase the ladybird has found its way to an even higher section of the same hill; or found its way to the base of the mountain - the true global optima, rather than the local optima the simple hill climbers would have dutifully crawled.</p>
+<p>By analogy, the most genuinely innovative organations support staff to pursue both ‘flying’ and ‘crawling’, and to this extent trade-off some ‘efficiency’ for more possibility of creativity. Within large organisations, the freedom to fly has often found its way through permitting or actively promoting ‘skunkworks’. And within small tech outfits, through the idea of ‘pivoting’: recognising that an adjunct of one technology and use-case might actually be where the genuine value of a technology and business exists. Getting the balance right between flying and crawling is a perennial challenge, but to only value the measurable ‘efficiency’ of crawling over the immeasurable potential benefits of flying makes for a bad organisation and bad society.</p>
+</section>
+<section id="idea-3-top-down-and-bottom-up-modes-of-enterprise-need-to-know-how-to-dance" class="level2">
+<h2 class="anchored" data-anchor-id="idea-3-top-down-and-bottom-up-modes-of-enterprise-need-to-know-how-to-dance">Idea 3: Top down and bottom up modes of enterprise need to know how to dance</h2>
+<p>The web (or rather the http protocol) is not the internet, which was developed in the US through military funding, before spreading through US universities. The military: top-down organisation based on hierarchy and standards operation procesures; universities: bottom-up institutions based on exploration and emergent connections. Within the US, top-down started, then bottom-up followed.</p>
+<p>Another theme of questions from Stewart and Campbell, once they’d tired of asking TBL why he wasn’t a billionaire, was “Why did the US, not Europe, capitalise so much on the European technology of the web?” The short answer seemed to be that the web was the next step of the internet dance that was taking place in US universities, and so the bottom-up, freewheeling sensibilities of these US research institutions were highly compatible with TBL’s vision of the web. Http was intended as a means of allowing people to tell machines something that people can identify easily but machines cannot: the way that data sources are connected and linked in the human mind. And it was intended to do so in a way that was akin to conversation: originally TBL wanted web pages to be editable by default, rather than just viewable, allowing new readers to themselves become editors, and find and refine the associations between nodes even further. Http was a lightweight framework offering a lot of possibilities for how people build links with each other. This open, democratic (but meritocratic) mentality was much more compatible with the often-anarchic researchers already using and familiar with the internet in US research institutions.</p>
+<p>By contrast, it seems Europe was relatively reluctant to adopt the web for the same reasons the hippies and nerds over the Atlantic were keen on it: it was too <em>bottom-up</em>. The European instinct was instead to support and enforce a more top-down model of information sharing, based much more on conventions and standards. And conventions and standards mean meetings and bureaucracy, and meetings and bureaucracy takes <em>time</em> for deliberation and agreement. In short, it seems like Europe lost the advantage of its own technology by trying to <em>tame</em>, <em>organise</em> and <em>categorise</em> it, to make it work better in theory, rather than to adopt and use it in practice. After teaching the US a new series of dance moves, European bureacracies then refused to dance any furher.</p>
+</section>
+<section id="idea-4-the-web-was-for-information-not-engagement" class="level2">
+<h2 class="anchored" data-anchor-id="idea-4-the-web-was-for-information-not-engagement">Idea 4: The Web was for Information, not Engagement</h2>
+<p>For TBL, Wikipedia is the clearest working example of the web that he had envisaged. Wikipedia is not, by and large, a particularly <em>addictive</em> website. Instead, it’s something people will use to find information on something, and then once they’ve found that information, they will stop using it. Disengagement is therefore a <em>feature</em> of Wikipedia, not a <em>flaw</em> in Wikipedia.</p>
+<p>But much of the modern web is the other way around: intended to <em>engage</em>, not to inform. The reasons for this are obvious once given the types of monetisation that have prevailed over the last twenty or so years: the profitability of a website is broadly proportional to the amount of time people spend on it, because users’ attenion is the resource such companies sell to advertisers. Whereas the original aim of the web was to help people find what they are looking for, the engagement imperative of the commercial web instead militated towards almost the opposite: ensuring that users want more, but find less.</p>
+</section>
+<section id="idea-5-would-the-semantic-web-have-led-to-smarter-but-less-articulate-ais" class="level2">
+<h2 class="anchored" data-anchor-id="idea-5-would-the-semantic-web-have-led-to-smarter-but-less-articulate-ais">Idea 5: Would the semantic web have led to smarter (but less articulate) AIs?</h2>
+</section>
+<section id="idea-6-household-microcultures-a-licence-to-be-uninhibited-in-eccentric-passion" class="level2">
+<h2 class="anchored" data-anchor-id="idea-6-household-microcultures-a-licence-to-be-uninhibited-in-eccentric-passion">Idea 6: Household microcultures: A licence to be uninhibited in eccentric passion</h2>
+</section>
+<section id="idea-7-who-owns-my-data-double" class="level2">
+<h2 class="anchored" data-anchor-id="idea-7-who-owns-my-data-double">Idea 7: Who owns my Data Double?</h2>
+</section>
+<section id="idea-8-apps-the-gates-and-sentries-of-the-modern-webs-walled-gardens" class="level2">
+<h2 class="anchored" data-anchor-id="idea-8-apps-the-gates-and-sentries-of-the-modern-webs-walled-gardens">Idea 8: Apps: The Gates and Sentries of the Modern Web’s Walled Gardens</h2>
+</section>
+<section id="idea-9-even-nice-guy-millionaires-trade-up" class="level2">
+<h2 class="anchored" data-anchor-id="idea-9-even-nice-guy-millionaires-trade-up">Idea 9: Even ‘Nice guy’ millionaires ‘trade-up’</h2>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The tl;dr seems to be something like, “apply the same kind of unhinged, suave monotone obsessiveness that make great people great industrialists to being great philanthropists instead (or as well). Here’s a couple of dozen case studies of smart obsessive philanthropists for you to bask vicariously in the effectively beneficent glory of through this book.”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
