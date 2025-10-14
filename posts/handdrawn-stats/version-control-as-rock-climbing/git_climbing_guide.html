@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Version Control: The Rock Climber's Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #87CEEB 0%, #f0f0f0 100%);
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        .concept {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .concept h2 {
+            color: #e74c3c;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .illustration {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 200px;
+            position: relative;
+        }
+        .git-command {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .analogy-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .climber {
+            width: 30px;
+            height: 40px;
+            background: #e74c3c;
+            border-radius: 15px 15px 5px 5px;
+            position: absolute;
+        }
+        .rope {
+            stroke: #3498db;
+            stroke-width: 3;
+            fill: none;
+        }
+        .anchor {
+            width: 20px;
+            height: 20px;
+            background: #95a5a6;
+            border-radius: 50%;
+            position: absolute;
+            border: 3px solid #7f8c8d;
+        }
+        .rock-face {
+            fill: #8b7355;
+            stroke: #654321;
+            stroke-width: 2;
+        }
+        .commit-point {
+            width: 15px;
+            height: 15px;
+            background: #2ecc71;
+            border-radius: 50%;
+            position: absolute;
+            border: 2px solid #27ae60;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        .key-point {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧗 Git Version Control: The Rock Climber's Guide</h1>
+    <p class="subtitle">Understanding version control through the safety of secured climbing</p>
+
+    <div class="concept">
+        <h2>The Climb: Your Project Journey</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 400 300">
+                <!-- Rock face -->
+                <path class="rock-face" d="M 50 300 L 50 50 L 100 30 L 150 60 L 200 40 L 250 70 L 300 50 L 350 80 L 350 300 Z" />
+                
+                <!-- Rope path -->
+                <path class="rope" d="M 200 280 Q 180 220, 200 180 Q 220 140, 200 100 Q 180 60, 200 40" />
+                
+                <!-- Anchors (commits) -->
+                <circle cx="200" cy="260" r="8" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="200" cy="180" r="8" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="200" cy="100" r="8" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                
+                <!-- Climber -->
+                <ellipse cx="200" cy="40" rx="12" ry="16" fill="#e74c3c"/>
+                <circle cx="200" cy="30" r="6" fill="#f39c12"/>
+                
+                <!-- Labels -->
+                <text x="220" y="265" font-size="12" fill="#2c3e50">Commit 1</text>
+                <text x="220" y="185" font-size="12" fill="#2c3e50">Commit 2</text>
+                <text x="220" y="105" font-size="12" fill="#2c3e50">Commit 3</text>
+                <text x="220" y="35" font-size="12" fill="#e74c3c" font-weight="bold">Current Work</text>
+                
+                <text x="70" y="290" font-size="14" fill="#7f8c8d">Start (git init)</text>
+            </svg>
+        </div>
+        
+        <p><strong>The Analogy:</strong> Just as a climber ascends a rock face, you progress through your project. The climber doesn't just scramble up recklessly - they secure themselves at regular intervals. Similarly, you don't just write code continuously without saving your progress.</p>
+        
+        <div class="analogy-box">
+            <strong>🪢 Climbing Reality:</strong> A climber clips their rope into anchors every few meters. If they slip, they only fall to the last anchor, not all the way to the ground.
+        </div>
+        
+        <div class="analogy-box">
+            <strong>💻 Git Reality:</strong> You commit your code at regular intervals. If something breaks, you can return to the last working commit instead of losing all your work.
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>Commits: Setting Your Anchors</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 400 250">
+                <!-- Timeline -->
+                <line x1="50" y1="125" x2="350" y2="125" stroke="#95a5a6" stroke-width="2"/>
+                
+                <!-- Commits -->
+                <circle cx="80" cy="125" r="15" fill="#2ecc71" stroke="#27ae60" stroke-width="3"/>
+                <circle cx="170" cy="125" r="15" fill="#2ecc71" stroke="#27ae60" stroke-width="3"/>
+                <circle cx="260" cy="125" r="15" fill="#2ecc71" stroke="#27ae60" stroke-width="3"/>
+                <circle cx="350" cy="125" r="15" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+                
+                <!-- Climber icons -->
+                <ellipse cx="80" cy="105" rx="8" ry="12" fill="#e74c3c" opacity="0.3"/>
+                <ellipse cx="170" cy="105" rx="8" ry="12" fill="#e74c3c" opacity="0.3"/>
+                <ellipse cx="260" cy="105" rx="8" ry="12" fill="#e74c3c" opacity="0.3"/>
+                <ellipse cx="350" cy="105" rx="8" ry="12" fill="#e74c3c"/>
+                
+                <!-- Labels -->
+                <text x="55" y="170" font-size="11" fill="#2c3e50" text-anchor="middle">Added login</text>
+                <text x="55" y="185" font-size="11" fill="#2c3e50" text-anchor="middle">feature</text>
+                
+                <text x="145" y="170" font-size="11" fill="#2c3e50" text-anchor="middle">Fixed bug in</text>
+                <text x="145" y="185" font-size="11" fill="#2c3e50" text-anchor="middle">validation</text>
+                
+                <text x="235" y="170" font-size="11" fill="#2c3e50" text-anchor="middle">Updated</text>
+                <text x="235" y="185" font-size="11" fill="#2c3e50" text-anchor="middle">database</text>
+                
+                <text x="325" y="170" font-size="11" fill="#3498db" text-anchor="middle" font-weight="bold">Current</text>
+                <text x="325" y="185" font-size="11" fill="#3498db" text-anchor="middle" font-weight="bold">position</text>
+            </svg>
+        </div>
+        
+        <p><strong>Setting an Anchor (Making a Commit):</strong> When a climber reaches a good position, they set an anchor point. In Git, when you complete a meaningful unit of work, you make a commit.</p>
+        
+        <div class="git-command">
+            git add .<br>
+            git commit -m "Added user authentication feature"
+        </div>
+        
+        <div class="key-point">
+            <strong>✓ Why this matters:</strong> Each commit is a safety point. If your next changes break everything, you can return to this exact state. The climber can rest here; you can return here.
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>Branches: Trying Alternative Routes</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 400 280">
+                <!-- Main route (main branch) -->
+                <line x1="50" y1="240" x2="350" y2="240" stroke="#2c3e50" stroke-width="3"/>
+                <circle cx="80" cy="240" r="12" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="180" cy="240" r="12" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="280" cy="240" r="12" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                
+                <!-- Branch route -->
+                <path d="M 180 240 Q 200 200, 220 160 L 320 160" stroke="#e74c3c" stroke-width="3" fill="none"/>
+                <circle cx="220" cy="160" r="12" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+                <circle cx="270" cy="160" r="12" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+                <circle cx="320" cy="160" r="12" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+                
+                <!-- Merge line -->
+                <path d="M 320 160 Q 310 200, 300 240" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+                
+                <!-- Labels -->
+                <text x="50" y="265" font-size="13" fill="#2c3e50" font-weight="bold">main branch</text>
+                <text x="180" y="145" font-size="13" fill="#e74c3c" font-weight="bold">feature branch</text>
+                
+                <!-- Climber on branch -->
+                <ellipse cx="320" cy="145" rx="10" ry="14" fill="#e74c3c"/>
+                <circle cx="320" cy="138" r="5" fill="#f39c12"/>
+            </svg>
+        </div>
+        
+        <p><strong>Exploring a New Route:</strong> Imagine a climber sees two possible paths up the cliff. They can secure their main rope, then explore a side route with a second rope. If the side route doesn't work, they can return to the main path without losing progress.</p>
+        
+        <div class="git-command">
+            git branch feature-payment<br>
+            git checkout feature-payment<br>
+            <span style="color: #95a5a6">// Work on the payment feature safely</span>
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🧗 The Safety:</strong> The main route remains secure. If the experimental route fails, the climber hasn't compromised their original path.
+        </div>
+        
+        <div class="key-point">
+            <strong>✓ Why branch:</strong> You can experiment with new features without risking your stable code. Your main branch stays safe while you explore.
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>Merging: Rejoining the Main Route</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 400 260">
+                <!-- Before merge -->
+                <text x="50" y="30" font-size="14" fill="#7f8c8d" font-weight="bold">Before Merge:</text>
+                <line x1="50" y1="80" x2="180" y2="80" stroke="#2c3e50" stroke-width="2"/>
+                <path d="M 100 80 Q 120 60, 140 40 L 180 40" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                <circle cx="100" cy="80" r="8" fill="#2ecc71"/>
+                <circle cx="180" cy="80" r="8" fill="#2ecc71"/>
+                <circle cx="180" cy="40" r="8" fill="#e74c3c"/>
+                <text x="190" y="45" font-size="11" fill="#e74c3c">feature</text>
+                <text x="190" y="85" font-size="11" fill="#2c3e50">main</text>
+                
+                <!-- After merge -->
+                <text x="50" y="150" font-size="14" fill="#7f8c8d" font-weight="bold">After Merge:</text>
+                <line x1="50" y1="200" x2="200" y2="200" stroke="#2c3e50" stroke-width="2"/>
+                <path d="M 100 200 Q 120 180, 140 160 L 180 160" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                <path d="M 180 160 L 200 200" stroke="#9b59b6" stroke-width="2" fill="none"/>
+                <circle cx="100" cy="200" r="8" fill="#2ecc71"/>
+                <circle cx="180" cy="160" r="8" fill="#e74c3c"/>
+                <circle cx="200" cy="200" r="8" fill="#9b59b6"/>
+                <text x="210" y="205" font-size="11" fill="#9b59b6">merged!</text>
+            </svg>
+        </div>
+        
+        <p><strong>The Successful Alternative Route:</strong> After exploring the side route and finding it leads somewhere good, the climber can incorporate it into their main path. In Git, when a feature branch works well, you merge it back into main.</p>
+        
+        <div class="git-command">
+            git checkout main<br>
+            git merge feature-payment<br>
+            <span style="color: #95a5a6">// Feature now part of main branch</span>
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>Checkout/Reset: Rappelling Down</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 400 280">
+                <!-- Rock face -->
+                <rect x="150" y="50" width="100" height="200" fill="#8b7355" stroke="#654321" stroke-width="2" rx="5"/>
+                
+                <!-- Rope going down -->
+                <line x1="200" y1="80" x2="200" y2="220" stroke="#3498db" stroke-width="3"/>
+                
+                <!-- Commits as anchors -->
+                <circle cx="200" cy="230" r="10" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <text x="215" y="235" font-size="11">Commit A</text>
+                
+                <circle cx="200" cy="180" r="10" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <text x="215" y="185" font-size="11">Commit B</text>
+                
+                <circle cx="200" cy="130" r="10" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <text x="215" y="135" font-size="11">Commit C</text>
+                
+                <!-- Climber rappelling -->
+                <ellipse cx="200" cy="100" rx="10" ry="14" fill="#e74c3c"/>
+                <circle cx="200" cy="92" r="5" fill="#f39c12"/>
+                <line x1="200" y1="92" x2="200" y2="130" stroke="#3498db" stroke-width="2"/>
+                <text x="215" y="100" font-size="11" fill="#e74c3c" font-weight="bold">Problem!</text>
+                
+                <!-- Arrow showing descent -->
+                <path d="M 230 110 L 230 175" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="240" y="150" font-size="12" fill="#e74c3c" font-weight="bold">Rappel down</text>
+                
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                        <polygon points="0 0, 10 5, 0 10" fill="#e74c3c"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        
+        <p><strong>Something Went Wrong:</strong> If a climber makes a mistake or the route becomes unsafe, they can rappel back down to their last secure anchor. Git lets you do the same - return to a previous commit when things go wrong.</p>
+        
+        <div class="git-command">
+            git checkout abc123<br>
+            <span style="color: #95a5a6">// Return to commit abc123</span><br><br>
+            git reset --hard HEAD~1<br>
+            <span style="color: #95a5a6">// Go back one commit permanently</span>
+        </div>
+        
+        <div class="key-point">
+            <strong>✓ The Safety Net:</strong> You can always return to any commit (anchor point). Your anchors never disappear, so you can always climb back down to safety.
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>Remote Repository: The Base Camp</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 400 280">
+                <!-- Base camp (remote) -->
+                <rect x="250" y="180" width="100" height="70" fill="#3498db" stroke="#2980b9" stroke-width="2" rx="5"/>
+                <text x="270" y="205" font-size="13" fill="white" font-weight="bold">GitHub</text>
+                <text x="258" y="225" font-size="11" fill="white">(Base Camp)</text>
+                
+                <!-- Climber with local repo -->
+                <rect x="50" y="50" width="100" height="70" fill="#2ecc71" stroke="#27ae60" stroke-width="2" rx="5"/>
+                <text x="65" y="75" font-size="13" fill="white" font-weight="bold">Local Repo</text>
+                <ellipse cx="100" cy="100" rx="10" ry="14" fill="#e74c3c"/>
+                <circle cx="100" cy="92" r="5" fill="#f39c12"/>
+                
+                <!-- Push arrow -->
+                <path d="M 150 85 L 250 215" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrowred)"/>
+                <text x="180" y="140" font-size="12" fill="#e74c3c" font-weight="bold">git push</text>
+                <text x="175" y="155" font-size="10" fill="#7f8c8d">(Send progress)</text>
+                
+                <!-- Pull arrow -->
+                <path d="M 250 235 L 150 105" stroke="#3498db" stroke-width="2" fill="none" marker-end="url(#arrowblue)"/>
+                <text x="180" y="180" font-size="12" fill="#3498db" font-weight="bold">git pull</text>
+                <text x="175" y="195" font-size="10" fill="#7f8c8d">(Get updates)</text>
+                
+                <defs>
+                    <marker id="arrowred" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                        <polygon points="0 0, 10 5, 0 10" fill="#e74c3c"/>
+                    </marker>
+                    <marker id="arrowblue" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                        <polygon points="0 0, 10 5, 0 10" fill="#3498db"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        
+        <p><strong>Coordinating with Your Team:</strong> Climbers report back to base camp with their progress and get updates about what other climbers discovered. Similarly, you push your commits to a remote repository and pull down changes from teammates.</p>
+        
+        <div class="git-command">
+            git push origin main<br>
+            <span style="color: #95a5a6">// Send your progress to base camp</span><br><br>
+            git pull origin main<br>
+            <span style="color: #95a5a6">// Get updates from teammates</span>
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🏕️ Base Camp Benefits:</strong>
+            <ul style="margin: 10px 0;">
+                <li>Backup of all your progress</li>
+                <li>Team can see your work</li>
+                <li>You can see others' progress</li>
+                <li>Everyone stays coordinated</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>Pull Requests: Team Problem-Solving</h2>
+        <div class="illustration">
+            <svg viewBox="0 0 500 400">
+                <!-- Rock face with obstacle -->
+                <rect x="50" y="50" width="400" height="320" fill="#8b7355" stroke="#654321" stroke-width="2" rx="5"/>
+                
+                <!-- Obstacle/overhang (visual indicator only) -->
+                <text x="85" y="175" font-size="11" fill="#654321" font-weight="bold">⚠ HAZARD</text>
+                
+                <!-- Main climber's path (stuck at commit 3) -->
+                <line x1="120" y1="350" x2="120" y2="220" stroke="#2c3e50" stroke-width="3"/>
+                <circle cx="120" cy="340" r="8" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="120" cy="280" r="8" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <circle cx="120" cy="220" r="8" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+                <text x="75" y="225" font-size="10" fill="#2c3e50">Commit 3</text>
+                
+                <!-- Main climber (stuck) -->
+                <ellipse cx="120" cy="205" rx="8" ry="12" fill="#e74c3c"/>
+                <circle cx="120" cy="198" r="4" fill="#f39c12"/>
+                <text x="85" y="195" font-size="11" fill="#e74c3c" font-weight="bold">STUCK!</text>
+                
+                <!-- Three team members trying different routes -->
+                <!-- Team member 1 (failed attempt - left) -->
+                <path d="M 120 220 Q 100 200, 80 170 L 80 130" stroke="#95a5a6" stroke-width="2" stroke-dasharray="3,3" fill="none"/>
+                <ellipse cx="80" cy="130" rx="7" ry="10" fill="#95a5a6"/>
+                <text x="50" y="135" font-size="9" fill="#95a5a6">Team 1</text>
+                <text x="48" y="145" font-size="9" fill="#95a5a6">✗ Failed</text>
+                
+                <!-- Team member 2 (failed attempt - middle left) -->
+                <path d="M 120 220 Q 130 200, 140 170 L 160 130" stroke="#95a5a6" stroke-width="2" stroke-dasharray="3,3" fill="none"/>
+                <ellipse cx="160" cy="130" rx="7" ry="10" fill="#95a5a6"/>
+                <text x="130" y="135" font-size="9" fill="#95a5a6">Team 2</text>
+                <text x="128" y="145" font-size="9" fill="#95a5a6">✗ Failed</text>
+                
+                <!-- Team member 3 (successful attempt - right) -->
+                <path d="M 120 220 Q 200 210, 280 200 Q 340 190, 380 170 L 380 80" stroke="#9b59b6" stroke-width="3" fill="none"/>
+                <circle cx="220" cy="205" r="6" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+                <circle cx="330" cy="185" r="6" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+                <circle cx="380" cy="140" r="6" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+                <circle cx="380" cy="80" r="8" fill="#9b59b6" stroke="#8e44ad" stroke-width="2"/>
+                <ellipse cx="380" cy="68" rx="8" ry="12" fill="#2ecc71"/>
+                <circle cx="380" cy="61" r="4" fill="#f39c12"/>
+                <text x="390" y="85" font-size="10" fill="#9b59b6" font-weight="bold">Team 3 ✓</text>
+                <text x="390" y="97" font-size="9" fill="#9b59b6">SUCCESS!</text>
+                
+                <!-- Summit -->
+                <polygon points="380,50 370,65 390,65" fill="#ffd700" stroke="#f39c12" stroke-width="2"/>
+                <text x="345" y="48" font-size="11" fill="#f39c12" font-weight="bold">🏔️ SUMMIT</text>
+                
+                <!-- PR arrow -->
+                <path d="M 360 140 Q 300 160, 240 180 L 140 215" stroke="#9b59b6" stroke-width="3" fill="none" marker-end="url(#arrowpr)" stroke-dasharray="8,4"/>
+                <text x="240" y="170" font-size="12" fill="#9b59b6" font-weight="bold">Pull Request</text>
+                <text x="235" y="185" font-size="9" fill="#7f8c8d">"Found a way!"</text>
+                
+                <!-- Labels for git commands -->
+                <text x="200" y="30" font-size="10" fill="#7f8c8d" font-style="italic">git clone (3 team members)</text>
+                
+                <defs>
+                    <marker id="arrowpr" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                        <polygon points="0 0, 10 5, 0 10" fill="#9b59b6"/>
+                    </marker>
+                </defs>
+            </svg>
+        </div>
+        
+        <p><strong>Encountering an Obstacle:</strong> The main climber reaches commit 3 and encounters a dangerous overhang - they don't know how to proceed safely. Rather than risk a fall, they radio base camp for help.</p>
+        
+        <div class="git-command">
+            <span style="color: #95a5a6">// Main climber pushes their progress and asks for help</span><br>
+            git push origin main<br>
+            <span style="color: #95a5a6">// "Stuck at commit 3 - need solution for obstacle!"</span>
+        </div>
+        
+        <p><strong>Team Members Clone the Route:</strong> Three other climbers at base camp see the problem. Each one makes an exact copy of the route up to commit 3, then attempts their own solution.</p>
+        
+        <div class="git-command">
+            <span style="color: #95a5a6">// Team member 3 clones the repository</span><br>
+            git clone https://github.com/team/climbing-project<br>
+            git checkout -b solution-overhang-right<br>
+            <span style="color: #95a5a6">// Creates a new branch to try a solution</span>
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🧗‍♀️ Team Attempts:</strong>
+            <ul style="margin: 10px 0;">
+                <li><strong>Team Member 1:</strong> Tries going left around the overhang - path too unstable ✗</li>
+                <li><strong>Team Member 2:</strong> Attempts a direct route up - too dangerous ✗</li>
+                <li><strong>Team Member 3:</strong> Discovers a path swinging wide right, then up - reaches summit! ✓</li>
+            </ul>
+        </div>
+        
+        <p><strong>The Successful Solution:</strong> Team Member 3 finds a viable route! They document their path with commits and propose it as a Pull Request.</p>
+        
+        <div class="git-command">
+            <span style="color: #95a5a6">// Team member 3's successful commits</span><br>
+            git commit -m "Swing right to avoid overhang"<br>
+            git commit -m "Secure anchor on right side"<br>
+            git commit -m "Climb to summit via eastern route"<br>
+            git push origin solution-overhang-right<br><br>
+            <span style="color: #95a5a6">// Creates Pull Request on GitHub</span><br>
+            <span style="color: #f39c12">"PR: Solution to overhang obstacle - eastern route works!"</span>
+        </div>
+        
+        <div class="illustration">
+            <svg viewBox="0 0 500 300">
+                <!-- GitHub PR interface mockup -->
+                <rect x="50" y="40" width="400" height="240" fill="white" stroke="#d1d5da" stroke-width="2" rx="8"/>
+                
+                <!-- Header -->
+                <rect x="50" y="40" width="400" height="50" fill="#f6f8fa" stroke="#d1d5da" stroke-width="2" rx="8"/>
+                <text x="70" y="70" font-size="16" fill="#24292e" font-weight="bold">Pull Request #42: Solution to overhang obstacle</text>
+                
+                <!-- PR status badge -->
+                <rect x="70" y="100" width="60" height="25" fill="#2ecc71" rx="4"/>
+                <text x="78" y="117" font-size="12" fill="white" font-weight="bold">✓ Open</text>
+                
+                <!-- PR description -->
+                <text x="70" y="145" font-size="13" fill="#24292e" font-weight="bold">Team Member 3 wants to merge 3 commits into main</text>
+                <text x="70" y="170" font-size="12" fill="#586069">Found a viable route around the overhang by swinging right.</text>
+                <text x="70" y="188" font-size="12" fill="#586069">Tested successfully - reaches summit safely!</text>
+                
+                <!-- Files changed -->
+                <rect x="70" y="205" width="360" height="25" fill="#f6f8fa" stroke="#d1d5da" stroke-width="1" rx="3"/>
+                <text x="80" y="222" font-size="11" fill="#24292e">📁 route.md: +12 -0 lines</text>
+                
+                <!-- Action buttons -->
+                <rect x="280" y="245" width="75" height="28" fill="#95a5a6" rx="5"/>
+                <text x="292" y="264" font-size="12" fill="white" font-weight="bold">Close</text>
+                
+                <rect x="365" y="245" width="75" height="28" fill="#2ecc71" rx="5"/>
+                <text x="374" y="264" font-size="12" fill="white" font-weight="bold">Merge</text>
+            </svg>
+        </div>
+        
+        <p><strong>Reviewing and Merging:</strong> The main climber reviews Team Member 3's solution. The path looks good - well-documented commits, safe anchors, reaches the summit. They approve and merge the Pull Request.</p>
+        
+        <div class="git-command">
+            <span style="color: #95a5a6">// Main climber reviews and merges the PR</span><br>
+            git checkout main<br>
+            git pull origin main<br>
+            <span style="color: #95a5a6">// GitHub has merged the solution into main</span><br><br>
+            <span style="color: #2ecc71">// Now the main climber has the solution!</span><br>
+            <span style="color: #2ecc71">// They can follow Team 3's proven path to the summit</span>
+        </div>
+        
+        <div class="illustration">
+            <svg viewBox="0 0 500 320">
+                <!-- Rock face -->
+                <rect x="80" y="50" width="340" height="250" fill="#8b7355" stroke="#654321" stroke-width="2" rx="5"/>
+                
+                <!-- Original path (commits 1-3) -->
+                <line x1="150" y1="280" x2="150" y2="180" stroke="#2c3e50" stroke-width="3"/>
+                <circle cx="150" cy="270" r="8" fill="#2ecc71"/>
+                <circle cx="150" cy="225" r="8" fill="#2ecc71"/>
+                <circle cx="150" cy="180" r="8" fill="#2ecc71"/>
+                
+                <!-- Merged solution path -->
+                <path d="M 150 180 Q 220 170, 290 160 Q 340 150, 370 130 L 370 80" stroke="#9b59b6" stroke-width="3" fill="none"/>
+                <circle cx="230" cy="168" r="6" fill="#9b59b6"/>
+                <circle cx="320" cy="150" r="6" fill="#9b59b6"/>
+                <circle cx="370" cy="100" r="6" fill="#9b59b6"/>
+                <circle cx="370" cy="80" r="8" fill="#9b59b6"/>
+                
+                <!-- Main climber now following the solution -->
+                <ellipse cx="370" cy="68" rx="10" ry="14" fill="#e74c3c"/>
+                <circle cx="370" cy="60" r="5" fill="#f39c12"/>
+                
+                <!-- Summit flag -->
+                <polygon points="370,50 360,65 380,65" fill="#ffd700" stroke="#f39c12" stroke-width="2"/>
+                <line x1="370" y1="50" x2="370" y2="30" stroke="#f39c12" stroke-width="2"/>
+                <text x="320" y="28" font-size="13" fill="#f39c12" font-weight="bold">🏆 SUCCESS!</text>
+                
+                <!-- Labels -->
+                <text x="100" y="185" font-size="10" fill="#2c3e50">Original route</text>
+                <text x="240" y="135" font-size="10" fill="#9b59b6">Merged solution</text>
+                <text x="250" y="148" font-size="9" fill="#9b59b6">(from Team 3's PR)</text>
+            </svg>
+        </div>
+        
+        <div class="key-point">
+            <strong>✓ The Power of Collaboration:</strong> The main climber was stuck, but didn't have to solve the problem alone. Team members could safely experiment with different solutions in parallel (different branches). The successful solution was shared via Pull Request and merged into the main path. Now everyone on the team has access to the proven route!
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🤝 Why Pull Requests Work:</strong>
+            <ul style="margin: 10px 0;">
+                <li><strong>Safe experimentation:</strong> Each team member tries solutions without risking the main route</li>
+                <li><strong>Parallel attempts:</strong> Multiple solutions can be tried simultaneously</li>
+                <li><strong>Code review:</strong> The main climber can review before accepting the solution</li>
+                <li><strong>Documentation:</strong> The PR describes what works and why</li>
+                <li><strong>Knowledge sharing:</strong> Once merged, everyone benefits from the solution</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); border-radius: 10px; color: white;">
+            <h3 style="margin-top: 0; color: #ffd700;">🚀 Real-World Example: Apollo 13</h3>
+            <p style="line-height: 1.8;">This exact pattern of collaborative problem-solving saved the Apollo 13 mission in 1970. When a critical oxygen supply issue threatened the crew, they reported the problem to Ground Control (git push with issue report). Multiple teams at Mission Control worked in parallel, each mocking up the lunar module with the exact same equipment available to the crew (git clone). They tried different solutions until one team found a working fix using only materials on board. They radioed detailed instructions back to Apollo 13 (Pull Request), the crew reviewed and implemented the solution (merge), and the astronauts made it home safely.</p>
+            
+            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px; margin-top: 15px;">
+                <strong style="color: #ffd700;">The Pattern:</strong>
+                <ul style="margin: 10px 0; line-height: 1.8;">
+                    <li><strong>Apollo 13 crew</strong> = Main climber stuck at obstacle</li>
+                    <li><strong>Ground Control teams</strong> = Repository clones with parallel branches</li>
+                    <li><strong>Mock-up modules</strong> = Development environments matching production</li>
+                    <li><strong>Radio communication</strong> = Git push/pull and PR comments</li>
+                    <li><strong>Tested solution</strong> = Successful PR ready to merge</li>
+                    <li><strong>Implementation instructions</strong> = Merge commit into main</li>
+                </ul>
+            </div>
+            
+            <p style="margin-bottom: 0; font-style: italic; margin-top: 15px;">Whether it's saving astronauts in space, helping a climber past a hazard, or fixing critical bugs in production code, this pattern of distributed problem-solving with version control is one of humanity's most powerful collaborative tools.</p>
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>The Complete Picture</h2>
+        <div class="key-point">
+            <strong>Rock Climbing Safety System:</strong>
+            <ul style="margin: 10px 0;">
+                <li>🧗 <strong>Climber</strong> = You, the developer</li>
+                <li>🪨 <strong>Rock face</strong> = Your project/codebase</li>
+                <li>🪢 <strong>Rope</strong> = Git tracking your changes</li>
+                <li>⚙️ <strong>Anchors</strong> = Commits (safe points)</li>
+                <li>🛤️ <strong>Alternative routes</strong> = Branches</li>
+                <li>⬇️ <strong>Rappelling</strong> = Checkout/reset to previous commits</li>
+                <li>🏕️ <strong>Base camp</strong> = Remote repository (GitHub/GitLab)</li>
+                <li>🤝 <strong>Team problem-solving</strong> = Pull Requests</li>
+                <li>📻 <strong>Radio communication</strong> = GitHub issues & comments</li>
+            </ul>
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🎯 The Core Principle:</strong> Just as a climber would never ascend a cliff without proper safety equipment and regular anchor points, you should never develop software without version control and regular commits. Both systems exist to catch you when you fall and let you recover without losing all progress. And just as climbing teams work together to solve difficult obstacles, development teams use Pull Requests to collaborate and share solutions.
+        </div>
+    </div>" width="340" height="250" fill="#8b7355" stroke="#654321" stroke-width="2" rx="5"/>
+                
+                <!-- Original path (commits 1-3) -->
+                <line x1="150" y1="280" x2="150" y2="180" stroke="#2c3e50" stroke-width="3"/>
+                <circle cx="150" cy="270" r="8" fill="#2ecc71"/>
+                <circle cx="150" cy="225" r="8" fill="#2ecc71"/>
+                <circle cx="150" cy="180" r="8" fill="#2ecc71"/>
+                
+                <!-- Merged solution path -->
+                <path d="M 150 180 Q 220 170, 290 160 Q 340 150, 370 130 L 370 80" stroke="#9b59b6" stroke-width="3" fill="none"/>
+                <circle cx="230" cy="168" r="6" fill="#9b59b6"/>
+                <circle cx="320" cy="150" r="6" fill="#9b59b6"/>
+                <circle cx="370" cy="100" r="6" fill="#9b59b6"/>
+                <circle cx="370" cy="80" r="8" fill="#9b59b6"/>
+                
+                <!-- Main climber now following the solution -->
+                <ellipse cx="370" cy="68" rx="10" ry="14" fill="#e74c3c"/>
+                <circle cx="370" cy="60" r="5" fill="#f39c12"/>
+                
+                <!-- Summit flag -->
+                <polygon points="370,50 360,65 380,65" fill="#ffd700" stroke="#f39c12" stroke-width="2"/>
+                <line x1="370" y1="50" x2="370" y2="30" stroke="#f39c12" stroke-width="2"/>
+                <text x="320" y="28" font-size="13" fill="#f39c12" font-weight="bold">🏆 SUCCESS!</text>
+                
+                <!-- Labels -->
+                <text x="100" y="185" font-size="10" fill="#2c3e50">Original route</text>
+                <text x="240" y="135" font-size="10" fill="#9b59b6">Merged solution</text>
+                <text x="250" y="148" font-size="9" fill="#9b59b6">(from Team 3's PR)</text>
+            </svg>
+        </div>
+        
+        <div class="key-point">
+            <strong>✓ The Power of Collaboration:</strong> The main climber was stuck, but didn't have to solve the problem alone. Team members could safely experiment with different solutions in parallel (different branches). The successful solution was shared via Pull Request and merged into the main path. Now everyone on the team has access to the proven route!
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🤝 Why Pull Requests Work:</strong>
+            <ul style="margin: 10px 0;">
+                <li><strong>Safe experimentation:</strong> Each team member tries solutions without risking the main route</li>
+                <li><strong>Parallel attempts:</strong> Multiple solutions can be tried simultaneously</li>
+                <li><strong>Code review:</strong> The main climber can review before accepting the solution</li>
+                <li><strong>Documentation:</strong> The PR describes what works and why</li>
+                <li><strong>Knowledge sharing:</strong> Once merged, everyone benefits from the solution</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="concept">
+        <h2>The Complete Picture</h2>
+        <div class="key-point">
+            <strong>Rock Climbing Safety System:</strong>
+            <ul style="margin: 10px 0;">
+                <li>🧗 <strong>Climber</strong> = You, the developer</li>
+                <li>🪨 <strong>Rock face</strong> = Your project/codebase</li>
+                <li>🪢 <strong>Rope</strong> = Git tracking your changes</li>
+                <li>⚙️ <strong>Anchors</strong> = Commits (safe points)</li>
+                <li>🛤️ <strong>Alternative routes</strong> = Branches</li>
+                <li>⬇️ <strong>Rappelling</strong> = Checkout/reset to previous commits</li>
+                <li>🏕️ <strong>Base camp</strong> = Remote repository (GitHub/GitLab)</li>
+                <li>🤝 <strong>Team problem-solving</strong> = Pull Requests</li>
+                <li>📻 <strong>Radio communication</strong> = GitHub issues & comments</li>
+            </ul>
+        </div>
+        
+        <div class="analogy-box">
+            <strong>🎯 The Core Principle:</strong> Just as a climber would never ascend a cliff without proper safety equipment and regular anchor points, you should never develop software without version control and regular commits. Both systems exist to catch you when you fall and let you recover without losing all progress. And just as climbing teams work together to solve difficult obstacles, development teams use Pull Requests to collaborate and share solutions.
+        </div>
+    </div>
+
+</body>
+</html>
