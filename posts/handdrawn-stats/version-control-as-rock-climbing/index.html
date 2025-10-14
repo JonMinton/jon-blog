@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-10-14">
 
-<title>Jon Minton’s Blog - Hand-drawn Statistics</title>
+<title>Jon Minton’s Blog - Climbing with Claude: Understanding Collaborative Version Control</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Hand-drawn Statistics">
-<meta name="twitter:description" content="">
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Climbing with Claude: Understanding Collaborative Version Control">
+<meta name="twitter:description" content="An Artificially Hand-drawn Analogy">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -126,15 +95,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
         <li>
-    <a class="dropdown-item" href="./glms.html" rel="" target="">
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
  <span class="dropdown-text">Statistical Theory and Applications</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tardy-tuesday.html" rel="" target="">
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
  <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hand-drawn-statistics.html" rel="" target="">
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
  <span class="dropdown-text">Hand-drawn Statistics</span></a>
   </li>  
     </ul>
@@ -142,11 +111,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./unpop.html" rel="" target="">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
  <span class="menu-text">Unpop</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -170,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -183,105 +152,63 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Climbing with Claude: Understanding Collaborative Version Control</h1>
+            <p class="subtitle lead">An Artificially Hand-drawn Analogy</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">llm-generated</div>
+                <div class="quarto-category">version-control</div>
+                <div class="quarto-category">git</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 14, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="analogue">analogue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="factor analysis">factor analysis <span class="quarto-category-count">(2)</span></div><div class="category" data-category="git">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hand written">hand written <span class="quarto-category-count">(1)</span></div><div class="category" data-category="llm-generated">llm-generated <span class="quarto-category-count">(1)</span></div><div class="category" data-category="multi-level-modelling">multi-level-modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ordinal variables">ordinal variables <span class="quarto-category-count">(1)</span></div><div class="category" data-category="random-effects">random-effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="simulation">simulation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="systems">systems <span class="quarto-category-count">(1)</span></div><div class="category" data-category="testing">testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="version-control">version-control <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Hand-drawn Statistics</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>Sometimes it can be easiest to think about complex ideas without having to think too much about the tooling to use to express and represent these ideas. Instead of having to deal with R code, mermaid uml syntax, latex equations and so on, sometimes the right tool for expressing an idea is just a pen and paper, and the right tool for presenting it to others is just take a picture with my camera phone.</p>
-<p>At some point these hand drawn notes may become the basis of ‘proper’ blog posts. But for now I hope they’re legible and comprehensible enough to be useful resources to others in the mean time.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Collaborative version control, with git and GitHub, is the coders’ <strong>Big Little Secret</strong>. It offers a set of tools and approaches to working securely, safely and collaboratively with others (including one’s past self) on complex projects that is <em>potentially</em> very transferrable to almost any kind of knowledge work that involves writing stuff down. (So, pretty much anything office-based.) Not just transferrable to other kinds of knowledge work, but potentially <em>transformative</em>.</p>
+<p>The git/GitHub collaborative version control pattern isn’t coders’ <strong>Big Little Secret</strong> because coders <em>want</em> it to be a secret, however. Instead, it’s because collaborative version control, through git and GitHub, is <em>fundamentally weird</em>, inherently <em>arcane</em>, unintuitive, difficult to ‘grok’.</p>
+<p>For years, I’ve been trying to work out some more intuitive ways to explain git/GitHub. And now, below, with the embarassingly sizeable help of Claude Sonnet 4.5, I think I might have it: <strong>Git/GitHub as rock climbing</strong>.</p>
+<p><em>Enjoy</em></p>
+<iframe src="git_climbing_guide.html" width="100%" height="800px" style="border:none; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></iframe>
+<p>Some text</p>
 
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics,factor analysis,ordinal variables,analogue" data-listing-date-sort="1714777200000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Factor analysis with ordinal variables" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 4, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/index.html" class="title listing-title">Factor analysis with ordinal variables</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics,factor analysis,testing" data-listing-date-sort="1714863600000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="How factor analysis is used in testing" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 5, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/index.html" class="title listing-title">How factor analysis is used in testing</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,simulation,systems,hand written" data-listing-date-sort="1716850800000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Statistics as circuit boards" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 28, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/statistics-as-circuits/index.html" class="title listing-title">Statistics as circuit boards</a>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,multi-level-modelling,random-effects" data-listing-date-sort="1750114800000" data-listing-file-modified-sort="1756029618459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Repeated Measures" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jun 17, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/repeated-measures/index.html" class="title listing-title">Repeated Measures</a>
-</td>
-</tr>
-<tr data-index="4" data-categories="llm-generated,version-control,git" data-listing-date-sort="1760396400000" data-listing-file-modified-sort="1760464242937" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Climbing with Claude: Understanding Collaborative Version Control" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Oct 14, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/version-control-as-rock-climbing/index.html" class="title listing-title">Climbing with Claude: Understanding Collaborative Version Control</a>
-</td>
-</tr>
-</tbody>
 
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -629,6 +556,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
