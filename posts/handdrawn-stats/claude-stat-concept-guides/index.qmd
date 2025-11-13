@@ -1,0 +1,21 @@
+---
+title: "Point estimates, Confidence Intervals and P-Values"
+subtitle: "Two simple statistical animations co-produced with Claude"
+author: Jon Minton
+date: 2025-11-13
+categories: [statistics, claude, visualisations]
+---
+
+Alongside eliciting a sense of incipient dread that I may be witnessing the birth of an alien superintelligence, I've recently found Claude AI highly effective at producing visual guides for conveying important technical concepts based on instructions I provide. Following up from a few weeks ago, where I co-produced a guide for understanding version control by analogy to rock climbing,[^1] here are a couple of animated guides I've co-produced for trying to convey some simple, but fundamental, concepts in statistics. 
+
+Firstly, an animated guide into how a data get summarised into a distribution, and the distribution into point and interval estimates. 
+
+![Point and interval estimates](hypothesis_test_animation.gif)
+
+Secondly, a simple guide into how (one sided) p values follow simply from estimating the proportion of such distributions that falls one side or another of a line: 
+
+![One sided P values](statistical_intuition_python.gif)
+
+Though there's a great deal I could write about the experience of co-producing pedagogic artefacts with Claude, for now I'm presenting the artefacts as-is, and hope they're interesting and useful for clarifying and embedding these core statistical concepts!
+
+[^1]: Disclaimer: Both Claude and I have equal levels of real-world rock climbing experience

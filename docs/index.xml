@@ -10,7 +10,57 @@
 <atom:link href="https://jonminton.github.io/jon-blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Mon, 13 Oct 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 27 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Claude as a Dialectical Engine?</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://jonminton.github.io/jon-blog/posts/the-dialectical-engine/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Since watching <a href="https://www.imdb.com/title/tt32150119/">The Thinking Game</a>, the 2024 documentary on DeepMind <a href="../../posts/unpop/the-man-who-solved-intelligence/index.html">I wrote about previously</a>, I’ve been increasingly fascinated by recent advances in AI, and how transformative they may turn out to be. However, such fascination hasn’t always extended, for me, to LLMs, even though for most people these terms are pretty much synonymous. This is because of the differences in the loss function, the specificity of the task, between the kinds of AIs built to play games or fold proteins, versus those which ‘merely’ make text. For an AI that plays a game, the loss function and its justificaiton is clear: get the most points; travel the most distance, and so on. For LLMs, by contrast, the loss function of ‘find the most likely words, in the most likely sentences, in the most likely paragraphs’, and so on, seem less intrinsically justifiable. Modifying the loss function further by adding points for producing streams of text that a user ‘likes’ or agrees with, and this can potentially lead to some very strange incentives.</p>
+<p>In particular, a common charge against LLMs is they tend to be deeply agreeable and sychophantic, eager to please, to butter up and blow smoke into their users. People might often like being agreed with, told that they’re brillant and insightful, but this isn’t really synonymous with such responses being objectively correct or helpful.</p>
+<p>Until a couple of weeks ago, I tended to believe that sycophancy and agreeableness were ubiquitous pathologies of LLMs, and that despite the surface differences and particularities of how they’re fit, implemented, and pre-loaded with persona prompts, there was in practice little getting away from the modal experience of using LLMs being a kind of colonic irrigation of the ego. Won’t someone please make an LLM that doesn’t tell me I’m fantastic? I wondered. Where can I find an LLM that decides to disagree, challenge me, and probe some of my ideas and assumptions in a way that’s constructively critical, rather than try to drown me in toxic positivity?</p>
+<p>I said I believed this until a couple of weeks ago, because the weekend before last something unusual happened: An LLM, more specifically Claude Sonnet 4.5, exhibited some of the above behaviours. The context was as follows: I was sitting in a park, eating a baked potato with cheese, and thinking how I - as a vegetarian - sit in a fairly awkard ethical middle ground between meat eaters and vegans, potentially liable for criticism from both sides. So, while sitting in the park, eating my baked potato, I thought aloud, to Claude, about the ethical issues involved in animal husbandry. The chat log for this session is available below:</p>
+<ul>
+<li><a href="https://claude.ai/share/32f28c15-5eee-40b4-aa2c-2b981be9a874"><strong>Animal Welfare Ethics Chat</strong></a></li>
+</ul>
+<p>So, after the first prompt, which was both factually inaccurate and facetious, I offered the main framing by which I tend to think about the issues of animal welfare, meat consumption, and veganism: namely that there seems to be a tension between efforts to improve animal welfare by opposing from without, and working from within.</p>
+<p>As well as pointing out my oversights regarding the first premise, about animal products derived from pigs other than meat, two prompts later Claude turns the tables:</p>
+<blockquote class="blockquote">
+<p>What’s your intuition on whether creating beings for marginally posisitive existences is morally valuable?</p>
+</blockquote>
+<p>Claude then devotes about half of its following response to challenging the intuitions it asked me about. Then it ends the response with another challenging question:</p>
+<blockquote class="blockquote">
+<p>What’s your vision for how we <em>should</em> balance these considerations?</p>
+</blockquote>
+<p>In the response to this prompt, Claude then:</p>
+<ol type="1">
+<li>Expands on and restates my brief response in a way that shows that it understands and strengthens it (Essentially the first of <a href="https://en.wikipedia.org/wiki/Rogerian_argument#Rapoport's_rules">Rapoport’s Rules</a> for effective disagreement)</li>
+<li>Acknowledge the fit and relevance to the earlier discussions</li>
+<li>Devotes around half of the response to challenges to my suggestions</li>
+<li>Ends with another challenging question.</li>
+</ol>
+<p>This process of both showing effective understanding of my positions, challenging them, and then asking follow-up questions, then continues a few more times, until I provide a response it deems to be sufficiently internally consistent, and summarises it in a way that I thought contained no errors of interpretation or nuance.</p>
+<p>This exchange, taking place in a park over a baked potato, showed, for me, an LLM - unprompted - changing stance from the usual, sychophantic <em>agreement engine</em> to a genuinely challenging and argumentative <em>dialectical engine</em>. Though it might in a sense be just a higher order ‘magic trick’, it <em>seemed</em> qualitatively different to anything I’d experienced previously from an LLM.</p>
+<p>More recently, I guess showing that the above behaviour was not a one-off, I asked Claude about… the dangers of AIs, and again it adopted a dialectical persona, challenging me on my premises, expressing my positions more clearly than I could, and asking highly pertinent follow-up questions.</p>
+<ul>
+<li><a href="https://claude.ai/share/33ae9347-83e7-4317-851b-093b51fdab8e"><strong>Sneaky AI ethics chat</strong></a></li>
+</ul>
+<p>Although with this recent exchange we did not reach, as with the animal welfare chat, a natural point of conclusion, the same kind of broader pattern of behaviour seemed to be on full display. Claude, though courteous, is not sycophantic, and <em>can</em> be challenging and critical.</p>
+<p>Does this count as <em>intelligent</em>, even edging into <em>superintelligent</em>? It’s both too early to know, but we might find out all too soon…</p>
+
+
+
+ ]]></description>
+  <category>llms</category>
+  <category>debate</category>
+  <category>dialectics</category>
+  <guid>https://jonminton.github.io/jon-blog/posts/the-dialectical-engine/index.html</guid>
+  <pubDate>Mon, 27 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Climbing with Claude: Understanding Collaborative Version Control</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -4412,75 +4462,6 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   <category>progress</category>
   <guid>https://jonminton.github.io/jon-blog/posts/unpop/wham-forever-cultural-debraiding/index.html</guid>
   <pubDate>Sat, 21 Dec 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Poecilia parae: A lover, and a fighter</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/gentes-lover-and-a-fighter/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/gentes-lover-and-a-fighter/figures/gentes.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Five Boys</figcaption>
-</figure>
-</div>
-<p>I went to see Richard Dawkins, <em>in conversation</em>, in Glasgow, on 31 October, as part of a tour to promote his latest book, <em>The Genetic Book of the Dead: A Darwinian Reverie</em>, <span class="citation" data-cites="dawkins2024">(Dawkins and Lenzová 2024)</span> beautifully illustrated by Jana Lenzova, who previously translated <em>The God Delusion</em> to Slovak. The talk was… fine. But as the tour was to promote the book, I thought I’d buy that alongside the ticket. And the book is much better than fine. It’s fantastic. Dawkins is a good speaker, a sometimes gauche tweeter (or is it now Xer?), but an excellent writer of long-form content.</p>
-<p>Though he did not play up the association, or possibly did not even notice or consider it important, there is a fascinating link between a chapter framed around cuckoos (chapter 10: The Backward Gene’s Eye View, pp 214-238), and the subsequent chapter (chapter 11: More Glances in the Rear-View Mirror, pp 240-259), which includes the following (slightly fanciful and highly simplified) genetic tree showing the level of common ancestry between humans and our closest living relatives.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/gentes-lover-and-a-fighter/figures/chimpanzees.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Family Tree</figcaption>
-</figure>
-</div>
-<p>This figure suggests that, on average, chimps and bonobos are the closest living relatives of each other, as well as the closest living relatives of humans. This is relatively well known, and the reason why Jared Diamond referred to humans as ‘the third chimpanzee’ in one of his most famous books <span class="citation" data-cites="diamond_third_2006">(Diamond 2006)</span>.</p>
-<p>The social differences between chimps (as labeled here) and bonobos are often played up by popular science writers focused on our evolutionary endowment, especially in relation to questions of humans’ innate propensity to violence and to gender inequality. Chimps and bonobos are sometimes presented competing ideal types, with something like a moral refrain that we should be <em>more like</em> the peaceful bonobos, and <em>less like</em> the warmongering chimps. The steps of reasoning, as I understand them, are something as follows:</p>
-<p>The reproductive success of an individual animal, and so its genes’ probability of being replicated along the germline, is influenced both by <em>natural selection</em>, ‘fitness’ to the broader environment, and <em>sexual selection</em>, that ‘game-within-a-game’ in which the specific reproductive challenges of the individual are the mate-guarding propensities and mate-selecting preferences of same- and opposite-sex members of the same species. Sometimes, natural selection and sexual selection can exert competing influence on the ‘fitness’ of different genes through the phenotypes they encode. Most famously, the exuberant, iridescent and expensive plumage of the male peacock tilts its phenotype against something optimised for the broader environment, making it both more visible to and harder to escape from predators. But exuberant plumage increases its success in the subgame of sexual selection, making it more likely to be selected by the (comparatively dull) female peahen (slightly paradoxically in part because the ability to survive the natural environment <em>despite</em> the handicap of unwieldy plumage itself to some extent suggests master of the natural environment and the capacity to find surplus calories).</p>
-<p>In most mammal species, females have larger gametes, and much larger minimal parental investment, which militates towards greater choosiness in mate selection. If gross differentials in minimal parental investment tend to militate towards females as ‘choosers’, then this forms the first layer of sexual selection pressures within a species. But mate guarding behaviours amongst males then emerge as a subsequent layer in this game. Mate guarding is when a male of a species acts so as to limit the choice of females, by keeping other males away. This is usually achieved by a male being larger and (often) more aggressive than other males, with an incidental outcome of this being that, in species that practice mate guarding, males are also somewhat larger than females. Especially visible and notable examples of mate guarding occur in elephant seals (p.&nbsp;242), in which an extreme minority of especially large and violent male ‘beachmasters’ impregnate the vast majority of females.</p>
-<p>I think it was within Diamond’s <em>The Rise and Fall of the Third Chimpanzee</em> that the argument was made that, if an evolutionary biologist from another planet were to appear on earth, knowledgeable of evolutionary theory but not of the specifics of earthly fauna, they would be able to reasonably estimate the relative influence of mate-guarding-based sexual selection in a species by comparing the average size of males to females within a species: the larger the male is relative to the female, on average, the greater the role of mate-guarding-based sexual selection in genetic selection. Based on this, I think the argument went, as human males are perhaps a fifth larger than human females on average, with even larger relative differentials in upper body strength, there is clear evidence of at least some level of mate-guarding based sexual selection in humans.</p>
-<p>The sex-based size disparity is even larger in chimpanzees, with chimpanzee males being on average around a third larger than females, compared with the one fifth difference in humans, suggesting an even larger degree of mate-guarding based sexual selection in this distant ‘cousin’ of ours. Similarly, male chimpanzees appear even to have an even stronger tendency towards violence than humans. To the extent the term is useful, chimpanzee groupings or bands can be thought of as patrilineal, even patriarchal.</p>
-<p>By contrast, there is no apparent sex difference in sizes between male and female bonobos: males and females are roughly the same size. And relatedly, there is in bonobos no clear evidence of male mate-guarding in the usual sense. Bonobos are also considered to have a much lower propensity to violence more generally than chimpanzees. Their groupings or bands tend to be matrilineal, even matriarchal.</p>
-<p>Although male bonobos aren’t larger overall compared with female bonobos, their is one part of their anatomy that is disproportionately large given their size. Male bonobos have disproportionately large testicles, containing disproportionately large amounts of sperm, and they have disproportionately large amounts of sex with a disproportionately large variety of female bonobos.</p>
-<p>So, the contrast as implied in the above account is between the patriarchal, violence-prone <em>fighter</em> species of the chimpanzees; and the matriarchial, matrilineal <em>lover</em> species of the bonobos. The slightly elegaic refrain then follows: why can’t we be more like the bonobos, and less like the chimpanzees? Evolutionary arms races went down the big bodies and violence route for the chimpanzee, and the big balls and free-love route for the bonobo, and though humans are neither bonobo nor chimpanzee, the fifth-larger size of average males compared with females, and even more disproportionate sex differentials in upper body strength, suggests that humans are somewhat more biased towards the chimpanzee path than the bonobo path.</p>
-<p>So, in chimpanzees, bonobos, and humans, evolution made choices for us regarding sexual selection, which reinforced and imprinted themselves on our bodies and behaviours: fighter males <em>or</em> lover males. The two options are <em>mutually exclusive</em>. But what chapter 10 of the same book revealed is that, in some species, the <em>lover/fighter</em> male strategy split is <em>not mutually exclusive</em>, but instead can coexist.</p>
-<p>The coexistence of apparently mutually exclusive phenotypes can occur in species if one of the sexes exhibits a number of discrete categories of phenotypic form, and these categories of form tend not to converge or blend over time. Imagine a species where males tend to either be all red, all green, or all blue; if a child is born of a red ancestral and blue ancestral parent, however, they will not be purple (a colour mix of the two parents), but instead either fully red or fully blue. The primary colours - these phenotypic forms - tend not to diminish or blend in the ways they are expressed. Instead, if one were to monitor the relative proportions of reds, greens and blues over time, one would see some degree of fluctuation over time, but likely around a stable relative proportion: say one-third red, one-third green, and one-third blue.</p>
-<p>The factor which determines the category of phenotypic variation of a child is the <em>gens</em> of one of its parents, and which of its parents - male or female - is always the same. A <em>gens</em> (plural <em>gentes</em>), as I understand it, is a cluster of sex-specific genetic instructions that produce a series of phenotypic features that ‘work’ together, but which instruct and exist only in one sex of a <em>gentes</em>-exhibiting species. When comparing across species, such clusters of genetic instructions and phenotypic features are easier to think about: long canines and short intestines and front-facing eyes are three phenotypic features that ‘work’ together to produce a <em>carnivore</em> phenotype; whereas short canines and banks of molars and long intestines and side-facing eyes are alternative phenotypic features that ‘work’ together to produce a <em>herbivore</em> phenotype. But with standard speciation, the clustering of features that ‘work’ together, and so co-selection of particular selections of genes, tends to lead to the entire species towards strategic exclusivity: either optimise gene selection for the carnivore phenotype, or for the herbivore phenotype, but don’t try to mix-and-match. The fitness landscape across multiple features tends to feature many more hills and mountains than broad plateaus and aqueducts.</p>
-<p>The opening example of a <em>gentes</em>-exhibiting species given by Dawkins is the Cuckoo. Cuckoos have an overall strategy that involves laying eggs that impersonate the eggs of other species, but there are many other species, and so many styles and patterns of eggs to try to impersonate. In cuckoos, it’s the females that are the <em>gentes</em>-exhibiting sex in the species, as they produce the eggs that need to blend in with the other eggs of the species in whose nest they have laid. Say there are two types of ‘victim’ birds: V1, who lays grey speckled eggs, and V2, who lays blue unspeckled eggs. Female cuckoos then, over many generations, specialise into two separate <em>gentes</em>: one <em>gens</em> that optimises towards impersonating V1’s eggs, and other <em>gens</em> that optimises towards impersonating V2’s eggs. Male cuckoos do not discriminate in mate selection in females from different <em>gentes</em>: a male whose mother was from the V1-optimised lineage will freely mate with females from the V2-optimised lineage, and vice-versa. We can think of the female <em>gentes</em> as distinct vertical columns, becoming no closer or further apart from each other, whereas the male cuckoos’ genetic contributions as like darting diagonal strings that either wrap around (V1/V1, V2/V2) or dart between (V1/V2, V2/V1) the columnar female <em>gentes</em>. It’s the males’ cross-mating between <em>gentes</em> that keeps the cuckoos a single species, despite so much variation in egg phenotype.</p>
-<p>Which brings me to a remarkable <em>gentes</em>-exhibiting species of fish, <em>Peocilia parae</em>. Unlike the cuckoo, the <em>gentes</em>-exhibiting sex is male, not female: the males are the columns, and the females are the string binding them together. And although Dawkins’ description - reproduced below, in Dawkins’ typically non-diplomatic tone - focuses initially on colour variation between male <em>gentes</em>, it’s clear the phenotypic differences from <em>gens</em> to <em>gens</em> affect overall size and behaviour too:</p>
-<blockquote class="blockquote">
-<p>One species, <em>Poecilia parae</em>, has a remarkable colour <em>polymorphism</em>, which affects only the males. Polymorphism means that there are different genetically determined colour types coexisting in the population (in this case five colour patterns) and the proportions of the different types remain stable in the population through time. All five male morphes can be found swimming together in South American streams. There’s only one female morph: females look alike.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Since the polymorphism affects only one sex, we can call them five gentes, by analogy with the cuckoos, with the difference that in these fish it’s the males who are separated by gens. The picture shows the five male types plus a female at the bottom. Three of the five male types have two long stripes like tramlines. Between the tramlines there is colour, and I’ll call them reds, yellows, and blues respectively. These three ‘tramliners’ can, for many purposes, be lumped together. The fourth type has vertical stripes. They’re officially named ‘parae’, but confusingly that’s also the name of the whole species. I’ll call them ‘tigers’. The fifth type, ‘immaculata’, is relatively plain gray, like females but smaller, and I’ll call them ‘greys’.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Tigers are the largest. They behave aggressively, chasing rival males away, and copulating with females by force. Greys are the smallest, and they manage to copulated only by occasionally sneaking up on females opportunistically. When they can get away with it, it seems to be because otherwise aggressive males mistake them for females, which they do indeed resemble. Greys have the largest testes, presumably capable of producing the most sperm, perhaps to take advantage of their scarce opportunities to use it. Red, yellow, and blue tramliners are of intermediate size. Rather than rape or sneak, they court females in a civilised manner, displaying their respective coloured flanks.</p>
-</blockquote>
-<p>pp 228-230</p>
-<p>Although Dawkins used brusque and somewhat damning language in contrasting the ‘Tigers’ and the ‘Greys’, the descriptions suggest that the ‘Tigers’ come from a <em>gens</em> optimised on a <em>fighter</em> phenotype, including its larger size and more aggressive behaviour, whereas the ‘Greys’ from from a <em>gens</em> optimised on a <em>lover</em> phenotype, including is comparatively diminutive size and, crucially, larger testes.</p>
-<p>So, although it seems the choice between <em>fighter</em> and <em>lover</em> male phenotypes in humans and primates is mutually exclusive, and essentially locks in a species’ genetic endowment towards pursuit of just a single strategy, there’s at least one species of fish that is both a lover <em>and</em> a fighter.</p>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-dawkins2024" class="csl-entry">
-Dawkins, R., and J. Lenzová. 2024. <em>The Genetic Book of the Dead: A Darwinian Reverie</em>. Bloomsbury Publishing. <a href="https://books.google.co.uk/books?id=87sBEQAAQBAJ">https://books.google.co.uk/books?id=87sBEQAAQBAJ</a>.
-</div>
-<div id="ref-diamond_third_2006" class="csl-entry">
-Diamond, J. M. 2006. <em>The <span>Third</span> <span>Chimpanzee</span>: <span>The</span> <span>Evolution</span> and <span>Future</span> of the <span>Human</span> <span>Animal</span></em>. P.<span>S</span>. HarperCollins. <a href="https://books.google.co.uk/books?id=9TVNmDojtzUC">https://books.google.co.uk/books?id=9TVNmDojtzUC</a>.
-</div>
-</div></section></div> ]]></description>
-  <category>evolution</category>
-  <category>dawkins</category>
-  <category>sex differences</category>
-  <category>natural selection</category>
-  <category>sexual selection</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/gentes-lover-and-a-fighter/index.html</guid>
-  <pubDate>Sat, 07 Dec 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
