@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-11-13">
 
-<title>Jon Minton’s Blog - Hand-drawn Statistics</title>
+<title>Jon Minton’s Blog - Point estimates, Confidence Intervals and P-Values</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Hand-drawn Statistics">
-<meta name="twitter:description" content="">
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Point estimates, Confidence Intervals and P-Values">
+<meta name="twitter:description" content="Two simple statistical animations co-produced with Claude">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/claude-stat-concept-guides/hypothesis_test_animation.gif">
 <meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -126,15 +96,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
         <li>
-    <a class="dropdown-item" href="./glms.html" rel="" target="">
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
  <span class="dropdown-text">Statistical Theory and Applications</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tardy-tuesday.html" rel="" target="">
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
  <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hand-drawn-statistics.html" rel="" target="">
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
  <span class="dropdown-text">Hand-drawn Statistics</span></a>
   </li>  
     </ul>
@@ -142,11 +112,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./unpop.html" rel="" target="">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
  <span class="menu-text">Unpop</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -170,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -183,113 +153,76 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Point estimates, Confidence Intervals and P-Values</h1>
+            <p class="subtitle lead">Two simple statistical animations co-produced with Claude</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">claude</div>
+                <div class="quarto-category">visualisations</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 13, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="analogue">analogue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="claude">claude <span class="quarto-category-count">(1)</span></div><div class="category" data-category="factor analysis">factor analysis <span class="quarto-category-count">(2)</span></div><div class="category" data-category="git">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hand written">hand written <span class="quarto-category-count">(1)</span></div><div class="category" data-category="llm-generated">llm-generated <span class="quarto-category-count">(1)</span></div><div class="category" data-category="multi-level-modelling">multi-level-modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ordinal variables">ordinal variables <span class="quarto-category-count">(1)</span></div><div class="category" data-category="random-effects">random-effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="simulation">simulation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(5)</span></div><div class="category" data-category="systems">systems <span class="quarto-category-count">(1)</span></div><div class="category" data-category="testing">testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="version-control">version-control <span class="quarto-category-count">(1)</span></div><div class="category" data-category="visualisations">visualisations <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Hand-drawn Statistics</h1>
+
+
+
+<p>Alongside eliciting a sense of incipient dread that I may be witnessing the birth of an alien superintelligence, I’ve recently found Claude AI highly effective at producing visual guides for conveying important technical concepts based on instructions I provide. Following up from a few weeks ago, where I co-produced a guide for understanding version control by analogy to rock climbing,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> here are a couple of animated guides I’ve co-produced for trying to convey some simple, but fundamental, concepts in statistics.</p>
+<p>Firstly, an animated guide into how a data get summarised into a distribution, and the distribution into point and interval estimates.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hypothesis_test_animation.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Point and interval estimates</figcaption>
+</figure>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>Sometimes it can be easiest to think about complex ideas without having to think too much about the tooling to use to express and represent these ideas. Instead of having to deal with R code, mermaid uml syntax, latex equations and so on, sometimes the right tool for expressing an idea is just a pen and paper, and the right tool for presenting it to others is just take a picture with my camera phone.</p>
-<p>At some point these hand drawn notes may become the basis of ‘proper’ blog posts. But for now I hope they’re legible and comprehensible enough to be useful resources to others in the mean time.</p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<p>Secondly, a simple guide into how (one sided) p values follow simply from estimating the proportion of such distributions that falls one side or another of a line:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="statistical_intuition_python.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">One sided P values</figcaption>
+</figure>
 </div>
+<p>Though there’s a great deal I could write about the experience of co-producing pedagogic artefacts with Claude, for now I’m presenting the artefacts as-is, and hope they’re interesting and useful for clarifying and embedding these core statistical concepts!</p>
 
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics,factor analysis,ordinal variables,analogue" data-listing-date-sort="1714777200000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Factor analysis with ordinal variables" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 4, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/index.html" class="title listing-title">Factor analysis with ordinal variables</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics,factor analysis,testing" data-listing-date-sort="1714863600000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="How factor analysis is used in testing" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 5, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/index.html" class="title listing-title">How factor analysis is used in testing</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,simulation,systems,hand written" data-listing-date-sort="1716850800000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Statistics as circuit boards" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 28, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/statistics-as-circuits/index.html" class="title listing-title">Statistics as circuit boards</a>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,multi-level-modelling,random-effects" data-listing-date-sort="1750114800000" data-listing-file-modified-sort="1756029618459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Repeated Measures" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jun 17, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/repeated-measures/index.html" class="title listing-title">Repeated Measures</a>
-</td>
-</tr>
-<tr data-index="4" data-categories="llm-generated,version-control,git" data-listing-date-sort="1760396400000" data-listing-file-modified-sort="1760465118824" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Climbing with Claude: Understanding Collaborative Version Control" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Oct 14, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/version-control-as-rock-climbing/index.html" class="title listing-title">Climbing with Claude: Understanding Collaborative Version Control</a>
-</td>
-</tr>
-<tr data-index="5" data-categories="statistics,claude,visualisations" data-listing-date-sort="1762992000000" data-listing-file-modified-sort="1763061800179" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Point estimates, Confidence Intervals and P-Values" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 13, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/claude-stat-concept-guides/index.html" class="title listing-title">Point estimates, Confidence Intervals and P-Values</a>
-</td>
-</tr>
-</tbody>
 
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Disclaimer: Both Claude and I have equal levels of real-world rock climbing experience<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -637,6 +570,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
