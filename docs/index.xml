@@ -10,7 +10,111 @@
 <atom:link href="https://jonminton.github.io/jon-blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Thu, 13 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 29 Nov 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Analytical Maxim Gun</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://jonminton.github.io/jon-blog/posts/analytical-maxim-gun/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The last few weeks I’ve found myself thinking increasingly intensively about AI. For those who’ve been following this blog, the timing of my step-change in perspective is likely easy to track. Firstly, it was when I saw <a href="../../posts/unpop/the-man-who-solved-intelligence/index.html">The Thinking Game</a>, which made clear to me:</p>
+<ul>
+<li>That LLMs and AIs are not synonyms, and that for AIs trained on problems with more objective loss functions, the progress is harder to argue against;</li>
+<li>That if one compares the capabilities of AIs two or more years apart, the differences tend to be utterly spectacular.</li>
+</ul>
+<p>Secondly, when I noticed Claude adopt what I’d call a <a href="../../posts/the-dialectical-engine/index.html">‘dialectical stance’</a> in a conversation with me, turning the tables on me, asking probing and skeptical follow-up questions, rather than - as with the stereotype - being simply pathologically affirming and sycophantic.</p>
+<p>Some specific things I’ve been thinking about:</p>
+<ul>
+<li>How much the current stock market bull run (which has recently taken a sizeable stumble, wiping out about a month’s worth of growth in a week) is driven by extremely high expectations about AI, and the extent to which these may be irrational;</li>
+<li>How integrated such systems have already become into modern technologies;</li>
+<li>Just how rapidly they’ve been developing, and about the risks for ourselves of assuming linear trends given exponential progress across many domains;</li>
+<li>How many of the skills and professions we value may no longer be fit for purpose, and the various academic rites of passage, and measures of excellence, which are currently valued, may soon find themselves largely useless (or worse).</li>
+</ul>
+<section id="two-recent-talks-probably-written-by-humans" class="level2">
+<h2 class="anchored" data-anchor-id="two-recent-talks-probably-written-by-humans">Two Recent Talks Probably Written by Humans</h2>
+<p>This last couple of weeks I managed to tear myself away from the screen, however, and attend two talks by ‘public intellectuals’:</p>
+<ul>
+<li>On Wednesday, a talk by <a href="https://en.wikipedia.org/wiki/Jon_Ronson">Jon Ronson</a>, loosely based on his book <a href="https://en.wikipedia.org/wiki/The_Psychopath_Test">The Psychopath Test</a> (in which he argued that, at least in terms of glibness and superficial charm, ChatGPT may be a psychopath..)</li>
+<li>Saturday, a talk by historian <a href="https://en.wikipedia.org/wiki/David_Olusoga">David Olusoga</a>, called A Gun Through Time, about the ways that the invention of specific types of firearm have profoundly affected geopolitics, culture, and the modern world.</li>
+</ul>
+<p>A Gun Through Time covered four British-invented firearms - The Musket; the Lee-Enfield; The Thompson submachine gun; and the Maxim machine-gun. It focused on the last two of these firearms, with the longer first half focused on the Thompson gun (developed in the late 1910s), and the shorter second half focused on the Maxim gun (developed in the 1880s).</p>
+<p>Though much shorter than the first half, the arguments proposed by Olusoga on the Maxim gun, and how it changed the world, struck me as much more impactful, and convincing, and I fear applicable, for how we might try to understand the impact of AI in the present era.</p>
+<p>In a way, it’s all about speed.</p>
+</section>
+<section id="the-physics-of-firearms-a-primer" class="level2">
+<h2 class="anchored" data-anchor-id="the-physics-of-firearms-a-primer">The Physics of Firearms: A Primer</h2>
+<p>From my understanding (based on theory alone; based on the polls taken at the talk I seemed to be in a minority of the audience, in that I have never fired a firearm), a firearm is a means of initiating and focusing a controlled explosion such that an explosive force is directed such as to rapidly accelerate a dense projectile in a particular direction. And doing this involves:</p>
+<ul>
+<li><strong>A trigger</strong>, meaning some aspect of a device that presents itself clearly to the user as an affordance, something that can be ‘activated’, and that exists clearly in an active or inactive state at any time; activating the trigger then cascades to:</li>
+<li><strong>A transmission mechanism</strong>, which occurs immediately, or near immediately, following that trigger’s activation. The transmission mechanism means that each activation of the trigger should lead to:</li>
+<li><strong>An ignition and directed explosion</strong>, i.e.&nbsp;propellant, causing a rapid force to be generated in a pre-determined direction, which rapidly accelerates:</li>
+<li><strong>A projectile</strong>, being a dense object which under the directed explosive force of the propellant accelerates rapidly (and which then transfers its energy into its target by decelerating as or more rapidly).</li>
+</ul>
+<p>For the musket, the transmission mechanism (a small amount of black powder in a pan struck by the trigger), the projectile (a lead ball), and the directed propellant (more black powder, poured into the muzzle, followed by wadding rammed along with projectile into the barrel), are all loaded in situ by the user. This means the conditions under which each projectile is propelled (the amount of wadding, the amount of ramming, the amounts of black powder, and so on) will be different each time. It also means that the usual rate of fire might only be around two rounds per minute, maybe three for especially well trained musketeers.</p>
+</section>
+<section id="from-muskets-to-rifles-the-first-revolution" class="level2">
+<h2 class="anchored" data-anchor-id="from-muskets-to-rifles-the-first-revolution">From Muskets to Rifles: The First Revolution</h2>
+<p>Then, from the mid 19th century, the <a href="https://en.wikipedia.org/wiki/Cartridge_(firearms)">standardised cartridge</a> was invented: a metallic casing, with a shaped projectile at one end, a percussion cap at the other, and a fixed quantity and type of explosive powder (the propellant) sitting between the two ends.</p>
+<p>And because of this technological development, whereas a musket might have a rate of fire of two to three rounds per minute, an integrated-cartridge based rifle might easily manage 10 to 15 rounds per minute, so around a 5x increase in earlier rates of fire.</p>
+<p>What the standardised cartridge also provided, as well as convenience for the soldier, was consistency in terms of behaviour. And what this meant was that the recoil forces generated by each projectile firing tended to be consistent and predictable.</p>
+</section>
+<section id="the-maxim-gun-an-order-of-magnitude-leap" class="level2">
+<h2 class="anchored" data-anchor-id="the-maxim-gun-an-order-of-magnitude-leap">The Maxim Gun: An Order of Magnitude Leap</h2>
+<p>And it appears to be this consistency in recoil forces that allowed the Maxim gun to slip into the <a href="https://en.wikipedia.org/wiki/Adjacent_possible">‘adjacent possible’</a>. Because in a Maxim gun, these recoil forces are used to: 1. Eject the spent cartridge 2. Load the next cartridge 3. Ignite the current cartridge 4. See 1.</p>
+<p>And it’s this looping property, a sequence of actions all flowing from each other, as made possible by the standardisation of munitions, that allowed the Maxim gun to have a faster rate of fire still than the standard rifle.</p>
+<p>How much faster?</p>
+<p>If the rifle was 5x faster than the musket, then maybe we might naively expect the Maxim gun to be maybe 5x faster than the rifle, so maybe 50-80 rounds per minute.</p>
+<p>But this wasn’t the case. The Maxim gun had (and has, they’re still in use) a rate of fire over <em>600 rounds per minute</em>! So, not a 5x increase, as with muskets to rifles, but over a 50x increase, or over a 250x increase as compared with muskets.</p>
+<p>Put another way, a single Maxim gun unit (maybe a half dozen people?) could fire as many projectiles as literally hundreds of musketeers, or maybe a hundred or so trained archers, and require orders of magnitude less training to use.</p>
+</section>
+<section id="reshaping-the-world-the-scramble-for-africa" class="level2">
+<h2 class="anchored" data-anchor-id="reshaping-the-world-the-scramble-for-africa">Reshaping the World: The Scramble for Africa</h2>
+<p>So, the Maxim gun was simply on a different order of magnitude of technological advancement to its predecessors. And - Olusoga argues - this technology reshaped the world in profound and devastating ways.</p>
+<p>How? Well, according to Olusoga, in the decade before the invention of the Maxim gun, European nations owned less than 10% of Africa. Within 10 years of the Maxim gun being invented, European nations had successfully conquered over 90% of Africa. Along with <a href="https://en.wikipedia.org/wiki/Quinine#Use_in_European_colonization">quinine</a>, the Maxim gun was possibly the key technology that allowed the European empires to expand south in this way during the <a href="https://en.wikipedia.org/wiki/Scramble_for_Africa">Scramble for Africa</a>.</p>
+<p>Winning battles and conquering territory with the Maxim gun required a fundamentally different way of thinking about and doing warfare. The training and temperament of soldiers came to matter much less; the need for good planning and logistics came to matter much more. Maxim guns were machines for firing a lot of bullets, and so become pretty much useless if European powers either ran out of bullets, or ran out of spare parts for the guns. And Maxim guns were <em>heavy</em>, meaning if there were ways of moving Maxim guns that didn’t depend on human muscle, these should be used in preference.</p>
+<p>In the African context, this meant <em>gunboats</em>, mobile platforms through which these machines of devastation could be injected into the veins and arteries of Africa’s waterways. (And as settlements across the world tend to form near sources of freshwater, this constraint was likely less onerous for the invading forces than might initially be expected.)</p>
+<p>So, a new set of skills, and a new way of working, was needed in order to make effective use of this horrifying new technology. And within the African subcontinent, it seems all European imperial forces with expansionist ambitions adjusted their ways of invading and projecting power accordingly. European empires, in practice, adjusted their strategies and tactics so as to maximise the effects of the Maxim gun, becoming intercontinental logistics machines that fed the Maxim guns’ insatiable thirst for ammunition, slaughtering generations of brave and skilled warriors, then forcing peace, on very unequal terms, with the once proud kingdoms these warriors, until recently, served and protected (and terrorised).</p>
+</section>
+<section id="the-dangerous-persistence-of-tradition" class="level2">
+<h2 class="anchored" data-anchor-id="the-dangerous-persistence-of-tradition">The Dangerous Persistence of Tradition</h2>
+<p>But, although the European Empires adapted their warcraft <em>in practice</em>, Olusoga argues, they were blinded - by tradition, by old fashioned notions of ‘honour’ and ‘bravery’, and by racism - into not adopting the lessons wholesale into their self-narratives, beliefs and theories. Fundamentally, they did not consider sufficiently the possibility that the African experience on the receiving end of the Maxim gun at the end of the 19th century would translate easily into the European continent, against other ‘superior’ European nations and empires whose soldiers, the European Imperial Elites believed, were surely drawn from better stock, were better equipped, better trained, braver and more heroic than the primitive peoples they had conquered less than a generation ago.</p>
+<p>And this failure - failure to look at the empirical evidence, failure to realise that the laws of physics apply equally to all bodies regardless of language or melanin content, failure to adapt their beliefs about what distinguishes heroism from collective suicide - led to the horrors of the Great War, in which an early 19th century mentality met the Maxim machinegun. The European Elites had over a generation to adapt their worldview to the enormity of the new military technologies they had brought into the world. But for various reasons they did not.</p>
+<p>The traditions were long established, the lessons about their historic utility hard won: warfare of European against European empire had for centuries involved some form of rock-paper-scissors interplay between the forces of artillery, musketry (and before that archery) and cavalry. And within this triangular configuration of troop types the apex warriors were considered the cavalry. <a href="https://en.wikipedia.org/wiki/Winston_Churchill">Winston Churchill</a>, from an Elite family, finagled and cajoled his way into the cavalry’s ranks during the British Empire’s dismemberment of Africa in the 19th century, such was the mythic appeal of fighting on horseback with cutlass in hand. And within Africa cavalry were used occasionally to mop up those remnants of African forces who had retreated sufficiently far from the Maxim gun’s radius and sightlines. These cavalry battles were then reported and valorised out of proportion to their value in conquering territories, so as to allow the European Elites to still convince themselves of the continued value of <em>the old ways</em>. But in practice, even in the 19th century, they were highly wasteful and ineffective ways of turning European lives into African territory. The European Imperial Elites practiced a form of doublethink, of self deceit, in continuing to heroize and valorise traditions they themselves had rendered redundant.</p>
+</section>
+<section id="the-ai-maxim-gun-moment" class="level2">
+<h2 class="anchored" data-anchor-id="the-ai-maxim-gun-moment">The AI Maxim Gun Moment</h2>
+<p>But what relevance does this have to AI? Well, it’s because I suspect - when it comes to research, and analysis, and code, and knowledge work - we are at the start of a new Maxim gun moment, and most of us haven’t realised it yet. The heroism of learning a profession - spending years studying to become a medical doctor, or accountant, or lawyer, or even statistician - are losing their fundamental comparative value at an exponential rate. Studying and consistently applying if-then rules, the source of the heroic effort and cognitive distinction signaled by membership of such professions, is something computers have always found very easy; it’s people who struggle to do this. And now AIs are developing - for all intents and purposes - the capacity to not just recall but to reason about the massive corpus of information inside their gigabrains. Similarly, the apparently soft and subtle skills of pontificating and speechifying, of finding the right form of words to tug at the heartstrings or appeal to the better (or basest) nature of different kinds of audience, the role of essayists, politicians, commentators - turned out to be even easier challenges for LLMs, fed a big corpus of words, to start to master than that of thinking analytically and reasonably. Even the demagogic, sycophantic and ‘hallucinatory’ tendencies of (at least earlier) LLMs, to say what is expected to please the audience over what is factually correct, appears to have been well learned by such models based on the historic records of influential humans who did exactly the same.</p>
+<p>And with the expansion of AIs into ever more modalities - audio, visual, musical as well as textual - and integrated, specialised and applied to ever more domains of human ability and, until recently, brilliance, the magisteria of human comparative advantage starts to retreat ever further. Even the uneven path of retreat is not as the modern Intellectual Elites might have imagined and hoped for: memorising millions of pages of legal text and finding the best arguments for how the laws of all the world’s territories are likely to be interpreted and applied: easy for AIs. Folding t-shirts, picking up rubbish, dusting and hoovering: still difficult. But do the rates of retreat from the faultlines - faster in knowledge work, slower when it comes to embodied knowledge - lead amongst contemporary Elites to a reevaluation of what they (what we) value, and consider highly skilled? Not so much. For now, for instance, degrees and professional membership tend to gatekeep the majority of those less hazardous and better paying methods of remuneration, whereas years or decades developing the exquisite gross and fine motor skills that constitute more and less specialised embodied knowledge (elite sports notwithstanding) still tend to count for less. But for how much longer?</p>
+</section>
+<section id="the-lag-between-economic-and-cultural-value" class="level2">
+<h2 class="anchored" data-anchor-id="the-lag-between-economic-and-cultural-value">The Lag Between Economic and Cultural Value</h2>
+<p>As with the Maxim Gun and the Great War, I suspect the rites and sacrifices involved in becoming specialised knowledge workers may be valued sociologically and culturally decades longer than their economic value holds water. Just as the ‘solving’ of chess by the brute-force AIs of the <a href="https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)">late 1990s</a> did not lead to the death of chess-playing as a hobby (just a renewed paranoia that the best human players may be technologically enhanced), and just as the horse or the motor vehicle did not lead to the end of valorisation of those humans who can run fast and/or for long distances, so I suspect institutes of secondary, tertiary and further education will continue to teach much the same material, and grade humans in much the same way, as they always have.</p>
+<p>And for a long time - possibly decades, possibly a half century - governments and parents may pay for such additional education, and aspirant knowledge workers will continue to seek out such credentialisation. But at some point, perhaps within the next five years, the substantive need and value of trying to load such knowledge into slow, lossy human brains will become negligible, if not negative (if it leads to humans not deferring tasks to AIs, which the AIs can complete more competently and orders of magnitude faster).</p>
+<p>The only remaining value of continuing to pursue and receive such credentials will be to signal membership and status to other humans, to show that one has devoted oneself to the ancient traditions of Law or Medicine or Engineering, much as centuries before people expressed the vocation they had been called to by taking vows of silence or wearing sackcloth. Even the smartest lawyers won’t practice law directly, and the smartest and most empathic medical doctors won’t practice diagnosis and treatment of human ailments directly. In both cases, they will become figureheads, taking undue credit 99.99% of the time the AIs’ solutions ‘work’, and taking the liability and blame the 0.01% of the time the AIs made a bad decision or executed it poorly.</p>
+<p>The intellectual elites will call this mast-sitting ‘work’, and those sitting atop the smartest legions of AIs may find themselves very well remunerated. They will justify their vastly better pay and conditions than those who ranked slightly lower in their professions, and those who did not credentialise them into any profession, by reference to their innate cognitive and moral superiority over less fortunate humans. Even though, compared to the AIs who do the work, they are effectively no different from the other humans whom they disparage. They will, like the European Imperial Elites, try to maintain belief in their own value and superiority even when almost all evidence is to the contrary.</p>
+</section>
+<section id="an-uncertain-future" class="level2">
+<h2 class="anchored" data-anchor-id="an-uncertain-future">An Uncertain Future</h2>
+<p>But eventually, like the Europeans at the receiving end of their own weaponry, like the Roadrunner who looks down, perhaps a generation or two after it becomes objectively net harmful to do so, attitudes and beliefs that sort-of suited the Old Way things were will become replaced, wholesale, by something new, something more realistic with the new reality in which sapiency ceases to be the canonical feature of homo sapiens, and people will have somehow re-evaluated their value, place and purpose in the world.</p>
+<p>How? No idea. When? Also no idea.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>futurism</category>
+  <category>elitism</category>
+  <category>history</category>
+  <category>guns</category>
+  <category>inequality</category>
+  <category>tradition</category>
+  <guid>https://jonminton.github.io/jon-blog/posts/analytical-maxim-gun/index.html</guid>
+  <pubDate>Sat, 29 Nov 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Point estimates, Confidence Intervals and P-Values</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -4353,37 +4457,6 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   <category>react</category>
   <guid>https://jonminton.github.io/jon-blog/posts/website-update/index.html</guid>
   <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Weaponising the Empathy Machine: On Escape at Dannemora</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/unpop/escape-at-dannemora-weaponising-the-empathy-machine/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>The film critic Roger Ebert <a href="https://www.rogerebert.com/features/memoriam-feature-2023">famously described films as ‘empathy machines’</a>, and indeed they are. The combination and synchronisation of sight and sound, and over a century’s development and refinement of techniques for conveying a sense of ‘being there’- from shot/reverse shot onwards - means perhaps there is no other medium in which the sense of feeling embodied and experientially coterminous with a protagonist is so effortless for a viewer to experience and, for better or for worse, so difficult to resist.</p>
-<p>In <a href="https://en.wikipedia.org/wiki/Brave_New_World">Brave New World</a>, which extrapolated and parodied the sociological consequences of then-emerging early twentieth century technologies, the utopian successor to ‘movies’ are called ‘feelies’, in which this sense of experiential coterminousness reaches its theoretical apex. Though we do not use the term, many contemporary films, especially those which place theme-park-ride-like spectacle over conventional narrative structure, are already in effect ‘feelies’, even if in such cases the intent is more to make the viewer <em>feel</em>, rather than <em>feel like</em> any of the film’s protagonists.</p>
-<p>By convention movies and television aim to promote empathy towards the protagonists, who are heroic, and amnity (reverse empathy) towards the antagonists, who are villainous. But this choice of in which direction to fire the empathy machine is ultimately just a convention. Films and television can choose to bring an equinimity of empathy to characters whose aims are in conflict with each other: both ‘cop’ and ‘robber’ in <a href="https://en.wikipedia.org/wiki/Heat_(1995_film)">Heat</a>, for example. But generally, empathy is directed and hoarded, not radiated and shared. Showing empathy for all characters in a story, whose aims are in irreconcilible conflict, can bring to the viewer the realisation that reality, itself, is fundamentally tragic: there is seldom a clear choice between good and evil, so much as a need to constantly try, and often fail, to find the lesser of two evils. Films that share the empathy too widely, and show both the light and darkness in all conflicting parties, tend to win awards but not viewers, who would rather feel only happiness for the eventual victor, without also experiencing the heartache of the loser.</p>
-<p>All of which is a preamble for sharing my thoughts - and feelings - on watching <a href="https://en.wikipedia.org/wiki/Escape_at_Dannemora">Escape at Dannemora</a>, a 2018 true crime biopic based on <a href="https://en.wikipedia.org/wiki/2015_Clinton_Correctional_Facility_escape">a (partially) successful prison escape in 2015</a> (and seemingly about the only newish programme on Paramount+ that’s not about cowboys). The mini-series makes great use of the convention of the programme format, of being around six to ten one hour episodes long, and quite slow, to play with and weaponise film as an empathy machines.</p>
-<p>In stories of David vs Goliath, of the man against the machine, of the few against the many, there’s an overwhelming instinct to side with the underdog. And indeed over half of Escape at Dannemora - the first four of the seven episodes - seem devoted to telling the story of the escape, its meticulous planning and execution, very much from the escapees’ perspectives. We can’t help but find something about the escapees’ fortitude, initiative, resilience, creativity and grit admirable, even inspirational.</p>
-<p>But, though Escape from Dannemora is a programme of seven episodes, it’s more fundamentally a programme of <em>three sections</em>.</p>
-<p>Section one comprises the first four episodes, as mentioned, tell the story of the planning and execution of the escape. And as mentioned, the viewer can’t help but empathise strongly with the escapees.</p>
-<p>Section three comparises the last two episodes, which document the authorities’ attempts to recapture the escapees.</p>
-<p>And between the first four episodes set before the escape and the last two episodes set after the escape, is section two, comprising a single episode: episode five. And episode five isn’t set <em>before</em> the escape, or <em>during</em> the escape, but <em>way before</em> the escape. Episode five shows, after four episodes developing empathy for the two main protagonists, exactly why that empathy may be misplaced. Episode five shows, in graphic detail, why the prisoners, whom the show has been implicitly encouraging viewers to will and wish out of prison, are in prison, and <em>deserve to be</em> in prison.</p>
-<p>So, episode five, section two of the three section series, turns the first four episodes of the series, section one, into <em>an empathy trick</em>. And because section one comparises four of the seven episodes, episode five therefore turns the majoarity of the programme itself into an empathy trick. By episode five, the viewer - like another of the key protagonists - was seduced by two barbaric murderers into feeling that they’re <em>the good guys</em>, and that the aspirations and aims of the protagonists are coterminous with that of the viewer.</p>
-<p>Film and television are empathy machines. And to my mind no television show has been more effective and masterful at weaponising these machines to play an <em>empathy trick</em> on its viewers. It got me right in the feelies. And then it got me.</p>
-
-
-
- ]]></description>
-  <category>prison</category>
-  <category>crime</category>
-  <category>escape</category>
-  <category>empathy</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/unpop/escape-at-dannemora-weaponising-the-empathy-machine/index.html</guid>
-  <pubDate>Mon, 30 Dec 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
