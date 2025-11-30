@@ -1,0 +1,18 @@
+[1m[34mpre-render.R[39m[22m
+Total word count: 199464 
+Word count updated in _quarto.yml
+Captured warnings:
+WARNING: package ‘stringr’ was built under R version 4.1.3
+WARNING: package ‘yaml’ was built under R version 4.1.3
+
+[1m[34m[1/2] posts/tardy-tuesday/tidy-tuesday-leapyears/index.qmd[39m[22m
+[31m
+
+processing file: index.qmd
+[39m  |                                                           |                                                   |   0%  |                                                           |.                                                  |   2%                     |                                                           |..                                                 |   4% (unnamed-chunk-1) [31mQuitting from lines 36-48 (index.qmd) 
+Error in library(tidytuesdayR) : 
+  there is no package called 'tidytuesdayR'
+Calls: .main ... withVisible -> eval_with_user_handlers -> eval -> eval -> library
+[39m                                                                                                             
+[31mExecution halted
+[39m

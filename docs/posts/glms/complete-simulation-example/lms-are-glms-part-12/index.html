@@ -348,10 +348,10 @@ F-statistic:  64.5 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   (Intercept)     log(dose)        suppVC log(dose):suppVC
-(Intercept)       4.612422e-01 -8.768056e-17 -4.612422e-01    -7.224251e-17
-log(dose)        -8.768056e-17  1.440023e+00  1.753611e-16    -1.440023e+00
-suppVC           -4.612422e-01  1.753611e-16  9.224843e-01     1.748938e-16
-log(dose):suppVC -7.224251e-17 -1.440023e+00  1.748938e-16     2.880045e+00</code></pre>
+(Intercept)       4.612422e-01  4.324484e-17 -4.612422e-01    -2.757462e-17
+log(dose)         4.324484e-17  1.440023e+00 -3.988108e-17    -1.440023e+00
+suppVC           -4.612422e-01 -3.988108e-17  9.224843e-01    -7.659195e-18
+log(dose):suppVC -2.757462e-17 -1.440023e+00 -7.659195e-18     2.880045e+00</code></pre>
 </div>
 </div>
 <p>Finally, we can extract <em>the point estimate</em> for stochastic variation in the model, i.e.&nbsp;variation assumed by the model even if parameter uncertainty were minimised, using the <code>sigma</code> function:</p>
@@ -450,12 +450,12 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     (Intercept) log(dose)    suppVC log(dose):suppVC
-[1,]    21.06791  7.645689 -3.819112         6.625200
-[2,]    21.48901  7.676168 -3.516544         4.243647
-[3,]    19.14443  9.214789 -1.195671         3.862845
-[4,]    20.92187 10.205717 -3.823071         2.742209
-[5,]    20.37284  9.212964 -2.789648         3.912550
-[6,]    20.44124  9.132118 -3.280281         1.993097</code></pre>
+[1,]    20.45533 10.515316 -3.546009         4.725299
+[2,]    22.00558  9.738154 -5.690312         3.273416
+[3,]    21.54113  7.219820 -4.198040         6.630290
+[4,]    20.26204 10.181336 -4.191837         3.648118
+[5,]    21.69398 11.946005 -5.299914         2.325066
+[6,]    22.08880  9.601980 -5.243841         4.737267</code></pre>
 </div>
 </div>
 <p>Let’s first look at each of these parameters individually:</p>
@@ -607,7 +607,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_ev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 22.77400 23.20190 21.20065 23.19921 22.42865 22.47902</code></pre>
+<pre><code>[1] 22.80175 24.17859 23.15219 22.53394 24.35965 24.23142</code></pre>
 </div>
 </div>
 <p>Let’s now get a 95% credible interval:</p>
@@ -618,7 +618,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.31125 22.73087 24.18298 </code></pre>
+21.31922 22.71085 24.17323 </code></pre>
 </div>
 </div>
 <p>So, the 95% interval for the expected value is between <code>21.31</code> and <code>24.14</code>, with a middle (median) estimate of <code>22.73</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s check this against estimates from the <code>predict()</code> function:</p>
@@ -650,7 +650,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predictions_pv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.19537 19.87588 20.12654 28.13522 26.16638 22.19669</code></pre>
+<pre><code>[1] 28.60712 26.77472 24.05076 22.01156 21.31240 25.03424</code></pre>
 </div>
 </div>
 <p>Let’s get the 95% interval from the above using quantile</p>
@@ -661,7 +661,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-15.17997 22.73280 30.16406 </code></pre>
+15.17804 22.74853 30.08431 </code></pre>
 </div>
 </div>
 <p>As expected, the interval is now much wider, with a 95% interval from <code>15.34</code> to <code>30.11</code>. The central estimate should in theory, with an infinite number of runs, be the same, however because of random variation it will never be <em>exactly</em> the same to an arbitrary number of decimal places. In this case, the middle estimate is <code>22.75</code>, not identical to the central estimate from the expected values distribution of <code>22.72</code>. The number of simulations can <em>always</em> be increased to produce greater precision if needed.</p>
@@ -721,18 +721,18 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,000 × 3
-      x0    x1     fd
-   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
- 1  22.8  20.4 -2.34 
- 2  23.2  20.6 -2.57 
- 3  21.2  20.9 -0.334
- 4  23.2  20.0 -3.21 
- 5  22.4  20.5 -1.92 
- 6  22.5  19.6 -2.84 
- 7  22.1  20.0 -2.17 
- 8  23.4  20.3 -3.17 
- 9  21.7  19.9 -1.78 
-10  21.8  20.0 -1.85 
+      x0    x1    fd
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  22.8  20.3 -2.49
+ 2  24.2  19.2 -4.96
+ 3  23.2  20.4 -2.72
+ 4  22.5  19.2 -3.38
+ 5  24.4  19.6 -4.78
+ 6  24.2  20.0 -4.19
+ 7  22.9  20.4 -2.50
+ 8  22.1  19.5 -2.56
+ 9  22.8  20.1 -2.71
+10  22.6  21.1 -1.44
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
@@ -778,7 +778,7 @@ Y_i \sim Norm(\theta_i, \sigma^2)
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.8919856 -2.8561481 -0.8011861 </code></pre>
+-4.9063322 -2.8229173 -0.7972347 </code></pre>
 </div>
 </div>
 <p>So, 95% of estimates of the first difference are between <code>-4.85</code> and <code>-0.81</code>, with the middle of this distribution (on this occasion) being <code>-2.83</code>.</p>

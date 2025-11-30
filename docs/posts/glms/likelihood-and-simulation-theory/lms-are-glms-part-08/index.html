@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>To estract estimates of uncertainty about the uncertainty of each of these parameters, we used <code>optim()</code> with the options shown below, and then inverted the matrix to go from information to uncertainty.</p>
+<p>To extract estimates of uncertainty about the uncertainty of each of these parameters, we used <code>optim()</code> with the options shown below, and then inverted the matrix to go from information to uncertainty.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -291,14 +291,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
-[1]  2.460675  1.375424 -1.336438
+[1]  2.460675  1.375425 -1.336438
 
 $value
 [1] 1.51397
 
 $counts
 function gradient 
-      80       36 
+      79       36 
 
 $convergence
 [1] 0
@@ -308,9 +308,9 @@ NULL
 
 $hessian
               [,1]          [,2]          [,3]
-[1,] -3.424917e+01 -3.424917e+01  2.727840e-05
-[2,] -3.424917e+01 -2.625770e+02 -2.818257e-05
-[3,]  2.727840e-05 -2.818257e-05 -4.500002e+00</code></pre>
+[1,] -3.424917e+01 -3.424917e+01  2.716036e-05
+[2,] -3.424917e+01 -2.625770e+02 -2.557859e-05
+[3,]  2.716036e-05 -2.557859e-05 -4.500002e+00</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -320,9 +320,9 @@ $hessian
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>              [,1]          [,2]          [,3]
-[1,]  3.357745e-02 -4.379668e-03  2.309709e-07
-[2,] -4.379668e-03  4.379668e-03 -5.397790e-08
-[3,]  2.309709e-07 -5.397790e-08  2.222221e-01</code></pre>
+[1,]  3.357745e-02 -4.379668e-03  2.275558e-07
+[2,] -4.379668e-03  4.379668e-03 -5.132867e-08
+[3,]  2.275558e-07 -5.132867e-08  2.222221e-01</code></pre>
 </div>
 </div>
 <p>We were especially interested in the first two rows and columns of this matrix, as they correspond to uncertainty in <span class="math inline">\(\beta = \{ \beta_0, \beta_1 \}\)</span>.</p>
@@ -335,7 +335,7 @@ $hessian
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>             [,1]         [,2]
-[1,]  0.033577455 -0.004379668
+[1,]  0.033577454 -0.004379668
 [2,] -0.004379668  0.004379668</code></pre>
 </div>
 </div>
@@ -424,11 +424,11 @@ $hessian
 <div class="cell-output cell-output-stdout">
 <pre><code>        beta0    beta1         eta
 [1,] 2.564978 1.375636 -0.30407255
-[2,] 2.440111 1.367774 -1.16815288
+[2,] 2.440111 1.367774 -1.16815289
 [3,] 2.775332 1.338583 -0.05574937
-[4,] 2.283011 1.481799 -0.26095101
+[4,] 2.283011 1.481799 -0.26095102
 [5,] 2.695635 1.228565 -1.18369341
-[6,] 2.686818 1.483601 -0.44262363</code></pre>
+[6,] 2.686818 1.483601 -0.44262364</code></pre>
 </div>
 </div>
 <p>We can see that <code>mvrnorm()</code>, with these inputs from <code>optim()</code> produces three columns: one for each parameter being estimated <span class="math inline">\(\{ \beta_0, \beta_1, \eta \}\)</span>. The <code>n</code> argumment indicates the number of draws to take; in this case, 10000. This number of draws makes it easier to see how much variation there is in each of the estimates.</p>

@@ -572,7 +572,7 @@ Discarded       0       0</code></pre>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>m.out1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>A matchit object
+<pre><code>A `matchit` object
  - method: 1:1 nearest neighbor matching without replacement
  - distance: Propensity score
              - estimated with logistic regression
@@ -721,10 +721,10 @@ Discarded       0       0</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 12
-  treat   age  educ race  married nodegree  re74  re75   re78 distance weights
-  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1     1    33    12 white       1        0    0      0 12418.   0.0429       1
-2     0    39    12 white       1        0 1289.     0  1203.   0.0430       1
+  treat   age  educ race   married nodegree  re74  re75  re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    22     9 hispan       0        1    0     0  3596.    0.225       1
+2     0    16    10 white        0        1 1027. 1225. 6848.    0.103       1
 # ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
 </div>
 </div>
@@ -736,10 +736,10 @@ Discarded       0       0</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 12
-  treat   age  educ race   married nodegree  re74  re75   re78 distance weights
-  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;    &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-1     1    31     9 hispan       0        1     0    0  26818.    0.250       1
-2     0    16    10 white        0        1     0  190.  2137.    0.105       1
+  treat   age  educ race  married nodegree  re74  re75   re78 distance weights
+  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1     1    30    12 black       0        0    0     0  24909.    0.678       1
+2     0    22    12 black       1        0 9730. 7373.  2231.    0.374       1
 # ℹ 1 more variable: subclass &lt;fct&gt;</code></pre>
 </div>
 </div>
@@ -785,11 +785,12 @@ Discarded       0       0</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-  Term Contrast Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
- treat    1 - 0     1121        752 1.49    0.136 2.9  -354   2596
+ Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+     1121        837 1.34    0.181 2.5  -520   2763
 
-Columns: term, contrast, estimate, std.error, statistic, p.value, s.value, conf.low, conf.high 
-Type:  response </code></pre>
+Term: treat
+Type: response
+Comparison: 1 - 0</code></pre>
 </div>
 </div>
 <p>Using the recommended approach, the ATT estimate is now $1121. Not statistically significant at the conventional 95% threshold, but also more likely to be positive than negative.</p>
