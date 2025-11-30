@@ -67,7 +67,7 @@ mod_lm
 
 The coefficients $\boldsymbol{\beta} = \{\beta_0, \beta_1, \beta_2\}$ are $\{0.73, 0.34, 0.99\}$, and refer to the intercept, Sepal Length and `is_setosa` respectively.
 
-If we assume a Sepel Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34` or about `2.78` where `is_setosa` is false.
+If we assume a Sepal Length of 6, for example, then the expected Sepal Width (the thing we are predicting) is `0.73 + 6 * 0.34 + 0.99` or about `3.77` in the case where `is_setosa` is true, and `0.73 + 6 * 0.34` or about `2.78` where `is_setosa` is false.
 
 The difference between these two values, `3.77` and `2.78`, i.e. the 'influence of setosa' on the outcome, is `0.99`, i.e. the $\beta_2$ coefficient shown before. In fact, for any conceivable (and non-conceivable, i.e. negative) value of Sepal Length, the difference is still `0.99`.
 

@@ -43,7 +43,7 @@ dta <- openxlsx::readWorkbook(here("simd_data.xlsx"), sheet = "SIMD 2020v2 DZ lo
 
 ```
 
-The code for the figure itself is below. It's quite a convoluted process. There's almost certaintly neater ways of doing this. The main thing to keep in mind is *all the figures exist; just only one is visible at a time*.
+The code for the figure itself is below. It's quite a convoluted process. There's almost certainly neater ways of doing this. The main thing to keep in mind is *all the figures exist; just only one is visible at a time*.
 
 
 ```{r}

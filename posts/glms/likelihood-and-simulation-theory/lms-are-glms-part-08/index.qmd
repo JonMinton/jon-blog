@@ -47,7 +47,7 @@ colnames(X) <- NULL
 
 ```
 
-To estract estimates of uncertainty about the uncertainty of each of these parameters, we used `optim()` with the options shown below, and then inverted the matrix to go from information to uncertainty. 
+To extract estimates of uncertainty about the uncertainty of each of these parameters, we used `optim()` with the options shown below, and then inverted the matrix to go from information to uncertainty. 
 
 ```{r}
 fuller_optim_output <- optim(

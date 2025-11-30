@@ -116,7 +116,7 @@ control_toothlengths <- dta_vc |> pull(len) # Literally pulling teeth!
 Ncontrol <- length(control_toothlengths) #Length of 'control' population sample
 
 dta_oj <- df |>
-    filter(supp == "OJ", dose == 1.0) # The equivalent of our 'treamtnet' population
+    filter(supp == "OJ", dose == 1.0) # The equivalent of our 'treatment' population
 
 treatment_toothlengths <- dta_oj |> pull(len) # Literally pulling teeth!
 

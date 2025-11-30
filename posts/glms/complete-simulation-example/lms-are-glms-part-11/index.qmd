@@ -43,9 +43,9 @@ df |>
 
 ```
 
-So, although this has just three variables, there is some complexity involved in thinking about how the two predictor variables, `supp` and `dose`, relate to the response variable `len`. These include: 
+So, although this has just three variables, there is some complexity involved in thinking about how the two predictor variables, `supp` and `dose`, relate to the response variable `len`. These include:
 
-- Whether the relationship between `len` and `dose` is linear in a straightforward sense, or associated in a more complicated wway
+- Whether the relationship between `len` and `dose` is linear in a straightforward sense, or associated in a more complicated way
 - Whether `supp` has the same effect on `len` regardless of dose, or whether there is an interaction between `dose` and `supp`. 
 
 

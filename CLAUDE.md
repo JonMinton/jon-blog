@@ -1,0 +1,112 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+This is Jon Minton's personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.
+
+## Building and Rendering
+
+**Preview the blog locally:**
+```bash
+quarto preview
+```
+
+**Render the full site:**
+```bash
+quarto render
+```
+
+The rendered site outputs to the `docs/` directory (configured in `_quarto.yml`), which is served by GitHub Pages.
+
+**Pre-render automation:**
+The `pre-render.R` script runs automatically before each render (configured in `_quarto.yml`). It:
+- Executes `calculate-wordcount.R` to count total words across all `.qmd` files
+- Updates the subtitle in `index.qmd` with the current word count
+- Captures warnings to `render_warnings.log`
+
+## Project Structure
+
+```
+.
+├── _quarto.yml           # Main Quarto configuration
+├── posts/                # All blog posts, organized by topic
+│   ├── glms/            # Multi-part GLM statistics series
+│   ├── unpop/           # Pop culture analysis posts
+│   ├── tardy-tuesday/   # Tidy Tuesday data visualizations
+│   ├── handdrawn-stats/ # Hand-drawn statistics illustrations
+│   └── [topic]/index.qmd
+├── docs/                 # Rendered output (GitHub Pages)
+├── index.qmd            # Homepage with post listing
+├── about.qmd            # About page
+└── *.qmd                # Top-level pages (glms.qmd, tardy-tuesday.qmd, etc.)
+```
+
+**Post organization:**
+- Each post lives in `posts/[category]/[post-name]/index.qmd`
+- Multi-part series organized in subdirectories (e.g., `glms/intro-to-glms/lms-are-glms-part-01/`)
+- YAML frontmatter required: title, author, date, categories
+
+## Blog Post Conventions
+
+**YAML frontmatter structure:**
+```yaml
+---
+title: Post Title
+subtitle: Optional subtitle (if needed)
+author: Jon Minton
+date: YYYY-MM-DD
+categories: [category1, category2, tag3]
+---
+```
+
+**Internal linking:**
+- Use relative paths from the post location: `../other-post/index.qmd`
+- For posts in nested directories: `../../category/post/index.qmd`
+- Common pattern: Link to related posts in the same series or topic area
+
+**Markdown formatting:**
+- Paragraph breaks require blank lines between paragraphs (markdown standard)
+- Lists need blank lines before and after the list block
+- Use `**bold**` for emphasis in bullet points when needed
+- Links: `[Link text](url)` for external, `[Link text](../path/index.qmd)` for internal
+
+**Images and media:**
+- Store in the same directory as the post's `index.qmd`
+- Reference with relative paths: `![Alt text](filename.jpg)`
+
+## Themes and Styling
+
+The blog uses dual themes configured in `_quarto.yml`:
+- Light: cosmo
+- Dark: slate
+- Custom CSS: `styles.css`
+
+## R Integration
+
+This is primarily an R-based blog with Quarto. R scripts handle word counting and pre-render automation. Posts may contain R code chunks with statistical analyses and visualizations.
+
+## Content Categories
+
+The blog has several major content areas linked in the navbar:
+- **Statistical Theory and Applications** (glms.qmd): GLM series and statistical tutorials
+- **Tardy Tuesday** (tardy-tuesday.qmd): Tidy Tuesday data visualization challenges
+- **Hand-drawn Statistics** (hand-drawn-statistics.qmd): Visual explanations of stats concepts
+- **Unpopular Opinions** (unpop.qmd): Pop culture and media analysis
+
+## Common Workflow Patterns
+
+**Creating a new post:**
+1. Create directory: `posts/[category]/[post-name]/`
+2. Add `index.qmd` with proper YAML frontmatter
+3. Add any images/assets to the same directory
+4. Render to preview: `quarto preview`
+
+**Editing existing posts:**
+- Posts are in `posts/**/**/index.qmd`
+- After editing, render to see changes
+- Word count updates automatically on next render via pre-render script
+
+**Working with series posts:**
+The GLM series follows a numbered pattern (`lms-are-glms-part-XX`) within subdirectories by topic area. When adding to a series, maintain the numbering convention and place in the appropriate subdirectory.
