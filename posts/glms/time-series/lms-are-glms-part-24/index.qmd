@@ -66,7 +66,7 @@ $$
 
 i.e. You might have been taught that, if the predictors include one term for the *intercept* (the $\beta_0$ term) and one term for the *slope* (the $\beta_1$ term), then this is a *univariate model*. But if there are two or more terms that can claim to be 'the slope' then this is a *multivariate model*. 
 
-However, this isn't the real distinction between a univariate model and a multivariate model. To see this distinction we have to return, for the umpeenth time, to the 'grandmother model' specification first introduced at the start of [the very first post](../intro-to-glms/lms-are-glms-part-01/index.qmd):
+However, this isn't the real distinction between a univariate model and a multivariate model. To see this distinction we have to return, for the umpeenth time, to the 'grandmother model' specification first introduced at the start of [the very first post](../../intro-to-glms/lms-are-glms-part-01/index.qmd):
 
 **Stochastic Component**
 
@@ -174,7 +174,7 @@ X = \begin{pmatrix}
 $$
 :::
 ::::
-This is an example of a **multivariate regression model**. We encountered it before when we used the multivariate normal distribution [in post 12](../complete-simulation-example/lms-are-glms-part-12/index.qmd), and when we draw from the posterior distribution of Bayesian models [in post 13](../complete-simulation-example/lms-are-glms-part-14/index.qmd), but this is the first time we've considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it's the first example of multivariate regression we've encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they've been *univariate* regression models in the sense that the response component $Y$ has always only contained one column only. 
+This is an example of a **multivariate regression model**. We encountered it before when we used the multivariate normal distribution [in post 12](../../complete-simulation-example/lms-are-glms-part-12/index.qmd), and when we draw from the posterior distribution of Bayesian models [in post 13](../../complete-simulation-example/lms-are-glms-part-14/index.qmd), but this is the first time we've considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it's the first example of multivariate regression we've encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they've been *univariate* regression models in the sense that the response component $Y$ has always only contained one column only. 
 
 So, with this definition of multivariate regression, let's now look at VAR as a particular application of multivariate regression used in time series.
 
@@ -278,9 +278,9 @@ var_model
 
 We can see here that the model reports a small matrix of coefficients: three rows (one for each coefficient term) and two columns: one for each of the response variables. This is as we should expect. 
 
-Back in [part 12 of the series](../complete-simulation-example/lms-are-glms-part-12/index.qmd), we saw we could extract the coefficients, variance-covariance matrix, and error terms of a linear regression model using the functions `coefficients`, `vcov`, and `sigma` respectively.[^1] Let's use those functions here too:
+Back in [part 12 of the series](../../complete-simulation-example/lms-are-glms-part-12/index.qmd), we saw we could extract the coefficients, variance-covariance matrix, and error terms of a linear regression model using the functions `coefficients`, `vcov`, and `sigma` respectively.[^1] Let's use those functions here too:
 
-[^1]:A primary aim extracting these components from a linear regression in this way is to allow something approximating a Bayesian posterior distribution of coefficients to be generated, using a multivariate normal distribution (the first place we actually encountered a multivariate regression), without using a Bayesian modelling approach. This allows for the estimating and propagation of 'honest uncertainty' in predicted and expected outcomes. However, as we saw in [part 13](../complete-simulation-example/lms-are-glms-part-13/index.qmd), it can sometimes be as or more straightforward to just use a Bayesian modelling approach.
+[^1]:A primary aim extracting these components from a linear regression in this way is to allow something approximating a Bayesian posterior distribution of coefficients to be generated, using a multivariate normal distribution (the first place we actually encountered a multivariate regression), without using a Bayesian modelling approach. This allows for the estimating and propagation of 'honest uncertainty' in predicted and expected outcomes. However, as we saw in [part 13](../../complete-simulation-example/lms-are-glms-part-13/index.qmd), it can sometimes be as or more straightforward to just use a Bayesian modelling approach.
 
 First the coefficients
 
