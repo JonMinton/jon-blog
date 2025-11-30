@@ -174,7 +174,7 @@ X = \begin{pmatrix}
 $$
 :::
 ::::
-This is an example of a **multivariate regression model**. We encountered it before when we used the multivariate normal distribution [in post 12](../../complete-simulation-example/lms-are-glms-part-12/index.qmd), and when we draw from the posterior distribution of Bayesian models [in post 13](../../complete-simulation-example/lms-are-glms-part-14/index.qmd), but this is the first time we've considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it's the first example of multivariate regression we've encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they've been *univariate* regression models in the sense that the response component $Y$ has always only contained one column only. 
+This is an example of a **multivariate regression model**. We encountered it before when we used the multivariate normal distribution [in post 12](../../complete-simulation-example/lms-are-glms-part-12/index.qmd), and when we draw from the posterior distribution of Bayesian models [in post 13](../../complete-simulation-example/lms-are-glms-part-13/index.qmd), but this is the first time we've considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it's the first example of multivariate regression we've encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they've been *univariate* regression models in the sense that the response component $Y$ has always only contained one column only. 
 
 So, with this definition of multivariate regression, let's now look at VAR as a particular application of multivariate regression used in time series.
 
@@ -221,7 +221,7 @@ Expressed verbally, if we imagine two entities - **self** and **other** - tracke
 
 ## Example and application in R 
 
-In [a more substantivelly focused post](../../still-the-economy/index.qmd), I discussed how I suspect economic growth and longevity growth trends are correlated. What I proposed doesn't exactly lend itself to the simplest kind of `VAR(1)` model specification, because I suggested a longer lag between the influence of economic growth on longevity growth, and a change in the fundamentals of growth in both cases. However, as an example of VAR I will ignore these complexities, and use the data I prepared for that post:
+In [a more substantivelly focused post](../../../still-the-economy/index.qmd), I discussed how I suspect economic growth and longevity growth trends are correlated. What I proposed doesn't exactly lend itself to the simplest kind of `VAR(1)` model specification, because I suggested a longer lag between the influence of economic growth on longevity growth, and a change in the fundamentals of growth in both cases. However, as an example of VAR I will ignore these complexities, and use the data I prepared for that post:
 
 
 ```{r}
@@ -318,7 +318,7 @@ The summary is now reported for each of the two outcomes: first `gdp`, then `e0`
 
 Remember that the outcome is percentage annual change in the outcome of interest from the previous year. i.e. both series have already been 'differenced' to produce approximately stationary series. It also means that the intercept terms are especially important, as they indicate the long-term trends observed in each series.
 
-In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As [the post this relates to](../../still-the-economy/index.qmd) makes clear, however, these long-term trends may no longer apply.
+In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As [the post this relates to](../../../still-the-economy/index.qmd) makes clear, however, these long-term trends may no longer apply.
 
 Of the four lag (`AR(1)`) terms in the model(s), three are not statistically significant; not even close. The exception is the `lag_e0` term for the `e0` response model, which is statistically significant and negative. Its coefficient is also of similar magnitude to the intercept too. 
 
