@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2025-05-05">
 
-<title>Jon Minton’s Blog - Three Computer Games for People who Don’t Play Computer Games</title>
+<title>Jon Minton's Blog – claude</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,27 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -65,11 +97,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Three Computer Games for People who Don’t Play Computer Games">
-<meta name="twitter:description" content="">
-<meta name="twitter:site" content="@jonminton">
-<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -79,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -95,15 +123,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
         <li>
-    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+    <a class="dropdown-item" href="./glms.html" rel="" target="">
  <span class="dropdown-text">Statistical Theory and Applications</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+    <a class="dropdown-item" href="./tardy-tuesday.html" rel="" target="">
  <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+    <a class="dropdown-item" href="./hand-drawn-statistics.html" rel="" target="">
  <span class="dropdown-text">Hand-drawn Statistics</span></a>
   </li>  
     </ul>
@@ -111,11 +139,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+    <a class="nav-link" href="./unpop.html" rel="" target="">
  <span class="menu-text">Unpop</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../about.html" rel="" target="">
+    <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -139,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -152,75 +180,84 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Three Computer Games for People who Don’t Play Computer Games</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">games</div>
-                <div class="quarto-category">puzzles</div>
-                <div class="quarto-category">stories</div>
-                <div class="quarto-category">bank holidays</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Jon Minton </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">May 5, 2025</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 
+<section id="claude.md" class="level1">
+<h1>CLAUDE.md</h1>
+<p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>This is Jon Minton’s personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.</p>
+</section>
+<section id="building-and-rendering" class="level2">
+<h2 class="anchored" data-anchor-id="building-and-rendering">Building and Rendering</h2>
+<p><strong>Preview the blog locally:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Render the full site:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The rendered site outputs to the <code>docs/</code> directory (configured in <code>_quarto.yml</code>), which is served by GitHub Pages.</p>
+<p><strong>Pre-render automation:</strong> The <code>pre-render.R</code> script runs automatically before each render (configured in <code>_quarto.yml</code>). It: - Executes <code>calculate-wordcount.R</code> to count total words across all <code>.qmd</code> files - Updates the subtitle in <code>index.qmd</code> with the current word count - Captures warnings to <code>render_warnings.log</code></p>
+</section>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<pre><code>.
+├── _quarto.yml           # Main Quarto configuration
+├── posts/                # All blog posts, organized by topic
+│   ├── glms/            # Multi-part GLM statistics series
+│   ├── unpop/           # Pop culture analysis posts
+│   ├── tardy-tuesday/   # Tidy Tuesday data visualizations
+│   ├── handdrawn-stats/ # Hand-drawn statistics illustrations
+│   └── [topic]/index.qmd
+├── docs/                 # Rendered output (GitHub Pages)
+├── index.qmd            # Homepage with post listing
+├── about.qmd            # About page
+└── *.qmd                # Top-level pages (glms.qmd, tardy-tuesday.qmd, etc.)</code></pre>
+<p><strong>Post organization:</strong> - Each post lives in <code>posts/[category]/[post-name]/index.qmd</code> - Multi-part series organized in subdirectories (e.g., <code>glms/intro-to-glms/lms-are-glms-part-01/</code>) - YAML frontmatter required: title, author, date, categories</p>
+</section>
+<section id="blog-post-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="blog-post-conventions">Blog Post Conventions</h2>
+<p><strong>YAML frontmatter structure:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Post Title</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> Optional subtitle (if needed)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Jon Minton</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> YYYY-MM-DD</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">category1</span><span class="kw">,</span><span class="at"> category2</span><span class="kw">,</span><span class="at"> tag3</span><span class="kw">]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Internal linking:</strong> - Use relative paths from the post location: <code>../other-post/index.qmd</code> - For posts in nested directories: <code>../../category/post/index.qmd</code> - Common pattern: Link to related posts in the same series or topic area</p>
+<p><strong>Markdown formatting:</strong> - Paragraph breaks require blank lines between paragraphs (markdown standard) - Lists need blank lines before and after the list block - Use <code>**bold**</code> for emphasis in bullet points when needed - Links: <code>[Link text](url)</code> for external, <code>[Link text](../path/index.qmd)</code> for internal</p>
+<p><strong>Images and media:</strong> - Store in the same directory as the post’s <code>index.qmd</code> - Reference with relative paths: <code>![Alt text](filename.jpg)</code></p>
+</section>
+<section id="themes-and-styling" class="level2">
+<h2 class="anchored" data-anchor-id="themes-and-styling">Themes and Styling</h2>
+<p>The blog uses dual themes configured in <code>_quarto.yml</code>: - Light: cosmo - Dark: slate - Custom CSS: <code>styles.css</code></p>
+</section>
+<section id="r-integration" class="level2">
+<h2 class="anchored" data-anchor-id="r-integration">R Integration</h2>
+<p>This is primarily an R-based blog with Quarto. R scripts handle word counting and pre-render automation. Posts may contain R code chunks with statistical analyses and visualizations.</p>
+</section>
+<section id="content-categories" class="level2">
+<h2 class="anchored" data-anchor-id="content-categories">Content Categories</h2>
+<p>The blog has several major content areas linked in the navbar: - <strong>Statistical Theory and Applications</strong> (glms.qmd): GLM series and statistical tutorials - <strong>Tardy Tuesday</strong> (tardy-tuesday.qmd): Tidy Tuesday data visualization challenges - <strong>Hand-drawn Statistics</strong> (hand-drawn-statistics.qmd): Visual explanations of stats concepts - <strong>Unpopular Opinions</strong> (unpop.qmd): Pop culture and media analysis</p>
+</section>
+<section id="common-workflow-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="common-workflow-patterns">Common Workflow Patterns</h2>
+<p><strong>Creating a new post:</strong> 1. Create directory: <code>posts/[category]/[post-name]/</code> 2. Add <code>index.qmd</code> with proper YAML frontmatter 3. Add any images/assets to the same directory 4. Render to preview: <code>quarto preview</code></p>
+<p><strong>Editing existing posts:</strong> - Posts are in <code>posts/**/**/index.qmd</code> - After editing, render to see changes - Word count updates automatically on next render via pre-render script</p>
+<p><strong>Working with series posts:</strong> The GLM series follows a numbered pattern (<code>lms-are-glms-part-XX</code>) within subdirectories by topic area. When adding to a series, maintain the numbering convention and place in the appropriate subdirectory.</p>
 
-<p>It’s a Bank Holiday. In my last few jobs - in the NHS, and in academia - Bank Holidays weren’t taken off by default. But in my current job Bank Holidays <em>are</em> holidays, though for my partner Bank Holidays are not. So, when we’re working different days, what better use of a free day than to bury oneself in a good game? Today I’ve mostly been playing a new game called The Blue Prince, which by no coincidence is a homophone on ‘blueprints’.</p>
-<p>Many people don’t like computer games, both for good and bad reasons. Potentially good reasons include: the clear opportunity cost, the potential for motivation and energies that could be diverted more ‘productively’ to be instead vied to the mere shifting of electrons<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>; the predatory practices involved in profiting from many modern games, and in some cases their blending into gambling mechanics, especially mobile games; their contribution to snacking and physical inactivity<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>; the thematic preoccupation with violent power fantasies in many games. Some bad reasons include: the presumption that gaming develops no transferrable skills, and that gamers are mentally inactive; and that violent games lead to violent behaviour.</p>
-<p>Amongst non-gamers, some of the above arguments can be shields, psychological defences against the lurking awareness that, if they were to start playing most games, they would likely be terrible at them, unable to know how to jump, move, interact with items, react quickly enough to events, and so on, and so would feel humiliated. So rather than risk facing humiliation, they denegrate an activity worth billions of dollars, and that entertains and brings a sense of joy and meaning to hundreds of millions of people.</p>
-<p>The barriers to entry are genuine, however, and as games become faster and - in <em>some</em> ways - more sophisticated, they lead to the cultural divides between gamers and non-gamers only growing, to lived experiences and sources of joy and purpose becoming mutually incomprehensible.</p>
-<p>Blue Prince, whose main ‘quest’ I managed to finish today, is one of just three games I can think of, from the last 20 or so years, that I can recommend wholeheartedly to non-gamers. Each of these three games is very different, but each presents a comprehensive, joyous and enriching experience to players, which crucially does not rely on the level of kinetic fluency, the ability to decode events and react very quickly - required to even tread water in the majority of games. So in an effort to bridge the New Two Cultures - the separation between gamers and non-gamers - here’s a brief overview of each of these three games:</p>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Blue_Prince_(video_game)"><strong>The Blue Prince</strong></a>: The Blue Prince was made largely by one person, Tondor Ros, who was inspired by an obscure 1985 puzzle book called Maze. The book was a choose-your-own-adventure story involving a mysterious house that can only be traversed by following a series of cryptic clues, in which the adventurer must reach the 46th room of the 45 room house. The Blue Prince takes this core premise and adds atmospheric sound and graphics, arcane storytelling, layers and levels of puzzlesolving, and most importantly <em>stochasticity</em>,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> meaning no game is exactly the same. The puzzles range from the clearly specified to the cryptically implied, from those which play out room-by-room to those which build up slowly across successive games, and from those that tax one’s linear and logical faculties to those which require creativity and lateral leaps. And although demanding on those faculties that might be exercised by players of sodoku puzzles and cryptic crossword, there are no demands on dexterity or reaction time, and no violent or graphic content.</li>
-<li><a href="https://en.wikipedia.org/wiki/Disco_Elysium"><strong>Disco Elysium</strong></a>: Disco Elysium is a 2019 adventure game produced by a small Eastern European games company called ZU/AM, and based on lore and ideas developed in a book called <em>Sacred and Terrible Air</em> by its lead designeer Robert Kurvitz, itself based on complex gameworld he developed with friends over many years. It is not just a game: it is narrative art. It is a rich, creative, undisciplined, cutting, poignant, elegaic, bittersweet book disguished as a game, and uses magical realism to try to make sense of the Eastern European sociocultural experience of the 20th Century: the state of being an individual in a state that is always acted upon by outside forces and political ideologies, that is predominantly object and not subject in outside battles. It is also the story of a broken man, haunted by the past, both guided and misdirected by a chorus of Jungian archetypes who swell up from within his psyche, and who forever try and pull the protagonist towards their ideals. In moderation, balanced out by other archetypes, each voice within can offer wisdom. But if one voice within ever becomes too loud then it drowns out its peers, leading the protagonist to pathology, embarassment and harm.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Disco Elysium is the antidote to standard power fantasy cliches: the protagonist’s present and future boxed in by the chains of their personal biography from before, by grand sociopolitical and even metaphysical forces acting from without, and by the chorus howling from within. Disco Elysium is set on another world, with a painterly expressionist style throughout and elegaic instrumentals swelling softly as our broken hero trudges through a quietly broken world. But in terms of its treatment of psychology, and politics, and the links between the two, it’s one of the most realistic works of fiction I’ve ever encountered.</li>
-<li><a href="https://en.wikipedia.org/wiki/Plants_vs._Zombies"><strong>Plants vs.&nbsp;Zombies</strong></a>: PvZ is a 2009 tower defence game. You are in charge of a house, a lawn, and some magical seeds, and you use the seeds to populate the lawn with various type of plant, with a view to holding off a very-slow moving, and very cute, zombie invasion. Although this is the only of the three games that can reasonably be described as ‘real time’, in that events occur to the player without the player causing them to happen, the pace is slow enough, and the controls simple enough, that the technical barriers to entry are very low. Of all the games I’ve ever played, PvZ is the only game my partner has played, and became enthusiastic about playing. For a few months many years ago, due entirely and exclusively to this game, my partner and I had gaming in common. What set up PvZ apart from other tower defence games includes the generousity and richness of what’s included with the game,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> the comic premise and off-kilter humour, the gentle challenge of the gameplay, and the extremely charming music.</li>
-</ul>
-<p>So, three games I can recommend to non-gamers. Each accessible, each very different, each brilliant.</p>
 
+</section>
+</section>
 
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Only a <em>potentially</em> good reason both because many forms of paid employment are, viewed from enough distance, also ‘just’ involve shifting electrons; and because similar opportunity costs are also present in many other, non-gaming and non-electronic hobbies, such as stamp collecting or going for hikes.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Again, not necessarily different to many desk jobs, especially those that are fully remote.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The name for games that are somewhat random in this way, in effect procedurally generated, is <em>roguelike</em>. For those of a certain age and background, a good shortcut for understanding The Blue Prince is <em>Roguelike Myst</em>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>And to the extent the protagonist can effectively die of shame, embarassment and harm can be one and the same.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Though nongamers over the age of fifty might assume the most harmful aspect of games might be moral corruption due to interactive portrayals of violence criminality, I think a much stronger case is the introduction of <em>fremium</em> mobile phone games, in which an initially ‘free’ game uses full-scale psychological warfare to effectively ‘trick’ gamers into ploughing hundreds of pounds, micropayment by micropayment, into games seldom worth more than ten pounds. Unfortunately these highly predatory and dangerous games are likely to look amongst the least objectionable and harmful, and are often marketed towards children. When did the Fremium Turn begin? Sometimes between 2009, when Plants vs Zombies was released, and 2013, when Plants vs Zombies 2 was released. Whereas PvZ was for home PCs, so players had to make a conscious and sustained decision to play it, PvZ was mobile only, making it much easier to start a game almost without realising it. And where as PvZ cost a fixed price, and game with a lot of content, PvZ 2 starts nominally ‘free’, but after a few hours of play pesters players with adverts to new characters and areas, each time ‘just’ costing a pound or two. If the player doesn’t part with real cash, the game then intentionally becomes tedious and bad until they change their mind. Between 2009 and 2013, between PvZ and PvZ2, the gaming industry’s moral compass got replaced with a legion of barbed iphone apps.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -568,8 +605,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
