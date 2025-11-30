@@ -431,14 +431,14 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$par
-[1]  2.460675  1.375424 -1.336438
+[1]  2.460675  1.375425 -1.336438
 
 $value
 [1] 1.51397
 
 $counts
 function gradient 
-      80       36 
+      79       36 
 
 $convergence
 [1] 0
@@ -448,9 +448,9 @@ NULL
 
 $hessian
               [,1]          [,2]          [,3]
-[1,] -3.424917e+01 -3.424917e+01  2.727840e-05
-[2,] -3.424917e+01 -2.625770e+02 -2.818257e-05
-[3,]  2.727840e-05 -2.818257e-05 -4.500002e+00</code></pre>
+[1,] -3.424917e+01 -3.424917e+01  2.716036e-05
+[2,] -3.424917e+01 -2.625770e+02 -2.557859e-05
+[3,]  2.716036e-05 -2.557859e-05 -4.500002e+00</code></pre>
 </div>
 </div>
 <p>We have used a slightly different algorithm (‘BFGS’), and a different way of specifying the function to search over (using <code>fnscale = -1</code> to invert the likelihood), but we have the same <code>par</code> estimates as before: <span class="math inline">\(\beta = \{\beta_0 = 2.46, \beta_1 = 1.38\}\)</span>. So the changes we’ve made to the <code>optim</code> arguments haven’t changed what it estimates.</p>
@@ -464,9 +464,9 @@ $hessian
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>              [,1]          [,2]          [,3]
-[1,] -3.424917e+01 -3.424917e+01  2.727840e-05
-[2,] -3.424917e+01 -2.625770e+02 -2.818257e-05
-[3,]  2.727840e-05 -2.818257e-05 -4.500002e+00</code></pre>
+[1,] -3.424917e+01 -3.424917e+01  2.716036e-05
+[2,] -3.424917e+01 -2.625770e+02 -2.557859e-05
+[3,]  2.716036e-05 -2.557859e-05 -4.500002e+00</code></pre>
 </div>
 </div>
 <p>You might notice that the Hessian matrix is square, with as many columns as rows. And, that the number of columns (or rows) is equal to the number of parameters we have estimated, i.e.&nbsp;three in this case.</p>
@@ -481,9 +481,9 @@ $hessian
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>              [,1]          [,2]          [,3]
-[1,]  3.357745e-02 -4.379668e-03  2.309709e-07
-[2,] -4.379668e-03  4.379668e-03 -5.397790e-08
-[3,]  2.309709e-07 -5.397790e-08  2.222221e-01</code></pre>
+[1,]  3.357745e-02 -4.379668e-03  2.275558e-07
+[2,] -4.379668e-03  4.379668e-03 -5.132867e-08
+[3,]  2.275558e-07 -5.132867e-08  2.222221e-01</code></pre>
 </div>
 </div>
 <p>As with <code>hess</code>, <code>inv_hess</code> is symmetric around the top-left to bottom-right diagonal. For example, the value on row 2 and column 1 is the same as on row 1, column 2.</p>
@@ -497,7 +497,7 @@ $hessian
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>             [,1]         [,2]
-[1,]  0.033577455 -0.004379668
+[1,]  0.033577454 -0.004379668
 [2,] -0.004379668  0.004379668</code></pre>
 </div>
 </div>

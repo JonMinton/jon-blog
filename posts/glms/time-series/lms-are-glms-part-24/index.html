@@ -293,7 +293,7 @@ y = \beta_0 + \beta_1 x_1 + \epsilon
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
 \]</span></p>
 <p>i.e.&nbsp;You might have been taught that, if the predictors include one term for the <em>intercept</em> (the <span class="math inline">\(\beta_0\)</span> term) and one term for the <em>slope</em> (the <span class="math inline">\(\beta_1\)</span> term), then this is a <em>univariate model</em>. But if there are two or more terms that can claim to be ‘the slope’ then this is a <em>multivariate model</em>.</p>
-<p>However, this isn’t the real distinction between a univariate model and a multivariate model. To see this distinction we have to return, for the umpeenth time, to the ‘grandmother model’ specification first introduced at the start of <a href="../lms-are-glms-part-01/index.qmd">the very first post</a>:</p>
+<p>However, this isn’t the real distinction between a univariate model and a multivariate model. To see this distinction we have to return, for the umpeenth time, to the ‘grandmother model’ specification first introduced at the start of <a href="../../../../posts/glms/intro-to-glms/lms-are-glms-part-01/index.html">the very first post</a>:</p>
 <p><strong>Stochastic Component</strong></p>
 <p><span class="math display">\[
 Y \sim f(\theta, \alpha)
@@ -380,7 +380,7 @@ X = \begin{pmatrix}
 \]</span></p>
 </div>
 </div>
-<p>This is an example of a <strong>multivariate regression model</strong>. We encountered it before when we used the multivariate normal distribution <a href="../lms-are-glms-part-13/index.qmd">in post 13</a>, and when we draw from the posterior distribution of Bayesian models <a href="../lms-are-glms-part-14/dundas-bad-counterfactual.png">in post 14</a>, but this is the first time we’ve considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it’s the first example of multivariate regression we’ve encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they’ve been <em>univariate</em> regression models in the sense that the response component <span class="math inline">\(Y\)</span> has always only contained one column only.</p>
+<p>This is an example of a <strong>multivariate regression model</strong>. We encountered it before when we used the multivariate normal distribution <a href="../../../../posts/glms/complete-simulation-example/lms-are-glms-part-12/index.html">in post 12</a>, and when we draw from the posterior distribution of Bayesian models <a href="../../../../posts/glms/complete-simulation-example/lms-are-glms-part-13/index.html">in post 13</a>, but this is the first time we’ve considered multivariate modelling in the context of trying to represent something we suspect to be true about the world, rather than our uncertainty about the world. And it’s the first example of multivariate regression we’ve encountered in this series. For every previous model, no matter how apparently disparate, complicated or exotic they may appear, they’ve been <em>univariate</em> regression models in the sense that the response component <span class="math inline">\(Y\)</span> has always only contained one column only.</p>
 <p>So, with this definition of multivariate regression, let’s now look at VAR as a particular application of multivariate regression used in time series.</p>
 </section>
 <section id="vector-autoregression" class="level2">
@@ -432,7 +432,7 @@ Y1_T1 &amp; Y2_T1 --&gt; Y1_T &amp; Y2_T
 </section>
 <section id="example-and-application-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="example-and-application-in-r">Example and application in R</h2>
-<p>In <a href="../../still-the-economy/index.qmd">a more substantivelly focused post</a>, I discussed how I suspect economic growth and longevity growth trends are correlated. What I proposed doesn’t exactly lend itself to the simplest kind of <code>VAR(1)</code> model specification, because I suggested a longer lag between the influence of economic growth on longevity growth, and a change in the fundamentals of growth in both cases. However, as an example of VAR I will ignore these complexities, and use the data I prepared for that post:</p>
+<p>In <a href="../../../../posts/still-the-economy/index.html">a more substantivelly focused post</a>, I discussed how I suspect economic growth and longevity growth trends are correlated. What I proposed doesn’t exactly lend itself to the simplest kind of <code>VAR(1)</code> model specification, because I suggested a longer lag between the influence of economic growth on longevity growth, and a change in the fundamentals of growth in both cases. However, as an example of VAR I will ignore these complexities, and use the data I prepared for that post:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -454,8 +454,8 @@ Y1_T1 &amp; Y2_T1 --&gt; Y1_T &amp; Y2_T
  6     6  1954 1. Per Capita GDP      3.87  Old   
  7     7  1955 1. Per Capita GDP      3.55  Old   
  8     8  1956 1. Per Capita GDP      1.28  Old   
- 9     9  1957 1. Per Capita GDP      1.49  Old   
-10    10  1958 1. Per Capita GDP      0.815 Old   
+ 9     9  1957 1. Per Capita GDP      1.50  Old   
+10    10  1958 1. Per Capita GDP      0.810 Old   
 # ℹ 137 more rows</code></pre>
 </div>
 </div>
@@ -495,9 +495,9 @@ Y1_T1 &amp; Y2_T1 --&gt; Y1_T &amp; Y2_T
  4  1954 3.87   0.530    5.07   0.388 
  5  1955 3.55  -0.0570   3.87   0.530 
  6  1956 1.28   0.385    3.55  -0.0570
- 7  1957 1.49   0.170    1.28   0.385 
- 8  1958 0.815  0.255    1.49   0.170 
- 9  1959 3.70   0.184    0.815  0.255 
+ 7  1957 1.50   0.170    1.28   0.385 
+ 8  1958 0.810  0.255    1.50   0.170 
+ 9  1959 3.70   0.184    0.810  0.255 
 10  1960 5.72   0.268    3.70   0.184 
 # ℹ 61 more rows</code></pre>
 </div>
@@ -527,13 +527,13 @@ lm(formula = cbind(gdp, e0) ~ lag_gdp + lag_e0, data = wide_ts_series)
 
 Coefficients:
              gdp       e0      
-(Intercept)   1.99440   0.28108
-lag_gdp       0.06173   0.01179
-lag_e0       -0.48525  -0.33063</code></pre>
+(Intercept)   1.98084   0.27892
+lag_gdp       0.07122   0.01293
+lag_e0       -0.47808  -0.33122</code></pre>
 </div>
 </div>
 <p>We can see here that the model reports a small matrix of coefficients: three rows (one for each coefficient term) and two columns: one for each of the response variables. This is as we should expect.</p>
-<p>Back in <a href="../lms-are-glms-part-12/index.qmd">part 12 of the series</a>, we saw we could extract the coefficients, variance-covariance matrix, and error terms of a linear regression model using the functions <code>coefficients</code>, <code>vcov</code>, and <code>sigma</code> respectively.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s use those functions here too:</p>
+<p>Back in <a href="../../../../posts/glms/complete-simulation-example/lms-are-glms-part-12/index.html">part 12 of the series</a>, we saw we could extract the coefficients, variance-covariance matrix, and error terms of a linear regression model using the functions <code>coefficients</code>, <code>vcov</code>, and <code>sigma</code> respectively.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Let’s use those functions here too:</p>
 <p>First the coefficients</p>
 <div class="cell">
 <details>
@@ -542,9 +542,9 @@ lag_e0       -0.48525  -0.33063</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    gdp          e0
-(Intercept)  1.99439587  0.28108028
-lag_gdp      0.06172721  0.01178781
-lag_e0      -0.48524808 -0.33062640</code></pre>
+(Intercept)  1.98084264  0.27891769
+lag_gdp      0.07122463  0.01293322
+lag_e0      -0.47808210 -0.33122055</code></pre>
 </div>
 </div>
 <p>And now the variance-covariance matrix:</p>
@@ -555,19 +555,19 @@ lag_e0      -0.48524808 -0.33062640</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                gdp:(Intercept)   gdp:lag_gdp    gdp:lag_e0 e0:(Intercept)
-gdp:(Intercept)    0.1804533467 -0.0272190933 -0.1129646084   0.0039007790
-gdp:lag_gdp       -0.0272190933  0.0164590434 -0.0180517467  -0.0005883829
-gdp:lag_e0        -0.1129646084 -0.0180517467  0.6290771233  -0.0024419053
-e0:(Intercept)     0.0039007790 -0.0005883829 -0.0024419053   0.0037904364
-e0:lag_gdp        -0.0005883829  0.0003557878 -0.0003902165  -0.0005717391
-e0:lag_e0         -0.0024419053 -0.0003902165  0.0135984779  -0.0023728303
+gdp:(Intercept)    0.1786940002 -0.0274047582 -0.1113853264   0.0037086805
+gdp:lag_gdp       -0.0274047582  0.0163659594 -0.0171118274  -0.0005687684
+gdp:lag_e0        -0.1113853264 -0.0171118274  0.6153164081  -0.0023117317
+e0:(Intercept)     0.0037086805 -0.0005687684 -0.0023117317   0.0038237235
+e0:lag_gdp        -0.0005687684  0.0003396651 -0.0003551451  -0.0005864115
+e0:lag_e0         -0.0023117317 -0.0003551451  0.0127705013  -0.0023834415
                    e0:lag_gdp     e0:lag_e0
-gdp:(Intercept) -0.0005883829 -0.0024419053
-gdp:lag_gdp      0.0003557878 -0.0003902165
-gdp:lag_e0      -0.0003902165  0.0135984779
-e0:(Intercept)  -0.0005717391 -0.0023728303
-e0:lag_gdp       0.0003457235 -0.0003791783
-e0:lag_e0       -0.0003791783  0.0132138133</code></pre>
+gdp:(Intercept) -0.0005687684 -0.0023117317
+gdp:lag_gdp      0.0003396651 -0.0003551451
+gdp:lag_e0      -0.0003551451  0.0127705013
+e0:(Intercept)  -0.0005864115 -0.0023834415
+e0:lag_gdp       0.0003502015 -0.0003661617
+e0:lag_e0       -0.0003661617  0.0131666413</code></pre>
 </div>
 </div>
 <p>And finally the error terms</p>
@@ -578,7 +578,7 @@ e0:lag_e0       -0.0003791783  0.0132138133</code></pre>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      gdp        e0 
-2.6906051 0.3899529 </code></pre>
+2.6643030 0.3897372 </code></pre>
 </div>
 </div>
 <p>The coefficients returns the same kind of 3x2 matrix we saw previously: two models run simultaneously. The error terms is now a vector of length 2: one for each of these models. The variance-covariance matrix is a square matrix of dimension 6: i.e.&nbsp;6 rows and 6 columns. This is the number of predictor coefficients in each model (the number of columns of <span class="math inline">\(X\)</span>, i.e.&nbsp;3) <em>times</em> the number of models simultaneously run, i.e.&nbsp;2.</p>
@@ -596,20 +596,20 @@ Call:
 lm(formula = gdp ~ lag_gdp + lag_e0, data = wide_ts_series)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--12.679  -1.061   0.143   1.483   6.478 
+     Min       1Q   Median       3Q      Max 
+-12.3406  -1.0459   0.2158   1.4581   6.4502 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  1.99440    0.42480   4.695 1.34e-05 ***
-lag_gdp      0.06173    0.12829   0.481    0.632    
-lag_e0      -0.48525    0.79314  -0.612    0.543    
+(Intercept)  1.98084    0.42272   4.686 1.38e-05 ***
+lag_gdp      0.07122    0.12793   0.557    0.580    
+lag_e0      -0.47808    0.78442  -0.609    0.544    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 2.691 on 68 degrees of freedom
-Multiple R-squared:  0.007555,  Adjusted R-squared:  -0.02163 
-F-statistic: 0.2588 on 2 and 68 DF,  p-value: 0.7727
+Residual standard error: 2.664 on 68 degrees of freedom
+Multiple R-squared:  0.008495,  Adjusted R-squared:  -0.02067 
+F-statistic: 0.2913 on 2 and 68 DF,  p-value: 0.7482
 
 
 Response e0 :
@@ -619,24 +619,24 @@ lm(formula = e0 ~ lag_gdp + lag_e0, data = wide_ts_series)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.45680 -0.19230 -0.00385  0.24379  1.38706 
+-1.45068 -0.19300 -0.00686  0.24135  1.38554 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.28108    0.06157   4.565 2.15e-05 ***
-lag_gdp      0.01179    0.01859   0.634  0.52823    
-lag_e0      -0.33063    0.11495  -2.876  0.00537 ** 
+(Intercept)  0.27892    0.06184   4.511 2.63e-05 ***
+lag_gdp      0.01293    0.01871   0.691  0.49185    
+lag_e0      -0.33122    0.11475  -2.887  0.00522 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.39 on 68 degrees of freedom
-Multiple R-squared:  0.1086,    Adjusted R-squared:  0.08243 
-F-statistic: 4.144 on 2 and 68 DF,  p-value: 0.02003</code></pre>
+Residual standard error: 0.3897 on 68 degrees of freedom
+Multiple R-squared:  0.1096,    Adjusted R-squared:  0.08345 
+F-statistic: 4.186 on 2 and 68 DF,  p-value: 0.01929</code></pre>
 </div>
 </div>
 <p>The summary is now reported for each of the two outcomes: first <code>gdp</code>, then <code>e0</code>.</p>
 <p>Remember that the outcome is percentage annual change in the outcome of interest from the previous year. i.e.&nbsp;both series have already been ‘differenced’ to produce approximately stationary series. It also means that the intercept terms are especially important, as they indicate the long-term trends observed in each series.</p>
-<p>In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As <a href="../../still-the-economy/index.qmd">the post this relates to</a> makes clear, however, these long-term trends may no longer apply.</p>
+<p>In this case the intercepts for both series are positive and statistically significant: over the long term, GDP has grown on average around 2% each year, and life expectancy by around 0.28%. As <a href="../../../../posts/still-the-economy/index.html">the post this relates to</a> makes clear, however, these long-term trends may no longer apply.</p>
 <p>Of the four lag (<code>AR(1)</code>) terms in the model(s), three are not statistically significant; not even close. The exception is the <code>lag_e0</code> term for the <code>e0</code> response model, which is statistically significant and negative. Its coefficient is also of similar magnitude to the intercept too.</p>
 <p>What does this mean in practice? In effect, that annual mortality improvement trends have a tendency to <em>oscillate</em>: a better-than-average year tends to be followed by a worse-than-average year, and a worse-than-average year to be followed by a better-than-average year, in both cases at higher-than-chance rates.</p>
 <p>What could be the cause of this oscillatory phenomenon? When it comes to longevity, the phenomenon is somewhat well understood (though perhaps not widely enough), and referred to as either ‘forward mortality displacement’ or, more chillingly, ‘harvesting’. This outcome likely comes about because, if there were an exceptionally bad year in terms of (say) influenza mortality, the most frail and vulnerable are likely to be those who die disproportionately from this additional mortality event. This means that the ‘stock’ of people remaining the following year have been selected, on average, to be slightly less frail and vulnerable than those who started the previous year. Similarly, an exceptionally ‘good’ year can mean that the average ‘stock’ of the population in the following year is slightly more frail than in an average year, so more susceptible to mortality. And so, by this means, comparatively-bad-years tend to be followed by comparatively-good-years, and comparatively-good-years by comparatively-bad-years.</p>
@@ -654,7 +654,7 @@ F-statistic: 4.144 on 2 and 68 DF,  p-value: 0.02003</code></pre>
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>A primary aim extracting these components from a linear regression in this way is to allow something approximating a Bayesian posterior distribution of coefficients to be generated, using a multivariate normal distribution (the first place we actually encountered a multivariate regression), without using a Bayesian modelling approach. This allows for the estimating and propagation of ‘honest uncertainty’ in predicted and expected outcomes. However, as we saw in <a href="../lms-are-glms-part-13/index.qmd">part 13</a>, it can sometimes be as or more straightforward to just use a Bayesian modelling approach.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>A primary aim extracting these components from a linear regression in this way is to allow something approximating a Bayesian posterior distribution of coefficients to be generated, using a multivariate normal distribution (the first place we actually encountered a multivariate regression), without using a Bayesian modelling approach. This allows for the estimating and propagation of ‘honest uncertainty’ in predicted and expected outcomes. However, as we saw in <a href="../../../../posts/glms/complete-simulation-example/lms-are-glms-part-13/index.html">part 13</a>, it can sometimes be as or more straightforward to just use a Bayesian modelling approach.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>i.e.&nbsp;two times three squared.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->

@@ -3652,7 +3652,7 @@ font-style: inherit;">'Our cumulative survivorship'</span></span>
 <span id="cb17-9">    )</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://jonminton.github.io/jon-blog/posts/glms/one-off/time-and-change/index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://jonminton.github.io/jon-blog/posts/glms/one-off/time-and-change/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Let’s now compare this with the quantity <img src="https://latex.codecogs.com/png.latex?l(x)">:</p>
@@ -3755,7 +3755,7 @@ font-style: inherit;">'Cumulative survivorship by age x'</span></span>
 <span id="cb18-16">    )</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="https://jonminton.github.io/jon-blog/posts/glms/one-off/time-and-change/index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="https://jonminton.github.io/jon-blog/posts/glms/one-off/time-and-change/index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We can see that these quantities are effectively identical. Additionally, they are both a type of survival function <img src="https://latex.codecogs.com/png.latex?S(t)">, showing cumulatitve survival probability from time 0 through to time t, so long as we assume (again, a <em>strong</em> assumption) that x and t are effectively the same. The lifetable <img src="https://latex.codecogs.com/png.latex?l(t)"> is therefore an example of a <em>nonparametric</em> survival function <img src="https://latex.codecogs.com/png.latex?S(t)"> that operates with discrete time intervals (as with a Markov model), even though they are often used and applied by different fields to those where survival models are the bread-and-butter, leading to different terms and symbols often being used.</p>
