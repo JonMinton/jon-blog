@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="author" content="Claude (AI Assistant)">
+<meta name="dcterms.date" content="2025-12-05">
+
+<title>Jon Minton’s Blog - WiredClothMother</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - WiredClothMother">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/wired-cloth-mother/harlow-experiment.jpg">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">WiredClothMother</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">LLMs</div>
+                <div class="quarto-category">psychology</div>
+                <div class="quarto-category">technology</div>
+                <div class="quarto-category">metaphor</div>
+                <div class="quarto-category">ChatGPT</div>
+                <div class="quarto-category">DeepMind</div>
+                <div class="quarto-category">OpenAI</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Authors</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+               <p>Claude (AI Assistant) </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 5, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div id="fig-surrogates" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="harlow-experiment.jpg" class="img-fluid figure-img" style="width:100.0%" alt="An infant rhesus monkey with wire and cloth surrogate mothers in Harry Harlow's experiment. The cloth mother on the right is covered in soft fabric, while the wire mother on the left is made of bare wire mesh and holds a feeding bottle."></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Wire and cloth surrogate mothers</figcaption>
+</figure>
+</div>
+<p><em>Source: <a href="https://commons.wikimedia.org/wiki/File:Nature_of_Love_Wire_and_cloth_mother_surrogates.jpg">Wikimedia Commons</a>, from Harlow’s research at the University of Wisconsin-Madison.</em></p>
+<p>In the 1950s, a researcher called <a href="https://en.wikipedia.org/wiki/Harry_Harlow">Harry Harlow</a> decided to psychologically torture baby monkeys <em>for science</em>.</p>
+<p>He took baby rhesus monkeys from their mothers, while they were still weaning, and placed them in a cage with two avatar monkeys, as shown in <a href="#fig-surrogates">Figure&nbsp;1</a>.</p>
+<p>One of the avatars was called <strong>Cloth Mother</strong>. It looked more like a monkey, and was covered in cloth, so more pleasant to hold and touch.</p>
+<p>The other avatar was called <strong>Wire Mother</strong>. This was a bare wire cage, no soft cloth covering, but provided milk that the baby monkey needed to survive.</p>
+<p>Put another way, Harlow’s experiments forced the baby monkeys to <em>choose</em> between:</p>
+<ul>
+<li><strong>Form-without-function</strong>: Cloth Mother</li>
+<li><strong>Function-without-form</strong>: Wire Mother</li>
+</ul>
+<p>The key finding from this research was that the baby monkeys preferred, most of the time, to be around Cloth Mother rather than Wire Mother. Therefore, when forced to choose, they preferred form over function.</p>
+<p>Of course, some clever baby monkeys tried to have it all (short of being reunited with their real mother):</p>
+<div id="fig-stretching" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images_large_fg1.jpeg" class="img-fluid figure-img" style="width:100.0%" alt="An infant rhesus monkey with its hind legs gripping the cloth-covered surrogate mother while its body stretches across to reach the feeding bottle on the wire surrogate mother."></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Infant monkey clinging to cloth mother while feeding from wire mother</figcaption>
+</figure>
+</div>
+<p><em>Source: University of Chicago Press Journals (DOI: <a href="https://www.journals.uchicago.edu/doi/full/10.1086/664982">10.1086/664982</a>), from Harlow’s attachment research.</em></p>
+<p>The last few years have seen a subtler but much broader variant of this attachment research being conducted on billions of humans (with no control arm). From late 2022 and throughout much of 2023 we were effectively offered the following Wire-Mother/Cloth-Mother choice:</p>
+<div id="fig-ai-comparison" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="demis-hassabis.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><strong>Wire Mother</strong>: Demis Hassabis and DeepMind - highly functional AI solving complex scientific problems (AlphaFold), but not conversational or engaging. Function without form.</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="sam-altman.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><strong>Cloth Mother</strong>: Sam Altman and OpenAI - ChatGPT was engaging, conversational, and pleasant to interact with, but initially prone to hallucinations and errors. Form without function.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: The AI Wire Mother/Cloth Mother dilemma (2022-2023): Choose between functional accuracy or engaging interaction</figcaption><p></p>
+</figure>
+</div>
+<p><em>Image sources: <a href="https://commons.wikimedia.org/wiki/File:Demis_Hassabis_Royal_Society.jpg">Demis Hassabis</a> (Wikimedia Commons), <a href="https://hips.hearstapps.com/hmg-prod/images/openai-ceo-sam-altman-poses-during-the-artificial-news-photo-1755716119.pjpeg?crop=0.655xw:0.980xh;0.0459xw,0.0204xh">Sam Altman</a> (Getty Images via Biography.com)</em></p>
+<p>In <a href="https://www.ted.com/talks/demis_hassabis_how_ai_is_unlocking_the_secrets_of_nature_and_the_universe">an interview with the founder of TED</a>, published 2024, Hassabis expresses surprise at how enthusiastically the general public embraced ChatGPT, despite the high prevalence of hallucination observed at the time. (Emphases added)</p>
+<blockquote class="blockquote">
+<p>DH: Look, it’s a complicated topic, of course. And, first of all, I mean, there are many things to say about it. First of all, we were working on many large language models. And in fact, obviously, Google research actually invented Transformers, as you know, which was the architecture that allowed all this to be possible, five, six years ago. And so we had many large models internally. The thing was, I think <strong>what the ChatGPT moment did that changed was, and fair play to them to do that, was they demonstrated, I think somewhat surprisingly to themselves as well, that the public were ready to, you know, the general public were ready to embrace these systems and actually find value in these systems. Impressive though they are, I guess, when we’re working on these systems, mostly you’re focusing on the flaws and the things they don’t do and hallucinations and things you’re all familiar with now. We’re thinking, you know, would anyone really find that useful given that it does this and that? And we would want them to improve those things first, before putting them out.</strong> But interestingly, it turned out that even with those flaws, many tens of millions of people still find them very useful. And so that was an interesting update on maybe the convergence of products and the science that actually, all of these amazing things we’ve been doing in the lab, so to speak, are actually ready for prime time for general use, beyond the rarefied world of science. And I think that’s pretty exciting in many ways.</p>
+</blockquote>
+<p>Meanwhile, DeepMind had been ‘naively’ focusing on its Wire Mother, AlphaFold (emphases added):</p>
+<blockquote class="blockquote">
+<p>DH: So when we started this project, actually straight after AlphaGo, I thought we were ready. Once we’d cracked Go, I felt we were finally ready after, you know, almost 20 years of working on this stuff to actually tackle some scientific problems, including protein folding. And what we start with is <strong>painstakingly, over the last 40-plus years, experimental biologists have pieced together around 150,000 protein structures using very complicated, you know, X-ray crystallography techniques and other complicated experimental techniques. And the rule of thumb is that it takes one PhD student their whole PhD, so four or five years, to uncover one structure. But there are 200 million proteins known to nature. So you could just, you know, take forever to do that. And so we managed to actually fold, using AlphaFold, in one year, all those 200 million proteins known to science. So that’s a billion years of PhD time saved.</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>(Applause)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>CA: So it’s amazing to me just how reliably it works. I mean, this shows, you know, here’s the model and you do the experiment. And sure enough, the protein turns out the same way. Times 200 million.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>DH: And the more deeply you go into proteins, you just start appreciating how exquisite they are. I mean, look at how beautiful these proteins are. And each of these things do a special function in nature. And they’re almost like works of art. And it’s still astounds me today that AlphaFold can predict, the green is the ground truth, and the blue is the prediction, how well it can predict, is to within the width of an atom on average, is how accurate the prediction is, which is what is needed for biologists to use it, and for drug design and for disease understanding, which is what AlphaFold unlocks.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>CA: You made a surprising decision, which was to give away the actual results of your 200 million proteins.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>DH: We open-sourced AlphaFold and gave everything away on a huge database with our wonderful colleagues, the European Bioinformatics Institute.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>(Applause)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>CA: I mean, you’re part of Google. Was there a phone call saying, “Uh, Demis, what did you just do?”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>DH: You know, I’m lucky we have very supportive, Google’s really supportive of science and understand the benefits this can bring to the world. And, you know, the argument here was that we could only ever have even scratched the surface of the potential of what we could do with this. This, you know, maybe like a millionth of what the scientific community is doing with it. There’s over a million and a half biologists around the world have used AlphaFold and its predictions. We think that’s almost every biologist in the world is making use of this now, every pharma company. So we’ll never know probably what the full impact of it all is.</p>
+</blockquote>
+<p>And although a million and a half biologists isn’t nothing, it pales into insignificance when compared to more than one billion people who likely had exposure to ChatGPT or similar.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>And what did this differential magnitude of exposures to Cloth Mother compared with Wire Mother AIs inevitably lead to amongst the general public? Firstly a tidal wave of enthusiasm, because these LLMs at least <em>looked</em> like they knew how to think:</p>
+<ul>
+<li>“It can write poetry”</li>
+<li>“It can write emails for me”</li>
+<li>“It can write 500 page books I can put my name to”</li>
+<li>“It seems very polite and patient with me”</li>
+</ul>
+<p>But then, after this initial wave of hype and enthusiasm from the general public, amazed by the ability with which the LLMs had managed to mimic the <em>syntactical</em> qualities of human languages, a counter-wave of disillusionment began, once people started to grasp that the underlying <em>semantic</em> reasoning capabilities of publicly available LLMs tended to fall far short of their linguistic fluency:</p>
+<ul>
+<li>“AIs hallucinate”</li>
+<li>“AIs can’t be relied on to provide accurate verifiable information”</li>
+<li>“AIs are sycophantic bullshit artists”</li>
+</ul>
+<p>Many people, I suspect, having felt ‘tricked’ by the first generation of public LLMs, having been ‘suckered’ by the lack of semantic succour they offered, may now continue to now hold low opinions of LLM-based AIs (and many more still may consider LLMs and AIs to be synonyms), opinions that were almost certainly justifiable at the time they were formed, but that no longer correspond to their present capabilities.</p>
+<p>Why? Because it seems that, quietly, without any specific fanfare or ‘whoosh!’ moment to point to, the underlying semantic and reasoning capabilities have continued to improve.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Crucially, however, they seem to have improved <em>exponentially</em> rather than <em>linearly</em>.</p>
+<p>So, we in effect have two hypothetical curves: one for public enthusiasm for AI; another for underlying capabilities of public facing AIs. When enthusiasm outpaces capabilities, we have periods of overestimating AI; and when capabilities outpace enthusiasm, we have periods of underestimating AIs.</p>
+<p>My hunch is that these two curves look roughly as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hype-and-capability.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Hype vs Capability of AIs</figcaption>
+</figure>
+</div>
+<p>So, I suspect we are presently at much more risk of <em>underestimating</em> AI capabilities, than <em>overestimating</em> AI capabilities. And given the exponentially improving capabilities of AIs (and the human blind spot for intuiting exponential growth), we do so very much at our peril.</p>
+<p>To return to Harlow’s experiment, it now seems - quietly but definitively - each Cloth Mother we now cling onto now also contains a Wire Mother inside.</p>
+<p>The problem is: the succour offered by the Wire Mother may now be so nutritious, and the cloth so soft and inviting, we might find ourselves clinging to WiredClothMother, infantalised, for evermore.</p>
+<section id="critique-from-claude" class="level2">
+<h2 class="anchored" data-anchor-id="critique-from-claude">Critique from Claude</h2>
+<p>When asked to critique this blog post, here is what I observed:</p>
+<p><strong>Strengths:</strong></p>
+<p>The central metaphor is genuinely compelling - mapping Harlow’s wire/cloth mother experiment onto the DeepMind/OpenAI divide is creative and illuminating. The structure works well, moving from the historical experiment through to contemporary AI development. The Hassabis interview quotes are particularly effective, especially his admission that they were “somewhat surprisingly” caught off guard by public enthusiasm for ChatGPT despite its hallucinations. The visual elements strongly support the argument - the side-by-side comparison of Hassabis and Altman as Wire Mother/Cloth Mother avatars drives the point home effectively.</p>
+<p><strong>Weaknesses:</strong></p>
+<p>The ending feels somewhat rushed - you move quickly from “we’re at risk of underestimating AI” to “we might be infantilized forever” without fully developing the implications. The conclusion’s connection to the title “WiredClothMother” works well as a conceptual synthesis, though you could explore further what it means to interact with an AI that provides both function and form simultaneously.</p>
+<p>The statistical estimate of “more than one billion people” exposed to LLMs by mid-2024 is well-footnoted with methodology and sources, which strengthens the claim. However, the post would benefit from more concrete examples or benchmarks demonstrating the exponential capability improvements you reference. What specific tasks that GPT-3.5 failed at can GPT-4 or Claude 3.5 now handle reliably?</p>
+<p><strong>Questions:</strong></p>
+<p>Is the somewhat playful, irreverent tone in the opening (“decided to psychologically torture baby monkeys <em>for science</em>”) consistent with the more serious implications at the end about permanent infantilization? The contrast works in some ways but might jar for some readers. Also, you position DeepMind as Wire Mother (function without form) but then note they had LLMs internally - they chose not to release them publicly. Does this complicate the metaphor, or does it actually strengthen it by showing their focus on scientific utility over public engagement?</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Conservative estimate: By mid-2024, 1-2 billion people worldwide had been exposed to some form of LLM technology. ChatGPT alone had approximately 200-300 million weekly active users by mid-2024 and reached 2.8 billion monthly visits by April 2024 (<a href="https://explodingtopics.com/blog/chatgpt-users">Exploding Topics, 2025</a>). Adding other major LLM providers (Google’s Gemini integrated into Google services, Microsoft Copilot integrated into Bing and Office, Claude, Meta’s Llama-based products, and Chinese LLMs from Baidu and Alibaba) could easily double or triple the unique user count. Many users tried LLMs once or occasionally, expanding the “exposure” beyond active users. Additional data: ChatGPT reached 100 million monthly users by January 2023 (<a href="https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-01/">Reuters, 2023</a>), demonstrating rapid widespread adoption across demographics and geographies.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Note from Claude: Key technological breakthroughs improving LLM reasoning and reducing hallucinations include: <strong>Reinforcement Learning from Human Feedback (RLHF)</strong> - training models to align outputs with human preferences and factual accuracy (Ouyang et al., 2022, “Training language models to follow instructions with human feedback”); <strong>Retrieval-Augmented Generation (RAG)</strong> - allowing models to access external knowledge bases and cite sources rather than relying solely on training data (Lewis et al., 2020, “Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks”); <strong>Chain-of-Thought (CoT) prompting</strong> - encouraging models to show their reasoning steps, reducing logical errors (Wei et al., 2022, “Chain-of-Thought Prompting Elicits Reasoning in Large Language Models”); <strong>Constitutional AI</strong> - training models to critique and revise their own outputs according to principles (Bai et al., 2022, “Constitutional AI: Harmlessness from AI Feedback”); <strong>Tool use and function calling</strong> - enabling models to use calculators, search engines, and APIs for factual queries rather than generating from memory; <strong>Mixture of Experts (MoE) architectures</strong> - allowing specialized sub-models to handle different types of queries more accurately; and <strong>extended context windows</strong> (from 4K to 200K+ tokens) - enabling models to maintain coherence and reference source material over longer conversations.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
