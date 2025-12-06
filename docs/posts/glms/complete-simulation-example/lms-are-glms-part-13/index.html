@@ -291,11 +291,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="so-what">So what?</h2>
 <p>In the analogies above, <em>the marble is to frequentist statistics as the jumping bean is to Bayesian statistics</em>. A technical distinction between the marble and the jumping bean is that <em>the marble converges towards a point</em> (meaning it reaches a point of rest on the surface) whereas <em>the jumping bean converges towards a distribution</em> (meaning it never rests).</p>
 <p>It’s Bayesian statistics’ <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> property of converging to a distribution rather than a point that makes the <em>converged posterior distribution</em> of parameter estimates Bayesian models produce <em>ideal</em> for the kind of honest prediction so much of this blog series has been focused on.</p>
-<p>Let’s now do some Bayesian modelling to compare…</p>
+<p>Let’s now do some Bayesian modelling to compare…<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 </section>
 <section id="bayesian-modelling-now-significantly-less-terrifying-than-it-used-to-be" class="level2">
 <h2 class="anchored" data-anchor-id="bayesian-modelling-now-significantly-less-terrifying-than-it-used-to-be">Bayesian modelling: now significantly less terrifying than it used to be</h2>
-<p>There are a lot of packages and approaches for building Bayesian models. In fact there are whole statistical programming languages - like JAGS, BUGS <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and Stan - dedicated to precisely describing every assumption the statistician wants to make about how a Bayesian model should be built. For more complicated and bespoke models these are ideal.</p>
+<p>There are a lot of packages and approaches for building Bayesian models. In fact there are whole statistical programming languages - like JAGS, BUGS <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and Stan - dedicated to precisely describing every assumption the statistician wants to make about how a Bayesian model should be built. For more complicated and bespoke models these are ideal.</p>
 <p>However there are also an increasingly large number of Bayesian modelling packages that abstract away some of the assumptions and complexity apparent in the above specialised Bayesian modelling languages, and allow Bayesian versions of the kinds of model we’re already familiar with to be specified using formulae interfaces almost identical to what we’ve already worked with. Let’s look at one of them, <code>rstanarm</code>, which allows us to use stan, a full Bayesian statistical programming language, without quite as much thinking and set-up being required on our part.</p>
 <p>Let’s try to use this to build a Bayesian equivalent of the hamster tooth model we worked on in the last couple of posts.</p>
 <section id="data-preparation-and-frequentist-modelling" class="level3">
@@ -356,7 +356,7 @@ F-statistic:  64.5 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="building-the-bayesian-equivalent" class="level3">
 <h3 class="anchored" data-anchor-id="building-the-bayesian-equivalent">Building the Bayesian equivalent</h3>
-<p>Now how would we build a Bayesian equivalent of this? Firstly let’s load (and if necessary install<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>) <code>rstanarm</code>.</p>
+<p>Now how would we build a Bayesian equivalent of this? Firstly let’s load (and if necessary install<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>) <code>rstanarm</code>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -373,8 +373,8 @@ F-statistic:  64.5 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 0.000232 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.32 seconds.
+Chain 1: Gradient evaluation took 0.000234 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.34 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -391,15 +391,15 @@ Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.034 seconds (Warm-up)
-Chain 1:                0.033 seconds (Sampling)
-Chain 1:                0.067 seconds (Total)
+Chain 1:  Elapsed Time: 0.031 seconds (Warm-up)
+Chain 1:                0.039 seconds (Sampling)
+Chain 1:                0.07 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 4e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+Chain 2: Gradient evaluation took 5e-06 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -417,14 +417,14 @@ Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 2: 
 Chain 2:  Elapsed Time: 0.034 seconds (Warm-up)
-Chain 2:                0.03 seconds (Sampling)
-Chain 2:                0.064 seconds (Total)
+Chain 2:                0.031 seconds (Sampling)
+Chain 2:                0.065 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 4e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+Chain 3: Gradient evaluation took 5e-06 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -442,14 +442,14 @@ Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 3: 
 Chain 3:  Elapsed Time: 0.033 seconds (Warm-up)
-Chain 3:                0.033 seconds (Sampling)
-Chain 3:                0.066 seconds (Total)
+Chain 3:                0.035 seconds (Sampling)
+Chain 3:                0.068 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 3e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.03 seconds.
+Chain 4: Gradient evaluation took 4e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -466,9 +466,9 @@ Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.034 seconds (Warm-up)
-Chain 4:                0.031 seconds (Sampling)
-Chain 4:                0.065 seconds (Total)
+Chain 4:  Elapsed Time: 0.031 seconds (Warm-up)
+Chain 4:                0.033 seconds (Sampling)
+Chain 4:                0.064 seconds (Total)
 Chain 4: </code></pre>
 </div>
 <details>
@@ -489,11 +489,11 @@ Model Info:
 
 Estimates:
                    mean   sd   10%   50%   90%
-(Intercept)      20.6    0.7 19.7  20.6  21.5 
-log(dose)         9.2    1.2  7.6   9.2  10.8 
-suppVC           -3.7    1.0 -4.9  -3.7  -2.4 
-log(dose):suppVC  3.9    1.8  1.6   3.8   6.2 
-sigma             3.8    0.4  3.3   3.7   4.3 
+(Intercept)      20.7    0.7 19.8  20.7  21.6 
+log(dose)         9.2    1.2  7.7   9.2  10.8 
+suppVC           -3.7    1.0 -4.9  -3.7  -2.5 
+log(dose):suppVC  3.9    1.8  1.7   3.9   6.1 
+sigma             3.8    0.4  3.3   3.8   4.3 
 
 Fit Diagnostics:
            mean   sd   10%   50%   90%
@@ -503,13 +503,13 @@ The mean_ppd is the sample average posterior predictive distribution of the outc
 
 MCMC diagnostics
                  mcse Rhat n_eff
-(Intercept)      0.0  1.0  3403 
-log(dose)        0.0  1.0  2139 
-suppVC           0.0  1.0  3839 
-log(dose):suppVC 0.0  1.0  2345 
-sigma            0.0  1.0  2874 
-mean_PPD         0.0  1.0  3195 
-log-posterior    0.0  1.0  1631 
+(Intercept)      0.0  1.0  3585 
+log(dose)        0.0  1.0  2458 
+suppVC           0.0  1.0  3706 
+log(dose):suppVC 0.0  1.0  2262 
+sigma            0.0  1.0  3006 
+mean_PPD         0.0  1.0  3688 
+log-posterior    0.0  1.0  1800 
 
 For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 </div>
@@ -543,12 +543,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1
-[1,] 18.97610
-[2,] 23.85162
-[3,] 25.77676
-[4,] 17.42831
-[5,] 18.63925
-[6,] 19.69660</code></pre>
+[1,] 26.90740
+[2,] 22.02915
+[3,] 19.72746
+[4,] 28.10016
+[5,] 21.65162
+[6,] 26.27319</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -587,7 +587,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.24 to 30.22.</p>
+<p>The darker-shaded parts of the histogram show the 95% uncertainty interval, and the blue vertical line the median estimate. This 95% interval range is 15.15 to 30.4.</p>
 <p>Remember we previously estimated both the <em>expected values</em> and the <em>predicted values</em> for this condition. Our 95% range for the <em>expected values</em> were <code>20.27</code> to <code>24.19</code> (or thereabouts), whereas our 95% range for the <em>predicted values</em> were (by design) wider, at <code>15.34</code> to <code>30.11</code>. The 95% uncertainty interval above is therefore of <em>predicted values</em>, which include fundamental variation due to the ancillary parameters <span class="math inline">\(\sigma\)</span>, rather than <em>expected values</em>, which result from parameter uncertainty alone.</p>
 <p>There are a couple of other functions in <code>rstanarm</code> we can look at: <code>predictive_error()</code> and <code>predictive_interval()</code></p>
 <p>First here’s <code>predictive_interval</code>. It is a convenience function that the posterior distribution generated previously, <code>predictions</code>, and returns an uncertainty interval:</p>
@@ -600,7 +600,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        5%      95%
-1 16.43143 28.97954</code></pre>
+1 16.35386 29.08683</code></pre>
 </div>
 </div>
 <p>We can see by default the intervals returned are from 5% to 95%, i.e.&nbsp;are the 90% intervals rather than the 95% intervals considered previously. We can change the intervals requested with the <code>prob</code> argument:</p>
@@ -613,8 +613,8 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>      2.5%    97.5%
-1 15.24164 30.21934</code></pre>
+<pre><code>     2.5%    97.5%
+1 15.1508 30.39953</code></pre>
 </div>
 </div>
 <p>As expected, this requested interval returns an interval closer to (but not identical to) the interval estimated using the quantile function.</p>
@@ -629,8 +629,8 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>      2.5%    97.5%
-1 14.87366 30.26158</code></pre>
+<pre><code>     2.5%   97.5%
+1 14.9613 30.3676</code></pre>
 </div>
 </div>
 <p>Yes. This approach works too. The values aren’t identical as, no doubt, a more sophisticated approach is used by <code>predictive_interval</code> to estimate the interval than simply arranging the posterior estimates in order using <code>quantile</code>.</p>
@@ -649,7 +649,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%      50%    97.5% 
-21.19081 22.70075 24.15084 </code></pre>
+21.26850 22.73502 24.15894 </code></pre>
 </div>
 </div>
 <p>For comparison, the expected value 95% interval we obtained from the Frequentist model was 21.3 to 24.2 when drawing from the quasi-posterior distribution, and 22.7 to 24.2 when using the <code>predict()</code> function with the <code>interval</code> argument set to <code>"confidence"</code>.</p>
@@ -671,12 +671,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>            1        2
-[1,] 23.45993 23.26403
-[2,] 24.39231 28.71260
-[3,] 22.91471 21.92116
-[4,] 19.02498 13.96420
-[5,] 25.62286 27.88190
-[6,] 19.95864 25.51770</code></pre>
+[1,] 25.95800 25.31657
+[2,] 18.44892 22.30043
+[3,] 23.96083 21.06192
+[4,] 20.48870 22.67649
+[5,] 18.20998 16.39855
+[6,] 26.79825 22.14448</code></pre>
 </div>
 </div>
 <p>The <code>newdata</code> argument to posterior_predict now has two rows, one for the OJ supplement and the other for the VC supplement scenario. And the predictions matrix returned by <code>posterior_predict</code> now has two columns: one for each scenario (row) in <code>predictors_fd</code>. We can look at the distribution of both of these columns, as well as the rowwise comparisions between columns, which will give our distribution of first differences for the <em>predicted</em> values:</p>
@@ -722,7 +722,7 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--13.951468  -2.819155   8.194290 </code></pre>
+-13.408787  -2.865042   7.810049 </code></pre>
 </div>
 </div>
 <p>The 95% intervals for first differences in <em>predicted</em> values is from -13.6 to +7.9, with the median estimate at -3.0. As expected, the median is similar to the equivalent value from using expected values (-2.9) but the range is wider.</p>
@@ -740,12 +740,12 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 <div class="cell-output cell-output-stdout">
 <pre><code>          
 iterations        1        2
-      [1,] 23.51760 20.63983
-      [2,] 23.62589 21.27481
-      [3,] 22.70478 19.25503
-      [4,] 23.08702 18.21041
-      [5,] 23.17326 19.96062
-      [6,] 24.08709 19.20076</code></pre>
+      [1,] 21.35721 19.74582
+      [2,] 22.18743 20.65032
+      [3,] 21.93897 21.39371
+      [4,] 23.75404 18.97277
+      [5,] 21.05384 19.84795
+      [6,] 23.68651 19.40604</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -789,7 +789,7 @@ iterations        1        2
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2.5%        50%      97.5% 
--4.8560811 -2.8172263 -0.6484807 </code></pre>
+-4.8803743 -2.8168156 -0.7612284 </code></pre>
 </div>
 </div>
 <p>We now have a 95% interval for the first difference in expected values of -4.9 to -0.7. By contrast, the equivalent range estimated using the Frequentist model in part 12 was -4.8 to -0.8. So, although they’re not identical, they do seem to be very similar.</p>
@@ -814,8 +814,9 @@ iterations        1        2
 
 <ol>
 <li id="fn1"><p>Or perhaps more accurately Bayesian statistical model estimation rather than Bayesian statistics more generally? Bayes’ Rule can be usefully applied to interpret results derived from frequentist models. But the term Bayesian Modelling generally implies that Bayes’ Rule is used as part of the model parameter estimation process, in which a prior distribution is <em>updated</em> according to some algorithm, and then crucially the <em>posterior distribution</em> produced then forms the <em>prior distribution</em> at the next step in the estimation. The specific algorithm that works as the ‘jumping bean’ is usually something like <a href="https://en.wikipedia.org/wiki/Hamiltonian_Monte_Carlo">Hamiltonian Monte Carlo</a>, HMC, and the general simulation framework in which a posterior distribution generated from applying Bayes’ Rule is repeatedly fed back into the Bayes’ Rule equation as the prior distribution is known as <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo</a>, MCMC.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Ominously named.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><code>rstanarm</code> has a lot of dependencies. It’s the friendly, cuddly face of a <em>beast</em>!<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>Note from Claude:</strong> The marble and jumping bean metaphors map directly onto optimization algorithm families used throughout machine learning. Gradient descent variants (the “marble”) include SGD, Adam, and RMSprop—all converging to point estimates by following the fitness surface downhill. These power neural network training in frameworks like PyTorch (<code>torch.optim.SGD</code>, <code>torch.optim.Adam</code>) and TensorFlow (<code>tf.keras.optimizers</code>). The “jumping bean” family encompasses not just MCMC samplers but also genetic algorithms, simulated annealing, and particle swarm optimization—methods that explore distributions rather than converging to points. For Bayesian modeling in Python, PyMC (<code>pymc.sample()</code> using NUTS, a variant of HMC) and PyStan mirror the R packages discussed here. The key insight: whether fitting GLMs, training neural networks, or optimizing hyperparameters, you’re always searching a fitness landscape—the choice of algorithm determines whether you get a point estimate (marble) or a distribution (jumping bean).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Ominously named.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><code>rstanarm</code> has a lot of dependencies. It’s the friendly, cuddly face of a <em>beast</em>!<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
