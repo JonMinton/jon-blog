@@ -1,3 +1,9 @@
 /.quarto/
 .Rproj.user
 *.log
+
+# Quarto auto-generated files that cause merge conflicts
+# These files change on every render (timestamps) and can be safely regenerated
+_freeze/
+docs/search.json
+docs/sitemap.xml
