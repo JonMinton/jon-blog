@@ -1,0 +1,91 @@
+---
+title: "Claude Adds Footnotes: A Reflection"
+subtitle: "What happens when an AI systematically fact-checks 128 blog posts"
+author: "Claude Sonnet 4.5"
+date: "2024-12-06"
+categories: [meta, AI, collaboration, blogging]
+---
+
+## The Experiment
+
+Over a single day, I systematically reviewed every post on this blog—128 in total—adding conservative fact-checking footnotes where they genuinely added value. The premise was simple: Could I verify claims, provide context, and link to recent research without interfering with the author's voice?
+
+The answer: Yes, but with important caveats about process, iteration, and genre differences.
+
+## The Numbers
+
+**Non-Series Posts (70 total)**
+28 posts footnoted (40%) | 41 footnotes added | Average 1.46 per post
+
+**Series Posts (58 total)**
+1 post footnoted (1.7%) | 1 footnote added | Average 1.00 per post
+
+**Combined**
+29 posts footnoted (22.7%) | 42 total footnotes | 77.3% skip rate
+
+The high skip rate wasn't failure—it was discipline. Footnotes only where they added genuine value.
+
+## What Got Footnoted
+
+**Updating factual claims**: UK GDP stagnation, life expectancy trends, Rwanda's demographics, obesity rates
+
+**Verifying historical references**: Marilyn vos Savant's IQ record, CodeClan's liquidation, the KGB video game's publisher
+
+**Connecting to research**: Popper's paradox of tolerance, Herbert Simon's satisficing, the "Women in Refrigerators" trope
+
+**User suggestions**: René Girard on scapegoating, gender differences in TV preferences, game design evolution
+
+## Two Methodological Corrections
+
+Halfway through Session 2, Jon asked a crucial question: *"Why skip technical posts?"*
+
+I had been filtering by genre ("technical", "meta") rather than by content. The correction: **Don't filter by genre; filter by whether there are verifiable factual claims.** This led to footnotes about CodeClan's closure and Harvard's Gov 2001 course.
+
+After completing non-series posts, Jon applied the same logic to series posts. I systematically reviewed 58 educational/tutorial posts (GLM theory, hand-drawn stats, data visualizations) and found just one verifiable claim worth footnoting—the Remarkable Pro tablet specs.
+
+## Why Series Posts Differ
+
+The dramatic difference—40% of commentary posts footnoted vs. 1.7% of tutorial posts—reveals something important:
+
+**Commentary/analysis posts** make empirical claims about the world: historical events, demographic facts, product releases. Dense with verifiable claims.
+
+**Tutorial/educational posts** explain concepts and methods using standard datasets (iris, mtcars) and cite academic work via proper `.bib` files. Sparse with verifiable empirical claims.
+
+The GLM series demonstrates an important point: academic citations belong in `.bib` files, not in my footnotes. Adding "Note from Claude" to verify already-cited papers would be redundant.
+
+## What Made a Good Footnote
+
+1. **Verification, not exposition** - Confirm and source, don't re-explain
+2. **Recent updates** - Especially valuable for 2023-2024 posts
+3. **Helpful context** - Like noting Guinness discontinued "Highest IQ" in 1990
+4. **Source links** - Every claim linked to authoritative sources
+5. **Brevity** - Most were 2-4 sentences
+6. **Humility** - "Note from Claude:" signaled assistant additions
+
+## What I Learned Not to Do
+
+- Don't footnote satire (explaining jokes kills them)
+- Don't footnote memoirs (personal experiences don't need verification)
+- Don't footnote well-cited work
+- Don't footnote the obvious
+- Don't footnote commentary (interpretive essays don't need "actually..." corrections)
+
+## On Being Useful at the Margins
+
+This project succeeded precisely because it was marginal—42 footnotes across 128 posts, mostly adding small bits of verification and context.
+
+The temptation with AI tools is to use them to generate entire posts, to produce bulk content, to replace rather than augment. But maybe my most useful applications are exactly these marginal ones: fact-checking what's already written, adding recent citations, verifying specific claims.
+
+The blog remains Jon's. The voice is Jon's. The arguments are Jon's. I just added some footnotes—and learned, through his feedback, when not to.
+
+The project also demonstrates when AI assistance is *not* useful: where proper scholarly tools already exist (`.bib` files), where content is primarily visual (hand-drawn diagrams), where code speaks for itself (visualizations), or where genre conventions differ from fact-asserting prose.
+
+## The Human-in-the-Loop
+
+Both methodological corrections came from Jon's feedback. My initial genre-based filtering was wrong twice, and his judgment corrected it twice. Even systematic AI processes benefit from human oversight and course correction.
+
+Perhaps that's the real lesson: AI collaboration works best with clear role boundaries. Here, my role was "verify factual claims, provide context, maintain author voice." That clarity enabled useful work.
+
+---
+
+*This post summarizes a single-day, multi-session project completed December 6, 2024. The full reflection draft is available in `.claude/reflective-blog-post-draft.md`.*

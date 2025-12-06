@@ -96,7 +96,9 @@ gdp_per_cap %>%
 long_term_gdp_trend
 ```
 
-We can see here just how large the gap between observed GDP per capita, and that which would have been expected if the long-term trend which existed between 1950 to 2007 had continued. By 2022, the last year in the series, the observed GDP per capita was under £35,000, whereas the projected rate for the same year, if the growth fundamentals that had held for over half a century previous had continued, would have been over £45,000. A gap between expectation and reality of over £10,000, or around 30% of current values. 
+We can see here just how large the gap between observed GDP per capita, and that which would have been expected if the long-term trend which existed between 1950 to 2007 had continued. By 2022, the last year in the series, the observed GDP per capita was under £35,000, whereas the projected rate for the same year, if the growth fundamentals that had held for over half a century previous had continued, would have been over £45,000. A gap between expectation and reality of over £10,000, or around 30% of current values. [^gdp-stagnation]
+
+[^gdp-stagnation]: Note from Claude: The Institute for Fiscal Studies confirms this persistent GDP shortfall, reporting that as of 2024, UK GDP per capita is nearly £11,000 lower than it would have been had pre-crisis trends continued. This represents growth of only 0.7% per year from 2007 to 2024, compared to 2.5% during 1990-2007. The IFS notes that productivity per hour grew by just 0.3% annually between 2008-2018 versus a historical trend of 2% per year, and that average wages adjusted for inflation in 2024 were roughly the same as in 2008 - representing perhaps the slowest earnings growth in over 200 years. See [Why isn't Britain getting richer anymore? - IFS](https://ifs.org.uk/articles/why-isnt-britain-getting-richer-anymore-0) and [A decade and a half of historically poor growth - IFS](https://ifs.org.uk/news/decade-and-half-historically-poor-growth-has-taken-its-toll). 
 
 Another way of looking at this same data is in terms of percentage change in GDP per capita from the previous year. 
 
@@ -194,7 +196,9 @@ hmd_e0 |>
 
 Either way, but perhaps even more clearly with the percentage graph, it is clear there has been a substantive decline in the fundamentals of longevity growth in the UK in recent years, much as there has been in the fundamentals of economic growth. 
 
-Within at a couple of papers, I investigated whether there is any clear evidence of a **breakpoint** in the longevity trends, much as there is a clear 2008 breakpoint in the economic growth trends. There does appear to be, but with 2012, rather than 2008, as the most likely breakpoint year. Splitting the percent longevity growth trends into the pre 2012 and 2012+ periods gives the following average longevity growth trends: 
+Within at a couple of papers, I investigated whether there is any clear evidence of a **breakpoint** in the longevity trends, much as there is a clear 2008 breakpoint in the economic growth trends. There does appear to be, but with 2012, rather than 2008, as the most likely breakpoint year. [^life-exp-stalling] Splitting the percent longevity growth trends into the pre 2012 and 2012+ periods gives the following average longevity growth trends:
+
+[^life-exp-stalling]: Note from Claude: Extensive research supports a 2012 breakpoint in UK life expectancy trends. Healthy life expectancy increased markedly between 1995 and 2009, then decreased by approximately 2 years between 2011 and 2019. The impact was particularly severe in deprived areas, where mortality rates actually increased. Research estimated approximately 335,000 excess deaths occurred between 2012-2019 compared to expectations based on 1981-2011 trends. Multiple studies link this stalling to austerity measures: the Glasgow Centre for Population Health concluded that UK Government austerity measures - cuts to public spending and social security - were the principal driver, with disproportionate effects on the poorest and most vulnerable. See [Trends in healthy life expectancy in the age of austerity - PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC9279837/) and [How the UK's austerity policies caused life expectancy to fall - The Conversation](https://theconversation.com/how-the-uks-austerity-policies-caused-life-expectancy-to-fall-244558). 
 
 
 ```{r}

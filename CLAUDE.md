@@ -67,8 +67,31 @@ categories: [category1, category2, tag3]
 - Common pattern: Link to related posts in the same series or topic area
 
 **Markdown formatting:**
+
+**CRITICAL - List formatting:** Bullet point lists in `.qmd` files MUST have blank lines before and after the entire list block, or they will not render properly. This is a common source of rendering errors.
+
+Correct format:
+```markdown
+Here is some text before the list.
+
+- Item one
+- Item two
+- Item three
+
+Here is text after the list.
+```
+
+Incorrect format (will break rendering):
+```markdown
+Here is some text before the list.
+- Item one
+- Item two
+- Item three
+Here is text after the list.
+```
+
+Other formatting rules:
 - Paragraph breaks require blank lines between paragraphs (markdown standard)
-- Lists need blank lines before and after the list block
 - Use `**bold**` for emphasis in bullet points when needed
 - Links: `[Link text](url)` for external, `[Link text](../path/index.qmd)` for internal
 

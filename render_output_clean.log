@@ -1,37 +1,0 @@
-[1m[34mpre-render.R[39m[22m
-Total word count: 199461 
-Word count updated in _quarto.yml
-Captured warnings:
-WARNING: package ‘stringr’ was built under R version 4.1.3
-WARNING: package ‘yaml’ was built under R version 4.1.3
-WARNING: incomplete final line found on './posts/analytical-maxim-gun/index.qmd'
-WARNING: incomplete final line found on './posts/handdrawn-stats/claude-stat-concept-guides/index.qmd'
-WARNING: incomplete final line found on './posts/three-qol-updates/index.qmd'
-WARNING: incomplete final line found on './posts/unpop/remembering-kgb-social-poison-simulator/index.qmd'
-WARNING: incomplete final line found on './posts/unpop/the-man-who-solved-intelligence/index.qmd'
-WARNING: incomplete final line found on './posts/unpop/was-this-for-everyone/index.qmd'
-
-[1m[34m[  1/138] hand-drawn-statistics.qmd[39m[22m
-[1m[34m[  2/138] tardy-tuesday.qmd[39m[22m
-[1m[34m[  3/138] posts/talk-at-edinbr/index.qmd[39m[22m
-[1m[34m[  4/138] posts/voter-types/index.qmd[39m[22m
-[1m[34m[  5/138] posts/edinbr-pair-programming/index.qmd[39m[22m
-[31m
-
-processing file: index.qmd
-[39m  |                                                             |                                                     |   0%  |                                                             |...                                                  |   5%                   |                                                             |......                                               |  11% (setup)           |                                                             |........                                             |  16%                   |                                                             |...........                                          |  21% (load-tidyverse)[31mWarning: program compiled against libxml 210 using older 209
-[39m  |                                                             |..............                                       |  26%                   |                                                             |.................                                    |  32% (task1)           |                                                             |....................                                 |  37%                   |                                                             |......................                               |  42% (task2)           |                                                             |.........................                            |  47%                   |                                                             |............................                         |  53% (task3)         [31mQuitting from lines 110-125 (index.qmd) 
-[39m[31mError in `mutate()`:
-ℹ In argument: `mnth = month(date, label = TRUE)`.
-Caused by error in `month()`:
-! could not find function "month"
-Backtrace:
-  1. dplyr::ungroup(...)
-  5. dplyr:::mutate.data.frame(dta, mnth = month(date, label = TRUE), yr = year(date))
-  6. dplyr:::mutate_cols(.data, dplyr_quosures(...), by)
-  8. dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
-  9. mask$eval_all_mutate(quo)
- 10. dplyr (local) eval()
-[39m                                                                                                           
-[31mExecution halted
-[39m
