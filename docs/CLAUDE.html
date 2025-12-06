@@ -192,6 +192,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="claude.md" class="level1">
 <h1>CLAUDE.md</h1>
 <p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<section id="safety-branch-check" class="level2">
+<h2 class="anchored" data-anchor-id="safety-branch-check">SAFETY: Branch Check</h2>
+<p><strong>CRITICAL SAFETY REQUIREMENT:</strong> Before making any changes to files, commits, or running commands that modify the repository:</p>
+<ol type="1">
+<li>Check the current git branch with <code>git branch --show-current</code></li>
+<li><strong>NEVER work directly on the <code>main</code> branch</strong></li>
+<li>If on <code>main</code>, STOP and ask the user to switch to a feature branch first</li>
+<li>Only proceed with file modifications when on a branch other than <code>main</code></li>
+</ol>
+<p>This is a safety aspect of the workflow to prevent accidental changes to the production branch.</p>
+</section>
 <section id="project-overview" class="level2">
 <h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
 <p>This is Jon Minton’s personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.</p>
