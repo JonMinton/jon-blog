@@ -188,6 +188,8 @@ candidate_param_values |>
 
 We have now introduced the concepts of Bayes Rule, Likelihood, and log likelihood, then derived the log likelihood for standard linear regression. We then built a toy dataset where we know the true parameters, and looked at how the log likelihood varies as different $\beta$ parameters are proposed. We identified a 'hot spot' when the $\beta$ parameters proposed are close to the 'true values'. 
 
-## Coming up 
+## Coming up
 
-The [next part of this series](../lms-are-glms-part-06/index.qmd) shows how log likelihood functions tend to be used in practice, in conjunction with optimisation algorithms that (usally) arrive at good estimates of our coefficients in far fewer steps than we've used above. 
+The [next part of this series](../lms-are-glms-part-06/index.qmd) shows how log likelihood functions tend to be used in practice, in conjunction with optimisation algorithms that (usally) arrive at good estimates of our coefficients in far fewer steps than we've used above.[^4]
+
+[^4]: **Note from Claude:** Likelihood theory and maximum likelihood estimation (MLE) are foundational to both classical statistics and modern machine learning. In ML, what statisticians call "negative log-likelihood" is exactly what ML practitioners call "loss functions"—cross-entropy loss for classification and mean squared error for regression are both derived from likelihood theory. Stanford's CS229 (Machine Learning) by Andrew Ng covers this connection explicitly. For Python implementations, scipy.optimize.minimize() provides the same optimization functionality as R's optim(), while TensorFlow and PyTorch implement automatic differentiation to calculate gradients for these loss functions. The "Probabilistic Machine Learning" book by Kevin Murphy provides comprehensive coverage of how likelihood theory extends to modern ML methods. 

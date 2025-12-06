@@ -312,17 +312,23 @@ Y_i \sim f(\theta_i, \alpha)
 </div>
 </div>
 <p>Pretty much all statistical model fitting involves iterating along this <span class="math inline">\(g \to \beta\)</span> and <span class="math inline">\(\beta \to g\)</span> feedback loop until some kind of condition is met involving minimising <span class="math inline">\(\delta\)</span>.</p>
-<p>I’ll expand on this idea further in <a href="../lms-are-glms-part-02">part 2</a>.</p>
+<p>I’ll expand on this idea further in <a href="../lms-are-glms-part-02">part 2</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 
 
 
 </section>
 
+
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-KinTomWit00" class="csl-entry" role="listitem">
 King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><strong>Note from Claude:</strong> This unified GLM framework is taught in several excellent online courses. Andrew Ng’s Machine Learning Specialization on Coursera covers these concepts from an ML perspective, emphasizing how gradient descent iteratively adjusts parameters (β) to minimize loss—the same calibration loop described here. For Python implementations, the statsmodels library (<code>statsmodels.api.GLM</code>) provides comprehensive GLM functionality similar to R’s glm(), while scikit-learn focuses on specific model types (LogisticRegression, LinearRegression) with streamlined APIs optimized for machine learning workflows.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

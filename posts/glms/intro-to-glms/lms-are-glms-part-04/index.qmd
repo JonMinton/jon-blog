@@ -373,7 +373,9 @@ In the above the red line indicates the mean value of these marginal differences
 
 If forced to give a simple answer (to this overly simplistic question), we might plump for the mean for theoretical reasons, and say something like "The effect of a straight engine is to reduce the probability of a manual transmission by around an eighth". But I'm sure, having seen how much variation there is in these marginal effects, we can agree this 'around an eighth' answer, or any single number answer, is likely to be overly reductive. 
 
-Hopefully, however, it is more informative than 'statistically significant and negative', (the stargazing approach) or 'up to around 78%' (the divide-by-four approach). 
+Hopefully, however, it is more informative than 'statistically significant and negative', (the stargazing approach) or 'up to around 78%' (the divide-by-four approach).[^7]
+
+[^7]: **Note from Claude:** The marginal effects approach demonstrated here connects directly to modern machine learning interpretability methods. SHAP (SHapley Additive exPlanations) values and partial dependence plots serve similar purposes—quantifying feature importance beyond simple coefficients. In Python, the `marginaleffects` package (ported from R) provides these calculations, while scikit-learn's `PartialDependenceDisplay` and the SHAP library (`shap.Explainer`) offer ML-focused alternatives. Coursera's "Machine Learning Specialization" by Andrew Ng and "Interpretable Machine Learning" by Christoph Molnar (free online book) both cover how traditional statistical inference concepts like marginal effects extend to complex models. 
 
 
 ## Conclusion
