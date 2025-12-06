@@ -192,6 +192,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="claude.md" class="level1">
 <h1>CLAUDE.md</h1>
 <p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<section id="safety-branch-check" class="level2">
+<h2 class="anchored" data-anchor-id="safety-branch-check">SAFETY: Branch Check</h2>
+<p><strong>CRITICAL SAFETY REQUIREMENT:</strong> Before making any changes to files, commits, or running commands that modify the repository:</p>
+<ol type="1">
+<li>Check the current git branch with <code>git branch --show-current</code></li>
+<li><strong>NEVER work directly on the <code>main</code> branch</strong></li>
+<li>If on <code>main</code>, STOP and ask the user to switch to a feature branch first</li>
+<li>Only proceed with file modifications when on a branch other than <code>main</code></li>
+</ol>
+<p>This is a safety aspect of the workflow to prevent accidental changes to the production branch.</p>
+</section>
 <section id="project-overview" class="level2">
 <h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
 <p>This is Jon Minton’s personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.</p>
@@ -250,6 +261,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Other formatting rules: - Paragraph breaks require blank lines between paragraphs (markdown standard) - Use <code>**bold**</code> for emphasis in bullet points when needed - Links: <code>[Link text](url)</code> for external, <code>[Link text](../path/index.qmd)</code> for internal</p>
 <p><strong>Images and media:</strong> - Store in the same directory as the post’s <code>index.qmd</code> - Reference with relative paths: <code>![Alt text](filename.jpg)</code></p>
+<p><strong>Footnotes:</strong></p>
+<p>Quarto supports standard Markdown footnote syntax with two-part format: - Reference in text: <code>Some text here[^id]</code> - Definition elsewhere: <code>[^id]: Footnote content here</code></p>
+<p><strong>CRITICAL - Footnote ID Convention:</strong> - <strong>ALWAYS use descriptive IDs</strong> for Claude-generated footnotes - Format: <code>[^claude-shorttopic]</code> (e.g., <code>[^claude-ml]</code>, <code>[^claude-pvalues]</code>) - <strong>NEVER use sequential numbers</strong> ([^1], [^2]) for Claude footnotes - this creates collision risk with existing footnotes - User’s original footnotes may use numbers - descriptive IDs prevent conflicts</p>
+<p>Example correct usage:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>The GLM framework applies to many models.<span class="ot">[^claude-ml]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^claude-ml]: </span>**Note from Claude:** This concept is taught in Andrew Ng's ML course...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Footnotes can include bibliography citations using <code>@citationkey</code> format if the post has a <code>bibliography: references.bib</code> entry in the YAML frontmatter. See <code>.claude/footnote-rendering-fix.md</code> for full details on the footnote rendering fix and conventions.</p>
 </section>
 <section id="themes-and-styling" class="level2">
 <h2 class="anchored" data-anchor-id="themes-and-styling">Themes and Styling</h2>

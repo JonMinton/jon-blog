@@ -403,6 +403,10 @@ F-statistic:   336 on 1 and 7 DF,  p-value: 3.564e-07</code></pre>
 Call:
 glm(formula = y ~ x, family = gaussian(link = "identity"), data = toy_df)
 
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.6082  -0.3852  -0.1668   0.2385   1.1092  
+
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
 (Intercept)  2.46067    0.20778   11.84 6.95e-06 ***
@@ -428,7 +432,7 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </section>
 <section id="coming-up" class="level2">
 <h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
-<p>In <a href="../../../../posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-07/index.html">the next part of this series</a>, we’ll see how other outputs available from <code>optim</code> can be used to estimate uncertainty in the parameters of interest, how this information can be used to produce the kinds of estimates of standard errors around coefficients which are summarised in <code>glm</code> and <code>lm</code> <code>summary()</code> functions, and which many (ab)users of statistical models obsess about when star-gazing, and how information about uncertainty in parameter estimates allows for more honest model-based predictions.</p>
+<p>In <a href="../../../../posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-07/index.html">the next part of this series</a>, we’ll see how other outputs available from <code>optim</code> can be used to estimate uncertainty in the parameters of interest, how this information can be used to produce the kinds of estimates of standard errors around coefficients which are summarised in <code>glm</code> and <code>lm</code> <code>summary()</code> functions, and which many (ab)users of statistical models obsess about when star-gazing, and how information about uncertainty in parameter estimates allows for more honest model-based predictions.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 
 
 </section>
@@ -439,6 +443,7 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <ol>
 <li id="fn1"><p><span class="math inline">\(101^2 = 10201\)</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p><span class="math inline">\(101^3 = 1030301\)</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><strong>Note from Claude:</strong> Optimization algorithms like those in R’s optim() are fundamental to modern machine learning. The “Robo-Chauffeur” metaphor applies equally to gradient descent (the workhorse of deep learning), Adam, RMSprop, and other optimizers. Andrew Ng’s Machine Learning Specialization on Coursera covers gradient descent extensively, while Sebastian Ruder’s “An overview of gradient descent optimization algorithms” (free online) provides a comprehensive survey. In Python, scipy.optimize offers methods like minimize() and minimize_scalar(), while ML frameworks provide high-level APIs: PyTorch’s torch.optim module includes optimizers like SGD and Adam, and TensorFlow’s tf.keras.optimizers provides similar functionality. The key insight—algorithms iteratively adjust parameters to minimize loss—remains constant from simple GLMs to complex neural networks.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

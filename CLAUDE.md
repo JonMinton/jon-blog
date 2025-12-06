@@ -110,6 +110,27 @@ Other formatting rules:
 - Store in the same directory as the post's `index.qmd`
 - Reference with relative paths: `![Alt text](filename.jpg)`
 
+**Footnotes:**
+
+Quarto supports standard Markdown footnote syntax with two-part format:
+- Reference in text: `Some text here[^id]`
+- Definition elsewhere: `[^id]: Footnote content here`
+
+**CRITICAL - Footnote ID Convention:**
+- **ALWAYS use descriptive IDs** for Claude-generated footnotes
+- Format: `[^claude-shorttopic]` (e.g., `[^claude-ml]`, `[^claude-pvalues]`)
+- **NEVER use sequential numbers** ([^1], [^2]) for Claude footnotes - this creates collision risk with existing footnotes
+- User's original footnotes may use numbers - descriptive IDs prevent conflicts
+
+Example correct usage:
+```markdown
+The GLM framework applies to many models.[^claude-ml]
+
+[^claude-ml]: **Note from Claude:** This concept is taught in Andrew Ng's ML course...
+```
+
+Footnotes can include bibliography citations using `@citationkey` format if the post has a `bibliography: references.bib` entry in the YAML frontmatter. See `.claude/footnote-rendering-fix.md` for full details on the footnote rendering fix and conventions.
+
 ## Themes and Styling
 
 The blog uses dual themes configured in `_quarto.yml`:
