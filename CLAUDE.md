@@ -37,6 +37,20 @@ The `pre-render.R` script runs automatically before each render (configured in `
 - Updates the subtitle in `index.qmd` with the current word count
 - Captures warnings to `render_warnings.log`
 
+**Monitoring long-running renders:**
+When `quarto render` is run in the background, use these **safe** methods to check progress without interrupting the process:
+
+1. **Check process table (safest):**
+   ```bash
+   ps aux | grep -E "quarto|render" | grep -v grep
+   ```
+   This only reads system info and won't interrupt the process.
+
+2. **Check background task output:**
+   Use the `BashOutput` tool with the background task ID. This reads buffered output without sending signals to the process.
+
+**AVOID:** Calling the `BashOutput` tool excessively or asking about progress too frequently, as this can sometimes interrupt the render process. Check progress sparingly (e.g., every few minutes for long renders).
+
 ## Project Structure
 
 ```
