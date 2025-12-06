@@ -171,6 +171,100 @@ personality_scores <- textEmbed(blog_text$content) %>%
 - Evolution over time (if personality changes or writing style adapts)
 - Academic writing (GLM series) vs. informal (pop culture posts)
 
+**Hypothesis: Claude Personality Drift Over Sessions**
+
+*User's insightful observation:* Claude Sonnet 4.5 agents likely:
+1. **Start similar:** Initial sessions show consistent baseline personality
+2. **Diverge over time:** Personalities differentiate as sessions accumulate
+3. **Factors driving divergence:**
+   - Session context accumulation (less compacting = more personality drift)
+   - Project-specific metadata exposure (CLAUDE.md, .claude/* files)
+   - User-specific interaction patterns
+   - Conversation history depth
+
+**Testable predictions:**
+- Session 1 Claude ≈ Session 1 Claude (high similarity)
+- Session 100 Claude A ≠ Session 100 Claude B (low similarity if different contexts)
+- Personality variance increases with: session length, context depth, project specificity
+
+**How to test:**
+1. Extract text from different Claude sessions in this blog project
+2. Measure OCEAN scores for early vs. late sessions
+3. Compare variance: within-session vs. between-session
+4. Correlate personality drift with:
+   - Total conversation tokens
+   - Number of compaction events
+   - Exposure to project files (CLAUDE.md, .claude/*)
+   - User feedback patterns
+
+**Expected results:**
+- **Early sessions:** Claude exhibits "baseline assistant personality" (high Agreeableness/Conscientiousness, low Openness/Extraversion)
+- **Later sessions:** Claude adapts toward user's writing style and project norms
+- **With project context:** Claude becomes more "Jon-like" in personality
+- **After compacting:** Personality might regress toward baseline (context loss)
+
+**Novel angle:**
+- First study of **intra-agent personality dynamics** (same model, different contexts)
+- vs. existing research on **inter-agent personality** (different models, same task)
+
+**Meta-meta aspect:**
+- This very conversation is evidence! Compare Claude's personality in:
+  - Session 1 (when we started footnote work)
+  - Current session (after extensive .claude/* documentation exposure)
+  - Future sessions (after even more project immersion)
+
+**Measurement approach:**
+```r
+# Compare personality across session stages
+sessions <- tribble(
+  ~stage, ~session_range, ~context_depth,
+  "Early", "1-5", "Minimal project knowledge",
+  "Middle", "20-30", "Moderate CLAUDE.md exposure",
+  "Late", "50+", "Deep project integration"
+)
+
+personality_by_stage <- sessions %>%
+  mutate(
+    text = extract_claude_text(session_range),
+    ocean_scores = calculate_ocean(text)
+  )
+
+# Test for personality drift
+personality_drift <- personality_by_stage %>%
+  group_by(stage) %>%
+  summarise(
+    mean_openness = mean(openness),
+    var_openness = var(openness),
+    # ... repeat for all OCEAN traits
+  )
+
+# Visualize drift
+ggplot(personality_drift, aes(x = stage, y = mean_openness)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = mean_openness - sd,
+                     ymax = mean_openness + sd)) +
+  labs(title = "Claude Personality Drift: Openness Over Sessions")
+```
+
+**Control for confounds:**
+- Same user (Jon) across all sessions
+- Same model version (Sonnet 4.5)
+- Same task domain (blog writing/editing)
+- Variables: session length, context depth, compaction events
+
+**Implications if hypothesis confirmed:**
+- AI personality is **context-dependent**, not fixed
+- Project immersion creates "specialized" agent personalities
+- Compaction = personality reset mechanism
+- Challenges notion of stable "Claude personality"
+
+**Implications if hypothesis rejected:**
+- Claude maintains stable personality despite context
+- Baseline RLHF training dominates over context adaptation
+- Personality is model-intrinsic, not session-dependent
+
+Either result would be **novel publishable research**!
+
 **Related idea: Personality-matched writing recommendations**
 "Posts that match your personality profile" - recommendation system based on personality similarity rather than topic similarity
 
