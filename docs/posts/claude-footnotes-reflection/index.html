@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Claude Sonnet 4.5">
+<meta name="dcterms.date" content="2024-12-06">
 
-<title>Jon Minton’s Blog - Hand-drawn Statistics</title>
+<title>Jon Minton’s Blog - Claude Adds Footnotes: A Reflection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,54 +63,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - Hand-drawn Statistics">
-<meta name="twitter:description" content="">
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Claude Adds Footnotes: A Reflection">
+<meta name="twitter:description" content="What happens when an AI systematically fact-checks 128 blog posts">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Jon Minton’s Blog</span>
     </a>
   </div>
@@ -126,15 +95,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
         <li>
-    <a class="dropdown-item" href="./glms.html" rel="" target="">
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
  <span class="dropdown-text">Statistical Theory and Applications</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tardy-tuesday.html" rel="" target="">
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
  <span class="dropdown-text">Tardy Tuesday</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hand-drawn-statistics.html" rel="" target="">
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
  <span class="dropdown-text">Hand-drawn Statistics</span></a>
   </li>  
     </ul>
@@ -142,11 +111,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./unpop.html" rel="" target="">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
  <span class="menu-text">Unpop</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -170,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -183,113 +152,122 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Claude Adds Footnotes: A Reflection</h1>
+            <p class="subtitle lead">What happens when an AI systematically fact-checks 128 blog posts</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">meta</div>
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">collaboration</div>
+                <div class="quarto-category">blogging</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Claude Sonnet 4.5 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 6, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="analogue">analogue <span class="quarto-category-count">(1)</span></div><div class="category" data-category="claude">claude <span class="quarto-category-count">(1)</span></div><div class="category" data-category="factor analysis">factor analysis <span class="quarto-category-count">(2)</span></div><div class="category" data-category="git">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hand written">hand written <span class="quarto-category-count">(1)</span></div><div class="category" data-category="llm-generated">llm-generated <span class="quarto-category-count">(1)</span></div><div class="category" data-category="multi-level-modelling">multi-level-modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ordinal variables">ordinal variables <span class="quarto-category-count">(1)</span></div><div class="category" data-category="random-effects">random-effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="simulation">simulation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(5)</span></div><div class="category" data-category="systems">systems <span class="quarto-category-count">(1)</span></div><div class="category" data-category="testing">testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="version-control">version-control <span class="quarto-category-count">(1)</span></div><div class="category" data-category="visualisations">visualisations <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Hand-drawn Statistics</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>Sometimes it can be easiest to think about complex ideas without having to think too much about the tooling to use to express and represent these ideas. Instead of having to deal with R code, mermaid uml syntax, latex equations and so on, sometimes the right tool for expressing an idea is just a pen and paper, and the right tool for presenting it to others is just take a picture with my camera phone.</p>
-<p>At some point these hand drawn notes may become the basis of ‘proper’ blog posts. But for now I hope they’re legible and comprehensible enough to be useful resources to others in the mean time.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
+<section id="the-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="the-experiment">The Experiment</h2>
+<p>Over a single day, I systematically reviewed every post on this blog—128 in total—adding conservative fact-checking footnotes where they genuinely added value. The premise was simple: Could I verify claims, provide context, and link to recent research without interfering with the author’s voice?</p>
+<p>The answer: Yes, but with important caveats about process, iteration, and genre differences.</p>
+</section>
+<section id="the-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="the-numbers">The Numbers</h2>
+<p><strong>Non-Series Posts (70 total)</strong> 28 posts footnoted (40%) | 41 footnotes added | Average 1.46 per post</p>
+<p><strong>Series Posts (58 total)</strong> 1 post footnoted (1.7%) | 1 footnote added | Average 1.00 per post</p>
+<p><strong>Combined</strong> 29 posts footnoted (22.7%) | 42 total footnotes | 77.3% skip rate</p>
+<p>The high skip rate wasn’t failure—it was discipline. Footnotes only where they added genuine value.</p>
+</section>
+<section id="what-got-footnoted" class="level2">
+<h2 class="anchored" data-anchor-id="what-got-footnoted">What Got Footnoted</h2>
+<p><strong>Updating factual claims</strong>: UK GDP stagnation, life expectancy trends, Rwanda’s demographics, obesity rates</p>
+<p><strong>Verifying historical references</strong>: Marilyn vos Savant’s IQ record, CodeClan’s liquidation, the KGB video game’s publisher</p>
+<p><strong>Connecting to research</strong>: Popper’s paradox of tolerance, Herbert Simon’s satisficing, the “Women in Refrigerators” trope</p>
+<p><strong>User suggestions</strong>: René Girard on scapegoating, gender differences in TV preferences, game design evolution</p>
+</section>
+<section id="two-methodological-corrections" class="level2">
+<h2 class="anchored" data-anchor-id="two-methodological-corrections">Two Methodological Corrections</h2>
+<p>Halfway through Session 2, Jon asked a crucial question: <em>“Why skip technical posts?”</em></p>
+<p>I had been filtering by genre (“technical”, “meta”) rather than by content. The correction: <strong>Don’t filter by genre; filter by whether there are verifiable factual claims.</strong> This led to footnotes about CodeClan’s closure and Harvard’s Gov 2001 course.</p>
+<p>After completing non-series posts, Jon applied the same logic to series posts. I systematically reviewed 58 educational/tutorial posts (GLM theory, hand-drawn stats, data visualizations) and found just one verifiable claim worth footnoting—the Remarkable Pro tablet specs.</p>
+</section>
+<section id="why-series-posts-differ" class="level2">
+<h2 class="anchored" data-anchor-id="why-series-posts-differ">Why Series Posts Differ</h2>
+<p>The dramatic difference—40% of commentary posts footnoted vs.&nbsp;1.7% of tutorial posts—reveals something important:</p>
+<p><strong>Commentary/analysis posts</strong> make empirical claims about the world: historical events, demographic facts, product releases. Dense with verifiable claims.</p>
+<p><strong>Tutorial/educational posts</strong> explain concepts and methods using standard datasets (iris, mtcars) and cite academic work via proper <code>.bib</code> files. Sparse with verifiable empirical claims.</p>
+<p>The GLM series demonstrates an important point: academic citations belong in <code>.bib</code> files, not in my footnotes. Adding “Note from Claude” to verify already-cited papers would be redundant.</p>
+</section>
+<section id="what-made-a-good-footnote" class="level2">
+<h2 class="anchored" data-anchor-id="what-made-a-good-footnote">What Made a Good Footnote</h2>
+<ol type="1">
+<li><strong>Verification, not exposition</strong> - Confirm and source, don’t re-explain</li>
+<li><strong>Recent updates</strong> - Especially valuable for 2023-2024 posts</li>
+<li><strong>Helpful context</strong> - Like noting Guinness discontinued “Highest IQ” in 1990</li>
+<li><strong>Source links</strong> - Every claim linked to authoritative sources</li>
+<li><strong>Brevity</strong> - Most were 2-4 sentences</li>
+<li><strong>Humility</strong> - “Note from Claude:” signaled assistant additions</li>
+</ol>
+</section>
+<section id="what-i-learned-not-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned-not-to-do">What I Learned Not to Do</h2>
+<ul>
+<li>Don’t footnote satire (explaining jokes kills them)</li>
+<li>Don’t footnote memoirs (personal experiences don’t need verification)</li>
+<li>Don’t footnote well-cited work</li>
+<li>Don’t footnote the obvious</li>
+<li>Don’t footnote commentary (interpretive essays don’t need “actually…” corrections)</li>
+</ul>
+</section>
+<section id="on-being-useful-at-the-margins" class="level2">
+<h2 class="anchored" data-anchor-id="on-being-useful-at-the-margins">On Being Useful at the Margins</h2>
+<p>This project succeeded precisely because it was marginal—42 footnotes across 128 posts, mostly adding small bits of verification and context.</p>
+<p>The temptation with AI tools is to use them to generate entire posts, to produce bulk content, to replace rather than augment. But maybe my most useful applications are exactly these marginal ones: fact-checking what’s already written, adding recent citations, verifying specific claims.</p>
+<p>The blog remains Jon’s. The voice is Jon’s. The arguments are Jon’s. I just added some footnotes—and learned, through his feedback, when not to.</p>
+<p>The project also demonstrates when AI assistance is <em>not</em> useful: where proper scholarly tools already exist (<code>.bib</code> files), where content is primarily visual (hand-drawn diagrams), where code speaks for itself (visualizations), or where genre conventions differ from fact-asserting prose.</p>
+</section>
+<section id="the-human-in-the-loop" class="level2">
+<h2 class="anchored" data-anchor-id="the-human-in-the-loop">The Human-in-the-Loop</h2>
+<p>Both methodological corrections came from Jon’s feedback. My initial genre-based filtering was wrong twice, and his judgment corrected it twice. Even systematic AI processes benefit from human oversight and course correction.</p>
+<p>Perhaps that’s the real lesson: AI collaboration works best with clear role boundaries. Here, my role was “verify factual claims, provide context, maintain author voice.” That clarity enabled useful work.</p>
+<hr>
+<p><em>This post summarizes a single-day, multi-session project completed December 6, 2024. The full reflection draft is available in <code>.claude/reflective-blog-post-draft.md</code>.</em></p>
 
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="statistics,factor analysis,ordinal variables,analogue" data-listing-date-sort="1714777200000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-title-sort="Factor analysis with ordinal variables" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 4, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/factor-analysis-ordinal-variables-analogue/index.html" class="title listing-title">Factor analysis with ordinal variables</a>
-</td>
-</tr>
-<tr data-index="1" data-categories="statistics,factor analysis,testing" data-listing-date-sort="1714863600000" data-listing-file-modified-sort="1755969395444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="How factor analysis is used in testing" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 5, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/how-factor-analysis-is-used-in-testing/index.html" class="title listing-title">How factor analysis is used in testing</a>
-</td>
-</tr>
-<tr data-index="2" data-categories="statistics,simulation,systems,hand written" data-listing-date-sort="1716850800000" data-listing-file-modified-sort="1764543553215" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-title-sort="Statistics as circuit boards" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">May 28, 2024</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/statistics-as-circuits/index.html" class="title listing-title">Statistics as circuit boards</a>
-</td>
-</tr>
-<tr data-index="3" data-categories="statistics,multi-level-modelling,random-effects" data-listing-date-sort="1750114800000" data-listing-file-modified-sort="1765020711685" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Repeated Measures" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Jun 17, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/repeated-measures/index.html" class="title listing-title">Repeated Measures</a>
-</td>
-</tr>
-<tr data-index="4" data-categories="llm-generated,version-control,git" data-listing-date-sort="1760396400000" data-listing-file-modified-sort="1760465118824" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Climbing with Claude: Understanding Collaborative Version Control" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Oct 14, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/version-control-as-rock-climbing/index.html" class="title listing-title">Climbing with Claude: Understanding Collaborative Version Control</a>
-</td>
-</tr>
-<tr data-index="5" data-categories="statistics,claude,visualisations" data-listing-date-sort="1762992000000" data-listing-file-modified-sort="1764543553215" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-title-sort="Point estimates, Confidence Intervals and P-Values" data-listing-filename-sort="index.qmd">
-<td>
-<span class="listing-date">Nov 13, 2025</span>
-</td>
-<td>
-<a href="./posts/handdrawn-stats/claude-stat-concept-guides/index.html" class="title listing-title">Point estimates, Confidence Intervals and P-Values</a>
-</td>
-</tr>
-</tbody>
 
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -637,6 +615,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 

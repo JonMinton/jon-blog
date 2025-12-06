@@ -22,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -367,17 +386,23 @@ d_{5}^{fake} = \{d_{5,1} , d_{5,2}\}
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>In this post we’ve discussed the key ideas behind resampling methods, AKA <code>Hacker Stats</code>. These approaches are computationally intensive as compared with analytical solutions, which would have been a big barrier to their use until, perhaps, the mid 1980s. However <em>computationally intensive</em> these days might just mean it takes five seconds to perform many times, whereas the analytic solution takes five microseconds: still a large relative difference in computing time, but practically both kinds of approaches are similarly fast to perform.</p>
-<p>These days, whether you know an analytic approximation for performing the test or calculation of interest, or whether you don’t, the <code>Hacker Stats</code> approach is still worth trying out. Even at their slowest, the worst case scenario with <code>Hacker Stats</code> is your computer might whirr a bit more loudly than usual, and you’ll finally have a good excuse to get that much-deserved tea- or coffee-break!</p>
+<p>These days, whether you know an analytic approximation for performing the test or calculation of interest, or whether you don’t, the <code>Hacker Stats</code> approach is still worth trying out. Even at their slowest, the worst case scenario with <code>Hacker Stats</code> is your computer might whirr a bit more loudly than usual, and you’ll finally have a good excuse to get that much-deserved tea- or coffee-break!<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-downey2014think" class="csl-entry" role="listitem">
+Downey, Allen B. 2014. <em>Think Stats: Exploratory Data Analysis in Python</em>. 2nd ed. Sebastopol, CA: O’Reilly Media. <a href="https://greenteapress.com/thinkstats2/">https://greenteapress.com/thinkstats2/</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>Though it wasn’t written as the first post in the series, so a challenge for me is to figure out how to present these in something other than date order!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This isn’t a made-up example, but broadly the approach used by <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/forecasting-with-nonrepresentative-polls.pdf">Wang et al 2014</a> to produce pretty accurate estimates of a then-upcoming US election<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><strong>Note from Claude:</strong> <span class="citation" data-cites="downey2014think">Downey (<a href="#ref-downey2014think" role="doc-biblioref">2014</a>)</span> popularized the term “computational statistics” for these resampling methods, emphasizing their accessibility to programmers. Bootstrapping directly inspired bootstrap aggregating (bagging) in machine learning—the ensemble method used by random forests where each tree trains on a bootstrapped sample. Cross-validation, the standard ML technique for assessing model performance, is fundamentally a resampling method. In Python, scipy.stats provides permutation_test() and bootstrap() functions, while scikit-learn’s sklearn.utils.resample() and sklearn.model_selection modules implement resampling for both statistical inference and ML model validation. The connection is explicit: traditional statistical resampling methods evolved into core ML practices for handling uncertainty and preventing overfitting.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

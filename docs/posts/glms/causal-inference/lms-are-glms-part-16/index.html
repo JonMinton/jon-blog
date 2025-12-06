@@ -22,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -260,13 +279,21 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="coming-up" class="level2">
 <h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
-<p>The <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-17/index.html">next post</a> attempts to apply matching methods to a relatively complex dataset on an economic intervention, using the <code>MatchIt</code> package. The post largely follows an introductory example from the package, but at some points goes ‘off piste’. I hope it does so, however, in ways that are interesting, useful, and help bridge the gaps between the theoretical discussions in this and previous posts, with the practical challenges involved in applying such theory.</p>
+<p>The <a href="../../../../posts/glms/causal-inference/lms-are-glms-part-17/index.html">next post</a> attempts to apply matching methods to a relatively complex dataset on an economic intervention, using the <code>MatchIt</code> package. The post largely follows an introductory example from the package, but at some points goes ‘off piste’. I hope it does so, however, in ways that are interesting, useful, and help bridge the gaps between the theoretical discussions in this and previous posts, with the practical challenges involved in applying such theory.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-cunningham2021causal" class="csl-entry" role="listitem">
+Cunningham, Scott. 2021. <em>Causal Inference: The Mixtape</em>. New Haven, CT: Yale University Press. <a href="https://mixtape.scunning.com/">https://mixtape.scunning.com/</a>.
+</div>
+<div id="ref-facure2022causal" class="csl-entry" role="listitem">
+Facure, Matheus. 2022. <em>Causal Inference for the Brave and True</em>. <a href="https://matheusfacure.github.io/python-causality-handbook/">https://matheusfacure.github.io/python-causality-handbook/</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>pronounced ‘unobtainium’<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -280,6 +307,7 @@ ul.task-list li input[type="checkbox"] {
 <li id="fn9"><p>It <em>could</em> be you. But it probably won’t be.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>Or their pushy parents…<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>An example of a bias/variance trade-off<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><strong>Note from Claude:</strong> Causal inference methods have been rapidly adopted in modern machine learning and data science. <span class="citation" data-cites="cunningham2021causal">Cunningham (<a href="#ref-cunningham2021causal" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="facure2022causal">Facure (<a href="#ref-facure2022causal" role="doc-biblioref">2022</a>)</span> provide excellent Python-focused introductions. The matching, propensity scoring, and instrumental variable methods described here are implemented in several Python libraries: DoWhy (Microsoft Research) provides a unified framework for causal inference with support for multiple methods including matching and IV; CausalML (Uber) focuses on uplift modeling and heterogeneous treatment effects; and EconML (Microsoft) specializes in machine learning methods for causal inference. These libraries extend traditional causal methods to work with modern ML models like random forests and neural networks for estimating treatment effects, connecting classical econometrics to contemporary data science practice.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
