@@ -192,16 +192,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="claude.md" class="level1">
 <h1>CLAUDE.md</h1>
 <p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
-<section id="safety-branch-check" class="level2">
-<h2 class="anchored" data-anchor-id="safety-branch-check">SAFETY: Branch Check</h2>
-<p><strong>CRITICAL SAFETY REQUIREMENT:</strong> Before making any changes to files, commits, or running commands that modify the repository:</p>
+<section id="safety-branch-check-and-sync" class="level2">
+<h2 class="anchored" data-anchor-id="safety-branch-check-and-sync">SAFETY: Branch Check and Sync</h2>
+<p><strong>CRITICAL SAFETY REQUIREMENT - Run at the start of EVERY session:</strong></p>
+<p>At the beginning of each session, Claude Code agents MUST:</p>
 <ol type="1">
-<li>Check the current git branch with <code>git branch --show-current</code></li>
-<li><strong>NEVER work directly on the <code>main</code> branch</strong></li>
-<li>If on <code>main</code>, STOP and ask the user to switch to a feature branch first</li>
-<li>Only proceed with file modifications when on a branch other than <code>main</code></li>
+<li><p><strong>Check current branch:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">--show-current</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Verify branch is experimental/claude:</strong></p>
+<ul>
+<li>If on <code>main</code>: STOP immediately and inform the user they are on main</li>
+<li>Ask user if they want to switch to <code>experimental/claude</code> or if they explicitly intend to work on main</li>
+<li><strong>NEVER make file changes on main</strong> unless user explicitly confirms</li>
+</ul></li>
+<li><p><strong>If on experimental/claude, sync with main to prevent merge conflicts:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>This is AUTOMATIC and should be done proactively without asking</li>
+<li>Inform the user: “Syncing experimental/claude with main to prevent merge conflicts…”</li>
+<li>If merge conflicts occur during sync, report them to the user</li>
+<li>If sync succeeds, report: “✓ Branch synced with main”</li>
+</ul></li>
+<li><p><strong>Only then proceed with normal work</strong></p></li>
 </ol>
-<p>This is a safety aspect of the workflow to prevent accidental changes to the production branch.</p>
+<p><strong>Why this matters:</strong> Syncing at the start of each session prevents the experimental/claude branch from diverging from main, which causes painful merge conflicts later. This two-line command prevents hours of merge conflict resolution.</p>
+<p><strong>Exception:</strong> If user explicitly states they are working on main and know what they’re doing, skip the sync step but still warn about working on main.</p>
+</section>
+<section id="merge-workflow-experimentalclaude-main" class="level2">
+<h2 class="anchored" data-anchor-id="merge-workflow-experimentalclaude-main">Merge Workflow: experimental/claude → main</h2>
+<p><strong>To minimize merge conflicts when merging experimental/claude to main:</strong></p>
+<ol type="1">
+<li><p><strong>Before starting new work on experimental/claude:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout experimental/claude</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge origin/main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This keeps experimental/claude in sync with main.</p></li>
+<li><p><strong>When committing from experimental/claude:</strong></p>
+<ul>
+<li>Commit source file changes (.qmd, .md, .R files)</li>
+<li>Avoid running <code>quarto render</code> before committing if possible</li>
+<li>If you must render, that’s okay - just be aware it may cause merge conflicts</li>
+</ul></li>
+<li><p><strong>When merging to main (user handles this, but context is useful):</strong></p>
+<ul>
+<li>Most conflicts will be in auto-generated files (docs/*, _freeze/*)</li>
+<li>For conflicts in source files (.qmd): prefer the experimental/claude version</li>
+<li>For conflicts in generated files: accept experimental/claude version, then re-render on main</li>
+<li>Use <code>git checkout --theirs &lt;file&gt;</code> to accept experimental/claude version</li>
+</ul></li>
+<li><p><strong>After merging to main:</strong></p>
+<ul>
+<li>Run <code>quarto render</code> on main branch to regenerate docs/ with merged content</li>
+<li>This ensures rendered output matches the merged source files</li>
+</ul></li>
+</ol>
 </section>
 <section id="project-overview" class="level2">
 <h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
@@ -210,15 +255,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="building-and-rendering" class="level2">
 <h2 class="anchored" data-anchor-id="building-and-rendering">Building and Rendering</h2>
 <p><strong>Preview the blog locally:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Render the full site:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The rendered site outputs to the <code>docs/</code> directory (configured in <code>_quarto.yml</code>), which is served by GitHub Pages.</p>
 <p><strong>Pre-render automation:</strong> The <code>pre-render.R</code> script runs automatically before each render (configured in <code>_quarto.yml</code>). It: - Executes <code>calculate-wordcount.R</code> to count total words across all <code>.qmd</code> files - Updates the subtitle in <code>index.qmd</code> with the current word count - Captures warnings to <code>render_warnings.log</code></p>
 <p><strong>Monitoring long-running renders:</strong> When <code>quarto render</code> is run in the background, use these <strong>safe</strong> methods to check progress without interrupting the process:</p>
 <ol type="1">
 <li><p><strong>Check process table (safest):</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">"quarto|render"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> grep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">"quarto|render"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> grep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This only reads system info and won’t interrupt the process.</p></li>
 <li><p><strong>Check background task output:</strong> Use the <code>BashOutput</code> tool with the background task ID. This reads buffered output without sending signals to the process.</p></li>
 </ol>
@@ -243,39 +288,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="blog-post-conventions" class="level2">
 <h2 class="anchored" data-anchor-id="blog-post-conventions">Blog Post Conventions</h2>
 <p><strong>YAML frontmatter structure:</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Post Title</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> Optional subtitle (if needed)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Jon Minton</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> YYYY-MM-DD</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">category1</span><span class="kw">,</span><span class="at"> category2</span><span class="kw">,</span><span class="at"> tag3</span><span class="kw">]</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Post Title</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> Optional subtitle (if needed)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Jon Minton</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> YYYY-MM-DD</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">category1</span><span class="kw">,</span><span class="at"> category2</span><span class="kw">,</span><span class="at"> tag3</span><span class="kw">]</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Internal linking:</strong> - Use relative paths from the post location: <code>../other-post/index.qmd</code> - For posts in nested directories: <code>../../category/post/index.qmd</code> - Common pattern: Link to related posts in the same series or topic area</p>
 <p><strong>Markdown formatting:</strong></p>
 <p><strong>CRITICAL - List formatting:</strong> Bullet point lists in <code>.qmd</code> files MUST have blank lines before and after the entire list block, or they will not render properly. This is a common source of rendering errors.</p>
 <p>Correct format:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Incorrect format (will break rendering):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Other formatting rules: - Paragraph breaks require blank lines between paragraphs (markdown standard) - Use <code>**bold**</code> for emphasis in bullet points when needed - Links: <code>[Link text](url)</code> for external, <code>[Link text](../path/index.qmd)</code> for internal</p>
 <p><strong>Images and media:</strong> - Store in the same directory as the post’s <code>index.qmd</code> - Reference with relative paths: <code>![Alt text](filename.jpg)</code></p>
 <p><strong>Footnotes:</strong></p>
 <p>Quarto supports standard Markdown footnote syntax with two-part format: - Reference in text: <code>Some text here[^id]</code> - Definition elsewhere: <code>[^id]: Footnote content here</code></p>
 <p><strong>CRITICAL - Footnote ID Convention:</strong> - <strong>ALWAYS use descriptive IDs</strong> for Claude-generated footnotes - Format: <code>[^claude-shorttopic]</code> (e.g., <code>[^claude-ml]</code>, <code>[^claude-pvalues]</code>) - <strong>NEVER use sequential numbers</strong> ([^1], [^2]) for Claude footnotes - this creates collision risk with existing footnotes - User’s original footnotes may use numbers - descriptive IDs prevent conflicts</p>
 <p>Example correct usage:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>The GLM framework applies to many models.<span class="ot">[^claude-ml]</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^claude-ml]: </span>**Note from Claude:** This concept is taught in Andrew Ng's ML course...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>The GLM framework applies to many models.<span class="ot">[^claude-ml]</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^claude-ml]: </span>**Note from Claude:** This concept is taught in Andrew Ng's ML course...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Footnotes can include bibliography citations using <code>@citationkey</code> format if the post has a <code>bibliography: references.bib</code> entry in the YAML frontmatter. See <code>.claude/footnote-rendering-fix.md</code> for full details on the footnote rendering fix and conventions.</p>
 </section>
 <section id="themes-and-styling" class="level2">
