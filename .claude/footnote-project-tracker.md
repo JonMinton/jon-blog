@@ -21,8 +21,8 @@ Systematically review all blog posts and add conservative, fact-checking Claude 
 
 **Pilot Stats:**
 - Posts reviewed: 4
-- Footnotes added: 7
-- Average per post: 1.75
+- Footnotes added: 5
+- Average per post: 1.25
 - User feedback: ✅ Approved style, tone, length, attribution
 
 ## Systematic Review Progress
@@ -31,7 +31,7 @@ Systematically review all blog posts and add conservative, fact-checking Claude 
 
 **Posts Footnoted:**
 5. ✅ `posts/tolerating-intolerance-paradox/index.qmd` - 1 footnote (Popper's paradox)
-6. ✅ `posts/brian-may-gentleman-ecoscientist/index.qmd` - 1 footnote (badger cull documentary)
+6. ✅ `posts/brian-may-gentleman-ecoscientist/index.qmd` - 4 footnotes (documentary reception, Anne Brunner, testing frequency, May's PhD)
 7. ✅ `posts/gentes-lover-and-a-fighter/index.qmd` - 1 footnote (Poecilia parae research)
 8. ✅ `posts/unpop/the-man-who-solved-intelligence/index.qmd` - 1 footnote (Nobel Prize 2024)
 9. ✅ `posts/can-we-go-dutch/index.qmd` - 1 footnote (Zipf's Law validation)
@@ -136,6 +136,45 @@ Systematically review all blog posts and add conservative, fact-checking Claude 
 - Skip rate: 67.7%
 - Average footnotes per newly footnoted post: 1.29
 - Token usage: ~55k / 200k
+
+### Session 3 (2025-12-06 - Technical/Statistical Methods Posts)
+
+**Special Focus:** Technical footnotes for statistical methods posts connecting traditional GLM/statistics to ML/data science
+
+**Posts Footnoted:**
+28. ✅ `posts/glms/intro-to-glms/lms-are-glms-part-01/index.qmd` - 1 footnote (Andrew Ng ML course, Python libraries)
+29. ✅ `posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd` - 1 footnote (link functions vs activation functions)
+30. ✅ `posts/glms/intro-to-glms/lms-are-glms-part-03/index.qmd` - 1 footnote (Python GLM libraries, fast.ai)
+31. ✅ `posts/glms/intro-to-glms/lms-are-glms-part-04/index.qmd` - 1 footnote + .bib (marginal effects, SHAP)
+32. ✅ `posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-05/index.qmd` - 1 footnote + .bib (likelihood theory, loss functions)
+33. ✅ `posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-06/index.qmd` - 1 footnote (optimization algorithms)
+34. ✅ `posts/glms/causal-inference/lms-are-glms-part-16/index.qmd` - 1 footnote + .bib (causal inference in ML)
+35. ✅ `posts/glms/hacker-stats/resampling-approaches-intro/index.qmd` - 1 footnote + .bib (computational statistics)
+36. ✅ `posts/glms/one-off/p-values-stat-sig/index.qmd` - 1 footnote + .bib (cross-validation, model selection)
+
+**Bibliography Files Created/Updated:**
+- `posts/glms/intro-to-glms/lms-are-glms-part-04/references.bib` - Added Molnar (2022)
+- `posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-05/references.bib` - Added Murphy (2022)
+- `posts/glms/causal-inference/lms-are-glms-part-16/references.bib` - Created with Cunningham (2021), Facure (2022)
+- `posts/glms/hacker-stats/resampling-approaches-intro/references.bib` - Created with Downey (2014)
+- `posts/glms/one-off/p-values-stat-sig/references.bib` - Updated with McElreath (2020), Efron (2016)
+
+**Session 3 Stats:**
+- Posts reviewed: 9
+- Posts footnoted: 9
+- Posts skipped: 0 (targeted review)
+- Total footnotes added: 9
+- Bibliography files created/updated: 5
+- Skip rate: 0% (all GLM posts in scope received footnotes)
+- Average footnotes per post: 1.0
+- Token usage: ~40k / 200k
+
+**Key Themes:**
+- Connected traditional statistical methods to modern ML/data science
+- Referenced online courses (Andrew Ng, fast.ai, Stanford CS229)
+- Identified Python library alternatives (statsmodels, scikit-learn, PyTorch, TensorFlow)
+- Enhanced academic rigor by moving book references to .bib files
+- Maintained "Note from Claude:" convention throughout
 
 ---
 
@@ -327,17 +366,89 @@ Systematically review all blog posts and add conservative, fact-checking Claude 
 - **Research Sources:** Google DeepMind blog, IMDb, Nobel Prize official site
 - **Notes:** Verified 2024 documentary directed by Greg Kohs, filmed over 5 years, covers AlphaFold breakthrough that won 2024 Nobel Prize in Chemistry. Premiered at Tribeca Festival, available free on YouTube.
 
+#### 2024-01-01: Part One: A unified framework
+- **Path:** `posts/glms/intro-to-glms/lms-are-glms-part-01/index.qmd`
+- **Categories:** R, statistics, inference
+- **Footnotes Added:** 1
+- **Topics:** Andrew Ng's Machine Learning Specialization, Python libraries (statsmodels, scikit-learn)
+- **Research Sources:** Coursera, library documentation
+- **Notes:** Connected GLM framework to ML perspective. Referenced Andrew Ng course on gradient descent for parameter calibration. Identified Python equivalents: statsmodels.api.GLM and scikit-learn model classes.
+
+#### 2024-01-02: Part Two: Link functions and exponential families
+- **Path:** `posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd`
+- **Categories:** R, statistics, inference
+- **Footnotes Added:** 1
+- **Topics:** Link functions vs activation functions, cross-entropy loss equivalence
+- **Research Sources:** ML/DL documentation (PyTorch, TensorFlow)
+- **Notes:** Connected statistical link functions to neural network activation functions. Explained that logistic function = sigmoid activation, and cross-entropy loss in ML = negative log-likelihood in GLMs.
+
+#### 2024-01-03: Part Three: Why generalise?
+- **Path:** `posts/glms/intro-to-glms/lms-are-glms-part-03/index.qmd`
+- **Categories:** R, statistics, inference
+- **Footnotes Added:** 1
+- **Topics:** Python GLM libraries, fast.ai course
+- **Research Sources:** statsmodels, scikit-learn, fast.ai documentation
+- **Notes:** Provided Python equivalents for R's glm() function. Referenced fast.ai's "Practical Deep Learning for Coders" showing how GLM concepts scale to deep learning.
+
+#### 2024-01-04: Part Four: Summarising the model (and its uncertainty)
+- **Path:** `posts/glms/intro-to-glms/lms-are-glms-part-04/index.qmd`
+- **Categories:** R, statistics, inference
+- **Footnotes Added:** 1 + .bib entry
+- **Topics:** Marginal effects, SHAP values, ML interpretability
+- **Research Sources:** @molnar2022interpretable, scikit-learn, SHAP library
+- **Notes:** Connected traditional marginal effects to modern ML interpretability methods (SHAP, partial dependence plots). Added Molnar (2022) to bibliography for comprehensive ML interpretability reference.
+
+#### 2024-01-05: Part Five: Maximum likelihood, models and machines
+- **Path:** `posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-05/index.qmd`
+- **Categories:** R, statistics, inference
+- **Footnotes Added:** 1 + .bib entry
+- **Topics:** Likelihood theory, loss functions, Stanford CS229
+- **Research Sources:** @murphy2022probabilistic, Stanford CS229, scipy/PyTorch/TensorFlow docs
+- **Notes:** Explained that negative log-likelihood (statistics) = loss functions (ML). Referenced Stanford CS229 and Murphy's probabilistic ML textbook. Noted scipy.optimize.minimize() as Python equivalent to R's optim().
+
+#### 2024-01-06: Part Six: The Optimiser as Robo-Chauffeur
+- **Path:** `posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-06/index.qmd`
+- **Categories:** R, statistics, inference
+- **Footnotes Added:** 1
+- **Topics:** Optimization algorithms, gradient descent, Adam, RMSprop
+- **Research Sources:** Sebastian Ruder's gradient descent overview, PyTorch/TensorFlow docs
+- **Notes:** Connected optimization in GLMs to ML optimizers. Referenced Andrew Ng course, Sebastian Ruder's survey, and PyTorch/TensorFlow optimizer modules.
+
+#### 2024-02-28: Part Sixteen: Causal Inference - How to try to do the impossible
+- **Path:** `posts/glms/causal-inference/lms-are-glms-part-16/index.qmd`
+- **Categories:** statistics, causality, R
+- **Footnotes Added:** 1 + .bib entries
+- **Topics:** Causal inference in ML/data science, DoWhy, CausalML, EconML
+- **Research Sources:** @cunningham2021causal, @facure2022causal, library documentation
+- **Notes:** Connected traditional causal inference methods to modern ML libraries. Created new bibliography with Cunningham's "Causal Inference: The Mixtape" and Facure's Python-focused guide. Referenced Microsoft/Uber causal ML libraries.
+
+#### 2024-07-21: Hacker Stats - Intro and overview
+- **Path:** `posts/glms/hacker-stats/resampling-approaches-intro/index.qmd`
+- **Categories:** R, statistics, inference, hacker stats, bootstrapping, permutation tests, post-stratification
+- **Footnotes Added:** 1 + .bib entry
+- **Topics:** Computational statistics, bootstrapping in ML (bagging), cross-validation as resampling
+- **Research Sources:** @downey2014think, scipy/scikit-learn documentation
+- **Notes:** Connected bootstrapping to ML bagging (random forests). Explained cross-validation as resampling method. Created bibliography with Downey's "Think Stats". Referenced scipy.stats and sklearn.model_selection.
+
+#### 2024-10-19: On P-values and Statistical Significance
+- **Path:** `posts/glms/one-off/p-values-stat-sig/index.qmd`
+- **Categories:** statistics, p-values, significance testing
+- **Footnotes Added:** 1 + .bib entries (updated existing)
+- **Topics:** Cross-validation, model selection, bias-variance tradeoff in ML
+- **Research Sources:** @mcelreath2020statistical, @efron2016computer, scikit-learn
+- **Notes:** Connected traditional p-value issues to modern ML approaches. Added McElreath's "Statistical Rethinking" and Efron & Hastie's "Computer Age Statistical Inference" to existing bibliography. Emphasized cross-validation as alternative to hypothesis testing.
+
 ---
 
 ## Running Statistics
 
-- **Total posts reviewed:** 90 / 131 (68.7%)
-- **Total posts footnoted:** 27 / 131 (20.6%)
-- **Total footnotes added:** 39
-- **Average footnotes per footnoted post:** 1.44
-- **Posts skipped:** 63 (70.0% skip rate)
-- **Posts already footnoted (from Session 1):** 5
-- **Cumulative token usage:** ~55k / 200k (Sessions 1+2)
+- **Total posts reviewed:** 99 / 131 (75.6%)
+- **Total posts footnoted:** 36 / 131 (27.5%)
+- **Total footnotes added:** 51
+- **Average footnotes per footnoted post:** 1.42
+- **Posts skipped:** 63 (63.6% skip rate)
+- **Bibliography files created/updated:** 5
+- **Cumulative token usage:** ~95k / 200k (Sessions 1+2+3)
 
 ## Themes/Patterns Observed
 
@@ -345,6 +456,7 @@ Systematically review all blog posts and add conservative, fact-checking Claude 
 2. **Economic observations** often can be validated/updated with recent data
 3. **Historical claims** benefit from verification with authoritative sources
 4. **Commentary posts** work well with links to related concepts/research
+5. **Technical/statistical methods posts** benefit from connections to ML/data science (courses, libraries, modern interpretations)
 
 ## Next Actions
 

@@ -12,8 +12,13 @@
 - Pure commentary/opinion pieces
 - Humorous/satirical posts
 - Posts already have extensive citations
-- Technical tutorials (GLM series) - these are educational content
 - No clear value-add from external verification
+
+**SPECIAL CASE - Technical/Educational Posts:**
+- Statistical methods posts (GLM series, etc.) DO receive technical footnotes
+- Focus: Online courses, ML/data science connections, Python library alternatives
+- Academic references (books/articles) moved to .bib files for proper citations
+- Web resources (courses, documentation) remain as inline footnotes
 
 ## Posts Reviewed - Batch 1 (Pilot + Recent)
 
@@ -24,9 +29,9 @@
 3. **x-minute-neighbourhoods** (1 footnote) - Walkability research evidence
 4. **analytical-maxim-gun** (1 footnote) - Historical verification of Maxim gun
 5. **tolerating-intolerance-paradox** (1 footnote) - Link to Popper's paradox
-6. **brian-may-gentleman-ecoscientist** (1 footnote) - Controversy/follow-up on documentary
+6. **brian-may-gentleman-ecoscientist** (4 footnotes) - Documentary reception + verification footnotes (Anne Brunner, testing frequency, May's PhD)
 
-**Subtotal: 6 posts, 7 footnotes**
+**Subtotal: 6 posts, 10 footnotes**
 
 ### ⏭️ Skipped (Good Reasons)
 
@@ -36,6 +41,29 @@
 4. **threw-missiles** - Linguistic commentary, no factual verification needed
 
 **Subtotal: 4 posts skipped**
+
+## Batch 2: Technical/Statistical Methods Posts
+
+### ✅ Added Footnotes
+
+1. **lms-are-glms-part-01** (1 footnote) - Andrew Ng's ML course, Python libraries (statsmodels, scikit-learn)
+2. **lms-are-glms-part-02** (1 footnote) - Link functions vs activation functions, cross-entropy loss
+3. **lms-are-glms-part-03** (1 footnote) - Python GLM libraries, fast.ai course
+4. **lms-are-glms-part-04** (1 footnote + .bib) - Marginal effects, SHAP values, ML interpretability [@molnar2022interpretable]
+5. **lms-are-glms-part-05** (1 footnote + .bib) - Likelihood theory, loss functions, Stanford CS229 [@murphy2022probabilistic]
+6. **lms-are-glms-part-06** (1 footnote) - Optimization algorithms, gradient descent, PyTorch/TensorFlow
+7. **lms-are-glms-part-16** (1 footnote + .bib) - Causal inference in ML/data science [@cunningham2021causal, @facure2022causal]
+8. **resampling-approaches-intro** (1 footnote + .bib) - Computational statistics, bootstrapping in ML [@downey2014think]
+9. **p-values-stat-sig** (1 footnote + .bib) - Cross-validation, model selection in ML [@mcelreath2020statistical, @efron2016computer]
+
+**Subtotal: 9 posts, 9 footnotes, 5 new .bib files created/updated**
+
+**Bibliography files created:**
+- `posts/glms/intro-to-glms/lms-are-glms-part-04/references.bib` (Molnar)
+- `posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-05/references.bib` (Murphy)
+- `posts/glms/causal-inference/lms-are-glms-part-16/references.bib` (Cunningham, Facure)
+- `posts/glms/hacker-stats/resampling-approaches-intro/references.bib` (Downey)
+- `posts/glms/one-off/p-values-stat-sig/references.bib` (McElreath, Efron - updated existing)
 
 ## Posts To Review - Remaining ~121 posts
 
