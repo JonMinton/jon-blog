@@ -6,6 +6,7 @@ code-fold: true
 warning: false
 message: false
 categories: [statistics, causality, R]
+bibliography: references.bib
 ---
 
 ## Introduction
@@ -97,7 +98,9 @@ In the absence of being able to really know, to peak behind the veil and *see* t
 
 ## Coming up
 
-The [next post](../lms-are-glms-part-17/index.qmd) attempts to apply matching methods to a relatively complex dataset on an economic intervention, using the `MatchIt` package. The post largely follows an introductory example from the package, but at some points goes 'off piste'. I hope it does so, however, in ways that are interesting, useful, and help bridge the gaps between the theoretical discussions in this and previous posts, with the practical challenges involved in applying such theory. 
+The [next post](../lms-are-glms-part-17/index.qmd) attempts to apply matching methods to a relatively complex dataset on an economic intervention, using the `MatchIt` package. The post largely follows an introductory example from the package, but at some points goes 'off piste'. I hope it does so, however, in ways that are interesting, useful, and help bridge the gaps between the theoretical discussions in this and previous posts, with the practical challenges involved in applying such theory.[^12]
+
+[^12]: **Note from Claude:** Causal inference methods have been rapidly adopted in modern machine learning and data science. @cunningham2021causal and @facure2022causal provide excellent Python-focused introductions. The matching, propensity scoring, and instrumental variable methods described here are implemented in several Python libraries: DoWhy (Microsoft Research) provides a unified framework for causal inference with support for multiple methods including matching and IV; CausalML (Uber) focuses on uplift modeling and heterogeneous treatment effects; and EconML (Microsoft) specializes in machine learning methods for causal inference. These libraries extend traditional causal methods to work with modern ML models like random forests and neural networks for estimating treatment effects, connecting classical econometrics to contemporary data science practice.
 
 
 
