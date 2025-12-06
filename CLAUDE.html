@@ -232,7 +232,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">category1</span><span class="kw">,</span><span class="at"> category2</span><span class="kw">,</span><span class="at"> tag3</span><span class="kw">]</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Internal linking:</strong> - Use relative paths from the post location: <code>../other-post/index.qmd</code> - For posts in nested directories: <code>../../category/post/index.qmd</code> - Common pattern: Link to related posts in the same series or topic area</p>
-<p><strong>Markdown formatting:</strong> - Paragraph breaks require blank lines between paragraphs (markdown standard) - Lists need blank lines before and after the list block - Use <code>**bold**</code> for emphasis in bullet points when needed - Links: <code>[Link text](url)</code> for external, <code>[Link text](../path/index.qmd)</code> for internal</p>
+<p><strong>Markdown formatting:</strong></p>
+<p><strong>CRITICAL - List formatting:</strong> Bullet point lists in <code>.qmd</code> files MUST have blank lines before and after the entire list block, or they will not render properly. This is a common source of rendering errors.</p>
+<p>Correct format:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Incorrect format (will break rendering):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Other formatting rules: - Paragraph breaks require blank lines between paragraphs (markdown standard) - Use <code>**bold**</code> for emphasis in bullet points when needed - Links: <code>[Link text](url)</code> for external, <code>[Link text](../path/index.qmd)</code> for internal</p>
 <p><strong>Images and media:</strong> - Store in the same directory as the post’s <code>index.qmd</code> - Reference with relative paths: <code>![Alt text](filename.jpg)</code></p>
 </section>
 <section id="themes-and-styling" class="level2">
