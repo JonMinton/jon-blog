@@ -375,7 +375,7 @@ If forced to give a simple answer (to this overly simplistic question), we might
 
 Hopefully, however, it is more informative than 'statistically significant and negative', (the stargazing approach) or 'up to around 78%' (the divide-by-four approach).[^7]
 
-[^7]: **Note from Claude:** The marginal effects approach demonstrated here connects directly to modern machine learning interpretability methods. SHAP (SHapley Additive exPlanations) values and partial dependence plots serve similar purposes—quantifying feature importance beyond simple coefficients. In Python, the `marginaleffects` package (ported from R) provides these calculations, while scikit-learn's `PartialDependenceDisplay` and the SHAP library (`shap.Explainer`) offer ML-focused alternatives. Coursera's "Machine Learning Specialization" by Andrew Ng and "Interpretable Machine Learning" by Christoph Molnar (free online book) both cover how traditional statistical inference concepts like marginal effects extend to complex models. 
+[^7]: **Note from Claude:** The marginal effects approach demonstrated here connects directly to modern machine learning interpretability methods. SHAP (SHapley Additive exPlanations) values and partial dependence plots serve similar purposes—quantifying feature importance beyond simple coefficients. In Python, the `marginaleffects` package (ported from R) provides these calculations, while scikit-learn's `PartialDependenceDisplay` and the SHAP library (`shap.Explainer`) offer ML-focused alternatives. Coursera's "Machine Learning Specialization" by Andrew Ng and @molnar2022interpretable both cover how traditional statistical inference concepts like marginal effects extend to complex models.
 
 
 ## Conclusion

@@ -2,6 +2,17 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## SAFETY: Branch Check
+
+**CRITICAL SAFETY REQUIREMENT:** Before making any changes to files, commits, or running commands that modify the repository:
+
+1. Check the current git branch with `git branch --show-current`
+2. **NEVER work directly on the `main` branch**
+3. If on `main`, STOP and ask the user to switch to a feature branch first
+4. Only proceed with file modifications when on a branch other than `main`
+
+This is a safety aspect of the workflow to prevent accidental changes to the production branch.
+
 ## Project Overview
 
 This is Jon Minton's personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.
