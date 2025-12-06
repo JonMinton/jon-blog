@@ -151,28 +151,32 @@ One person (born in Scotland!)
 We then looked text analysis, and in particular sentiment analysis of the content of the descriptio field:
 
 ```{r}
-births %>% 
-  unnest_tokens(word, description) %>% 
-  anti_join(get_stopwords()) %>% 
+#| eval: false
+births %>%
+  unnest_tokens(word, description) %>%
+  anti_join(get_stopwords()) %>%
   left_join(get_sentiments("afinn"))
 ```
 
 ```{r}
-events %>% 
-  unnest_tokens(word, event) %>% 
-  anti_join(get_stopwords()) %>% 
+#| eval: false
+events %>%
+  unnest_tokens(word, event) %>%
+  anti_join(get_stopwords()) %>%
   left_join(get_sentiments("afinn"))
 ```
 
 Here's the words in the `afinn` object with the highest (most positive) sentiment
 ```{r}
-get_sentiments("afinn") %>% 
-  arrange(desc(value)) 
+#| eval: false
+get_sentiments("afinn") %>%
+  arrange(desc(value))
 ```
 
 And here's an exploration of average sentiment by (leap)year based on the events description field:
 
 ```{r}
+#| eval: false
 events |>
   unnest_tokens(word, event) |>
   anti_join(get_stopwords()) |>
@@ -313,18 +317,19 @@ events %>%
 A neutral word should have a sentiment score of 0, not NA. Let's make that change...
 
 ```{r}
+#| eval: false
 
 afinn_sentiments <- get_sentiments('afinn')
 
-events %>% 
-  unnest_tokens(word, event) %>% 
-  anti_join(get_stopwords(),"word") %>% 
-  left_join(afinn_sentiments,"word") %>% 
-  # filter(!is.na(value)) %>% 
-  replace_na(list(value=0)) %>% 
-  mutate(century = sapply(year,getCenturyCorrected)) %>% 
-  group_by(century) %>% 
-  summarise(mean_sentiment = mean(value)) %>% 
+events %>%
+  unnest_tokens(word, event) %>%
+  anti_join(get_stopwords(),"word") %>%
+  left_join(afinn_sentiments,"word") %>%
+  # filter(!is.na(value)) %>%
+  replace_na(list(value=0)) %>%
+  mutate(century = sapply(year,getCenturyCorrected)) %>%
+  group_by(century) %>%
+  summarise(mean_sentiment = mean(value)) %>%
   ggplot(aes(x=century,y=mean_sentiment))+geom_line()
 ```
 
