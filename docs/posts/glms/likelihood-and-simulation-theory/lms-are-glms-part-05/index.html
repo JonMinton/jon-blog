@@ -411,7 +411,7 @@ L(\beta, \sigma^2 | y) = \prod{L(y_i | \mu_i, \sigma^2)}
 </section>
 <section id="coming-up" class="level2">
 <h2 class="anchored" data-anchor-id="coming-up">Coming up</h2>
-<p>The <a href="../../../../posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-06/index.html">next part of this series</a> shows how log likelihood functions tend to be used in practice, in conjunction with optimisation algorithms that (usally) arrive at good estimates of our coefficients in far fewer steps than we’ve used above.</p>
+<p>The <a href="../../../../posts/glms/likelihood-and-simulation-theory/lms-are-glms-part-06/index.html">next part of this series</a> shows how log likelihood functions tend to be used in practice, in conjunction with optimisation algorithms that (usally) arrive at good estimates of our coefficients in far fewer steps than we’ve used above.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 
 
 
@@ -425,6 +425,9 @@ King, Gary. 1998. <em>Unifying Political Methodology: The Likelihood Theory of S
 <div id="ref-KinTomWit00" class="csl-entry" role="listitem">
 King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
 </div>
+<div id="ref-murphy2022probabilistic" class="csl-entry" role="listitem">
+Murphy, Kevin P. 2022. <em>Probabilistic Machine Learning: An Introduction</em>. Cambridge, MA: MIT Press. <a href="https://probml.github.io/pml-book/book1.html">https://probml.github.io/pml-book/book1.html</a>.
+</div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
@@ -432,6 +435,7 @@ King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most o
 <li id="fn2"><p>As <span class="citation" data-cites="King98">King (<a href="#ref-King98" role="doc-biblioref">1998</a>)</span> (p.&nbsp;59) describes it, “<span class="math inline">\(k(y)\)</span> is an unknown function of the data. Whereas traditional probability is a measure of <em>absolute</em> uncertainty … the constant <span class="math inline">\(k(y)\)</span> means that likelihood is only a <em>relative</em> measure of uncertainty”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Frequentist approaches can thus be considered a kind of ‘improper Bayesian’ approach by considering <span class="math inline">\(k(y)\)</span> in the Likelihood formula as a stand-in for <span class="math inline">\(\frac{P(\tilde{\theta})}{P(y)}\)</span> in Bayes’ Rule. Roughly speaking, it’s because of the improperness of treating the two terms as equivalent, and the relativeness of <span class="math inline">\(k(y)\)</span>, that mean frequentist probability statements can’t be interpreted as Bayesian probability statements. But thinking of the two terms as equivalent can be helpful for spotting the similarity between the two formulae.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>i.e.&nbsp;the square of the <code>sd</code> passed to <code>rnorm()</code> of 0.5<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><strong>Note from Claude:</strong> Likelihood theory and maximum likelihood estimation (MLE) are foundational to both classical statistics and modern machine learning. In ML, what statisticians call “negative log-likelihood” is exactly what ML practitioners call “loss functions”—cross-entropy loss for classification and mean squared error for regression are both derived from likelihood theory. Stanford’s CS229 (Machine Learning) by Andrew Ng covers this connection explicitly. For Python implementations, scipy.optimize.minimize() provides the same optimization functionality as R’s optim(), while TensorFlow and PyTorch implement automatic differentiation to calculate gradients for these loss functions. <span class="citation" data-cites="murphy2022probabilistic">Murphy (<a href="#ref-murphy2022probabilistic" role="doc-biblioref">2022</a>)</span> provides comprehensive coverage of how likelihood theory extends to modern ML methods.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

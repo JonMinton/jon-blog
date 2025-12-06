@@ -355,6 +355,10 @@ Residual Deviance: 24.94    AIC: 30.94</code></pre>
 Call:
 glm(formula = am ~ mpg + vs, family = binomial(), data = mtcars)
 
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3389  -0.6304  -0.2980   0.3069   2.0106  
+
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)   
 (Intercept)  -9.9183     3.4942  -2.839  0.00453 **
@@ -399,6 +403,10 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <pre><code>
 Call:
 glm(formula = am ~ vs + wt + hp, family = binomial(), data = mtcars)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.88193  -0.10513  -0.01248   0.10256   1.65058  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)  
@@ -447,6 +455,10 @@ Number of Fisher Scoring iterations: 8</code></pre>
 <pre><code>
 Call:
 glm(formula = am ~ vs + wt_z + hp_z, family = binomial(), data = mtcars_z)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.88193  -0.10513  -0.01248   0.10256   1.65058  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)  
@@ -700,7 +712,7 @@ Number of Fisher Scoring iterations: 8</code></pre>
 </div>
 <p>In the above the red line indicates the mean value of these marginal differences, which is <code>-0.12</code>, and the green line the median value of these differences, which is around <code>-0.02</code>. So, even with just these two measures of central tendency, there’s around a six-fold difference in the estimate of ‘the effect’. We can also see there’s a lot of variation, from around nothing (right hand side), to around a 65% reduction (left hand side).</p>
 <p>If forced to give a simple answer (to this overly simplistic question), we might plump for the mean for theoretical reasons, and say something like “The effect of a straight engine is to reduce the probability of a manual transmission by around an eighth”. But I’m sure, having seen how much variation there is in these marginal effects, we can agree this ‘around an eighth’ answer, or any single number answer, is likely to be overly reductive.</p>
-<p>Hopefully, however, it is more informative than ‘statistically significant and negative’, (the stargazing approach) or ‘up to around 78%’ (the divide-by-four approach).</p>
+<p>Hopefully, however, it is more informative than ‘statistically significant and negative’, (the stargazing approach) or ‘up to around 78%’ (the divide-by-four approach).<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 </section>
 </section>
 <section id="conclusion" class="level2">
@@ -722,6 +734,9 @@ Number of Fisher Scoring iterations: 8</code></pre>
 <div id="ref-KinTomWit00" class="csl-entry" role="listitem">
 King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most of Statistical Analyses: Improving Interpretation and Presentation.”</span> <em>American Journal of Political Science</em> 44: 341355. <a href="http://gking.harvard.edu/files/abs/making-abs.shtml">http://gking.harvard.edu/files/abs/making-abs.shtml</a>.
 </div>
+<div id="ref-molnar2022interpretable" class="csl-entry" role="listitem">
+Molnar, Christoph. 2022. <em>Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</em>. 2nd ed. <a href="https://christophm.github.io/interpretable-ml-book/">https://christophm.github.io/interpretable-ml-book/</a>.
+</div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
@@ -731,6 +746,7 @@ King, Gary, Michael Tomz, and Jason Wittenberg. 2000. <span>“Making the Most o
 <li id="fn4"><p>We should <em>always</em> expect the absolute value of a coefficient for a discrete variable to be less than four, for this reason.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>The lower bound for the marginal effect of a discrete variable, or any variable, is zero. This is when the absolute value of the sum of the product of the other variables is infinite.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Or the base R <code>expand.grid</code> function<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><strong>Note from Claude:</strong> The marginal effects approach demonstrated here connects directly to modern machine learning interpretability methods. SHAP (SHapley Additive exPlanations) values and partial dependence plots serve similar purposes—quantifying feature importance beyond simple coefficients. In Python, the <code>marginaleffects</code> package (ported from R) provides these calculations, while scikit-learn’s <code>PartialDependenceDisplay</code> and the SHAP library (<code>shap.Explainer</code>) offer ML-focused alternatives. Coursera’s “Machine Learning Specialization” by Andrew Ng and <span class="citation" data-cites="molnar2022interpretable">Molnar (<a href="#ref-molnar2022interpretable" role="doc-biblioref">2022</a>)</span> both cover how traditional statistical inference concepts like marginal effects extend to complex models.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

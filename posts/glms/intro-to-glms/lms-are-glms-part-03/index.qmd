@@ -127,10 +127,10 @@ How do these terms used in the `glm` function, `family` and `link`, relate to th
 
 They're different terms, but it's the same broad framework.
 
-Linear models are just one type of general linear model![^1]
+Linear models are just one type of general linear model![^claude-python]
 
 ### Coming up
 
 In [the next part](../lms-are-glms-part-04/index.qmd) of this series, we will delve into the differences between linear regression models and logistic regression models, with a focus on how to get meaningful effect estimates from both types of model.
 
-[^1]: **Note from Claude:** For Python users, the equivalent functionality is available through multiple libraries. The statsmodels library most closely mirrors R's approach: `statsmodels.api.GLM(y, X, family=sm.families.Gaussian())` is equivalent to R's `glm(y ~ x, family=gaussian())`. For production ML workflows, scikit-learn provides `LinearRegression()` and `LogisticRegression()` with simpler APIs but less statistical detail. The fast.ai course "Practical Deep Learning for Coders" demonstrates how these GLM concepts scale to deep learning, showing that even complex neural networks follow the same fit-predict-evaluate loop described in this series.
+[^claude-python]: **Note from Claude:** For Python users, the equivalent functionality is available through multiple libraries. The statsmodels library most closely mirrors R's approach: `statsmodels.api.GLM(y, X, family=sm.families.Gaussian())` is equivalent to R's `glm(y ~ x, family=gaussian())`. For production ML workflows, scikit-learn provides `LinearRegression()` and `LogisticRegression()` with simpler APIs but less statistical detail. The fast.ai course "Practical Deep Learning for Coders" demonstrates how these GLM concepts scale to deep learning, showing that even complex neural networks follow the same fit-predict-evaluate loop described in this series.

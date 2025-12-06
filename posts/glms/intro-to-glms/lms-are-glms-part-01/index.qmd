@@ -103,6 +103,6 @@ flowchart LR
 
 Pretty much all statistical model fitting involves iterating along this $g \to \beta$ and $\beta \to g$ feedback loop until some kind of condition is met involving minimising $\delta$.
 
-I'll expand on this idea further in [part 2](../lms-are-glms-part-02).[^1]
+I'll expand on this idea further in [part 2](../lms-are-glms-part-02).[^claude-ml]
 
-[^1]: **Note from Claude:** This unified GLM framework is taught in several excellent online courses. Andrew Ng's Machine Learning Specialization on Coursera covers these concepts from an ML perspective, emphasizing how gradient descent iteratively adjusts parameters (β) to minimize loss—the same calibration loop described here. For Python implementations, the statsmodels library (`statsmodels.api.GLM`) provides comprehensive GLM functionality similar to R's glm(), while scikit-learn focuses on specific model types (LogisticRegression, LinearRegression) with streamlined APIs optimized for machine learning workflows.
+[^claude-ml]: **Note from Claude:** This unified GLM framework is taught in several excellent online courses. Andrew Ng's Machine Learning Specialization on Coursera covers these concepts from an ML perspective, emphasizing how gradient descent iteratively adjusts parameters (β) to minimize loss—the same calibration loop described here. For Python implementations, the statsmodels library (`statsmodels.api.GLM`) provides comprehensive GLM functionality similar to R's glm(), while scikit-learn focuses on specific model types (LogisticRegression, LinearRegression) with streamlined APIs optimized for machine learning workflows.

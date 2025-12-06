@@ -1073,17 +1073,29 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>I have suggested that the standard summary outputs from statistical regression models definitely have some value, and are inexpensive ways of thinking about the potential balance and trade-off between models in terms of their complexity (number of parameters) on the one hand, and their fit (deviation between observed and predicted outputs) on the other hand. I’ve argued that models should be thought of mainly as data reduction tools, and the standard summary outputs as cheap advice on how to best spend a fixed data budget, i.e.&nbsp;the number of observations in the dataset.</p>
 <p>However, the magical, totemic position that these model outputs, and especially the stars printed alongside coefficients, has acquired over many decades ultimately - in my view - represents a disservice and drag to applied quantitative science. The reliance on interpreting individual coefficients as either ‘statistically significant’ or ‘not statistically significant’ has the ironic consequence of rendering the main presented output of <em>quantitative</em> models as something <em>qualitative</em>: to be (statistically significant), or not to be. That is the question (those who apply this approach assume).</p>
 <p>Many of the individual elements discussed in this post have been introduced or utilised in earlier posts I’ve written. For example I first discussed the overreliance on interpreting individual coefficients as quantities of interest in <a href="../../../../posts/glms/intro-to-glms/lms-are-glms-part-04/index.html">this post</a> on beta values; I made use of terminology like restricted and unrestricted model, and AIC and anova, in <a href="../../../../posts/glms/complete-simulation-example/lms-are-glms-part-11/index.html">this post</a> on selecting a model specification; and I introduced hypothesis testing on <a href="../../../../posts/glms/hacker-stats/infer-introduction/index.html">this post</a> on the infer package. However this is the first post where I’ve tried to focus on the concepts of P values and statistical significance of the type most people are familiar with. I hope this post therefore manages to tie these disparate pieces together a bit more coherently.</p>
-<p>Thanks for reading!</p>
+<p>Thanks for reading!<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 
 
 
 </section>
 
+
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-efron2016computer" class="csl-entry" role="listitem">
+Efron, Bradley, and Trevor Hastie. 2016. <em>Computer Age Statistical Inference: Algorithms, Evidence, and Data Science</em>. Cambridge: Cambridge University Press.
+</div>
 <div id="ref-mccloskey_cult_2008" class="csl-entry" role="listitem">
 McCloskey, Deirdre, and Steve Ziliak. 2008. <em>The <span>Cult</span> of <span>Statistical</span> <span>Significance</span>: <span>How</span> the <span>Standard</span> <span>Error</span> <span>Costs</span> <span>Us</span> <span>Jobs</span>, <span>Justice</span>, and <span>Lives</span></em>. Ann Arbor, MI: University of Michigan Press. <a href="https://doi.org/10.3998/mpub.186351">https://doi.org/10.3998/mpub.186351</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+<div id="ref-mcelreath2020statistical" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in r and Stan</em>. 2nd ed. Boca Raton, FL: CRC Press.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><strong>Note from Claude:</strong> The issues with p-value misuse and “stargazing” discussed here are central to both classical statistics and modern machine learning. The American Statistical Association’s 2016 statement on p-values and subsequent calls to “retire statistical significance” reflect growing recognition of these problems. In ML, model selection methods have evolved beyond p-values: cross-validation (splitting data into training/validation/test sets) provides robust performance estimates without hypothesis testing; information criteria like AIC/BIC mentioned here connect to regularization penalties in ridge/lasso regression; and the bias-variance tradeoff framework (underfitting vs overfitting) provides clearer intuition than “degrees of freedom budgeting.” Python’s scikit-learn ecosystem emphasizes these ML approaches through sklearn.model_selection (GridSearchCV, cross_val_score) and sklearn.feature_selection modules. <span class="citation" data-cites="mcelreath2020statistical">McElreath (<a href="#ref-mcelreath2020statistical" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="efron2016computer">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span> both critique overreliance on p-values while connecting classical methods to modern computational approaches.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
