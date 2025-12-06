@@ -13,6 +13,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a safety aspect of the workflow to prevent accidental changes to the production branch.
 
+## Merge Workflow: experimental/claude → main
+
+**To minimize merge conflicts when merging experimental/claude to main:**
+
+1. **Before starting new work on experimental/claude:**
+   ```bash
+   git checkout experimental/claude
+   git fetch origin
+   git merge origin/main
+   ```
+   This keeps experimental/claude in sync with main.
+
+2. **When committing from experimental/claude:**
+   - Commit source file changes (.qmd, .md, .R files)
+   - Avoid running `quarto render` before committing if possible
+   - If you must render, that's okay - just be aware it may cause merge conflicts
+
+3. **When merging to main (user handles this, but context is useful):**
+   - Most conflicts will be in auto-generated files (docs/*, _freeze/*)
+   - For conflicts in source files (.qmd): prefer the experimental/claude version
+   - For conflicts in generated files: accept experimental/claude version, then re-render on main
+   - Use `git checkout --theirs <file>` to accept experimental/claude version
+
+4. **After merging to main:**
+   - Run `quarto render` on main branch to regenerate docs/ with merged content
+   - This ensures rendered output matches the merged source files
+
 ## Project Overview
 
 This is Jon Minton's personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.
