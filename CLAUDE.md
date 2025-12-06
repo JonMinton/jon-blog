@@ -2,16 +2,37 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## SAFETY: Branch Check
+## SAFETY: Branch Check and Sync
 
-**CRITICAL SAFETY REQUIREMENT:** Before making any changes to files, commits, or running commands that modify the repository:
+**CRITICAL SAFETY REQUIREMENT - Run at the start of EVERY session:**
 
-1. Check the current git branch with `git branch --show-current`
-2. **NEVER work directly on the `main` branch**
-3. If on `main`, STOP and ask the user to switch to a feature branch first
-4. Only proceed with file modifications when on a branch other than `main`
+At the beginning of each session, Claude Code agents MUST:
 
-This is a safety aspect of the workflow to prevent accidental changes to the production branch.
+1. **Check current branch:**
+   ```bash
+   git branch --show-current
+   ```
+
+2. **Verify branch is experimental/claude:**
+   - If on `main`: STOP immediately and inform the user they are on main
+   - Ask user if they want to switch to `experimental/claude` or if they explicitly intend to work on main
+   - **NEVER make file changes on main** unless user explicitly confirms
+
+3. **If on experimental/claude, sync with main to prevent merge conflicts:**
+   ```bash
+   git fetch origin
+   git merge origin/main
+   ```
+   - This is AUTOMATIC and should be done proactively without asking
+   - Inform the user: "Syncing experimental/claude with main to prevent merge conflicts..."
+   - If merge conflicts occur during sync, report them to the user
+   - If sync succeeds, report: "✓ Branch synced with main"
+
+4. **Only then proceed with normal work**
+
+**Why this matters:** Syncing at the start of each session prevents the experimental/claude branch from diverging from main, which causes painful merge conflicts later. This two-line command prevents hours of merge conflict resolution.
+
+**Exception:** If user explicitly states they are working on main and know what they're doing, skip the sync step but still warn about working on main.
 
 ## Merge Workflow: experimental/claude → main
 
