@@ -227,3 +227,39 @@ The blog has several major content areas linked in the navbar:
 
 **Working with series posts:**
 The GLM series follows a numbered pattern (`lms-are-glms-part-XX`) within subdirectories by topic area. When adding to a series, maintain the numbering convention and place in the appropriate subdirectory.
+
+## Troubleshooting Common Issues
+
+### Duplicate or Missing Footnotes in Rendered Output
+
+**Symptom:** Footnotes appear duplicated, missing, or incorrect in the rendered HTML even though the source `.qmd` file is correct.
+
+**Cause:** Stale Quarto cache in `_freeze/` directory. When footnote IDs are changed (e.g., from `[^1]` to `[^claude-ml]`), the cached render state can conflict with the new source.
+
+**Solution:**
+```bash
+# Clear cache for specific post
+rm -rf _freeze/posts/[path-to-post]/
+
+# Re-render the post
+quarto render posts/[path-to-post]/index.qmd
+```
+
+**Example:**
+```bash
+# If part-02 has duplicate footnotes:
+rm -rf _freeze/posts/glms/intro-to-glms/lms-are-glms-part-02/
+quarto render posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd
+```
+
+**When to use this fix:**
+- After changing footnote IDs (numbered → descriptive)
+- When footnotes appear duplicated in rendered output
+- When user's footnotes are missing but Claude footnotes appear multiple times
+- After resolving merge conflicts in posts with footnotes
+
+**Prevention:** The session startup sync (pulling main into experimental/claude) helps prevent this by keeping branches aligned, reducing the need for retroactive footnote ID changes.
+
+### Render Warnings
+
+See `.claude/known-render-warnings.md` for documented warnings that are safe to ignore vs. those requiring immediate attention.
