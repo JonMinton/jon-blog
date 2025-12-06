@@ -340,8 +340,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Creating a new post:</strong> 1. Create directory: <code>posts/[category]/[post-name]/</code> 2. Add <code>index.qmd</code> with proper YAML frontmatter 3. Add any images/assets to the same directory 4. Render to preview: <code>quarto preview</code></p>
 <p><strong>Editing existing posts:</strong> - Posts are in <code>posts/**/**/index.qmd</code> - After editing, render to see changes - Word count updates automatically on next render via pre-render script</p>
 <p><strong>Working with series posts:</strong> The GLM series follows a numbered pattern (<code>lms-are-glms-part-XX</code>) within subdirectories by topic area. When adding to a series, maintain the numbering convention and place in the appropriate subdirectory.</p>
+</section>
+<section id="troubleshooting-common-issues" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-common-issues">Troubleshooting Common Issues</h2>
+<section id="duplicate-or-missing-footnotes-in-rendered-output" class="level3">
+<h3 class="anchored" data-anchor-id="duplicate-or-missing-footnotes-in-rendered-output">Duplicate or Missing Footnotes in Rendered Output</h3>
+<p><strong>Symptom:</strong> Footnotes appear duplicated, missing, or incorrect in the rendered HTML even though the source <code>.qmd</code> file is correct.</p>
+<p><strong>Cause:</strong> Stale Quarto cache in <code>_freeze/</code> directory. When footnote IDs are changed (e.g., from <code>[^1]</code> to <code>[^claude-ml]</code>), the cached render state can conflict with the new source.</p>
+<p><strong>Solution:</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear cache for specific post</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> _freeze/posts/<span class="pp">[</span><span class="ss">path</span><span class="pp">-</span><span class="ss">to</span><span class="pp">-</span><span class="ss">post</span><span class="pp">]</span>/</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-render the post</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render posts/<span class="pp">[</span><span class="ss">path</span><span class="pp">-</span><span class="ss">to</span><span class="pp">-</span><span class="ss">post</span><span class="pp">]</span>/index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If part-02 has duplicate footnotes:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> _freeze/posts/glms/intro-to-glms/lms-are-glms-part-02/</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>When to use this fix:</strong> - After changing footnote IDs (numbered → descriptive) - When footnotes appear duplicated in rendered output - When user’s footnotes are missing but Claude footnotes appear multiple times - After resolving merge conflicts in posts with footnotes</p>
+<p><strong>Prevention:</strong> The session startup sync (pulling main into experimental/claude) helps prevent this by keeping branches aligned, reducing the need for retroactive footnote ID changes.</p>
+</section>
+<section id="render-warnings" class="level3">
+<h3 class="anchored" data-anchor-id="render-warnings">Render Warnings</h3>
+<p>See <code>.claude/known-render-warnings.md</code> for documented warnings that are safe to ignore vs.&nbsp;those requiring immediate attention.</p>
 
 
+</section>
 </section>
 </section>
 
