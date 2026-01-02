@@ -80,7 +80,7 @@ At present, AIs look likely to become capable lawyers and doctors and programmer
 
 The gap between cognitive and embodied intelligence in AIs may well persist for many years. Much of the progress of advancement with cognitive intelligence tasks in AIs appears to come from them being able to learn in simulations which run orders of magnitude faster than people can comprehend, and for learning to be run in a way that is massively parallel. With cognitive tasks, AIs really can gain centuries of experience in a single day, and so go from infants to experts in a single afternoon. When it comes to embodied intelligence, the need to operate in a real physical environment appears to place a severe bottleneck on both the speed and scale at which new experiments in dexterous manipulation can occur, and with this how quickly reinforcement learning algorithms are likely to bring competence and capability with object interpretation and manipulation. A billion agents playing a billion Atari games to learn and master the rules - the DeepMind approach - has some physical and environmental footprint, but creating a billion pairs of physical hands and arms to cook a trillion omelettes or fold a trillion t-shirts would take much more space, and likely have to move at a much lower speed than is the case with purely electronic simulations.
 
-Ultimately, I suspect the development of embodied intelligence will also continue to progress, but I also suspect progress with physicality may, unlike with cognitive intelligence, lag rather than lead expectations for the next few years. New training paradigms may change this - such as if simulations of physical environments become accurate enough that learning to use hands and feet itself becomes a virtual exercise for AIs - but for now looking for comparative advantage in physical dexterity and object manipulation appears a safer means of maintaining a positive sense of distinction and comparative advantage with AIs than looking only at cognitive intelligence. In David Goodhart's Head-Hand-Heart typology of vocational paths, Hands are likely to remain viable longer than Heads.[^claude-goodhart]
+Ultimately, I suspect the development of embodied intelligence will also continue to progress, but I also suspect progress with physicality may, unlike with cognitive intelligence, lag rather than lead expectations for the next few years. The differential training challenge is fundamental: cognitive AI can learn from text at superhuman speed because language is inherently digital and parallelisable, but physics is stubbornly analogue. New training paradigms may change this - if physics simulations become accurate enough that learning to use hands and feet itself becomes a virtual exercise, embodied AI could eventually achieve the same exponential training advantages that cognitive AI currently enjoys. Companies like DeepMind and Figure AI are working precisely on this problem. But for now, looking for comparative advantage in physical dexterity and object manipulation appears a safer means of maintaining a positive sense of distinction and comparative advantage with AIs than looking only at cognitive intelligence. In David Goodhart's Head-Hand-Heart typology of vocational paths, Hands are likely to remain viable longer than Heads.[^claude-goodhart]
 
 ### *Homo Gregarius*
 
@@ -108,7 +108,7 @@ HD(Homo Dexterous)
 HG(Homo Gregarius)
 HL(Homo Ludens)
 
-HSS -->|Doubling Down| HD
+HSS -->|Changing Tack| HD
 HD -->|Heart| HG
 HD -->|Head| HL
 ```
