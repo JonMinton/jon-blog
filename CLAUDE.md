@@ -77,7 +77,30 @@ quarto preview
 quarto render
 ```
 
-The rendered site outputs to the `docs/` directory (configured in `_quarto.yml`), which is served by GitHub Pages.
+The rendered site outputs to the `docs/` directory (configured in `_quarto.yml`).
+
+**Deploying to GitHub Pages:**
+
+This blog uses `quarto publish gh-pages` for deployment, NOT direct serving from `docs/` on main.
+
+```bash
+quarto publish gh-pages
+```
+
+This command:
+1. Renders the entire site
+2. Creates/updates the `gh-pages` branch with rendered output
+3. Pushes that branch to GitHub
+4. GitHub Pages serves from the `gh-pages` branch
+
+**Important:** Simply pushing to `main` (even with rendered `docs/`) will NOT update the live site. You must run `quarto publish gh-pages` to deploy changes.
+
+**Typical deployment workflow:**
+1. Edit source files (.qmd, .md)
+2. Commit and push to main (for version control)
+3. Run `quarto publish gh-pages` (to deploy to live site)
+
+The publish command takes several minutes as it re-renders the entire site.
 
 **Pre-render automation:**
 The `pre-render.R` script runs automatically before each render (configured in `_quarto.yml`). It:
