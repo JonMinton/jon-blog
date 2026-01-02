@@ -127,6 +127,26 @@ Systematically review all blog posts and add conservative, fact-checking Claude 
 26. ✅ `posts/rwanda-information-warfare/index.qmd` - 1 footnote (Rwanda religious demographics)
 27. ✅ `posts/the-dialectical-engine/index.qmd` - 1 footnote (The Thinking Game documentary)
 
+### Session 4 (2026-01-02)
+
+**Posts Footnoted:**
+28. ✅ `posts/2025-last-human-majority-knowledge-worker/index.qmd` - 6 footnotes (Chinese Room/Searle/Dennett, Yudkowsky AI doom, Geoffrey Hinton Nobel/plumber advice, David Goodhart Head-Hand-Heart, Huizinga Homo Ludens, Stanley Kubrick's Boxes documentary)
+
+**Session 4 Stats:**
+- Posts reviewed: 1
+- Posts footnoted: 1
+- Total footnotes added: 6
+- Average footnotes per post: 6.0 (above average - commentary post with many verifiable claims)
+
+**Key Themes:**
+- Philosophy of mind (Chinese Room debate, systems reply)
+- AI safety researchers and their positions (Yudkowsky, Hinton)
+- Academic frameworks (Goodhart's vocational typology, Huizinga's play theory)
+- Documentary verification (Kubrick's Boxes)
+- Included Dennett's response to Chinese Room per user request
+
+---
+
 **Session 2 Final Stats:**
 - Posts reviewed: 62
 - Posts footnoted: 15 (14 new + 1 enhanced)
