@@ -8,7 +8,7 @@ categories: [AI, society, work, existential, futures]
 
 ## The End of Nothing Changes
 
-Back around a year ago, in 2024's fallow Twixmas fortnight, I wrote a lament, fundamentally, about how things didn't seem to have changed for many years. It was about cultural progress, cultural distinction, and the ways in which the 2020s and the 2010s and the 2000s seem more indistinct from each other than were the 1990s, 1980s, and earlier decades.
+Back around a year ago, in 2024's fallow Twixmas fortnight, I wrote [a lament](../unpop/wham-forever-cultural-debraiding/index.qmd), fundamentally, about how things didn't seem to have changed for many years. It was about cultural progress, cultural distinction, and the ways in which the 2020s and the 2010s and the 2000s seem more indistinct from each other than were the 1990s, 1980s, and earlier decades.
 
 For most of 2025, if I had similar inclination and opportunity to write about societal and cultural change, my position likely wouldn't have changed so much from the above piece. A quarter of the way into the 21st century, things seemed much as they always were, if a little more tired and tarnished. Another year, another year older, but fundamentally nothing seemed to have changed.
 
@@ -30,7 +30,7 @@ For anyone who's been following my blog the last few months, the answer is tires
 
 ## Organisational Nervous Systems
 
-I was slow to realise a lot of this, because I had largely chosen not to look. It was only when I challenged an LLM to challenge me, and it did so, and when I tasked an LLM (Claude, in both cases) with creating a pedagogic codebase through the medium of discussion alone, that I realised how outdated and complacent I'd become in my estimation of what LLMs can and cannot now do well. My impression of LLMs was a year or two out of date, and given the rate of change in AIs' underlying capabilities, this was like confusing Steam Age with Space Age capabilities.
+I was slow to realise a lot of this, because I had largely chosen not to look. It was only when [I challenged an LLM to challenge me](../the-dialectical-engine/index.qmd), and it did so, and when I tasked an LLM (Claude, in both cases) with [creating pedagogic content](../handdrawn-stats/claude-stat-concept-guides/index.qmd) through the medium of discussion alone, that I realised how outdated and complacent I'd become in my estimation of what LLMs can and cannot now do well. My impression of LLMs was a year or two out of date, and given the rate of change in AIs' underlying capabilities, this was like confusing Steam Age with Space Age capabilities.
 
 I was shocked. Reality had changed. And so I updated my understanding, and my orientation to this new technology, to match the new reality. Now I'm less shocked, and hopefully more prepared.
 
@@ -60,7 +60,49 @@ Though it's Knowledge Workers whom I expect will experience of the brunt of the 
 
 We are *Homo Sapiens sapiens*. Unlike our forerunners we define ourselves not by our ability to stand upright (freeing up two paws for advanced object manipulation) but to think, to plan, and to be smart, and for hundreds of thousands of years we have been able to bootstrap our superior cognitive advantage over other species through the layer of civilisational memory, meaning each generation has access to new world-changing technologies developed by the last generation. But we are now, potentially, bringing into existence a new species, *Silica Sapiens*, whose cognitive capabilities and processing speed will dwarf us much as our own capabilities dwarf that of livestock, pets, bugs and wild animals. Even if we reject Yudekowsky-style doommongery, premised on the colonial assumption that smarter-always-destroys-dumber (again, think of pets and livestock), the pending emergence of artificial general intelligence means we may start to experience something like a species-wide existential crisis. We will have to start thinking of ourselves, and find distinct within ourselves, something other than our cognitive capacity, our 'smarts'.
 
-I have no idea how this kind of higher order existential crisis will play out, or over what kind of timescale, but I suspect there may be both some level of sequencing and speciation of how we define ourselves. In particular I think the first sequence is already upon us:
+I have no idea how this kind of higher order existential crisis will play out, or over what kind of timescale, but I suspect there may be both some level of sequencing and speciation of how we define ourselves. The following diagram sketches out potential strategies humans might adopt:
+
+```{mermaid}
+flowchart TD
+    subgraph "The Challenge"
+        SS[<b>Silica Sapiens</b><br/>AI surpasses human<br/>cognitive capabilities]
+    end
+
+    subgraph "Human Identity Responses"
+        HSS["<b>Homo Sapiens sapiens!</b><br/>(Doubling Down)<br/>Emphasise remaining<br/>cognitive advantages"]
+        HD["<b>Homo dexterous</b><br/>(Manual Skills)<br/>Value physical dexterity<br/>robots can't yet match"]
+        HS["<b>Homo sentiens</b><br/>(Feeling Beings)<br/>Emphasise emotional<br/>depth & subjective experience"]
+        HC["<b>Homo connectus</b><br/>(Social Beings)<br/>Value authentic human<br/>relationships & community"]
+        HE["<b>Homo existens</b><br/>(Simply Being)<br/>Intrinsic value in<br/>human existence itself"]
+    end
+
+    subgraph "Trajectory"
+        EARLY["Early Response<br/>(Already happening)"]
+        MID["Mid-term<br/>(Next 5-10 years)"]
+        LATE["Long-term<br/>(Post-AGI)"]
+    end
+
+    SS --> HSS
+    SS --> HD
+    SS --> HS
+    SS --> HC
+    SS --> HE
+
+    HSS -.-> EARLY
+    HD -.-> EARLY
+    HS -.-> MID
+    HC -.-> MID
+    HE -.-> LATE
+
+    style SS fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+    style HSS fill:#ffd93d,stroke:#333,stroke-width:2px
+    style HD fill:#6bcb77,stroke:#333,stroke-width:2px
+    style HS fill:#4d96ff,stroke:#333,stroke-width:2px
+    style HC fill:#9b59b6,stroke:#333,stroke-width:2px
+    style HE fill:#1abc9c,stroke:#333,stroke-width:2px
+```
+
+In particular I think the first sequence is already upon us:
 
 ### *Homo Sapiens sapiens*! (Note the !)
 
