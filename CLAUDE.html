@@ -258,12 +258,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Render the full site:</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The rendered site outputs to the <code>docs/</code> directory (configured in <code>_quarto.yml</code>), which is served by GitHub Pages.</p>
+<p>The rendered site outputs to the <code>docs/</code> directory (configured in <code>_quarto.yml</code>).</p>
+<p><strong>Deploying to GitHub Pages:</strong></p>
+<p>This blog uses <code>quarto publish gh-pages</code> for deployment, NOT direct serving from <code>docs/</code> on main.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command: 1. Renders the entire site 2. Creates/updates the <code>gh-pages</code> branch with rendered output 3. Pushes that branch to GitHub 4. GitHub Pages serves from the <code>gh-pages</code> branch</p>
+<p><strong>Important:</strong> Simply pushing to <code>main</code> (even with rendered <code>docs/</code>) will NOT update the live site. You must run <code>quarto publish gh-pages</code> to deploy changes.</p>
+<p><strong>Typical deployment workflow:</strong> 1. Edit source files (.qmd, .md) 2. Commit and push to main (for version control) 3. Run <code>quarto publish gh-pages</code> (to deploy to live site)</p>
+<p>The publish command takes several minutes as it re-renders the entire site.</p>
 <p><strong>Pre-render automation:</strong> The <code>pre-render.R</code> script runs automatically before each render (configured in <code>_quarto.yml</code>). It: - Executes <code>calculate-wordcount.R</code> to count total words across all <code>.qmd</code> files - Updates the subtitle in <code>index.qmd</code> with the current word count - Captures warnings to <code>render_warnings.log</code></p>
 <p><strong>Monitoring long-running renders:</strong> When <code>quarto render</code> is run in the background, use these <strong>safe</strong> methods to check progress without interrupting the process:</p>
 <ol type="1">
 <li><p><strong>Check process table (safest):</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">"quarto|render"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> grep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> aux <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-E</span> <span class="st">"quarto|render"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> grep</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This only reads system info and won’t interrupt the process.</p></li>
 <li><p><strong>Check background task output:</strong> Use the <code>BashOutput</code> tool with the background task ID. This reads buffered output without sending signals to the process.</p></li>
 </ol>
@@ -288,39 +295,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="blog-post-conventions" class="level2">
 <h2 class="anchored" data-anchor-id="blog-post-conventions">Blog Post Conventions</h2>
 <p><strong>YAML frontmatter structure:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Post Title</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> Optional subtitle (if needed)</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Jon Minton</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> YYYY-MM-DD</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">category1</span><span class="kw">,</span><span class="at"> category2</span><span class="kw">,</span><span class="at"> tag3</span><span class="kw">]</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Post Title</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> Optional subtitle (if needed)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Jon Minton</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> YYYY-MM-DD</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">category1</span><span class="kw">,</span><span class="at"> category2</span><span class="kw">,</span><span class="at"> tag3</span><span class="kw">]</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Internal linking:</strong> - Use relative paths from the post location: <code>../other-post/index.qmd</code> - For posts in nested directories: <code>../../category/post/index.qmd</code> - Common pattern: Link to related posts in the same series or topic area</p>
 <p><strong>Markdown formatting:</strong></p>
 <p><strong>CRITICAL - List formatting:</strong> Bullet point lists in <code>.qmd</code> files MUST have blank lines before and after the entire list block, or they will not render properly. This is a common source of rendering errors.</p>
 <p>Correct format:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Incorrect format (will break rendering):</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Incorrect format (will break rendering):</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Here is some text before the list.</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item one</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item two</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Item three</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Here is text after the list.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Other formatting rules: - Paragraph breaks require blank lines between paragraphs (markdown standard) - Use <code>**bold**</code> for emphasis in bullet points when needed - Links: <code>[Link text](url)</code> for external, <code>[Link text](../path/index.qmd)</code> for internal</p>
 <p><strong>Images and media:</strong> - Store in the same directory as the post’s <code>index.qmd</code> - Reference with relative paths: <code>![Alt text](filename.jpg)</code></p>
 <p><strong>Footnotes:</strong></p>
 <p>Quarto supports standard Markdown footnote syntax with two-part format: - Reference in text: <code>Some text here[^id]</code> - Definition elsewhere: <code>[^id]: Footnote content here</code></p>
 <p><strong>CRITICAL - Footnote ID Convention:</strong> - <strong>ALWAYS use descriptive IDs</strong> for Claude-generated footnotes - Format: <code>[^claude-shorttopic]</code> (e.g., <code>[^claude-ml]</code>, <code>[^claude-pvalues]</code>) - <strong>NEVER use sequential numbers</strong> ([^1], [^2]) for Claude footnotes - this creates collision risk with existing footnotes - User’s original footnotes may use numbers - descriptive IDs prevent conflicts</p>
 <p>Example correct usage:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>The GLM framework applies to many models.<span class="ot">[^claude-ml]</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^claude-ml]: </span>**Note from Claude:** This concept is taught in Andrew Ng's ML course...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>The GLM framework applies to many models.<span class="ot">[^claude-ml]</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^claude-ml]: </span>**Note from Claude:** This concept is taught in Andrew Ng's ML course...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Footnotes can include bibliography citations using <code>@citationkey</code> format if the post has a <code>bibliography: references.bib</code> entry in the YAML frontmatter. See <code>.claude/footnote-rendering-fix.md</code> for full details on the footnote rendering fix and conventions.</p>
 </section>
 <section id="themes-and-styling" class="level2">
@@ -348,15 +355,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Symptom:</strong> Footnotes appear duplicated, missing, or incorrect in the rendered HTML even though the source <code>.qmd</code> file is correct.</p>
 <p><strong>Cause:</strong> Stale Quarto cache in <code>_freeze/</code> directory. When footnote IDs are changed (e.g., from <code>[^1]</code> to <code>[^claude-ml]</code>), the cached render state can conflict with the new source.</p>
 <p><strong>Solution:</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear cache for specific post</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> _freeze/posts/<span class="pp">[</span><span class="ss">path</span><span class="pp">-</span><span class="ss">to</span><span class="pp">-</span><span class="ss">post</span><span class="pp">]</span>/</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-render the post</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render posts/<span class="pp">[</span><span class="ss">path</span><span class="pp">-</span><span class="ss">to</span><span class="pp">-</span><span class="ss">post</span><span class="pp">]</span>/index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear cache for specific post</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> _freeze/posts/<span class="pp">[</span><span class="ss">path</span><span class="pp">-</span><span class="ss">to</span><span class="pp">-</span><span class="ss">post</span><span class="pp">]</span>/</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-render the post</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render posts/<span class="pp">[</span><span class="ss">path</span><span class="pp">-</span><span class="ss">to</span><span class="pp">-</span><span class="ss">post</span><span class="pp">]</span>/index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If part-02 has duplicate footnotes:</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> _freeze/posts/glms/intro-to-glms/lms-are-glms-part-02/</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If part-02 has duplicate footnotes:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> _freeze/posts/glms/intro-to-glms/lms-are-glms-part-02/</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>When to use this fix:</strong> - After changing footnote IDs (numbered → descriptive) - When footnotes appear duplicated in rendered output - When user’s footnotes are missing but Claude footnotes appear multiple times - After resolving merge conflicts in posts with footnotes</p>
 <p><strong>Prevention:</strong> The session startup sync (pulling main into experimental/claude) helps prevent this by keeping branches aligned, reducing the need for retroactive footnote ID changes.</p>
 </section>
