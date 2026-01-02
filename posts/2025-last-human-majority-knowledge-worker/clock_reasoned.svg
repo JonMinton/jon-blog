@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Analogue Clock showing 10:10
+  
+  Meta-reasoning for hand positions:
+  - Clock center at (100, 100), radius 95
+  - 12 o'clock is at top (negative y direction)
+  - Each hour = 30 degrees (360/12)
+  - Each minute = 6 degrees (360/60)
+  
+  For 10:10:
+  - Hour hand: 10 hours + 10/60 hours = 10.167 hours
+    = 10.167 * 30 = 305 degrees from 12 (clockwise)
+    = -55 degrees from positive x-axis (in standard math coords)
+    Hour hand length: 50 pixels
+    End point: (100 + 50*sin(305°), 100 - 50*cos(305°))
+             = (100 + 50*(-0.819), 100 - 50*(0.574))
+             = (100 - 41, 100 - 29) = (59, 71)
+  
+  - Minute hand: 10 minutes = 60 degrees from 12 (clockwise)
+    Minute hand length: 70 pixels
+    End point: (100 + 70*sin(60°), 100 - 70*cos(60°))
+             = (100 + 70*(0.866), 100 - 70*(0.5))
+             = (100 + 61, 100 - 35) = (161, 65)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Clock face -->
+  <circle cx="100" cy="100" r="95" fill="#fafafa" stroke="#333" stroke-width="3"/>
+  
+  <!-- Tick marks for all hours -->
+  <!-- 12 -->
+  <line x1="100" y1="10" x2="100" y2="25" stroke="#333" stroke-width="2"/>
+  <!-- 1 -->
+  <line x1="145" y1="17" x2="140" y2="30" stroke="#333" stroke-width="2"/>
+  <!-- 2 -->
+  <line x1="183" y1="55" x2="170" y2="60" stroke="#333" stroke-width="2"/>
+  <!-- 3 -->
+  <line x1="190" y1="100" x2="175" y2="100" stroke="#333" stroke-width="2"/>
+  <!-- 4 -->
+  <line x1="183" y1="145" x2="170" y2="140" stroke="#333" stroke-width="2"/>
+  <!-- 5 -->
+  <line x1="145" y1="183" x2="140" y2="170" stroke="#333" stroke-width="2"/>
+  <!-- 6 -->
+  <line x1="100" y1="190" x2="100" y2="175" stroke="#333" stroke-width="2"/>
+  <!-- 7 -->
+  <line x1="55" y1="183" x2="60" y2="170" stroke="#333" stroke-width="2"/>
+  <!-- 8 -->
+  <line x1="17" y1="145" x2="30" y2="140" stroke="#333" stroke-width="2"/>
+  <!-- 9 -->
+  <line x1="10" y1="100" x2="25" y2="100" stroke="#333" stroke-width="2"/>
+  <!-- 10 -->
+  <line x1="17" y1="55" x2="30" y2="60" stroke="#333" stroke-width="2"/>
+  <!-- 11 -->
+  <line x1="55" y1="17" x2="60" y2="30" stroke="#333" stroke-width="2"/>
+  
+  <!-- Hour numbers -->
+  <text x="100" y="42" text-anchor="middle" font-size="14" font-family="Georgia, serif" fill="#333">12</text>
+  <text x="165" y="106" text-anchor="middle" font-size="14" font-family="Georgia, serif" fill="#333">3</text>
+  <text x="100" y="170" text-anchor="middle" font-size="14" font-family="Georgia, serif" fill="#333">6</text>
+  <text x="36" y="106" text-anchor="middle" font-size="14" font-family="Georgia, serif" fill="#333">9</text>
+  
+  <!-- Hour hand: 10:10 means hour hand at ~305 degrees from 12 -->
+  <!-- Using calculated coordinates: approximately (59, 71) -->
+  <line x1="100" y1="100" x2="59" y2="71" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Minute hand: 10 minutes = 60 degrees from 12 -->
+  <!-- End point approximately (161, 65) -->
+  <line x1="100" y1="100" x2="161" y2="65" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Center cap -->
+  <circle cx="100" cy="100" r="6" fill="#222"/>
+  <circle cx="100" cy="100" r="3" fill="#666"/>
+</svg>
