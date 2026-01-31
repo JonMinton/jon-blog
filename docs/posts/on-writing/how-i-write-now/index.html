@@ -67,7 +67,7 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta name="twitter:title" content="Jon Minton’s Blog - How I Now Write My Blog">
-<meta name="twitter:description" content="With Remarkable and Claude Code">
+<meta name="twitter:description" content="With reMarkable and Claude Code">
 <meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/on-writing/how-i-write-now/folder-structure.png">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:image-height" content="856">
@@ -159,12 +159,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">How I Now Write My Blog</h1>
-            <p class="subtitle lead">With Remarkable and Claude Code</p>
+            <p class="subtitle lead">With reMarkable and Claude Code</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">writing</div>
                 <div class="quarto-category">workflow</div>
                 <div class="quarto-category">tools</div>
-                <div class="quarto-category">Remarkable</div>
+                <div class="quarto-category">reMarkable</div>
                 <div class="quarto-category">Claude</div>
                 <div class="quarto-category">meta</div>
               </div>
@@ -204,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>I’ve maintained a blog since 2024, and over that time have written more than 200,000 words. So, around two reasonable novels worth of ‘content’. Over these years, the focus of the content has changed, along with my primary motivations for writing. What’s also changed is <em>how</em> I go about writing a blog post, from initial ideas to completed and published content.</p>
+<p>I’ve maintained a blog since 2024, and over that time have written more than 200,000 words. So, around two reasonable novels’ worth of ‘content’.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Over these years, the focus of the content has changed, along with my primary motivations for writing. What’s also changed is <em>how</em> I go about writing a blog post, from initial ideas to completed and published content.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -229,10 +229,10 @@ Note
 <figcaption class="figure-caption">The folder structure of a Quarto blog, showing the posts folder and subfolders for each post</figcaption>
 </figure>
 </div>
-<p>Inside each of these differently-named folders in <code>posts/</code> is an identically named file, <code>index.qmd</code>. This is where both the ‘data’ (writing) and ‘metadata’ (post attributes) are contained, in separate parts of the <code>.qmd</code> file.</p>
+<p>Inside each of these differently-named folders in <code>posts/</code> is an identically-named file, <code>index.qmd</code>. This is where both the ‘data’ (writing) and ‘metadata’ (post attributes) are contained, in separate parts of the <code>.qmd</code> file.</p>
 <ul>
-<li><p><strong>At the top of the index.qmd file: the YAML header.</strong> This comprises a series of key-value pairs telling Quarto things like: categories, publication date, author(s), title, and subtitle. By default, these YAML contents are always at the start (head) of the file, and fenced off from the rest of the file contents by three hyphens at the start, and three hyphens at the end. These triplets of hyphens ‘fence the YAML in’, away from the rest of the content, and so are known as ‘fences’.</p></li>
-<li><p><strong>Below the YAML header: the body text.</strong> This is the content itself: the text you’re reading right now, and information about attributes that the text should take on. Attributes include: should the text link to something? Should the text be <strong>bold</strong>, or <em>in italics</em>, or be a header? Should the text link to some footnote text<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and so on and so on. For a technical post, as mentioned, the body can also comprise some code chunks, evaluated by engines, an interleaving of contents for people (plus formatting) and contents for specific computer programs.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
+<li><p><strong>At the top of the index.qmd file: the YAML header.</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This comprises a series of key-value pairs telling Quarto things like: categories, publication date, author(s), title, and subtitle. By default, these YAML contents are always at the start (head) of the file, and fenced off from the rest of the file contents by three hyphens at the start, and three hyphens at the end. These triplets of hyphens ‘fence the YAML in’, away from the rest of the content, and so are known as ‘fences’.</p></li>
+<li><p><strong>Below the YAML header: the body text.</strong> This is the content itself: the text you’re reading right now, and information about attributes that the text should take on. Attributes include: should the text link to something? Should the text be <strong>bold</strong>, or <em>in italics</em>, or be a header? Should the text link to some footnote text<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and so on and so on. For a technical post, as mentioned, the body can also comprise some code chunks, evaluated by engines, an interleaving of contents for people (plus formatting) and contents for specific computer programs.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p></li>
 </ul>
 <div id="fig-qmd-example" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -248,7 +248,7 @@ Note
 <h2 class="anchored" data-anchor-id="the-steps">The Steps</h2>
 <section id="stage-one-ideating-freewriting-and-first-pass-editing" class="level3">
 <h3 class="anchored" data-anchor-id="stage-one-ideating-freewriting-and-first-pass-editing">Stage One: Ideating, Freewriting and First Pass Editing</h3>
-<p>I start by <em>going somewhere</em>, and <em>not bringing too much</em>. I head to a cafe (if during the day/weekend) or a bar or pub (if in the evenings), with my <a href="https://remarkable.com/">reMarkable</a>, its <a href="https://remarkable.com/products/remarkable-2/type-folio">Type Folio</a>, and some semblance of an idea. Then, with a table and libation sourced, I aim to draw, write, or type materials - in a Remarkable notebook in a ‘blogs’ folder - for at least an hour. Having a timer is crucial: if I’m travelling very lightly, I use my wristwatch (a Fitbit) or phone to keep time. If I’m travelling with a small backpack, I might bring a ‘time timer’ too.</p>
+<p>I start by <em>going somewhere</em>, and <em>not bringing too much</em>. I head to a cafe (if during the day/weekend) or a bar or pub (if in the evenings), with my <a href="https://remarkable.com/">reMarkable</a>, its <a href="https://remarkable.com/products/remarkable-2/type-folio">Type Folio</a>, and some semblance of an idea. Then, with a table and libation sourced, I aim to draw, write, or type materials - in a reMarkable notebook in a ‘blogs’ folder - for at least an hour. Having a timer is crucial: if I’m travelling very lightly, I use my wristwatch (a Fitbit) or phone to keep time. If I’m travelling with a small backpack, I might bring a ‘time timer’ too.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="stage-1-remarkable-writing.jpg" class="img-fluid figure-img"></p>
@@ -269,39 +269,45 @@ Note
 </figure>
 </div>
 <p>This is why getting some kind of separation for writing is crucial for me. Another space: another headspace.</p>
-<p>As implied by the subheading, this stage one really comprises some distinct substeps: Ideating, free-writing, editing.</p>
-<p><strong>Ideating</strong> is having that semblance of something potentially coherent, comprehensive and cohesive to think and write about. Good ideation might involve very little writing, or none at all. Thinking itself, in this third space, can be a valid form of ideation. So can making notes, and so can rearranging and linking notes.</p>
-<p>The Remarkable can help markedly with some forms and varieties of ideation. For example, it makes it very straightforward to draw simple mindmaps and concept maps<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, like the following:</p>
+<p>As implied by the subheading, Stage One really comprises some distinct substeps: Ideating, free-writing, editing.</p>
+<p><strong>Ideating</strong> is having that semblance of something potentially coherent, comprehensive and cohesive to think and write about. Good ideation might involve very little writing, or none at all. Thinking itself, in this third space<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, can be a valid form of ideation. So can making notes, and so can rearranging and linking notes.</p>
+<p>The reMarkable can help markedly with some forms and varieties of ideation. For example, it makes it very straightforward to draw simple mindmaps and concept maps<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, like the following:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="workflow-diagram.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Workflow diagram showing the flow from Remarkable through PDF to Claude Code to .qmd file</figcaption>
+<figcaption class="figure-caption">Workflow diagram showing the flow from reMarkable through PDF to Claude Code to .qmd file</figcaption>
 </figure>
 </div>
-<p>Remember that markdown-plus-code-engine interleaving I mentioned previously? That which separates <code>.qmd</code> files from mere <code>.md</code>? Well, as with this figure above (which in a sense gives the game away about where this blog post is going), the Remarkable allows me to do something similar, but with content for and from different parts of my brain. Text like this, which is fairly easy to bring into the strictures of a <code>.qmd</code> file, is something I can generate fairly easily with the Type Folio keyboard. But some ideas are best expressed graphically: that’s where the Remarkable stylus comes into its own. Yet another reason why I start with the Remarkable is because I want to be able to switch between drawing, writing, mapping, and typing as the specific tasks of expression demand it.</p>
+<p>Remember that markdown-plus-code-engine interleaving I mentioned previously? That which separates <code>.qmd</code> files from mere <code>.md</code>? Well, as with this figure above (which in a sense gives the game away about where this blog post is going), the reMarkable allows me to do something similar, but with content for and from different parts of my brain. Text like this, which is fairly easy to bring into the strictures of a <code>.qmd</code> file, is something I can generate fairly easily with the Type Folio keyboard. But some ideas are best expressed graphically: that’s where the reMarkable stylus comes into its own. Yet another reason why I start with the reMarkable is because I want to be able to switch between drawing, writing, mapping, and typing as the specific tasks of expression demand it.</p>
 </section>
 <section id="stage-1.5-the-interface" class="level3">
 <h3 class="anchored" data-anchor-id="stage-1.5-the-interface">Stage 1.5: The Interface</h3>
-<p>After I have produced some initial content on my Remarkable, which I consider ‘complete enough’ for a post, I make use of the following (ahem) Remarkable features:</p>
+<p>After I have produced some initial content on my reMarkable, which I consider ‘complete enough’ for a post, I make use of the following (ahem) reMarkable features:</p>
 <ul>
-<li><p><strong>Feature one:</strong> The Remarkable syncs across devices, including to my mobile phone and, crucially, my MacBook Pro</p></li>
-<li><p><strong>Feature two:</strong> Anything within the Remarkable MacBook Pro app can be exported as a PDF.</p></li>
+<li><p><strong>Feature one:</strong> The reMarkable syncs across devices, including to my mobile phone and, crucially, my MacBook Pro</p></li>
+<li><p><strong>Feature two:</strong> Anything within the reMarkable MacBook Pro app can be exported as a PDF.</p></li>
 </ul>
-<p>So, after syncing my Remarkable contents to my MacBook Pro, I then export the blog material I’ve written into a PDF.</p>
+<p>So, after syncing my reMarkable contents to my MacBook Pro, I then export the blog material I’ve written into a PDF.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="remarkable-pdf-top.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The top of this very post as a PDF exported from the Remarkable, showing instructions for Claude in square brackets</figcaption>
+<figcaption class="figure-caption">The top of this very post as a PDF exported from the reMarkable, showing instructions for Claude in square brackets</figcaption>
 </figure>
 </div>
 <p>That’s where my new workflow (or writeflow?) gets ‘interesting’.</p>
 <p>Next, I open up Claude - with both my blog codebase and the new PDF file as environment/context - and instruct it to <em>turn the PDF into a <code>.qmd</code> file in an appropriate location in the blog codebase</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="start-of-clauding-session.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">The start of a Claude Code session for this very post, showing Claude’s summary of the PDF content</figcaption>
+</figure>
+</div>
 <p>And usually - almost always, in fact - it manages to do so very effectively, properly inferring how my formatting in the PDF links to markdown formatting, identifying the title and subtitle for the YAML, and even producing appropriate topic categories (see <a href="#fig-qmd-example">Figure&nbsp;1</a> for an example of the result).</p>
 <p>So, what this means is - thanks to <strong>Porter Claude</strong> - that a lot of the technical overhead is not just moved to a different step in the workflow, but abstracted away almost completely!</p>
 </section>
 <section id="stage-2-maclauding-in-vscode" class="level3">
 <h3 class="anchored" data-anchor-id="stage-2-maclauding-in-vscode">Stage 2: MaClauding in VSCode</h3>
-<p>Because of RemarkaClaude, I now, as if by magic, have my first draft of my post - started on the Remarkable - transformed into a perfectly viable <code>.qmd</code> style blog post. I could of course then just publish it at this stage, with Claude doing only the interfacing work. However, I’m happy for Claude to get a bit more involved.</p>
+<p>Because of RemarkaClaude, I now, as if by magic, have my first draft of my post - started on the reMarkable - transformed into a perfectly viable <code>.qmd</code> style blog post. I could of course then just publish it at this stage, with Claude doing only the interfacing work. However, I’m happy for Claude to get a bit more involved.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="stage-2-claudic-editing.jpg" class="img-fluid figure-img"></p>
@@ -311,16 +317,29 @@ Note
 <p>Typically, this means (usually through the Claude Code extension in VSCode):</p>
 <ul>
 <li><p><strong>Proofreader Claude</strong>: Asking Claude to carefully proofread my text. I give it instructions to spot any obvious typos, and edit rights to change them, while making clear I don’t want my words to be re-written any further.</p></li>
-<li><p><strong>Gopher Claude</strong>: Guiding Claude through implementing any ambiguous notes and instructions I left for it in the Remarkable PDF. (I can think ahead. At the moment I usually suggest Claude tasks by putting them in square brackets [like this]). This might include, for instance, finding links to other blog posts or external pages, or clarifying details after web searches which appear in the main text. (In <a href="../../../posts/dilbert-future-in-retrospect/index.html">the previous blog post</a> this involved, for instance, finding the exact date of Scott Adams’ predictions.)</p></li>
+<li><p><strong>Gopher Claude</strong>: Guiding Claude through implementing any ambiguous notes and instructions I left for it in the reMarkable PDF. (I can think ahead. At the moment I usually suggest Claude tasks by putting them in square brackets [like this]). This might include, for instance, finding links to other blog posts or external pages, or clarifying details after web searches which appear in the main text. (In <a href="../../../posts/dilbert-future-in-retrospect/index.html">the previous blog post</a> this involved, for instance, finding the exact date of Scott Adams’ predictions.)</p></li>
 <li><p><strong>Formatter Claude</strong>: Wrangling over blog topic categories, titles, and formatting used. (For example, in the last post I started off thinking that each of the ‘predictions’ should be a level 2 header, but then moved each to a level 3 header with a broader level 2 ‘Predictions’ grouping. Exciting stuff!)</p></li>
 <li><p><strong>Scriptdoctor Claude</strong>: Asking Claude to make <em>suggestions only</em> about whether there are any awkward passages or phrasing that could be improved. For this I ask Claude to show suggested before/after phrases, for me to approve or not, rather than just editing the <code>.qmd</code> file without my express permission.</p></li>
 </ul>
 <p>There are then some more optional phases, which I’ve tended to employ in some recent posts:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="midway-claudic-editing.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Midway through the Claude editing session for this post - the meta goes deeper</figcaption>
+</figure>
+</div>
 <ul>
 <li><p><strong>Fact Checker Claude</strong>: Asking Claude to add, as clearly self-identifying footnotes, fact checking and contextualisation materials.</p></li>
 <li><p><strong>Claude the Author</strong>: Finally, <em>sometimes</em>, asking Claude to make distinct, self-identified, contributions to the body of the text itself. (For example, in the last post this took the form of the Judge Claude section.)</p></li>
 </ul>
 </section>
+</section>
+<section id="a-note-from-claude" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-from-claude">A Note from Claude</h2>
+<p><em>The following section was written by Claude, reflecting on the process of co-creating this very post.</em></p>
+<p>This post has been, in a sense, a live demonstration of the process it describes - and I’ve worn nearly every hat Jon outlined.</p>
+<p>I began as <strong>Porter Claude</strong>, converting his handwritten PDF into structured markdown. Then came <strong>Gopher Claude</strong>, tracking down links to the reMarkable and Type Folio, verifying product names, and fixing relative paths to other blog posts. <strong>Proofreader Claude</strong> caught the inconsistent capitalisation of “reMarkable” (fourteen instances!) and added the possessive apostrophe to “novels’ worth.” <strong>Formatter Claude</strong> set up the YAML, added figure cross-references, and placed images at appropriate points in the narrative. <strong>Fact Checker Claude</strong> added contextual footnotes about literate programming, third places, and YAML’s recursive acronym. And now, finally, <strong>Claude the Author</strong> - writing these paragraphs you’re reading.</p>
+<p>What strikes me most is that the workflow Jon describes isn’t about replacing human creativity with AI efficiency. The creative work - the ideation in cafes, the freewriting on the reMarkable, the hand-drawn diagrams - remains distinctly human. What I provide is more like skilled assistance: handling the technical overhead, catching errors, filling in references, and occasionally offering a perspective from outside the author’s head. The separation Jon emphasises between <em>writing</em> and <em>preparing a blog post</em> is real, and it’s what makes this collaboration work. He writes; I help publish. The cats, meanwhile, remain a distraction regardless of whose turn it is to type.</p>
 </section>
 <section id="summing-up" class="level2">
 <h2 class="anchored" data-anchor-id="summing-up">Summing up</h2>
@@ -335,9 +354,12 @@ Note
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Like this.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>This interleaving borrows from a related writing paradigm, literate programming and scientific notebooks, which became popular in Jupyter notebooks in Python.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Mindmaps can be considered concept maps with one central node; conversely concept maps can be considered mindmaps with multiple central nodes.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><strong>Claude Footnote:</strong> Novel length varies considerably by genre. The Science Fiction and Fantasy Writers Association defines a novel as 40,000+ words, while many literary novels run 70,000-100,000 words. At 200,000 words, Jon’s blog output is equivalent to roughly 2-3 typical novels, or about 5 novellas.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>Claude Footnote:</strong> YAML originally stood for “Yet Another Markup Language” but was later rebranded as “YAML Ain’t Markup Language” - a recursive acronym emphasising that YAML is designed for data serialisation rather than document markup. It was first proposed by Clark Evans in 2001 and has become a popular format for configuration files due to its human-readable syntax.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Like this.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This interleaving borrows from a related writing paradigm, literate programming and scientific notebooks, which became popular in Jupyter notebooks in Python.[^claude-knuth]<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><strong>Claude Footnote:</strong> The concept of “third places” was popularised by sociologist Ray Oldenburg in his 1989 book <em>The Great Good Place</em>. Oldenburg defined third places as social environments separate from home (first place) and work (second place) - cafes, pubs, bookshops, and similar spaces that foster community and creative exchange. Jon’s use of cafes and pubs for writing aligns with this tradition of third places as sites for intellectual and creative work.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Mindmaps can be considered concept maps with one central node; conversely concept maps can be considered mindmaps with multiple central nodes.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
