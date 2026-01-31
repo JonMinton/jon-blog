@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2025-01-31">
+
+<title>Jon Minton’s Blog - How I Now Write My Blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - How I Now Write My Blog">
+<meta name="twitter:description" content="With Remarkable and Claude Code">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/on-writing/how-i-write-now/folder-structure.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="856">
+<meta name="twitter:image-width" content="1224">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">How I Now Write My Blog</h1>
+            <p class="subtitle lead">With Remarkable and Claude Code</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">writing</div>
+                <div class="quarto-category">workflow</div>
+                <div class="quarto-category">tools</div>
+                <div class="quarto-category">Remarkable</div>
+                <div class="quarto-category">Claude</div>
+                <div class="quarto-category">meta</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 31, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>I’ve maintained a blog since 2024, and over that time have written more than 200,000 words. So, around two reasonable novels worth of ‘content’. Over these years, the focus of the content has changed, along with my primary motivations for writing. What’s also changed is <em>how</em> I go about writing a blog post, from initial ideas to completed and published content.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When I started writing this post, I thought I’d cover not just how I write now, but also my previous writing setup. I also thought I’d discuss my motivations for writing. But, it turns out the current writing setup alone seems a substantial enough piece of content. So consider this post not just a ‘post in itself’ (sort of Kantian?) but also the start of a short <em>on writing</em> series of posts, where I’ll cover some of these additional areas in due course.</p>
+</div>
+</div>
+</section>
+<section id="blog-platform" class="level2">
+<h2 class="anchored" data-anchor-id="blog-platform">Blog platform</h2>
+<p>My blog uses <a href="https://quarto.org/">Quarto</a>, so at some level involves maintaining a nice big bag of files with <code>.qmd</code> extensions. For those with a bit of a software background, the clue’s in the file extension. A <code>.qmd</code> (Quarto) file is like a markdown (<code>.md</code>) file, but with something added. (A markdown file is like a simplified way of writing an HTML page, which makes it a bit easier for humans to read and maintain.) The ‘something added’ by the Q is the ability to include evaluable code chunks, sections of the page which are instructions for various types of computer program - called <em>engines</em> - to do something and return what it’s done. This was especially important when much of my blog content was focused on statistics and data science, as then the main engine powering the code chunks was R, the open source statistical software. Much of my blog content these days doesn’t need these engines, so the ability to include them as chunks is now less important. But anyway, that’s why my blog uses Quarto.</p>
+<p>Maintaining a Quarto blog means, after setting up the index page, having a folder called <code>posts/</code>; this <code>posts/</code> folder then has a series of carefully named subfolders, one for each specific blog post on the site itself. Each of these subfolders determines the specific URL for a specific blog post. For example, my most recent post was about the book <a href="../../../posts/dilbert-future-in-retrospect/index.html"><em>The Dilbert Future</em></a>, and was in a folder <code>posts/dilbert-future-in-retrospect/</code>, and so has a URL ending <code>/posts/dilbert-future-in-retrospect/</code> too.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="folder-structure.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">The folder structure of a Quarto blog, showing the posts folder and subfolders for each post</figcaption>
+</figure>
+</div>
+<p>Inside each of these differently-named folders in <code>posts/</code> is an identically named file, <code>index.qmd</code>. This is where both the ‘data’ (writing) and ‘metadata’ (post attributes) are contained, in separate parts of the <code>.qmd</code> file.</p>
+<ul>
+<li><p><strong>At the top of the index.qmd file: the YAML header.</strong> This comprises a series of key-value pairs telling Quarto things like: categories, publication date, author(s), title, and subtitle. By default, these YAML contents are always at the start (head) of the file, and fenced off from the rest of the file contents by three hyphens at the start, and three hyphens at the end. These triplets of hyphens ‘fence the YAML in’, away from the rest of the content, and so are known as ‘fences’.</p></li>
+<li><p><strong>Below the YAML header: the body text.</strong> This is the content itself: the text you’re reading right now, and information about attributes that the text should take on. Attributes include: should the text link to something? Should the text be <strong>bold</strong>, or <em>in italics</em>, or be a header? Should the text link to some footnote text<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and so on and so on. For a technical post, as mentioned, the body can also comprise some code chunks, evaluated by engines, an interleaving of contents for people (plus formatting) and contents for specific computer programs.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
+</ul>
+<div id="fig-qmd-example" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="yaml-and-top-of-body-qmd.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: A .qmd file showing the YAML header (fenced by triple hyphens) and the start of the body text</figcaption>
+</figure>
+</div>
+<p>If you think having to think about <code>.qmd</code> file structures, metadata, and folder organisation is maybe a bit of a distraction from the act of <em>writing</em>, especially <em>freely and creatively</em>, you’re right. For me, at least, the act of having to decide exactly which words to write, what arguments to make, which references to mention, which analogies and metaphors to employ… all of this is demanding and challenging in its own terms. Having to think about how to express formatting and structure to computer programs too feels like too much overhead.</p>
+<p>That’s why, when I’m trying to write freely and creatively, I try to <em>split</em> and <em>separate</em> the tasks of <em>writing</em> from the tasks of <em>putting contents into a blog post</em>. Keeping these tasks separate is perhaps the single most important factor in my current workflow.</p>
+<p>So, how does this workflow (when it does flow) work in practice?</p>
+</section>
+<section id="the-steps" class="level2">
+<h2 class="anchored" data-anchor-id="the-steps">The Steps</h2>
+<section id="stage-one-ideating-freewriting-and-first-pass-editing" class="level3">
+<h3 class="anchored" data-anchor-id="stage-one-ideating-freewriting-and-first-pass-editing">Stage One: Ideating, Freewriting and First Pass Editing</h3>
+<p>I start by <em>going somewhere</em>, and <em>not bringing too much</em>. I head to a cafe (if during the day/weekend) or a bar or pub (if in the evenings), with my <a href="https://remarkable.com/">reMarkable</a>, its <a href="https://remarkable.com/products/remarkable-2/type-folio">Type Folio</a>, and some semblance of an idea. Then, with a table and libation sourced, I aim to draw, write, or type materials - in a Remarkable notebook in a ‘blogs’ folder - for at least an hour. Having a timer is crucial: if I’m travelling very lightly, I use my wristwatch (a Fitbit) or phone to keep time. If I’m travelling with a small backpack, I might bring a ‘time timer’ too.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stage-1-remarkable-writing.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Stage 1: Writing on the reMarkable with Type Folio in a cafe</figcaption>
+</figure>
+</div>
+<p>I both work at home, and I rest from work at home. There are also too many distractions at home…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="distraction-cat-grey.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">One of the distractions at home</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="distraction-cat-black.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Another distraction at home</figcaption>
+</figure>
+</div>
+<p>This is why getting some kind of separation for writing is crucial for me. Another space: another headspace.</p>
+<p>As implied by the subheading, this stage one really comprises some distinct substeps: Ideating, free-writing, editing.</p>
+<p><strong>Ideating</strong> is having that semblance of something potentially coherent, comprehensive and cohesive to think and write about. Good ideation might involve very little writing, or none at all. Thinking itself, in this third space, can be a valid form of ideation. So can making notes, and so can rearranging and linking notes.</p>
+<p>The Remarkable can help markedly with some forms and varieties of ideation. For example, it makes it very straightforward to draw simple mindmaps and concept maps<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, like the following:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="workflow-diagram.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Workflow diagram showing the flow from Remarkable through PDF to Claude Code to .qmd file</figcaption>
+</figure>
+</div>
+<p>Remember that markdown-plus-code-engine interleaving I mentioned previously? That which separates <code>.qmd</code> files from mere <code>.md</code>? Well, as with this figure above (which in a sense gives the game away about where this blog post is going), the Remarkable allows me to do something similar, but with content for and from different parts of my brain. Text like this, which is fairly easy to bring into the strictures of a <code>.qmd</code> file, is something I can generate fairly easily with the Type Folio keyboard. But some ideas are best expressed graphically: that’s where the Remarkable stylus comes into its own. Yet another reason why I start with the Remarkable is because I want to be able to switch between drawing, writing, mapping, and typing as the specific tasks of expression demand it.</p>
+</section>
+<section id="stage-1.5-the-interface" class="level3">
+<h3 class="anchored" data-anchor-id="stage-1.5-the-interface">Stage 1.5: The Interface</h3>
+<p>After I have produced some initial content on my Remarkable, which I consider ‘complete enough’ for a post, I make use of the following (ahem) Remarkable features:</p>
+<ul>
+<li><p><strong>Feature one:</strong> The Remarkable syncs across devices, including to my mobile phone and, crucially, my MacBook Pro</p></li>
+<li><p><strong>Feature two:</strong> Anything within the Remarkable MacBook Pro app can be exported as a PDF.</p></li>
+</ul>
+<p>So, after syncing my Remarkable contents to my MacBook Pro, I then export the blog material I’ve written into a PDF.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="remarkable-pdf-top.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">The top of this very post as a PDF exported from the Remarkable, showing instructions for Claude in square brackets</figcaption>
+</figure>
+</div>
+<p>That’s where my new workflow (or writeflow?) gets ‘interesting’.</p>
+<p>Next, I open up Claude - with both my blog codebase and the new PDF file as environment/context - and instruct it to <em>turn the PDF into a <code>.qmd</code> file in an appropriate location in the blog codebase</em>.</p>
+<p>And usually - almost always, in fact - it manages to do so very effectively, properly inferring how my formatting in the PDF links to markdown formatting, identifying the title and subtitle for the YAML, and even producing appropriate topic categories (see <a href="#fig-qmd-example">Figure&nbsp;1</a> for an example of the result).</p>
+<p>So, what this means is - thanks to <strong>Porter Claude</strong> - that a lot of the technical overhead is not just moved to a different step in the workflow, but abstracted away almost completely!</p>
+</section>
+<section id="stage-2-maclauding-in-vscode" class="level3">
+<h3 class="anchored" data-anchor-id="stage-2-maclauding-in-vscode">Stage 2: MaClauding in VSCode</h3>
+<p>Because of RemarkaClaude, I now, as if by magic, have my first draft of my post - started on the Remarkable - transformed into a perfectly viable <code>.qmd</code> style blog post. I could of course then just publish it at this stage, with Claude doing only the interfacing work. However, I’m happy for Claude to get a bit more involved.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stage-2-claudic-editing.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Stage 2: Editing in VSCode with Claude Code, also in a cafe</figcaption>
+</figure>
+</div>
+<p>Typically, this means (usually through the Claude Code extension in VSCode):</p>
+<ul>
+<li><p><strong>Proofreader Claude</strong>: Asking Claude to carefully proofread my text. I give it instructions to spot any obvious typos, and edit rights to change them, while making clear I don’t want my words to be re-written any further.</p></li>
+<li><p><strong>Gopher Claude</strong>: Guiding Claude through implementing any ambiguous notes and instructions I left for it in the Remarkable PDF. (I can think ahead. At the moment I usually suggest Claude tasks by putting them in square brackets [like this]). This might include, for instance, finding links to other blog posts or external pages, or clarifying details after web searches which appear in the main text. (In <a href="../../../posts/dilbert-future-in-retrospect/index.html">the previous blog post</a> this involved, for instance, finding the exact date of Scott Adams’ predictions.)</p></li>
+<li><p><strong>Formatter Claude</strong>: Wrangling over blog topic categories, titles, and formatting used. (For example, in the last post I started off thinking that each of the ‘predictions’ should be a level 2 header, but then moved each to a level 3 header with a broader level 2 ‘Predictions’ grouping. Exciting stuff!)</p></li>
+<li><p><strong>Scriptdoctor Claude</strong>: Asking Claude to make <em>suggestions only</em> about whether there are any awkward passages or phrasing that could be improved. For this I ask Claude to show suggested before/after phrases, for me to approve or not, rather than just editing the <code>.qmd</code> file without my express permission.</p></li>
+</ul>
+<p>There are then some more optional phases, which I’ve tended to employ in some recent posts:</p>
+<ul>
+<li><p><strong>Fact Checker Claude</strong>: Asking Claude to add, as clearly self-identifying footnotes, fact checking and contextualisation materials.</p></li>
+<li><p><strong>Claude the Author</strong>: Finally, <em>sometimes</em>, asking Claude to make distinct, self-identified, contributions to the body of the text itself. (For example, in the last post this took the form of the Judge Claude section.)</p></li>
+</ul>
+</section>
+</section>
+<section id="summing-up" class="level2">
+<h2 class="anchored" data-anchor-id="summing-up">Summing up</h2>
+<p>Wow! That’s a lot of Claude!</p>
+<p>I was going to write a longer piece, comparing my current writing and publishing workflow, with how it used to be in the past; comparing my earlier content with my most recent content; and comparing my initial motivation to start, with my current motivation to continue writing.</p>
+<p>But maybe this is as good a place as any to finish. This is a more applied and technically focused post than I was initially planning. So maybe it’s best to stop here and turn this from a single post to a short series of posts <em>on writing</em>.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Like this.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This interleaving borrows from a related writing paradigm, literate programming and scientific notebooks, which became popular in Jupyter notebooks in Python.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Mindmaps can be considered concept maps with one central node; conversely concept maps can be considered mindmaps with multiple central nodes.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
