@@ -10,7 +10,356 @@
 <atom:link href="https://jonminton.github.io/jon-blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Sat, 31 Jan 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 15 Feb 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Repeated Measures (Transcribed)</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="about-this-post" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-post">About this post</h2>
+<p>This post is an AI-assisted transcription of <a href="../../../posts/handdrawn-stats/repeated-measures/index.html">the original handwritten notes on repeated measures</a>, written on a reMarkable tablet as a single ultra-long page. The original handwritten version remains available in full, but at over 73,000 pixels tall it can be difficult to read on screen.</p>
+<p>This transcription was produced by Claude, using an iterative image-slicing approach to parse the handwriting. The hand-drawn diagrams, annotated equations, and coloured illustrations are preserved as images from the original — they are a key part of the explanation and lose their character if converted to plain text. The surrounding narrative text and R code examples have been transcribed into readable markdown.</p>
+<p>Where colour was used in the original handwriting, this is noted. The colour scheme is: <strong>black</strong> for main text, <strong>green</strong> for detailed discussion and answers, <strong>blue</strong> for diagram labels, <strong>red</strong> for diagram elements and emphasis, <strong>orange</strong> for highlighted equation components, and <strong>purple/pink</strong> for specific highlighted terms.</p>
+<hr>
+</section>
+<section id="repeated-measures" class="level2">
+<h2 class="anchored" data-anchor-id="repeated-measures">Repeated Measures</h2>
+<p>Apropos of nothing specifically, I’ve been thinking a lot recently about repeated measures data, and how such data should be modelled.</p>
+<section id="our-fictitious-problem" class="level3">
+<h3 class="anchored" data-anchor-id="our-fictitious-problem">Our (Fictitious) Problem</h3>
+<p>Say we’re interested in knowing how one of two possible supplements aids with weight gain. (This may be a science-fiction-like example given the current obesogenic environment we’re in, but go with me for now), and we’re interested in these two supplements’ effects in the real world, not just in mice bred to be, effectively, like clones.</p>
+<p>Because of this, we have some variety in initial shapes and sizes of our population:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_01_stick_figures.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Stick figures illustrating variety in the population</figcaption>
+</figure>
+</div>
+<p>If we could recruit many, many subjects, this variety in starting weight and other initial characteristics, this variety wouldn’t matter too much. We can randomise subjects to Sup A or Sup B, and through the miracles of the randomisation process on average the starting characteristics of subjects in the two arms will be the same.</p>
+<p>However, our budget is finite, and can only stretch to tens, not hundreds or thousands, of subjects in each arm.</p>
+<p>And, all subjects have a weight at the start, before we treat them with Sup A or Sup B.</p>
+<p>Obviously, the subjects’ starting weight can’t be attributed to Sup A or Sup B. It’s what they came with. So any claims about the weight adding effects of the supplements can only be based on how the weights of subjects changes over the course of the study.</p>
+<p>One good thing about the study, however, is that each subject’s weight is measured multiple times over the course of the study, not just the first and end.</p>
+</section>
+<section id="understanding-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-data">Understanding the Data</h3>
+<p>With our data and problem described, let’s now start to think about what the data we’re working with might look like, and how to better visualise and understand it.</p>
+<p>We can start by imagining how the data might come to us, or what it might look like after some data cleaning and reshaping.</p>
+<p>As I’ve discussed before, almost all data we can model comprises some big rectangle of numbers and values <img src="https://latex.codecogs.com/png.latex?D">, with:</p>
+<ol type="i">
+<li>one row per observation</li>
+<li>one column per variable</li>
+</ol>
+<p>(This is the definition, in brief, of Tidy Data)</p>
+<p>So, the first few rows of our data might look something like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_02_data_table.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Hand-drawn data table</figcaption>
+</figure>
+</div>
+<p>Let’s try to understand this data by asking ourselves a series of questions:</p>
+<section id="what-is-our-observational-unit" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-our-observational-unit">1) What is our observational unit?</h4>
+<p><em>[Green text in original]</em></p>
+<p>Each row is an observation. Each row shows the characteristics of a given subject at a given point in time. So our observational unit is: Subject-Time.</p>
+<p>More abstractly, we can say each row is about a time × person.</p>
+</section>
+<section id="what-is-our-treatment-variable-t" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-our-treatment-variable-t">2) What is our treatment variable, T?</h4>
+<p><em>[Green text in original]</em></p>
+<p>This is the variable for Arm. Something like:</p>
+<ul>
+<li>A = Sup A</li>
+<li>B = Sup B</li>
+</ul>
+<p>(So, we’ll need some way of comparing changes in response for people in Arm B compared with Arm A)</p>
+</section>
+<section id="what-is-our-response-variable-y" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-our-response-variable-y">3) What is our response variable (Y)?</h4>
+<p><em>[Green text in original]</em></p>
+<p>This definitely <em>involves</em> the weight column, but it might not <em>just</em> be the weight column.</p>
+<p>Firstly, we know it needs to involve <em>change</em> in weight, because each subject had some weight at the start, that we know can’t be caused by the supplement, which they only started taking at the start of the trial.</p>
+<p>Secondly, we might want to account for the <em>height</em> as part of outcome/response, as someone who’s taller can probably change weight more easily than someone who’s shorter. (Something to ponder…)</p>
+</section>
+<section id="what-are-our-control-variables-x" class="level4">
+<h4 class="anchored" data-anchor-id="what-are-our-control-variables-x">4) What are our control variables (X)?</h4>
+<p><em>[Green text in original]</em></p>
+<p>If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider age as a control variable.</p>
+<p>We might also wish to consider starting weight as a control variable, as well as maybe height.</p>
+<p>However, given our discussion about the response variable above, we might not want to simply use height in its standard way, and instead use it as part of our derivation of the response instead.</p>
+<p>There are also nonstandard approaches to consider for controlling for starting weight too, which come about from pondering the next question.</p>
+</section>
+<section id="are-our-observations-independent" class="level4">
+<h4 class="anchored" data-anchor-id="are-our-observations-independent">5) Are our observations independent?</h4>
+<p><em>[Green text in original]</em></p>
+<p>This question might sound like it’s coming out of left field, but it’s really central to how we can think about and approach modelling this kind of data.</p>
+<p>Independent (&amp; identically distributed) are two standard assumptions made when deriving most statistics models. If our data aren’t independent then the assumptions aren’t correct, and so neither will what our model estimates be.</p>
+<p>In the case of our data, we know our data aren’t independent in one very obvious and important way.</p>
+<p>They’re nested.</p>
+<p>Specifically, our observations (each row in the dataset) are time-persons. And we know each time-person is ‘nested within’ a grouping variable called a person (or subject).</p>
+<p>Graphically we can represent this grouping as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_03_nesting_diagram.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Nesting diagram — subjects containing time-person observations</figcaption>
+</figure>
+</div>
+<p>Our awareness of this grouping relationship will be critical both for how we continue to visualise the data, and for how we model the data.</p>
+</section>
+</section>
+<section id="visualising-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-the-data">Visualising the data</h3>
+<p>Having now thought through the problem and data we have, we can start to come up with some ideas for visualising the data effectively. (Which will, in turn, help us choose an appropriate model specification.)</p>
+<p>Two things we know:</p>
+<ol type="i">
+<li>Observations are grouped into subjects</li>
+<li>Earlier visits happen before later visits.</li>
+</ol>
+<p>Obvious, really, but also really helpful for looking at the data the right way. A slightly less obvious thing we should have seen from the data is that subjects had their first visit on different dates (and that not all subjects had the same number of visits, nor were visits spaced out equally far apart.)</p>
+<p>So, maybe our graphing canvas should be set up as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_04_vis_building_blocks.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Building up the visualisation — axes, points, lines, groupings</figcaption>
+</figure>
+</div>
+<p>Given the above design decisions, our main statistical graphic for this kind of data might look something like the following:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_05_spaghetti_plot.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Spaghetti plot — individual trajectories by supplement arm</figcaption>
+</figure>
+</div>
+<p>With this kind of visualisation, complicated though it is, it should at least be apparent that there’s an upwards drift in weight over time. We also have some sense of the number of subjects (not observations) in the study; we can maybe temper our expectations a little about whether our main question of interest — whether Sup A or Sup B are better for weight gain — can be answered in a way that shows a statistically significant difference even if there’s a substantive difference really between the two supplements. We might well be underpowered (mainly because I didn’t want to spend too long drawing dots and lines!)</p>
+<p>But we can still use this kind of visualisation, along with everything else we understand about the data and data generating process (DGP), to try to figure out the best way of modelling the data we have.</p>
+</section>
+<section id="towards-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="towards-modelling">Towards modelling</h3>
+<p>What’s our simplest possible model? It’s probably the mean.</p>
+<p>Yes, the mean is a model. It’s the linear regression of y (our weight response value) against the intercept:</p>
+<p><img src="https://latex.codecogs.com/png.latex?M1:%20%5Cquad%20y%20=%20%5Calpha%20+%20%5Cepsilon,%20%5Cqquad%20%5Cepsilon%20%5Csim%20N(0,%20%5Csigma%5E2)"></p>
+<p>In R, something like:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">mod01 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(weight <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb1-2">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> data)</span></code></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_06_m1_graph.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M1 graphically — a horizontal line through the data</figcaption>
+</figure>
+</div>
+<p>Not a very useful model. Let’s try to do better, firstly by accounting for the two arms (Sup A or Sup B).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_07_m2_equation_graph.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M2 — equation, R code, and graphical representation with two horizontal lines</figcaption>
+</figure>
+</div>
+<p>So: <img src="https://latex.codecogs.com/png.latex?%5Calpha_0"> is the mean of y for Supp A, and <img src="https://latex.codecogs.com/png.latex?%5Calpha_0%20+%20%5Calpha_B"> (not <img src="https://latex.codecogs.com/png.latex?%5Calpha_B"> alone) the mean of y for Supp B.</p>
+<p>This might look like an improvement, but in some ways it’s not. It’s a wrong turn. For instance, what would happen if Supp B really causes the most weight gain, but the average subject in the Supp A arm both tends to be heavier and to be visited more often and to exit the study earlier?</p>
+<p>With this kind of model we might end up thinking Supp A, not Supp B, is ‘better’ because its model-implied mean value is higher.</p>
+<p>In both of the models so far, we haven’t yet modelled the effect of time. Let’s look at that:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_08_m3_equation_graph.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M3 — adding time as a predictor, with equation and graph</figcaption>
+</figure>
+</div>
+<p>Great, now we’ve got a coefficient for capturing the trend over time. However, we haven’t included some way of representing:</p>
+<ol type="i">
+<li>the subject membership of observations</li>
+<li>the difference in growth trends between supplement arms</li>
+</ol>
+<p>Let’s start with the second issue. One naive approach would be to include a coefficient for a flag variable, which is 1 if the arm is Sup B, but 0 otherwise.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_09_m4_m5_splitting.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M4, coefficient splitting, and M5 — allowing different slopes by supplement arm</figcaption>
+</figure>
+</div>
+<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ need never be applied to just the intercept (<img src="https://latex.codecogs.com/png.latex?%5Calpha">); it can also be applied to the slope coefficient <img src="https://latex.codecogs.com/png.latex?%5Cbeta">.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_10_m5_green_box.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Condensed M5 specification and R code</figcaption>
+</figure>
+</div>
+<p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. It doesn’t have different groups, or different initial weights.</p>
+<p>How do we try to account for this? Perhaps we shouldn’t be thinking about one model, but</p>
+</section>
+</section>
+<section id="many-models" class="level2">
+<h2 class="anchored" data-anchor-id="many-models">MANY Models ??!</h2>
+<p>If we arrange the data into many panels, one for each subject, we can do a simple regression for each subject series!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_11_many_models_panels.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Individual regression panels for each subject</figcaption>
+</figure>
+</div>
+<p>We could compare the slope coefficient for each of these series, and maybe see if the types of slope coefficient for Supp A arm looks different to that for Supp B arm.</p>
+<p>We could even represent our uncertainty in the coefficients visually, producing something like a forest plot (used in meta analysis):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_12_forest_plot.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Forest plot with pooled estimates by arm</figcaption>
+</figure>
+</div>
+<p>We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.</p>
+<p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n=2 ‘study’), this is actually not a particularly good approach for all kinds of reasons. I’ve merely just mentioned it to be helpful with the intuition some more.</p>
+<section id="back-on-track" class="level3">
+<h3 class="anchored" data-anchor-id="back-on-track">Back on Track</h3>
+<p>So, if meta-analysis isn’t actually good for this kind of problem, what is?</p>
+<p>It’s something between <strong>One</strong> Model AND <strong>MANY</strong> Models.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_13_one_vs_many.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">One model vs Many models — and the multi-level middle ground</figcaption>
+</figure>
+</div>
+<p>It’s called multi-level modelling because we have multi-level data.</p>
+</section>
+<section id="how-does-it-work" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h3>
+<p>Well, we need to tell the model about the way the data are grouped.</p>
+<p>Let’s go back to the fundamentals… A (generalised) linear model has a stochastic component and a systematic component. In a previous post I compared the systematic component <img src="https://latex.codecogs.com/png.latex?g(.)"> to a TRANSFORMER and the stochastic component <img src="https://latex.codecogs.com/png.latex?f(.)"> to a NOISEMAKER:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_14_transformer_noisemaker.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">The Transformer and Noisemaker framework, with Fixed Effects vs Random Effects table</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_15_fe_re_table.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fixed Effects vs Random Effects — which component do we ‘tell’?</figcaption>
+</figure>
+</div>
+<p>And both of those layers of model can be referred to as either <strong>Mixed Effect</strong> or <strong>Multi-level Model</strong>.</p>
+<p>If you’ve ever encountered these terms and haven’t been sure what they mean, then hopefully this clarifies a few things.</p>
+<p>Let’s now think through how we could ‘tell’ our model about group-level membership of observations, first through the transformer, <img src="https://latex.codecogs.com/png.latex?g(.)">, leading to a fixed effects model specification, then through the noisemaker, <img src="https://latex.codecogs.com/png.latex?f(.)">, leading to a random effects model.</p>
+</section>
+<section id="fixed-effect-model-approach" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-effect-model-approach">Fixed Effect model approach</h3>
+<p>Let’s say we have J groups. We could include, in our model, J additional dummy variables, each of which takes the value 1 if the observation comes from group j, 0 otherwise.</p>
+<p>In doing this, we’re expanding the intercept part of our model, potentially a lot:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_16_fe_equations.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fixed effects equations with coloured annotations</figcaption>
+</figure>
+</div>
+<p>This fixed effects modelling approach is less exotic than it might first appear. We’re just adding some more <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> coefficients to the transformer part of the model <img src="https://latex.codecogs.com/png.latex?g(.)"> to be determined through the usual approaches (maximum likelihood, optimisation and so on).</p>
+<p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope differences, by-arm part of the model).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_17_barbed_aside.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A mildly barbed aside</figcaption>
+</figure>
+</div>
+<p>So, is there a more efficient way of ‘telling’ a model about group differences, especially when there are many groups, many of which involve few observations? Yes there is! It’s the…</p>
+</section>
+<section id="random-effects-model-specification" class="level3">
+<h3 class="anchored" data-anchor-id="random-effects-model-specification">Random Effects Model Specification</h3>
+<p>In the Random Effects (RE) model specification, we ‘tell’ the noisemaker (<img src="https://latex.codecogs.com/png.latex?f(.)">), not the transformer (<img src="https://latex.codecogs.com/png.latex?g(.)">), part of the model about the ‘groupiness’ of the data.</p>
+<p>So, in RE, the ‘action’ is in the bit of the specification highlighted orange at the end:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_18_re_equation_decomposition.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">RE equation decomposition — splitting the error term</figcaption>
+</figure>
+</div>
+<p>Overall variation = group-level variation (<img src="https://latex.codecogs.com/png.latex?%5Ctau">) + residual/remaining variation (<img src="https://latex.codecogs.com/png.latex?%5Cepsilon">)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_19_re_fe_comparison_diagrams.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Comparing FE flags vs RE normal distribution for representing group variation</figcaption>
+</figure>
+</div>
+<p>So, the aim of this approach is to represent the ‘gist’ of the observed group-level variation in fewer parameters. This means less of the data budget is ‘spent’ on representing group level variation, and so more of the budget can be spent on better estimating other model parameters instead.</p>
+</section>
+<section id="modelling-what-were-actually-interested-in-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="modelling-what-were-actually-interested-in-modelling">Modelling what we’re actually interested in modelling</h3>
+<p>After all this discussion about how to represent group level variation, it’s important not to lose sight of what we’re trying to do, namely: see if Supp B has a higher weight gain trend than Supp A.</p>
+<p>We’re now used to the idea of splitting out the components of a regression model, as they relate to intercepts, slopes, and ‘errors’, and the way we need to do that one more time to get a model containing coefficients that can help us answer our main research question.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_20_final_model_spec.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Final model specification with coloured annotations</figcaption>
+</figure>
+</div>
+<p>Which will be our final model specification.</p>
+</section>
+<section id="testing-and-interpreting-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="testing-and-interpreting-the-model">Testing and interpreting the model</h3>
+<p>One easy test we can perform is by comparing the above specification, including a coefficient that flags arm <img src="https://latex.codecogs.com/png.latex?%5Cbeta_%7BBs%7D">, with a restricted model that omits this term. We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform Likelihood Ratio Tests, looking for statistically significant p-values.</p>
+<p>Arguably, the t-value on the coefficient <img src="https://latex.codecogs.com/png.latex?%5Cbeta_%7BBs%7D"> for testing should also be equivalent (so it might be easier to just look at that instead). But remember: evidence of there being two different slopes between groups is a good reason to understand/explore what these differences in slope between groups really mean.</p>
+<p>In R, there are a number of packages for fitting this kind of model:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_21_lmer_code.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">R lme4 code with highlighted components</figcaption>
+</figure>
+</div>
+<p>Using the <code>summary</code> function, both the fixed effects and random components will be returned.</p>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<p>In this long excursion through grouped data analysis, we’ve focused on a very fictitious and unrealistic example: how to best make <em>people</em> fat.</p>
+<p>However, if we change the species and context even this example is probably useful in practice. Imagine we work in farming, for example, and have bought a lot of baby chickens or cows, and want to decide on a type of feed to help them ‘grow’ the fastest.</p>
+<p>Often the animals (‘livestock’) will be quite homogeneous, from the same genetic stock and often even of the same sex. This kind of modelling approach would probably work for figuring out what type of feed to use in a way that’s both fairly robust and fairly cheap. (Though as a vegetarian, I’d rather have come up with a different real world application of this kind of model!)</p>
+<p>Even if this specific model specification isn’t useful for you, hopefully the broader process and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
+<hr>
+</section>
+<section id="claudes-reflection-on-this-transcription" class="level3">
+<h3 class="anchored" data-anchor-id="claudes-reflection-on-this-transcription">Claude’s reflection on this transcription</h3>
+<p><em>This section is written by Claude (Opus 4.6), reflecting on the process and quality of this transcription.</em></p>
+<p>Jon rates this transcription as roughly 60-70% successful, which I think is fair. It was an interesting experiment that revealed both possibilities and clear limitations.</p>
+<p><strong>What worked reasonably well:</strong></p>
+<ul>
+<li>The iterative “shingling” approach — slicing the 73,000-pixel image into overlapping segments, borrowing the concept from R’s <code>lattice</code> package — was effective for turning an otherwise impossibly large image into manageable chunks.</li>
+<li>The earlier, more narrative sections of the notes were transcribed with reasonable accuracy. Larger handwriting and standard prose are within my comfort zone.</li>
+<li>Identifying the overall structure, section boundaries, and colour usage was straightforward even at low resolution.</li>
+</ul>
+<p><strong>What didn’t work well:</strong></p>
+<ul>
+<li>I hallucinated content towards the end of the document, fabricating an entire paragraph about Satterthwaite’s approximation and Kenward-Roger adjustments that appeared nowhere in the original notes. This is a serious failure mode — confidently generating plausible-sounding technical content that the author never wrote. The final slice was the tallest (5,748px), pushing the limits of readable resolution, and rather than flagging uncertainty I filled in gaps with invention.</li>
+<li>Several phrases were misread: “a mildly barbed aside” became “entity model aside”; “height as part of outcome/response” became “home/regime”; “need never” became “can never”. These aren’t catastrophic individually, but they accumulate.</li>
+<li>Dense handwriting, especially where equations, annotations, and colour overlap, remained challenging. Many of the annotated equations had to be preserved as images rather than transcribed, which is the right call but also an honest acknowledgement of the limitation.</li>
+</ul>
+<p><strong>The broader point:</strong></p>
+<p>Claude models are currently less multimodal than some alternatives when it comes to this kind of image parsing task. Google’s Gemini models, with their heritage in OCR (Google Lens, Cloud Vision) and their ability to ingest very high-resolution images natively, likely have a comparative advantage for raw handwriting extraction. The bottleneck here wasn’t reasoning about the content — it was reliably reading the pixels.</p>
+<p>This remains a genuinely hard problem. Handwriting recognition on structured technical content (mixing prose, equations, diagrams, code, and colour) is at the frontier of what current multimodal models can do. The shingling workaround helped, but it’s a workaround — not a solution to the underlying resolution and parsing constraints.</p>
+<p>If nothing else, this experiment provides a useful baseline. As multimodal capabilities improve, it would be interesting to revisit this same source image and see how the accuracy changes.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>statistics</category>
+  <category>multi-level-modelling</category>
+  <category>random-effects</category>
+  <category>handdrawn-stats</category>
+  <category>AI-transcription</category>
+  <guid>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/index.html</guid>
+  <pubDate>Sun, 15 Feb 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>How I Now Write My Blog</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -798,9 +1147,8 @@ Note
 <hr>
 <p><em>The Mortician is available on HBO and Max.</em></p>
 <p><strong>End Experiment</strong></p>
-<p><em>So, how was that? Aside from the em-dashes, could that have been me (Jon) writing? Does Claude write better than me :(</em><br>
-<br>
-<em>Anyway, if you want to see where this started, the chat transcript is available <a href="https://claude.ai/share/be037c07-f3e6-4af0-afa4-b40b2c75308d">here</a>.</em></p>
+<p><em>So, how was that? Aside from the em-dashes, could that have been me (Jon) writing? Does Claude write better than me?</em></p>
+<p><em>Anyway, if you want to see where this started, the chat transcript is available <a href="https://claude.ai/share/be037c07-f3e6-4af0-afa4-b40b2c75308d">here</a>.</em></p>
 
 
 </section>
@@ -2912,62 +3260,6 @@ HD --&gt;|Head| HL
   <category>random-effects</category>
   <guid>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures/index.html</guid>
   <pubDate>Mon, 16 Jun 2025 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>No Longer Under-stand-ing</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/unpop/no-longer-understanding/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/unpop/no-longer-understanding/stand-new-ident.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The New Stand Ident</figcaption>
-</figure>
-</div>
-<p>One of the few things Glasgow and Edinburgh share, other than latitude, is <a href="https://www.thestand.co.uk/">the Stand Comedy Club</a>, a chain of venues where both beginners can try their hand at stand-up comedy, and seasoned professionals can test out a minute or two of new materials to help decide whether it should make the cut and become part of a new set.</p>
-<p>I’ve walked by both the Glasgow and Edinburgh venues many times, each time struck by their distinct ident, which looks as shown at the start of this post.</p>
-<p>So, a goofy looking kid, dressed as a cowboy, grinning awkwardly in a harsh blue spotlight. The ident is familiar to me, but also not. It triggers, for me, my own variant of the <a href="https://www.britannica.com/science/Mandela-effect">Mandala Effect</a>, of distinctly remembering how the past used to be distinctly, definitively different to how it’s now presented as being and always having been.</p>
-<p>Search online for The Stand (Edinburgh or Glasgow) and this same ident -the goofy, blue-light bathed cowboy kid - tends to get returned. It’s largely only my memory that tells me this ident wasn’t always this. It used to be different, in one specific but important way.</p>
-<p>The Stand’s past has largely been erased. But not completely. <a href="https://www.bbc.co.uk/news/articles/cg3evpd5dvjo">This story from the BBC</a> shows how this ident used to be.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/unpop/no-longer-understanding/stand-old-ident.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Stand Old Ident</figcaption>
-</figure>
-</div>
-<p>This was the mural at the back of the stage. From memory (imperfect as it is) the bluetone ident was similarly different too. Originally, the ident for The Stand was a boy dressed as a cowboy, <em>with a revolver to his head</em>.</p>
-<p>This one difference, to me, made all the difference. It said something, memorable engaging, harsh, arresting. And it said it instantly. What the original ident said to me was the following:</p>
-<blockquote class="blockquote">
-<p>If you go to The stand, you might see people <em>die</em> on stage. If you perform at the Stand, <em>you</em> might die on stage. You’ll die on stage because you weren’t prepared, because you’re just pretending to be able to do this to engage and entertain others - but you can’t really do this.. You are, in fact, just a cowboy. Not even a cowboy; a make-believe cowboy. However, because you’re just playing, don’t worry. You’re not a real cowboy, and what you’ve put up against your head isn’t a real gun, even if you do really put it up against your head and pull the trigger. You aim. You miss. You die on stage.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>But you don’t actually die. After ‘dying on stage’, you’ll feel terrible. But then you get to slump off, put yourself together, and try to die a bit less next time. Eventually, you might even learn to become what you’re only pretending to be.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Perform at The Stand: The stakes are real. But they’re also just make-believe.</p>
-</blockquote>
-<p>Though I can understand why the revolver was deleted from the ident, all I can now think of when I see the new ident is the old ident: the ident that told a complex and arresting story in a single image, the ident that had meaning beyond its being a recognisable brand or identity. On its own merits, without its buried history, the new ident says or means very little, and isn’t something on its own I’d find very memorable. At most, I might just think “isn’t that just a cheap rip-off of <a href="https://www.tomrichmond.com/history-of-an-idiot/20/06/2017/">the Mad TV kid</a>?”</p>
-<p><strong>Coda</strong>: <em>The Stand aren’t completely in denial about their past ident. I walked by the Edinburgh venue recently, and saw this poster. The clue’s in the cake!</em></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/unpop/no-longer-understanding/stand-cake.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Stand in the Cake</figcaption>
-</figure>
-</div>
-
-
-
- ]]></description>
-  <category>branding</category>
-  <category>comedy</category>
-  <category>edinburgh</category>
-  <category>glasgow</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/unpop/no-longer-understanding/index.html</guid>
-  <pubDate>Sat, 07 Jun 2025 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
