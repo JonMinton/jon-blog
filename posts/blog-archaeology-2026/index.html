@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-02-15">
+
+<title>Jon Minton’s Blog - Blog Archaeology: Mapping the Territory</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Blog Archaeology: Mapping the Territory">
+<meta name="twitter:description" content="A data-driven look at what I’ve been writing about">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/blog-archaeology-2026/index_files/figure-html/posting-frequency-1.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Blog Archaeology: Mapping the Territory</h1>
+            <p class="subtitle lead">A data-driven look at what I’ve been writing about</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">meta</div>
+                <div class="quarto-category">blog</div>
+                <div class="quarto-category">analytics</div>
+                <div class="quarto-category">data visualization</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 15, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This blog started in late November 2023, initially as a place to work through ideas about statistics, and quickly expanding to encompass film and book reviews, pop culture analysis, data visualisations, hand-drawn illustrations, and assorted other preoccupations. Over two years and 130+ posts later, it seems worth stepping back and looking at what’s accumulated.</p>
+<p>This post uses R to programmatically read every post’s metadata — title, date, word count, categories — and visualise the blog’s structure, growth, and evolution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reading-the-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="reading-the-metadata">Reading the metadata</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all index.qmd files in posts/</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>qmd_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../../posts"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"index</span><span class="sc">\\</span><span class="st">.qmd$"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">recursive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">full.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to safely extract metadata from a .qmd file</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>extract_post_meta <span class="ot">&lt;-</span> <span class="cf">function</span>(f) {</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  lines <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">readLines</span>(f, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="fu">character</span>(<span class="dv">0</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(lines) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Find YAML delimiters</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  yaml_markers <span class="ot">&lt;-</span> <span class="fu">which</span>(lines <span class="sc">==</span> <span class="st">"---"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(yaml_markers) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  yaml_text <span class="ot">&lt;-</span> <span class="fu">paste</span>(lines[(yaml_markers[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(yaml_markers[<span class="dv">2</span>] <span class="sc">-</span> <span class="dv">1</span>)], <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  meta <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(yaml<span class="sc">::</span><span class="fu">yaml.load</span>(yaml_text), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(meta)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate word count (text after YAML header)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  body_lines <span class="ot">&lt;-</span> lines[(yaml_markers[<span class="dv">2</span>] <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">length</span>(lines)]</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">paste</span>(body_lines, <span class="at">collapse =</span> <span class="st">" "</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  word_count <span class="ot">&lt;-</span> <span class="fu">str_count</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">S+"</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract path components</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  rel_path <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(f, <span class="st">".*/posts/"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  path_parts <span class="ot">&lt;-</span> <span class="fu">str_split</span>(rel_path, <span class="st">"/"</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Determine folder structure</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(path_parts) <span class="sc">&gt;=</span> <span class="dv">3</span>) {</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    top_folder <span class="ot">&lt;-</span> path_parts[<span class="dv">1</span>]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    sub_folder <span class="ot">&lt;-</span> path_parts[<span class="dv">2</span>]</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">length</span>(path_parts) <span class="sc">==</span> <span class="dv">2</span>) {</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    top_folder <span class="ot">&lt;-</span> <span class="st">"standalone"</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    sub_folder <span class="ot">&lt;-</span> path_parts[<span class="dv">1</span>]</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    top_folder <span class="ot">&lt;-</span> <span class="st">"other"</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    sub_folder <span class="ot">&lt;-</span> <span class="st">"other"</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Handle date</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  post_date <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">as.Date</span>(meta<span class="sc">$</span>date), <span class="at">error =</span> <span class="cf">function</span>(e) NA_Date_)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Handle categories</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  cats <span class="ot">&lt;-</span> meta<span class="sc">$</span>categories</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(cats)) cats <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> rel_path,</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> meta<span class="sc">$</span>title <span class="sc">%||%</span> <span class="st">"Untitled"</span>,</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> post_date,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">word_count =</span> word_count,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_folder =</span> top_folder,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">sub_folder =</span> sub_folder,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">categories =</span> <span class="fu">list</span>(cats),</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">has_claude_footnote =</span> <span class="fu">str_detect</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">[</span><span class="sc">\\</span><span class="st">^claude-"</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract metadata from all posts</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>posts_df <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(qmd_files, extract_post_meta) <span class="sc">|&gt;</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(date)) <span class="sc">|&gt;</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">nrow</span>(posts_df), <span class="st">"posts found, spanning"</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(<span class="fu">min</span>(posts_df<span class="sc">$</span>date)), <span class="st">"to"</span>, <span class="fu">as.character</span>(<span class="fu">max</span>(posts_df<span class="sc">$</span>date)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>137 posts found, spanning 2023-11-25 to 2026-02-15 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total word count:"</span>, <span class="fu">format</span>(<span class="fu">sum</span>(posts_df<span class="sc">$</span>word_count), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total word count: 225,824 </code></pre>
+</div>
+</div>
+</section>
+<section id="the-treemap" class="level2">
+<h2 class="anchored" data-anchor-id="the-treemap">The Treemap</h2>
+<p>The treemap below shows every post, grouped by top-level folder and sub-folder. Size reflects word count; colour reflects posting date (darker = older, lighter = more recent). Hover for details.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare treemap data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create parent labels</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>treemap_data <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean up folder names for display</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">folder_label =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      top_folder <span class="sc">==</span> <span class="st">"glms"</span> <span class="sc">~</span> <span class="st">"GLM Series"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      top_folder <span class="sc">==</span> <span class="st">"unpop"</span> <span class="sc">~</span> <span class="st">"Unpopular Opinions"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      top_folder <span class="sc">==</span> <span class="st">"tardy-tuesday"</span> <span class="sc">~</span> <span class="st">"Tardy Tuesday"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      top_folder <span class="sc">==</span> <span class="st">"handdrawn-stats"</span> <span class="sc">~</span> <span class="st">"Hand-drawn Stats"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      top_folder <span class="sc">==</span> <span class="st">"standalone"</span> <span class="sc">~</span> <span class="st">"Standalone"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> top_folder</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Truncate long titles</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">short_title =</span> <span class="fu">str_trunc</span>(title, <span class="dv">40</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_numeric =</span> <span class="fu">as.numeric</span>(date),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">hover_text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;"</span>, title, <span class="st">"&lt;/b&gt;&lt;br&gt;"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Date: "</span>, date, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Words: "</span>, <span class="fu">format</span>(word_count, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Folder: "</span>, top_folder, <span class="st">"/"</span>, sub_folder</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the treemap</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"treemap"</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> treemap_data<span class="sc">$</span>short_title,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">parents =</span> treemap_data<span class="sc">$</span>folder_label,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">values =</span> treemap_data<span class="sc">$</span>word_count,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> treemap_data<span class="sc">$</span>hover_text,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">hoverinfo =</span> <span class="st">"text"</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">marker =</span> <span class="fu">list</span>(</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">colors =</span> treemap_data<span class="sc">$</span>date_numeric,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">colorscale =</span> <span class="fu">list</span>(</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">0</span>, <span class="st">"#2c3e50"</span>),</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="st">"#3498db"</span>),</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#e74c3c"</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">showscale =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">colorbar =</span> <span class="fu">list</span>(</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Date"</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">ticktext =</span> <span class="fu">c</span>(</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.character</span>(<span class="fu">min</span>(treemap_data<span class="sc">$</span>date)),</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.character</span>(<span class="fu">max</span>(treemap_data<span class="sc">$</span>date))</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">tickvals =</span> <span class="fu">c</span>(</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">min</span>(treemap_data<span class="sc">$</span>date_numeric),</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="fu">max</span>(treemap_data<span class="sc">$</span>date_numeric)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">textinfo =</span> <span class="st">"label"</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Blog Post Treemap: Size = Word Count, Colour = Date"</span>),</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">margin =</span> <span class="fu">list</span>(<span class="at">t =</span> <span class="dv">50</span>)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ee2f9ef6c0cfb7a69645" style="width:100%;height:742px;"></div>
+<script type="application/json" data-for="htmlwidget-ee2f9ef6c0cfb7a69645">{"x":{"visdat":{"1762771914165":["function () ","plotlyVisDat"]},"cur_data":"1762771914165","attrs":{"1762771914165":{"labels":["EdinbR talk on modelling economic (in...","A Deathly Silence","First Post","Part One: Model fitting as parameter ...","Post with code","Tidy Tuesday on Dr Who","Robocop (1987) is wonderfully childish","Interactive Sliders with Crosstalk an...","Part Two: Systematic components and l...","Scientific Illustrations: Annotating ...","Part Three: glm is just fancy lm","New blog feature: comments","How to wrap presents","The Effective Savings on Interest-fre...","Beavis and Butt-Head: When a physics ...","Tidy Tuesday on Life Expectancy","Why such pushback against 20 minute n...","Optimised for Twitter?","My Economic Inactivity Modelling Pack...","Tidy Tuesday on Life Expectancy - Par...","Nerdy Dialogues on Life and Death","Changing tenure in Scotland","The Eerie Familiarity of Frasier (2023)","Tidy Tuesday: Christmas films","Part Four: why only betas just look a...","GLMs: My first series","Part Five: Traversing the Likelihood ...","Part Six: The Robo-Chauffeur","Part Seven: Feeling Uncertain","David Sedaris: Humourists as Unrepent...","Part Eight: Guessing what a landscape...","Part Nine: Answering questions with h...","I got permanently banned from a polit...","The Other Left-Right Divide: Iain McG...","Tidytuesday 2024-01-23","Part Ten: Log Likelihood estimation f...","On Sweary Soap Operas: A Concealed Te...","Tidy Tuesday 30 Jan 2024: Groundhogs","Part Eleven: Honest Predictions the e...","Tardy Tuesdays: My Second Series","Part Twelve: Honest Predictions the s...","Part Thirteen: On Marbles and Jumping...","Tidy Tuesday on Valentine's Day","On the background to my statistical i...","Part Fourteen: A non-technical but ch...","Part Fifteen: Causal Inference: The p...","Tidy Tuesday: 20 Feb 2024 - R Grants","Edinbr Pair Programming","Why can't we just get on with making ...","Part Sixteen: Causal Inference: How t...","Tidy Tuesday 27 Feb 2024: Leap Years","Part Seventeen: Causal Inference: Con...","My thoughts on Dune (Part 1)","Tidy Tuesday Trash","Can we go Dutch? (And should we?)","Part Eighteen: Causal Inference: Some...","Levelling up... forever. On Gaming's ...","Thoughts on Dreams from My Father","The Trading Mind Game","Jason Statham vs the Nepobaby Cybersc...","Double Tardy Tuesday","Tidy Tuesday: Solar Eclipses","Tidy Tuesday Extra - Packages and rec...","Part Nineteen: Time Series: Introduct...","Part Twenty: Time Series: Integration","It's still the economy","Part Twenty One: Time Series: The Mov...","Tidy Tuesday 23 April 2024: Space obj...","Part Twenty Two: Time Series - ARIMA ...","Factor analysis with ordinal variables","How factor analysis is used in testing","Part Twenty Three: Time series and se...","David Lynch: All-American Shaman","A Quarto blog post on a Quarto presen...","Tidy Tuesday R performance","Part Twenty Four: Time series - Vecto...","Statistics as circuit boards","Tidy Tuesday: Self-generated data cha...","Link-breaking Spring Clean","Time series: Some closing remarks","The Game of Life Beyond","Tidy Tuesday: Roaming US Holidays","Johan Hari: Superior Inferior Superio...","A brief introduction to bootstrapping","Permutation Testing, and the intuitio...","Getting started with the infer package","Tidy Tuesday: Women's Football","Hacker Stats: Intro and overview","Resampling for post-stratification","Tardy Tuesday: American Idol","Psycho-logical Arithmetic","Information Warfare: Proportion of Rw...","Tardy Tuesday: Olympics","Threw missiles: a concealed tautology?","Mistaken (Aural) Identity: On podcast...","Tidy Tuesday: English Monarchs","Brian May: Gentleman Ecoscientist","Statistics Website","The Paradox of Tolerating Intolerance...","On Anti-victories and Velvet Mousetraps","Megalopolis: Dream Film","Demystifying and Disenchanting Statis...","The Book of Nigel","Sanders to Trump? Some thoughts on vo...","The Wristwatch","*Poecilia parae*: A lover, and a fighter","Statistical Significance: Now off in ...","Wham! forever: On cultural debraiding...","Weaponising the Empathy Machine: On E...","First website update since 2023!","Brother Lee the Antimonk","Time and (state) change","Mickey 17 and the Economics of Life","Three Computer Games for People who D...","Strangelove: On Love and (Civil) Warfare","No Longer Under-stand-ing","Repeated Measures","The Contestant","It's your choice","More on the Stand Ident","Some thoughts on The Genius(*) Myth: ...","Three quality-of-life upgrades","Remembering KGB: 1992's subtly terrif...","The Man Who Solved Intelligence","Nine thoughts on Tim Berners-Lee's *T...","Climbing with Claude: Understanding C...","Claude as a Dialectical Engine?","Point estimates, Confidence Intervals...","The Analytical Maxim Gun","WiredClothMother","Claude Adds Footnotes: A Reflection","2025: The Last Year Most Knowledge Wo...","David Sconce and the benevolence of e...","The Dilbert Future in Retrospect","How I Now Write My Blog","Blog Archaeology: Mapping the Territory","Repeated Measures (Transcribed)"],"parents":["Standalone","Standalone","Standalone","GLM Series","Standalone","Tardy Tuesday","Unpopular Opinions","Standalone","GLM Series","Standalone","GLM Series","Standalone","Standalone","Standalone","Unpopular Opinions","Tardy Tuesday","Standalone","Standalone","Standalone","Tardy Tuesday","Standalone","Standalone","Unpopular Opinions","Tardy Tuesday","GLM Series","Standalone","GLM Series","GLM Series","GLM Series","Unpopular Opinions","GLM Series","GLM Series","Standalone","Standalone","Tardy Tuesday","GLM Series","Unpopular Opinions","Tardy Tuesday","GLM Series","Standalone","GLM Series","GLM Series","Tardy Tuesday","Standalone","GLM Series","GLM Series","Tardy Tuesday","Standalone","Unpopular Opinions","GLM Series","Tardy Tuesday","GLM Series","Unpopular Opinions","Tardy Tuesday","Standalone","GLM Series","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Tardy Tuesday","Tardy Tuesday","Tardy Tuesday","GLM Series","GLM Series","Standalone","GLM Series","Tardy Tuesday","GLM Series","Hand-drawn Stats","Hand-drawn Stats","GLM Series","Unpopular Opinions","Standalone","Tardy Tuesday","GLM Series","Hand-drawn Stats","Tardy Tuesday","Standalone","GLM Series","Unpopular Opinions","Tardy Tuesday","Unpopular Opinions","GLM Series","GLM Series","GLM Series","Tardy Tuesday","GLM Series","GLM Series","Tardy Tuesday","Standalone","Standalone","Tardy Tuesday","Standalone","Unpopular Opinions","Tardy Tuesday","Standalone","Standalone","Standalone","Standalone","Unpopular Opinions","GLM Series","Standalone","Standalone","Standalone","Standalone","Standalone","Unpopular Opinions","Unpopular Opinions","Standalone","Unpopular Opinions","GLM Series","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Hand-drawn Stats","Unpopular Opinions","fiction","Unpopular Opinions","Unpopular Opinions","Standalone","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Hand-drawn Stats","Standalone","Hand-drawn Stats","Standalone","Standalone","Standalone","Standalone","Unpopular Opinions","Standalone","on-writing","Standalone","Hand-drawn Stats"],"values":[135,445,48,578,164,364,963,595,640,555,771,299,57,1664,922,469,1152,53,301,414,1480,42,1883,293,3536,82,1845,1446,1866,886,1700,1907,1105,697,497,1391,837,790,2412,37,2346,4066,1070,794,1079,2008,621,1381,1987,3206,886,2568,2525,1202,1649,3208,2056,2564,1806,3168,609,633,1894,1925,1891,3408,1622,564,1796,260,114,2347,2049,820,179,2544,1968,489,323,2190,2987,390,3560,1243,2085,1887,667,1826,1115,427,540,317,328,231,667,582,1849,65,1385,1008,1369,6319,4451,2301,1501,2316,37,3821,808,278,1402,12044,3580,1599,1597,708,138,1461,3865,178,6636,911,2886,5578,6359,173,966,189,4172,2260,689,5134,2070,4665,2505,1249,3314],"text":["<b>EdinbR talk on modelling economic (in)activity transitions<\/b><br>Date: 2023-11-25<br>Words:    135<br>Folder: standalone/talk-at-edinbr","<b>A Deathly Silence<\/b><br>Date: 2023-11-25<br>Words:    445<br>Folder: standalone/unattended-deaths","<b>First Post<\/b><br>Date: 2023-11-25<br>Words:     48<br>Folder: standalone/welcome","<b>Part One: Model fitting as parameter calibration<\/b><br>Date: 2023-11-28<br>Words:    578<br>Folder: glms/intro-to-glms","<b>Post with code<\/b><br>Date: 2023-11-28<br>Words:    164<br>Folder: standalone/r-code","<b>Tidy Tuesday on Dr Who<\/b><br>Date: 2023-11-29<br>Words:    364<br>Folder: tardy-tuesday/tidy-tuesday-dr-who","<b>Robocop (1987) is wonderfully childish<\/b><br>Date: 2023-11-29<br>Words:    963<br>Folder: unpop/robocop-is-wonderfully-childish","<b>Interactive Sliders with Crosstalk and Plotly<\/b><br>Date: 2023-11-30<br>Words:    595<br>Folder: standalone/interactive-sliders","<b>Part Two: Systematic components and link functions<\/b><br>Date: 2023-12-01<br>Words:    640<br>Folder: glms/intro-to-glms","<b>Scientific Illustrations: Annotating the unit circle<\/b><br>Date: 2023-12-01<br>Words:    555<br>Folder: standalone/scientific-illustration-unit-circle","<b>Part Three: glm is just fancy lm<\/b><br>Date: 2023-12-02<br>Words:    771<br>Folder: glms/intro-to-glms","<b>New blog feature: comments<\/b><br>Date: 2023-12-02<br>Words:    299<br>Folder: standalone/utterences-comments","<b>How to wrap presents<\/b><br>Date: 2023-12-03<br>Words:     57<br>Folder: standalone/wrapping-guide","<b>The Effective Savings on Interest-free Credit<\/b><br>Date: 2023-12-04<br>Words:  1,664<br>Folder: standalone/effective-saving-for-interest-free-credit","<b>Beavis and Butt-Head: When a physics graduate dons Dumbface<\/b><br>Date: 2023-12-05<br>Words:    922<br>Folder: unpop/beavis-and-butthead-is-dumbface","<b>Tidy Tuesday on Life Expectancy<\/b><br>Date: 2023-12-06<br>Words:    469<br>Folder: tardy-tuesday/tidy-tuesday-life-expectancy","<b>Why such pushback against 20 minute neighbourhoods?<\/b><br>Date: 2023-12-07<br>Words:  1,152<br>Folder: standalone/x-minute-neighbourhoods","<b>Optimised for Twitter?<\/b><br>Date: 2023-12-08<br>Words:     53<br>Folder: standalone/optimised-for-twitter","<b>My Economic Inactivity Modelling Package: *Informative Readme File!*<\/b><br>Date: 2023-12-09<br>Words:    301<br>Folder: standalone/economic-inactivity-modelling-package-readme","<b>Tidy Tuesday on Life Expectancy - Part Two<\/b><br>Date: 2023-12-13<br>Words:    414<br>Folder: tardy-tuesday/tidy-tuesday-more-life-expectancy","<b>Nerdy Dialogues on Life and Death<\/b><br>Date: 2023-12-14<br>Words:  1,480<br>Folder: standalone/socatic-dialogue-part-01","<b>Changing tenure in Scotland<\/b><br>Date: 2023-12-15<br>Words:     42<br>Folder: standalone/changing-tenure-in-scotland","<b>The Eerie Familiarity of Frasier (2023)<\/b><br>Date: 2023-12-17<br>Words:  1,883<br>Folder: unpop/new-frasiers-eerie-familiarity","<b>Tidy Tuesday: Christmas films<\/b><br>Date: 2023-12-21<br>Words:    293<br>Folder: tardy-tuesday/tidy-tuesday-christmas-films","<b>Part Four: why only betas just look at betas<\/b><br>Date: 2023-12-30<br>Words:  3,536<br>Folder: glms/intro-to-glms","<b>GLMs: My first series<\/b><br>Date: 2023-12-31<br>Words:     82<br>Folder: standalone/glm-series","<b>Part Five: Traversing the Likelihood Landscape<\/b><br>Date: 2024-01-02<br>Words:  1,845<br>Folder: glms/likelihood-and-simulation-theory","<b>Part Six: The Robo-Chauffeur<\/b><br>Date: 2024-01-03<br>Words:  1,446<br>Folder: glms/likelihood-and-simulation-theory","<b>Part Seven: Feeling Uncertain<\/b><br>Date: 2024-01-04<br>Words:  1,866<br>Folder: glms/likelihood-and-simulation-theory","<b>David Sedaris: Humourists as Unrepentant Observational Confessionals<\/b><br>Date: 2024-01-06<br>Words:    886<br>Folder: unpop/unrepentent-confessional","<b>Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet<\/b><br>Date: 2024-01-16<br>Words:  1,700<br>Folder: glms/likelihood-and-simulation-theory","<b>Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values<\/b><br>Date: 2024-01-20<br>Words:  1,907<br>Folder: glms/likelihood-and-simulation-theory","<b>I got permanently banned from a politics forum for mentioning how circles work<\/b><br>Date: 2024-01-21<br>Words:  1,105<br>Folder: standalone/circular-reasoning","<b>The Other Left-Right Divide: Iain McGilchrist and the Battle of the Hemispheres<\/b><br>Date: 2024-01-24<br>Words:    697<br>Folder: standalone/the-other-left-right-divide","<b>Tidytuesday 2024-01-23<\/b><br>Date: 2024-01-25<br>Words:    497<br>Folder: tardy-tuesday/tidy-tuesday-education-townsize","<b>Part Ten: Log Likelihood estimation for Logistic Regression<\/b><br>Date: 2024-01-27<br>Words:  1,391<br>Folder: glms/likelihood-and-simulation-theory","<b>On Sweary Soap Operas: A Concealed Television Genre<\/b><br>Date: 2024-02-01<br>Words:    837<br>Folder: unpop/on-sweary-soaps","<b>Tidy Tuesday 30 Jan 2024: Groundhogs<\/b><br>Date: 2024-02-02<br>Words:    790<br>Folder: tardy-tuesday/tidy-tuesday-groundhogs","<b>Part Eleven: Honest Predictions the easier way<\/b><br>Date: 2024-02-03<br>Words:  2,412<br>Folder: glms/complete-simulation-example","<b>Tardy Tuesdays: My Second Series<\/b><br>Date: 2024-02-03<br>Words:     37<br>Folder: standalone/tardy-tuesday-series","<b>Part Twelve: Honest Predictions the slightly-less easier way<\/b><br>Date: 2024-02-04<br>Words:  2,346<br>Folder: glms/complete-simulation-example","<b>Part Thirteen: On Marbles and Jumping Beans<\/b><br>Date: 2024-02-10<br>Words:  4,066<br>Folder: glms/complete-simulation-example","<b>Tidy Tuesday on Valentine's Day<\/b><br>Date: 2024-02-14<br>Words:  1,070<br>Folder: tardy-tuesday/tidy-tuesday-valentines-day","<b>On the background to my statistical inference series<\/b><br>Date: 2024-02-15<br>Words:    794<br>Folder: standalone/background-to-my-stats-series","<b>Part Fourteen: A non-technical but challenging introduction to causal inference...<\/b><br>Date: 2024-02-19<br>Words:  1,079<br>Folder: glms/causal-inference","<b>Part Fifteen: Causal Inference: The platinum and gold standards<\/b><br>Date: 2024-02-22<br>Words:  2,008<br>Folder: glms/causal-inference","<b>Tidy Tuesday: 20 Feb 2024 - R Grants<\/b><br>Date: 2024-02-22<br>Words:    621<br>Folder: tardy-tuesday/tidy-tuesday-r-grants","<b>Edinbr Pair Programming<\/b><br>Date: 2024-02-23<br>Words:  1,381<br>Folder: standalone/edinbr-pair-programming","<b>Why can't we just get on with making and fixing stuff?<\/b><br>Date: 2024-02-24<br>Words:  1,987<br>Folder: unpop/andy-weir-utopian-engfi","<b>Part Sixteen: Causal Inference: How to try to do the impossible<\/b><br>Date: 2024-02-28<br>Words:  3,206<br>Folder: glms/causal-inference","<b>Tidy Tuesday 27 Feb 2024: Leap Years<\/b><br>Date: 2024-02-28<br>Words:    886<br>Folder: tardy-tuesday/tidy-tuesday-leapyears","<b>Part Seventeen: Causal Inference: Controlling and Matching Approaches<\/b><br>Date: 2024-03-02<br>Words:  2,568<br>Folder: glms/causal-inference","<b>My thoughts on Dune (Part 1)<\/b><br>Date: 2024-03-03<br>Words:  2,525<br>Folder: unpop/dune-pt-1-after-dune-pt-2","<b>Tidy Tuesday Trash<\/b><br>Date: 2024-03-06<br>Words:  1,202<br>Folder: tardy-tuesday/tidy-tuesday-trash","<b>Can we go Dutch? (And should we?)<\/b><br>Date: 2024-03-13<br>Words:  1,649<br>Folder: standalone/can-we-go-dutch","<b>Part Eighteen: Causal Inference: Some closing thoughts<\/b><br>Date: 2024-03-16<br>Words:  3,208<br>Folder: glms/causal-inference","<b>Levelling up... forever. On Gaming's Shepherd's Tone and the Fremium Trap<\/b><br>Date: 2024-03-22<br>Words:  2,056<br>Folder: unpop/fractal-game-mechanics-and-the-illusion-of-progress","<b>Thoughts on Dreams from My Father<\/b><br>Date: 2024-03-26<br>Words:  2,564<br>Folder: unpop/obama-dialectic-identity","<b>The Trading Mind Game<\/b><br>Date: 2024-03-29<br>Words:  1,806<br>Folder: unpop/trading-mind-game","<b>Jason Statham vs the Nepobaby Cyberscammers<\/b><br>Date: 2024-03-30<br>Words:  3,168<br>Folder: unpop/jason-statham-vs-the-nepobaby-cyberscammers","<b>Double Tardy Tuesday<\/b><br>Date: 2024-04-02<br>Words:    609<br>Folder: tardy-tuesday/tidy-tuesday-double","<b>Tidy Tuesday: Solar Eclipses<\/b><br>Date: 2024-04-11<br>Words:    633<br>Folder: tardy-tuesday/tidy-tuesday-eclipse","<b>Tidy Tuesday Extra - Packages and recursive searching<\/b><br>Date: 2024-04-20<br>Words:  1,894<br>Folder: tardy-tuesday/tidy-tuesday-packages","<b>Part Nineteen: Time Series: Introduction and Autoregression<\/b><br>Date: 2024-04-21<br>Words:  1,925<br>Folder: glms/time-series","<b>Part Twenty: Time Series: Integration<\/b><br>Date: 2024-04-22<br>Words:  1,891<br>Folder: glms/time-series","<b>It's still the economy<\/b><br>Date: 2024-04-25<br>Words:  3,408<br>Folder: standalone/still-the-economy","<b>Part Twenty One: Time Series: The Moving Average Model<\/b><br>Date: 2024-04-26<br>Words:  1,622<br>Folder: glms/time-series","<b>Tidy Tuesday 23 April 2024: Space objects<\/b><br>Date: 2024-04-26<br>Words:    564<br>Folder: tardy-tuesday/tidy-tuesday-space-objects","<b>Part Twenty Two: Time Series - ARIMA in practice<\/b><br>Date: 2024-04-30<br>Words:  1,796<br>Folder: glms/time-series","<b>Factor analysis with ordinal variables<\/b><br>Date: 2024-05-04<br>Words:    260<br>Folder: handdrawn-stats/factor-analysis-ordinal-variables-analogue","<b>How factor analysis is used in testing<\/b><br>Date: 2024-05-05<br>Words:    114<br>Folder: handdrawn-stats/how-factor-analysis-is-used-in-testing","<b>Part Twenty Three: Time series and seasonality<\/b><br>Date: 2024-05-06<br>Words:  2,347<br>Folder: glms/time-series","<b>David Lynch: All-American Shaman<\/b><br>Date: 2024-05-12<br>Words:  2,049<br>Folder: unpop/david-lynch-all-american-shaman","<b>A Quarto blog post on a Quarto presentation about the Quarto blog<\/b><br>Date: 2024-05-19<br>Words:    820<br>Folder: standalone/edinburgh-js-talk","<b>Tidy Tuesday R performance<\/b><br>Date: 2024-05-22<br>Words:    179<br>Folder: tardy-tuesday/tidy-tuesday-r-perf","<b>Part Twenty Four: Time series - Vector Autoregression and multivariate models<\/b><br>Date: 2024-05-26<br>Words:  2,544<br>Folder: glms/time-series","<b>Statistics as circuit boards<\/b><br>Date: 2024-05-28<br>Words:  1,968<br>Folder: handdrawn-stats/statistics-as-circuits","<b>Tidy Tuesday: Self-generated data challenge<\/b><br>Date: 2024-05-29<br>Words:    489<br>Folder: tardy-tuesday/tidy-tuesday-data-wrangling","<b>Link-breaking Spring Clean<\/b><br>Date: 2024-05-31<br>Words:    323<br>Folder: standalone/link-breaking-spring-clean","<b>Time series: Some closing remarks<\/b><br>Date: 2024-06-09<br>Words:  2,190<br>Folder: glms/time-series","<b>The Game of Life Beyond<\/b><br>Date: 2024-06-17<br>Words:  2,987<br>Folder: unpop/psychomechanics-of-cultist-simulator","<b>Tidy Tuesday: Roaming US Holidays<\/b><br>Date: 2024-06-19<br>Words:    390<br>Folder: tardy-tuesday/tidy-tuesday-roaming-us-holidays","<b>Johan Hari: Superior Inferior Superior Storyteller<\/b><br>Date: 2024-06-25<br>Words:  3,560<br>Folder: unpop/hari-superior-inferior-superior-story-teller","<b>A brief introduction to bootstrapping<\/b><br>Date: 2024-06-28<br>Words:  1,243<br>Folder: glms/hacker-stats","<b>Permutation Testing, and the intuition of the Null hypothesis, with Base R<\/b><br>Date: 2024-07-11<br>Words:  2,085<br>Folder: glms/hacker-stats","<b>Getting started with the infer package<\/b><br>Date: 2024-07-16<br>Words:  1,887<br>Folder: glms/hacker-stats","<b>Tidy Tuesday: Women's Football<\/b><br>Date: 2024-07-17<br>Words:    667<br>Folder: tardy-tuesday/tidy-tuesday-womens-football","<b>Hacker Stats: Intro and overview<\/b><br>Date: 2024-07-21<br>Words:  1,826<br>Folder: glms/hacker-stats","<b>Resampling for post-stratification<\/b><br>Date: 2024-07-23<br>Words:  1,115<br>Folder: glms/hacker-stats","<b>Tardy Tuesday: American Idol<\/b><br>Date: 2024-07-24<br>Words:    427<br>Folder: tardy-tuesday/tidy-tuesday-american-idol","<b>Psycho-logical Arithmetic<\/b><br>Date: 2024-08-04<br>Words:    540<br>Folder: standalone/psycho-logical-arithmetic","<b>Information Warfare: Proportion of Rwandans who are Muslims<\/b><br>Date: 2024-08-06<br>Words:    317<br>Folder: standalone/rwanda-information-warfare","<b>Tardy Tuesday: Olympics<\/b><br>Date: 2024-08-07<br>Words:    328<br>Folder: tardy-tuesday/tidy-tuesday-olympics","<b>Threw missiles: a concealed tautology?<\/b><br>Date: 2024-08-10<br>Words:    231<br>Folder: standalone/threw-missiles","<b>Mistaken (Aural) Identity: On podcasts and soundalikes<\/b><br>Date: 2024-08-12<br>Words:    667<br>Folder: unpop/soundalikes","<b>Tidy Tuesday: English Monarchs<\/b><br>Date: 2024-08-21<br>Words:    582<br>Folder: tardy-tuesday/tidy-tuesday-english-monarchs","<b>Brian May: Gentleman Ecoscientist<\/b><br>Date: 2024-08-25<br>Words:  1,849<br>Folder: standalone/brian-may-gentleman-ecoscientist","<b>Statistics Website<\/b><br>Date: 2024-09-04<br>Words:     65<br>Folder: standalone/stats-website","<b>The Paradox of Tolerating Intolerance: Position A and Position B<\/b><br>Date: 2024-09-28<br>Words:  1,385<br>Folder: standalone/tolerating-intolerance-paradox","<b>On Anti-victories and Velvet Mousetraps<\/b><br>Date: 2024-10-06<br>Words:  1,008<br>Folder: standalone/anti-victories-and-velvet-mousetraps","<b>Megalopolis: Dream Film<\/b><br>Date: 2024-10-10<br>Words:  1,369<br>Folder: unpop/francis-dream-film","<b>Demystifying and Disenchanting Statistical Significance<\/b><br>Date: 2024-10-19<br>Words:  6,319<br>Folder: glms/one-off","<b>The Book of Nigel<\/b><br>Date: 2024-10-25<br>Words:  4,451<br>Folder: standalone/book-of-nigel","<b>Sanders to Trump? Some thoughts on voter types<\/b><br>Date: 2024-11-09<br>Words:  2,301<br>Folder: standalone/voter-types","<b>The Wristwatch<\/b><br>Date: 2024-11-21<br>Words:  1,501<br>Folder: standalone/the-wristwatch","<b>*Poecilia parae*: A lover, and a fighter<\/b><br>Date: 2024-12-07<br>Words:  2,316<br>Folder: standalone/gentes-lover-and-a-fighter","<b>Statistical Significance: Now off in the land of the stats<\/b><br>Date: 2024-12-07<br>Words:     37<br>Folder: standalone/stat-sig-non-sig-update","<b>Wham! forever: On cultural debraiding and the end of Cultural progress<\/b><br>Date: 2024-12-21<br>Words:  3,821<br>Folder: unpop/wham-forever-cultural-debraiding","<b>Weaponising the Empathy Machine: On Escape at Dannemora<\/b><br>Date: 2024-12-30<br>Words:    808<br>Folder: unpop/escape-at-dannemora-weaponising-the-empathy-machine","<b>First website update since 2023!<\/b><br>Date: 2025-01-01<br>Words:    278<br>Folder: standalone/website-update","<b>Brother Lee the Antimonk<\/b><br>Date: 2025-01-04<br>Words:  1,402<br>Folder: unpop/brother-lee-the-antimonk","<b>Time and (state) change<\/b><br>Date: 2025-03-30<br>Words: 12,044<br>Folder: glms/one-off","<b>Mickey 17 and the Economics of Life<\/b><br>Date: 2025-04-18<br>Words:  3,580<br>Folder: unpop/mickey-17-and-the-economics-of-life","<b>Three Computer Games for People who Don't Play Computer Games<\/b><br>Date: 2025-05-05<br>Words:  1,599<br>Folder: unpop/three-nongamer-games","<b>Strangelove: On Love and (Civil) Warfare<\/b><br>Date: 2025-05-24<br>Words:  1,597<br>Folder: unpop/on-love-and-civil-warfare","<b>No Longer Under-stand-ing<\/b><br>Date: 2025-06-08<br>Words:    708<br>Folder: unpop/no-longer-understanding","<b>Repeated Measures<\/b><br>Date: 2025-06-17<br>Words:    138<br>Folder: handdrawn-stats/repeated-measures","<b>The Contestant<\/b><br>Date: 2025-06-22<br>Words:  1,461<br>Folder: unpop/the-scapegoat","<b>It's your choice<\/b><br>Date: 2025-07-28<br>Words:  3,865<br>Folder: fiction/its-your-choice","<b>More on the Stand Ident<\/b><br>Date: 2025-08-03<br>Words:    178<br>Folder: unpop/more-on-the-stand-ident","<b>Some thoughts on The Genius(*) Myth: A Review and a Reverie<\/b><br>Date: 2025-08-19<br>Words:  6,636<br>Folder: unpop/the-what-is-a-genius-myth","<b>Three quality-of-life upgrades<\/b><br>Date: 2025-08-24<br>Words:    911<br>Folder: standalone/three-qol-updates","<b>Remembering KGB: 1992's subtly terrifying social poison simulator<\/b><br>Date: 2025-08-26<br>Words:  2,886<br>Folder: unpop/remembering-kgb-social-poison-simulator","<b>The Man Who Solved Intelligence<\/b><br>Date: 2025-10-09<br>Words:  5,578<br>Folder: unpop/the-man-who-solved-intelligence","<b>Nine thoughts on Tim Berners-Lee's *This is for Everyone*<\/b><br>Date: 2025-10-12<br>Words:  6,359<br>Folder: unpop/was-this-for-everyone","<b>Climbing with Claude: Understanding Collaborative Version Control<\/b><br>Date: 2025-10-14<br>Words:    173<br>Folder: handdrawn-stats/version-control-as-rock-climbing","<b>Claude as a Dialectical Engine?<\/b><br>Date: 2025-10-27<br>Words:    966<br>Folder: standalone/the-dialectical-engine","<b>Point estimates, Confidence Intervals and P-Values<\/b><br>Date: 2025-11-13<br>Words:    189<br>Folder: handdrawn-stats/claude-stat-concept-guides","<b>The Analytical Maxim Gun<\/b><br>Date: 2025-11-29<br>Words:  4,172<br>Folder: standalone/analytical-maxim-gun","<b>WiredClothMother<\/b><br>Date: 2025-12-05<br>Words:  2,260<br>Folder: standalone/wired-cloth-mother","<b>Claude Adds Footnotes: A Reflection<\/b><br>Date: 2025-12-06<br>Words:    689<br>Folder: standalone/claude-footnotes-reflection","<b>2025: The Last Year Most Knowledge Workers will be Human<\/b><br>Date: 2026-01-02<br>Words:  5,134<br>Folder: standalone/2025-last-human-majority-knowledge-worker","<b>David Sconce and the benevolence of evil?<\/b><br>Date: 2026-01-14<br>Words:  2,070<br>Folder: unpop/the-mortician","<b>The Dilbert Future in Retrospect<\/b><br>Date: 2026-01-25<br>Words:  4,665<br>Folder: standalone/dilbert-future-in-retrospect","<b>How I Now Write My Blog<\/b><br>Date: 2026-01-31<br>Words:  2,505<br>Folder: on-writing/how-i-write-now","<b>Blog Archaeology: Mapping the Territory<\/b><br>Date: 2026-02-15<br>Words:  1,249<br>Folder: standalone/blog-archaeology-2026","<b>Repeated Measures (Transcribed)<\/b><br>Date: 2026-02-15<br>Words:  3,314<br>Folder: handdrawn-stats/repeated-measures-transcribed"],"hoverinfo":"text","marker":{"colors":[19686,19686,19686,19689,19689,19690,19690,19691,19692,19692,19693,19693,19694,19695,19696,19697,19698,19699,19700,19704,19705,19706,19708,19712,19721,19722,19724,19725,19726,19728,19738,19742,19743,19746,19747,19749,19754,19755,19756,19756,19757,19763,19767,19768,19772,19775,19775,19776,19777,19781,19781,19784,19785,19788,19795,19798,19804,19808,19811,19812,19815,19824,19833,19834,19835,19838,19839,19839,19843,19847,19848,19849,19855,19862,19865,19869,19871,19872,19874,19883,19891,19893,19899,19902,19915,19920,19921,19925,19927,19928,19939,19941,19942,19945,19947,19956,19960,19970,19994,20002,20006,20015,20021,20036,20048,20064,20064,20078,20087,20089,20092,20177,20196,20213,20232,20247,20256,20261,20297,20303,20319,20324,20326,20370,20373,20375,20388,20405,20421,20427,20428,20455,20467,20478,20484,20499,20499],"colorscale":[["0","#2c3e50"],["0.5","#3498db"],["1","#e74c3c"]],"showscale":true,"colorbar":{"title":"Date","ticktext":["2023-11-25","2026-02-15"],"tickvals":[19686,20499]}},"textinfo":"label","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"treemap"}},"layout":{"margin":{"b":40,"l":60,"t":50,"r":10},"title":{"text":"Blog Post Treemap: Size = Word Count, Colour = Date"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["EdinbR talk on modelling economic (in...","A Deathly Silence","First Post","Part One: Model fitting as parameter ...","Post with code","Tidy Tuesday on Dr Who","Robocop (1987) is wonderfully childish","Interactive Sliders with Crosstalk an...","Part Two: Systematic components and l...","Scientific Illustrations: Annotating ...","Part Three: glm is just fancy lm","New blog feature: comments","How to wrap presents","The Effective Savings on Interest-fre...","Beavis and Butt-Head: When a physics ...","Tidy Tuesday on Life Expectancy","Why such pushback against 20 minute n...","Optimised for Twitter?","My Economic Inactivity Modelling Pack...","Tidy Tuesday on Life Expectancy - Par...","Nerdy Dialogues on Life and Death","Changing tenure in Scotland","The Eerie Familiarity of Frasier (2023)","Tidy Tuesday: Christmas films","Part Four: why only betas just look a...","GLMs: My first series","Part Five: Traversing the Likelihood ...","Part Six: The Robo-Chauffeur","Part Seven: Feeling Uncertain","David Sedaris: Humourists as Unrepent...","Part Eight: Guessing what a landscape...","Part Nine: Answering questions with h...","I got permanently banned from a polit...","The Other Left-Right Divide: Iain McG...","Tidytuesday 2024-01-23","Part Ten: Log Likelihood estimation f...","On Sweary Soap Operas: A Concealed Te...","Tidy Tuesday 30 Jan 2024: Groundhogs","Part Eleven: Honest Predictions the e...","Tardy Tuesdays: My Second Series","Part Twelve: Honest Predictions the s...","Part Thirteen: On Marbles and Jumping...","Tidy Tuesday on Valentine's Day","On the background to my statistical i...","Part Fourteen: A non-technical but ch...","Part Fifteen: Causal Inference: The p...","Tidy Tuesday: 20 Feb 2024 - R Grants","Edinbr Pair Programming","Why can't we just get on with making ...","Part Sixteen: Causal Inference: How t...","Tidy Tuesday 27 Feb 2024: Leap Years","Part Seventeen: Causal Inference: Con...","My thoughts on Dune (Part 1)","Tidy Tuesday Trash","Can we go Dutch? (And should we?)","Part Eighteen: Causal Inference: Some...","Levelling up... forever. On Gaming's ...","Thoughts on Dreams from My Father","The Trading Mind Game","Jason Statham vs the Nepobaby Cybersc...","Double Tardy Tuesday","Tidy Tuesday: Solar Eclipses","Tidy Tuesday Extra - Packages and rec...","Part Nineteen: Time Series: Introduct...","Part Twenty: Time Series: Integration","It's still the economy","Part Twenty One: Time Series: The Mov...","Tidy Tuesday 23 April 2024: Space obj...","Part Twenty Two: Time Series - ARIMA ...","Factor analysis with ordinal variables","How factor analysis is used in testing","Part Twenty Three: Time series and se...","David Lynch: All-American Shaman","A Quarto blog post on a Quarto presen...","Tidy Tuesday R performance","Part Twenty Four: Time series - Vecto...","Statistics as circuit boards","Tidy Tuesday: Self-generated data cha...","Link-breaking Spring Clean","Time series: Some closing remarks","The Game of Life Beyond","Tidy Tuesday: Roaming US Holidays","Johan Hari: Superior Inferior Superio...","A brief introduction to bootstrapping","Permutation Testing, and the intuitio...","Getting started with the infer package","Tidy Tuesday: Women's Football","Hacker Stats: Intro and overview","Resampling for post-stratification","Tardy Tuesday: American Idol","Psycho-logical Arithmetic","Information Warfare: Proportion of Rw...","Tardy Tuesday: Olympics","Threw missiles: a concealed tautology?","Mistaken (Aural) Identity: On podcast...","Tidy Tuesday: English Monarchs","Brian May: Gentleman Ecoscientist","Statistics Website","The Paradox of Tolerating Intolerance...","On Anti-victories and Velvet Mousetraps","Megalopolis: Dream Film","Demystifying and Disenchanting Statis...","The Book of Nigel","Sanders to Trump? Some thoughts on vo...","The Wristwatch","*Poecilia parae*: A lover, and a fighter","Statistical Significance: Now off in ...","Wham! forever: On cultural debraiding...","Weaponising the Empathy Machine: On E...","First website update since 2023!","Brother Lee the Antimonk","Time and (state) change","Mickey 17 and the Economics of Life","Three Computer Games for People who D...","Strangelove: On Love and (Civil) Warfare","No Longer Under-stand-ing","Repeated Measures","The Contestant","It's your choice","More on the Stand Ident","Some thoughts on The Genius(*) Myth: ...","Three quality-of-life upgrades","Remembering KGB: 1992's subtly terrif...","The Man Who Solved Intelligence","Nine thoughts on Tim Berners-Lee's *T...","Climbing with Claude: Understanding C...","Claude as a Dialectical Engine?","Point estimates, Confidence Intervals...","The Analytical Maxim Gun","WiredClothMother","Claude Adds Footnotes: A Reflection","2025: The Last Year Most Knowledge Wo...","David Sconce and the benevolence of e...","The Dilbert Future in Retrospect","How I Now Write My Blog","Blog Archaeology: Mapping the Territory","Repeated Measures (Transcribed)"],"parents":["Standalone","Standalone","Standalone","GLM Series","Standalone","Tardy Tuesday","Unpopular Opinions","Standalone","GLM Series","Standalone","GLM Series","Standalone","Standalone","Standalone","Unpopular Opinions","Tardy Tuesday","Standalone","Standalone","Standalone","Tardy Tuesday","Standalone","Standalone","Unpopular Opinions","Tardy Tuesday","GLM Series","Standalone","GLM Series","GLM Series","GLM Series","Unpopular Opinions","GLM Series","GLM Series","Standalone","Standalone","Tardy Tuesday","GLM Series","Unpopular Opinions","Tardy Tuesday","GLM Series","Standalone","GLM Series","GLM Series","Tardy Tuesday","Standalone","GLM Series","GLM Series","Tardy Tuesday","Standalone","Unpopular Opinions","GLM Series","Tardy Tuesday","GLM Series","Unpopular Opinions","Tardy Tuesday","Standalone","GLM Series","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Tardy Tuesday","Tardy Tuesday","Tardy Tuesday","GLM Series","GLM Series","Standalone","GLM Series","Tardy Tuesday","GLM Series","Hand-drawn Stats","Hand-drawn Stats","GLM Series","Unpopular Opinions","Standalone","Tardy Tuesday","GLM Series","Hand-drawn Stats","Tardy Tuesday","Standalone","GLM Series","Unpopular Opinions","Tardy Tuesday","Unpopular Opinions","GLM Series","GLM Series","GLM Series","Tardy Tuesday","GLM Series","GLM Series","Tardy Tuesday","Standalone","Standalone","Tardy Tuesday","Standalone","Unpopular Opinions","Tardy Tuesday","Standalone","Standalone","Standalone","Standalone","Unpopular Opinions","GLM Series","Standalone","Standalone","Standalone","Standalone","Standalone","Unpopular Opinions","Unpopular Opinions","Standalone","Unpopular Opinions","GLM Series","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Hand-drawn Stats","Unpopular Opinions","fiction","Unpopular Opinions","Unpopular Opinions","Standalone","Unpopular Opinions","Unpopular Opinions","Unpopular Opinions","Hand-drawn Stats","Standalone","Hand-drawn Stats","Standalone","Standalone","Standalone","Standalone","Unpopular Opinions","Standalone","on-writing","Standalone","Hand-drawn Stats"],"values":[135,445,48,578,164,364,963,595,640,555,771,299,57,1664,922,469,1152,53,301,414,1480,42,1883,293,3536,82,1845,1446,1866,886,1700,1907,1105,697,497,1391,837,790,2412,37,2346,4066,1070,794,1079,2008,621,1381,1987,3206,886,2568,2525,1202,1649,3208,2056,2564,1806,3168,609,633,1894,1925,1891,3408,1622,564,1796,260,114,2347,2049,820,179,2544,1968,489,323,2190,2987,390,3560,1243,2085,1887,667,1826,1115,427,540,317,328,231,667,582,1849,65,1385,1008,1369,6319,4451,2301,1501,2316,37,3821,808,278,1402,12044,3580,1599,1597,708,138,1461,3865,178,6636,911,2886,5578,6359,173,966,189,4172,2260,689,5134,2070,4665,2505,1249,3314],"text":["<b>EdinbR talk on modelling economic (in)activity transitions<\/b><br>Date: 2023-11-25<br>Words:    135<br>Folder: standalone/talk-at-edinbr","<b>A Deathly Silence<\/b><br>Date: 2023-11-25<br>Words:    445<br>Folder: standalone/unattended-deaths","<b>First Post<\/b><br>Date: 2023-11-25<br>Words:     48<br>Folder: standalone/welcome","<b>Part One: Model fitting as parameter calibration<\/b><br>Date: 2023-11-28<br>Words:    578<br>Folder: glms/intro-to-glms","<b>Post with code<\/b><br>Date: 2023-11-28<br>Words:    164<br>Folder: standalone/r-code","<b>Tidy Tuesday on Dr Who<\/b><br>Date: 2023-11-29<br>Words:    364<br>Folder: tardy-tuesday/tidy-tuesday-dr-who","<b>Robocop (1987) is wonderfully childish<\/b><br>Date: 2023-11-29<br>Words:    963<br>Folder: unpop/robocop-is-wonderfully-childish","<b>Interactive Sliders with Crosstalk and Plotly<\/b><br>Date: 2023-11-30<br>Words:    595<br>Folder: standalone/interactive-sliders","<b>Part Two: Systematic components and link functions<\/b><br>Date: 2023-12-01<br>Words:    640<br>Folder: glms/intro-to-glms","<b>Scientific Illustrations: Annotating the unit circle<\/b><br>Date: 2023-12-01<br>Words:    555<br>Folder: standalone/scientific-illustration-unit-circle","<b>Part Three: glm is just fancy lm<\/b><br>Date: 2023-12-02<br>Words:    771<br>Folder: glms/intro-to-glms","<b>New blog feature: comments<\/b><br>Date: 2023-12-02<br>Words:    299<br>Folder: standalone/utterences-comments","<b>How to wrap presents<\/b><br>Date: 2023-12-03<br>Words:     57<br>Folder: standalone/wrapping-guide","<b>The Effective Savings on Interest-free Credit<\/b><br>Date: 2023-12-04<br>Words:  1,664<br>Folder: standalone/effective-saving-for-interest-free-credit","<b>Beavis and Butt-Head: When a physics graduate dons Dumbface<\/b><br>Date: 2023-12-05<br>Words:    922<br>Folder: unpop/beavis-and-butthead-is-dumbface","<b>Tidy Tuesday on Life Expectancy<\/b><br>Date: 2023-12-06<br>Words:    469<br>Folder: tardy-tuesday/tidy-tuesday-life-expectancy","<b>Why such pushback against 20 minute neighbourhoods?<\/b><br>Date: 2023-12-07<br>Words:  1,152<br>Folder: standalone/x-minute-neighbourhoods","<b>Optimised for Twitter?<\/b><br>Date: 2023-12-08<br>Words:     53<br>Folder: standalone/optimised-for-twitter","<b>My Economic Inactivity Modelling Package: *Informative Readme File!*<\/b><br>Date: 2023-12-09<br>Words:    301<br>Folder: standalone/economic-inactivity-modelling-package-readme","<b>Tidy Tuesday on Life Expectancy - Part Two<\/b><br>Date: 2023-12-13<br>Words:    414<br>Folder: tardy-tuesday/tidy-tuesday-more-life-expectancy","<b>Nerdy Dialogues on Life and Death<\/b><br>Date: 2023-12-14<br>Words:  1,480<br>Folder: standalone/socatic-dialogue-part-01","<b>Changing tenure in Scotland<\/b><br>Date: 2023-12-15<br>Words:     42<br>Folder: standalone/changing-tenure-in-scotland","<b>The Eerie Familiarity of Frasier (2023)<\/b><br>Date: 2023-12-17<br>Words:  1,883<br>Folder: unpop/new-frasiers-eerie-familiarity","<b>Tidy Tuesday: Christmas films<\/b><br>Date: 2023-12-21<br>Words:    293<br>Folder: tardy-tuesday/tidy-tuesday-christmas-films","<b>Part Four: why only betas just look at betas<\/b><br>Date: 2023-12-30<br>Words:  3,536<br>Folder: glms/intro-to-glms","<b>GLMs: My first series<\/b><br>Date: 2023-12-31<br>Words:     82<br>Folder: standalone/glm-series","<b>Part Five: Traversing the Likelihood Landscape<\/b><br>Date: 2024-01-02<br>Words:  1,845<br>Folder: glms/likelihood-and-simulation-theory","<b>Part Six: The Robo-Chauffeur<\/b><br>Date: 2024-01-03<br>Words:  1,446<br>Folder: glms/likelihood-and-simulation-theory","<b>Part Seven: Feeling Uncertain<\/b><br>Date: 2024-01-04<br>Words:  1,866<br>Folder: glms/likelihood-and-simulation-theory","<b>David Sedaris: Humourists as Unrepentant Observational Confessionals<\/b><br>Date: 2024-01-06<br>Words:    886<br>Folder: unpop/unrepentent-confessional","<b>Part Eight: Guessing what a landscape looks like by feeling the curves beneath our feet<\/b><br>Date: 2024-01-16<br>Words:  1,700<br>Folder: glms/likelihood-and-simulation-theory","<b>Part Nine: Answering questions with honest uncertainty: Expected values and Predicted values<\/b><br>Date: 2024-01-20<br>Words:  1,907<br>Folder: glms/likelihood-and-simulation-theory","<b>I got permanently banned from a politics forum for mentioning how circles work<\/b><br>Date: 2024-01-21<br>Words:  1,105<br>Folder: standalone/circular-reasoning","<b>The Other Left-Right Divide: Iain McGilchrist and the Battle of the Hemispheres<\/b><br>Date: 2024-01-24<br>Words:    697<br>Folder: standalone/the-other-left-right-divide","<b>Tidytuesday 2024-01-23<\/b><br>Date: 2024-01-25<br>Words:    497<br>Folder: tardy-tuesday/tidy-tuesday-education-townsize","<b>Part Ten: Log Likelihood estimation for Logistic Regression<\/b><br>Date: 2024-01-27<br>Words:  1,391<br>Folder: glms/likelihood-and-simulation-theory","<b>On Sweary Soap Operas: A Concealed Television Genre<\/b><br>Date: 2024-02-01<br>Words:    837<br>Folder: unpop/on-sweary-soaps","<b>Tidy Tuesday 30 Jan 2024: Groundhogs<\/b><br>Date: 2024-02-02<br>Words:    790<br>Folder: tardy-tuesday/tidy-tuesday-groundhogs","<b>Part Eleven: Honest Predictions the easier way<\/b><br>Date: 2024-02-03<br>Words:  2,412<br>Folder: glms/complete-simulation-example","<b>Tardy Tuesdays: My Second Series<\/b><br>Date: 2024-02-03<br>Words:     37<br>Folder: standalone/tardy-tuesday-series","<b>Part Twelve: Honest Predictions the slightly-less easier way<\/b><br>Date: 2024-02-04<br>Words:  2,346<br>Folder: glms/complete-simulation-example","<b>Part Thirteen: On Marbles and Jumping Beans<\/b><br>Date: 2024-02-10<br>Words:  4,066<br>Folder: glms/complete-simulation-example","<b>Tidy Tuesday on Valentine's Day<\/b><br>Date: 2024-02-14<br>Words:  1,070<br>Folder: tardy-tuesday/tidy-tuesday-valentines-day","<b>On the background to my statistical inference series<\/b><br>Date: 2024-02-15<br>Words:    794<br>Folder: standalone/background-to-my-stats-series","<b>Part Fourteen: A non-technical but challenging introduction to causal inference...<\/b><br>Date: 2024-02-19<br>Words:  1,079<br>Folder: glms/causal-inference","<b>Part Fifteen: Causal Inference: The platinum and gold standards<\/b><br>Date: 2024-02-22<br>Words:  2,008<br>Folder: glms/causal-inference","<b>Tidy Tuesday: 20 Feb 2024 - R Grants<\/b><br>Date: 2024-02-22<br>Words:    621<br>Folder: tardy-tuesday/tidy-tuesday-r-grants","<b>Edinbr Pair Programming<\/b><br>Date: 2024-02-23<br>Words:  1,381<br>Folder: standalone/edinbr-pair-programming","<b>Why can't we just get on with making and fixing stuff?<\/b><br>Date: 2024-02-24<br>Words:  1,987<br>Folder: unpop/andy-weir-utopian-engfi","<b>Part Sixteen: Causal Inference: How to try to do the impossible<\/b><br>Date: 2024-02-28<br>Words:  3,206<br>Folder: glms/causal-inference","<b>Tidy Tuesday 27 Feb 2024: Leap Years<\/b><br>Date: 2024-02-28<br>Words:    886<br>Folder: tardy-tuesday/tidy-tuesday-leapyears","<b>Part Seventeen: Causal Inference: Controlling and Matching Approaches<\/b><br>Date: 2024-03-02<br>Words:  2,568<br>Folder: glms/causal-inference","<b>My thoughts on Dune (Part 1)<\/b><br>Date: 2024-03-03<br>Words:  2,525<br>Folder: unpop/dune-pt-1-after-dune-pt-2","<b>Tidy Tuesday Trash<\/b><br>Date: 2024-03-06<br>Words:  1,202<br>Folder: tardy-tuesday/tidy-tuesday-trash","<b>Can we go Dutch? (And should we?)<\/b><br>Date: 2024-03-13<br>Words:  1,649<br>Folder: standalone/can-we-go-dutch","<b>Part Eighteen: Causal Inference: Some closing thoughts<\/b><br>Date: 2024-03-16<br>Words:  3,208<br>Folder: glms/causal-inference","<b>Levelling up... forever. On Gaming's Shepherd's Tone and the Fremium Trap<\/b><br>Date: 2024-03-22<br>Words:  2,056<br>Folder: unpop/fractal-game-mechanics-and-the-illusion-of-progress","<b>Thoughts on Dreams from My Father<\/b><br>Date: 2024-03-26<br>Words:  2,564<br>Folder: unpop/obama-dialectic-identity","<b>The Trading Mind Game<\/b><br>Date: 2024-03-29<br>Words:  1,806<br>Folder: unpop/trading-mind-game","<b>Jason Statham vs the Nepobaby Cyberscammers<\/b><br>Date: 2024-03-30<br>Words:  3,168<br>Folder: unpop/jason-statham-vs-the-nepobaby-cyberscammers","<b>Double Tardy Tuesday<\/b><br>Date: 2024-04-02<br>Words:    609<br>Folder: tardy-tuesday/tidy-tuesday-double","<b>Tidy Tuesday: Solar Eclipses<\/b><br>Date: 2024-04-11<br>Words:    633<br>Folder: tardy-tuesday/tidy-tuesday-eclipse","<b>Tidy Tuesday Extra - Packages and recursive searching<\/b><br>Date: 2024-04-20<br>Words:  1,894<br>Folder: tardy-tuesday/tidy-tuesday-packages","<b>Part Nineteen: Time Series: Introduction and Autoregression<\/b><br>Date: 2024-04-21<br>Words:  1,925<br>Folder: glms/time-series","<b>Part Twenty: Time Series: Integration<\/b><br>Date: 2024-04-22<br>Words:  1,891<br>Folder: glms/time-series","<b>It's still the economy<\/b><br>Date: 2024-04-25<br>Words:  3,408<br>Folder: standalone/still-the-economy","<b>Part Twenty One: Time Series: The Moving Average Model<\/b><br>Date: 2024-04-26<br>Words:  1,622<br>Folder: glms/time-series","<b>Tidy Tuesday 23 April 2024: Space objects<\/b><br>Date: 2024-04-26<br>Words:    564<br>Folder: tardy-tuesday/tidy-tuesday-space-objects","<b>Part Twenty Two: Time Series - ARIMA in practice<\/b><br>Date: 2024-04-30<br>Words:  1,796<br>Folder: glms/time-series","<b>Factor analysis with ordinal variables<\/b><br>Date: 2024-05-04<br>Words:    260<br>Folder: handdrawn-stats/factor-analysis-ordinal-variables-analogue","<b>How factor analysis is used in testing<\/b><br>Date: 2024-05-05<br>Words:    114<br>Folder: handdrawn-stats/how-factor-analysis-is-used-in-testing","<b>Part Twenty Three: Time series and seasonality<\/b><br>Date: 2024-05-06<br>Words:  2,347<br>Folder: glms/time-series","<b>David Lynch: All-American Shaman<\/b><br>Date: 2024-05-12<br>Words:  2,049<br>Folder: unpop/david-lynch-all-american-shaman","<b>A Quarto blog post on a Quarto presentation about the Quarto blog<\/b><br>Date: 2024-05-19<br>Words:    820<br>Folder: standalone/edinburgh-js-talk","<b>Tidy Tuesday R performance<\/b><br>Date: 2024-05-22<br>Words:    179<br>Folder: tardy-tuesday/tidy-tuesday-r-perf","<b>Part Twenty Four: Time series - Vector Autoregression and multivariate models<\/b><br>Date: 2024-05-26<br>Words:  2,544<br>Folder: glms/time-series","<b>Statistics as circuit boards<\/b><br>Date: 2024-05-28<br>Words:  1,968<br>Folder: handdrawn-stats/statistics-as-circuits","<b>Tidy Tuesday: Self-generated data challenge<\/b><br>Date: 2024-05-29<br>Words:    489<br>Folder: tardy-tuesday/tidy-tuesday-data-wrangling","<b>Link-breaking Spring Clean<\/b><br>Date: 2024-05-31<br>Words:    323<br>Folder: standalone/link-breaking-spring-clean","<b>Time series: Some closing remarks<\/b><br>Date: 2024-06-09<br>Words:  2,190<br>Folder: glms/time-series","<b>The Game of Life Beyond<\/b><br>Date: 2024-06-17<br>Words:  2,987<br>Folder: unpop/psychomechanics-of-cultist-simulator","<b>Tidy Tuesday: Roaming US Holidays<\/b><br>Date: 2024-06-19<br>Words:    390<br>Folder: tardy-tuesday/tidy-tuesday-roaming-us-holidays","<b>Johan Hari: Superior Inferior Superior Storyteller<\/b><br>Date: 2024-06-25<br>Words:  3,560<br>Folder: unpop/hari-superior-inferior-superior-story-teller","<b>A brief introduction to bootstrapping<\/b><br>Date: 2024-06-28<br>Words:  1,243<br>Folder: glms/hacker-stats","<b>Permutation Testing, and the intuition of the Null hypothesis, with Base R<\/b><br>Date: 2024-07-11<br>Words:  2,085<br>Folder: glms/hacker-stats","<b>Getting started with the infer package<\/b><br>Date: 2024-07-16<br>Words:  1,887<br>Folder: glms/hacker-stats","<b>Tidy Tuesday: Women's Football<\/b><br>Date: 2024-07-17<br>Words:    667<br>Folder: tardy-tuesday/tidy-tuesday-womens-football","<b>Hacker Stats: Intro and overview<\/b><br>Date: 2024-07-21<br>Words:  1,826<br>Folder: glms/hacker-stats","<b>Resampling for post-stratification<\/b><br>Date: 2024-07-23<br>Words:  1,115<br>Folder: glms/hacker-stats","<b>Tardy Tuesday: American Idol<\/b><br>Date: 2024-07-24<br>Words:    427<br>Folder: tardy-tuesday/tidy-tuesday-american-idol","<b>Psycho-logical Arithmetic<\/b><br>Date: 2024-08-04<br>Words:    540<br>Folder: standalone/psycho-logical-arithmetic","<b>Information Warfare: Proportion of Rwandans who are Muslims<\/b><br>Date: 2024-08-06<br>Words:    317<br>Folder: standalone/rwanda-information-warfare","<b>Tardy Tuesday: Olympics<\/b><br>Date: 2024-08-07<br>Words:    328<br>Folder: tardy-tuesday/tidy-tuesday-olympics","<b>Threw missiles: a concealed tautology?<\/b><br>Date: 2024-08-10<br>Words:    231<br>Folder: standalone/threw-missiles","<b>Mistaken (Aural) Identity: On podcasts and soundalikes<\/b><br>Date: 2024-08-12<br>Words:    667<br>Folder: unpop/soundalikes","<b>Tidy Tuesday: English Monarchs<\/b><br>Date: 2024-08-21<br>Words:    582<br>Folder: tardy-tuesday/tidy-tuesday-english-monarchs","<b>Brian May: Gentleman Ecoscientist<\/b><br>Date: 2024-08-25<br>Words:  1,849<br>Folder: standalone/brian-may-gentleman-ecoscientist","<b>Statistics Website<\/b><br>Date: 2024-09-04<br>Words:     65<br>Folder: standalone/stats-website","<b>The Paradox of Tolerating Intolerance: Position A and Position B<\/b><br>Date: 2024-09-28<br>Words:  1,385<br>Folder: standalone/tolerating-intolerance-paradox","<b>On Anti-victories and Velvet Mousetraps<\/b><br>Date: 2024-10-06<br>Words:  1,008<br>Folder: standalone/anti-victories-and-velvet-mousetraps","<b>Megalopolis: Dream Film<\/b><br>Date: 2024-10-10<br>Words:  1,369<br>Folder: unpop/francis-dream-film","<b>Demystifying and Disenchanting Statistical Significance<\/b><br>Date: 2024-10-19<br>Words:  6,319<br>Folder: glms/one-off","<b>The Book of Nigel<\/b><br>Date: 2024-10-25<br>Words:  4,451<br>Folder: standalone/book-of-nigel","<b>Sanders to Trump? Some thoughts on voter types<\/b><br>Date: 2024-11-09<br>Words:  2,301<br>Folder: standalone/voter-types","<b>The Wristwatch<\/b><br>Date: 2024-11-21<br>Words:  1,501<br>Folder: standalone/the-wristwatch","<b>*Poecilia parae*: A lover, and a fighter<\/b><br>Date: 2024-12-07<br>Words:  2,316<br>Folder: standalone/gentes-lover-and-a-fighter","<b>Statistical Significance: Now off in the land of the stats<\/b><br>Date: 2024-12-07<br>Words:     37<br>Folder: standalone/stat-sig-non-sig-update","<b>Wham! forever: On cultural debraiding and the end of Cultural progress<\/b><br>Date: 2024-12-21<br>Words:  3,821<br>Folder: unpop/wham-forever-cultural-debraiding","<b>Weaponising the Empathy Machine: On Escape at Dannemora<\/b><br>Date: 2024-12-30<br>Words:    808<br>Folder: unpop/escape-at-dannemora-weaponising-the-empathy-machine","<b>First website update since 2023!<\/b><br>Date: 2025-01-01<br>Words:    278<br>Folder: standalone/website-update","<b>Brother Lee the Antimonk<\/b><br>Date: 2025-01-04<br>Words:  1,402<br>Folder: unpop/brother-lee-the-antimonk","<b>Time and (state) change<\/b><br>Date: 2025-03-30<br>Words: 12,044<br>Folder: glms/one-off","<b>Mickey 17 and the Economics of Life<\/b><br>Date: 2025-04-18<br>Words:  3,580<br>Folder: unpop/mickey-17-and-the-economics-of-life","<b>Three Computer Games for People who Don't Play Computer Games<\/b><br>Date: 2025-05-05<br>Words:  1,599<br>Folder: unpop/three-nongamer-games","<b>Strangelove: On Love and (Civil) Warfare<\/b><br>Date: 2025-05-24<br>Words:  1,597<br>Folder: unpop/on-love-and-civil-warfare","<b>No Longer Under-stand-ing<\/b><br>Date: 2025-06-08<br>Words:    708<br>Folder: unpop/no-longer-understanding","<b>Repeated Measures<\/b><br>Date: 2025-06-17<br>Words:    138<br>Folder: handdrawn-stats/repeated-measures","<b>The Contestant<\/b><br>Date: 2025-06-22<br>Words:  1,461<br>Folder: unpop/the-scapegoat","<b>It's your choice<\/b><br>Date: 2025-07-28<br>Words:  3,865<br>Folder: fiction/its-your-choice","<b>More on the Stand Ident<\/b><br>Date: 2025-08-03<br>Words:    178<br>Folder: unpop/more-on-the-stand-ident","<b>Some thoughts on The Genius(*) Myth: A Review and a Reverie<\/b><br>Date: 2025-08-19<br>Words:  6,636<br>Folder: unpop/the-what-is-a-genius-myth","<b>Three quality-of-life upgrades<\/b><br>Date: 2025-08-24<br>Words:    911<br>Folder: standalone/three-qol-updates","<b>Remembering KGB: 1992's subtly terrifying social poison simulator<\/b><br>Date: 2025-08-26<br>Words:  2,886<br>Folder: unpop/remembering-kgb-social-poison-simulator","<b>The Man Who Solved Intelligence<\/b><br>Date: 2025-10-09<br>Words:  5,578<br>Folder: unpop/the-man-who-solved-intelligence","<b>Nine thoughts on Tim Berners-Lee's *This is for Everyone*<\/b><br>Date: 2025-10-12<br>Words:  6,359<br>Folder: unpop/was-this-for-everyone","<b>Climbing with Claude: Understanding Collaborative Version Control<\/b><br>Date: 2025-10-14<br>Words:    173<br>Folder: handdrawn-stats/version-control-as-rock-climbing","<b>Claude as a Dialectical Engine?<\/b><br>Date: 2025-10-27<br>Words:    966<br>Folder: standalone/the-dialectical-engine","<b>Point estimates, Confidence Intervals and P-Values<\/b><br>Date: 2025-11-13<br>Words:    189<br>Folder: handdrawn-stats/claude-stat-concept-guides","<b>The Analytical Maxim Gun<\/b><br>Date: 2025-11-29<br>Words:  4,172<br>Folder: standalone/analytical-maxim-gun","<b>WiredClothMother<\/b><br>Date: 2025-12-05<br>Words:  2,260<br>Folder: standalone/wired-cloth-mother","<b>Claude Adds Footnotes: A Reflection<\/b><br>Date: 2025-12-06<br>Words:    689<br>Folder: standalone/claude-footnotes-reflection","<b>2025: The Last Year Most Knowledge Workers will be Human<\/b><br>Date: 2026-01-02<br>Words:  5,134<br>Folder: standalone/2025-last-human-majority-knowledge-worker","<b>David Sconce and the benevolence of evil?<\/b><br>Date: 2026-01-14<br>Words:  2,070<br>Folder: unpop/the-mortician","<b>The Dilbert Future in Retrospect<\/b><br>Date: 2026-01-25<br>Words:  4,665<br>Folder: standalone/dilbert-future-in-retrospect","<b>How I Now Write My Blog<\/b><br>Date: 2026-01-31<br>Words:  2,505<br>Folder: on-writing/how-i-write-now","<b>Blog Archaeology: Mapping the Territory<\/b><br>Date: 2026-02-15<br>Words:  1,249<br>Folder: standalone/blog-archaeology-2026","<b>Repeated Measures (Transcribed)<\/b><br>Date: 2026-02-15<br>Words:  3,314<br>Folder: handdrawn-stats/repeated-measures-transcribed"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(31,119,180,1)","colors":[19686,19686,19686,19689,19689,19690,19690,19691,19692,19692,19693,19693,19694,19695,19696,19697,19698,19699,19700,19704,19705,19706,19708,19712,19721,19722,19724,19725,19726,19728,19738,19742,19743,19746,19747,19749,19754,19755,19756,19756,19757,19763,19767,19768,19772,19775,19775,19776,19777,19781,19781,19784,19785,19788,19795,19798,19804,19808,19811,19812,19815,19824,19833,19834,19835,19838,19839,19839,19843,19847,19848,19849,19855,19862,19865,19869,19871,19872,19874,19883,19891,19893,19899,19902,19915,19920,19921,19925,19927,19928,19939,19941,19942,19945,19947,19956,19960,19970,19994,20002,20006,20015,20021,20036,20048,20064,20064,20078,20087,20089,20092,20177,20196,20213,20232,20247,20256,20261,20297,20303,20319,20324,20326,20370,20373,20375,20388,20405,20421,20427,20428,20455,20467,20478,20484,20499,20499],"colorscale":[["0","#2c3e50"],["0.5","#3498db"],["1","#e74c3c"]],"showscale":true,"colorbar":{"title":"Date","ticktext":["2023-11-25","2026-02-15"],"tickvals":[19686,20499]},"line":{"color":"rgba(255,255,255,1)"}},"textinfo":"label","type":"treemap","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="posting-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="posting-patterns">Posting Patterns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>posts_by_month <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(date, <span class="st">"month"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(month) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(<span class="at">month =</span> <span class="fu">seq</span>(<span class="fu">min</span>(month), <span class="fu">max</span>(month), <span class="at">by =</span> <span class="st">"month"</span>), <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="dv">0</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(posts_by_month, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#3498db"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">"#e74c3c"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Posts per month"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of posts"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"3 months"</span>, <span class="at">date_labels =</span> <span class="st">"%b</span><span class="sc">\n</span><span class="st">%Y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/posting-frequency-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate gaps between posts</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>posts_sorted <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span> <span class="fu">arrange</span>(date)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>gaps <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">from_title =</span> posts_sorted<span class="sc">$</span>title[<span class="sc">-</span><span class="fu">nrow</span>(posts_sorted)],</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">to_title =</span> posts_sorted<span class="sc">$</span>title[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">from_date =</span> posts_sorted<span class="sc">$</span>date[<span class="sc">-</span><span class="fu">nrow</span>(posts_sorted)],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">to_date =</span> posts_sorted<span class="sc">$</span>date[<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">gap_days =</span> <span class="fu">as.numeric</span>(to_date <span class="sc">-</span> from_date)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Longest gaps between posts:</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Longest gaps between posts:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gaps <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gap_days)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">gap =</span> <span class="fu">paste</span>(gap_days, <span class="st">"days"</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">paste0</span>(from_title, <span class="st">" ("</span>, from_date, <span class="st">")"</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">paste0</span>(to_title, <span class="st">" ("</span>, to_date, <span class="st">")"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gap, from, to) <span class="sc">|&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 47%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">gap</th>
+<th style="text-align: left;">from</th>
+<th style="text-align: left;">to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">85 days</td>
+<td style="text-align: left;">Brother Lee the Antimonk (2025-01-04)</td>
+<td style="text-align: left;">Time and (state) change (2025-03-30)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">44 days</td>
+<td style="text-align: left;">Remembering KGB: 1992’s subtly terrifying social poison simulator (2025-08-26)</td>
+<td style="text-align: left;">The Man Who Solved Intelligence (2025-10-09)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">36 days</td>
+<td style="text-align: left;">The Contestant (2025-06-22)</td>
+<td style="text-align: left;">It’s your choice (2025-07-28)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">27 days</td>
+<td style="text-align: left;">Claude Adds Footnotes: A Reflection (2025-12-06)</td>
+<td style="text-align: left;">2025: The Last Year Most Knowledge Workers will be Human (2026-01-02)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">24 days</td>
+<td style="text-align: left;">Statistics Website (2024-09-04)</td>
+<td style="text-align: left;">The Paradox of Tolerating Intolerance: Position A and Position B (2024-09-28)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="content-categories" class="level2">
+<h2 class="anchored" data-anchor-id="content-categories">Content Categories</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>folder_summary <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(top_folder, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(top_folder, <span class="st">" ("</span>, n, <span class="st">", "</span>, <span class="fu">round</span>(pct), <span class="st">"%)"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(folder_summary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(top_folder, n), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#2ecc71"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Posts by top-level folder"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of posts"</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/folder-distribution-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explode categories and count</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>all_cats <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(categories) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(categories, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Top 15 category tags:</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top 15 category tags:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>all_cats <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">15</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">categories</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">statistics</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tidy tuesday</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stories</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">time series</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">films</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AI</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tidy Tuesday</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">books</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">causality</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">games</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">blog</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bootstrapping</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">economics</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">meta</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="word-counts" class="level2">
+<h2 class="anchored" data-anchor-id="word-counts">Word Counts</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(posts_df, <span class="fu">aes</span>(<span class="at">x =</span> word_count)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"#9b59b6"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(posts_df<span class="sc">$</span>word_count),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> <span class="st">"#e74c3c"</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">median</span>(posts_df<span class="sc">$</span>word_count) <span class="sc">+</span> <span class="dv">100</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="cn">Inf</span>, <span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Median:"</span>, <span class="fu">format</span>(<span class="fu">median</span>(posts_df<span class="sc">$</span>word_count), <span class="at">big.mark =</span> <span class="st">","</span>)),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> <span class="st">"#e74c3c"</span>) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of post word counts"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Word count"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of posts"</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/word-counts-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cumulative <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cumulative_words =</span> <span class="fu">cumsum</span>(word_count),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">post_number =</span> <span class="fu">row_number</span>()</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cumulative, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> cumulative_words)) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"#3498db"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#3498db"</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Cumulative word count over time"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Cumulative words"</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/cumulative-words-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Longest posts:</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Longest posts:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>posts_df <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(word_count)) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(title, date, word_count, top_folder) <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 64%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">title</th>
+<th style="text-align: left;">date</th>
+<th style="text-align: right;">word_count</th>
+<th style="text-align: left;">top_folder</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Time and (state) change</td>
+<td style="text-align: left;">2025-03-30</td>
+<td style="text-align: right;">12044</td>
+<td style="text-align: left;">glms</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Some thoughts on The Genius(*) Myth: A Review and a Reverie</td>
+<td style="text-align: left;">2025-08-19</td>
+<td style="text-align: right;">6636</td>
+<td style="text-align: left;">unpop</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nine thoughts on Tim Berners-Lee’s <em>This is for Everyone</em></td>
+<td style="text-align: left;">2025-10-12</td>
+<td style="text-align: right;">6359</td>
+<td style="text-align: left;">unpop</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Demystifying and Disenchanting Statistical Significance</td>
+<td style="text-align: left;">2024-10-19</td>
+<td style="text-align: right;">6319</td>
+<td style="text-align: left;">glms</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Man Who Solved Intelligence</td>
+<td style="text-align: left;">2025-10-09</td>
+<td style="text-align: right;">5578</td>
+<td style="text-align: left;">unpop</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025: The Last Year Most Knowledge Workers will be Human</td>
+<td style="text-align: left;">2026-01-02</td>
+<td style="text-align: right;">5134</td>
+<td style="text-align: left;">standalone</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Dilbert Future in Retrospect</td>
+<td style="text-align: left;">2026-01-25</td>
+<td style="text-align: right;">4665</td>
+<td style="text-align: left;">standalone</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The Book of Nigel</td>
+<td style="text-align: left;">2024-10-25</td>
+<td style="text-align: right;">4451</td>
+<td style="text-align: left;">standalone</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Analytical Maxim Gun</td>
+<td style="text-align: left;">2025-11-29</td>
+<td style="text-align: right;">4172</td>
+<td style="text-align: left;">standalone</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Part Thirteen: On Marbles and Jumping Beans</td>
+<td style="text-align: left;">2024-02-10</td>
+<td style="text-align: right;">4066</td>
+<td style="text-align: left;">glms</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="the-claude-footnotes-project" class="level2">
+<h2 class="anchored" data-anchor-id="the-claude-footnotes-project">The Claude Footnotes Project</h2>
+<p>In December 2025, Claude Sonnet reviewed 128 posts and added 42 fact-checking footnotes across 29 posts. In February 2026, Claude Opus conducted a more extensive review, expanding to previously-skipped opinion and commentary posts, correcting typos, and adding further footnotes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>footnoted <span class="ot">&lt;-</span> posts_df <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(has_claude_footnote)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">nrow</span>(footnoted), <span class="st">"of"</span>, <span class="fu">nrow</span>(posts_df), <span class="st">"posts now have Claude footnotes.</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>31 of 137 posts now have Claude footnotes.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Footnoted posts by folder:</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Footnoted posts by folder:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>footnoted <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(top_folder, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">top_folder</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">unpop</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">glms</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">standalone</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">on-writing</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tardy-tuesday</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>What does the data show? A blog that started with a burst of statistical pedagogy in late 2023 and early 2024, diversified into cultural commentary and personal essays, and settled into a rhythm of roughly weekly posting with occasional longer gaps. The GLM series remains the heaviest single body of work by word count, but the <em>Unpopular Opinions</em> posts collectively rival it — and tend to be more widely read. The Tardy Tuesday data visualisation posts, though numerous, are lighter on prose, being primarily code and charts.</p>
+<p>The blog has become, unexpectedly, a body of work. Not a planned one — there was never a grand design — but an accumulation of preoccupations that, viewed at this distance, form a reasonably coherent picture of someone interested in both the mechanics of understanding the world (statistics, data, methodology) and the meaning we impose on it (stories, film, neurodiversity, politics).</p>
+<p>Whether anyone other than the author reads it is, as ever, beside the point.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
