@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-02-15">
+
+<title>Jon Minton’s Blog - Repeated Measures (Transcribed)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - Repeated Measures (Transcribed)">
+<meta name="twitter:description" content="AI-assisted transcription of handwritten notes on repeated measures and multi-level modelling">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/repeated-measures-transcribed/img_01_stick_figures.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="700">
+<meta name="twitter:image-width" content="1620">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Repeated Measures (Transcribed)</h1>
+            <p class="subtitle lead">AI-assisted transcription of handwritten notes on repeated measures and multi-level modelling</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">multi-level-modelling</div>
+                <div class="quarto-category">random-effects</div>
+                <div class="quarto-category">handdrawn-stats</div>
+                <div class="quarto-category">AI-transcription</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 15, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="about-this-post" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-post">About this post</h2>
+<p>This post is an AI-assisted transcription of <a href="../../../posts/handdrawn-stats/repeated-measures/index.html">the original handwritten notes on repeated measures</a>, written on a reMarkable tablet as a single ultra-long page. The original handwritten version remains available in full, but at over 73,000 pixels tall it can be difficult to read on screen.</p>
+<p>This transcription was produced by Claude, using an iterative image-slicing approach to parse the handwriting. The hand-drawn diagrams, annotated equations, and coloured illustrations are preserved as images from the original — they are a key part of the explanation and lose their character if converted to plain text. The surrounding narrative text and R code examples have been transcribed into readable markdown.</p>
+<p>Where colour was used in the original handwriting, this is noted. The colour scheme is: <strong>black</strong> for main text, <strong>green</strong> for detailed discussion and answers, <strong>blue</strong> for diagram labels, <strong>red</strong> for diagram elements and emphasis, <strong>orange</strong> for highlighted equation components, and <strong>purple/pink</strong> for specific highlighted terms.</p>
+<hr>
+</section>
+<section id="repeated-measures" class="level2">
+<h2 class="anchored" data-anchor-id="repeated-measures">Repeated Measures</h2>
+<p>Apropos of nothing specifically, I’ve been thinking a lot recently about repeated measures data, and how such data should be modelled.</p>
+<section id="our-fictitious-problem" class="level3">
+<h3 class="anchored" data-anchor-id="our-fictitious-problem">Our (Fictitious) Problem</h3>
+<p>Say we’re interested in knowing how one of two possible supplements aids with weight gain. (This may be a science-fiction-like example given the current obesogenic environment we’re in, but go with me for now), and we’re interested in these two supplements’ effects in the real world, not just in mice bred to be, effectively, like clones.</p>
+<p>Because of this, we have some variety in initial shapes and sizes of our population:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_01_stick_figures.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Stick figures illustrating variety in the population</figcaption>
+</figure>
+</div>
+<p>If we could recruit many, many subjects, this variety in starting weight and other initial characteristics, this variety wouldn’t matter too much. We can randomise subjects to Sup A or Sup B, and through the miracles of the randomisation process on average the starting characteristics of subjects in the two arms will be the same.</p>
+<p>However, our budget is finite, and can only stretch to tens, not hundreds or thousands, of subjects in each arm.</p>
+<p>And, all subjects have a weight at the start, before we treat them with Sup A or Sup B.</p>
+<p>Obviously, the subjects’ starting weight can’t be attributed to Sup A or Sup B. It’s what they came with. So any claims about the weight adding effects of the supplements can only be based on how the weights of subjects changes over the course of the study.</p>
+<p>One good thing about the study, however, is that each subject’s weight is measured multiple times over the course of the study, not just the first and end.</p>
+</section>
+<section id="understanding-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-data">Understanding the Data</h3>
+<p>With our data and problem described, let’s now start to think about what the data we’re working with might look like, and how to better visualise and understand it.</p>
+<p>We can start by imagining how the data might come to us, or what it might look like after some data cleaning and reshaping.</p>
+<p>As I’ve discussed before, almost all data we can model comprises some big rectangle of numbers and values <span class="math inline">\(D\)</span>, with:</p>
+<ol type="i">
+<li>one row per observation</li>
+<li>one column per variable</li>
+</ol>
+<p>(This is the definition, in brief, of Tidy Data)</p>
+<p>So, the first few rows of our data might look something like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_02_data_table.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Hand-drawn data table</figcaption>
+</figure>
+</div>
+<p>Let’s try to understand this data by asking ourselves a series of questions:</p>
+<section id="what-is-our-observational-unit" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-our-observational-unit">1) What is our observational unit?</h4>
+<p><em>[Green text in original]</em></p>
+<p>Each row is an observation. Each row shows the characteristics of a given subject at a given point in time. So our observational unit is: Subject-Time.</p>
+<p>More abstractly, we can say each row is about a time × person.</p>
+</section>
+<section id="what-is-our-treatment-variable-t" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-our-treatment-variable-t">2) What is our treatment variable, T?</h4>
+<p><em>[Green text in original]</em></p>
+<p>This is the variable for Arm. Something like:</p>
+<ul>
+<li>A = Sup A</li>
+<li>B = Sup B</li>
+</ul>
+<p>(So, we’ll need some way of comparing changes in response for people in Arm B compared with Arm A)</p>
+</section>
+<section id="what-is-our-response-variable-y" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-our-response-variable-y">3) What is our response variable (Y)?</h4>
+<p><em>[Green text in original]</em></p>
+<p>This definitely <em>involves</em> the weight column, but it might not <em>just</em> be the weight column.</p>
+<p>Firstly, we know it needs to involve <em>change</em> in weight, because each subject had some weight at the start, that we know can’t be caused by the supplement, which they only started taking at the start of the trial.</p>
+<p>Secondly, we might want to account for the <em>height</em> as part of outcome/response, as someone who’s taller can probably change weight more easily than someone who’s shorter. (Something to ponder…)</p>
+</section>
+<section id="what-are-our-control-variables-x" class="level4">
+<h4 class="anchored" data-anchor-id="what-are-our-control-variables-x">4) What are our control variables (X)?</h4>
+<p><em>[Green text in original]</em></p>
+<p>If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider age as a control variable.</p>
+<p>We might also wish to consider starting weight as a control variable, as well as maybe height.</p>
+<p>However, given our discussion about the response variable above, we might not want to simply use height in its standard way, and instead use it as part of our derivation of the response instead.</p>
+<p>There are also nonstandard approaches to consider for controlling for starting weight too, which come about from pondering the next question.</p>
+</section>
+<section id="are-our-observations-independent" class="level4">
+<h4 class="anchored" data-anchor-id="are-our-observations-independent">5) Are our observations independent?</h4>
+<p><em>[Green text in original]</em></p>
+<p>This question might sound like it’s coming out of left field, but it’s really central to how we can think about and approach modelling this kind of data.</p>
+<p>Independent (&amp; identically distributed) are two standard assumptions made when deriving most statistics models. If our data aren’t independent then the assumptions aren’t correct, and so neither will what our model estimates be.</p>
+<p>In the case of our data, we know our data aren’t independent in one very obvious and important way.</p>
+<p>They’re nested.</p>
+<p>Specifically, our observations (each row in the dataset) are time-persons. And we know each time-person is ‘nested within’ a grouping variable called a person (or subject).</p>
+<p>Graphically we can represent this grouping as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_03_nesting_diagram.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Nesting diagram — subjects containing time-person observations</figcaption>
+</figure>
+</div>
+<p>Our awareness of this grouping relationship will be critical both for how we continue to visualise the data, and for how we model the data.</p>
+</section>
+</section>
+<section id="visualising-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-the-data">Visualising the data</h3>
+<p>Having now thought through the problem and data we have, we can start to come up with some ideas for visualising the data effectively. (Which will, in turn, help us choose an appropriate model specification.)</p>
+<p>Two things we know:</p>
+<ol type="i">
+<li>Observations are grouped into subjects</li>
+<li>Earlier visits happen before later visits.</li>
+</ol>
+<p>Obvious, really, but also really helpful for looking at the data the right way. A slightly less obvious thing we should have seen from the data is that subjects had their first visit on different dates (and that not all subjects had the same number of visits, nor were visits spaced out equally far apart.)</p>
+<p>So, maybe our graphing canvas should be set up as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_04_vis_building_blocks.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Building up the visualisation — axes, points, lines, groupings</figcaption>
+</figure>
+</div>
+<p>Given the above design decisions, our main statistical graphic for this kind of data might look something like the following:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_05_spaghetti_plot.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Spaghetti plot — individual trajectories by supplement arm</figcaption>
+</figure>
+</div>
+<p>With this kind of visualisation, complicated though it is, it should at least be apparent that there’s an upwards drift in weight over time. We also have some sense of the number of subjects (not observations) in the study; we can maybe temper our expectations a little about whether our main question of interest — whether Sup A or Sup B are better for weight gain — can be answered in a way that shows a statistically significant difference even if there’s a substantive difference really between the two supplements. We might well be underpowered (mainly because I didn’t want to spend too long drawing dots and lines!)</p>
+<p>But we can still use this kind of visualisation, along with everything else we understand about the data and data generating process (DGP), to try to figure out the best way of modelling the data we have.</p>
+</section>
+<section id="towards-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="towards-modelling">Towards modelling</h3>
+<p>What’s our simplest possible model? It’s probably the mean.</p>
+<p>Yes, the mean is a model. It’s the linear regression of y (our weight response value) against the intercept:</p>
+<p><span class="math display">\[M1: \quad y = \alpha + \epsilon, \qquad \epsilon \sim N(0, \sigma^2)\]</span></p>
+<p>In R, something like:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mod01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_06_m1_graph.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M1 graphically — a horizontal line through the data</figcaption>
+</figure>
+</div>
+<p>Not a very useful model. Let’s try to do better, firstly by accounting for the two arms (Sup A or Sup B).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_07_m2_equation_graph.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M2 — equation, R code, and graphical representation with two horizontal lines</figcaption>
+</figure>
+</div>
+<p>So: <span class="math inline">\(\alpha_0\)</span> is the mean of y for Supp A, and <span class="math inline">\(\alpha_0 + \alpha_B\)</span> (not <span class="math inline">\(\alpha_B\)</span> alone) the mean of y for Supp B.</p>
+<p>This might look like an improvement, but in some ways it’s not. It’s a wrong turn. For instance, what would happen if Supp B really causes the most weight gain, but the average subject in the Supp A arm both tends to be heavier and to be visited more often and to exit the study earlier?</p>
+<p>With this kind of model we might end up thinking Supp A, not Supp B, is ‘better’ because its model-implied mean value is higher.</p>
+<p>In both of the models so far, we haven’t yet modelled the effect of time. Let’s look at that:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_08_m3_equation_graph.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M3 — adding time as a predictor, with equation and graph</figcaption>
+</figure>
+</div>
+<p>Great, now we’ve got a coefficient for capturing the trend over time. However, we haven’t included some way of representing:</p>
+<ol type="i">
+<li>the subject membership of observations</li>
+<li>the difference in growth trends between supplement arms</li>
+</ol>
+<p>Let’s start with the second issue. One naive approach would be to include a coefficient for a flag variable, which is 1 if the arm is Sup B, but 0 otherwise.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_09_m4_m5_splitting.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">M4, coefficient splitting, and M5 — allowing different slopes by supplement arm</figcaption>
+</figure>
+</div>
+<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ need never be applied to just the intercept (<span class="math inline">\(\alpha\)</span>); it can also be applied to the slope coefficient <span class="math inline">\(\beta\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_10_m5_green_box.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Condensed M5 specification and R code</figcaption>
+</figure>
+</div>
+<p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. It doesn’t have different groups, or different initial weights.</p>
+<p>How do we try to account for this? Perhaps we shouldn’t be thinking about one model, but</p>
+</section>
+</section>
+<section id="many-models" class="level2">
+<h2 class="anchored" data-anchor-id="many-models">MANY Models ??!</h2>
+<p>If we arrange the data into many panels, one for each subject, we can do a simple regression for each subject series!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_11_many_models_panels.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Individual regression panels for each subject</figcaption>
+</figure>
+</div>
+<p>We could compare the slope coefficient for each of these series, and maybe see if the types of slope coefficient for Supp A arm looks different to that for Supp B arm.</p>
+<p>We could even represent our uncertainty in the coefficients visually, producing something like a forest plot (used in meta analysis):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_12_forest_plot.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Forest plot with pooled estimates by arm</figcaption>
+</figure>
+</div>
+<p>We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.</p>
+<p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n=2 ‘study’), this is actually not a particularly good approach for all kinds of reasons. I’ve merely just mentioned it to be helpful with the intuition some more.</p>
+<section id="back-on-track" class="level3">
+<h3 class="anchored" data-anchor-id="back-on-track">Back on Track</h3>
+<p>So, if meta-analysis isn’t actually good for this kind of problem, what is?</p>
+<p>It’s something between <strong>One</strong> Model AND <strong>MANY</strong> Models.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_13_one_vs_many.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">One model vs Many models — and the multi-level middle ground</figcaption>
+</figure>
+</div>
+<p>It’s called multi-level modelling because we have multi-level data.</p>
+</section>
+<section id="how-does-it-work" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h3>
+<p>Well, we need to tell the model about the way the data are grouped.</p>
+<p>Let’s go back to the fundamentals… A (generalised) linear model has a stochastic component and a systematic component. In a previous post I compared the systematic component <span class="math inline">\(g(.)\)</span> to a TRANSFORMER and the stochastic component <span class="math inline">\(f(.)\)</span> to a NOISEMAKER:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_14_transformer_noisemaker.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">The Transformer and Noisemaker framework, with Fixed Effects vs Random Effects table</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_15_fe_re_table.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fixed Effects vs Random Effects — which component do we ‘tell’?</figcaption>
+</figure>
+</div>
+<p>And both of those layers of model can be referred to as either <strong>Mixed Effect</strong> or <strong>Multi-level Model</strong>.</p>
+<p>If you’ve ever encountered these terms and haven’t been sure what they mean, then hopefully this clarifies a few things.</p>
+<p>Let’s now think through how we could ‘tell’ our model about group-level membership of observations, first through the transformer, <span class="math inline">\(g(.)\)</span>, leading to a fixed effects model specification, then through the noisemaker, <span class="math inline">\(f(.)\)</span>, leading to a random effects model.</p>
+</section>
+<section id="fixed-effect-model-approach" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-effect-model-approach">Fixed Effect model approach</h3>
+<p>Let’s say we have J groups. We could include, in our model, J additional dummy variables, each of which takes the value 1 if the observation comes from group j, 0 otherwise.</p>
+<p>In doing this, we’re expanding the intercept part of our model, potentially a lot:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_16_fe_equations.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Fixed effects equations with coloured annotations</figcaption>
+</figure>
+</div>
+<p>This fixed effects modelling approach is less exotic than it might first appear. We’re just adding some more <span class="math inline">\(\beta\)</span> coefficients to the transformer part of the model <span class="math inline">\(g(.)\)</span> to be determined through the usual approaches (maximum likelihood, optimisation and so on).</p>
+<p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope differences, by-arm part of the model).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_17_barbed_aside.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A mildly barbed aside</figcaption>
+</figure>
+</div>
+<p>So, is there a more efficient way of ‘telling’ a model about group differences, especially when there are many groups, many of which involve few observations? Yes there is! It’s the…</p>
+</section>
+<section id="random-effects-model-specification" class="level3">
+<h3 class="anchored" data-anchor-id="random-effects-model-specification">Random Effects Model Specification</h3>
+<p>In the Random Effects (RE) model specification, we ‘tell’ the noisemaker (<span class="math inline">\(f(.)\)</span>), not the transformer (<span class="math inline">\(g(.)\)</span>), part of the model about the ‘groupiness’ of the data.</p>
+<p>So, in RE, the ‘action’ is in the bit of the specification highlighted orange at the end:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_18_re_equation_decomposition.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">RE equation decomposition — splitting the error term</figcaption>
+</figure>
+</div>
+<p>Overall variation = group-level variation (<span class="math inline">\(\tau\)</span>) + residual/remaining variation (<span class="math inline">\(\epsilon\)</span>)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_19_re_fe_comparison_diagrams.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Comparing FE flags vs RE normal distribution for representing group variation</figcaption>
+</figure>
+</div>
+<p>So, the aim of this approach is to represent the ‘gist’ of the observed group-level variation in fewer parameters. This means less of the data budget is ‘spent’ on representing group level variation, and so more of the budget can be spent on better estimating other model parameters instead.</p>
+</section>
+<section id="modelling-what-were-actually-interested-in-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="modelling-what-were-actually-interested-in-modelling">Modelling what we’re actually interested in modelling</h3>
+<p>After all this discussion about how to represent group level variation, it’s important not to lose sight of what we’re trying to do, namely: see if Supp B has a higher weight gain trend than Supp A.</p>
+<p>We’re now used to the idea of splitting out the components of a regression model, as they relate to intercepts, slopes, and ‘errors’, and the way we need to do that one more time to get a model containing coefficients that can help us answer our main research question.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_20_final_model_spec.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Final model specification with coloured annotations</figcaption>
+</figure>
+</div>
+<p>Which will be our final model specification.</p>
+</section>
+<section id="testing-and-interpreting-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="testing-and-interpreting-the-model">Testing and interpreting the model</h3>
+<p>One easy test we can perform is by comparing the above specification, including a coefficient that flags arm <span class="math inline">\(\beta_{Bs}\)</span>, with a restricted model that omits this term. We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform Likelihood Ratio Tests, looking for statistically significant p-values.</p>
+<p>Arguably, the t-value on the coefficient <span class="math inline">\(\beta_{Bs}\)</span> for testing should also be equivalent (so it might be easier to just look at that instead). But remember: evidence of there being two different slopes between groups is a good reason to understand/explore what these differences in slope between groups really mean.</p>
+<p>In R, there are a number of packages for fitting this kind of model:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img_21_lmer_code.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">R lme4 code with highlighted components</figcaption>
+</figure>
+</div>
+<p>Using the <code>summary</code> function, both the fixed effects and random components will be returned.</p>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<p>In this long excursion through grouped data analysis, we’ve focused on a very fictitious and unrealistic example: how to best make <em>people</em> fat.</p>
+<p>However, if we change the species and context even this example is probably useful in practice. Imagine we work in farming, for example, and have bought a lot of baby chickens or cows, and want to decide on a type of feed to help them ‘grow’ the fastest.</p>
+<p>Often the animals (‘livestock’) will be quite homogeneous, from the same genetic stock and often even of the same sex. This kind of modelling approach would probably work for figuring out what type of feed to use in a way that’s both fairly robust and fairly cheap. (Though as a vegetarian, I’d rather have come up with a different real world application of this kind of model!)</p>
+<p>Even if this specific model specification isn’t useful for you, hopefully the broader process and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
