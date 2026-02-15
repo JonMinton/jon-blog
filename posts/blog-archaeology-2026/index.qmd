@@ -120,7 +120,7 @@ treemap_data <- posts_df |>
     # Clean up folder names for display
     folder_label = case_when(
       top_folder == "glms" ~ "GLM Series",
-      top_folder == "unpop" ~ "Unpopular Opinions",
+      top_folder == "unpop" ~ "Unpop",
       top_folder == "tardy-tuesday" ~ "Tardy Tuesday",
       top_folder == "handdrawn-stats" ~ "Hand-drawn Stats",
       top_folder == "standalone" ~ "Standalone",
@@ -336,7 +336,7 @@ footnoted |>
 
 ## Reflection
 
-What does the data show? A blog that started with a burst of statistical pedagogy in late 2023 and early 2024, diversified into cultural commentary and personal essays, and settled into a rhythm of roughly weekly posting with occasional longer gaps. The GLM series remains the heaviest single body of work by word count, but the *Unpopular Opinions* posts collectively rival it — and tend to be more widely read. The Tardy Tuesday data visualisation posts, though numerous, are lighter on prose, being primarily code and charts.
+What does the data show? A blog that started with a burst of statistical pedagogy in late 2023 and early 2024, diversified into cultural commentary and personal essays, and settled into a rhythm of roughly weekly posting with occasional longer gaps. The GLM series remains the heaviest single body of work by word count, but the *Unpop* posts collectively rival it. The Tardy Tuesday data visualisation posts, though numerous, are lighter on prose, being primarily code and charts.
 
 The blog has become, unexpectedly, a body of work. Not a planned one — there was never a grand design — but an accumulation of preoccupations that, viewed at this distance, form a reasonably coherent picture of someone interested in both the mechanics of understanding the world (statistics, data, methodology) and the meaning we impose on it (stories, film, neurodiversity, politics).
 
