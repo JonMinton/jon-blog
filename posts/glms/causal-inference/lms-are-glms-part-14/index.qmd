@@ -34,11 +34,11 @@ There are broadly two schools of thought when it comes to thinking about the pro
 
 ## Henry Dundas: Hero or Villain?
 
-A few minutes' walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the [Melville Monument](https://en.wikipedia.org/wiki/Melville_Monument), a 40 metre tall column, on which stands a statue of [Henry Dundas, 1st Viscount Melville](https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville). 
+A few minutes' walk from where I live is St Andrew Square. And in the middle of St Andrew Square is the [Melville Monument](https://en.wikipedia.org/wiki/Melville_Monument), a 40 metre tall column, on which stands a statue of [Henry Dundas, 1st Viscount Melville](https://en.wikipedia.org/wiki/Henry_Dundas,_1st_Viscount_Melville).[^claude-dundas]
 
-Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edimburgh Council chose to add more context to Dundas' legacy by unveiling [a plaque](https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg) with the following message:: 
+Though the Melville Monument was constructed in the 19th century to commemorate and celebrate this 18th century figure, in 2020 the City of Edinburgh Council chose to add more context to Dundas' legacy by unveiling [a plaque](https://upload.wikimedia.org/wikipedia/commons/4/44/Melville_Plaque.jpg) with the following message:: 
 
-> At the top of this neoclassial column stands a statue of Hentry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic. 
+> At the top of this neoclassical column stands a statue of Henry Dundas, 1st Viscount Melville (1742-1811). He was the Scottish Lord Advocate, an MP for Edinburgh and Midlothian, and the First Lord of the Admiralty. Dundas was a contentious figure, provoking controversies that resonate to this day. While Home Secretary in 1792, and first Secretary of State for War in 1796 he was instrumental in deferring the abolition of the Atlantic slave trade. Slave trading by British ships was not abolished until 1807. As a result of this delay, more than half a million enslaved Africans crossed the Atlantic. 
 
 So, the claim of the council plaque was that Dundas *caused* the enslavement of hundreds of thousands of Africans, by promoting a gradualist policy of abolition. 
 
@@ -75,6 +75,6 @@ So, by having the same observed historical facts, the observed Dundas, but radic
 [The next post](../lms-are-glms-part-15/index.qmd) offers more of a technical treatment of the key concept introduced here: namely that causal effect estimation depends on comparing observed with counterfactual data, and as the counterfactual is unobserved, causal effect estimation is fundamentally a missing data problem. 
 
 
-[^1]: The data that would have been observed if what hadn't happened, had happened, is the other type of unobserved counterfactual. 
+[^1]: The data that would have been observed if what hadn't happened, had happened, is the other type of unobserved counterfactual.
 
-
+[^claude-dundas]: **Note from Claude:** The plaque was unveiled in February 2020 and proved immediately controversial. The "half a million" figure refers to the estimated 630,000+ enslaved Africans transported on British ships between 1792 (when the immediate abolition bill was defeated in favour of Dundas's gradualist amendment) and 1807 (when abolition finally passed). In June 2020, during the Black Lives Matter protests, the Melville Monument was [graffitied and a petition gathered](https://en.wikipedia.org/wiki/Melville_Monument) for its removal; Edinburgh Council instead opted to add further contextual information. Dundas was also impeached in 1806 on charges of misappropriation of Admiralty funds (acquitted).

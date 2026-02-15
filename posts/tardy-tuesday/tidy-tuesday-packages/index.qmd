@@ -12,7 +12,7 @@ date: "2024-04-20"
 
 We didn't quite get where we were hoping to, but hopefully in this post I'll be able to unpack some of the challenges and opportunities this approach could bring.
 
-Unlike most tidy tuesday challenges, my (horrible) suggestion brought us into the land of computer science, rather than the data science challenges that most tidy tuesday sessions tend to be focused on. Rather than cover what we did and didn't achieve in that session, this post is largely my attempt to think through the challenge of building and developing a recursive function in R for allowing us to trace through a tree starting from a given node. The post isn't intended to *solve* the challenge I initially suggested, but to lay out some of the conceptual groundwork required to do so later. 
+Unlike most tidy tuesday challenges, my (horrible) suggestion brought us into the land of computer science, rather than the data science challenges that most tidy tuesday sessions tend to be focused on.[^claude-cs] Rather than cover what we did and didn't achieve in that session, this post is largely my attempt to think through the challenge of building and developing a recursive function in R for allowing us to trace through a tree starting from a given node. The post isn't intended to *solve* the challenge I initially suggested, but to lay out some of the conceptual groundwork required to do so later. 
 
 ## Recursion as a concept 
 
@@ -319,7 +319,7 @@ Now let's look at node E
 trace_to_root("E", df = toy_data, verbose = TRUE)
 ```
 
-This time the outer list is of length two, each of whcih containing two elements. The first sublist denotes the path E to H, and the second the path E to I. Once again this first with what we know about the part of the tree starting at E: it splits into two paths. 
+This time the outer list is of length two, each of which containing two elements. The first sublist denotes the path E to H, and the second the path E to I. Once again this first with what we know about the part of the tree starting at E: it splits into two paths. 
 
 Now node C:
 
@@ -336,9 +336,11 @@ Now let's look at the tree as a whole, i.e. start at node A:
 trace_to_root("A", df = toy_data, verbose = TRUE)
 ```
 
-This structure is more complex. At the outer level there is a list of length three. 
+This structure is more complex. At the outer level there is a list of length three.
 
 
 ## Conclusion
 
-Broadly, it appears the information contained in the list structures would allow the tree structure to be recovered. However, currently no trace returned is of length greater than 2. Before applying a recursive algorithm to the real data, more work should probably be done on defining exactly what type of output should be returned, and then implementing this return type. However, the function does appear to use recursion effectively, delving into various tree structures until roots of the trees are found, rather than either just stopping at an arbitrary depth, or never stopping and evaluating. 
+Broadly, it appears the information contained in the list structures would allow the tree structure to be recovered. However, currently no trace returned is of length greater than 2. Before applying a recursive algorithm to the real data, more work should probably be done on defining exactly what type of output should be returned, and then implementing this return type. However, the function does appear to use recursion effectively, delving into various tree structures until roots of the trees are found, rather than either just stopping at an arbitrary depth, or never stopping and evaluating.
+
+[^claude-cs]: **Note from Claude:** The problem explored here — traversing a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) of package dependencies — is a classic computer science problem. The recursive approach used is a form of [depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) (DFS), one of two fundamental graph traversal algorithms (the other being [breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search), BFS). DFS explores as far down each branch as possible before backtracking, which is naturally expressed via recursion. For finding roots specifically, the `is_root` function identifies nodes with no children in the parent column — in graph theory terminology, these are **leaf nodes** (nodes with [out-degree](https://en.wikipedia.org/wiki/Directed_graph#Indegree_and_outdegree) zero). The challenge noted at the end — that the nested list output doesn't cleanly represent the tree — is a well-known issue; purpose-built data structures like R's `igraph` or `data.tree` packages, or Python's `networkx`, provide adjacency list representations that make traversal and visualisation much more tractable. The Moore Neighbourhood imputation problem described earlier is a form of [flood fill](https://en.wikipedia.org/wiki/Flood_fill), also classically solved with recursion or BFS.
