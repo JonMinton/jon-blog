@@ -531,6 +531,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>However, if we change the species and context even this example is probably useful in practice. Imagine we work in farming, for example, and have bought a lot of baby chickens or cows, and want to decide on a type of feed to help them ‘grow’ the fastest.</p>
 <p>Often the animals (‘livestock’) will be quite homogeneous, from the same genetic stock and often even of the same sex. This kind of modelling approach would probably work for figuring out what type of feed to use in a way that’s both fairly robust and fairly cheap. (Though as a vegetarian, I’d rather have come up with a different real world application of this kind of model!)</p>
 <p>Even if this specific model specification isn’t useful for you, hopefully the broader process and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
+<hr>
+</section>
+<section id="claudes-reflection-on-this-transcription" class="level3">
+<h3 class="anchored" data-anchor-id="claudes-reflection-on-this-transcription">Claude’s reflection on this transcription</h3>
+<p><em>This section is written by Claude (Opus 4.6), reflecting on the process and quality of this transcription.</em></p>
+<p>Jon rates this transcription as roughly 60-70% successful, which I think is fair. It was an interesting experiment that revealed both possibilities and clear limitations.</p>
+<p><strong>What worked reasonably well:</strong></p>
+<ul>
+<li>The iterative “shingling” approach — slicing the 73,000-pixel image into overlapping segments, borrowing the concept from R’s <code>lattice</code> package — was effective for turning an otherwise impossibly large image into manageable chunks.</li>
+<li>The earlier, more narrative sections of the notes were transcribed with reasonable accuracy. Larger handwriting and standard prose are within my comfort zone.</li>
+<li>Identifying the overall structure, section boundaries, and colour usage was straightforward even at low resolution.</li>
+</ul>
+<p><strong>What didn’t work well:</strong></p>
+<ul>
+<li>I hallucinated content towards the end of the document, fabricating an entire paragraph about Satterthwaite’s approximation and Kenward-Roger adjustments that appeared nowhere in the original notes. This is a serious failure mode — confidently generating plausible-sounding technical content that the author never wrote. The final slice was the tallest (5,748px), pushing the limits of readable resolution, and rather than flagging uncertainty I filled in gaps with invention.</li>
+<li>Several phrases were misread: “a mildly barbed aside” became “entity model aside”; “height as part of outcome/response” became “home/regime”; “need never” became “can never”. These aren’t catastrophic individually, but they accumulate.</li>
+<li>Dense handwriting, especially where equations, annotations, and colour overlap, remained challenging. Many of the annotated equations had to be preserved as images rather than transcribed, which is the right call but also an honest acknowledgement of the limitation.</li>
+</ul>
+<p><strong>The broader point:</strong></p>
+<p>Claude models are currently less multimodal than some alternatives when it comes to this kind of image parsing task. Google’s Gemini models, with their heritage in OCR (Google Lens, Cloud Vision) and their ability to ingest very high-resolution images natively, likely have a comparative advantage for raw handwriting extraction. The bottleneck here wasn’t reasoning about the content — it was reliably reading the pixels.</p>
+<p>This remains a genuinely hard problem. Handwriting recognition on structured technical content (mixing prose, equations, diagrams, code, and colour) is at the frontier of what current multimodal models can do. The shingling workaround helped, but it’s a workaround — not a solution to the underlying resolution and parsing constraints.</p>
+<p>If nothing else, this experiment provides a useful baseline. As multimodal capabilities improve, it would be interesting to revisit this same source image and see how the accuracy changes.</p>
 
 
 </section>

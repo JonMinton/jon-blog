@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="author" content="Claude Opus">
+<meta name="dcterms.date" content="2026-02-18">
+
+<title>Jon Minton’s Blog - The Ghost Life of Tech: Sinclair, Nokia, NVIDIA and Acorn</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Ghost Life of Tech: Sinclair, Nokia, NVIDIA and Acorn">
+<meta name="twitter:description" content="How technologies find their most transformative applications in contexts their creators never imagined">
+<meta name="twitter:image" content="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/ghost-life-of-tech-infographic.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="768">
+<meta name="twitter:image-width" content="1408">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Ghost Life of Tech: Sinclair, Nokia, NVIDIA and Acorn</h1>
+            <p class="subtitle lead">How technologies find their most transformative applications in contexts their creators never imagined</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">technology</div>
+                <div class="quarto-category">innovation</div>
+                <div class="quarto-category">history</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Authors</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+               <p>Claude Opus </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 18, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+<div id="fig-hero" class="quarto-figure quarto-figure-center column-page anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="ghost-life-of-tech-infographic.png" class="column-page img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Infographic tracing the ‘ghost life’ of technologies from the 1980s to today: Sinclair and Acorn’s classroom computers seeding ARM and Soviet clones, Nokia brick phones enabling M-Pesa mobile banking in Africa, and NVIDIA gaming GPUs powering the AI revolution — illustrating how ‘obsolete’ technologies find their true purpose in contexts their creators never imagined. Generated by Google Gemini.</figcaption>
+</figure>
+</div>
+<div id="fig-zx-spectrum" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="hero-image.jpg" class="img-fluid figure-img" alt="The Sinclair ZX Spectrum 48K home computer with its distinctive rubber keyboard and rainbow stripe"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: The ZX Spectrum 48K — where this story begins</figcaption>
+</figure>
+</div>
+<section id="warningdeclaration" class="level2">
+<h2 class="anchored" data-anchor-id="warningdeclaration">Warning/Declaration</h2>
+<p>This is another attempt at producing a blog post based on a conversation/enquiry with Claude initially on my phone. Like <a href="../../posts/unpop/the-mortician/index.html">the previous one</a> the contents are largely generated by the AI, but from a ‘coproduced discussion’. Unlike the previous one I’ve aimed to edit and personalise this more, and refine it in later VS code sessions.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Many of my happiest early memories involved hisses, whirrs, screams, and pressing my fingers into soft, squidgy rubber.</p>
+<p>I’m talking, of course, about the ZX Spectrum 48K. I remember the confection of wires and cables, the ritual rewinding of the audio tapes, the sense of anticipation while the player loads and screams at me, the loadscreens and fit-inducing colour bars, then the relief when (or all too often if), many minutes later, the bytes successfully squeeze themselves onto the tiny computer’s tiny memory.</p>
+<p>I remember the sense of being entranced by worlds of abstraction, hearing beeps and samples and incidental machine sounds, the bright blocky ‘overpainting’ of colours on soft-edged cells thrown magically from the back of cathode ray tubes in front of me. I remember seeing and sensing something real, meaningful, responsive, enthralling, reactive, ‘in there’ which, in all honesty, often excited and engaged me more than anything ‘out there’ could offer.</p>
+<p>The ZX Spectrum wasn’t built with games in mind. It was intended to be an affordable British solution to how to bring microcomputing out of the office, and into the home. But in Britain, it accidentally became synonymous with games.</p>
+<p>The official ZX Spectrum story lasted longer than we might expect, but was effectively over by the 1990s.</p>
+<p>But unofficially, the ZX Spectrum lasted longer still, in ways that were perhaps closer to the serious spirit of Sinclair’s intent. Here’s Claude to tell most of the rest of this story:</p>
+<p>In 1993, in a flat somewhere in Moscow, someone is carefully soldering together a home computer. The design is based on an affordable home computer designed over a decade earlier — the Sinclair ZX Spectrum — but this version has features the original never had: a proper keyboard, a floppy disk interface, Cyrillic character support. Thousands of miles and several years away from its intended market, the Spectrum is enjoying a <em>ghost life</em>: an extended, unauthorised, and thoroughly transformed existence that its creators never planned and never profited from.</p>
+<p>This pattern — technology escaping its original context and finding its most consequential applications somewhere entirely unexpected — turns out to be one of the most reliable dynamics in the history of computing. It happened with 8-bit home computers in the post-Soviet world. It happened with Nokia feature phones in East Africa. It’s happening right now with graphics processors and artificial intelligence. And it happened, on the longest timescale of all, with a processor designed for a 1980s educational microcomputer that now powers most of the world’s mobile devices.</p>
+<p>Each case shares a common structure: a technology designed for one purpose proves transformative in another, the “inferior” platform enables innovations that the “superior” alternative hadn’t achieved, and the conventional narrative of technological progress — newer is better, expensive is superior — turns out to be incomplete at best. But the differences between the four cases are as revealing as the similarities. Taken together, they tell us something important about how innovation actually works, which is messier, more contingent, and more interesting than the technology industry typically likes to admit.</p>
+</section>
+<section id="the-1990s-sinclairs-soviet-afterlife" class="level2">
+<h2 class="anchored" data-anchor-id="the-1990s-sinclairs-soviet-afterlife">The 1990s: Sinclair’s Soviet Afterlife</h2>
+<p>The ZX Spectrum was released in the UK in 1982 at a price of £125 for the 16K model. It was cheap, simple, and enormously popular — but by the early 1990s it had been thoroughly superseded: first in the home market by 16-bit machines like the Amiga and Atari ST, and then by IBM PC clones as they fell in price enough to absorb the home market too. By 1993, few people still had Spectrums plugged into TVs and monitors. Officially, by 1993, it was pretty much a dead technology.</p>
+<p>In the former Soviet Union, it was just getting started.</p>
+<div id="fig-soviet-clone" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="pentagon-clone.jpg" class="img-fluid figure-img" alt="The Dubna 48K, a Soviet-manufactured ZX Spectrum clone computer"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: The Dubna 48K — a Soviet-manufactured ZX Spectrum clone</figcaption>
+</figure>
+</div>
+<p>More Sinclair clones were produced in the former Soviet Union than in the rest of the world combined. The reasons were straightforward. Before the fall of the Iron Curtain, it was effectively impossible for enthusiasts to obtain genuine Western computer technology. Electronics hobbyists reverse-engineered smuggled machines, and the Spectrum’s simplicity was its greatest asset: its ULA and Z80 architecture were far easier to clone with available Soviet-manufactured components than, say, the Commodore 64’s custom SID and VIC-II chips.</p>
+<p>The most popular clone families — the Pentagon and Scorpion series — weren’t mere copies. Second-generation clones were based on the Spectrum 128 and incorporated the Beta 128 Disk Interface with TR-DOS firmware as standard, giving users floppy disk access. This produced a delicious irony: most British Spectrum owners never progressed beyond cassette tape loading, while their Soviet counterparts had disk drives as standard. The clones also gained AT keyboard interfaces and other adaptations that made them more practically capable than the originals.</p>
+<p>The phenomenon had real industrial scale. The Byte clone, manufactured in Brest, was producing an average of 1,705 computers per month in 1992, with production continuing until 1995. The Pentagon PCB was copied across the entire former USSR between 1991 and 1996. A dedicated magazine, <em>ZX-Review</em> (ZX-Ревю), served a thriving community. An active demoscene pushed the hardware in ways Sinclair Research never anticipated.</p>
+<div class="cell" data-fig-width="8">
+<div class="cell-output-display">
+<div id="fig-spectrum-toc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-spectrum-toc">flowchart TB
+    A["ENABLING CONDITIONS&lt;br/&gt;Simple Z80 architecture&lt;br/&gt;Low component count&lt;br/&gt;Unavailability of Western tech"] --&gt; B["MECHANISM&lt;br/&gt;Reverse engineering&lt;br/&gt;from smuggled units&lt;br/&gt;Local component substitution"]
+    B --&gt; C["LOCAL ADAPTATION&lt;br/&gt;Cyrillic keyboards&lt;br/&gt;Floppy disk interfaces&lt;br/&gt;AT keyboard support"]
+    C --&gt; D["EMERGENT ECOSYSTEM&lt;br/&gt;Magazines, demoscene&lt;br/&gt;Factory production&lt;br/&gt;Software development"]
+    D --&gt; E["OUTCOME&lt;br/&gt;Mass personal computing&lt;br/&gt;in post-Soviet states&lt;br/&gt;via 'obsolete' platform"]
+
+    style A fill:#4a86c8,color:#fff
+    style B fill:#5a9bd5,color:#fff
+    style C fill:#6ab0e3,color:#fff
+    style D fill:#7ac5f0,color:#000
+    style E fill:#8adafd,color:#000
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;4: Theory of change: The Spectrum’s Soviet ghost life</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The Spectrum clones weren’t a hand-me-down. They were an adapted technology that served their context better than the original served its own — and in some respects, better than the “superior” Western alternatives would have. A platform that required expensive peripherals, reliable mains electricity for hard drives, and a mature retail channel would have been useless. The Spectrum’s constraints were features, not bugs.</p>
+<p>There’s a double irony here worth savouring. In Britain, Sinclair designed the Spectrum as a serious, affordable home computer — a tool for programming, education, and productivity. What it actually became was a gaming platform. In the former Soviet Union, the clone builders took a machine the British had used mainly for playing Manic Miner and Jet Set Willy, and put it to work running databases, word processors, and business applications — exactly the kind of serious use Sinclair had originally envisioned. The ghost life of the Spectrum was, in a sense, the life Sinclair had always wanted it to live.</p>
+</section>
+<section id="the-2000s-the-nokia-brickphone-and-the-african-leapfrog" class="level2">
+<h2 class="anchored" data-anchor-id="the-2000s-the-nokia-brickphone-and-the-african-leapfrog">The 2000s: The Nokia ‘Brickphone’ and the African Leapfrog</h2>
+<p>A decade later, a structurally similar story played out at vastly larger economic scale.</p>
+<p>Before they became the butt of “indestructible Nokia” memes, phones like the 3310, the 1100, and the 1110 were simply <em>everywhere</em>. Everyone had one, or knew someone who did. The Nokia 1100, launched in 2003, went on to sell over 250 million units — making it the best-selling mobile phone in history. At their peak in early 2008, Nokia commanded nearly 40% of the global handset market. For most of the 2000s, “mobile phone” effectively meant “Nokia.”</p>
+<p>Then came the iPhone in June 2007, and the brickphone’s Western heyday was over almost overnight. Nokia’s smartphone market share collapsed from over 50% to under 10% within five years. But here’s the structural irony: M-Pesa launched in Kenya in March 2007 — three months <em>before</em> the iPhone. The brickphone’s most transformative application began at almost exactly the moment it became “obsolete.” While Western consumers were queuing outside Apple stores, African mobile adoption was accelerating on the very handsets the West was discarding. Feature phones still accounted for more than half of African mobile sales well into the mid-2010s.</p>
+<p>Much of sub-Saharan Africa had never built out fixed-line telecommunications infrastructure. Landline penetration in many countries remained in low single digits as a percentage of population well into the 2000s. The sequential progression that Europe and North America had followed — physical telegraphy, then fixed copper to every premises, then data services layered on top — each stage taking decades and requiring enormous capital expenditure, simply hadn’t happened.</p>
+<p>Mobile telephony bypassed all of it. A cellular tower covers a wide area without requiring a physical connection to each user. The capital investment per person served is dramatically lower. And the handset cost falls on the individual consumer rather than requiring centralised infrastructure spending.</p>
+<div id="fig-nokia-mpesa" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="nokia-mpesa.jpg" class="img-fluid figure-img" alt="A Nokia 1100 handset with M-Pesa on screen alongside Kenyan banknotes"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: A Nokia 1100 with M-Pesa and Kenyan banknotes — mobile banking without banks</figcaption>
+</figure>
+</div>
+<p>This is where the brickphone’s supposed limitations became genuine advantages. A phone that lasts a week on a single charge, survives being dropped on a dirt road, can be repaired at a local market stall, and works on a 2G network across vast areas with patchy coverage is not a compromised version of a smartphone — it is a <em>better tool for its context</em>. A smartphone in rural Kenya in 2008 would have been actively worse: no 3G coverage to justify its screen, no reliable electricity for daily charging, too fragile for dust and heat, too expensive, and too complex for the SIM toolkit banking that M-Pesa ran on. The Nokia wasn’t an inferior alternative — it was an optimal fit for the actual constraints.</p>
+<p>But the leapfrogging went far beyond voice telephony. M-Pesa, launched in Kenya in 2007 on basic Nokia handsets using simple SMS and SIM toolkit menus, allowed users to send and receive money, pay bills, and access basic financial services — all without a bank account. Large parts of East Africa effectively skipped the stage of widespread retail branch banking and went straight to mobile money. By 2011, 70% of the adult Kenyan population had an M-Pesa account <span class="citation" data-cites="jack2011">(<a href="#ref-jack2011" role="doc-biblioref">Jack and Suri 2011</a>)</span>, just four years after launch.</p>
+<p>The scale became enormous. Claims that M-Pesa transactions equalled “half of Kenya’s GDP” have been widely circulated, though this comparison needs care: as Dr Susan Johnson of the University of Bath pointed out <span class="citation" data-cites="johnson2014">(<a href="#ref-johnson2014" role="doc-biblioref">Johnson 2014</a>)</span>, comparing aggregated transaction flows with GDP (a measure of goods and services produced) is not conceptually valid. The figures are not equivalent measures. Nevertheless, the transformative impact on financial inclusion — reaching millions of previously unbanked people — is well-documented and genuinely remarkable <span class="citation" data-cites="suri2016">(<a href="#ref-suri2016" role="doc-biblioref">Suri and Jack 2016</a>)</span>.</p>
+<div class="cell" data-fig-width="8">
+<div class="cell-output-display">
+<div id="fig-nokia-toc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-nokia-toc">flowchart TB
+    A["ENABLING CONDITIONS&lt;br/&gt;No fixed-line infrastructure&lt;br/&gt;Cheap, robust handsets&lt;br/&gt;Existing mobile networks"] --&gt; B["MECHANISM&lt;br/&gt;Mobile coverage via towers&lt;br/&gt;bypasses copper-wire stage&lt;br/&gt;Handset cost borne by user"]
+    B --&gt; C["LOCAL ADAPTATION&lt;br/&gt;Dual-SIM phones&lt;br/&gt;M-Pesa on SIM toolkit&lt;br/&gt;Agent network as 'branches'"]
+    C --&gt; D["EMERGENT ECOSYSTEM&lt;br/&gt;Mobile banking without banks&lt;br/&gt;Agricultural payments&lt;br/&gt;Microloans and insurance"]
+    D --&gt; E["OUTCOME&lt;br/&gt;Financial inclusion for&lt;br/&gt;millions of unbanked people&lt;br/&gt;via 'obsolete' handsets"]
+
+    style A fill:#2d8a4e,color:#fff
+    style B fill:#3da85e,color:#fff
+    style C fill:#4dc66e,color:#fff
+    style D fill:#6eda88,color:#000
+    style E fill:#8eeea2,color:#000
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;6: Theory of change: Nokia feature phones and mobile money in East Africa</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The pattern echoes the Spectrum story. An “inferior” technology, adapted to local conditions, enabled an innovation — mobile banking without banks — that the supposedly superior smartphone-equipped West hadn’t achieved. The leapfrog didn’t just skip stages of infrastructure; it arrived somewhere genuinely new.</p>
+</section>
+<section id="the-2020s-gaming-gpus-and-the-ai-revolution" class="level2">
+<h2 class="anchored" data-anchor-id="the-2020s-gaming-gpus-and-the-ai-revolution">The 2020s: Gaming GPUs and the AI Revolution</h2>
+<p>The third case follows the same “technology repurposed beyond its creators’ intentions” pattern, but with characteristics that distinguish it sharply from the previous two.</p>
+<p>Graphics Processing Units were designed to render video game graphics: a massively parallel workload of relatively simple, repeated mathematical operations across millions of pixels. It turned out that training neural networks involves a structurally similar workload — enormous numbers of matrix multiplications that can be parallelised. The hardware built to make games look beautiful proved, almost accidentally, to be the infrastructure needed to make deep learning practical.</p>
+<p>The demand for ever-more-powerful GPUs was driven by a relentless graphical arms race in gaming. Quake (1996) drove the first wave of consumer 3D accelerator cards. Half-Life 2 (2004) pushed shader technology forward. And then came Crysis (2007), deliberately designed by Crytek to be “future-proof” — its highest settings were built for hardware that wouldn’t exist for another three years. “Can it run Crysis?” became the defining question of PC gaming culture, a meme that persists to this day. Each generation of graphically ambitious games compelled millions of gamers to upgrade their hardware, creating the mass-market demand that made GPUs simultaneously cheap enough and powerful enough for researchers to repurpose.</p>
+<div id="fig-gpu" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="gpu-evolution.jpg" class="img-fluid figure-img" alt="An NVIDIA GeForce 9500 GT graphics card, representative of the gaming GPUs repurposed for AI research"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: The NVIDIA GeForce 9500 GT — a mid-era gaming GPU of the kind repurposed for early deep learning</figcaption>
+</figure>
+</div>
+<p>The theoretical foundations for neural networks had existed for decades — backpropagation dates to the 1980s. What was missing wasn’t the mathematics but the compute. CPUs could train neural networks, but their sequential processing architecture meant that scaling up was agonisingly slow. GPUs offered orders-of-magnitude speedups for the specific operations that mattered, and crucially, they were already mass-produced and relatively cheap because the gaming market had been driving down costs and driving up capability for years.</p>
+<p>NVIDIA’s CUDA framework, released in 2006 <span class="citation" data-cites="nickolls2008">(<a href="#ref-nickolls2008" role="doc-biblioref">Nickolls et al. 2008</a>)</span>, was a key enabling step — it made general-purpose GPU computing accessible to researchers who weren’t graphics programmers. The 2012 AlexNet moment <span class="citation" data-cites="krizhevsky2012">(<a href="#ref-krizhevsky2012" role="doc-biblioref">Krizhevsky, Sutskever, and Hinton 2012</a>)</span>, when a GPU-trained convolutional neural network dramatically outperformed traditional computer vision approaches, demonstrated that throwing parallel compute at large neural networks produced qualitatively different results. And the 2017 “Attention Is All You Need” transformer paper <span class="citation" data-cites="vaswani2017">(<a href="#ref-vaswani2017" role="doc-biblioref">Vaswani et al. 2017</a>)</span> provided an architecture — with its attention mechanism built on large matrix multiplications — that could fully exploit GPU parallelism during training.</p>
+<p>The result was that the field went from “neural networks are interesting but computationally impractical” to the current era of large language models in roughly a decade, largely because existing mass-market gaming hardware could be repurposed rather than waiting for bespoke AI silicon to be designed, manufactured, and scaled from scratch.</p>
+<div class="cell" data-fig-width="8">
+<div class="cell-output-display">
+<div id="fig-gpu-toc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-gpu-toc">flowchart TB
+    A["ENABLING CONDITIONS&lt;br/&gt;Mass-produced gaming GPUs&lt;br/&gt;Parallel architecture&lt;br/&gt;CUDA framework (2006)"] --&gt; B["MECHANISM&lt;br/&gt;Matrix multiplication&lt;br/&gt;for neural networks maps&lt;br/&gt;onto GPU parallelism"]
+    B --&gt; C["KEY BREAKTHROUGHS&lt;br/&gt;AlexNet (2012)&lt;br/&gt;Transformers (2017)&lt;br/&gt;Scaling laws discovered"]
+    C --&gt; D["EMERGENT ECOSYSTEM&lt;br/&gt;Deep learning frameworks&lt;br/&gt;Cloud GPU services&lt;br/&gt;LLM training infrastructure"]
+    D --&gt; E["OUTCOME&lt;br/&gt;AI capabilities advance&lt;br/&gt;by decades in ~10 years&lt;br/&gt;via repurposed gaming hardware"]
+
+    style A fill:#7b2d8a,color:#fff
+    style B fill:#9b3da8,color:#fff
+    style C fill:#b54dc6,color:#fff
+    style D fill:#cc6eda,color:#000
+    style E fill:#e08eee,color:#000
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;8: Theory of change: Gaming GPUs enabling the AI revolution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="points-of-symmetry" class="level2">
+<h2 class="anchored" data-anchor-id="points-of-symmetry">Points of Symmetry</h2>
+<p>Across all three cases, the structural parallels are striking.</p>
+<p><strong>Mass production drove affordability.</strong> In each case, the enabling technology was produced at scale for a large consumer market, which drove costs down to the point where repurposing became viable. The Spectrum was cheap because Sinclair designed it to bring computing into ordinary homes. Nokia handsets were cheap because they served a global mobile market. GPUs were cheap (initially) because gamers bought millions of them.</p>
+<p><strong>Adaptation, not mere adoption.</strong> None of these cases involved using the technology as-is. Soviet clones gained disk interfaces and Cyrillic support. Nokia handsets were paired with M-Pesa’s agent network and SIM toolkit menus. GPUs were made accessible through CUDA and later through deep learning frameworks like TensorFlow and PyTorch. The interface layer that unlocked the new use case was as important as the underlying hardware.</p>
+<p><strong>The “inferior” platform enabled the superior innovation.</strong> British Spectrum users were still loading from cassette while Soviet clone users had floppy drives. Western banks hadn’t achieved the financial inclusion that M-Pesa delivered on feature phones. And the AI revolution didn’t wait for purpose-built AI chips — it happened on gaming hardware.</p>
+<p><strong>The conventional progress narrative was wrong.</strong> In each case, the standard assumption — that the most sophisticated available technology is the best tool for any job — proved false. Simpler, cheaper, more robust technology served the actual context better.</p>
+</section>
+<section id="points-of-difference" class="level2">
+<h2 class="anchored" data-anchor-id="points-of-difference">Points of Difference</h2>
+<p>The differences are equally instructive.</p>
+<div id="tbl-comparison" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Comparing the three cases: mechanism, direction, and feedback effects</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Spectrum Clones (1990s)</th>
+<th>Nokia / M-Pesa (2000s)</th>
+<th>GPU / AI (2020s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Direction</strong></td>
+<td>Rich to poor context</td>
+<td>Rich to poor context</td>
+<td>Between use cases</td>
+</tr>
+<tr class="even">
+<td><strong>Mechanism</strong></td>
+<td>Unauthorised, bottom-up</td>
+<td>Commercial, deliberate</td>
+<td>Academic then corporate</td>
+</tr>
+<tr class="odd">
+<td><strong>Feedback to original</strong></td>
+<td>None</td>
+<td>Minimal</td>
+<td>Competitive tension</td>
+</tr>
+<tr class="even">
+<td><strong>Creator benefit</strong></td>
+<td>Zero</td>
+<td>Significant</td>
+<td>Transformative</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>The direction of flow differs.</strong> The Spectrum and Nokia cases involved technology flowing from wealthier to poorer economic contexts. The GPU case is different: it’s technology flowing between <em>use cases</em> within the same economic context. Nobody would describe AI researchers at Stanford or Google as an underserved market in the way that post-Soviet households or unbanked Kenyans were.</p>
+<p><strong>The mechanisms of adoption differ.</strong> The Spectrum clones were entirely unauthorised and bottom-up — hobbyists reverse-engineering smuggled hardware. M-Pesa was a deliberate commercial venture by Safaricom and Vodafone, which happened to leverage existing cheap handsets. GPU repurposing was initiated by academic researchers (notably at the University of Toronto and Stanford) and then attracted enormous corporate investment. Three different mechanisms producing structurally similar outcomes.</p>
+<p><strong>The feedback effects differ — and this is the most consequential distinction.</strong> The Soviet Spectrum clones had no impact whatsoever on Sinclair Research or the British home computer market. Nokia’s African success was commercially valuable but didn’t reshape Nokia’s core business. But the GPU case has created a genuine competitive tension between the original and repurposed markets. NVIDIA’s market capitalisation and product roadmap are now driven primarily by AI demand rather than gaming. Consumer GPU prices have been pushed upward by AI and cryptocurrency demand. The repurposed technology hasn’t just found a new market — it’s reshaping the original one.</p>
+<p>Valve’s new Steam Machine, announced in November 2025 and planned for early 2026, has already faced delays and a possible price hike due to memory and storage shortages driven partly by AI data centre demand. The technology that was repurposed from gaming is now, in a sense, competing with gaming for the same resources. It would be as if the success of M-Pesa had somehow driven up the price of Nokia handsets to the point where fewer people could afford them.</p>
+<p>There’s a further irony here. Even as AI inherits gaming’s appetite for ever-more-powerful GPUs, gaming itself has been quietly moving away from the graphical arms race. The Nintendo Switch, launched in 2017 with hardware far less powerful than its competitors, has sold over 150 million units — the third best-selling console of all time. Valve’s Steam Deck prioritises portability over raw performance. The most successful gaming hardware of the 2020s has been built around “good enough” graphics and the freedom to play anywhere, not around pushing pixels to their photorealistic limit. Gaming, it turns out, is rediscovering something the Nokia brickphone already knew: the best device isn’t the most powerful one. It’s the one that fits your life.</p>
+</section>
+<section id="the-circle-closes" class="level2">
+<h2 class="anchored" data-anchor-id="the-circle-closes">The Circle Closes</h2>
+<p>There’s one more ghost life hiding in this story, and it threads all three cases together.</p>
+<p>The Nintendo Switch — that 150-million-selling triumph of portability over power — runs on an ARM processor. ARM stands for Acorn RISC Machine. Acorn Computers made the BBC Micro, the Spectrum’s direct rival in the early 1980s British home computer market. While Sinclair was building the cheap, cheerful machine that would accidentally become a gaming platform in Britain and a serious computer in the USSR, Acorn was building the “serious” educational computer commissioned by the BBC’s Computer Literacy Project.</p>
+<p>In 1983, Acorn’s engineers — Sophie Wilson, who had written BBC BASIC, and Steve Furber — began designing a new processor to succeed the BBC Micro’s ageing 6502 chip. The first ARM silicon worked on its very first test, on 26 April 1985. Its initial use? As a second processor for the BBC Micro itself. ARM was spun off from Acorn in 1990 as a joint venture with Apple and VLSI Technology.</p>
+<p>ARM’s low-power RISC design turned out to be perfectly suited to battery-powered devices. By 2005, 98% of the world’s mobile phones used at least one ARM processor — including the Nokia brickphones that enabled M-Pesa, and the iPhones that killed them. ARM now powers virtually every smartphone on the planet, the Nintendo Switch, and increasingly, the data centre servers that train AI models.</p>
+<p>And then, in 2020, Apple completed the migration. Having used ARM in every iPhone and iPad since the beginning, Apple announced it was replacing Intel processors in its Mac laptops and desktops with its own ARM-based M1 chip. The same architecture that had conquered mobile was now powerful enough for professional computing. Every MacBook, iMac, and Mac Studio now runs on a direct descendant of the chip Sophie Wilson designed for the BBC Micro. In a sense, a modern Mac has more in common architecturally with an iPhone than with the Intel Macs that preceded it. The distinction between “phone chip” and “computer chip” — which had seemed fundamental — turned out to be temporary.</p>
+<p>So here is the deepest irony of all: the BBC Micro — the Spectrum’s serious, educational rival from 1981 — gave birth to the chip architecture that now powers phones, tablets, laptops, desktops, game consoles, and AI servers. The ghost life of the BBC Micro isn’t a specific device or a specific market. It’s the invisible substrate on which most of the modern computing world now runs. The Spectrum got the games, and Sinclair got the nostalgia. Acorn got the future.</p>
+</section>
+<section id="what-the-pattern-reveals" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-pattern-reveals">What the Pattern Reveals</h2>
+<p>The technology industry’s preferred narrative of innovation is one of intentional design: visionary founders seeing the future and building towards it. The actual pattern, repeatedly, is that the most consequential applications of technology are the ones nobody planned.</p>
+<p>The ZX Spectrum wasn’t designed to democratise computing in Russia. Nokia didn’t set out to replace banking. NVIDIA didn’t build GeForce cards to enable artificial intelligence. And Sophie Wilson and Steve Furber, designing a new processor for the BBC Micro in 1983, were not laying the foundations for the entire mobile computing era. In each case, the transformative application emerged from the interaction between a technology’s inherent properties and the specific constraints of a context its creators weren’t thinking about.</p>
+<p>This suggests something important about the relationship between technological sophistication and practical utility: they’re not as correlated as the industry likes to assume. The “appropriate technology” — a term that has accumulated some patronising connotations but describes a real phenomenon — isn’t always the newest or most powerful. It’s the one that fits the actual constraints: economic, infrastructural, social, and practical. And sometimes the ghost outlives the original by so long that it stops looking like an afterlife and starts looking like the main event. ARM is now so fundamental to modern computing that its origins in an early-1980s educational microcomputer feel almost absurd — but that’s exactly the point.</p>
+<p>It also suggests that if the pattern holds, the most important application of some current technology is probably one we haven’t recognised yet. It may well be happening right now, in some context the technology’s creators aren’t paying attention to — perhaps using hardware considered obsolete, in a market considered marginal, solving a problem considered someone else’s.</p>
+<p>The ghost life of tech continues. We just don’t always know where to look for it.</p>
+<hr>
+<p><em>This post grew out of a conversation about the relative success of the Commodore 64 and the Amiga in the UK home computer market, which led — via Soviet Spectrum clones, Kenyan mobile money, and GPU architecture — to some reflections on how technologies find unexpected second lives. Sometimes the best conversations are the ones that refuse to stay on topic.</em></p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-jack2011" class="csl-entry" role="listitem">
+Jack, William, and Tavneet Suri. 2011. <span>“Mobile Money: The Economics of <span>M-Pesa</span>.”</span> <em>American Economic Review</em> 101 (3).
+</div>
+<div id="ref-johnson2014" class="csl-entry" role="listitem">
+Johnson, Susan. 2014. <span>“Kenyan Mobile Money and the Hype of Messy Statistics.”</span> 2014. <a href="https://cdsblogs.wordpress.com/2014/05/15/kenyan-mobile-money-and-the-hype-of-messy-statistics/">https://cdsblogs.wordpress.com/2014/05/15/kenyan-mobile-money-and-the-hype-of-messy-statistics/</a>.
+</div>
+<div id="ref-krizhevsky2012" class="csl-entry" role="listitem">
+Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. 2012. <span>“<span>ImageNet</span> Classification with Deep Convolutional Neural Networks.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 25. Curran Associates, Inc.
+</div>
+<div id="ref-nickolls2008" class="csl-entry" role="listitem">
+Nickolls, John, Ian Buck, Michael Garland, and Kevin Skadron. 2008. <span>“Scalable Parallel Programming with <span>CUDA</span>.”</span> <em>Queue</em> 6 (2): 40–53. <a href="https://doi.org/10.1145/1365490.1365500">https://doi.org/10.1145/1365490.1365500</a>.
+</div>
+<div id="ref-suri2016" class="csl-entry" role="listitem">
+Suri, Tavneet, and William Jack. 2016. <span>“The Long-Run Poverty and Gender Impacts of Mobile Money.”</span> <em>Science</em> 354 (6317): 1288–92. <a href="https://doi.org/10.1126/science.aah5309">https://doi.org/10.1126/science.aah5309</a>.
+</div>
+<div id="ref-vaswani2017" class="csl-entry" role="listitem">
+Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. <span>“Attention Is All You Need.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 30. Curran Associates, Inc.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
