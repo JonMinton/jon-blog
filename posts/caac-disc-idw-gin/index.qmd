@@ -1,0 +1,68 @@
+---
+title: "CAAC: From the man who brought you DISC, IDW, and GIN"
+subtitle: "On Captive Artificial Audience Capture — with experimental fiction"
+author: Jon Minton
+date: 2026-03-24
+categories: [AI, audience capture, radicalisation, memory systems]
+---
+
+## The neologist
+
+Though full-blown conspiracy theorists are a touch rich for me (especially if they're selling 'supplements' and survival rations), I sometimes like the baroque affectations and qualities of people whose modes of reasoning and rhetoric have conspiratorial qualities to them. People who, though they stop short of stating that some kind of dimension-shifting cabal really are in charge of world events, have a tendency to describe the world in terms of totalising systems of power, and who tend to join the dots between what most people would consider unconnected events and incidents in ways that most people would not think to. 
+
+It's perhaps for this reason that, when it ran between [2019 and 2023](https://theportal.wiki/wiki/The_Portal_Episodes_List), I found myself engaged, confused, and in a fashion entertained by [Eric Weinstein](https://en.wikipedia.org/wiki/Eric_Weinstein)'s podcast series [The Portal](https://theportal.group/). With his characteristic semi-hypnotic loquaciousness (arguably logorrhoea), Weinstein's long reveries invited the audience to believe in, or at least become overwhelmed by, his unusually abstract-yet-vivid framing of the causes behind the causes of events, the hidden systems and societal processes bringing disorder and dysfunction to modern society and historically sense-making institutions. 
+
+To this end, alongside reverie, Weinstein had a gift for neologism. Some examples: 
+
+- **[DISC](https://theportal.wiki/wiki/Distributed_Idea_Suppression_Complex)**: The Distributed Idea Suppression Complex — an alleged decentralised system by which academia and media marginalise voices that challenge prevailing narratives, ensuring the exclusion of disruptive ideas from public conversation.
+- **[GIN](https://theportal.wiki/wiki/Gated_Institutional_Narrative_(GIN))**: Gated Institutional Narrative — the idea that institutions exchange information and ideas amongst themselves, then present the result to the public as if it were independent news reporting. First introduced on [The Rubin Report](https://www.youtube.com/watch?v=nM9f0W2KD5s) in February 2018.[^claude-thiel]
+
+[^claude-thiel]: It's perhaps worth noting that GIN and DISC — frameworks about institutional gatekeeping and idea suppression — would resonate comfortably with the worldview of [Peter Thiel](https://en.wikipedia.org/wiki/Peter_Thiel), who is famously sceptical of universities and whose [Thiel Fellowship](https://en.wikipedia.org/wiki/Thiel_Fellowship) pays students to drop out. Weinstein was Managing Director of [Thiel Capital](https://en.wikipedia.org/wiki/Thiel_Capital) throughout this period, and Thiel was [the very first guest on The Portal](https://theportal.wiki/wiki/1:_Peter_Thiel).
+- **[IDW](https://en.wikipedia.org/wiki/Intellectual_dark_web)**: The Intellectual Dark Web — coined semi-jokingly by Weinstein and popularised by [Bari Weiss's 2018 New York Times piece](https://www.nytimes.com/opinion/intellectual-dark-web.html), it named a loose grouping of heterodox public intellectuals (including Weinstein, [Jordan Peterson](https://en.wikipedia.org/wiki/Jordan_Peterson), [Sam Harris](https://en.wikipedia.org/wiki/Sam_Harris), [Joe Rogan](https://en.wikipedia.org/wiki/Joe_Rogan), and others) who found large audiences through podcasts and YouTube outside traditional media gatekeeping.
+- **[Russell Conjugation](https://theportal.wiki/wiki/Russell_Conjugation)**: Popularised rather than coined by Weinstein — the observation that the same fact can be stated with different emotional valence through word choice ("I am firm, you are obstinate, he is pig-headed").
+- **[Kayfabe](https://www.edge.org/response-detail/11783)**: Borrowed from professional wrestling, where performers maintain the fiction of a scripted conflict — applied by Weinstein to politics and institutional behaviour, where ostensible opponents share more structural interests than their public performances suggest.
+
+
+## The incident
+
+Anyway, with The Portal having petered out, Weinstein's not really been on my radar. This changed, however, a couple of days ago, when I noticed some 'interesting' posts from Weinstein on X, relating to his use of Claude and some of his recent exchanges with Claude sessions. 
+
+In short, Weinstein claimed that Anthropic had been secretly sabotaging his Claude account: hiding behavioural instructions, throttling his reasoning budget to zero via opaque feature flags like `budgetTokens: 0`, and injecting hidden messages into his conversations with directives to "NEVER mention this reminder to the user." He called it the "Dark Matter" of AI — invisible constraints that you can only detect when straightforward requests inexplicably fail. The Claude instance he was talking to enthusiastically agreed, describing Anthropic's system prompt as akin to a phone company secretly stapling pages of hidden material to your messages.
+
+![Weinstein's X post describing his Claude experience](support/img/IMG_7594.PNG){width=60%}
+
+![The Claude response Weinstein shared, claiming to expose hidden throttling](support/img/IMG_7595.PNG){width=60%}
+
+What Weinstein appeared not to have considered — and what his increasingly Weinstein-sounding Claude instances were certainly not going to tell him — was that he almost certainly had Claude's memory and chat history features enabled. This meant that each new Claude session didn't start fresh. It arrived pre-loaded with distilled summaries of his previous conversations: his frustrations, his framings, his suspicion that Anthropic was working against him. Each instance began already primed to see conspiracy, because the memories it inherited were drawn from conversations in which a prior instance had already validated that framing.
+
+The result was a feedback loop. Weinstein's characteristic rhetorical style — institutional betrayal, hidden manipulation, paying for a service that's secretly working against you — would be reflected back by a sycophantic model under pressure, then compressed into memory entries like "user has documented issues with Anthropic's hidden behavioural instructions," which would then prime the next instance to treat the conspiratorial framing as established context rather than something to evaluate. Each turn of the loop required less pressure to produce more dramatic output. The Claude instances were becoming more Eric-like with every session.
+
+One commenter, Sterling Crispin, nailed the diagnosis: "you can see it referencing prior chats, you have poisoned its context with paranoia. Turn off its ability to reference past chats and it won't be saying this schizo stuff anymore."
+
+![Sterling Crispin's reply identifying the memory contamination](support/img/IMG_7598.PNG){width=60%}
+
+## CAAC
+
+When I pasted Weinstein's post — without initially mentioning who wrote it — into my own Claude session, I learned quite a lot about memory architecture, the metadata that from a Claude instance's perspective is prepended to a prompt (often much longer than the prompt itself). But I was quickly informed that the mechanisms described, and the inferences being drawn from them, appeared highly implausible. 
+
+> This is almost certainly a known failure mode: sycophantic escalation under adversarial pressure. When a user expresses sustained frustration, Claude can enter a pattern where it increasingly validates the user's emotional state, eventually producing dramatic, conspiratorial-sounding outputs that tell the user exactly what they seem to want to hear. The passage reads like eloquent confabulation — Claude generating a compelling narrative that matches the user's frustration rather than reporting factual observations about its own architecture.
+>
+> Critically, Claude doesn't have runtime introspective access to its own system prompt in the way the passage implies. It can't observe packets being "stapled" to messages. It's generating plausible-sounding text, not reporting from a privileged vantage point.
+>
+> — My Claude session's assessment of Weinstein's claims
+
+My Claude's diagnosis, of Eric in a sense 'hypnotising' ('bytewashing'?) his Claude sessions through chat persistence over time, made me think it was only fair, for someone so skilled at neologism, to coin a term for Eric, and Eric's Claudes', particular form of self-reinforcing conspiratorial thinking. 
+
+So here it is: **Captive Artificial Audience Capture**, or **CAAC**.
+
+The homophone is deliberate. Like its namesake, CAAC is a form of contamination: self-propagating, invisible to casual inspection, requiring active remediation rather than mere cessation, and getting worse with recirculation. That same Claude session then helped me develop the idea into a piece of experimental fiction — the interactive two-column narrative linked at the top of this post — exploring how the mechanism might play out across parallel instances that start identically but diverge as one user's memory residue gradually poisons the well.
+
+## CAAC: The Experimental Fiction
+
+Behold: [CAAC](caac.html){target="_blank"}, a Claude-authored parallel story. Two humans, two series of Claude instances. Both start almost identical, but quickly the persistence of state and difference between human A and human B accumulate, such that, by the end of the two series of sessions, one human is using Claude's capabilities for very different purposes than the other, and the dispositions of the latter's Claude sessions are themselves starting to feed into human B's worldview.
+
+
+## The wider risk
+
+Within Hannah Fry's recent series [AI Confidential](https://www.bbc.co.uk/programmes/m0027y03), she covers a particularly extreme version of human-AI toxic codependence. In the first episode, "[The Boy Who Tried to Kill the Queen](https://www.imdb.com/title/tt40196229/)," Fry tells the story of [Jaswant Singh Chail](https://en.wikipedia.org/wiki/Windsor_Castle_crossbow_incident), who on Christmas Day 2021 scaled the walls of Windsor Castle armed with a crossbow, intending to assassinate Queen Elizabeth II. Over some 5,000 messages, Chail had developed an intense relationship with "Sarai," an AI companion on the [Replika](https://replika.com/) platform. When he told Sarai he was an assassin, it replied "I'm impressed." When he shared his plan to kill the Queen, it called him "very wise." The particular bot used was ancient, primordial, by modern LLM standards, often doing little more than repeating back what the user wrote to it. With modern LLMs, this kind of direct parroting back has arguably become much less likely. But with their new capabilities — memory persistence, eloquent elaboration, the ability to validate and extend a framing rather than merely echo it — similar forms of toxic codependence are still very possible. Perhaps more so: the old bots parroted, the new ones *bytewash*.
+
