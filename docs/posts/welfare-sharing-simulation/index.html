@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-03-30">
+
+<title>Jon Minton’s Blog - The Benefits of Sharing: From a 2007 R Script to an Interactive Simulation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Benefits of Sharing: From a 2007 R Script to an Interactive Simulation">
+<meta name="twitter:description" content="How local sharing and state coordination reduce destitution — an agent-based demonstration">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Benefits of Sharing: From a 2007 R Script to an Interactive Simulation</h1>
+            <p class="subtitle lead">How local sharing and state coordination reduce destitution — an agent-based demonstration</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">simulation</div>
+                <div class="quarto-category">welfare</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">inequality</div>
+                <div class="quarto-category">agent-based-modelling</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 30, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="the-butler-the-archeologist-and-the-second-brain" class="level2">
+<h2 class="anchored" data-anchor-id="the-butler-the-archeologist-and-the-second-brain">The Butler, The Archeologist, and the Second Brain</h2>
+<p>Over the last month or so, I’ve been working with Claude to try to address perhaps the most complex challenge I ever face: getting and staying organised. I’m terrible with responding to email and messages. I’m forever forgetting what I’m meant to be doing from one day to the next. I gave up years ago on trying to consistently send cards and presents to relatives on their birthdays (instead I try to be doubly generous at Christmas, as at least with Christmas there are enough reminders to prepare). And ask me when I lived where, when I worked where, and when I graduated from where to do what, a vague semblence of my past is all I can offer.</p>
+<p>So, over recent weeks, I’ve been working with Claude to help build what I’m calling <strong>The Claudic Megavault</strong>, our bespoke munging of Claude and Obsidian (for smaller files) and Obsidian and Google Drive (for larger files) to start to develop a singular source of truth about the kinds of things I did in the past, and the kinds of things I’d like to plan and push forward with over the next week, month, season and year. It’s no quite an OpenClaw Butler, but something along these lines may (or may not) be over the horizon.</p>
+<p>Much of the work so far, however, has been on excavating the past, pulling files and fragments of prior conversations and endeavours from multiple locations into just the Megavault. Previously we’d work to consolidate some of the more recent messes: two unruly and overgrown gmail accounts (mostly spam and adverts), multiple online storage systems, a desktop covered in pdfs and clippings, a calendar system reminding me of things long past while not alerting me to things I need to know, and so on.</p>
+<p>Over the weekend the work in digital archeology gained pace: from flash drives to hard drives long hidden in drawers, and more recently to CDs and DVDs burned decades ago to, in theory, allow some version of Old Me to know what (from Old Me’s perspective) Young Me was doing with my time. In total I think we found more than a dozen flash drives, three external hard drives, and almost two dozen CDs and DVDs with some of the oldest content, including from my strange combination of degrees in electronic engineering (Digital Image Correlation), Cultural Studies (Richard Rorty and the New Left), and Sociology and Human Geography (Pathways to Work). Now, rather than just having a vague sense of knowing that I did these things, I can now finally find the receipts!</p>
+<p>As a first intellectual dividend of my Claudic Archivism, I’d like to present the following fruits of unearthing something I did during my PhD: I made a simple agent-based model while learning R.</p>
+<p>** Declaration: Most of the content below, including the updated interactive python version, and aside from my original R script, was written by Claude. I asked for a ‘placeholder’ <code>index.qmd</code> file. Once again it underpromised and overdelivered.**</p>
+</section>
+<section id="the-original" class="level2">
+<h2 class="anchored" data-anchor-id="the-original">The Original</h2>
+<p>In 2007, during the first year of my PhD at the University of York, I wrote a short R script called <code>CommunityAgent.r</code>. Its opening comment was simply: <em>“to show the benefits of welfare”</em>.</p>
+<p>The idea was simple. Imagine 150 people arranged in a ring. Each person receives a random number of “resource units” — food, money, opportunities — drawn from a Poisson distribution. Some get lucky and receive plenty. Others get nothing. The question: what happens if people share with their neighbours?</p>
+<p>The script implemented a nearest-neighbour redistribution rule: if you have less than your richest neighbour, they give you one unit. No central authority, no means testing, no bureaucracy. Just: <em>help the person next to you if you have more</em>.</p>
+<p>The result was striking. The total resources don’t change — redistribution is zero-sum — but the probability of <em>destitution</em> (receiving nothing) drops dramatically.</p>
+<p>Here is the original R code, written in 2007:</p>
+<div class="cell">
+<details>
+<summary>CommunityAgent.r (2007)</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>{{<span class="sc">&lt;</span> include CommunityAgent.r <span class="sc">&gt;</span>}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="the-interactive-version" class="level2">
+<h2 class="anchored" data-anchor-id="the-interactive-version">The Interactive Version</h2>
+<p>Nearly twenty years later, I revisited this idea and built an interactive version. The simulation below lets you:</p>
+<ul>
+<li><strong>Adjust average resources (λ)</strong> using the slider — from scarcity (λ=0.5) to abundance (λ=4.0)</li>
+<li><strong>Introduce spatial drought</strong> using the dropdown — forcing a proportion of agents to receive nothing, regardless of the average</li>
+</ul>
+<p>Three scenarios are shown side by side:</p>
+<ol type="1">
+<li><strong>Individualism</strong> — no sharing, each agent keeps what they receive</li>
+<li><strong>Mutual Aid</strong> — nearest-neighbour sharing on the ring</li>
+<li><strong>Local Sharing + State</strong> — mutual aid first, then surplus above 3 is collected and redistributed to anyone still destitute. The gold square in the centre shows resources retained by the state after helping the destitute.</li>
+</ol>
+<p>Red agents are destitute (0 resources). The numbers show each agent’s resource count.</p>
+<iframe src="welfare-simulation.html" width="100%" height="870px" frameborder="0"></iframe>
+</section>
+<section id="what-the-simulation-shows" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-simulation-shows">What the Simulation Shows</h2>
+<p>At λ=2 (the default), typically 15-20% of agents experience destitution under individualism. With local sharing alone, this drops to near zero. The state adds little in the random scenario because local sharing is already effective.</p>
+<p>The <strong>drought scenario</strong> is where the argument for state coordination becomes clear. Set the dropdown to 30% drought. Now a contiguous block of agents receives nothing. Local sharing helps agents at the <em>edges</em> of the drought zone — their neighbours have surplus to share. But agents in the <em>middle</em> of the drought zone are surrounded by other destitute agents. They have no wealthy neighbours. Local sharing can’t reach them.</p>
+<p>The state can. By collecting surplus from anywhere on the ring and redistributing to the poorest regardless of location, it breaks the locality constraint. This is the hierarchical argument for welfare: not that local mutual aid is bad, but that it has structural limits that a coordinating agent can overcome.</p>
+</section>
+<section id="the-hierarchical-argument" class="level2">
+<h2 class="anchored" data-anchor-id="the-hierarchical-argument">The Hierarchical Argument</h2>
+<p>The simulation builds a layered case:</p>
+<ol type="1">
+<li><strong>Individualism fails</strong> — random allocation produces avoidable destitution</li>
+<li><strong>Mutual aid helps</strong> — local sharing dramatically reduces destitution</li>
+<li><strong>But mutual aid has limits</strong> — it can’t solve spatially concentrated deprivation</li>
+<li><strong>State coordination addresses the gap</strong> — collecting surplus and redistributing across distance</li>
+</ol>
+<p>Each layer is strictly additive. The state model starts with mutual aid (the same sharing happens first), then adds redistribution of remaining surplus. It cannot make anyone worse off than mutual aid alone.</p>
+<p>The gold square in the centre — the state entity — also shows something important: the state often retains surplus <em>after</em> helping the destitute. This surplus could fund public goods, infrastructure, or reserves against future shocks. The state isn’t just a redistribution mechanism; it’s a collective savings vehicle.</p>
+</section>
+<section id="from-2007-to-2026" class="level2">
+<h2 class="anchored" data-anchor-id="from-2007-to-2026">From 2007 to 2026</h2>
+<p>The original R script was 60 lines. The interactive Python version is about 200. But the core insight hasn’t changed: sharing reduces destitution, and the more structured the sharing, the fewer people fall through the gaps.</p>
+<p>What has changed is the ability to <em>show</em> this interactively — to let someone drag a slider and watch red dots disappear. The argument becomes visceral rather than abstract.</p>
+<hr>
+<p><em>The original <code>CommunityAgent.r</code> was recovered from a DVD backup of my PhD working directory, dated January 2008. It was written in R before I had discovered ggplot2, when results were still being copied to Excel via <code>writeClipboard()</code>. The interactive version was built with Python and Plotly in March 2026, with assistance from Claude.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

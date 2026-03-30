@@ -1,0 +1,90 @@
+---
+title: "The Benefits of Sharing: From a 2007 R Script to an Interactive Simulation"
+subtitle: "How local sharing and state coordination reduce destitution — an agent-based demonstration"
+author: "Jon Minton"
+date: "2026-03-30"
+categories: [simulation, welfare, R, Python, inequality, agent-based-modelling]
+---
+
+## The Butler, The Archeologist, and the Second Brain
+
+Over the last month or so, I've been working with Claude to try to address perhaps the most complex challenge I ever face: getting and staying organised. I'm terrible with responding to email and messages. I'm forever forgetting what I'm meant to be doing from one day to the next. I gave up years ago on trying to consistently send cards and presents to relatives on their birthdays (instead I try to be doubly generous at Christmas, as at least with Christmas there are enough reminders to prepare). And ask me when I lived where, when I worked where, and when I graduated from where to do what, a vague semblence of my past is all I can offer. 
+
+So, over recent weeks, I've been working with Claude to help build what I'm calling **The Claudic Megavault**, our bespoke munging of Claude and Obsidian (for smaller files) and Obsidian and Google Drive (for larger files) to start to develop a singular source of truth about the kinds of things I did in the past, and the kinds of things I'd like to plan and push forward with over the next week, month, season and year. It's no quite an OpenClaw Butler, but something along these lines may (or may not) be over the horizon. 
+
+Much of the work so far, however, has been on excavating the past, pulling files and fragments of prior conversations and endeavours from multiple locations into just the Megavault. Previously we'd work to consolidate some of the more recent messes: two unruly and overgrown gmail accounts (mostly spam and adverts), multiple online storage systems, a desktop covered in pdfs and clippings, a calendar system reminding me of things long past while not alerting me to things I need to know, and so on. 
+
+Over the weekend the work in digital archeology gained pace: from flash drives to hard drives long hidden in drawers, and more recently to CDs and DVDs burned decades ago to, in theory, allow some version of Old Me to know what (from Old Me's perspective) Young Me was doing with my time. In total I think we found more than a dozen flash drives, three external hard drives, and almost two dozen CDs and DVDs with some of the oldest content, including from my strange combination of degrees in electronic engineering (Digital Image Correlation), Cultural Studies (Richard Rorty and the New Left), and Sociology and Human Geography (Pathways to Work). Now, rather than just having a vague sense of knowing that I did these things, I can now finally find the receipts! 
+
+As a first intellectual dividend of my Claudic Archivism, I'd like to present the following fruits of unearthing something I did during my PhD: I made a simple agent-based model while learning R. 
+
+**Declaration: Most of the content below, including the updated interactive python version, and aside from my original R script, was written by Claude. I asked for a 'placeholder' `index.qmd` file. Once again it underpromised and overdelivered.**
+
+## The Original
+
+In 2007, during the first year of my PhD at the University of York, I wrote a short R script called `CommunityAgent.r`. Its opening comment was simply: *"to show the benefits of welfare"*.
+
+The idea was simple. Imagine 150 people arranged in a ring. Each person receives a random number of "resource units" — food, money, opportunities — drawn from a Poisson distribution. Some get lucky and receive plenty. Others get nothing. The question: what happens if people share with their neighbours?
+
+The script implemented a nearest-neighbour redistribution rule: if you have less than your richest neighbour, they give you one unit. No central authority, no means testing, no bureaucracy. Just: *help the person next to you if you have more*.
+
+The result was striking. The total resources don't change — redistribution is zero-sum — but the probability of *destitution* (receiving nothing) drops dramatically.
+
+Here is the original R code, written in 2007:
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "CommunityAgent.r (2007)"
+{{< include CommunityAgent.r >}}
+```
+
+## The Interactive Version
+
+Nearly twenty years later, I revisited this idea and built an interactive version. The simulation below lets you:
+
+- **Adjust average resources (λ)** using the slider — from scarcity (λ=0.5) to abundance (λ=4.0)
+- **Introduce spatial drought** using the dropdown — forcing a proportion of agents to receive nothing, regardless of the average
+
+Three scenarios are shown side by side:
+
+1. **Individualism** — no sharing, each agent keeps what they receive
+2. **Mutual Aid** — nearest-neighbour sharing on the ring
+3. **Local Sharing + State** — mutual aid first, then surplus above 3 is collected and redistributed to anyone still destitute. The gold square in the centre shows resources retained by the state after helping the destitute.
+
+Red agents are destitute (0 resources). The numbers show each agent's resource count.
+
+```{=html}
+<iframe src="welfare-simulation.html" width="100%" height="870px" frameborder="0"></iframe>
+```
+
+## What the Simulation Shows
+
+At λ=2 (the default), typically 15-20% of agents experience destitution under individualism. With local sharing alone, this drops to near zero. The state adds little in the random scenario because local sharing is already effective.
+
+The **drought scenario** is where the argument for state coordination becomes clear. Set the dropdown to 30% drought. Now a contiguous block of agents receives nothing. Local sharing helps agents at the *edges* of the drought zone — their neighbours have surplus to share. But agents in the *middle* of the drought zone are surrounded by other destitute agents. They have no wealthy neighbours. Local sharing can't reach them.
+
+The state can. By collecting surplus from anywhere on the ring and redistributing to the poorest regardless of location, it breaks the locality constraint. This is the hierarchical argument for welfare: not that local mutual aid is bad, but that it has structural limits that a coordinating agent can overcome.
+
+## The Hierarchical Argument
+
+The simulation builds a layered case:
+
+1. **Individualism fails** — random allocation produces avoidable destitution
+2. **Mutual aid helps** — local sharing dramatically reduces destitution
+3. **But mutual aid has limits** — it can't solve spatially concentrated deprivation
+4. **State coordination addresses the gap** — collecting surplus and redistributing across distance
+
+Each layer is strictly additive. The state model starts with mutual aid (the same sharing happens first), then adds redistribution of remaining surplus. It cannot make anyone worse off than mutual aid alone.
+
+The gold square in the centre — the state entity — also shows something important: the state often retains surplus *after* helping the destitute. This surplus could fund public goods, infrastructure, or reserves against future shocks. The state isn't just a redistribution mechanism; it's a collective savings vehicle.
+
+## From 2007 to 2026
+
+The original R script was 60 lines. The interactive Python version is about 200. But the core insight hasn't changed: sharing reduces destitution, and the more structured the sharing, the fewer people fall through the gaps.
+
+What has changed is the ability to *show* this interactively — to let someone drag a slider and watch red dots disappear. The argument becomes visceral rather than abstract.
+
+---
+
+*The original `CommunityAgent.r` was recovered from a DVD backup of my PhD working directory, dated January 2008. It was written in R before I had discovered ggplot2, when results were still being copied to Excel via `writeClipboard()`. The interactive version was built with Python and Plotly in March 2026, with assistance from Claude.*
