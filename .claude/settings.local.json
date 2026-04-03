@@ -12,7 +12,12 @@
       "Bash(quarto render:*)",
       "Bash(git fetch:*)",
       "Bash(git merge:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(quarto publish gh-pages --no-prompt)",
+      "Bash(ls /Users/JonMinton/repos/quarto-blog/jon-blog/.github/workflows/ 2>/dev/null; echo \"exit: $?\")",
+      "Bash(mkdir -p posts/handdrawn-stats/ai-and-agentic-ai && pdftoppm -png -r 300 \"/Users/JonMinton/Downloads/AI and AAI.pdf\" posts/handdrawn-stats/ai-and-agentic-ai/page)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
