@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-04-09">
+
+<title>Jon Minton’s Blog - The Guano Guild (v3)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Guano Guild (v3)">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Guano Guild (v3)</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">fiction</div>
+                <div class="quarto-category">story</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 9, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="the-guano-guild" class="level1">
+<h1>The Guano Guild</h1>
+<hr>
+<section id="scene-1-the-descent" class="level2">
+<h2 class="anchored" data-anchor-id="scene-1-the-descent">Scene 1: The Descent</h2>
+<p>The torchlight caught the edge of Marga’s shovel as she drove it into the mound. The smell was beyond description — beyond even memory, because the nose learned to forget between shifts, and each return to the deep chamber was a fresh education in revulsion.</p>
+<p>“Steady,” whispered Aldric from behind her. “She’s sleeping left-side. Stay right and we’ll fill eight bags before the turn of the hour.”</p>
+<p>They moved in practised formation: Marga shovelling, Kael holding the waxed sacks open, Aldric watching the dragon’s flank for any change in the rhythm of its breathing. The creature lay curled around a hillock of gold coins and gemstones that glittered obscenely in the torchlight. None of them spared it a glance.</p>
+<p>Kael tied off the sixth sack and winced as the knot squelched under his fingers. “Lovely,” he murmured. “Another day in paradise.”</p>
+<p>“Quiet,” said Aldric. Not unkindly. They had all said worse.</p>
+<p>The dragon’s breath hitched. All three froze. A long, rattling exhale, and the flank settled again. Marga resumed shovelling.</p>
+<p>By the time they emerged into grey daylight, the cart was heavy and the smell had become, as it always did, a kind of nothing — a thing so constant it erased itself. Kael drove. Marga sat on the back with her boots hanging off the edge, watching the lair entrance shrink behind them.</p>
+<p>“Same time Thursday?” said Aldric.</p>
+<p>“Same time Thursday.”</p>
+<hr>
+</section>
+<section id="scene-2-the-fall" class="level2">
+<h2 class="anchored" data-anchor-id="scene-2-the-fall">Scene 2: The Fall</h2>
+<p>Six months earlier, and a different kind of party entirely.</p>
+<p>Torben’s company had come for the gold. Five swords, one mage, one dwarf — standard heavy composition for a lair raid. Vesser the mage and Grundrak the sapper had argued about the approach for an hour before they’d even entered. They argued about most things. Vesser favoured diversion and concealment; Grundrak favoured structural assessment and controlled demolition. They had been colleagues long enough to have worn grooves in each other’s patience.</p>
+<p>The split was standard: forty per cent to Torben as principal, ten each to the rest after guild fees. The dragon was a young one — a Greyscale, maybe eighty years, probably sluggish after its winter feeding. Torben had done three raids before. He knew the pattern: move fast, fill the packs, get out before it wakes. If it wakes, the mage buys time. Simple.</p>
+<p>They were twenty minutes in and the packs were half full when Dalla lost her footing.</p>
+<p>It wasn’t heroic. She stepped back from the hoard, her heel found something soft, and she went down hard on her back into a sloping trench of dragon dung. The noise she made — half gasp, half retch — echoed off the chamber walls.</p>
+<p>The dragon opened one eye.</p>
+<p>What followed was not a battle. It was a scramble, graceless and panicked, people abandoning their packs and running for the passage while the Greyscale lifted its head with the drowsy irritation of something not yet fully committed to violence. Dalla was last out, coated from shoulder to boot in a thick, greenish-black paste, gagging as she ran.</p>
+<p>They made camp a mile from the lair. Torben did a headcount. All present. No packs. No gold. A total loss.</p>
+<p>“Burn those clothes,” he told Dalla. “I can’t think with that smell.”</p>
+<p>Dalla stripped down to her undershirt and threw the whole sodden bundle onto the campfire.</p>
+<p>What happened next, none of them were prepared for. The fire, which had been a modest thing of dry sticks and bracken, erupted. Not gradually — violently. The flames leapt to three times their height, blazing white at the core, hot enough to drive them all back six paces. The leather of Dalla’s jerkin didn’t smoulder; it was simply gone. The dung burned like nothing any of them had ever seen.</p>
+<p>It burned for four hours. Long after the clothes were ash, long after the sticks beneath were consumed, the residue of what had been on Dalla’s clothing kept burning — steady, white-hot, seemingly inexhaustible relative to its volume.</p>
+<p>They sat around it in silence for a long time. Then two people spoke at once.</p>
+<p>“That’s not possible,” said Vesser.</p>
+<p>“How much of that was in the trench?” said Grundrak.</p>
+<p>Vesser stood and walked to the fire’s edge. He held out his hand, palm down, and closed his eyes. The diagnostic gesture was familiar to anyone who’d worked with mages — reading the energy signature, tracing the source.</p>
+<p>“There’s no magical residue,” he said slowly. “This is purely thermogenic. Combustion without enchantment.” He said it the way a priest might say <em>there is no God here</em>.</p>
+<p>Grundrak was not listening to Vesser. Grundrak was on his knees beside the fire with a stick, scraping residue from a stone, holding it to the flames, watching it catch. He did this three times. Each time the fleck ignited with the same clean, white intensity.</p>
+<p>“Dalla,” he said. “How deep was the trench?”</p>
+<p>“I don’t know. Deep. I sank to my waist.”</p>
+<p>Grundrak looked at Torben. “We need to go back.”</p>
+<p>“To the lair?” Torben half-laughed. “We nearly —”</p>
+<p>“Not for the gold.”</p>
+<hr>
+</section>
+<section id="scene-3-the-trials" class="level2">
+<h2 class="anchored" data-anchor-id="scene-3-the-trials">Scene 3: The Trials</h2>
+<p>Grundrak returned to the lair alone the next morning with a handcart, a set of clay sample jars, and a damp cloth tied over his nose and mouth. The Greyscale was sleeping. He filled twelve jars in twenty minutes and left without incident. The dragon did not stir. It had, he noted, no reason to. He was taking nothing it valued.</p>
+<p>He set up the testing ground on a flat stretch of shale half a mile from camp. Twelve jars. Twelve controlled burns. He measured flame height with a knotted rope, duration with a sandglass, and heat intensity by the distance at which a strip of pig hide began to curl. He recorded everything in the small leather notebook he used for geological surveys, in the same neat columns he used for ite compositions and yield estimates.</p>
+<p>The results were consistent. A single jar — perhaps a quarter-pound of dung — burned hotter and longer than twenty pounds of seasoned hardwood. The energy density was, by any measure he had, absurd.</p>
+<p>Torben was persuadable. Dalla was enthusiastic. The swords were indifferent — they were paid for protection, and one job was much like another. Vesser was quiet, which Grundrak had learned to read as opposition gathering its arguments.</p>
+<p>The argument came that evening.</p>
+<p>“You’re proposing we abandon a proven revenue model,” said Vesser, “for a substance we don’t understand, on the basis of twelve jars and a campfire.”</p>
+<p>“Fourteen burns,” said Grundrak. “Consistent results across all fourteen.”</p>
+<p>“Consistent results in uncontrolled conditions with improvised equipment. You don’t have a calorimeter. You don’t have a thaumic spectrometer. You have a sandglass and some pig hide.”</p>
+<p>“And results.”</p>
+<p>Vesser proposed the trials, and Grundrak understood immediately that this was a trap dressed as fairness. The mage would set the terms, choose the tests, and demonstrate that <em>real</em> power — controllable, refined, understood — came from magical sources. The dung would be shown to be a curiosity. An accelerant, perhaps. A novelty. Not a replacement.</p>
+<p>“Fair enough,” said Grundrak. “Side by side.”</p>
+<p>They ran the trials over three days on the shale flat, with Torben as witness.</p>
+<p><strong>Test one: sustained heat.</strong> Vesser maintained a fire-conjuration at forge temperature for six hours. It was, Grundrak admitted, impressive — a steady, clean heat that Vesser modulated with small precise gestures, adjusting output the way a smith works a bellows. At the end of six hours, Vesser was pale and shaking and had to sit down. Grundrak lit a single compressed brick of dried dung. It reached forge temperature in four minutes and maintained it, unattended, for nine hours. When it finally guttered, Grundrak was asleep. He’d grown bored and turned in.</p>
+<p><strong>Test two: peak output.</strong> Vesser gathered himself for an hour in meditation, then produced a single concentrated blast that scorched a boulder black and cracked it along an existing fault line. It was dramatic. It was the kind of thing that won battles and made reputations. Vesser leaned on his staff afterward, breathing hard. Grundrak packed a clay pot with guano, sealed it with a wax plug, set a slow fuse, and retreated. The detonation shattered the boulder into gravel and left a crater where it had stood. Vesser stared at the crater in silence for a long time.</p>
+<p><strong>Test three: endurance.</strong> This was the test Vesser had insisted on, and the one he believed would settle things. “Power is nothing without sustainability,” he said. “Anyone can start a fire. The question is whether you can sustain a complex, responsive energy output over an extended period.” He proposed a continuous trial: maintain operational-level power output for as long as possible. Vesser began at dawn. By midday his hands were trembling. By late afternoon his nose was bleeding — a sign, well known among mages, of channelling beyond safe limits. He kept going. There was something of Boxer in it: a creature of genuine ability and genuine pride driving itself past breaking point because the alternative was obsolescence. Grundrak watched with more sympathy than he’d expected to feel.</p>
+<p>Vesser collapsed at dusk. Dalla caught him before he hit the ground. Eighteen hours of sustained output. It was, by any standard of magical practice, extraordinary.</p>
+<p>Grundrak’s brick was still burning from that morning. He hadn’t touched it since lighting it.</p>
+<p>Vesser did not speak for two days. When he did, it was to ask Grundrak a question.</p>
+<p>“The energy density. You said a quarter-pound outperforms twenty pounds of hardwood.”</p>
+<p>“Consistently.”</p>
+<p>“What’s the ratio for a full-grown dragon’s daily output against a mage at peak sustained channelling?”</p>
+<p>Grundrak had already done the calculation. He said the number.</p>
+<p>Vesser closed his eyes. Then he opened them and said: “Show me the lair.”</p>
+<hr>
+</section>
+<section id="scene-4-the-siege-of-arrath-keep" class="level2">
+<h2 class="anchored" data-anchor-id="scene-4-the-siege-of-arrath-keep">Scene 4: The Siege of Arrath Keep</h2>
+<p>The siege had lasted forty days. Arrath Keep sat on a granite bluff, and its walls were thick, and the defenders had water from a deep well and grain enough for two more months. Lord Catteral’s army had tried sappers, rams, scaling ladders. The walls held. Morale was rotting.</p>
+<p>The barrels arrived on the forty-first day, on a cart that stank so badly the horses pulling it had to be blinkered and led by hand. The carter, a lean woman with a Guild medallion around her neck, supervised the unloading personally.</p>
+<p>“Pack it around the base stones,” she told the sappers. “Tightly. Then I would suggest you withdraw to a considerable distance.”</p>
+<p>The sappers looked at Catteral. Catteral looked at the barrels. He had paid more for them than for the rest of his campaign provisions combined.</p>
+<p>“Do as she says.”</p>
+<p>The detonation took out a forty-foot section of wall and most of the gatehouse. Rubble rained for a quarter of a mile. The well cracked. Arrath Keep fell by nightfall.</p>
+<p>Catteral found the carter afterward, sitting on an intact piece of battlement, eating an apple.</p>
+<p>“I’ll need more,” he said. “For the southern campaign.”</p>
+<p>“You and everyone else, my lord. I’ll speak to the Guild about your account.”</p>
+<hr>
+</section>
+<section id="scene-5-normalisation" class="level2">
+<h2 class="anchored" data-anchor-id="scene-5-normalisation">Scene 5: Normalisation</h2>
+<p>Within a decade, the word <em>guano</em> — borrowed from the Dwarfish, who had known of the substance for centuries but considered it beneath serious discussion — entered common use. Within two decades, it was in the language the way <em>coal</em> or <em>timber</em> were: a word that meant nothing more remarkable than itself.</p>
+<p>The mills came first. A single compressed guano brick, no larger than a man’s fist, could drive a waterwheel mechanism for a week. The foundries followed, then the refineries, then the manufactories. Cities that had been market towns became something else — dense, loud, productive, and subject to a persistent smell that newcomers found unbearable and residents claimed not to notice.</p>
+<p>The Guild grew with the industry it had created. What had been Grundrak’s small prospecting concern — he and Dalla and Torben, negotiating access rights with a Greyscale that seemed genuinely indifferent to their presence — became a network of licensed collectors operating across every known lair in the Midlands. Guild membership required a three-year apprenticeship, a strong stomach, and a willingness to sign a waiver of considerable length.</p>
+<p>The engineering advances came quickly. Early collection had been crude — shovels, sacks, handcarts — but within a few years the Guild had developed plumbed drainage systems for the larger lairs: stone channels lined with fired clay, sluiced with diverted river water, feeding into sealed collection tanks outside the lair entrance. The dragons tolerated this, and in some cases seemed to prefer it. A clean lair was a comfortable lair, and comfortable dragons produced reliably. The infrastructure grew around them the way a city grows around a river — gradually, then all at once, until the original feature was almost invisible beneath what it supported.</p>
+<p>Vesser, true to the trajectory of his capitulation, became the Guild’s first Director of Applied Research — studying guano’s properties with the rigorous methodology he had once reserved for thaumic systems. His former colleagues at the Mages’ Collegium adapted less gracefully. The Collegium issued a formal position paper in the third year arguing that guano dependence represented a strategic vulnerability, which was true, and that magical energy remained superior in flexibility and precision, which was also true, and that the kingdom would regret abandoning proven magical infrastructure, which remained to be seen. The paper was widely read and politely ignored.</p>
+<p>Within a generation, working mages were specialists and consultants, not the primary energy source of civilisation. Their power was real. It simply no longer mattered in the way it had. Those who remained in pure research increasingly turned their attention to a single obsession: synthesising guano. If the substance’s extraordinary energy density was, as Vesser had confirmed, purely thermogenic — no magical signature, no enchantment — then in principle it should be replicable through alchemical means. The Collegium’s research wing, once devoted to high thaumaturgy, was quietly redesignated the Department of Applied Alchemical Synthesis. Its corridors smelled of sulphur and failure. Decades of methodical effort produced a library of meticulous dead ends: compounds that burned too fast, too slow, too violently, or not at all. The dragon’s digestive process — whatever strange metabolism converted pork and beef into a substance of such absurd potency — remained stubbornly irreproducible. The alchemists kept working. They had, after all, nothing else left to work towards.</p>
+<p>Dragon-slaying was outlawed by royal decree in the eleventh year. The penalty was death. This was not controversial. Killing a dragon had become, in the public imagination, something like collapsing a coal mine — not immoral in the old sense, but ruinously stupid. The remaining Dragon Knights, those few who still clung to the old code, were regarded with the kind of embarrassed pity reserved for men who had outlived their purpose and not yet noticed.</p>
+<p>Children born in the factory towns had never known a world without guano. To them, dragons were not monsters. They were not even animals, exactly. They were something closer to landscape — a feature of the world that produced what the world needed, as rivers produced water and forests produced timber. That the landscape occasionally ate someone was accepted in the way that mining collapses and factory fires were accepted: the cost of progress, priced in.</p>
+<hr>
+</section>
+<section id="scene-6-the-dragons-lament" class="level2">
+<h2 class="anchored" data-anchor-id="scene-6-the-dragons-lament">Scene 6: The Dragon’s Lament</h2>
+<p>I have been alive for four hundred and twelve years, and I will tell you plainly: the last thirty have been the most comfortable and the least satisfying.</p>
+<p>They feed me pork. Extraordinary quantities of pork. Whole herds arrive on carts twice a week, already slaughtered, cleaned, and arranged in a manner that I believe they consider presentable. Sometimes beef. Occasionally mutton, if the northern trade routes are disrupted. But mostly pork. Always pork.</p>
+<p>I am told — because they talk freely in my presence, having decided some years ago that I am essentially furniture with a digestive system — that the pork is “optimised for caloric throughput.” I do not know precisely what this means, but I know what it produces, which is a great deal of dung, and a great deal of dung is what they have come for.</p>
+<p>I understand the arrangement. I am not stupid. They feed me, I produce, they collect, the world turns. It is, by any rational measure, an improvement on the old ways. I no longer wake to find small angry men trying to stab me in the eye. No one attempts to steal my gold, which frankly was always more trouble than it was worth — you cannot eat gold, and it makes a poor mattress despite what the poets claim. The humans provide sanitation. Veterinary care, even. They have installed a drainage system beneath my sleeping chamber — a sort of stone latrine, channelled and sluiced, so that my waste is carried away without my having to move. The grating has been reinforced twice. They did not explain why, and I did not ask, though I noticed that the second reinforcement came shortly after the veterinary woman began using words like “portion control” in a tone that suggested she did not expect me to understand them.</p>
+<p>I understand them.</p>
+<p>My lair is almost clean now. This was not always so. When they first came with their shovels and their sacks, the chamber floor was layered with centuries of accumulation — compressed strata of dung, old and dense, built up in the way that peat builds on a moor. They have been methodical in its removal. The fresh waste goes through the drainage system, but the old deposits — the deep, dark, compacted layers — these they dig out by hand, and I am told these ancient bricks command the highest prices. Something about density. Something about time and compression producing a more concentrated form. I would not know. I only know that the floor of my chamber is now visible for the first time in my memory, and that the stone beneath is smoother than I expected, and that the space feels larger and emptier than it should.</p>
+<p>They come less often now. The drainage system, I suppose. When the shovelling crews first began, they came twice a week — Marga and her people, regular as the tides. Then it was weekly. Now it is fortnightly, sometimes less, and only to inspect the channels and chip away at whatever remains of the old strata. Last month Marga brought only Aldric. They were done in two hours. The lair, she said to him — not to me, never to me — was “nearly played out.” She meant the old deposits. The new waste, channelled and sluiced, no longer requires a crew. It requires a pipe.</p>
+<p>And yet.</p>
+<p>I am fat. There is no more diplomatic way to say it. My belly touches the floor of my chamber when I walk, which I rarely do, because walking has become effortful and pointless. Where would I go? The food comes to me. My waste is taken away. I sleep, I eat, I produce. I am, I have come to realise, a factory.</p>
+<p>My joints ache. My flame, once a thing of considerable pride — I could melt granite at sixty paces in my prime — now gutters and wheezes like an old man’s cough. I breathe hard after climbing to my ledge. The veterinary woman visits quarterly now. On her last visit she brought a glass vial and asked, with the practised directness of someone who has learned to speak simply to creatures she considers simple, whether she might “take a sample.” She meant my urine. I let her, because I have found that cooperation is easier than the alternative, and because I was curious what she was looking for.</p>
+<p>She dipped a finger in it and tasted it. I found this remarkable. She found it informative.</p>
+<p>“Sweet,” she said to her assistant, a thin young man who wrote everything down. “Sweeter than last quarter.”</p>
+<p>The word she used was <em>mellituria</em> — honey-water, roughly, in the old Elvish medical terminology that humans have borrowed and mangled. I gathered from the conversation that followed — again, conducted as though I were a particularly large piece of furniture — that the sweetness of my urine correlates with some failure of my body to manage the quantities of pork I am being fed. She recommended, again, that I eat less. She also noted, in an aside to the assistant, that the urine samples were being “forwarded to the Confectioners’ Guild as per the standing arrangement.”</p>
+<p>I did not ask about this. But I have since observed that certain sweets — small, amber, translucent lozenges sold at extraordinary prices in the market towns — are advertised as containing “essence of drake.” I am given to understand that these are consumed exclusively by the wealthy, and that they are considered a great delicacy. I have no opinion on this except to note that my body is, apparently, producing luxury goods at both ends.</p>
+<p>I think about the old days more than I should. Not with nostalgia exactly — I am not sentimental, and the old days involved a good deal of tedium punctuated by violence, which is not as romantic as it sounds. But there was a quality to them. A sharpness. When a party of adventurers entered my lair, everything mattered: the angle of approach, the position of my tail, the timing of the first breath. I was <em>engaged</em>. Every sense had a function.</p>
+<p>Now my senses serve only to confirm that another cartload of pork has arrived.</p>
+<p>I find myself watching the collectors when they come — on those increasingly rare occasions when they come at all. Marga and her crew, usually. Efficient, professional, dull. They move around me as though I were a geographical feature. And I watch them, and I think: <em>you are made of meat.</em></p>
+<p>I don’t mean this aggressively. Or perhaps I do. It is difficult to parse one’s own appetites honestly when one has been subsisting on a managed diet of commercially reared livestock for the better part of three decades. But there is a difference between pork and wild game, between farmed meat and hunted meat, and I suspect — no, I know — that there is a difference between pork and <em>long pig</em>, as the old mercenaries used to call it. I remember the taste. Not fondly. But precisely.</p>
+<p>(Well, maybe <em>not without fondness</em>.)</p>
+<p>The veterinary woman told me to exercise. “Short flights,” she said. “Build up gradually. Perhaps some hunting, if the Guild approves the enrichment programme.”</p>
+<p>Hunting. Enrichment programme. These are the words they use.</p>
+<p>I flexed my wings yesterday for the first time in a year. The left one clicked. The membrane has thinned. But the wind was there, under the surface, waiting. And my legs, when I stood — truly stood, not the shuffling crouch that passes for movement these days — my legs remembered what they were built for.</p>
+<p>I have not decided anything. I want to be clear about that. The arrangement is, as I said, rational. The pork will come on Tuesday. Marga and her crew will come on Thursday — or perhaps next Thursday, or the one after that. The visits grow further apart. The old guano is nearly gone. The pipes handle the rest. Soon there will be no reason for them to come at all.</p>
+<p>This is, I am aware, the logical completion of the system. Efficient. Automated. No need for a human presence in my lair. I should welcome this. It is, after all, what optimisation looks like.</p>
+<p>But I am thinking about Thursdays differently than I used to. And there are fewer Thursdays left to think about.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
