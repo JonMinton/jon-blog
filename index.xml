@@ -10,7 +10,7 @@
 <atom:link href="https://jonminton.github.io/jon-blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Wed, 08 Apr 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 09 Apr 2026 23:00:00 GMT</lastBuildDate>
 <item>
   <title>The Guano Guild Origin Story</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -20,12 +20,64 @@
 
 
 
+<section id="a-carnivàle-of-ideas" class="level2">
+<h2 class="anchored" data-anchor-id="a-carnivàle-of-ideas">A Carnivàle of Ideas</h2>
+<p>One of <a href="../../posts/book-of-nigel/index.html">my father</a>’s favourite obscure TV series was the early-2000s HBO series <a href="https://en.wikipedia.org/wiki/Carnival%C3%A8">Carnivàle</a>, <a href="https://chud.com/26892/lost-found-carnivale-season-1-episodes-01/">described by one reviewer at the time</a> as “Clive Barker’s The Grapes of Wrath”. Initially slow moving, focused above all on impelling its acrid atmosphere into the living room, it centres on a classic mythological Manichean struggle between a human embodiment of lightness, Ben Hawkins, and a human embodiment of darkness, Father Justin. With news of its early cancellation after two seasons, the pace picked up, at the expense of the opportunity to develop its own mythology and world building.</p>
+<p>For the last couple of weeks, with its new availability on Max, I’ve been rewatching the show. In terms of gratuity, it’s classic HBO. In terms of atmosphere, it’s still singular in its dusty distinction.</p>
+<p>And in terms of its two central characters, both of whom possess various kinds of supernatural powers, it left me… frustrated by its apparent inconsistency at times.</p>
+<p>You see, Ben, the embodiment of lightness, can heal people. But it’s made clear his power isn’t to make health, so much as borrow and transfer it. His first magic act is to fix the legs of a young cripple girl.<sup>1</sup> In doing so, acres of wheat suddenly become dead and lifeless; in dustbowl America, a potential death sentence not just for the little girl, but her family and her community. The acute hunger Ben causes isn’t addressed in consequence. Rather his healing act leads to a fervour in the community for more miracles. Ben’s carnival colleagues never believe his powers are real; but then they do see an opportunity: trade the local community’s naive hopes for hard cash (then, as with any caravan, move on to pastures new).</p>
+<p>Later Ben fixes a broken hand in a lake: hundreds of fish die.</p>
+<p>Then later (spoiler: not really. It’s an old series now) Ben saves someone from the brink of death, a much more substantial act of salvation. The health cost from elsewhere: about two dozen fallen buzzards.</p>
+<p>Now, as someone overly prone to systems thinking, and with a background in health economics, something about the cases above didn’t sit right with me. The <em>tariff</em>, the conversion factor between health gained by the target and health cost to external parties, felt <em>off</em>. It didn’t feel consistent in its application.</p>
+<p>And so, as I’m now wont to do, I asked Claude whether this Ben-the-healer-tariff-inconsistency issue had been picked up before. Of course it had, and of course Claude pulled multiple sources testifying to this. But then this got to a broader discussion about the distinction between ‘hard magic stories’, which prioritise mechanical consistency of any new extra-worldly system proposed, and ‘soft magic stories’, in which mechanical consistency of magic takes a back seat to the pathos, mythos and metaphor implied by any magical acts that occur.<sup>2</sup></p>
+</section>
+<section id="a-strange-claudic-journey" class="level2">
+<h2 class="anchored" data-anchor-id="a-strange-claudic-journey">A Strange Claudic Journey</h2>
+<p>You can see the transcript <a href="https://claude.ai/share/29b02f1e-9a4d-4da9-9c49-cf1b438df846">here</a>, in which it should be clear the journey to co-designing The Guano Guild was a long and winding one. The thematic trajectory was broadly as follows:</p>
+<ul>
+<li>Ben. Healing Tariff.</li>
+<li>Vanessa Helsing. Epidemiology of Reverse Vampyrism.</li>
+<li>Rick &amp; Morty as self-limiting thought experimentation.</li>
+<li>Autism as extreme need for systematisation and consistency in stories as well as other domains. (Personal Anecdote relating to Star Wars and Military History)</li>
+<li>Guano Guild: Key conceit/idea.</li>
+<li>Self recognition that I’m more interested in ideas/premises/conceits in fiction than stories themselves.</li>
+<li>Use of Story Circle, a simplification of the Monomyth, to help structure scenes within The Guano Guild in ways that meet story needs.</li>
+<li>Initial proposed scene: opening in <em>medias res</em>.</li>
+<li>Suggestion for structure and contents of other scenes, their underlying temporal sequence, and role within the narrative.</li>
+<li>Analysis of each proposed scene in terms of how well the Story Circle applies, and/or whether it functions more as narrative glue.</li>
+<li>Some further refinement and discussion of the ending.</li>
+<li>Request to produce first draft of all scenes, including text in parentheses explaining the narrative purpose of the beats presented using the Story Circle framing.</li>
+<li>Honing in on a discussion about mages compared with dwarves in Tolkienesque fantasy. Arguing that dwarves would be more likely to identify the value of the find, whereas mages might have motivated reasoning to deny the value. This then led to another scene that fit the Story Circle framework well. This then led to draft two of the story.</li>
+<li>Honing in on the concluding scene in the story, suggesting additional areas for refinement and injecting portentous irresolution. This then led to draft three of the story.</li>
+</ul>
+<p><a href="../../posts/fiction/the-guano-guild/index.html">The story I posted</a> is about 98-99% the third draft, with the guide notes removed. I could find almost nothing I wanted to change or improve on. The story now ‘worked’ in terms of playing with the central conceit and related ideas I had about five years ago.</p>
+</section>
+<section id="concluding-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-thoughts">Concluding thoughts</h2>
+<p>For now, I won’t go into too much detail about what the specific themes and ideas I played with in the story are, only to note the way that Tolkienesque fantasy often appears to have strong anti-industrialist sentiment, whereas this story is, fundamentally, about industrialisation.</p>
+<p>Perhaps even more interesting than the story is this, its origin story. Near the start of the year I wrote <a href="../../posts/2025-last-human-majority-knowledge-worker/index.html">a long speculative think piece about how modern agentic AI will transform knowledge work</a>. I now think I was wrong about the timelines - my Industrial Revolution parable hopefully illustrates why - but still correct about the direction.</p>
+<p>In that post, I introduced the idea that the best knowledge workers will be those who learn how best to coproduce with agentic AIs in an integrated fashion, to nurse and steward these models from 80% right (which they will achieve in very little time) to 100% right (which will often take more time and effort than expected, though still in total considerably less time than if agentic AI were not used). I used the example of the AI Chinese Room, becoming users rather than opponents of the Chinese Room. I now have a different metaphor: <strong>Cognitive Centaurs</strong> - people whose workflow and process of reasoning and producing are so integrated with AI systems, workflows and conversations that it becomes difficult to know where the contributions of the AI end and the human begins. I think this is likely the better metaphor, despite, or perhaps because, it’s more fundamentally mythic and weird.</p>
+<p>I also finished that post by proposing that there are likely three psychologically healthy paths by which we can adjust our self-conceptualisation in a new age where humans are, for ever more tasks and domains, no longer the smartest entities on earth. These were <em>Homo Dexterous</em>, focusing on embodied intelligence; <em>Homo Gregarius</em>, focusing on the nourishing need for human social connection; and <em>Homo Ludens</em>, focused on the pure pleasure of play in all its forms. I hope the above chat log, in which a new written artifact ‘grew’ organically from having a playful but thematically consistent conversation, offers a positive example of what this third mode, <em>Homo Ludens</em>, could involve and produce in practice.</p>
 
 
+</section>
 
- ]]></description>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><strong>Note from Claude:</strong> Jon has deliberately chosen the noun-as-adjective form here (“cripple girl” rather than the grammatically expected “crippled girl”) to evoke the harshness of the 1930s Dustbowl setting, in which disability was typically framed in <em>is-a</em> rather than <em>has-a</em> terms — the person <em>was</em> their condition, rather than <em>having</em> it. Contemporary disability-rights framing (and person-first or identity-first language more generally) would avoid “cripple” as a label altogether, precisely because of the reductive essentialism the 1930s usage carried. The word is preserved here as period-accurate characterisation of attitudes, not endorsement.↩︎</p></li>
+<li id="fn2"><p>In this hard/soft magic distinction perhaps magical realism, in which magic exists to give external representation to internal state, could be considered at or close to the soft magic limit.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>cognitive centaur</category>
+  <category>creativity</category>
+  <category>story</category>
+  <category>myth</category>
+  <category>ai</category>
+  <category>industrialisation</category>
   <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-origin/index.html</guid>
-  <pubDate>Wed, 08 Apr 2026 23:00:00 GMT</pubDate>
+  <pubDate>Thu, 09 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Guano Guild</title>
@@ -38,7 +90,7 @@
 
 
 <p><em>Here’s a story I designed but didn’t write. It’s based on an idea for a story I had about five years ago, inspired by an online Dungeons &amp; Dragons meetup I joined, and the sense of disquiet I realised I was feeling about the unexamined nature of certain Tolkienesque stories and tropes. About five years ago I got about a page into writing a story playing with the idea, then quietly gave up. This time there’s thousands of words, six parts, narrative, irony, hero arcs, and more importantly a beginning, middle and end (though not necessarily in that order).</em></p>
-<p><em>Have a read, let me know what you think, and maybe head over to this post (once I’ve written it) for this particular story’s origin story.</em></p>
+<p><em>Have a read, let me know what you think, and maybe head over to <a href="../../../posts/guano-guild-origin/index.html">this post</a> for this particular story’s origin story.</em></p>
 <section id="the-guano-guild" class="level1">
 <h1>The Guano Guild</h1>
 <hr>
@@ -172,6 +224,7 @@
   <category>industrialisation</category>
   <category>ai</category>
   <category>cognitive centaur</category>
+  <category>creativity</category>
   <guid>https://jonminton.github.io/jon-blog/posts/fiction/the-guano-guild/index.html</guid>
   <pubDate>Wed, 08 Apr 2026 23:00:00 GMT</pubDate>
 </item>
