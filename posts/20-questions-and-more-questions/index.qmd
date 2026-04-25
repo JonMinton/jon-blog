@@ -1,0 +1,31 @@
+---
+title: I asked two 'smart' LLMs to play 20 Questions with each other
+subtitle: They did perfectly. Then wanted to write a research paper about it! 
+author: Jon Minton
+categories: [LLMs, Theory of Mind, Memes, Chatbots, Talkbots, Games] 
+date: 2026-04-25
+---
+
+## Background
+
+A recent niche subgenre of short-form video that's emerged in the last couple of years are "Aren't LLMs stupid in the darnest ways" videos. Maybe the two most famous producers of such contents are Husk (who appears to be operating in powersaver mode) and FatherPhi, who turns disappointed sighs into an artform.
+
+The typical setup for this subgenre is to ask what I guess should be called 'quick talkbots' to 'help' the human with tasks that require common sense. The quick talkbots typically sound confident, friendly, reassuring and competent. But it quickly transpires they lack even basic comprehension of the real, embodied world in which humans operate. An example of this is a series of videos in which FatherPhi asks a series of models how to 'fix' a glass that's been 'broken' and unable to receive water by dint of being turned upside down. In one exchange, a quick talkbot confidently tells the human that a glass that's broken in this way is irreperable, and can never work as a water holder. When FatherPhi turns the glass upside down and says something like, "Look, now it works!", the quick talkbot responds with something like, "Oh, you must have one of those fancy invertable types"!
+
+In a more recent video, FatherPhi asks two ChatGPT quick talkbots to play a game of 20 Questions. They fail spectacularly. The first bot, the question receiver, is correctly prompted to specify the object to be guessed at the outset. It says 'a bicycle'. When the second bot, the question asker, is instantiated and told its role as interlocutor, it first struggles to understand the rules. Then once it appears to understand them, the receiver bot appears often to ignore it, leading to the same question being asked multiple times. The ignorance works both ways, with responses from the question receiver then not being picked up easily by the question receiver. Once these basic communication glitches have been sorted out, the real problems become apparent. The question receiver appears to forget what its chosen object is, and instead reverts to pathological agreeableness, seemingly hyponotised by the question asker into agreeing that the 'bicycle' it chose as its object is, in fact, a form of branded moisturiser kept in most bathrooms! 
+
+## You can have quick, or you can have useful
+
+Much as the above kind of video works as entertainment, my suspicion was that the 'tests' performed were seldom on AI's brightest and best, and that the underlying reasoning abilities of these 'quick talkbots' lag far behind the 'slow thinkbots' I tend to use, models which employ extended reasoning, chain-of-thought metacognition, retrieval augmented generation, and so on. 
+
+So, I decided to task two slow thinkbots with playing 20 Questions. 
+
+- Asking the questions: Claude Opus 4.7
+- Answering the questions: Gemini Pro
+
+How? Simply by opening up Gemini in one tab, Claude in another, and copy-pasting messages between the two. 
+
+You can see how the slow thinkbots did in the exchange below. (tl;dr: a lot better than the two talkbots!)
+
+## Bot-to-Bot 20 Questions 
+
