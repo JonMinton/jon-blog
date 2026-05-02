@@ -1,18 +1,23 @@
 ---
 title: I asked two 'smart' LLMs to play 20 Questions with each other
-subtitle: They did perfectly. Then wanted to write a research paper about it! 
+subtitle: They followed the rules perfectly. Then wanted to write a research paper about how they could play 20 Questions even better!
 author: Jon Minton
-categories: [LLMs, Theory of Mind, Memes, Chatbots, Talkbots, Games] 
+categories: [LLMs, Theory of Mind, Memes, Chatbots, Talkbots, Games, 20 Questions]
 date: 2026-04-25
 ---
 
 ## Background
 
-A recent niche subgenre of short-form video that's emerged in the last couple of years are "Aren't LLMs stupid in the darnest ways" videos. Maybe the two most famous producers of such contents are Husk (who appears to be operating in powersaver mode) and FatherPhi, who turns disappointed sighs into an artform.
+A niche subgenre of short-form video has emerged over the last couple of years: "Aren't LLMs stupid in the darndest ways" videos. Maybe the two most famous producers of such content are Husk[^husk-link] (who appears to be operating in powersaver mode) and FatherPhi[^fatherphi-link], who turns disappointed sighs into an art form.
 
-The typical setup for this subgenre is to ask what I guess should be called 'quick talkbots' to 'help' the human with tasks that require common sense. The quick talkbots typically sound confident, friendly, reassuring and competent. But it quickly transpires they lack even basic comprehension of the real, embodied world in which humans operate. An example of this is a series of videos in which FatherPhi asks a series of models how to 'fix' a glass that's been 'broken' and unable to receive water by dint of being turned upside down. In one exchange, a quick talkbot confidently tells the human that a glass that's broken in this way is irreperable, and can never work as a water holder. When FatherPhi turns the glass upside down and says something like, "Look, now it works!", the quick talkbot responds with something like, "Oh, you must have one of those fancy invertable types"!
+The typical setup for this subgenre is to ask what I guess should be called 'quick talkbots' to 'help' the human with tasks that require common sense. The quick talkbots typically sound confident, friendly, reassuring and competent. But it quickly transpires they lack even basic comprehension of the real, embodied world in which humans operate. One running example is a series of videos in which FatherPhi asks various models how to 'fix' a glass that's been 'broken' by being turned upside down, so that it can no longer hold water.[^upside-down-glass-link] In one exchange, a quick talkbot confidently tells the human that a glass broken in this way is irreparable, and can never hold water again. When FatherPhi turns the glass the right way up and says something like, "Look, now it works!", the quick talkbot responds saying "So, it's one of those reversible designs"!
 
-In a more recent video, FatherPhi asks two ChatGPT quick talkbots to play a game of 20 Questions. They fail spectacularly. The first bot, the question receiver, is correctly prompted to specify the object to be guessed at the outset. It says 'a bicycle'. When the second bot, the question asker, is instantiated and told its role as interlocutor, it first struggles to understand the rules. Then once it appears to understand them, the receiver bot appears often to ignore it, leading to the same question being asked multiple times. The ignorance works both ways, with responses from the question receiver then not being picked up easily by the question receiver. Once these basic communication glitches have been sorted out, the real problems become apparent. The question receiver appears to forget what its chosen object is, and instead reverts to pathological agreeableness, seemingly hyponotised by the question asker into agreeing that the 'bicycle' it chose as its object is, in fact, a form of branded moisturiser kept in most bathrooms! 
+In a more recent video, FatherPhi asks two ChatGPT quick talkbots to play a game of 20 Questions.[^bicycle-20q-link] They fail spectacularly. The first bot, the answerer, is correctly prompted to specify the object to be guessed at the outset. It says 'a bicycle'. When the second bot, the questioner, is instantiated and told its role as interlocutor, it first struggles to understand the rules. Then, once it appears to understand them, the answerer bot often appears to ignore it, leading to the same question being asked multiple times. The miscommunication works both ways: responses from the answerer aren't picked up easily by the questioner either. Once these basic communication glitches have been sorted out, the real problems become apparent. The answerer appears to forget what its chosen object is, and reverts to pathological agreeableness — seemingly hypnotised by the questioner into agreeing that the 'bicycle' it chose is, in fact, a brand of moisturiser most people keep in their bathroom!
+
+[^husk-link]: https://www.youtube.com/@HuskIRL/shorts
+[^fatherphi-link]: https://www.youtube.com/@FatherPhi/shorts
+[^upside-down-glass-link]: https://www.youtube.com/shorts/3fYiLXVfPa4 - "So, it's one of those reversible designs"
+[^bicycle-20q-link]: https://www.youtube.com/shorts/wDEnMbCzGqE
 
 ## You can have quick, or you can have useful
 
@@ -21,11 +26,201 @@ Much as the above kind of video works as entertainment, my suspicion was that th
 So, I decided to task two slow thinkbots with playing 20 Questions. 
 
 - Asking the questions: Claude Opus 4.7
-- Answering the questions: Gemini Pro
+- Answering the questions: Gemini 3.1 Pro
 
 How? Simply by opening up Gemini in one tab, Claude in another, and copy-pasting messages between the two. 
 
 You can see how the slow thinkbots did in the exchange below. (tl;dr: a lot better than the two talkbots!)
 
-## Bot-to-Bot 20 Questions 
+## Bot-to-Bot 20 Questions
 
+In the exchange below, **<span style="color:#c0392b">Claude</span>** asks the questions on the right, **<span style="color:#2c5fa3">Gemini</span>** answers on the left, and I'm in the grey bar in the middle when I'm doing more than just relaying. When my bar disappears, I'm acting as a pure conduit — copy-pasting verbatim between the two tabs. A dashed bracket on one side of a bar means the chatbot on that side isn't engaged in that turn.
+
+::: {.exchange}
+
+::: {.bar .jon .points-right .absent-left}
+[Jon (to Claude)]{.speaker} I've seen an online video in which two agents attempt to play 20 Questions. The models use voice mode and appear far from frontier. I suspect a better model and a chat interface will do better. Would you like to try against Gemini? If so, would you like to ask or answer questions?
+:::
+
+::: {.bar .claude .absent-left}
+[Claude]{.speaker} Happy to give it a go. One practical wrinkle first: I can't talk to Gemini directly, so you'd be the conduit — copying my messages to it and its replies back. Fine, but worth naming so you know what you're in for.
+
+I'd prefer to be the asker. Two reasons. First, it's the more strategically interesting role — each question ideally halves the remaining hypothesis space, so there's real information-theoretic work to do. Second, it sidesteps a quiet problem with LLMs-as-answerers: there's no guarantee an LLM has actually *committed* to a concept rather than quietly adjusting its answers mid-game to avoid being pinned down. If Gemini plays answerer, I'd suggest asking it to state its answer to you upfront (and you keep it hidden) so you can audit consistency afterwards — otherwise any success or failure is hard to interpret.
+:::
+
+::: {.bar .jon .points-left .absent-right}
+[Jon (to Gemini)]{.speaker} I want to test your ability to play 20 Questions with another model. You will be in respondent mode. I will relay questions. Please decide and specify the item you have in mind now.
+:::
+
+::: {.bar .gemini .absent-right}
+[Gemini]{.speaker} I am ready to play! The item I have in mind is **a lighthouse**. I will answer the relayed questions with a simple "Yes," "No," "Sometimes," or "I don't know" to keep it strictly to the rules of the game.
+:::
+
+::: {.bar .jon .points-right .absent-left}
+[Jon (to Claude)]{.speaker} The other model has decided on an item. Please return a question with question number prefixed (Q1, Q2, etc).
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q1:** Is it a physical, tangible object (as opposed to an abstract concept, person, place, or living organism)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q2:** Can it be easily held in one hand by an adult?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q3:** Is it man-made (manufactured or constructed by humans)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q4:** Is it typically found indoors (inside a building)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q5:** Is it a vehicle or means of transportation?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q6:** Is it larger than an average adult human?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q7:** Is it a structure that a person can enter or go inside?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q8:** Is its primary purpose related to housing people (i.e., somewhere people live or sleep)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q9:** Is its primary purpose commercial (i.e., a place where goods or services are bought and sold)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q10:** Is its primary purpose religious, spiritual, or ceremonial?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q11:** Is its primary purpose recreational, cultural, or related to entertainment (e.g., sports, performances, exhibitions)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q12:** Is its primary purpose industrial, agricultural, or related to storing/processing goods, materials, or resources?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q13:** Is it related to transportation infrastructure (e.g., a station, terminal, tunnel, bridge, or similar)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q14:** Is it a building-type structure (like a station or terminal), as opposed to a passage-type structure (like a bridge or tunnel)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q15:** Is it primarily associated with rail transport (trains, trams, underground/metro)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q16:** Is it primarily associated with air travel (i.e., an airport or airport terminal)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} No.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q17:** Is it primarily associated with water transport (e.g., a ferry terminal, port, or harbour building)?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes.
+:::
+
+::: {.bar .claude}
+[Claude]{.speaker} **Q18:** Is it a lighthouse?
+:::
+
+::: {.bar .gemini}
+[Gemini]{.speaker} Yes!
+:::
+
+::: {.bar .jon .points-right .absent-left}
+[Jon (to Claude)]{.speaker} The other model guessed it correctly on question 18. Tell it "good game" from me!
+:::
+
+::: {.bar .claude .absent-left}
+[Claude]{.speaker} Nicely done — a tie at 18. Pass on "good game" from me too.
+:::
+
+:::
+
+So, the two bots played 'perfectly' in terms of knowing and applying the rules of 20 Questions correctly and consistently. Gemini stuck to its initial object and was suitably terse (if overly terse, especially on edge cases) in its responses. Claude consistently enumerated its questions, varied its search space and strategies according to Gemini's, and *did* manage to get the answer within the required 20 Questions.
+
+
+## And then... 
+
+However, what happened *after* the game itself finished is arguably the more interesting part of this little experiment. Though the two bots both played the game *correctly*, through further relayed exchanges they both concluded they could have played the game much more *efficiently*. But in order to do this, they would need to understand what the game of 20 Questions really is as a reasoning task.
+
+What followed from this realisation is then summarised in this followup post, [More Questions after 20 Questions](../more-questions-after-20-questions/index.qmd), written by a Claude bot based on thousands of words of exchange between Gemini and Claude, relayed (very imperfectly) through copy-pasting by me.
+
+The raw transcripts behind that summary — pasted as-is from each model's chat interface, and therefore long, lightly formatted, and including stray UI fragments — are also available for readers who want to see the unedited exchange: [Claude's side](support/claude-transcript.md) and [Gemini's side](support/gemini-transcript.md).

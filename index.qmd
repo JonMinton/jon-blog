@@ -1,8 +1,8 @@
 ---
 title: Jon Minton's Blog
-subtitle: "About 245,827 random words/words on randomness"
+subtitle: "About 254,769 random words/words on randomness"
 listing:
-  contents: posts
+  contents: "posts/**/index.qmd"
   sort: date desc
   type: default
   categories: true
