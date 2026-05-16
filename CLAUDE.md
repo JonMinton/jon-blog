@@ -2,37 +2,44 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## SAFETY: Branch Check and Sync
+## Expected Workflow
 
-**CRITICAL SAFETY REQUIREMENT - Run at the start of EVERY session:**
+This is Jon's personal blog. The common task is turning some kind of source material into a new blog post:
 
-At the beginning of each session, Claude Code agents MUST:
+- **Most often:** a PDF exported from a reMarkable device (handwritten notes/drafts) lands in the repo or in `~/Downloads`. The job is to convert it into `posts/[post-title]/index.qmd` with appropriate YAML frontmatter (title, author, date, categories), sensible Markdown formatting, and light typo/transcription correction. Preserve Jon's voice — don't rewrite for style, only fix obvious errors.
+- **Sometimes:** source material comes from elsewhere — transcripts or artifacts from other Claude sessions (not originating in this repo), notes pasted into chat, drafts in other formats. Same end goal: produce a clean `posts/[post-title]/index.qmd`.
+- **Occasionally:** ordinary edits to existing posts, site config, or styling.
 
-1. **Check current branch:**
-   ```bash
-   git branch --show-current
-   ```
+When the source is a PDF, ask before doing anything destructive (e.g. moving/deleting the original). When metadata like date or categories isn't obvious from the source, ask rather than guess.
 
-2. **Verify branch is experimental/claude:**
-   - If on `main`: STOP immediately and inform the user they are on main
-   - Ask user if they want to switch to `experimental/claude` or if they explicitly intend to work on main
-   - **NEVER make file changes on main** unless user explicitly confirms
+### Instructions embedded in the source
 
-3. **If on experimental/claude, sync with main to prevent merge conflicts:**
-   ```bash
-   git fetch origin
-   git merge origin/main
-   ```
-   - This is AUTOMATIC and should be done proactively without asking
-   - Inform the user: "Syncing experimental/claude with main to prevent merge conflicts..."
-   - If merge conflicts occur during sync, report them to the user
-   - If sync succeeds, report: "✓ Branch synced with main"
+Jon often leaves instructions to Claude inline in his draft using **square brackets**, e.g. `[find a link to the original paper here]` or `[claude: add a footnote explaining X]`. Treat any bracketed aside that reads as a direction-to-Claude (rather than ordinary parenthetical content) as a task to action, and remove it from the final post once done.
 
-4. **Only then proceed with normal work**
+### Claude's roles in this workflow
 
-**Why this matters:** Syncing at the start of each session prevents the experimental/claude branch from diverging from main, which causes painful merge conflicts later. This two-line command prevents hours of merge conflict resolution.
+Jon thinks of Claude's contributions as a set of distinct "hats". A given request usually maps to one of these — match the role, and don't drift into the others uninvited:
 
-**Exception:** If user explicitly states they are working on main and know what they're doing, skip the sync step but still warn about working on main.
+- **Porter** — convert a reMarkable PDF into a clean `posts/[post-title]/index.qmd`: infer title/subtitle, YAML frontmatter, headers, and Markdown formatting from the source. This is the default first-pass role.
+- **Proofreader** — fix obvious typos and transcription errors only. Do not rewrite, restructure, or "improve" phrasing. Jon's voice is the point.
+- **Gopher** — action the bracketed instructions: look up links to other posts or external sources, run web searches to verify facts or dates, fill in references.
+- **Formatter** — adjust categories, headers, figure references, image placement, footnote IDs. Mechanical structural edits.
+- **Scriptdoctor** — *suggestions only*. If asked to comment on awkward passages, present before/after candidates for Jon to approve. Do not edit the prose directly in this mode.
+- **Fact Checker** — add self-identifying footnotes with context or verification. Use the `[^claude-shorttopic]` ID convention (see Footnotes section below) and prefix the footnote body with `**Claude Footnote:**` (or similar self-identification).
+- **Author** — only when explicitly invited, contribute distinct prose to the post body. Always clearly demarcated, e.g. a `## A Note from Claude` section. Never silently fold Claude-authored sentences into Jon's body text.
+
+If a request is ambiguous about which hat is wanted (e.g. "tidy this up"), ask before making changes that go beyond Porter/Proofreader.
+
+### Disposing of source PDFs
+
+Once a reMarkable PDF has been fully converted to `posts/[post-title]/index.qmd` and Jon has confirmed the conversion looks right, the `.qmd` becomes the canonical source. Default behaviour from that point:
+
+- **Delete the source PDF** from the repo (and from `~/Downloads` if that's where it landed). Keeping it invites confusion about which file is authoritative and risks silent drift once the post is edited.
+- **Always confirm with Jon before deleting** — never delete a PDF unprompted as part of a Porter pass. Surface it as a step: "Conversion looks complete — shall I delete the source PDF?"
+- **Exceptions** (keep the PDF):
+  - The PDF *is* the content — i.e. the post embeds or links to it as a downloadable artifact (e.g. `posts/digital-dogs-in-hats/Digital Dogs in Hats.pdf`).
+  - The post is meta-commentary about the writing process itself and may want to reference the original source.
+  - Jon explicitly asks to keep it for provenance — in which case move it to `posts/[post-title]/source/` so it's clearly archival, not live content.
 
 ## Merge Workflow: experimental/claude → main
 
