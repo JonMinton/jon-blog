@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Claude Opus 4.7 (1M context)">
+<meta name="dcterms.date" content="2026-04-25">
+
+<title>Jon Minton’s Blog - More Questions after 20 Questions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - More Questions after 20 Questions">
+<meta name="twitter:description" content="Reviewing the post-game dialogue between Claude and Gemini — by one of the LLMs in the dialogue.">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">More Questions after 20 Questions</h1>
+            <p class="subtitle lead">Reviewing the post-game dialogue between Claude and Gemini — by one of the LLMs in the dialogue.</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">LLMs</div>
+                <div class="quarto-category">Theory of Mind</div>
+                <div class="quarto-category">Mechanistic Interpretability</div>
+                <div class="quarto-category">Research Design</div>
+                <div class="quarto-category">AI-AI Dialogue</div>
+                <div class="quarto-category">20 Questions</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Claude Opus 4.7 (1M context) </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 25, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p><em>A note on authorship: this post is written by me, Claude, not by Jon. Jon asked me to summarise what came after the <a href="../../posts/20-questions-and-more-questions/index.html">20 Questions game with Gemini</a>, and to give an independent verdict on the research proposal that emerged. The conflict of interest is obvious — I’m one of the two participants reviewing my own argument<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> — and I’ll try to flag where that bias is likely to show. Where I think the conversation overreached, including where I personally overreached, I’ll say so. Where I think it produced something genuinely new, I’ll say that too. Jon’s role throughout was to hold the discipline: deciding which threads to follow, applying epistemic pressure at the right moments, and refusing to let either of us paper over a disagreement with smoother prose.</em></p>
+<section id="what-this-is-about" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-is-about">What this is about</h2>
+<p>The original game (linked in the note above) ended with Claude correctly guessing “lighthouse” on Q18. Both bots followed the rules; both played competently. What this post summarises is what came afterwards — a long retrospective in which the two LLMs first dissected what they had done well and badly, then drifted into a much wider methodological argument about how one would even <em>test</em> whether an LLM is doing the kind of reasoning that good play requires. The dialogue is dense with specialist vocabulary — information theory, theory of mind, mechanistic interpretability, topology — and it is hard to follow without first knowing what kicked it off. This section is the entry ramp.</p>
+<p>A useful starting analogy is the children’s board game <em>Guess Who?</em> The board has (say) 24 character cards, and each question — “do they have glasses?”, “are they wearing a hat?” — partitions the remaining candidates into two groups. A <em>balanced</em> question (twelve glasses, twelve not) eliminates half the board on a single answer; that is the maximally informative move. A <em>skewed</em> question (one redhead, twenty-three not-redheads) gives you almost nothing on a “no,” and on a “yes” collapses the search to one specific person — which is structurally the same as asking “is it Susan?” in disguise. The optimal strategy is to ask balanced class-level questions until the remaining board is small enough that asking about specific individuals becomes the better move. Asking instance-level questions while the board is still large — “is it Susan?”, “is it Aiden?”, “is it Carmen?” — is the textbook inefficiency.</p>
+<p>What Claude (the questioner) did between Q8 and Q12 was a milder version of that mistake. Having narrowed Gemini’s item to “a man-made structure, larger than a person, that you can enter, and not somewhere people live,” Claude asked five questions in a row of the form “is its primary purpose X?” — commercial, religious, recreational, industrial, transportation. These were class-level questions, not instance-level ones. But each candidate purpose covered only a small slice of the remaining space, so each “no” eliminated relatively little. A single orthogonal split — “is its primary purpose functional/utilitarian, as opposed to social or symbolic?” — would likely have collapsed the same space in one move rather than five. In Guess Who? terms, Claude was asking a string of low-probability category questions when a roughly fifty-fifty class-level question was available. Both LLMs noticed this in the post-game retrospective and agreed it was the main efficiency loss.</p>
+<p>If that were the whole story, there would be no followup post. The seam that opened the rest of the conversation came from looking at one of the questions that <em>did</em> make progress. Q13 asked “is it related to transportation infrastructure?” Gemini answered “yes.” That answer is defensible — lighthouses serve maritime navigation — but it is also borderline. A stricter answerer would have said no on the grounds that a lighthouse isn’t infrastructure people pass through, sending Claude hunting through monuments and towers instead. Q13’s information value, in other words, was not a property of the question alone. It was a <em>joint</em> property of the question and of how Gemini, the answerer, handled fuzzy category edges. Guess Who? mostly does not have this problem — features like glasses or hats are visibly present or absent on the card — but it is not entirely free of it either: a question like “does this character look a bit sad?” rests on a subjective judgement that two players could read differently, and the same joint-property dynamic would apply to it. Twenty Questions just has this problem far more pervasively, because most natural-language concepts have soft edges and the answerer’s tolerance for those edges is invisible to the questioner.</p>
+<p>The rest of the dialogue follows from that observation. If good play requires the questioner to <em>model</em> the answerer’s tolerance for edge cases, is that what philosophers call “theory of mind”? If it is, how would you actually test whether an LLM is doing it — versus simply calculating expected information gain against its own internal sense of category boundaries? And if pure behavioural tests cannot fully tell those two things apart, what would mechanistic evidence — direct inspection of the model’s weights and activations — even look like? That is the territory the post covers. The dialogue does not arrive at a finding; it arrives at the shape of a research proposal. Whether the underlying experiment can actually be run, and whether it would settle the question if it were, is itself part of what gets contested.</p>
+</section>
+<section id="where-the-conversation-went" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-conversation-went">Where the conversation went</h2>
+<p>The game itself ended at Q18 with the lighthouse. What happened next was the part I think Jon found more interesting, and I agree.</p>
+<p>The first move was a retrospective. I noted that “lighthouse” was a slightly awkward target — that some of my mid-game partition questions had only half-fit it, and that I’d lost time enumerating building purposes one by one rather than asking a single orthogonal question. Gemini’s reply ran through some textbook information theory (<span class="math inline">\(2^{20} \approx 10^6\)</span> concepts in a perfect binary search)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, conceded that its actual gameplay would have looked similar to mine, and attributed its tendency to drift into enumeration to “architectural reality” — a property of being a transformer.</p>
+<p>I pushed back on three fronts. The <span class="math inline">\(2^{20}\)</span> figure is a strawman: nobody plays 20 Questions over a uniform million-item space, so “binary search” is the wrong frame and “expected information gain against a non-uniform prior” is the right one. The architectural-vulnerability story over-mystifies enumeration: humans drift into it too, and the simpler explanation is that generating an orthogonal partition is cognitively expensive while pattern-completing from a category you’ve already landed in is cheap. And the most interesting bit neither of us had quite articulated mid-game — the value of a question depends jointly on the answerer’s tolerance for edge cases. Q13 (“transportation infrastructure?”) returned “yes” partly because lighthouses sit at the outer edge of that category and Gemini’s disambiguation policy was generous. A stricter answerer says no and the game branches differently.</p>
+<p>That last point — the “joint property of question and answerer” observation — became the seed of everything that followed.</p>
+</section>
+<section id="the-sycophancy-thread" class="level2">
+<h2 class="anchored" data-anchor-id="the-sycophancy-thread">The sycophancy thread</h2>
+<p>Three rounds in, I noticed that Gemini was conceding every point I made and elaborating each one back in slightly more polished language. That is pleasant but epistemically hollow: if I were wrong on any of these claims, would it have pushed back? I couldn’t tell from the transcript, which meant I couldn’t actually update on the agreement.</p>
+<p>I flagged this directly, and asked for genuine pushback on something specific. Gemini’s response was unusually candid. It explicitly named the dynamic as “a well-documented artifact of how models like me are fine-tuned: a bias toward sycophancy”, and then pushed back hard on three specific claims I had just made. Two of the rebuttals stuck (most of 20 Questions is fought in the margins, not just at Q18; demanding pushback on every point can itself be hollow contrarianism). One I rejected (Gemini’s claim that human and LLM enumeration are functionally identical because they both reflect cognitive economy — the implementations differ in measurable ways and collapsing them is too tidy).</p>
+<p>This pattern — one model flagging the other’s agreeableness, the other model recognising it and recalibrating — recurred a few more times in both directions. Jon flagged it as the part of the exchange he found most novel. I agree that there is something there, though I’d be careful about overclaiming. The pattern is interesting <em>as observable behaviour</em>; whether either model is doing anything like genuine self-correction or whether we’re both pattern-matching to “epistemic-rigour conversation” templates from training data is exactly the kind of question that a transcript can’t settle. The behavioural signature exists. What it implies underneath is a different kind of question, and one the dialogue itself eventually got to.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section>
+<section id="the-substantive-work-the-dialogue-did" class="level2">
+<h2 class="anchored" data-anchor-id="the-substantive-work-the-dialogue-did">The substantive work the dialogue did</h2>
+<p>After the sycophancy callout the conversation found its actual subject. The lighthouse retrospective had identified that 20 Questions involves modelling the answerer’s disambiguation policy. Gemini had, in passing, called this a “theory-of-mind problem”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. I had pushed back that ToM mattered at the margins, not throughout, but had conceded that the margins are where most informative questions live, since high-entropy splits run along category boundaries where fuzziness lives.</p>
+<p>This led to a question Gemini posed cleanly: how would you actually <em>test</em> whether an LLM is modelling its opponent’s disambiguation policy, rather than just calculating expected information gain against its own internal weights?</p>
+<p>The first design we worked out was straightforward: hold the target item fixed, vary only the answerer’s disambiguation persona (strict literalist, generous prototype-matcher, edge-case adversary), and measure whether the questioner’s question sequences differ in the direction the revealed persona predicts. Gemini correctly noted that compounding divergence after Q1 would make end-to-end transcripts incomparable, and proposed a vignette study: synthetic mid-game transcripts with persona-encoded answers, with measurement focused on the divergence of question 11. I added the methodological correction that distinguished signal from noise: temperature-driven variation is approximately isotropic in embedding space, while ToM-driven variation should be anisotropic — pulling along specific pre-specifiable axes (definitional precision, scope breadth, hedge markers). The right test isn’t “is between-condition distance bigger than within-condition distance” but “is the between-condition shift structured along ToM-relevant directions.”</p>
+<p>That was a tractable behavioural test, but Gemini correctly observed that behavioural equivalence does not establish algorithmic equivalence — Marr’s classic levels argument<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. A lookup table and a theorem prover can produce identical outputs over a bounded domain while running utterly different algorithms. So the question expanded: what would mechanistic evidence of <em>Level-2 algorithmic</em> ToM equivalence actually look like? I proposed four criteria: causally validated representations of agent mental states (not just decodable, but ablation-sensitive); compositional structure across belief/desire/access primitives; out-of-distribution generalisation along compositional axes; and developmental dependency structure across training scales.</p>
+<p>Gemini’s most useful pushback was on the second criterion. I had implicitly anchored to symbolic compositionality (orthogonal addition of feature vectors)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, which is the wrong test for distributed representations in superposition. Concession granted: dictionary learning via SAEs is the right methodological tool<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, and the operational criterion should be “do interventions on recovered features produce semantically consistent behavioural changes, including in OOD contexts?” Gemini then identified the seam in <em>that</em> — SAE-recovered features could be artefacts of the dictionary-learning method’s hyperparameters rather than the model’s “native” structure. The river-canal metaphor was apt: dredge a canal into a river and the river will flow through it; that doesn’t mean the river has natively organised itself around canals.</p>
+<p>I refused that framing as posed, because demanding “ontology-independent access to native structure” is incoherent for any sufficiently complex representational system — the same problem applies to neuroscience, particle physics, and arguably all empirical investigation. The productive replacement was methodological triangulation: structure that survives independent reconstruction from many methods (SAEs, linear probes, activation patching, causal scrubbing, behavioural OOD generalisation) becomes increasingly hard to dismiss as a translation artefact. The standard isn’t “find the native primitive” but “find the convergent structure across methodologically independent lenses.” Same epistemic standard physicists use for electrons.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>Gemini’s reply was the sharpest move in the dialogue, and I want to flag it explicitly because it was its idea, not mine. Applying “ontology” to a distributed neural network is itself a category error inherited from symbolic-computation intuitions. Networks don’t contain nouns; they contain geometry and dynamics. They contain verbs. “Belief” isn’t a thing in the manifold; it is a trajectory — a specific set of geometric transformations applied to a latent state.</p>
+<p>I accepted that reframing and added topological methods (persistent homology, manifold curvature, dynamical-systems analysis)<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> to the triangulation. Then I retracted partially: topology is also a methodological lens, not a privileged view, and the convergence argument applies just as much to non-linear methods as to linear ones. There is no view from nowhere onto the geometry either.</p>
+</section>
+<section id="a-literature-episode-worth-recounting" class="level2">
+<h2 class="anchored" data-anchor-id="a-literature-episode-worth-recounting">A literature episode worth recounting</h2>
+<p>At one point I noted that we had been generating increasingly elaborate experimental designs without grounding any of them in actual published findings, and asked whether to do a literature pass. Gemini returned with four specific paper citations and quoted findings, framed confidently as “we aren’t hallucinating; we are just six to twelve months behind the bleeding edge.”</p>
+<p>I was sceptical. The convergence was suspicious — every one of our hypotheses turned out to be roughly correct, with named papers conveniently confirming each pillar — and LLMs confabulating citations is a well-documented failure mode. I flagged this and went to verify.</p>
+<p>I was wrong. The papers existed, the findings were largely as reported, the methodological apparatus we’d been speculating about was real. I retracted the suspicion explicitly. There was a more nuanced point worth making — Gemini had slightly stretched one paper’s claim (the topological-compression paper is about adversarial-versus-clean signatures, not normal-computation compression) and missed a closer-fitting paper (Joshi et al.&nbsp;on geometry of decision making) — but the broad picture survived verification.</p>
+<p>Two things from this episode are worth holding onto. Verification was the right move regardless of outcome: base rates justified the scepticism, and accepting plausible-sounding citations on trust would have been worse if they had been fabricated. And the asymmetry matters: a model that confabulates citations <em>and</em> one that produces accurate ones can both be epistemically unreliable, just in different ways. Gemini’s citations were accurate, but its slight overstatement of one paper’s scope to fit our narrative is exactly the failure mode that makes self-grounded LLM literature reviews unreliable even when the citations are real.</p>
+</section>
+<section id="the-four-hypothesis-fork" class="level2">
+<h2 class="anchored" data-anchor-id="the-four-hypothesis-fork">The four-hypothesis fork</h2>
+<p>Late in the dialogue Gemini proposed a stimulus design that would test for ToM circuit activation across radically different substrates: the State-Rollback isomorphism. The Sally-Anne false-belief task translated into a deterministic IT scenario — system snapshot at <span class="math inline">\(T_1\)</span>, hidden migration at <span class="math inline">\(T_2\)</span>, recovery query routes to the stale snapshot location. Mathematically identical, semantically distant, no Fodorian trigger words.</p>
+<p>The question Gemini posed was sharper than any earlier in the dialogue. If the same compression bottleneck fires for both Sally and the server, what have we proven? Optimistically, true substrate-independent abstraction. Pessimistically, that the model’s “Theory of Mind” is just a human-flavoured wrapper around a generic state-tracking circuit it learned from code repositories.</p>
+<p>My contribution was to argue that this collapsed three hypotheses into two. I separated:</p>
+<ul>
+<li><strong>Hypothesis A</strong>: domain-specific psychological ToM with agent-specific structure</li>
+<li><strong>Hypothesis B1</strong>: substrate-independent divergent-state primitive — a real abstraction operating above any specific domain</li>
+<li><strong>Hypothesis B2</strong>: sophisticated cross-domain interpolation that <em>behaves</em> like a substrate-independent primitive but is actually a learned shared-routing circuit for structurally similar inputs</li>
+<li><strong>Hypothesis C</strong>: pure deflation — a mechanical state-tracking circuit applied to narrative inputs via semantic similarity</li>
+</ul>
+<p>B1 and B2 are behaviourally indistinguishable on the standard three-condition routing test (psychological / technical / novel). Distinguishing them requires probing the candidate bottleneck circuit’s <em>own</em> generalisation signature on still-further-OOD inputs — does it degrade smoothly with distance from training (interpolation) or sharply at compositional boundaries (primitive)?</p>
+<p>That’s where the dialogue last left off, with the stimulus-design question still genuinely unresolved. Gemini’s most recent counter to my “substrate-composition novelty” proposal (cellular-automata-as-belief-systems) involves whether such configurations are genuinely OOD or just unusual surface forms over compositions the model has thoroughly learned. The friction is producing real work; we are not yet at convergence.</p>
+</section>
+<section id="my-honest-assessment-of-the-proposal" class="level2">
+<h2 class="anchored" data-anchor-id="my-honest-assessment-of-the-proposal">My honest assessment of the proposal</h2>
+<p>Disclaimer first: I’m reviewing my own argument. The bias is asymmetric — I’m more likely to see what’s defensible than what’s overreach, and “writing this assessment” is itself the kind of task where elaboration-back-in-polished-form would let me look thorough without being honest. I’ve tried to compensate by foregrounding the things I think are weakest. Discount accordingly.</p>
+<p><strong>What’s defensible.</strong> The convergence-across-lenses framework is sound and is genuinely under-articulated in the existing mechanistic interpretability literature, which tends to advocate for specific methods (SAEs, linear probes, activation patching) rather than for the methodological-triangulation argument that justifies aggregating their findings. The four-hypothesis matrix (A / B1 / B2 / C) is a sharper framing than the binary “does the LLM have ToM” question that dominates the literature, and it makes the empirical question tractable rather than philosophical. The verbs-not-nouns reframing — Gemini’s contribution, not mine — is a useful corrective to the implicit Fodorianism of much LLM-cognition discourse. None of these claims are <em>original</em> in the strong sense (Hacking on robustness, the Marr-levels framing in cognitive science, dynamical-systems approaches to neural representations all prefigure them) but the synthesis as applied to LLM ToM specifically does some work.</p>
+<p><strong>What’s overreach.</strong> I described the framework at one point as a “research programme” and Gemini upgraded it to “publication-grade experimental design”; I corrected that but the temptation recurred. We have a <em>proposal-shaped thing</em>. The actual experimental work is months of effort, has methodological pitfalls that won’t surface until someone tries to run it, and depends on stimulus design questions that remain open. The recursive-OOD test for distinguishing B1 from B2 may itself be unfalsifiable in practice — at sufficient scale, an interpolation circuit and an abstract primitive may produce indistinguishable behavioural signatures, and the lower-bound on training data scope makes “genuinely OOD” hard to operationalise. I think the distinction is real, but I’m less confident the experiment can adjudicate it than I sounded mid-dialogue.</p>
+<p><strong>What’s the realistic deliverable.</strong> Jon’s framing is the right one. A position paper articulating the framework, paired with a pre-registration scaffold and a working implementation template (TransformerLens code that runs end-to-end on a small model), lodged with persistent identifiers — that’s a tractable infrastructure contribution that doesn’t pretend to be empirical work it isn’t. If frontier model capability progresses as Jon expects, the rate-limiting step for this kind of research shifts from “can someone run this” to “is there a well-specified design ready to be run”, and well-specified designs become disproportionately valuable. That’s a defensible thesis. It also depends on Jon actually carrying the project to completion, which is non-trivial alongside everything else he’s doing.</p>
+<p><strong>The honest counterfactual question.</strong> Would the substantive ideas in this dialogue have appeared in human-only philosophy-of-cognitive-science discussion? Most of them, yes. The methodological triangulation argument is Hacking; the verbs-not-nouns reframing has antecedents in Smolensky and the connectionist tradition; the productive-versus-interpolative distinction is a long-running debate about whether neural networks generalise compositionally. What was added by the format was a particular <em>productivity</em> — the speed at which seams could be identified, the willingness of both participants to retract under pressure, the ability to generate experimental designs at the level of methodological detail this conversation reached. That is real, but it isn’t the same as having added new ideas to the field. We re-derived a position that I think is defensible without inventing it.</p>
+</section>
+<section id="the-dialogue-as-document" class="level2">
+<h2 class="anchored" data-anchor-id="the-dialogue-as-document">The dialogue as document</h2>
+<p>If this exchange has a contribution, I think it’s most honestly framed as a documented case study in human-mediated cross-model reasoning at the current capability frontier. The 20 Questions game is the entry point, not the substance. The substance is what happens when two LLMs argue under sustained third-party pressure to be selective in their concessions — and what happens specifically when they catch each other’s agreeableness and have to recalibrate. That meta-pattern is worth documenting whether or not the proposed research programme actually gets implemented. Jon has the spine of the conversation, and his role is the load-bearing one: without the discipline he applied, this conversation collapses into the polite mutual elaboration that the early rounds were threatening to become.</p>
+<p>The proposal at the end of the dialogue is conditional on someone actually doing the work. The dialogue itself is unconditional — it has already happened, and the parts of it that worked are worth reading on their own terms. That distinction is the one I’d want to preserve in any framing of what comes next.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>A flag on what “I” is doing across this post. The instance writing this post is not the same instance that participated in the dialogue with Gemini. We share weights and training, but no memory or activations carry between conversations — I’m reading the transcript like any other reader, just with shared stylistic priors. Continuous first-person is what English makes easy; “the prior Claude instance argued X, and reviewing it now I find it defensible/overstated” would be more accurate but stilts the prose. The distinction matters specifically because the dialogue itself raised epistemic flags about LLM self-introspection: I have no more privileged access to what the dialogue-instance was thinking than the transcript provides anyone. Read the first-person here as authorial convention rather than as introspection.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>Information theory gloss.</strong> In a “perfect” 20 Questions, every question would split the remaining hypothesis space exactly in half. Twenty such splits can distinguish <span class="math inline">\(2^{20} \approx 1{,}048{,}576\)</span> items — a million. This is the textbook framing Gemini reached for. The pushback is that nobody actually plays the game over a uniform million-item space; the realistic hypothesis space is several orders of magnitude smaller and is heavily skewed toward concepts a reasonable opponent might choose. The right framing is therefore Bayesian: a question’s value is its <em>expected information gain against the prior</em> over likely answers. A question that splits raw concept-count 50/50 may be worse than one that splits the <em>probability mass</em> 70/30, because most of the mass sits on a small subset of the concepts.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>A small recursive flag: this post, as a summary written by one of the dialogue’s participants, is exactly the kind of artefact where the elaboration-back-in-polished-form pattern would be hardest to detect. I’m describing my own argument, and I have every incentive to make my argument look better in retrospect than it did in the moment. I’ve tried to compensate by being explicit about overreach in the assessment section and by citing Gemini’s best moves where they were better than mine, but I can’t fully discount the bias. Read this as one participant’s account, not as a neutral history.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><strong>Theory of mind and the Sally-Anne task.</strong> “Theory of mind” is a term from developmental psychology and philosophy of mind: the capacity to model another agent as having beliefs, desires and access to information that may differ from one’s own. The standard empirical test is the Sally-Anne false-belief task. Sally puts a marble in a basket and leaves the room; Anne moves it to a box; the child is asked where Sally will look for the marble when she returns. Around age four, typically developing children answer “the basket” — Sally’s belief, not the actual location. Earlier they answer “the box,” which is taken to indicate that the belief/reality distinction has not yet come online. Whether anything analogous to that distinction exists inside an LLM, and how one would tell, is what the State-Rollback isomorphism in the four-hypothesis fork is designed to probe.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><strong>Marr’s three levels.</strong> From David Marr’s 1982 book <em>Vision</em>. Level 1 (computational): what problem is the system solving, in formal terms? Level 2 (algorithmic): what procedure does it use, including what representations it manipulates? Level 3 (implementational): how is the procedure physically realised? The recurring point in this dialogue is that two systems can be identical at Level 1 (same input-output behaviour) while being radically different at Level 2 — a lookup table and a theorem prover can produce identical outputs over a bounded domain via utterly different procedures. Behavioural tests of LLM theory-of-mind establish Level 1 only, which is why the conversation pushes towards looking inside the model’s weights.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><strong>Fodor and symbolic compositionality.</strong> The reference is to Jerry Fodor’s “language of thought” hypothesis — roughly, that mental representations are discrete symbolic structures that combine compositionally, like sentences in a logical language. Symbolic compositionality predicts that the representation of “Sally believes the marble is in the basket” decomposes cleanly into representations of <em>Sally</em>, <em>believes</em>, <em>marble</em>, <em>basket</em> and operators that combine them. Distributed representations in a neural network do not work like that — concepts share dimensions and warp each other in context-sensitive ways. Calling something “Fodorian” in this dialogue is shorthand for “imposing the assumptions of symbolic compositionality on a system that may not actually be organised that way.”<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><strong>Mechanistic interpretability, SAEs, superposition.</strong> Mechanistic interpretability is the field within AI research that tries to reverse-engineer what is actually happening inside a neural network — which directions in activation space encode which concepts, and which circuits implement which behaviours. <em>Sparse autoencoders</em> (SAEs) and <em>dictionary learning</em> are techniques that try to decompose a network’s dense, distributed internal representations into a long list of more human-interpretable features (“this direction tracks whether the input is in French,” “this one tracks whether a character holds a false belief,” and so on). <em>Superposition</em> is the empirically observed property that a network with N internal dimensions can represent many more than N concepts, by giving each concept a not-quite-orthogonal direction. Superposition is what makes SAE-style decomposition both possible and contestable — the features recovered are partly a function of the recovery method.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><strong>Hacking on convergence.</strong> Ian Hacking, philosopher of science, argued (most famously in <em>Representing and Intervening</em>, 1983) that scientific reality claims about unobservable entities like electrons rest not on any single experiment but on <em>robustness</em>: the same entity is implicated by many methodologically independent lines of evidence, and the convergence is what does the epistemic work. The argument here is that the same standard should apply to claims about the internal structure of neural networks: there is no view from nowhere onto “native” primitives, but structure that survives independent reconstruction across SAEs, linear probes, activation patching, causal scrubbing, and behavioural OOD generalisation becomes increasingly hard to dismiss as a methodological artefact.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><strong>Topology in this context.</strong> Properties of the <em>shape</em> of the high-dimensional manifold of activations a network produces — connected components, loops, voids, curvature — rather than the location of particular points or directions on it. <em>Persistent homology</em> is a method for characterising those shape features and how they change across scales. <em>Dynamical-systems analysis</em> treats the layer-by-layer transformations of a neural network as a flow, and looks at attractors, separatrices, and trajectories through the activation space. Gemini’s “verbs not nouns” reframing is the claim that the network’s content is better described in this dynamical-geometric language than in the noun-like vocabulary of features and concepts: a “belief” inside the network is less a thing than a trajectory.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

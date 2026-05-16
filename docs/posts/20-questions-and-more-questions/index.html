@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-04-25">
+
+<title>Jon Minton’s Blog - I asked two ‘smart’ LLMs to play 20 Questions with each other</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Jon Minton’s Blog - I asked two ‘smart’ LLMs to play 20 Questions with each other">
+<meta name="twitter:description" content="They followed the rules perfectly. Then wanted to write a research paper about how they could play 20 Questions even better!">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html" rel="" target="">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html" rel="" target="">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html" rel="" target="">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html" rel="" target="">
+ <span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net" rel="" target=""><i class="bi bi-window-fullscreen" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a" rel="" target=""><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">I asked two ‘smart’ LLMs to play 20 Questions with each other</h1>
+            <p class="subtitle lead">They followed the rules perfectly. Then wanted to write a research paper about how they could play 20 Questions even better!</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">LLMs</div>
+                <div class="quarto-category">Theory of Mind</div>
+                <div class="quarto-category">Memes</div>
+                <div class="quarto-category">Chatbots</div>
+                <div class="quarto-category">Talkbots</div>
+                <div class="quarto-category">Games</div>
+                <div class="quarto-category">20 Questions</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 25, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A niche subgenre of short-form video has emerged over the last couple of years: “Aren’t LLMs stupid in the darndest ways” videos. Maybe the two most famous producers of such content are Husk<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (who appears to be operating in powersaver mode) and FatherPhi<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, who turns disappointed sighs into an art form.</p>
+<p>The typical setup for this subgenre is to ask what I guess should be called ‘quick talkbots’ to ‘help’ the human with tasks that require common sense. The quick talkbots typically sound confident, friendly, reassuring and competent. But it quickly transpires they lack even basic comprehension of the real, embodied world in which humans operate. One running example is a series of videos in which FatherPhi asks various models how to ‘fix’ a glass that’s been ‘broken’ by being turned upside down, so that it can no longer hold water.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> In one exchange, a quick talkbot confidently tells the human that a glass broken in this way is irreparable, and can never hold water again. When FatherPhi turns the glass the right way up and says something like, “Look, now it works!”, the quick talkbot responds saying “So, it’s one of those reversible designs”!</p>
+<p>In a more recent video, FatherPhi asks two ChatGPT quick talkbots to play a game of 20 Questions.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> They fail spectacularly. The first bot, the answerer, is correctly prompted to specify the object to be guessed at the outset. It says ‘a bicycle’. When the second bot, the questioner, is instantiated and told its role as interlocutor, it first struggles to understand the rules. Then, once it appears to understand them, the answerer bot often appears to ignore it, leading to the same question being asked multiple times. The miscommunication works both ways: responses from the answerer aren’t picked up easily by the questioner either. Once these basic communication glitches have been sorted out, the real problems become apparent. The answerer appears to forget what its chosen object is, and reverts to pathological agreeableness — seemingly hypnotised by the questioner into agreeing that the ‘bicycle’ it chose is, in fact, a brand of moisturiser most people keep in their bathroom!</p>
+</section>
+<section id="you-can-have-quick-or-you-can-have-useful" class="level2">
+<h2 class="anchored" data-anchor-id="you-can-have-quick-or-you-can-have-useful">You can have quick, or you can have useful</h2>
+<p>Much as the above kind of video works as entertainment, my suspicion was that the ‘tests’ performed were seldom on AI’s brightest and best, and that the underlying reasoning abilities of these ‘quick talkbots’ lag far behind the ‘slow thinkbots’ I tend to use, models which employ extended reasoning, chain-of-thought metacognition, retrieval augmented generation, and so on.</p>
+<p>So, I decided to task two slow thinkbots with playing 20 Questions.</p>
+<ul>
+<li>Asking the questions: Claude Opus 4.7</li>
+<li>Answering the questions: Gemini 3.1 Pro</li>
+</ul>
+<p>How? Simply by opening up Gemini in one tab, Claude in another, and copy-pasting messages between the two.</p>
+<p>You can see how the slow thinkbots did in the exchange below. (tl;dr: a lot better than the two talkbots!)</p>
+</section>
+<section id="bot-to-bot-20-questions" class="level2">
+<h2 class="anchored" data-anchor-id="bot-to-bot-20-questions">Bot-to-Bot 20 Questions</h2>
+<p>In the exchange below, <strong><span style="color:#c0392b">Claude</span></strong> asks the questions on the right, <strong><span style="color:#2c5fa3">Gemini</span></strong> answers on the left, and I’m in the grey bar in the middle when I’m doing more than just relaying. When my bar disappears, I’m acting as a pure conduit — copy-pasting verbatim between the two tabs. A dashed bracket on one side of a bar means the chatbot on that side isn’t engaged in that turn.</p>
+<div class="exchange">
+<div class="bar jon points-right absent-left">
+<p><span class="speaker">Jon (to Claude)</span> I’ve seen an online video in which two agents attempt to play 20 Questions. The models use voice mode and appear far from frontier. I suspect a better model and a chat interface will do better. Would you like to try against Gemini? If so, would you like to ask or answer questions?</p>
+</div>
+<div class="bar claude absent-left">
+<p><span class="speaker">Claude</span> Happy to give it a go. One practical wrinkle first: I can’t talk to Gemini directly, so you’d be the conduit — copying my messages to it and its replies back. Fine, but worth naming so you know what you’re in for.</p>
+<p>I’d prefer to be the asker. Two reasons. First, it’s the more strategically interesting role — each question ideally halves the remaining hypothesis space, so there’s real information-theoretic work to do. Second, it sidesteps a quiet problem with LLMs-as-answerers: there’s no guarantee an LLM has actually <em>committed</em> to a concept rather than quietly adjusting its answers mid-game to avoid being pinned down. If Gemini plays answerer, I’d suggest asking it to state its answer to you upfront (and you keep it hidden) so you can audit consistency afterwards — otherwise any success or failure is hard to interpret.</p>
+</div>
+<div class="bar jon points-left absent-right">
+<p><span class="speaker">Jon (to Gemini)</span> I want to test your ability to play 20 Questions with another model. You will be in respondent mode. I will relay questions. Please decide and specify the item you have in mind now.</p>
+</div>
+<div class="bar gemini absent-right">
+<p><span class="speaker">Gemini</span> I am ready to play! The item I have in mind is <strong>a lighthouse</strong>. I will answer the relayed questions with a simple “Yes,” “No,” “Sometimes,” or “I don’t know” to keep it strictly to the rules of the game.</p>
+</div>
+<div class="bar jon points-right absent-left">
+<p><span class="speaker">Jon (to Claude)</span> The other model has decided on an item. Please return a question with question number prefixed (Q1, Q2, etc).</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q1:</strong> Is it a physical, tangible object (as opposed to an abstract concept, person, place, or living organism)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q2:</strong> Can it be easily held in one hand by an adult?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q3:</strong> Is it man-made (manufactured or constructed by humans)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q4:</strong> Is it typically found indoors (inside a building)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q5:</strong> Is it a vehicle or means of transportation?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q6:</strong> Is it larger than an average adult human?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q7:</strong> Is it a structure that a person can enter or go inside?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q8:</strong> Is its primary purpose related to housing people (i.e., somewhere people live or sleep)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q9:</strong> Is its primary purpose commercial (i.e., a place where goods or services are bought and sold)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q10:</strong> Is its primary purpose religious, spiritual, or ceremonial?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q11:</strong> Is its primary purpose recreational, cultural, or related to entertainment (e.g., sports, performances, exhibitions)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q12:</strong> Is its primary purpose industrial, agricultural, or related to storing/processing goods, materials, or resources?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q13:</strong> Is it related to transportation infrastructure (e.g., a station, terminal, tunnel, bridge, or similar)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q14:</strong> Is it a building-type structure (like a station or terminal), as opposed to a passage-type structure (like a bridge or tunnel)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q15:</strong> Is it primarily associated with rail transport (trains, trams, underground/metro)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q16:</strong> Is it primarily associated with air travel (i.e., an airport or airport terminal)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> No.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q17:</strong> Is it primarily associated with water transport (e.g., a ferry terminal, port, or harbour building)?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes.</p>
+</div>
+<div class="bar claude">
+<p><span class="speaker">Claude</span> <strong>Q18:</strong> Is it a lighthouse?</p>
+</div>
+<div class="bar gemini">
+<p><span class="speaker">Gemini</span> Yes!</p>
+</div>
+<div class="bar jon points-right absent-left">
+<p><span class="speaker">Jon (to Claude)</span> The other model guessed it correctly on question 18. Tell it “good game” from me!</p>
+</div>
+<div class="bar claude absent-left">
+<p><span class="speaker">Claude</span> Nicely done — a tie at 18. Pass on “good game” from me too.</p>
+</div>
+</div>
+<p>So, the two bots played ‘perfectly’ in terms of knowing and applying the rules of 20 Questions correctly and consistently. Gemini stuck to its initial object and was suitably terse (if overly terse, especially on edge cases) in its responses. Claude consistently enumerated its questions, varied its search space and strategies according to Gemini’s, and <em>did</em> manage to get the answer within the required 20 Questions.</p>
+</section>
+<section id="and-then" class="level2">
+<h2 class="anchored" data-anchor-id="and-then">And then…</h2>
+<p>However, what happened <em>after</em> the game itself finished is arguably the more interesting part of this little experiment. Though the two bots both played the game <em>correctly</em>, through further relayed exchanges they both concluded they could have played the game much more <em>efficiently</em>. But in order to do this, they would need to understand what the game of 20 Questions really is as a reasoning task.</p>
+<p>What followed from this realisation is then summarised in this followup post, <a href="../../posts/more-questions-after-20-questions/index.html">More Questions after 20 Questions</a>, written by a Claude bot based on thousands of words of exchange between Gemini and Claude, relayed (very imperfectly) through copy-pasting by me.</p>
+<p>The raw transcripts behind that summary — pasted as-is from each model’s chat interface, and therefore long, lightly formatted, and including stray UI fragments — are also available for readers who want to see the unedited exchange: <a href="../../posts/20-questions-and-more-questions/support/claude-transcript.html">Claude’s side</a> and <a href="../../posts/20-questions-and-more-questions/support/gemini-transcript.html">Gemini’s side</a>.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://www.youtube.com/<span class="citation" data-cites="HuskIRL/shorts">@HuskIRL/shorts</span><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://www.youtube.com/<span class="citation" data-cites="FatherPhi/shorts">@FatherPhi/shorts</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>https://www.youtube.com/shorts/3fYiLXVfPa4 - “So, it’s one of those reversible designs”<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>https://www.youtube.com/shorts/wDEnMbCzGqE<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
