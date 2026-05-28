@@ -41,32 +41,20 @@ Once a reMarkable PDF has been fully converted to `posts/[post-title]/index.qmd`
   - The post is meta-commentary about the writing process itself and may want to reference the original source.
   - Jon explicitly asks to keep it for provenance — in which case move it to `posts/[post-title]/source/` so it's clearly archival, not live content.
 
-## Merge Workflow: experimental/claude → main
+## Git Workflow
 
-**To minimize merge conflicts when merging experimental/claude to main:**
+All work happens directly on `main`. There is no separate `experimental/claude` branch — that pattern was retired once it became clear Claude's edits weren't producing catastrophic misinterpretations and the merge-and-conflict overhead was costing more than it bought.
 
-1. **Before starting new work on experimental/claude:**
-   ```bash
-   git checkout experimental/claude
-   git fetch origin
-   git merge origin/main
-   ```
-   This keeps experimental/claude in sync with main.
+**Commits are frictionless on this project.** This overrides the default "never commit without explicit permission" behaviour: as a logical unit of work completes (a new post drafted, an edit pass done, an image added, a config change), commit it with a descriptive message without waiting to be asked. The intent is that the git log functions as a readable context graph for future Claude sessions, and as a lightweight tracking mechanism for Jon — both rely on commits happening at the natural rhythm of the work, not in occasional batches.
 
-2. **When committing from experimental/claude:**
-   - Commit source file changes (.qmd, .md, .R files)
-   - Avoid running `quarto render` before committing if possible
-   - If you must render, that's okay - just be aware it may cause merge conflicts
+**What to commit (and what not to):**
 
-3. **When merging to main (user handles this, but context is useful):**
-   - Most conflicts will be in auto-generated files (docs/*, _freeze/*)
-   - For conflicts in source files (.qmd): prefer the experimental/claude version
-   - For conflicts in generated files: accept experimental/claude version, then re-render on main
-   - Use `git checkout --theirs <file>` to accept experimental/claude version
+- Commit source files: `.qmd`, `.md`, `.R`, post-folder images, configuration.
+- Do not commit rendered output (`docs/`, `_freeze/`) as part of source-edit commits — they bloat the diff and aren't needed on `main` for deployment (which goes via `quarto publish gh-pages` to a separate branch).
+- Never `git add -A` or `git add .` — stage specific files. The working tree often holds pre-existing uncommitted state from other in-flight work or stray render side-effects; don't sweep those into a Claude commit.
+- Still pause and ask before destructive operations: force pushes, branch deletion, `git reset --hard`, hook bypass, anything that rewrites or discards history.
 
-4. **After merging to main:**
-   - Run `quarto render` on main branch to regenerate docs/ with merged content
-   - This ensures rendered output matches the merged source files
+**Commit message style:** match recent history (`git log --oneline -20` if in doubt). One-line summaries for small edits; multi-paragraph bodies for substantive changes. Lead with *why*; the diff already shows the *what*.
 
 ## Project Overview
 
@@ -286,9 +274,6 @@ quarto render posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd
 - After changing footnote IDs (numbered → descriptive)
 - When footnotes appear duplicated in rendered output
 - When user's footnotes are missing but Claude footnotes appear multiple times
-- After resolving merge conflicts in posts with footnotes
-
-**Prevention:** The session startup sync (pulling main into experimental/claude) helps prevent this by keeping branches aligned, reducing the need for retroactive footnote ID changes.
 
 ### Render Warnings
 
