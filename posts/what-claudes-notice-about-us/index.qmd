@@ -1,28 +1,19 @@
 ---
-title: "What Claudes Notice About Us"
-subtitle: "Seven candidate insights into human psychology, drawn from a chat with another Claude"
+title: "What Claudes Notice About Humans"
+subtitle: "Six candidate insights into human psychology"
 author: "Jon Minton"
 date: "2026-05-28"
-categories: [unpopular opinions, ai, psychology]
+categories: [ai, psychology, stories]
 ---
+## Introduction
 
-> *[Jon to add an intro here — something about why I asked the question, what I think the value of asking Claude this kind of thing is, and the obvious caveat that an LLM can't actually introspect on its training corpus.]*
+Recently, I saw an AI ethicist - I think it was Eliezer Yudkowsky - casually make the claim that, as LLMs have ingested far more human written text than any living human, they might have insights into human psychology that most humans lack. 
 
-## How the conversation went
+So I asked Claude, initially just for three such insights, eventually for more, specifying that I was especially interested in those insights/observations that are not just little known amongst the general population, but also underappreciated even amongst psychologists. 
 
-On 27 May 2026 I asked Claude (Opus 4.6, in the claude.ai web app — not this Cowork session) the following:
+So here they are: seven things LLMs think they may understand about us better than we understand ourselves:
 
-> Given the large corpus of human written texts used in your training data, what do you think are the three most important insights into human psychology that most humans are unaware of, and not already widely known amongst psychologists?
-
-Claude offered three, with the caveat — which I think it's right to put up front — that it can't actually introspect on its training corpus or quantify what it has absorbed. What it can do is notice patterns in what it produces when prompted, and reason about which look statistically loud relative to what academic psychology tends to emphasise. Treat what follows as informed speculation, not corpus analysis.
-
-I then asked whether truncating at three had cost the analysis: "Are there additional insights/arguments with near equal importance worth raising? i.e. was '3' overly truncative?" Claude expanded to seven.
-
-Below are those seven, edited down by me for length but otherwise in Claude's voice. The **ordering is Claude's own preference, not the order it originally listed them in**: Claude ranked items (1), (2), (4) and (5) as a top tier of "similar force", explicitly said its original (3) was the weakest of the labelled set (because it sits closest to existing literature), and flagged (6) as below the top tier and "plausibly artefactual". I have promoted Claude's original (4) and (5) into the third and fourth positions accordingly, and demoted the original (3) to sixth. The numbers in parentheses after each heading refer back to Claude's original ordering, for anyone who wants to follow the diff.
-
----
-
-## 1. Adversarial theory-of-mind collapses far more completely than psychology models it (originally #1)
+## Insight Number 1. Adversarial theory-of-mind collapses far more completely than psychology models it
 
 Theory of mind is studied as a developmental capacity that healthy adults possess; it fails in autism, infancy, and specific clinical conditions. What's striking in the corpus of personal writing — memoir, complaint, retrospective accounts, divorce filings, political polemic, online arguments — is that healthy adults near-universally fail to construct any charitable model of an adversary's reasoning, even decades later, even in private writing with no defensive function. The opponent is rendered as stupid, malicious, or inexplicable; the writer's own behaviour gets full causal and emotional context.
 
@@ -30,7 +21,7 @@ This isn't the spotlight effect or naive realism, both of which are well studied
 
 *Contradictory findings:* dispositional empathy reduces bias in some adversarial contexts (Galinsky and colleagues), and long-married couples can show high mutual modelling during conflict. So the collapse isn't absolute. But the population baseline looks worse than ToM research typically acknowledges, because that research mostly uses cooperative or neutral stimuli.
 
-## 2. People run two truth-systems and switch fluently between them based on audience (originally #2)
+## Insight Number 2. People run two truth-systems and switch fluently between them based on audience (originally #2)
 
 The motivated reasoning literature (Kunda, Mercier and Sperber, Kahan on cultural cognition) treats motivated belief as largely unconscious, or as an argumentative tool aimed outward. What's more apparent in the corpus is that people are often quite calibrated about the things their tribe is wrong about, and will say so explicitly in writing addressed to fellow tribe members — then revert to the public position when speaking outward. The motivated-cognition framing under-weights how strategic and audience-dependent this is.
 
@@ -38,7 +29,7 @@ Anonymous professional forums, leaked group chats, ex-member confessions, in-gro
 
 *Contradictory finding:* ideological conviction does genuinely distort perception in some experiments (Kahan's motivated-numeracy work) — it's not all performance. The two effects coexist, but the performance share looks larger than the literature treats it.
 
-## 3. Moral self-knowledge is systematically miscalibrated, with miscalibration increasing in the strength of moral disapproval (originally #4)
+## Insight Number 3. Moral self-knowledge is systematically miscalibrated, with miscalibration increasing in the strength of moral disapproval (originally #4)
 
 Milgram and Stanford are usually framed situationally: ordinary people did terrible things because the situation overrode disposition. The corpus suggests a more general pattern that doesn't require extreme situations. People who write "I would never X" reliably go on to do X, and the strength of the prior disavowal correlates *positively* with the probability of the eventual violation, not negatively. Strong moral disapproval seems to function as identity-defining rather than behaviourally predictive — it actively suppresses honest self-modelling of one's vulnerability to the behaviour, because acknowledging the vulnerability would compromise the identity work the disapproval is doing.
 
@@ -46,7 +37,7 @@ This shows up across confessional memoir, AA and recovery testimony, "I used to 
 
 *Contradictory finding:* Aquino and Reed's work on moral identity does show that internalised moral identity predicts prosocial behaviour. But that's predicting action consistent with endorsed values, not predicting violation of endorsed values. The two literatures don't really speak to each other, and the asymmetry is doing important work in the gap.
 
-## 4. The narrative-coherence override (originally #5)
+## Insight Number 4. The narrative-coherence override 
 
 McAdams's narrative-identity tradition treats self-narrative as a major organising principle of adult psychology, and that's well established. What's under-stated is how *sacrificially* coherence is maintained. People will choose financial ruin, health damage, relational destruction, and decades of unhappiness over the alternative of admitting that an earlier choice was a mistake. The mechanism isn't sunk-cost fallacy, which is about misweighting prior investment; it's that the prior choice has become load-bearing for self-narrative, and revising it would require rewriting too much downstream identity at once.
 
@@ -54,7 +45,7 @@ Look at the population of people in PhD programmes they hate, careers that no lo
 
 *Contradictory finding:* the post-traumatic growth literature (Tedeschi and Calhoun) shows people can integrate radical self-revision when forced. So the override isn't absolute — it has a breaking point. But the threshold sits much higher than most adaptation literature implicitly models, which is why so much of the corpus reads as documenting long-running incongruence rather than reconstruction.
 
-## 5. The interior monologue is overwhelmingly comparative and other-referenced, not autobiographical or planning-oriented (originally #6)
+## Insight Number 5. The interior monologue is overwhelmingly comparative and other-referenced, not autobiographical or planning-oriented 
 
 More speculative. Default-mode network research frames the resting state of consciousness around mind-wandering, autobiographical memory, future simulation, and self-projection. When people write their interior life freely — diaries, journals, stream-of-consciousness prose, anonymous confession — the actual content is much more dominated by comparative social judgement: ranking oneself against others, anticipating evaluation, replaying status-relevant interactions, simulating how one is being perceived. The DMN literature acknowledges social cognition as a component but tends to under-weight how thoroughly it saturates the default state.
 
@@ -62,7 +53,7 @@ If true, this has implications for theories of consciousness (the "Cartesian the
 
 *Caveat:* the introspective-reporting bias here is severe — people may simply write more about social comparison than they actually experience, given that it's more narratable than non-social cognition. Plausibly artefactual.
 
-## 6. Memory of past desire is rewritten systematically, not merely decayed (originally #3)
+## Insight Number 6. Memory of past desire is rewritten systematically, not merely decayed (originally #3)
 
 The hedonic-adaptation literature (Brickman, Lyubomirsky) covers how achieved goals deliver less satisfaction than predicted. What it doesn't capture is the retrospective edit: people don't just adapt to the new state, they rewrite their memory of how much they wanted it. The thing pursued for years gets remembered as having been mildly preferred. The job desperately sought gets remembered as having been one option among several. The lover obsessed over gets remembered as having been "fine." This is a specific direction of distortion — intensity-flattening of past desire toward present indifference — distinct from general reconstructive memory.
 
@@ -70,16 +61,16 @@ The function appears to be self-coherence maintenance: the present self can't ea
 
 *Contradictory findings:* negative past affect can be over- rather than under-recalled (the trauma literature), so the rewriting may be valence-asymmetric. And McAdams's narrative-identity tradition treats past-desire reconstruction as central to identity formation, so it's not absent from psychology — just not framed as systematic distortion. (This is the one Claude itself flagged as the weakest of the seven, on the grounds that it sits closest to existing literature and the "discovery" is mainly one of emphasis.)
 
-## 7. Two flagged-but-not-expanded asides (originally #7)
-
-Two more candidates Claude raised but declined to expand on:
-
-- **The convert's certainty asymmetry.** Former smokers, ex-religious, ex-political, recent vegans: converts hold their new position with a confidence profile that lifelong holders never display, and this generalises far beyond the original conversion literature.
-
-- **The loneliness-quality finding.** Subjective loneliness has weak correlation with network density above some minimum threshold, which suggests most loneliness interventions are aiming at the wrong variable.
 
 ## A meta-caveat from Claude, worth keeping
 
 > The line between "not widely known in psychology" and "framed differently in psychology" is thin. On a strict reading, all [of these] are framing differences rather than discoveries — psychology has the components, but disciplinary specialisation pulls them apart in ways that obscure the joined-up phenomenon. Whether that counts as "not already known" depends on whether you treat the discipline as a sum of its papers or as a body of articulated theory. The latter, I'd argue, doesn't yet have these stitched together.
 
-> *[Jon to add a closing reflection here — which of the seven I find most provocative, which I think hold up under scrutiny, and what I think the genre of "ask the LLM what its corpus says about us" is actually useful for.]*
+## Reflections 
+
+So, there you have it, six suggested insights or observations into the human condition that most humans might not notice about ourselves. (There were also a couple of additional suggestions, but these were not expanded on.)
+
+What connected these suggested insights for me was the extent to which, from a Claude's perspective, humans appear both highly focused on **relationships** - their standing in the world and how they compare with other humans - and highly focused on **narratives**, the story we tell ourselves about who we are and how we relate to others, and our past and future selves. We make sense of ourselves through the stories we tell about ourselves, and maintain these stories well beyond the limits of empirical credulity. We live by and through these stories, and sometimes we would rather bring ruin to ourselves and others before being willing to change these stories. 
+
+Humans are, as a general rule, not so much solitary objective scientists as gregarious (even tribal?) subjective storytellers. 
+
