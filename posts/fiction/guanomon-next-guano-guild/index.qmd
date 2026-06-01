@@ -1,0 +1,45 @@
+---
+title: "Guanomon: The Next Evolution of The Guano Guild"
+subtitle: "Worldbuilding, novums, and cognitive centauring at Makers Gonna Make"
+author: Jon Minton
+date: 2026-05-30
+categories: [fiction, ai, cognitive centaur, creativity, worldbuilding]
+---
+
+I had the privilege on Saturday of attending Makers Gonna Make in Edinburgh. Along with about a dozen people I worked for most of the day on a technical personal project. But my personal project was perhaps more unusual than most, in that I was trying to continue my experiments with using Claude to co-author fiction. In particular, a new version of [The Guano Guild](../the-guano-guild/index.qmd), reshaped stylistically to now comprise largely first person accounts, a la Rashomon.
+
+(So, as a short hand, Guanomon!)
+
+For this version I started with a fresh repo, beginning with a few paragraphs in a background.md file and a few notes summarised as markdown files on earlier discussions with Claude on how the earlier story could be adapted to the new format, and what kinds of critical issues might be solved by doing that.
+
+Guanomon, in its present form, is [available here](https://jonminton.github.io/guanomon/#story). The website contains both the story itself, and copious notes developed in preparation for writing the story, in a parallel section called 'The Experiment'. I encourage you to have a quick look at both before scrolling on.
+
+## The planning is the doing
+
+I encouraged Claude to delay writing a new version of the story as much as possible, and instead focus on co-developing notes in preparation for writing the story. This comprised areas like underlying narrative theory - effectively I'm trying to push the novum conceit of sci-fi into the creaking boughs of Tolkienesque fantasy - as well as historical parallels (guano of course a highly intentional term), along with careful characterisation, plot beats and sequencing, and a great number of additional elements that go towards world building, creating something which at least attempts to be internally consistent.
+
+What I hadn't expected when I started was just how much of the six hours of the Makers Gonna Make session - perhaps around five hours - turned out to be devoted to *not* writing the story, but instead stress testing the world. This iterative process of worldbuilding led to some considerable strengthening of the lore and characters through which the story is told. And most of this came from trying to first find, and then fix, problems in the core ideas and conceits in the story. You pull at a thread, and either the whole fabric unravels. Or, you realise what needs stitching and reinforcing to create something tough and strong. Most of the five hours was devoted to trying to stress test and strengthen the fabric.
+
+An example or two of thread-testing. For the first couple of versions of The Guano Guild it was something like this:
+
+The initial kernel behind the story was simply the image of a group of D&D style adventurers going into a dragon's lair and seeking out the dragon dung rather than the treasure, rather like [this xkcd cartoon](https://xkcd.com/1282/), riffing on the Monty Hall Problem, where the contestant *wants* to win the goat rather than the car. *Why would this be?* Clearly because somehow the dung was worth more than the treasure. *How would it be worth more?* Let's assume that the dung turns out to be highly energy dense. *What would the implications of this be?* Finding a highly energy dense material has the potential to change the technological base of the world. *What might examples of this be?* Slaying dragons now no longer makes sense; instead they will be fed and offered a life of convenience and culture. Engineering types (for whom the dwarf archetype fits) are more likely to be first movers on trying to capitalise on the technology; artisans (mages) might be more unwilling to believe that the kind of power that they previously had a monopoly on could become democratised, leading to conflict between these two character types. *What happens when magicians are no longer as valuable as sources of power?* They transition towards R&D; magicians become alchemists.
+
+But by pulling at the threads even longer, additional problems and solutions emerged:
+
+*If dragon dung is highly potent, why didn't the dragons explode themselves, and why hadn't the technology already been discovered?* First solution: just admit this is a bit of a plot hole. Second solution: the dung needs to be dry. Third solution: the dung must be dry *and* in the presence of a catalyst. *What's the catalyst?* Maybe some kind of thread - a special silk. No, how about a type of honey? *What follows from this?* The exact type of honey needs to be identified, and beekeeping becomes an important part of the economy.
+
+Now, as mentioned, although the story has a fantasy setting, the underlying driver is pure sci fi, the concept of *the novum*: something newly discovered in a previously settled world, that leads to large scale change, displacement, and estrangement. Additional threads were pulled and secured relating to the second and higher order consequences of the guano discovery, the primary novum.
+
+*What might the mages-turned-researchers, redirected from making power to studying power mechanisms, discover?* A second novum. *What second novum?* Means of mass communication and broadcast. *What are the implications of this?* There can be celebrities, familiar voices and characters heard by millions at the same time.
+
+So, with second novum now imagined as following the first novum, *what might happen next?* In the story, I imagine asking *what happens if the first novum (power) and the second novum (mass communications) get combined?* This then led to the concept of the hummingbird, a fantasyworld analogue of weaponised drones, and hopefully a reasonably organic element for raising the stakes in the portentous final chapter.
+
+There were similar issues to discuss regarding characters and characterisation, as well as the timeline. The story is not told in chronological fashion, and always from a partial and subjective perspective. However, it does cover multiple generations witnessing rapid social change, and that itself provides one clue as to how characters are likely to vary: younger generations will tend to be more 'native' to the new technology, and the new social order it has brought. Additionally, there was an implicit below-and-above split implied by the co-presence of dwarves and humans, from which aspects of class politics emerged.
+
+## Interim conclusion
+
+I hope the story that's emerged so far represents an improvement on previous iterations. I'm also sure there'll be further iterations too. This continues my experimentation with what I call 'cognitive centauring': seeing how deep human-AI coproduction can usefully become, blurring the lines between human and artificial contributorship.
+
+Although in this case Claude has also written the story, the lines could be drawn *before* the writing proper starts. For example, the result of the AI/human collaboration could include the codevelopment of the worldbuilding, then the storyboarding, up to specifying chapter structures and even story beats within each scene, *but without* the AI writing any of the story itself. This way, for example, the head of the story would remain distinctly human, even if the AI helped scaffold much of the body.
+
+Regardless, I hope this continuing experiment is of interest, and shows that there's a broad productive and creative continuum to explore in creative writing, that sits between the two extremes of, on the one hand, writing and planning stories entirely unassisted, and on the other hand attempting to 'one shot' a novel from a single sentence prompt.
