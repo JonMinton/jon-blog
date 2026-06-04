@@ -1,0 +1,29 @@
+---
+title: The single most important Datacamp course to take for Agentic AI users
+subtitle: (It's not what you think...)
+author: Jon Minton
+date: 2026-06-04
+categories: [AI, Datacamp, Agentic scaffolds]
+---
+
+A few years ago I spent a lot of weekends completing dozens of courses on Datacamp, in order to tick off the Data Scientist and Data Engineer career tracks. Since then my engagement with Datacamp has waned somewhat. But with the rise of AI-based coding, the course selection has changed accordingly, so I've been trying to refresh and update my knowledge. 
+
+There are currently a lot of AI-based courses available on Datacamp, including [Large Language Models (LLMs) Concepts](https://www.datacamp.com/courses/large-language-models-llms-concepts), [Developing LLM Applications with LangChain](https://www.datacamp.com/courses/developing-llm-applications-with-langchain), and [Understanding Prompt Engineering](https://www.datacamp.com/courses/understanding-prompt-engineering). Some of these are quite conceptual and high level, which is fine; others show how to write function calls to LLMs to deliver prompts and packages, which is worth doing once or twice, though coding agents themselves can largely handle this process too; some provide some fairly evergreen advice on 'prompt engineering', which is also good to know.
+
+However, I don't think any of the courses currently explicitly badged as AI-related are the most essential for using Agentic AI safely and effectively. Instead, I'd suggest the single most important course for working effectively with agentic AI is [this one](https://app.datacamp.com/learn/courses/introduction-to-shell), **Introduction to Shell**. 
+
+Why? Because Agentic AIs, being based on LLMs, and LLMs being ['streamworld natives'](../digital-dogs-in-hats/index.qmd), will 'want' to use shell, terminal based commands for doing things with files, *a lot*. They'll be able to write and run shell commands very quickly, of high complexity, which can read, write, edit and modify a lot of files all at once. 
+
+And when using an AI scaffold, such as Cursor, Claude Code, or Github Copilot, the requests from LLMs to execute shell scripts will tend to come in frequently, perhaps dozens or hundreds of times per session (depending on permissions settings). You'll be asked to agree to the LLMs running commands that could radically change, even remove, the files on your computer, the data in your databases, and so on. 
+
+So, it would seem opportune to learn at least a little about what shell does, how it works, and how remarkably powerful this little language can be. 
+
+(At the very least, a code scaffold user should learn enough about shell to understand why `rm -rf` is a coders' horror story with even more brevity than Hemingway's famous "For sale: baby shoes, never worn")
+
+
+What would I recommend *after* Introduction to Shell? Probably [Introduction to Git](https://app.datacamp.com/learn/courses/introduction-to-git). 
+
+Why?
+
+That's a story for another day...
+
