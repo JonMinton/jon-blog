@@ -1,0 +1,119 @@
+---
+title: The Second Most Important Datacamp course for Agentic AI users 
+subtitle: (It is what you think if you read the earlier post. But the reasons why are still worth unpacking)
+author: Jon Minton
+date: 2026-06-05
+categories: [AI, Datacamp, version control, Agentic scaffolds]
+---
+
+This post of course follows [my last post](../single-most-important-datacamp-course/index.qmd), arguing that the most important Datacamp course to take for anyone using Agentic AI won't be anything badged as AI related. Instead it's using and understanding shell commands, as any Agentic AI scaffold is likely to construct and request permissions to run shell commands dozens or even hundreds of times per sessions. So for the user to use Agentic AI effectively and responsibly, they should at least have *some* idea of what these shell commands are doing, and how shell works.
+
+*(As in the last post, the most useful course won't be the AI-badged one. The reason it's always this way is a thread I'll keep pulling on until [the end of the series](../the-pattern/index.qmd).)*
+
+At the end of that post I suggested the *next* most important course for Agentic AI users to take is [Introduction to Git](https://app.datacamp.com/learn/courses/introduction-to-git). Git is the near-universal [version control](https://git-scm.com/book) language used throughout software development and related technical fields. Think of it as a time machine for specially defined (called *initialised*) folders which can contain other folders and files, enabled by forcing and maintaining a precise written record of changes made to file contents be developed across various folder 'snapshots' (called *commits*), which allows for forwards, backwards, and even 'sideways' (through *branching*) time travel through the folder's contents. 
+
+The three most important capabilities that git opens up for an Agentic AI user are as follows (two should be obvious; one is more subtle): 
+
+
+### 1. A safety net: the undo button for (almost) everything
+
+This is the obvious one, and it's the direct sequel to the shell post. There, the worry was how much damage a single command could do — that an agent, fluent and fast, can ask permission to run something like `rm -rf` that flattens a directory before you've finished reading the request. Git makes a large class of those mistakes recoverable rather than permanent: any change to a file *inside a git repository* can be wound back.[^almost]
+
+Every commit is a save point. Before you let an agent loose on a substantial change, you commit; if the next twenty minutes go sideways — and with agents they sometimes do, enthusiastically — a single `git revert` or `git reset` rewinds the tracked files to exactly how they were. The agent's mistakes stop being disasters and become drafts.
+
+There's a quieter benefit hiding in here too, and it's really the one to hold on to: because undo *within the repo* is cheap and reliable, you can afford to let the agent be *bolder*. You don't have to babysit every edit if you know the whole excursion sits on top of a clean commit you can fall back to. Reversibility doesn't just protect you; it frees you to delegate more.
+
+[^almost]: *Almost* everything, because git only knows about the files inside the repository it is tracking. An agent can still do irreversible things *outside* that boundary — delete files elsewhere on the machine, drop a database, fire off a network request that can't be unsent. The repository is a reversible island in an otherwise unforgiving world; extending that reversibility to the *whole* environment is exactly where this post is heading — read on to [the section on containerisation below](#sandbox).
+
+### 2. Legibility: the diff is the receipt
+
+Also fairly obvious once stated. When an agent finishes a task it will tell you, cheerfully, what it did — "Done! I've updated the config and refactored the parser." That sentence is a *summary*, written by the same system that did the work. The `git diff` is the *receipt*: the exact, complete, line-by-line record of what actually changed, with nothing summarised away and nothing it forgot to mention.
+
+When an agent has touched twelve files, the diff is the only honest account of all twelve. Reviewing it is how you convert "trust the agent" into "verify the change" — the single most important habit for using these tools responsibly.
+
+And the diff has a natural ally: tests. The diff shows you *what* changed; a test suite tells you *whether it still works*. Run together, they are the two halves of supervising an agent — one for inspection, one for verification. This is where a little knowledge of [unit testing](https://en.wikipedia.org/wiki/Unit_testing) and [test-driven development (TDD)](https://www.martinfowler.com/bliki/TestDrivenDevelopment.html) pays off: if a meaningful test suite exists, you can let an agent rework a tangle of code and trust the tests as a tripwire, catching the moment a confident change quietly breaks behaviour. Some of the most effective agentic workflows lean hard on this — have the agent write the tests *first*, then change the code until they pass.
+
+### 3. A context graph: memory that doesn't bloat
+
+This is the subtle one.
+
+A common way to give an agent long-term memory is a standing instructions file — [`CLAUDE.md`](https://code.claude.com/docs/en/memory), or something like it — that it reads at the start of every session. It works, but it has a failure mode: it only ever grows. Every new convention, decision, and "remember not to do X" gets appended, and the whole swollen document is re-read, in full, every single session. It's memory as an ever-lengthening scroll.
+
+Why this matters: For LLMs, something like memory, and something like thinking, and something like doing, are all actions which draw from the same finite resource: *the context window*. This is something like the ledger of tokens spent so far, and still available, to the LLM instance currently working as agent, before that LLM is forced to 'forget' what it knew, and becomes just like any other LLM instance drawn from the same model family. In a baroque sense, the context window can be thought of as the LLM's 'working life' as agent. 
+
+Reading a very big and comprehensive account of all activities and design decisions relating to a project uses up more of this context *before any work is done*. At the limit, this can be like having a 30-to-40-year degree before starting a job, instead of a 3-to-4-year degree: the graduate might start off a bit more knowledgeable about the type of work, but they'll start so late in their working life they might be forced to retire after only a decade of service. 
+
+What the LLM as agent needs, instead of a big screed of everything, is a combination of i) 'cliffnotes' (high level summaries) and ii) a just-in-time retrieval system, allowing it to get more specific information about the history of a project as and when it needs to. This latter type of system, for LLMs, is known as a *context graph* (or *artefact graph*), and it so happens that, by diligently using git (or asking the LLM-as-agent to use git), git itself generates a rich project context graph which LLMs find easy to navigate.
+
+
+
+What does that look like in practice? Each commit in a git history is a small, dated, attributable *delta* — what changed, and (if the commit messages are any good) *why* — strung onto a chain the agent can query. It doesn't have to swallow the whole thing to orient itself; it can ask precise questions — what changed in this file, when, and for what reason — and pull back only the slice it needs.
+
+Here's the kind of thing this makes possible. Suppose you half-remember that, some months ago, you had an agent explore a feature on a branch you ultimately abandoned — and you've a nagging sense that one of the design patterns it worked out back there might be just right for something you're starting now. You don't recall the branch name, the commit hashes, or quite what was in it. With a standing context file, that memory is simply *gone* unless someone thought to write it down. With a git history it is *recoverable*. The agent starts high up — skims the recent history on `main`, lists the branches that ever existed, reads their commit messages — and from those alone forms a hypothesis about which abandoned branch you mean. Then it *drills in*: opens the handful of commits on that branch that look relevant, reads their diffs in full, and takes notes on the pattern worth keeping.
+
+```{mermaid}
+%%| label: fig-context-search
+%%| fig-cap: "Step 1 — searching the history as memory. The agent skims commit messages across `main` and `feature/old-abandoned-thing` (light), looks more closely at the abandoned branch's tip (mid), and reads the one commit holding the relevant design pattern in full (dark), extracting notes for reuse. Shade marks how deeply each commit was read — message-only skim through to full diff."
+flowchart TB
+    subgraph main["main"]
+        m1["a31f"] --> m2["9c20"] --> m3["4e71"] --> m4["b708 (HEAD)"]
+    end
+    subgraph old["feature/old-abandoned-thing (abandoned)"]
+        f1["7d1a"] --> f2["c0de"] --> f3["e44b"]
+    end
+    m2 --> f1
+    f2 -. "extract pattern" .-> notes[/"notes for new feature"/]
+
+    classDef skim fill:#e8ecf7,stroke:#9aa4bf,color:#2a2f3a;
+    classDef mid  fill:#9fb0d6,stroke:#5a6b96,color:#10131a;
+    classDef deep fill:#33405f,stroke:#1c2336,color:#ffffff;
+    classDef note fill:#fff3cf,stroke:#caa53d,color:#3a2f10;
+    class m1,m2,m3,m4,f1 skim;
+    class f3 mid;
+    class f2 deep;
+    class notes note;
+```
+
+From there the recovered knowledge becomes new work. The agent opens a fresh branch and makes its *first* commit a written record of what it found — a `design-notes.md` distilling the pattern lifted from the abandoned branch — and its *second* commit the implementation built from those notes. Once that's reviewed and tested, the branch merges back onto `main`, and a design that had been written off becomes a shipped feature. The git history didn't merely *store* the abandoned experiment; it let a later agent mine it, turning a dead end into a head start.
+
+```{mermaid}
+%%| label: fig-context-build
+%%| fig-cap: "Step 2 — building on what was found. A new branch carries the recovered pattern forward: commit 1 writes it up as `design-notes.md` (the artefact extracted in step 1), commit 2 implements it, and the finished work is merged back onto `main`."
+flowchart TB
+    subgraph main["main"]
+        m4b["b708 (HEAD)"] --> m5["c91d (merge new-thing)"]
+    end
+    subgraph newf["feature/new-thing (current)"]
+        n1["1 — design-notes.md"] --> n2["2 — implement pattern"]
+    end
+    m4b --> n1
+    n2 -- "merge" --> m5
+
+    classDef skim fill:#e8ecf7,stroke:#9aa4bf,color:#2a2f3a;
+    classDef now  fill:#d8f0d8,stroke:#4a9a4a,color:#13301a;
+    classDef note fill:#fff3cf,stroke:#caa53d,color:#3a2f10;
+    class m4b,m5 skim;
+    class n1 note;
+    class n2 now;
+```
+
+The practical upshot is that the commit log is both more *parseable* and more *frugal* than the ever-growing instructions file. It is structured (each entry is a discrete change with an author, a date, and a message), it is queryable (`git log`, `git blame`, `git show`), and it is incremental (you read deltas, not the entire history restated). For an agent — a creature whose attention is metered in tokens — a memory you can query a *slice* of beats a memory you must reread *whole*. The instructions file is still useful for the things that are *always* true; the git log carries the much larger story of how things *came to be* the way they are, without ever asking you — or the context window — to hold all of it at once.
+
+### Beyond your own machine: git, GitHub, and the sandbox {#sandbox}
+
+Everything so far is true of git running on a single laptop, entirely offline. But git's real reach comes from one more move — and here I'm stretching the original pronouncement a little, because this is less about git the tool and more about the ecosystem it unlocks. Bear with me; the destination is worth it.
+
+A git repository can be *pushed* to a hosted copy on a service like [GitHub](https://github.com), [GitLab](https://about.gitlab.com), or a self-run [Gitea](https://about.gitea.com). At a stroke this gives you an off-machine backup — and, more interestingly, it makes the codebase *portable*: the same project can be cloned onto many machines and worked on by many people, or many agents, each able to share their changes back through the same hosted hub.
+
+For agentic AI, that portability enables a safety pattern that is hard to overstate. You can let an agent develop a codebase inside a deliberately *sandboxed* environment — a disposable, [dockerised](https://www.docker.com) virtual machine with no access to anything you care about: no production database, no credentials, no ability to touch the wider world. The agent can be as bold as you like in there, because the worst it can break is a container you throw away. Only once the repository is mature — reviewed, and verified comprehensively through unit and integration tests — do you push it to the hub and deploy that *same, now-trusted* codebase into a higher-risk environment, the one with the real database and the real consequences.
+
+Git is the hinge that makes this possible: it is what lets a codebase grow up safely in one place and then move, intact and verified, to another. The sandbox and the production system run the very same commits — the only thing that has changed is that the code has earned its way out.
+
+Which is the deeper pattern behind both of these posts. Shell and git: humble, unglamorous, decidedly *not-AI* tools. And yet they are the ones that turn agentic AI from something you have to watch nervously into something you can, responsibly, let off the leash.
+
+---
+
+*Series: [1. Shell](../single-most-important-datacamp-course/index.qmd) · **2. Git** · [3 & 4. SQL & APIs →](../third-most-important-datacamp-course/index.qmd) · [the pattern underneath](../the-pattern/index.qmd)*
+
+
+

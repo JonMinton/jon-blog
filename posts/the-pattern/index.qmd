@@ -1,0 +1,31 @@
+---
+title: Why it was never the AI course
+subtitle: (The 90-90/10-10 heuristic — and what's actually worth learning now)
+author: Jon Minton
+date: 2026-06-05
+categories: [AI, Datacamp, Agentic scaffolds, learning]
+---
+
+Over the last few posts I made the same strange recommendation, three times running. The single most important Datacamp course for working with agentic AI is [Introduction to Shell](../single-most-important-datacamp-course/index.qmd) — not because it's about AI; it isn't. The second is [Introduction to Git](../next-most-important-datacamp-course/index.qmd). And the third and fourth are [SQL and APIs](../third-most-important-datacamp-course/index.qmd). None of these are badged as about AI, and were taught for decades prior to Agentic AI's ascendency.
+
+The underlying rationale for these choices is what I call **90-90/10-10**. It comes from the 16 week software development course I took in 2023, thinking through Agentic AI changes the value of the course material, and assuming it generalises to software development teaching in general. 
+
+**90-90/10-10** is shorthand for the following modest proposal:
+
+- *About 90% of the material became about 90% less valuable*...
+- ...*but the remaining 10% became **ten times** more valuable*
+
+What's guiding my suggestions in picking **[Shell](../single-most-important-datacamp-course/index.qmd)**, **[Git](../next-most-important-datacamp-course/index.qmd)**, and **[SQL and APIs](../third-most-important-datacamp-course/index.qmd)**, is that I think they sit in the **10-10** side of the boundary, with the last two being suggestions from Claude itself.  
+
+Of course, training in these areas isn't just something Datacamp offers. Indeed, there's likely plenty of free material on these areas. Claude suggests the [Pro Git book](https://git-scm.com/book), which is free, and [MDN](https://developer.mozilla.org/) (also free) for learning about the web more generally. 
+
+These are the kinds of materials that I'd suggest form the *grounding* for understanding enough about what Agentic AI does, and how it works, to be confident, competent and safe in using them. 
+
+- **If you already have a grounding in these areas**, my suggestion is to think more about specific real world problems that can be solved by software coproduced with AAI. This means your focus should be on developing breadth beyond software, developing enough of the *domain knowledge* needed for potential applications of this new capability to become *useful applications*. My suggestion: you have the foundation; now focus on *application*. 
+- **If you don't yet have that grounding**, even if you're not a software developer, even if you've no plans of ever becoming one, please focus on *this* subset of software development first. 
+
+That, in the end, was the whole argument. The most important course for the age of AI isn't an AI course — it's the small, surviving core of the un-AI ones.
+
+---
+
+*Series: [1. Shell](../single-most-important-datacamp-course/index.qmd) · [2. Git](../next-most-important-datacamp-course/index.qmd) · [3 & 4. SQL & APIs](../third-most-important-datacamp-course/index.qmd) · **the pattern underneath***

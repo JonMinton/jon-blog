@@ -10,7 +10,9 @@ A few years ago I spent a lot of weekends completing dozens of courses on Dataca
 
 There are currently a lot of AI-based courses available on Datacamp, including [Large Language Models (LLMs) Concepts](https://www.datacamp.com/courses/large-language-models-llms-concepts), [Developing LLM Applications with LangChain](https://www.datacamp.com/courses/developing-llm-applications-with-langchain), and [Understanding Prompt Engineering](https://www.datacamp.com/courses/understanding-prompt-engineering). Some of these are quite conceptual and high level, which is fine; others show how to write function calls to LLMs to deliver prompts and packages, which is worth doing once or twice, though coding agents themselves can largely handle this process too; some provide some fairly evergreen advice on 'prompt engineering', which is also good to know.
 
-However, I don't think any of the courses currently explicitly badged as AI-related are the most essential for using Agentic AI safely and effectively. Instead, I'd suggest the single most important course for working effectively with agentic AI is [this one](https://app.datacamp.com/learn/courses/introduction-to-shell), **Introduction to Shell**. 
+However, I don't think any of the courses currently explicitly badged as AI-related are the most essential for using Agentic AI safely and effectively. Instead, I'd suggest the single most important course for working effectively with agentic AI is [this one](https://app.datacamp.com/learn/courses/introduction-to-shell), **Introduction to Shell**.
+
+*(There's a reason the most useful course turns out not to be an AI course — and it's the same reason each time across this little series. I save the answer for [the end](../the-pattern/index.qmd); for now, just file the question away.)* 
 
 Why? Because Agentic AIs, being based on LLMs, and LLMs being ['streamworld natives'](../digital-dogs-in-hats/index.qmd), will 'want' to use shell, terminal based commands for doing things with files, *a lot*. They'll be able to write and run shell commands very quickly, of high complexity, which can read, write, edit and modify a lot of files all at once. 
 
@@ -26,4 +28,8 @@ What would I recommend *after* Introduction to Shell? Probably [Introduction to 
 Why?
 
 That's a story for another day...
+
+---
+
+*Series: **1. Shell** · [2. Git →](../next-most-important-datacamp-course/index.qmd) · [3 & 4. SQL & APIs](../third-most-important-datacamp-course/index.qmd) · [the pattern underneath](../the-pattern/index.qmd)*
 
