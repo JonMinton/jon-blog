@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2026-06-04">
+<meta name="dcterms.date" content="2026-06-05">
 
-<title>Jon Minton’s Blog - The single most important Datacamp course to take for Agentic AI users</title>
+<title>Jon Minton’s Blog - Why it was never the AI course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,8 +66,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - The single most important Datacamp course to take for Agentic AI users">
-<meta name="twitter:description" content="(It’s not what you think…)">
+<meta name="twitter:title" content="Jon Minton’s Blog - Why it was never the AI course">
+<meta name="twitter:description" content="(The 90-90/10-10 heuristic — and what’s actually worth learning now)">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
@@ -155,12 +155,13 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The single most important Datacamp course to take for Agentic AI users</h1>
-            <p class="subtitle lead">(It’s not what you think…)</p>
+      <h1 class="title">Why it was never the AI course</h1>
+            <p class="subtitle lead">(The 90-90/10-10 heuristic — and what’s actually worth learning now)</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">AI</div>
                 <div class="quarto-category">Datacamp</div>
                 <div class="quarto-category">Agentic scaffolds</div>
+                <div class="quarto-category">learning</div>
               </div>
                   </div>
   </div>
@@ -178,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 4, 2026</p>
+        <p class="date">June 5, 2026</p>
       </div>
     </div>
     
@@ -196,19 +197,23 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>A few years ago I spent a lot of weekends completing dozens of courses on Datacamp, in order to tick off the Data Scientist and Data Engineer career tracks. Since then my engagement with Datacamp has waned somewhat. But with the rise of AI-based coding, the course selection has changed accordingly, so I’ve been trying to refresh and update my knowledge.</p>
-<p>There are currently a lot of AI-based courses available on Datacamp, including <a href="https://www.datacamp.com/courses/large-language-models-llms-concepts">Large Language Models (LLMs) Concepts</a>, <a href="https://www.datacamp.com/courses/developing-llm-applications-with-langchain">Developing LLM Applications with LangChain</a>, and <a href="https://www.datacamp.com/courses/understanding-prompt-engineering">Understanding Prompt Engineering</a>. Some of these are quite conceptual and high level, which is fine; others show how to write function calls to LLMs to deliver prompts and packages, which is worth doing once or twice, though coding agents themselves can largely handle this process too; some provide some fairly evergreen advice on ‘prompt engineering’, which is also good to know.</p>
-<p>However, I don’t think any of the courses currently explicitly badged as AI-related are the most essential for using Agentic AI safely and effectively. Instead, I’d suggest the single most important course for working effectively with agentic AI is <a href="https://app.datacamp.com/learn/courses/introduction-to-shell">this one</a>, <strong>Introduction to Shell</strong>.</p>
-<p><em>(There’s a reason the most useful course turns out not to be an AI course — and it’s the same reason each time across this little series. I save the answer for <a href="../../posts/the-pattern/index.html">the end</a>; for now, just file the question away.)</em></p>
-<p>Why? Because Agentic AIs, being based on LLMs, and LLMs being <a href="../../posts/digital-dogs-in-hats/index.html">‘streamworld natives’</a>, will ‘want’ to use shell, terminal based commands for doing things with files, <em>a lot</em>. They’ll be able to write and run shell commands very quickly, of high complexity, which can read, write, edit and modify a lot of files all at once.</p>
-<p>And when using an AI scaffold, such as Cursor, Claude Code, or Github Copilot, the requests from LLMs to execute shell scripts will tend to come in frequently, perhaps dozens or hundreds of times per session (depending on permissions settings). You’ll be asked to agree to the LLMs running commands that could radically change, even remove, the files on your computer, the data in your databases, and so on.</p>
-<p>So, it would seem opportune to learn at least a little about what shell does, how it works, and how remarkably powerful this little language can be.</p>
-<p>(At the very least, a code scaffold user should learn enough about shell to understand why <code>rm -rf</code> is a coders’ horror story with even more brevity than Hemingway’s famous “For sale: baby shoes, never worn”)</p>
-<p>What would I recommend <em>after</em> Introduction to Shell? Probably <a href="https://app.datacamp.com/learn/courses/introduction-to-git">Introduction to Git</a>.</p>
-<p>Why?</p>
-<p>That’s a story for another day…</p>
+<p>Over the last few posts I made the same strange recommendation, three times running. The single most important Datacamp course for working with agentic AI is <a href="../../posts/single-most-important-datacamp-course/index.html">Introduction to Shell</a> — not because it’s about AI; it isn’t. The second is <a href="../../posts/next-most-important-datacamp-course/index.html">Introduction to Git</a>. And the third and fourth are <a href="../../posts/third-most-important-datacamp-course/index.html">SQL and APIs</a>. None of these are badged as about AI, and were taught for decades prior to Agentic AI’s ascendency.</p>
+<p>The underlying rationale for these choices is what I call <strong>90-90/10-10</strong>. It comes from the 16 week software development course I took in 2023, thinking through Agentic AI changes the value of the course material, and assuming it generalises to software development teaching in general.</p>
+<p><strong>90-90/10-10</strong> is shorthand for the following modest proposal:</p>
+<ul>
+<li><em>About 90% of the material became about 90% less valuable</em>…</li>
+<li>…<em>but the remaining 10% became <strong>ten times</strong> more valuable</em></li>
+</ul>
+<p>What’s guiding my suggestions in picking <strong><a href="../../posts/single-most-important-datacamp-course/index.html">Shell</a></strong>, <strong><a href="../../posts/next-most-important-datacamp-course/index.html">Git</a></strong>, and <strong><a href="../../posts/third-most-important-datacamp-course/index.html">SQL and APIs</a></strong>, is that I think they sit in the <strong>10-10</strong> side of the boundary, with the last two being suggestions from Claude itself.</p>
+<p>Of course, training in these areas isn’t just something Datacamp offers. Indeed, there’s likely plenty of free material on these areas. Claude suggests the <a href="https://git-scm.com/book">Pro Git book</a>, which is free, and <a href="https://developer.mozilla.org/">MDN</a> (also free) for learning about the web more generally.</p>
+<p>These are the kinds of materials that I’d suggest form the <em>grounding</em> for understanding enough about what Agentic AI does, and how it works, to be confident, competent and safe in using them.</p>
+<ul>
+<li><strong>If you already have a grounding in these areas</strong>, my suggestion is to think more about specific real world problems that can be solved by software coproduced with AAI. This means your focus should be on developing breadth beyond software, developing enough of the <em>domain knowledge</em> needed for potential applications of this new capability to become <em>useful applications</em>. My suggestion: you have the foundation; now focus on <em>application</em>.</li>
+<li><strong>If you don’t yet have that grounding</strong>, even if you’re not a software developer, even if you’ve no plans of ever becoming one, please focus on <em>this</em> subset of software development first.</li>
+</ul>
+<p>That, in the end, was the whole argument. The most important course for the age of AI isn’t an AI course — it’s the small, surviving core of the un-AI ones.</p>
 <hr>
-<p><em>Series: <strong>1. Shell</strong> · <a href="../../posts/next-most-important-datacamp-course/index.html">2. Git →</a> · <a href="../../posts/third-most-important-datacamp-course/index.html">3 &amp; 4. SQL &amp; APIs</a> · <a href="../../posts/the-pattern/index.html">the pattern underneath</a></em></p>
+<p><em>Series: <a href="../../posts/single-most-important-datacamp-course/index.html">1. Shell</a> · <a href="../../posts/next-most-important-datacamp-course/index.html">2. Git</a> · <a href="../../posts/third-most-important-datacamp-course/index.html">3 &amp; 4. SQL &amp; APIs</a> · <strong>the pattern underneath</strong></em></p>
 
 
 

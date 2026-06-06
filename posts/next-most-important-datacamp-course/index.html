@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2026-06-04">
+<meta name="dcterms.date" content="2026-06-05">
 
-<title>Jon Minton’s Blog - The single most important Datacamp course to take for Agentic AI users</title>
+<title>Jon Minton’s Blog - The Second Most Important Datacamp course for Agentic AI users</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,11 +63,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Jon Minton’s Blog - The single most important Datacamp course to take for Agentic AI users">
-<meta name="twitter:description" content="(It’s not what you think…)">
+<meta name="twitter:title" content="Jon Minton’s Blog - The Second Most Important Datacamp course for Agentic AI users">
+<meta name="twitter:description" content="(It is what you think if you read the earlier post. But the reasons why are still worth unpacking)">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:card" content="summary">
 </head>
@@ -155,11 +158,12 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The single most important Datacamp course to take for Agentic AI users</h1>
-            <p class="subtitle lead">(It’s not what you think…)</p>
+      <h1 class="title">The Second Most Important Datacamp course for Agentic AI users</h1>
+            <p class="subtitle lead">(It is what you think if you read the earlier post. But the reasons why are still worth unpacking)</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">AI</div>
                 <div class="quarto-category">Datacamp</div>
+                <div class="quarto-category">version control</div>
                 <div class="quarto-category">Agentic scaffolds</div>
               </div>
                   </div>
@@ -178,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 4, 2026</p>
+        <p class="date">June 5, 2026</p>
       </div>
     </div>
     
@@ -196,23 +200,112 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>A few years ago I spent a lot of weekends completing dozens of courses on Datacamp, in order to tick off the Data Scientist and Data Engineer career tracks. Since then my engagement with Datacamp has waned somewhat. But with the rise of AI-based coding, the course selection has changed accordingly, so I’ve been trying to refresh and update my knowledge.</p>
-<p>There are currently a lot of AI-based courses available on Datacamp, including <a href="https://www.datacamp.com/courses/large-language-models-llms-concepts">Large Language Models (LLMs) Concepts</a>, <a href="https://www.datacamp.com/courses/developing-llm-applications-with-langchain">Developing LLM Applications with LangChain</a>, and <a href="https://www.datacamp.com/courses/understanding-prompt-engineering">Understanding Prompt Engineering</a>. Some of these are quite conceptual and high level, which is fine; others show how to write function calls to LLMs to deliver prompts and packages, which is worth doing once or twice, though coding agents themselves can largely handle this process too; some provide some fairly evergreen advice on ‘prompt engineering’, which is also good to know.</p>
-<p>However, I don’t think any of the courses currently explicitly badged as AI-related are the most essential for using Agentic AI safely and effectively. Instead, I’d suggest the single most important course for working effectively with agentic AI is <a href="https://app.datacamp.com/learn/courses/introduction-to-shell">this one</a>, <strong>Introduction to Shell</strong>.</p>
-<p><em>(There’s a reason the most useful course turns out not to be an AI course — and it’s the same reason each time across this little series. I save the answer for <a href="../../posts/the-pattern/index.html">the end</a>; for now, just file the question away.)</em></p>
-<p>Why? Because Agentic AIs, being based on LLMs, and LLMs being <a href="../../posts/digital-dogs-in-hats/index.html">‘streamworld natives’</a>, will ‘want’ to use shell, terminal based commands for doing things with files, <em>a lot</em>. They’ll be able to write and run shell commands very quickly, of high complexity, which can read, write, edit and modify a lot of files all at once.</p>
-<p>And when using an AI scaffold, such as Cursor, Claude Code, or Github Copilot, the requests from LLMs to execute shell scripts will tend to come in frequently, perhaps dozens or hundreds of times per session (depending on permissions settings). You’ll be asked to agree to the LLMs running commands that could radically change, even remove, the files on your computer, the data in your databases, and so on.</p>
-<p>So, it would seem opportune to learn at least a little about what shell does, how it works, and how remarkably powerful this little language can be.</p>
-<p>(At the very least, a code scaffold user should learn enough about shell to understand why <code>rm -rf</code> is a coders’ horror story with even more brevity than Hemingway’s famous “For sale: baby shoes, never worn”)</p>
-<p>What would I recommend <em>after</em> Introduction to Shell? Probably <a href="https://app.datacamp.com/learn/courses/introduction-to-git">Introduction to Git</a>.</p>
-<p>Why?</p>
-<p>That’s a story for another day…</p>
+<p>This post of course follows <a href="../../posts/single-most-important-datacamp-course/index.html">my last post</a>, arguing that the most important Datacamp course to take for anyone using Agentic AI won’t be anything badged as AI related. Instead it’s using and understanding shell commands, as any Agentic AI scaffold is likely to construct and request permissions to run shell commands dozens or even hundreds of times per sessions. So for the user to use Agentic AI effectively and responsibly, they should at least have <em>some</em> idea of what these shell commands are doing, and how shell works.</p>
+<p><em>(As in the last post, the most useful course won’t be the AI-badged one. The reason it’s always this way is a thread I’ll keep pulling on until <a href="../../posts/the-pattern/index.html">the end of the series</a>.)</em></p>
+<p>At the end of that post I suggested the <em>next</em> most important course for Agentic AI users to take is <a href="https://app.datacamp.com/learn/courses/introduction-to-git">Introduction to Git</a>. Git is the near-universal <a href="https://git-scm.com/book">version control</a> language used throughout software development and related technical fields. Think of it as a time machine for specially defined (called <em>initialised</em>) folders which can contain other folders and files, enabled by forcing and maintaining a precise written record of changes made to file contents be developed across various folder ‘snapshots’ (called <em>commits</em>), which allows for forwards, backwards, and even ‘sideways’ (through <em>branching</em>) time travel through the folder’s contents.</p>
+<p>The three most important capabilities that git opens up for an Agentic AI user are as follows (two should be obvious; one is more subtle):</p>
+<section id="a-safety-net-the-undo-button-for-almost-everything" class="level3">
+<h3 class="anchored" data-anchor-id="a-safety-net-the-undo-button-for-almost-everything">1. A safety net: the undo button for (almost) everything</h3>
+<p>This is the obvious one, and it’s the direct sequel to the shell post. There, the worry was how much damage a single command could do — that an agent, fluent and fast, can ask permission to run something like <code>rm -rf</code> that flattens a directory before you’ve finished reading the request. Git makes a large class of those mistakes recoverable rather than permanent: any change to a file <em>inside a git repository</em> can be wound back.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Every commit is a save point. Before you let an agent loose on a substantial change, you commit; if the next twenty minutes go sideways — and with agents they sometimes do, enthusiastically — a single <code>git revert</code> or <code>git reset</code> rewinds the tracked files to exactly how they were. The agent’s mistakes stop being disasters and become drafts.</p>
+<p>There’s a quieter benefit hiding in here too, and it’s really the one to hold on to: because undo <em>within the repo</em> is cheap and reliable, you can afford to let the agent be <em>bolder</em>. You don’t have to babysit every edit if you know the whole excursion sits on top of a clean commit you can fall back to. Reversibility doesn’t just protect you; it frees you to delegate more.</p>
+</section>
+<section id="legibility-the-diff-is-the-receipt" class="level3">
+<h3 class="anchored" data-anchor-id="legibility-the-diff-is-the-receipt">2. Legibility: the diff is the receipt</h3>
+<p>Also fairly obvious once stated. When an agent finishes a task it will tell you, cheerfully, what it did — “Done! I’ve updated the config and refactored the parser.” That sentence is a <em>summary</em>, written by the same system that did the work. The <code>git diff</code> is the <em>receipt</em>: the exact, complete, line-by-line record of what actually changed, with nothing summarised away and nothing it forgot to mention.</p>
+<p>When an agent has touched twelve files, the diff is the only honest account of all twelve. Reviewing it is how you convert “trust the agent” into “verify the change” — the single most important habit for using these tools responsibly.</p>
+<p>And the diff has a natural ally: tests. The diff shows you <em>what</em> changed; a test suite tells you <em>whether it still works</em>. Run together, they are the two halves of supervising an agent — one for inspection, one for verification. This is where a little knowledge of <a href="https://en.wikipedia.org/wiki/Unit_testing">unit testing</a> and <a href="https://www.martinfowler.com/bliki/TestDrivenDevelopment.html">test-driven development (TDD)</a> pays off: if a meaningful test suite exists, you can let an agent rework a tangle of code and trust the tests as a tripwire, catching the moment a confident change quietly breaks behaviour. Some of the most effective agentic workflows lean hard on this — have the agent write the tests <em>first</em>, then change the code until they pass.</p>
+</section>
+<section id="a-context-graph-memory-that-doesnt-bloat" class="level3">
+<h3 class="anchored" data-anchor-id="a-context-graph-memory-that-doesnt-bloat">3. A context graph: memory that doesn’t bloat</h3>
+<p>This is the subtle one.</p>
+<p>A common way to give an agent long-term memory is a standing instructions file — <a href="https://code.claude.com/docs/en/memory"><code>CLAUDE.md</code></a>, or something like it — that it reads at the start of every session. It works, but it has a failure mode: it only ever grows. Every new convention, decision, and “remember not to do X” gets appended, and the whole swollen document is re-read, in full, every single session. It’s memory as an ever-lengthening scroll.</p>
+<p>Why this matters: For LLMs, something like memory, and something like thinking, and something like doing, are all actions which draw from the same finite resource: <em>the context window</em>. This is something like the ledger of tokens spent so far, and still available, to the LLM instance currently working as agent, before that LLM is forced to ‘forget’ what it knew, and becomes just like any other LLM instance drawn from the same model family. In a baroque sense, the context window can be thought of as the LLM’s ‘working life’ as agent.</p>
+<p>Reading a very big and comprehensive account of all activities and design decisions relating to a project uses up more of this context <em>before any work is done</em>. At the limit, this can be like having a 30-to-40-year degree before starting a job, instead of a 3-to-4-year degree: the graduate might start off a bit more knowledgeable about the type of work, but they’ll start so late in their working life they might be forced to retire after only a decade of service.</p>
+<p>What the LLM as agent needs, instead of a big screed of everything, is a combination of i) ‘cliffnotes’ (high level summaries) and ii) a just-in-time retrieval system, allowing it to get more specific information about the history of a project as and when it needs to. This latter type of system, for LLMs, is known as a <em>context graph</em> (or <em>artefact graph</em>), and it so happens that, by diligently using git (or asking the LLM-as-agent to use git), git itself generates a rich project context graph which LLMs find easy to navigate.</p>
+<p>What does that look like in practice? Each commit in a git history is a small, dated, attributable <em>delta</em> — what changed, and (if the commit messages are any good) <em>why</em> — strung onto a chain the agent can query. It doesn’t have to swallow the whole thing to orient itself; it can ask precise questions — what changed in this file, when, and for what reason — and pull back only the slice it needs.</p>
+<p>Here’s the kind of thing this makes possible. Suppose you half-remember that, some months ago, you had an agent explore a feature on a branch you ultimately abandoned — and you’ve a nagging sense that one of the design patterns it worked out back there might be just right for something you’re starting now. You don’t recall the branch name, the commit hashes, or quite what was in it. With a standing context file, that memory is simply <em>gone</em> unless someone thought to write it down. With a git history it is <em>recoverable</em>. The agent starts high up — skims the recent history on <code>main</code>, lists the branches that ever existed, reads their commit messages — and from those alone forms a hypothesis about which abandoned branch you mean. Then it <em>drills in</em>: opens the handful of commits on that branch that look relevant, reads their diffs in full, and takes notes on the pattern worth keeping.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-context-search" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-context-search">flowchart TB
+    subgraph main["main"]
+        m1["a31f"] --&gt; m2["9c20"] --&gt; m3["4e71"] --&gt; m4["b708 (HEAD)"]
+    end
+    subgraph old["feature/old-abandoned-thing (abandoned)"]
+        f1["7d1a"] --&gt; f2["c0de"] --&gt; f3["e44b"]
+    end
+    m2 --&gt; f1
+    f2 -. "extract pattern" .-&gt; notes[/"notes for new feature"/]
+
+    classDef skim fill:#e8ecf7,stroke:#9aa4bf,color:#2a2f3a;
+    classDef mid  fill:#9fb0d6,stroke:#5a6b96,color:#10131a;
+    classDef deep fill:#33405f,stroke:#1c2336,color:#ffffff;
+    classDef note fill:#fff3cf,stroke:#caa53d,color:#3a2f10;
+    class m1,m2,m3,m4,f1 skim;
+    class f3 mid;
+    class f2 deep;
+    class notes note;
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: Step 1 — searching the history as memory. The agent skims commit messages across <code>main</code> and <code>feature/old-abandoned-thing</code> (light), looks more closely at the abandoned branch’s tip (mid), and reads the one commit holding the relevant design pattern in full (dark), extracting notes for reuse. Shade marks how deeply each commit was read — message-only skim through to full diff.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>From there the recovered knowledge becomes new work. The agent opens a fresh branch and makes its <em>first</em> commit a written record of what it found — a <code>design-notes.md</code> distilling the pattern lifted from the abandoned branch — and its <em>second</em> commit the implementation built from those notes. Once that’s reviewed and tested, the branch merges back onto <code>main</code>, and a design that had been written off becomes a shipped feature. The git history didn’t merely <em>store</em> the abandoned experiment; it let a later agent mine it, turning a dead end into a head start.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-context-build" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-context-build">flowchart TB
+    subgraph main["main"]
+        m4b["b708 (HEAD)"] --&gt; m5["c91d (merge new-thing)"]
+    end
+    subgraph newf["feature/new-thing (current)"]
+        n1["1 — design-notes.md"] --&gt; n2["2 — implement pattern"]
+    end
+    m4b --&gt; n1
+    n2 -- "merge" --&gt; m5
+
+    classDef skim fill:#e8ecf7,stroke:#9aa4bf,color:#2a2f3a;
+    classDef now  fill:#d8f0d8,stroke:#4a9a4a,color:#13301a;
+    classDef note fill:#fff3cf,stroke:#caa53d,color:#3a2f10;
+    class m4b,m5 skim;
+    class n1 note;
+    class n2 now;
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the recovered pattern forward: commit 1 writes it up as <code>design-notes.md</code> (the artefact extracted in step 1), commit 2 implements it, and the finished work is merged back onto <code>main</code>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The practical upshot is that the commit log is both more <em>parseable</em> and more <em>frugal</em> than the ever-growing instructions file. It is structured (each entry is a discrete change with an author, a date, and a message), it is queryable (<code>git log</code>, <code>git blame</code>, <code>git show</code>), and it is incremental (you read deltas, not the entire history restated). For an agent — a creature whose attention is metered in tokens — a memory you can query a <em>slice</em> of beats a memory you must reread <em>whole</em>. The instructions file is still useful for the things that are <em>always</em> true; the git log carries the much larger story of how things <em>came to be</em> the way they are, without ever asking you — or the context window — to hold all of it at once.</p>
+</section>
+<section id="sandbox" class="level3">
+<h3 class="anchored" data-anchor-id="sandbox">Beyond your own machine: git, GitHub, and the sandbox</h3>
+<p>Everything so far is true of git running on a single laptop, entirely offline. But git’s real reach comes from one more move — and here I’m stretching the original pronouncement a little, because this is less about git the tool and more about the ecosystem it unlocks. Bear with me; the destination is worth it.</p>
+<p>A git repository can be <em>pushed</em> to a hosted copy on a service like <a href="https://github.com">GitHub</a>, <a href="https://about.gitlab.com">GitLab</a>, or a self-run <a href="https://about.gitea.com">Gitea</a>. At a stroke this gives you an off-machine backup — and, more interestingly, it makes the codebase <em>portable</em>: the same project can be cloned onto many machines and worked on by many people, or many agents, each able to share their changes back through the same hosted hub.</p>
+<p>For agentic AI, that portability enables a safety pattern that is hard to overstate. You can let an agent develop a codebase inside a deliberately <em>sandboxed</em> environment — a disposable, <a href="https://www.docker.com">dockerised</a> virtual machine with no access to anything you care about: no production database, no credentials, no ability to touch the wider world. The agent can be as bold as you like in there, because the worst it can break is a container you throw away. Only once the repository is mature — reviewed, and verified comprehensively through unit and integration tests — do you push it to the hub and deploy that <em>same, now-trusted</em> codebase into a higher-risk environment, the one with the real database and the real consequences.</p>
+<p>Git is the hinge that makes this possible: it is what lets a codebase grow up safely in one place and then move, intact and verified, to another. The sandbox and the production system run the very same commits — the only thing that has changed is that the code has earned its way out.</p>
+<p>Which is the deeper pattern behind both of these posts. Shell and git: humble, unglamorous, decidedly <em>not-AI</em> tools. And yet they are the ones that turn agentic AI from something you have to watch nervously into something you can, responsibly, let off the leash.</p>
 <hr>
-<p><em>Series: <strong>1. Shell</strong> · <a href="../../posts/next-most-important-datacamp-course/index.html">2. Git →</a> · <a href="../../posts/third-most-important-datacamp-course/index.html">3 &amp; 4. SQL &amp; APIs</a> · <a href="../../posts/the-pattern/index.html">the pattern underneath</a></em></p>
+<p><em>Series: <a href="../../posts/single-most-important-datacamp-course/index.html">1. Shell</a> · <strong>2. Git</strong> · <a href="../../posts/third-most-important-datacamp-course/index.html">3 &amp; 4. SQL &amp; APIs →</a> · <a href="../../posts/the-pattern/index.html">the pattern underneath</a></em></p>
 
 
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><em>Almost</em> everything, because git only knows about the files inside the repository it is tracking. An agent can still do irreversible things <em>outside</em> that boundary — delete files elsewhere on the machine, drop a database, fire off a network request that can’t be unsent. The repository is a reversible island in an otherwise unforgiving world; extending that reversibility to the <em>whole</em> environment is exactly where this post is heading — read on to <a href="#sandbox">the section on containerisation below</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
