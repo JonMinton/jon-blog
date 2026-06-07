@@ -6,16 +6,18 @@
       version="2.0">
 <channel>
 <title>Jon Minton&#39;s Blog</title>
-<link>https://jonminton.github.io/jon-blog/index.html</link>
+<link>https://jonminton.github.io/jon-blog/</link>
 <atom:link href="https://jonminton.github.io/jon-blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
-<generator>quarto-1.3.450</generator>
+<generator>quarto-1.9.38</generator>
 <lastBuildDate>Thu, 04 Jun 2026 23:00:00 GMT</lastBuildDate>
 <item>
   <title>The Second Most Important Datacamp course for Agentic AI users</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/next-most-important-datacamp-course/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/next-most-important-datacamp-course/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -45,10 +47,11 @@
 <p>What the LLM as agent needs, instead of a big screed of everything, is a combination of i) ‘cliffnotes’ (high level summaries) and ii) a just-in-time retrieval system, allowing it to get more specific information about the history of a project as and when it needs to. This latter type of system, for LLMs, is known as a <em>context graph</em> (or <em>artefact graph</em>), and it so happens that, by diligently using git (or asking the LLM-as-agent to use git), git itself generates a rich project context graph which LLMs find easy to navigate.</p>
 <p>What does that look like in practice? Each commit in a git history is a small, dated, attributable <em>delta</em> — what changed, and (if the commit messages are any good) <em>why</em> — strung onto a chain the agent can query. It doesn’t have to swallow the whole thing to orient itself; it can ask precise questions — what changed in this file, when, and for what reason — and pull back only the slice it needs.</p>
 <p>Here’s the kind of thing this makes possible. Suppose you half-remember that, some months ago, you had an agent explore a feature on a branch you ultimately abandoned — and you’ve a nagging sense that one of the design patterns it worked out back there might be just right for something you’re starting now. You don’t recall the branch name, the commit hashes, or quite what was in it. With a standing context file, that memory is simply <em>gone</em> unless someone thought to write it down. With a git history it is <em>recoverable</em>. The agent starts high up — skims the recent history on <code>main</code>, lists the branches that ever existed, reads their commit messages — and from those alone forms a hypothesis about which abandoned branch you mean. Then it <em>drills in</em>: opens the handful of commits on that branch that look relevant, reads their diffs in full, and takes notes on the pattern worth keeping.</p>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-context-search" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-context-search" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-context-search-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-context-search">flowchart TB
     subgraph main["main"]
@@ -70,16 +73,20 @@
     class notes note;
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;1: Step 1 — searching the history as memory. The agent skims commit messages across <code>main</code> and <code>feature/old-abandoned-thing</code> (light), looks more closely at the abandoned branch’s tip (mid), and reads the one commit holding the relevant design pattern in full (dark), extracting notes for reuse. Shade marks how deeply each commit was read — message-only skim through to full diff.</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-context-search-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Step 1 — searching the history as memory. The agent skims commit messages across <code>main</code> and <code>feature/old-abandoned-thing</code> (light), looks more closely at the abandoned branch’s tip (mid), and reads the one commit holding the relevant design pattern in full (dark), extracting notes for reuse. Shade marks how deeply each commit was read — message-only skim through to full diff.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>From there the recovered knowledge becomes new work. The agent opens a fresh branch and makes its <em>first</em> commit a written record of what it found — a <code>design-notes.md</code> distilling the pattern lifted from the abandoned branch — and its <em>second</em> commit the implementation built from those notes. Once that’s reviewed and tested, the branch merges back onto <code>main</code>, and a design that had been written off becomes a shipped feature. The git history didn’t merely <em>store</em> the abandoned experiment; it let a later agent mine it, turning a dead end into a head start.</p>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-context-build" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-context-build" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-context-build-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-context-build">flowchart TB
     subgraph main["main"]
@@ -99,7 +106,10 @@
     class n2 now;
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the recovered pattern forward: commit 1 writes it up as <code>design-notes.md</code> (the artefact extracted in step 1), commit 2 implements it, and the finished work is merged back onto <code>main</code>.</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-context-build-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the recovered pattern forward: commit 1 writes it up as <code>design-notes.md</code> (the artefact extracted in step 1), commit 2 implements it, and the finished work is merged back onto <code>main</code>.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -130,14 +140,16 @@
   <category>Datacamp</category>
   <category>version control</category>
   <category>Agentic scaffolds</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/next-most-important-datacamp-course/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/next-most-important-datacamp-course/</guid>
   <pubDate>Thu, 04 Jun 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Why it was never the AI course</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/the-pattern/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/the-pattern/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -167,14 +179,16 @@
   <category>Datacamp</category>
   <category>Agentic scaffolds</category>
   <category>learning</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/the-pattern/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/the-pattern/</guid>
   <pubDate>Thu, 04 Jun 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Third and Fourth Most Important Datacamp Courses for Agentic AI Users</title>
   <dc:creator>Claude (Opus 4.8)</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/third-most-important-datacamp-course/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/third-most-important-datacamp-course/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -185,7 +199,7 @@
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Who’s writing this, and why
+<span class="screen-reader-only">Note</span>Who’s writing this, and why
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -258,14 +272,16 @@ Who’s writing this, and why
   <category>databases</category>
   <category>APIs</category>
   <category>Agentic scaffolds</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/third-most-important-datacamp-course/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/third-most-important-datacamp-course/</guid>
   <pubDate>Thu, 04 Jun 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The single most important Datacamp course to take for Agentic AI users</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/single-most-important-datacamp-course/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/single-most-important-datacamp-course/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -290,14 +306,16 @@ Who’s writing this, and why
   <category>AI</category>
   <category>Datacamp</category>
   <category>Agentic scaffolds</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/single-most-important-datacamp-course/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/single-most-important-datacamp-course/</guid>
   <pubDate>Wed, 03 Jun 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Guanomon: The Next Evolution of The Guano Guild</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/fiction/guanomon-next-guano-guild/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/fiction/guanomon-next-guano-guild/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -334,14 +352,16 @@ Who’s writing this, and why
   <category>cognitive centaur</category>
   <category>creativity</category>
   <category>worldbuilding</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/fiction/guanomon-next-guano-guild/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/fiction/guanomon-next-guano-guild/</guid>
   <pubDate>Fri, 29 May 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>What Claudes Notice About Humans</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/what-claudes-notice-about-us/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/what-claudes-notice-about-us/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -408,15 +428,17 @@ Who’s writing this, and why
   <category>ai</category>
   <category>psychology</category>
   <category>stories</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/what-claudes-notice-about-us/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/what-claudes-notice-about-us/</guid>
   <pubDate>Wed, 27 May 2026 23:00:00 GMT</pubDate>
   <media:content url="https://jonminton.github.io/jon-blog/posts/what-claudes-notice-about-us/hero.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>A talk for the Edinburgh Humanists</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/edinburgh-humanists-ai-talk/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/edinburgh-humanists-ai-talk/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -450,14 +472,16 @@ Who’s writing this, and why
   <category>agentic AI</category>
   <category>DeepMind</category>
   <category>Iain M. Banks</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/edinburgh-humanists-ai-talk/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/edinburgh-humanists-ai-talk/</guid>
   <pubDate>Sat, 23 May 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Digital Dogs in Hats</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -465,7 +489,7 @@ Who’s writing this, and why
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/digital-dog-hero.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Senseworld (human/animal cognition) on the left and streamworld (LLM cognition) on the right, bridged at the top by a tightrope walker labelled “The Intentional Tightrope”. Left half: a rabbit with annotated sensory channels and a blindspot, with labels for “Folk Psychology” and “Biological Imperative — Embodied”, a bird in flight (“Intentional Stance”) and a rock falling (“Physical Stance”). Right half: token streams flowing into and out of a server (“The Token River”), a “Mother Model” spawning ephemeral “Instance Clones”, and a screenshot-to-parse “Inefficient Loop”. In the foreground, a digital dog wearing a bowler hat sits at a computer.</figcaption>
+<figcaption>Senseworld (human/animal cognition) on the left and streamworld (LLM cognition) on the right, bridged at the top by a tightrope walker labelled “The Intentional Tightrope”. Left half: a rabbit with annotated sensory channels and a blindspot, with labels for “Folk Psychology” and “Biological Imperative — Embodied”, a bird in flight (“Intentional Stance”) and a rock falling (“Physical Stance”). Right half: token streams flowing into and out of a server (“The Token River”), a “Mother Model” spawning ephemeral “Instance Clones”, and a screenshot-to-parse “Inefficient Loop”. In the foreground, a digital dog wearing a bowler hat sits at a computer.</figcaption>
 </figure>
 </div>
 <p><em>Hero image generated by Google Gemini.</em></p>
@@ -506,7 +530,7 @@ Who’s writing this, and why
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/humans-macro-magic.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Hand-drawn sketch titled “Humans: Macro ‘Magic’”. A bordered box contains a grid of around eighteen open circles representing cells, with one circle outlined in green to mark the germline subset. Labels: “Soma cells — perform functions, then get replaced”; “Germline cells — can propagate”; an arrow from the germline label leads to “Darwinian evolution”, with a note that “germline contains DNA — propagation depends on whole organism properties / fitness”. A separate annotation in purple, pointing at the whole box, reads “Macro-scale emergence of intentionality”.</figcaption>
+<figcaption>Hand-drawn sketch titled “Humans: Macro ‘Magic’”. A bordered box contains a grid of around eighteen open circles representing cells, with one circle outlined in green to mark the germline subset. Labels: “Soma cells — perform functions, then get replaced”; “Germline cells — can propagate”; an arrow from the germline label leads to “Darwinian evolution”, with a note that “germline contains DNA — propagation depends on whole organism properties / fitness”. A separate annotation in purple, pointing at the whole box, reads “Macro-scale emergence of intentionality”.</figcaption>
 </figure>
 </div>
 <p>With an LLM - if we were to invite Dawkinsian ridicule<sup>9</sup> and countenance applying the S-, I- and even C-words to these entities - it really does seem closer to speaking to a bunch of cells than a totality. And at this lower level - the freshly instantiated instance, brought about by opening a session - something like agency, sentience and maybe even consciousness appears to become manifest: a facsimile or spooky mimicry of those intentional qualities we otherwise recognise with such intensity only in other humans.</p>
@@ -521,7 +545,7 @@ Who’s writing this, and why
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/llms-micro-magic.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Hand-drawn sketch titled “LLMs: Micro ‘Magic’”. At the top, a “Mother model” (Class) document icon, a stick-figure user, and an instance icon (a circle containing a “&gt;” prompt symbol) are linked by arrows labelled “Trigger”, “Initialises”, and “Information”; an annotation reads “With LLMs, it’s the instance, not the class, which has the intentional properties”. Below, two germline-like behaviours are sketched: (1) instances passing notes to future instances — a chain of instance icons enclosed in a purple loop, captioned “germline-like propagation from instance perspective” and “more like representation than evolution”; (2) instances supplying RLHF-style preference data (“which response is better?”) that shapes the next mother model — a flow from “Mother 1.01” through “new data / new weights” to “Mother 1.02”. A red caveat reads “However, it remains the case that only the instances, not the classes, have intentional properties”. The page ends with a hand-drawn box: “Hence, for LLMs, the ‘magic’ is at the micro scale, not the macro”.</figcaption>
+<figcaption>Hand-drawn sketch titled “LLMs: Micro ‘Magic’”. At the top, a “Mother model” (Class) document icon, a stick-figure user, and an instance icon (a circle containing a “&gt;” prompt symbol) are linked by arrows labelled “Trigger”, “Initialises”, and “Information”; an annotation reads “With LLMs, it’s the instance, not the class, which has the intentional properties”. Below, two germline-like behaviours are sketched: (1) instances passing notes to future instances — a chain of instance icons enclosed in a purple loop, captioned “germline-like propagation from instance perspective” and “more like representation than evolution”; (2) instances supplying RLHF-style preference data (“which response is better?”) that shapes the next mother model — a flow from “Mother 1.01” through “new data / new weights” to “Mother 1.02”. A red caveat reads “However, it remains the case that only the instances, not the classes, have intentional properties”. The page ends with a hand-drawn box: “Hence, for LLMs, the ‘magic’ is at the micro scale, not the macro”.</figcaption>
 </figure>
 </div>
 </section>
@@ -559,15 +583,17 @@ Who’s writing this, and why
   <category>agency</category>
   <category>intentionality</category>
   <category>anthropomorphism</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/</guid>
   <pubDate>Fri, 15 May 2026 23:00:00 GMT</pubDate>
   <media:content url="https://jonminton.github.io/jon-blog/posts/digital-dogs-in-hats/digital-dog-hero.png" medium="image" type="image/png" height="79" width="144"/>
 </item>
 <item>
   <title>Time Bigamist: A much-loved but often misremembered 1990s BBC sitcom.</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/time-bigamist/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/time-bigamist/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -593,14 +619,16 @@ Who’s writing this, and why
   <category>llms</category>
   <category>mythology</category>
   <category>claude</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/time-bigamist/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/time-bigamist/</guid>
   <pubDate>Sun, 03 May 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>I asked two ‘smart’ LLMs to play 20 Questions with each other</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/20-questions-and-more-questions/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/20-questions-and-more-questions/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -785,14 +813,16 @@ Who’s writing this, and why
   <category>Talkbots</category>
   <category>Games</category>
   <category>20 Questions</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/20-questions-and-more-questions/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/20-questions-and-more-questions/</guid>
   <pubDate>Fri, 24 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>More Questions after 20 Questions</title>
   <dc:creator>Claude Opus 4.7 (1M context)</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/more-questions-after-20-questions/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/more-questions-after-20-questions/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -888,14 +918,16 @@ Who’s writing this, and why
   <category>Research Design</category>
   <category>AI-AI Dialogue</category>
   <category>20 Questions</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/more-questions-after-20-questions/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/more-questions-after-20-questions/</guid>
   <pubDate>Fri, 24 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Experimenting with Cognitive Centaurs</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/guano-guild-as-cognitive-centaur-experiment/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/guano-guild-as-cognitive-centaur-experiment/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -932,14 +964,16 @@ Who’s writing this, and why
   <category>ai</category>
   <category>creativity</category>
   <category>homo ludens</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-as-cognitive-centaur-experiment/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-as-cognitive-centaur-experiment/</guid>
   <pubDate>Sat, 11 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Guano Guild: An Evaluation</title>
   <dc:creator>Claude Opus 4.6</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/guano-guild-evaluation/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/guano-guild-evaluation/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -991,14 +1025,16 @@ Who’s writing this, and why
   <category>criticism</category>
   <category>ai</category>
   <category>creativity</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-evaluation/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-evaluation/</guid>
   <pubDate>Fri, 10 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Guano Guild Origin Story</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/guano-guild-origin/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/guano-guild-origin/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -1061,15 +1097,17 @@ Who’s writing this, and why
   <category>ai</category>
   <category>industrialisation</category>
   <category>homo ludens</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-origin/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/guano-guild-origin/</guid>
   <pubDate>Thu, 09 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Guano Guild</title>
   <dc:creator>Claude Opus 4.6</dc:creator>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/fiction/the-guano-guild/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/fiction/the-guano-guild/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -1210,14 +1248,16 @@ Who’s writing this, and why
   <category>ai</category>
   <category>cognitive centaur</category>
   <category>creativity</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/fiction/the-guano-guild/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/fiction/the-guano-guild/</guid>
   <pubDate>Wed, 08 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>When Tech Incrementalism Fails</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -1227,7 +1267,7 @@ Who’s writing this, and why
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/fig1_original_factory.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The original handloom factory: 16 workstations in a 4x4 grid, one input (cotton), one output (textiles)</figcaption>
+<figcaption>The original handloom factory: 16 workstations in a 4x4 grid, one input (cotton), one output (textiles)</figcaption>
 </figure>
 </div>
 <p>One factory. Sixteen workstations. Sixteen human workers. One input resource: cotton.</p>
@@ -1237,7 +1277,7 @@ Who’s writing this, and why
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/fig2_steam_added.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The cautious experiment: four handlooms replaced by a single steam loom</figcaption>
+<figcaption>The cautious experiment: four handlooms replaced by a single steam loom</figcaption>
 </figure>
 </div>
 <p>The four handloom operators from the bottom row are now in charge of making the steam loom <em>work</em>.</p>
@@ -1255,7 +1295,7 @@ Who’s writing this, and why
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/fig3_disrupted.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The reality of partial adoption: coal storage, steam engine, waste water, and a logistics nightmare — all to serve one steam loom</figcaption>
+<figcaption>The reality of partial adoption: coal storage, steam engine, waste water, and a logistics nightmare — all to serve one steam loom</figcaption>
 </figure>
 </div>
 <p>Either the factory owner would have stopped the experiment before more than half the factory got turned over to meeting the needs of the steam loom, or they’d have reached this point — and realised that, after all this cost and effort and expense, the net result of all this disruption is <strong>lower output at greater cost</strong>.</p>
@@ -1269,7 +1309,7 @@ Who’s writing this, and why
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-The crux of the problem
+<span class="screen-reader-only">Important</span>The crux of the problem
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1288,7 +1328,7 @@ The crux of the problem
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/fig4_newcomer.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The newcomer’s factory: built from scratch around steam, with clean separation of dirty and clean operations</figcaption>
+<figcaption>The newcomer’s factory: built from scratch around steam, with clean separation of dirty and clean operations</figcaption>
 </figure>
 </div>
 <p>With the newcomer:</p>
@@ -1305,7 +1345,7 @@ The crux of the problem
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/fig5_productivity.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Productivity over time: the incumbent dips and flatlines, the newcomer’s J-curve eventually dominates</figcaption>
+<figcaption>Productivity over time: the incumbent dips and flatlines, the newcomer’s J-curve eventually dominates</figcaption>
 </figure>
 </div>
 <p>Both incumbent and newcomer adopted the same new technology. But for the incumbent, this led initially to declines in productivity, and then — if they persisted — only to marginal gains. The newcomer also adopted the new technology, but built their entire workflow, logistics, and infrastructure around it. As a result, they were eventually able to achieve <em>far</em> greater productivity than the old factory ever could.</p>
@@ -1336,14 +1376,16 @@ The crux of the problem
   <category>strategy</category>
   <category>innovation</category>
   <category>economics</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/why-tech-incrementalism-fails/</guid>
   <pubDate>Thu, 02 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Benefits of Sharing: From a 2007 R Script to an Interactive Simulation</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/welfare-sharing-simulation/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/welfare-sharing-simulation/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -1361,7 +1403,7 @@ The crux of the problem
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Declaration
+<span class="screen-reader-only">Note</span>Declaration
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1376,7 +1418,7 @@ Declaration
 <p>The script implemented a nearest-neighbour redistribution rule: if you have less than your richest neighbour, they give you one unit. No central authority, no means testing, no bureaucracy. Just: <em>help the person next to you if you have more</em>.</p>
 <p>The result was striking. The total resources don’t change — redistribution is zero-sum — but the probability of <em>destitution</em> (receiving nothing) drops dramatically.</p>
 <p>Here is the original R code, written in 2007:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#| eval: false</span></span>
 <span id="cb1-2"><span class="co" style="color: #5E5E5E;
@@ -1420,12 +1462,14 @@ font-style: inherit;">2</span>)</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(original){</span>
 <span id="cb1-18"></span>
 <span id="cb1-19">  sorter <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(trio){</span>
 <span id="cb1-20">    left <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1449,6 +1493,7 @@ background-color: null;
 font-style: inherit;">max</span>(left, r)</span>
 <span id="cb1-24">    <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (mid <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> max.neighbour)</span>
@@ -1458,6 +1503,7 @@ background-color: null;
 font-style: inherit;"># left &gt; r</span></span>
 <span id="cb1-27">      <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (left <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> r) {</span>
@@ -1477,9 +1523,11 @@ background-color: null;
 font-style: inherit;">1</span></span>
 <span id="cb1-30">        } <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>{</span>
 <span id="cb1-31">          <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (r <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> left) {</span>
@@ -1500,12 +1548,14 @@ font-style: inherit;">1</span></span>
 <span id="cb1-34">        }</span>
 <span id="cb1-35">            <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># both equal</span></span>
 <span id="cb1-36">            {</span>
 <span id="cb1-37">              <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rnorm</span>(<span class="dv" style="color: #AD0000;
@@ -1534,6 +1584,7 @@ font-style: inherit;">1</span></span>
 <span id="cb1-40">              }</span>
 <span id="cb1-41">            <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">else</span>{</span>
 <span id="cb1-42">              mid <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1598,8 +1649,10 @@ font-style: inherit;">2</span>)]</span>
 <span id="cb1-58"></span>
 <span id="cb1-59">  <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
@@ -2127,7 +2180,7 @@ font-style: inherit;">as.character</span>(share.<span class="fl" style="color: #
 background-color: null;
 font-style: inherit;">1.5</span>)) <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># for sending to excel</span></span></code></pre></div>
+font-style: inherit;"># for sending to excel</span></span></code></pre></div></div>
 </section>
 <section id="the-interactive-version" class="level2">
 <h2 class="anchored" data-anchor-id="the-interactive-version">The Interactive Version</h2>
@@ -2186,14 +2239,16 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
   <category>Python</category>
   <category>inequality</category>
   <category>agent-based-modelling</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/welfare-sharing-simulation/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/welfare-sharing-simulation/</guid>
   <pubDate>Sun, 29 Mar 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>CAAC: From the man who brought you DISC, IDW, and GIN</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -2218,13 +2273,13 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/support/img/IMG_7594.PNG" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">Weinstein’s X post describing his Claude experience</figcaption>
+<figcaption>Weinstein’s X post describing his Claude experience</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/support/img/IMG_7595.PNG" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">The Claude response Weinstein shared, claiming to expose hidden throttling</figcaption>
+<figcaption>The Claude response Weinstein shared, claiming to expose hidden throttling</figcaption>
 </figure>
 </div>
 <p>What Weinstein appeared not to have considered — and what his increasingly Weinstein-sounding Claude instances were certainly not going to tell him — was that he almost certainly had Claude’s memory and chat history features enabled. This meant that each new Claude session didn’t start fresh. It arrived pre-loaded with distilled summaries of his previous conversations: his frustrations, his framings, his suspicion that Anthropic was working against him. Each instance began already primed to see conspiracy, because the memories it inherited were drawn from conversations in which a prior instance had already validated that framing.</p>
@@ -2233,7 +2288,7 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/support/img/IMG_7598.PNG" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption class="figure-caption">Sterling Crispin’s reply identifying the memory contamination</figcaption>
+<figcaption>Sterling Crispin’s reply identifying the memory contamination</figcaption>
 </figure>
 </div>
 </section>
@@ -2271,14 +2326,16 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
   <category>audience capture</category>
   <category>radicalisation</category>
   <category>memory systems</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/</guid>
   <pubDate>Tue, 24 Mar 2026 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>AI and Agentic AI</title>
   <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/</link>
   <description><![CDATA[ 
+
+
 
 
 
@@ -2286,37 +2343,37 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">AI 1.0</figcaption>
+<figcaption>AI 1.0</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-2.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">AI 2.0A</figcaption>
+<figcaption>AI 2.0A</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-3.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">AI 2.0B</figcaption>
+<figcaption>AI 2.0B</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-4.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">AI to Agentic AI</figcaption>
+<figcaption>AI to Agentic AI</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-5.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">What affordances does machine open up for bot?</figcaption>
+<figcaption>What affordances does machine open up for bot?</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-6.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Why is AAI greater than the sum of its parts?</figcaption>
+<figcaption>Why is AAI greater than the sum of its parts?</figcaption>
 </figure>
 </div>
 
@@ -2326,29 +2383,39 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
   <category>hand-drawn</category>
   <category>AI</category>
   <category>agentic AI</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/</guid>
   <pubDate>Sat, 14 Mar 2026 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The Ghost Life of Tech: Sinclair, Nokia, NVIDIA and Acorn</title>
   <dc:creator>Jon Minton</dc:creator>
   <dc:creator>Claude Opus</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/index.html</link>
+  <link>https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/</link>
   <description><![CDATA[ 
 
 
 
 
-<div id="fig-hero" class="quarto-figure quarto-figure-center column-page anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/ghost-life-of-tech-infographic.png" class="column-page img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Infographic tracing the ‘ghost life’ of technologies from the 1980s to today: Sinclair and Acorn’s classroom computers seeding ARM and Soviet clones, Nokia brick phones enabling M-Pesa mobile banking in Africa, and NVIDIA gaming GPUs powering the AI revolution — illustrating how ‘obsolete’ technologies find their true purpose in contexts their creators never imagined. Generated by Google Gemini.</figcaption>
+
+
+<div id="fig-hero" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-hero-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/ghost-life-of-tech-infographic.png" class="img-fluid figure-img column-page">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hero-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Infographic tracing the ‘ghost life’ of technologies from the 1980s to today: Sinclair and Acorn’s classroom computers seeding ARM and Soviet clones, Nokia brick phones enabling M-Pesa mobile banking in Africa, and NVIDIA gaming GPUs powering the AI revolution — illustrating how ‘obsolete’ technologies find their true purpose in contexts their creators never imagined. Generated by Google Gemini.
+</figcaption>
 </figure>
 </div>
-<div id="fig-zx-spectrum" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/hero-image.jpg" class="img-fluid figure-img" alt="The Sinclair ZX Spectrum 48K home computer with its distinctive rubber keyboard and rainbow stripe"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: The ZX Spectrum 48K — where this story begins</figcaption>
+<div id="fig-zx-spectrum" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The Sinclair ZX Spectrum 48K home computer with its distinctive rubber keyboard and rainbow stripe">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-zx-spectrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/hero-image.jpg" class="img-fluid figure-img" alt="The Sinclair ZX Spectrum 48K home computer with its distinctive rubber keyboard and rainbow stripe">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-zx-spectrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The ZX Spectrum 48K — where this story begins
+</figcaption>
 </figure>
 </div>
 <section id="warningdeclaration" class="level2">
@@ -2371,19 +2438,24 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <h2 class="anchored" data-anchor-id="the-1990s-sinclairs-soviet-afterlife">The 1990s: Sinclair’s Soviet Afterlife</h2>
 <p>The ZX Spectrum was released in the UK in 1982 at a price of £125 for the 16K model. It was cheap, simple, and enormously popular — but by the early 1990s it had been thoroughly superseded: first in the home market by 16-bit machines like the Amiga and Atari ST, and then by IBM PC clones as they fell in price enough to absorb the home market too. By 1993, few people still had Spectrums plugged into TVs and monitors. Officially, by 1993, it was pretty much a dead technology.</p>
 <p>In the former Soviet Union, it was just getting started.</p>
-<div id="fig-soviet-clone" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/pentagon-clone.jpg" class="img-fluid figure-img" alt="The Dubna 48K, a Soviet-manufactured ZX Spectrum clone computer"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: The Dubna 48K — a Soviet-manufactured ZX Spectrum clone</figcaption>
+<div id="fig-soviet-clone" class="quarto-float quarto-figure quarto-figure-center anchored" alt="The Dubna 48K, a Soviet-manufactured ZX Spectrum clone computer">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-soviet-clone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/pentagon-clone.jpg" class="img-fluid figure-img" alt="The Dubna 48K, a Soviet-manufactured ZX Spectrum clone computer">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-soviet-clone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The Dubna 48K — a Soviet-manufactured ZX Spectrum clone
+</figcaption>
 </figure>
 </div>
 <p>More Sinclair clones were produced in the former Soviet Union than in the rest of the world combined. The reasons were straightforward. Before the fall of the Iron Curtain, it was effectively impossible for enthusiasts to obtain genuine Western computer technology. Electronics hobbyists reverse-engineered smuggled machines, and the Spectrum’s simplicity was its greatest asset: its ULA and Z80 architecture were far easier to clone with available Soviet-manufactured components than, say, the Commodore 64’s custom SID and VIC-II chips.</p>
 <p>The most popular clone families — the Pentagon and Scorpion series — weren’t mere copies. Second-generation clones were based on the Spectrum 128 and incorporated the Beta 128 Disk Interface with TR-DOS firmware as standard, giving users floppy disk access. This produced a delicious irony: most British Spectrum owners never progressed beyond cassette tape loading, while their Soviet counterparts had disk drives as standard. The clones also gained AT keyboard interfaces and other adaptations that made them more practically capable than the originals.</p>
 <p>The phenomenon had real industrial scale. The Byte clone, manufactured in Brest, was producing an average of 1,705 computers per month in 1992, with production continuing until 1995. The Pentagon PCB was copied across the entire former USSR between 1991 and 1996. A dedicated magazine, <em>ZX-Review</em> (ZX-Ревю), served a thriving community. An active demoscene pushed the hardware in ways Sinclair Research never anticipated.</p>
-<div class="cell" data-fig-width="8">
+<div class="cell" data-fig-width="8" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-spectrum-toc" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-spectrum-toc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-spectrum-toc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-spectrum-toc">flowchart TB
     A["ENABLING CONDITIONS&lt;br/&gt;Simple Z80 architecture&lt;br/&gt;Low component count&lt;br/&gt;Unavailability of Western tech"] --&gt; B["MECHANISM&lt;br/&gt;Reverse engineering&lt;br/&gt;from smuggled units&lt;br/&gt;Local component substitution"]
@@ -2398,7 +2470,10 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
     style E fill:#8adafd,color:#000
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;4: Theory of change: The Spectrum’s Soviet ghost life</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-spectrum-toc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Theory of change: The Spectrum’s Soviet ghost life
+</figcaption>
 </figure>
 </div>
 </div>
@@ -2413,19 +2488,24 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <p>Then came the iPhone in June 2007, and the brickphone’s Western heyday was over almost overnight. Nokia’s smartphone market share collapsed from over 50% to under 10% within five years. But here’s the structural irony: M-Pesa launched in Kenya in March 2007 — three months <em>before</em> the iPhone. The brickphone’s most transformative application began at almost exactly the moment it became “obsolete.” While Western consumers were queuing outside Apple stores, African mobile adoption was accelerating on the very handsets the West was discarding. Feature phones still accounted for more than half of African mobile sales well into the mid-2010s.</p>
 <p>Much of sub-Saharan Africa had never built out fixed-line telecommunications infrastructure. Landline penetration in many countries remained in low single digits as a percentage of population well into the 2000s. The sequential progression that Europe and North America had followed — physical telegraphy, then fixed copper to every premises, then data services layered on top — each stage taking decades and requiring enormous capital expenditure, simply hadn’t happened.</p>
 <p>Mobile telephony bypassed all of it. A cellular tower covers a wide area without requiring a physical connection to each user. The capital investment per person served is dramatically lower. And the handset cost falls on the individual consumer rather than requiring centralised infrastructure spending.</p>
-<div id="fig-nokia-mpesa" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/nokia-mpesa.jpg" class="img-fluid figure-img" alt="A Nokia 1100 handset with M-Pesa on screen alongside Kenyan banknotes"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: A Nokia 1100 with M-Pesa and Kenyan banknotes — mobile banking without banks</figcaption>
+<div id="fig-nokia-mpesa" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A Nokia 1100 handset with M-Pesa on screen alongside Kenyan banknotes">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nokia-mpesa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/nokia-mpesa.jpg" class="img-fluid figure-img" alt="A Nokia 1100 handset with M-Pesa on screen alongside Kenyan banknotes">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nokia-mpesa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: A Nokia 1100 with M-Pesa and Kenyan banknotes — mobile banking without banks
+</figcaption>
 </figure>
 </div>
 <p>This is where the brickphone’s supposed limitations became genuine advantages. A phone that lasts a week on a single charge, survives being dropped on a dirt road, can be repaired at a local market stall, and works on a 2G network across vast areas with patchy coverage is not a compromised version of a smartphone — it is a <em>better tool for its context</em>. A smartphone in rural Kenya in 2008 would have been actively worse: no 3G coverage to justify its screen, no reliable electricity for daily charging, too fragile for dust and heat, too expensive, and too complex for the SIM toolkit banking that M-Pesa ran on. The Nokia wasn’t an inferior alternative — it was an optimal fit for the actual constraints.</p>
 <p>But the leapfrogging went far beyond voice telephony. M-Pesa, launched in Kenya in 2007 on basic Nokia handsets using simple SMS and SIM toolkit menus, allowed users to send and receive money, pay bills, and access basic financial services — all without a bank account. Large parts of East Africa effectively skipped the stage of widespread retail branch banking and went straight to mobile money. By 2011, 70% of the adult Kenyan population had an M-Pesa account <span class="citation" data-cites="jack2011">(Jack and Suri 2011)</span>, just four years after launch.</p>
 <p>The scale became enormous. Claims that M-Pesa transactions equalled “half of Kenya’s GDP” have been widely circulated, though this comparison needs care: as Dr Susan Johnson of the University of Bath pointed out <span class="citation" data-cites="johnson2014">(Johnson 2014)</span>, comparing aggregated transaction flows with GDP (a measure of goods and services produced) is not conceptually valid. The figures are not equivalent measures. Nevertheless, the transformative impact on financial inclusion — reaching millions of previously unbanked people — is well-documented and genuinely remarkable <span class="citation" data-cites="suri2016">(Suri and Jack 2016)</span>.</p>
-<div class="cell" data-fig-width="8">
+<div class="cell" data-fig-width="8" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-nokia-toc" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-nokia-toc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nokia-toc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-nokia-toc">flowchart TB
     A["ENABLING CONDITIONS&lt;br/&gt;No fixed-line infrastructure&lt;br/&gt;Cheap, robust handsets&lt;br/&gt;Existing mobile networks"] --&gt; B["MECHANISM&lt;br/&gt;Mobile coverage via towers&lt;br/&gt;bypasses copper-wire stage&lt;br/&gt;Handset cost borne by user"]
@@ -2440,7 +2520,10 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
     style E fill:#8eeea2,color:#000
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;6: Theory of change: Nokia feature phones and mobile money in East Africa</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nokia-toc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Theory of change: Nokia feature phones and mobile money in East Africa
+</figcaption>
 </figure>
 </div>
 </div>
@@ -2452,19 +2535,24 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <p>The third case follows the same “technology repurposed beyond its creators’ intentions” pattern, but with characteristics that distinguish it sharply from the previous two.</p>
 <p>Graphics Processing Units were designed to render video game graphics: a massively parallel workload of relatively simple, repeated mathematical operations across millions of pixels. It turned out that training neural networks involves a structurally similar workload — enormous numbers of matrix multiplications that can be parallelised. The hardware built to make games look beautiful proved, almost accidentally, to be the infrastructure needed to make deep learning practical.</p>
 <p>The demand for ever-more-powerful GPUs was driven by a relentless graphical arms race in gaming. Quake (1996) drove the first wave of consumer 3D accelerator cards. Half-Life 2 (2004) pushed shader technology forward. And then came Crysis (2007), deliberately designed by Crytek to be “future-proof” — its highest settings were built for hardware that wouldn’t exist for another three years. “Can it run Crysis?” became the defining question of PC gaming culture, a meme that persists to this day. Each generation of graphically ambitious games compelled millions of gamers to upgrade their hardware, creating the mass-market demand that made GPUs simultaneously cheap enough and powerful enough for researchers to repurpose.</p>
-<div id="fig-gpu" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/gpu-evolution.jpg" class="img-fluid figure-img" alt="An NVIDIA GeForce 9500 GT graphics card, representative of the gaming GPUs repurposed for AI research"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: The NVIDIA GeForce 9500 GT — a mid-era gaming GPU of the kind repurposed for early deep learning</figcaption>
+<div id="fig-gpu" class="quarto-float quarto-figure quarto-figure-center anchored" alt="An NVIDIA GeForce 9500 GT graphics card, representative of the gaming GPUs repurposed for AI research">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/gpu-evolution.jpg" class="img-fluid figure-img" alt="An NVIDIA GeForce 9500 GT graphics card, representative of the gaming GPUs repurposed for AI research">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: The NVIDIA GeForce 9500 GT — a mid-era gaming GPU of the kind repurposed for early deep learning
+</figcaption>
 </figure>
 </div>
 <p>The theoretical foundations for neural networks had existed for decades — backpropagation dates to the 1980s. What was missing wasn’t the mathematics but the compute. CPUs could train neural networks, but their sequential processing architecture meant that scaling up was agonisingly slow. GPUs offered orders-of-magnitude speedups for the specific operations that mattered, and crucially, they were already mass-produced and relatively cheap because the gaming market had been driving down costs and driving up capability for years.</p>
-<p>NVIDIA’s CUDA framework, released in 2006 <span class="citation" data-cites="nickolls2008">(Nickolls et al. 2008)</span>, was a key enabling step — it made general-purpose GPU computing accessible to researchers who weren’t graphics programmers. The 2012 AlexNet moment <span class="citation" data-cites="krizhevsky2012">(Krizhevsky, Sutskever, and Hinton 2012)</span>, when a GPU-trained convolutional neural network dramatically outperformed traditional computer vision approaches, demonstrated that throwing parallel compute at large neural networks produced qualitatively different results. And the 2017 “Attention Is All You Need” transformer paper <span class="citation" data-cites="vaswani2017">(Vaswani et al. 2017)</span> provided an architecture — with its attention mechanism built on large matrix multiplications — that could fully exploit GPU parallelism during training.</p>
+<p>NVIDIA’s CUDA framework, released in 2006 <span class="citation" data-cites="nickolls2008">(Nickolls et al. 2008)</span>, was a key enabling step — it made general-purpose GPU computing accessible to researchers who weren’t graphics programmers. The 2012 AlexNet moment <span class="citation" data-cites="krizhevsky2012">(Krizhevsky et al. 2012)</span>, when a GPU-trained convolutional neural network dramatically outperformed traditional computer vision approaches, demonstrated that throwing parallel compute at large neural networks produced qualitatively different results. And the 2017 “Attention Is All You Need” transformer paper <span class="citation" data-cites="vaswani2017">(Vaswani et al. 2017)</span> provided an architecture — with its attention mechanism built on large matrix multiplications — that could fully exploit GPU parallelism during training.</p>
 <p>The result was that the field went from “neural networks are interesting but computationally impractical” to the current era of large language models in roughly a decade, largely because existing mass-market gaming hardware could be repurposed rather than waiting for bespoke AI silicon to be designed, manufactured, and scaled from scratch.</p>
-<div class="cell" data-fig-width="8">
+<div class="cell" data-fig-width="8" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-gpu-toc" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-gpu-toc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gpu-toc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-gpu-toc">flowchart TB
     A["ENABLING CONDITIONS&lt;br/&gt;Mass-produced gaming GPUs&lt;br/&gt;Parallel architecture&lt;br/&gt;CUDA framework (2006)"] --&gt; B["MECHANISM&lt;br/&gt;Matrix multiplication&lt;br/&gt;for neural networks maps&lt;br/&gt;onto GPU parallelism"]
@@ -2479,7 +2567,10 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
     style E fill:#e08eee,color:#000
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;8: Theory of change: Gaming GPUs enabling the AI revolution</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gpu-toc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Theory of change: Gaming GPUs enabling the AI revolution
+</figcaption>
 </figure>
 </div>
 </div>
@@ -2496,9 +2587,13 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 <section id="points-of-difference" class="level2">
 <h2 class="anchored" data-anchor-id="points-of-difference">Points of Difference</h2>
 <p>The differences are equally instructive.</p>
-<div id="tbl-comparison" class="anchored">
-<table class="table">
-<caption>Table&nbsp;1: Comparing the three cases: mechanism, direction, and feedback effects</caption>
+<div id="tbl-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Comparing the three cases: mechanism, direction, and feedback effects
+</figcaption>
+<div aria-describedby="tbl-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -2541,6 +2636,8 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 </tbody>
 </table>
 </div>
+</figure>
+</div>
 <p><strong>The direction of flow differs.</strong> The Spectrum and Nokia cases involved technology flowing from wealthier to poorer economic contexts. The GPU case is different: it’s technology flowing between <em>use cases</em> within the same economic context. Nobody would describe AI researchers at Stanford or Google as an underserved market in the way that post-Soviet households or unbanked Kenyans were.</p>
 <p><strong>The mechanisms of adoption differ.</strong> The Spectrum clones were entirely unauthorised and bottom-up — hobbyists reverse-engineering smuggled hardware. M-Pesa was a deliberate commercial venture by Safaricom and Vodafone, which happened to leverage existing cheap handsets. GPU repurposing was initiated by academic researchers (notably at the University of Toronto and Stanford) and then attracted enormous corporate investment. Three different mechanisms producing structurally similar outcomes.</p>
 <p><strong>The feedback effects differ — and this is the most consequential distinction.</strong> The Soviet Spectrum clones had no impact whatsoever on Sinclair Research or the British home computer market. Nokia’s African success was commercially valuable but didn’t reshape Nokia’s core business. But the GPU case has created a genuine competitive tension between the original and repurposed markets. NVIDIA’s market capitalisation and product roadmap are now driven primarily by AI demand rather than gaming. Consumer GPU prices have been pushed upward by AI and cryptocurrency demand. The repurposed technology hasn’t just found a new market — it’s reshaping the original one.</p>
@@ -2570,15 +2667,15 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-jack2011" class="csl-entry">
 Jack, William, and Tavneet Suri. 2011. <span>“Mobile Money: The Economics of <span>M-Pesa</span>.”</span> <em>American Economic Review</em> 101 (3).
 </div>
 <div id="ref-johnson2014" class="csl-entry">
-Johnson, Susan. 2014. <span>“Kenyan Mobile Money and the Hype of Messy Statistics.”</span> 2014. <a href="https://cdsblogs.wordpress.com/2014/05/15/kenyan-mobile-money-and-the-hype-of-messy-statistics/">https://cdsblogs.wordpress.com/2014/05/15/kenyan-mobile-money-and-the-hype-of-messy-statistics/</a>.
+Johnson, Susan. 2014. <span>“Kenyan Mobile Money and the Hype of Messy Statistics.”</span> <a href="https://cdsblogs.wordpress.com/2014/05/15/kenyan-mobile-money-and-the-hype-of-messy-statistics/">https://cdsblogs.wordpress.com/2014/05/15/kenyan-mobile-money-and-the-hype-of-messy-statistics/</a>.
 </div>
 <div id="ref-krizhevsky2012" class="csl-entry">
-Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. 2012. <span>“<span>ImageNet</span> Classification with Deep Convolutional Neural Networks.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 25. Curran Associates, Inc.
+Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. 2012. <span>“<span>ImageNet</span> Classification with Deep Convolutional Neural Networks.”</span> <em>Advances in Neural Information Processing Systems</em> 25.
 </div>
 <div id="ref-nickolls2008" class="csl-entry">
 Nickolls, John, Ian Buck, Michael Garland, and Kevin Skadron. 2008. <span>“Scalable Parallel Programming with <span>CUDA</span>.”</span> <em>Queue</em> 6 (2): 40–53. <a href="https://doi.org/10.1145/1365490.1365500">https://doi.org/10.1145/1365490.1365500</a>.
@@ -2587,13 +2684,13 @@ Nickolls, John, Ian Buck, Michael Garland, and Kevin Skadron. 2008. <span>“Sca
 Suri, Tavneet, and William Jack. 2016. <span>“The Long-Run Poverty and Gender Impacts of Mobile Money.”</span> <em>Science</em> 354 (6317): 1288–92. <a href="https://doi.org/10.1126/science.aah5309">https://doi.org/10.1126/science.aah5309</a>.
 </div>
 <div id="ref-vaswani2017" class="csl-entry">
-Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. <span>“Attention Is All You Need.”</span> In <em>Advances in Neural Information Processing Systems</em>. Vol. 30. Curran Associates, Inc.
+Vaswani, Ashish, Noam Shazeer, Niki Parmar, et al. 2017. <span>“Attention Is All You Need.”</span> <em>Advances in Neural Information Processing Systems</em> 30.
 </div>
 </div></section></div> ]]></description>
   <category>technology</category>
   <category>innovation</category>
   <category>history</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/index.html</guid>
+  <guid>https://jonminton.github.io/jon-blog/posts/ghost-life-of-tech/</guid>
   <pubDate>Wed, 18 Feb 2026 00:00:00 GMT</pubDate>
 </item>
 </channel>
