@@ -124,3 +124,19 @@
 .quarto-dark .exchange .bar.jon     { background: #94a3b8; color: #1a1a1a; }
 .quarto-dark .exchange .bar.absent-left::before,
 .quarto-dark .exchange .bar.absent-right::before { border-color: #64748b; }
+
+/* ---- Slate dark-mode contrast fix (added 2026-06-07) ----
+   Quarto 1.5+ updated to Bootstrap 5.3, which (via Bootswatch slate)
+   sets --bs-body-color to #6c757d on a #272b30 background — a 2.7:1
+   contrast ratio, well below the 4.5:1 WCAG AA minimum for normal
+   text. The page rendered as a washed-out grey. These overrides
+   restore readable contrast while preserving the dark aesthetic. */
+body.quarto-dark {
+  --bs-body-color: #dee2e6;       /* gray-300; ~12:1 on #272b30 */
+  --bs-body-color-rgb: 222, 226, 230;
+  --bs-secondary-color: #adb5bd;   /* gray-500; for muted text */
+  --bs-secondary-color-rgb: 173, 181, 189;
+  --bs-tertiary-color: #6c757d;    /* gray-600; deeply muted only */
+  --bs-emphasis-color: #ffffff;    /* slate ships this as #000 — fix */
+  --bs-emphasis-color-rgb: 255, 255, 255;
+}
