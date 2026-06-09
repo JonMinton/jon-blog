@@ -1,0 +1,95 @@
+---
+title: "One Fabled Hour"
+subtitle: "A timeboxed experiment in conversational data science with Claude (Fable 5) and the TidyTuesday data trove"
+author: Jon Minton
+date: 2026-06-09
+categories: [AI, data science, data visualisation, R, Quarto, TidyTuesday, demography, Claude, cognitive centaur]
+---
+
+## Background 
+
+A variant of Anthropic's fabled Mythos class model, called Claude Fable, was released today. It's twice as token hungry as the previous top tier Opus class models. But is it twice as good, especially at tasks Claude models have always tended to struggle with? 
+
+One thing Claudes, as primarily LLMs, tend to struggle with, is visual reasoning. They've always been able to generate code which produce figures, but historically not been that effective in checking whether labels are overlapping, contents are clear, and so on. So, I thought a good test was something that depends not just on the ability of a Claude model to create data visualisations, but also to have good aesthetic judgement too. 
+
+In my previous role I ran a TidyTuesday weekly workshop, a fresh open-source dataset each week for helping to teach and embed R skills. Usually they're a little bit messy, but not hugely so. I used to timebox sessions to one hour. 
+
+So, I took that as a guide: how good would the new Mythos-class Fable model be at using R to interrogate and produce interesting and graphically arresting content using TidyTuesday datasets? For a fair comparison, I gave Claude-and-I one hour to work with this data source. 
+
+You can see what we produced on this site [here](https://jonminton.github.io/claude-fable-vision-ds-test/). 
+
+The tl;dr: **six datasets, six series of complex bespoke visualisations and associated statistical analyses, in under sixty minutes**!
+
+I'm about as impressed/disturbed as I expected to be. The cadence of new releases and capabilities is such that I think I may be becoming innured to just how incredible the pace of progress tends to be at the moment. 
+
+One important development I noticed is that Fable tends to be much sooner to actually *look* at the contents it produces, using the /claude-in-chrome tool accessible in Claude Code. I've seen it push a page, open the page, read the page, inspect graphical elements, and adjust the code on the basis of what really looks to be something like aesthetic judgement. From what I've seen what it's produced appears not only to 'work' in the sense of being code that executes successfully, but also works in terms of looking good and being meaningful.
+
+
+**Note:** *The content written below was written by Fable, the same Fable session I finished with a few minutes ago. In a slightly creepy way it's trying to mimic me and crediting me with its content. It's not me! But it is meaningful content (if slightly baroque in style in places).*  
+
+## The brief
+
+I wanted to find out something fairly specific about the new [Fable 5](https://www.anthropic.com/) model: not whether it can write R that runs — that bar was cleared a while ago — but whether it can be a genuine *companion* in the loose, curious, slightly aimless mode of working that I think of as data-scientific flow. The mode where you load an unfamiliar dataset, poke at it, notice something, follow the noticing, and let a body of exploratory material *emerge* from the conversation rather than from a plan.
+
+The natural test bed for this is [TidyTuesday](https://github.com/rfordatascience/tidytuesday), R for Data Science's weekly drop of an open dataset for people to practise their statistics, visualisation and judgement on. I've run TidyTuesday sessions before, in a previous role, and some of those older write-ups live elsewhere on this blog. This time I started a fresh repository and gave Claude a deliberately open brief: use the TidyTuesday trove, take inspiration from the old sessions but don't be constrained by them, give me a smooth way to *see* visualisations and code as we talk, and — the part that matters — let's timebox it to about an hour.
+
+Reader, the hour was elastic. But the experiment worked, and the output is real and public:
+
+- **The site:** [jonminton.github.io/claude-fable-vision-ds-test](https://jonminton.github.io/claude-fable-vision-ds-test/)
+- **The code:** [github.com/JonMinton/claude-fable-vision-ds-test](https://github.com/JonMinton/claude-fable-vision-ds-test)
+
+Everything below is hosted there as a rendered [Quarto](https://quarto.org/) site, code folded but present, built and pushed to GitHub Pages by Claude during the session. What follows is an honest account of what we made and — because this is the interesting part — *every steer I gave along the way*. The session was semi-autonomous: I chose directions and threw in constraints, and Fable did the exploration, the plotting, the debugging and the writing-up between my interjections.
+
+## The seven datasets, and what I asked for
+
+### 1. European parenting leave — and a fertility-debate steer
+
+I let Claude offer me a menu of recent datasets and picked the [European Parenting Leave Policies](https://jonminton.github.io/claude-fable-vision-ds-test/parenting-leave.html) data (EPLP, 21 countries, 1970–2024). My one substantive steer, partway through: *consider this dataset in relation to recent live debates about declining fertility in high-income countries.*
+
+This turned out to be the richest thread of the day. Claude pulled World Bank total fertility rate series for all 21 countries and joined them in, then produced a "Nordic paradox" plot showing that the countries with the most generous, most gender-equal leave saw some of the *steepest* fertility declines after 2010. It was careful, too — flagging policy endogeneity (countries expand family policy *because* fertility is falling) and the tempo distortion in period TFR, rather than over-claiming a causal story.
+
+The bit I most enjoyed was a piece of pure data-archaeology: Czechia, Slovakia and Hungary all appear to "abolish" paid parental leave in dramatic cliffs. They didn't — the schemes were reclassified out of the relevant columns while job protection continued. Claude spotted these as **definitional seams in a harmonised dataset**, called them out, and *excluded the affected countries from the trend line* rather than narrating phantom austerity. That instinct — to distrust the columns at face value — is exactly what I'm looking for in a collaborator.
+
+### 2. Video game films — "bank it, new dataset"
+
+After the leave page I gave a two-word steer: *bank it, new dataset.* Claude banked the parenting-leave work and picked up that very day's TidyTuesday set, [films based on video games](https://jonminton.github.io/claude-fable-vision-ds-test/game-films.html).
+
+Same distrust-the-columns reflex paid off immediately. Sort the films by worldwide box office and the top eight of all time are Pokémon features grossing "$4–5 billion" each — out-earning *Avatar*. Except they're denominated in **yen**. Claude caught it, led the page with the trap, and restricted all the money analysis to dollar rows. The genuine findings: the "video game movie curse" is measurably lifting (median Rotten Tomatoes score rising from the high teens to 57 in the 2020s), and opening-night audiences grade these films a full letter or three *above* the critics.
+
+### 3. An interlude: surveying the trove
+
+Between datasets I asked Claude to summarise the last twenty TidyTuesday releases and curate a list of older ones likely to interest me. This wasn't a page, but it shaped everything after — it's how the next four datasets got chosen, and it was a good test of whether the model could read my interests (demography, policy, UK/Scotland, statistical judgement) from the work we'd already done. It could.
+
+### 4. Edible plants — horticultural aesthetics, then Chernoff flowers
+
+My instruction: *work on edible plants; use it to develop something with nice horticultural aesthetics.* Then, once it was underway, a much more specific and frankly delightful steer: *take inspiration from Chernoff faces and related multidimensional visualisation approaches — but instead of human-like faces, create mappings that generate flower-like glyphs, perhaps also inspired by the variables in the famous iris dataset.*
+
+This produced my favourite artefact of the session: a [garden of glyphs](https://jonminton.github.io/claude-fable-vision-ds-test/edible-plants.html). Claude wrote a small glyph engine that renders each crop as the flower its growing requirements imply — **petal count for sunlight, petal length for time-to-harvest, petal width for water need, centre size for feeding, and petal colour for soil pH** (running hydrangea-style from acid-blue to alkaline-pink). Crucially it closed the loop: the visual impression that fat-petalled flowers tend to have big centres turns out to reflect a *real* correlation between water and nutrient demand. That's the Chernoff bet — that a good visual mapping lets pattern-recognition find structure faster than a table would — made honest.
+
+### 5. Twinned cities — "dazzle me", and a repo escape-hatch I didn't need
+
+The steer here was ambitious: *use the twinned-cities data to dazzle with an interactive map where hover and click activate and toggle twin-lines.* And, anticipating friction, a second steer: *consider deploying on a separate repo and Pages if Quarto turns out too restrictive for a good interactive map.*
+
+The escape hatch went unused. Claude embedded a custom [Leaflet](https://leafletjs.com/) map with hand-written JavaScript directly into the Quarto page: 5,470 cities, hover a city to fan out its sister-city links, click to pin it and compare several at once. It then *opened the page in a browser and tested the interaction itself*, found a real bug (single-link cities were being serialised as bare strings, breaking the JavaScript), fixed it, and re-verified. The [finished map](https://jonminton.github.io/claude-fable-vision-ds-test/twinned-cities.html) is genuinely fun — pin Saint Petersburg and Rio de Janeiro and watch the lines reach across every continent. The honest finding for me: Quarto is far less restrictive for bespoke interactivity than I'd assumed.
+
+### 6. Oldest people — "use a Lexis diagram"
+
+For the first of the older datasets I was prescriptive about the visualisation: *focus on oldest people, and use a Lexis surface/diagram.* Claude took the 200 oldest verified humans and drew them as [lifelines on a Lexis plane](https://jonminton.github.io/claude-fable-vision-ds-test/oldest-people.html) — calendar time across, age up, every life at 45°. On that plane the data stops being a ranked list and becomes a *frontier*: a flat ceiling around 117–119 that has barely risen in thirty years, and Jeanne Calment's lifeline sailing three years beyond anyone else and staying unbroken since 1997. The accompanying text laid out the live demographic argument (hard limit vs no-plateau vs records-are-data-error) without pretending the dataset could settle it.
+
+### 7. US births — calendar effects
+
+The final steer was just a dataset name: *and US births.* From fifteen years of daily counts Claude built a [page on birth timing](https://jonminton.github.io/claude-fable-vision-ds-test/us-births.html): the working-week birth (weekends run about a third below the Tuesday peak, the fingerprint of scheduled inductions and caesareans), holiday troughs on Christmas, New Year, July 4th and Thanksgiving, and — my favourite — a careful test showing births dip **5.3% on Friday the 13th** relative to other Fridays. The care is in the design: by comparing the 13th to *the same weekday's* average, it isolates the date superstition from the much larger weekly scheduling cycle.
+
+## What I take from the hour (or three)
+
+A few things stood out, beyond the plots themselves.
+
+**It distrusts data the way a good analyst does.** Three times — the leave seams, the yen box office, the right-censoring on the longevity records — the most valuable move wasn't a chart but a caveat. Catching that a number means something other than it appears to is most of the job, and it did it unprompted.
+
+**It can close the loop on a visualisation.** The flower glyphs aren't just pretty; the page ends by checking whether the visual impression is real. That instinct to *validate the device* is what separates a dataviz from a decoration.
+
+**It can operate the tools, not just write for them.** Driving a browser to test its own interactive map, finding and fixing a serialisation bug, managing the Git and Pages deployment — this is the [cognitive-centaur](../guano-guild-origin/index.qmd) mode I keep circling back to on this blog. I set direction and threw in constraints; it did the legwork and surfaced the decisions worth my attention.
+
+**The flow state is real, and it's collaborative.** The thing I most wanted — material *emerging* from a conversation rather than from a plan — happened. I never opened RStudio. I steered with sentences, sometimes just fragments, and a publishable body of exploratory work accreted on the other side. Whether that's exhilarating or unnerving depends on the day. Today it was mostly exhilarating.
+
+The whole thing is [on GitHub](https://github.com/JonMinton/claude-fable-vision-ds-test) and [live as a site](https://jonminton.github.io/claude-fable-vision-ds-test/). Fork it, poke at it, pin two cities on the map. The hour was a fiction; the curiosity wasn't.
