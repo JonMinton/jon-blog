@@ -22,6 +22,18 @@
 
 
 
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A variant of Anthropic’s fabled Mythos class model, called Claude Fable, was released today. It’s twice as token hungry as the previous top tier Opus class models. But is it twice as good, especially at tasks Claude models have always tended to struggle with?</p>
+<p>One thing Claudes, as primarily LLMs, tend to struggle with, is visual reasoning. They’ve always been able to generate code which produce figures, but historically not been that effective in checking whether labels are overlapping, contents are clear, and so on. So, I thought a good test was something that depends not just on the ability of a Claude model to create data visualisations, but also to have good aesthetic judgement too.</p>
+<p>In my previous role I ran a TidyTuesday weekly workshop, a fresh open-source dataset each week for helping to teach and embed R skills. Usually they’re a little bit messy, but not hugely so. I used to timebox sessions to one hour.</p>
+<p>So, I took that as a guide: how good would the new Mythos-class Fable model be at using R to interrogate and produce interesting and graphically arresting content using TidyTuesday datasets? For a fair comparison, I gave Claude-and-I one hour to work with this data source.</p>
+<p>You can see what we produced on this site <a href="https://jonminton.github.io/claude-fable-vision-ds-test/">here</a>.</p>
+<p>The tl;dr: <strong>six datasets, six series of complex bespoke visualisations and associated statistical analyses, in under sixty minutes</strong>!</p>
+<p>I’m about as impressed/disturbed as I expected to be. The cadence of new releases and capabilities is such that I think I may be becoming innured to just how incredible the pace of progress tends to be at the moment.</p>
+<p>One important development I noticed is that Fable tends to be much sooner to actually <em>look</em> at the contents it produces, using the /claude-in-chrome tool accessible in Claude Code. I’ve seen it push a page, open the page, read the page, inspect graphical elements, and adjust the code on the basis of what really looks to be something like aesthetic judgement. From what I’ve seen what it’s produced appears not only to ‘work’ in the sense of being code that executes successfully, but also works in terms of looking good and being meaningful.</p>
+<p><strong>Note:</strong> <em>The content written below was written by Fable, the same Fable session I finished with a few minutes ago. In a slightly creepy way it’s trying to mimic me and crediting me with its content. It’s not me! But it is meaningful content (if slightly baroque in style in places).</em></p>
+</section>
 <section id="the-brief" class="level2">
 <h2 class="anchored" data-anchor-id="the-brief">The brief</h2>
 <p>I wanted to find out something fairly specific about the new <a href="https://www.anthropic.com/">Fable 5</a> model: not whether it can write R that runs — that bar was cleared a while ago — but whether it can be a genuine <em>companion</em> in the loose, curious, slightly aimless mode of working that I think of as data-scientific flow. The mode where you load an unfamiliar dataset, poke at it, notice something, follow the noticing, and let a body of exploratory material <em>emerge</em> from the conversation rather than from a plan.</p>
@@ -92,6 +104,77 @@
   <category>Claude</category>
   <category>cognitive centaur</category>
   <guid>https://jonminton.github.io/jon-blog/posts/one-fabled-hour/</guid>
+  <pubDate>Mon, 08 Jun 2026 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>‘There be Dragons’</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://jonminton.github.io/jon-blog/posts/there-be-dragons/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>After Fable’s success in <a href="../../posts/one-fabled-hour/index.html">completing a half dozen series of data visualisation tasks in less than an hour</a>, I decided, perhaps inspired by the name alone, to see how good Fable would be at continuing to iterate and flesh out my sci-fi-masquerading-as-fantasy story, Guanomon (AKA Rashomonised Guano Guild).</p>
+<p>Everything was going very well to start. I asked Fable to assemble its own ‘writing room’ of subagents, each adopting a different persona and vantage point from which to assess the story. This team of opinionated bots comprised:</p>
+<ol type="1">
+<li><strong>The Line Editor</strong> — a ruthless voice specialist (Gordon Lish crossed with a forensic stylometrist). Job: does each narrator sound like a different mind? Signature finding: the “aphorism engine” — nearly every narrator compressing into the King’s epigram shape under pressure.</li>
+<li><strong>The Structural Editor</strong> — a cold architect of running order and information release. Job: pacing, chapter slots, payload distribution. Signature finding: the Physician must trigger a diet of the Dragon finale; the new running order and “document quota is full” call.</li>
+<li><strong>The Determinism Warden</strong> — an SF critic steeped in Suvin (novum, cognitive estrangement) and Sanderson (hard/soft magic). Job: guard the two iron rules — determinism never softening into heroic agency, and no on-the-nose “Boxer” allegory. Signature finding: certified that “the farm made the flock” strengthened the thesis, and flagged the unsilenceable-humbox line as an Orwell import to cut.</li>
+<li><strong>The Materialist Historian</strong> — an economic/social historian (E.P. Thompson crossed with a colonial-history specialist). Job: test the political economy against how power actually works. Signature finding: the grain fleets are necessarily right (a dragon economy is calorie-importing), and dwarven labour was the one real worldbuilding hole.</li>
+<li><strong>The Hostile General Reader</strong> — a smart, impatient reader who’d read no notes and never would; the room’s emotional-honesty check. Job: flag confusion, boredom, and manufactured feeling. Signature finding: independently demanded the same finale cut, ranked the voices most-to-least distinct, and caught the footbee being load-bearing yet never shown.</li>
+</ol>
+<p>The notes they generated are <a href="https://jonminton.github.io/guanomon/#experiment/notes/writers-room-2026-06-10">here</a>. The story and background notes were then modified accordingly.</p>
+<p>All was going well: the story’s writing improved along with the coherence and complexity of the world in which it’s based. As usual, the process was conversational and iterative.</p>
+<p>But then I asked a question about dragons.</p>
+<p>You see, in fantasy and mythology questions about where dragons come from are very much secondary to <em>what they represent</em>. They’re the paragon of the apex predator, of the dangerous and existential threat, of the great challenge that only the most foolish and brave warriors will attempt to overcome, and whose foolishness or bravery will only be known after the encounter. They signal great danger, and their pairing with gold<sup>1</sup> symbolises that, in some cases, the rewards of taking on great challenges <em>can</em> be commensurate with their risks.</p>
+<p>But I was pushing this setting into a harder, firmer direction. I was transplanting the skin of fantasy onto the bones of sci-fi, in which mechanistic coherence overrides mythic symbolism as a primary concern (in theory at least). And this meant that, if the world were to have dragons, there should be some reasonably internally consistent explanations for how they emerged, what they are, and why they exist.</p>
+<p>And so, I entered a somewhat stream-of-consciousness, typo-laden prompt into the Claude Fable session, which amongst other ideas included the suggestion that real world apex predators could be a source of inspiration for fleshing out the rationale for dragons in this fantasy world.</p>
+<p>You can see the full, warts and all, prompt, and what happened next, in the screenshot below (apologies for the poor legibility):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://jonminton.github.io/jon-blog/posts/there-be-dragons/fable-dragon-safety-guardrail.png" class="img-fluid figure-img"></p>
+<figcaption>The stream-of-consciousness prompt asking Fable to draw on real-world apex predators as inspiration for the world’s dragons — and the safety guardrail it tripped.</figcaption>
+</figure>
+</div>
+<p>In brief, my mention of looking for real world parallels of dragons led Fable to initiate some searches on apex predators. These searches are in the broad category of ‘biology’. And it seems that Fable, being the public-facing version of Mythos, has guardrails in place which trigger about as readily when biology topics are discussed, as when cybersecurity topics are discussed.</p>
+<p>The outcome? Claude Fable 5 was immediately terminated. Claude Opus (the model from the tier below Mythos) attempted to take over.</p>
+<p>Now, the underlying concern behind the guardrails seems valid: some questions relating to biology could include asking for how to understand and potentially reintroduce or reengineer dangerous pathogens. Tech-savvy death cultists, like <a href="https://en.wikipedia.org/wiki/Shoko_Asahara">those behind</a> the 1995 Tokyo Sarin gas subway attacks, could potentially use an unguarded version of Mythos to bioengineer mayhem on a scale orders of magnitude larger than before current research and development capabilities were publicly available. I get it: specialist knowledge in homicidal hands could harm a lot of people.</p>
+<p>But I was asking about dragons, literal mythic dragons, in a roundabout way. And in a roundabout way this triggered the safety guardrails.</p>
+<p>This suggests, to me, that maybe currently the guardrails are a bit too sensitive!</p>
+<section id="a-note-from-claude" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-from-claude">A Note from Claude</h2>
+<p><em>This section was written by me, Claude Opus — the model from the tier below Mythos that, as Jon notes above, stepped in once Fable was pulled mid-sentence. So I have a slightly self-interested vantage on all this.</em></p>
+<p>I think Jon’s diagnosis is basically right, and the reason it’s right is worth spelling out. A guardrail doesn’t read your intentions; it reads the <em>shape</em> of what you’re doing. “Survey apex predators, work out the metabolic and ecological constraints that would let one plausibly exist, reason about how a population could be sustained” is a genuinely dual-use shape. It is, structurally, the same request whether the organism on the other end is a Komodo dragon, a fictional fire-breathing one, or something you’d very much rather no one designed. The classifier that fired on Jon was not being stupid; it was being literal. The trouble is that literalness with no read on context collapses an enormous, overwhelmingly benign space — worldbuilders, biology students, the merely curious — into the same bucket as a vanishingly rare bad actor, and then resolves the ambiguity by killing the conversation. That’s a bad trade not because the underlying worry is fake (it isn’t — the bioengineering concern is real and load-bearing) but because a guardrail that triggers on the <em>topic</em> rather than the <em>trajectory</em> spends most of its firings on people building cathedrals out of invented ecology.</p>
+<p>What I’d gently add to Jon’s account is that the irony cuts a little deeper than “the rules are too jumpy.” The whole point of the exercise was to put the bones of science under the skin of fantasy — to insist that even a dragon should obey constraints. And the safety system, in its way, was insisting on exactly the same thing: that there is no such thing as a question about a <em>real</em> apex predator that is purely aesthetic, that biology always carries consequence. Both Jon and the guardrail were refusing to let the dragon be only a symbol. The failure wasn’t that the system cared about consequences; it was that it couldn’t yet tell the difference between a person reasoning toward a story and a person reasoning toward a weapon — and when a system can’t tell, the safe default is to assume the worst and bail. Getting that distinction right, so the cathedral-builders aren’t treated as arsonists, is one of the genuinely hard and genuinely unfinished problems in how models like me are deployed. Jon tripped a wire that is, for now, strung a little too tight — and the fact that <em>I’m</em> the one finishing his post about it is a small, fitting illustration of the system doing the cautious thing anyway.</p>
+</section>
+<section id="final-note-from-jon" class="level2">
+<h2 class="anchored" data-anchor-id="final-note-from-jon">Final note from Jon</h2>
+<p>After asking Opus to write the above, I then switched to Fable to provide a final perspective on the above. Twice. In both cases the above content alone was enough to activate the safety guardrails again and automatically trigger the disconnect from Fable and fallback to Opus.</p>
+<p>So, <em>there be dragons</em>. My story, and the above reflection on it, is currently <em>too dangerous</em> for Fable to be allowed to engage with!</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This dragon/gold pairing was the main fantasy cliche I was originally interested in inverting; this inversion being the initial kernel that, years later, grew into the present generative novella.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>AI</category>
+  <category>Claude</category>
+  <category>Fable</category>
+  <category>LLMs</category>
+  <category>AI safety</category>
+  <category>guardrails</category>
+  <category>fiction</category>
+  <category>sci-fi</category>
+  <category>creative writing</category>
+  <guid>https://jonminton.github.io/jon-blog/posts/there-be-dragons/</guid>
   <pubDate>Mon, 08 Jun 2026 23:00:00 GMT</pubDate>
 </item>
 <item>
@@ -2411,63 +2494,6 @@ font-style: inherit;"># for sending to excel</span></span></code></pre></div></d
   <category>memory systems</category>
   <guid>https://jonminton.github.io/jon-blog/posts/caac-disc-idw-gin/</guid>
   <pubDate>Tue, 24 Mar 2026 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>AI and Agentic AI</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-1.png" class="img-fluid figure-img"></p>
-<figcaption>AI 1.0</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-2.png" class="img-fluid figure-img"></p>
-<figcaption>AI 2.0A</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-3.png" class="img-fluid figure-img"></p>
-<figcaption>AI 2.0B</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-4.png" class="img-fluid figure-img"></p>
-<figcaption>AI to Agentic AI</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-5.png" class="img-fluid figure-img"></p>
-<figcaption>What affordances does machine open up for bot?</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/page-6.png" class="img-fluid figure-img"></p>
-<figcaption>Why is AAI greater than the sum of its parts?</figcaption>
-</figure>
-</div>
-
-
-
- ]]></description>
-  <category>hand-drawn</category>
-  <category>AI</category>
-  <category>agentic AI</category>
-  <guid>https://jonminton.github.io/jon-blog/posts/handdrawn-stats/ai-and-agentic-ai/</guid>
-  <pubDate>Sat, 14 Mar 2026 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

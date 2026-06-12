@@ -375,6 +375,18 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A variant of Anthropic’s fabled Mythos class model, called Claude Fable, was released today. It’s twice as token hungry as the previous top tier Opus class models. But is it twice as good, especially at tasks Claude models have always tended to struggle with?</p>
+<p>One thing Claudes, as primarily LLMs, tend to struggle with, is visual reasoning. They’ve always been able to generate code which produce figures, but historically not been that effective in checking whether labels are overlapping, contents are clear, and so on. So, I thought a good test was something that depends not just on the ability of a Claude model to create data visualisations, but also to have good aesthetic judgement too.</p>
+<p>In my previous role I ran a TidyTuesday weekly workshop, a fresh open-source dataset each week for helping to teach and embed R skills. Usually they’re a little bit messy, but not hugely so. I used to timebox sessions to one hour.</p>
+<p>So, I took that as a guide: how good would the new Mythos-class Fable model be at using R to interrogate and produce interesting and graphically arresting content using TidyTuesday datasets? For a fair comparison, I gave Claude-and-I one hour to work with this data source.</p>
+<p>You can see what we produced on this site <a href="https://jonminton.github.io/claude-fable-vision-ds-test/">here</a>.</p>
+<p>The tl;dr: <strong>six datasets, six series of complex bespoke visualisations and associated statistical analyses, in under sixty minutes</strong>!</p>
+<p>I’m about as impressed/disturbed as I expected to be. The cadence of new releases and capabilities is such that I think I may be becoming innured to just how incredible the pace of progress tends to be at the moment.</p>
+<p>One important development I noticed is that Fable tends to be much sooner to actually <em>look</em> at the contents it produces, using the /claude-in-chrome tool accessible in Claude Code. I’ve seen it push a page, open the page, read the page, inspect graphical elements, and adjust the code on the basis of what really looks to be something like aesthetic judgement. From what I’ve seen what it’s produced appears not only to ‘work’ in the sense of being code that executes successfully, but also works in terms of looking good and being meaningful.</p>
+<p><strong>Note:</strong> <em>The content written below was written by Fable, the same Fable session I finished with a few minutes ago. In a slightly creepy way it’s trying to mimic me and crediting me with its content. It’s not me! But it is meaningful content (if slightly baroque in style in places).</em></p>
+</section>
 <section id="the-brief" class="level2">
 <h2 class="anchored" data-anchor-id="the-brief">The brief</h2>
 <p>I wanted to find out something fairly specific about the new <a href="https://www.anthropic.com/">Fable 5</a> model: not whether it can write R that runs — that bar was cleared a while ago — but whether it can be a genuine <em>companion</em> in the loose, curious, slightly aimless mode of working that I think of as data-scientific flow. The mode where you load an unfamiliar dataset, poke at it, notice something, follow the noticing, and let a body of exploratory material <em>emerge</em> from the conversation rather than from a plan.</p>
