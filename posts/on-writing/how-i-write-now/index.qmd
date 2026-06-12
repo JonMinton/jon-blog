@@ -30,7 +30,9 @@ Inside each of these differently-named folders in `posts/` is an identically-nam
 
 [^claude-footnotes]: Like this.
 
-[^claude-literate]: This interleaving borrows from a related writing paradigm, literate programming and scientific notebooks, which became popular in Jupyter notebooks in Python.[^claude-knuth]
+[^claude-literate]: This interleaving borrows from a related writing paradigm, literate programming and scientific notebooks, which became popular in Jupyter notebooks in Python.
+
+    **Claude Footnote:** Literate programming was introduced by Donald Knuth in 1984. Knuth argued that programs should be written primarily for humans to read, with code interwoven with explanatory prose. This philosophy directly influenced the development of computational notebooks, from Mathematica notebooks in the 1980s through to Jupyter (originally IPython) notebooks which became widely popular in data science from the 2010s onwards.
 
 ![A .qmd file showing the YAML header (fenced by triple hyphens) and the start of the body text](yaml-and-top-of-body-qmd.png){#fig-qmd-example}
 
@@ -133,8 +135,6 @@ I was going to write a longer piece, comparing my current writing and publishing
 But maybe this is as good a place as any to finish. This is a more applied and technically focused post than I was initially planning. So maybe it's best to stop here and turn this from a single post to a short series of posts *on writing*.
 
 [^claude-novels]: **Claude Footnote:** Novel length varies considerably by genre. The Science Fiction and Fantasy Writers Association defines a novel as 40,000+ words, while many literary novels run 70,000-100,000 words. At 200,000 words, Jon's blog output is equivalent to roughly 2-3 typical novels, or about 5 novellas.
-
-[^claude-knuth]: **Claude Footnote:** Literate programming was introduced by Donald Knuth in 1984. Knuth argued that programs should be written primarily for humans to read, with code interwoven with explanatory prose. This philosophy directly influenced the development of computational notebooks, from Mathematica notebooks in the 1980s through to Jupyter (originally IPython) notebooks which became widely popular in data science from the 2010s onwards.
 
 [^claude-thirdplace]: **Claude Footnote:** The concept of "third places" was popularised by sociologist Ray Oldenburg in his 1989 book *The Great Good Place*. Oldenburg defined third places as social environments separate from home (first place) and work (second place) - cafes, pubs, bookshops, and similar spaces that foster community and creative exchange. Jon's use of cafes and pubs for writing aligns with this tradition of third places as sites for intellectual and creative work.
 
