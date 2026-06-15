@@ -150,8 +150,13 @@ body.quarto-dark {
 body.quarto-dark .listing-title {
   opacity: 1;
 }
-body.quarto-dark .listing-category,
 body.quarto-dark .listing-date,
 body.quarto-dark .listing-author {
   color: #adb5bd;                  /* ~6.8:1 on #272b30 — muted but AA-OK */
+}
+/* Listing categories need higher specificity — Bootswatch slate ships
+   `div.quarto-post .listing-categories .listing-category { color: #6c757d }`
+   which beats `body.quarto-dark .listing-category` by class count. */
+body.quarto-dark div.quarto-post .listing-categories .listing-category {
+  color: #adb5bd;
 }
