@@ -140,3 +140,18 @@ body.quarto-dark {
   --bs-emphasis-color: #ffffff;    /* slate ships this as #000 — fix */
   --bs-emphasis-color-rgb: 255, 255, 255;
 }
+
+/* Listing cards (jonminton.github.io/jon-blog/ index, /unpop/, /glms/ etc.)
+   The Quarto listing template hardcodes color: #6c757d on the date,
+   author, and category tags, AND sets opacity: 0.9 on listing-title.
+   On the dark theme these collapse to unreadable grey-on-grey
+   (verified 2026-06-15 in Chrome). Override only when quarto-dark is
+   active so the light theme keeps its intended muted hierarchy. */
+body.quarto-dark .listing-title {
+  opacity: 1;
+}
+body.quarto-dark .listing-category,
+body.quarto-dark .listing-date,
+body.quarto-dark .listing-author {
+  color: #adb5bd;                  /* ~6.8:1 on #272b30 — muted but AA-OK */
+}
