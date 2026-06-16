@@ -160,3 +160,12 @@ body.quarto-dark .listing-author {
 body.quarto-dark div.quarto-post .listing-categories .listing-category {
   color: #adb5bd;
 }
+/* Title links: the H3 already has color: #dee2e6 but the <a class="no-external">
+   inside it carries its own color: #6c757d (Bootswatch slate's muted link
+   colour, fine on light bg, unreadable on dark). Discovered 2026-06-16 —
+   the H3 colour doesn't cascade into anchors because anchors have their
+   own rule. Force the anchor to inherit so the title is fully readable. */
+body.quarto-dark div.quarto-post .listing-title a,
+body.quarto-dark div.quarto-post a.no-external {
+  color: inherit;
+}
