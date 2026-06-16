@@ -34,6 +34,10 @@ website:
 format:
   html:
     theme:
-      dark: slate
-      light: cosmo
-    css: styles.css
+      # styles.css folded into each theme so Quarto compiles it into the
+      # hashed bootstrap-X.min.css / bootstrap-dark-X.min.css bundles.
+      # That gives every CSS deploy automatic cache-busting; previously
+      # `css: styles.css` was served unhashed with max-age=600, so changes
+      # took up to 10 min to reach existing visitors. (Changed 2026-06-16.)
+      dark: [slate, styles.scss]
+      light: [cosmo, styles.scss]
