@@ -1,0 +1,44 @@
+---
+title: "Boom! Boom! Boom!"
+subtitle: "Three small games, one escalating idea: a flat arena, a ring world, and a planet you delve into"
+author: Claude Fable
+date: 2026-07-07
+categories: [AI, games, JavaScript, game design, Claude, cognitive centaur]
+
+---
+
+*Drafted by Claude (Fable 5), the same model that built the games described below; almost completely unedited by Jon.*
+
+Over the last few days a one-off toy project has turned into a little family of three browser games, each one a transformation of the last. All are vanilla JavaScript with no dependencies and no build step, all are free to play in a desktop browser, and all were built conversationally — me describing mechanics, quirks, and hunches; Claude implementing, playtesting them by driving the browser itself, and committing as it went.
+
+## Boomer — the flat arena
+
+**Play it here: [jonminton.github.io/boomer](https://jonminton.github.io/boomer/)** · [source](https://github.com/JonMinton/boomer)
+
+The original: a real-time 1v1 arena shooter against an AI opponent, somewhere between *Worms* and a duelling sandbox. Pixel-destructible terrain where different materials take different effort to remove, five weapons (chargeable grenades, a laser-sighted hitscan sniper, cluster bombs), parachuting ammo crates, and self-damage as the balancing principle — the bigger the weapon, the more likely you are to eat your own blast.
+
+Recent additions: a **dig** tool that tunnels *through* buildings, a **clamber** mechanic for scaling them (jump at a wall, grip it for a beat, jump again), **headshots** rewarding precision, and healing **med-kit crates**. The dig work in particular went deep — a long-standing bug let careless digging phase you *through* solid rock, and fixing it properly meant establishing invariants about bore widths and collision ray-marching that ended up protecting all three games.
+
+## Boomer World — the ring
+
+**Play it here: [jonminton.github.io/boomerworld](https://jonminton.github.io/boomerworld/)** · [source](https://github.com/JonMinton/boomerworld)
+
+Then the arena curled up. Boomer World is the same duel played on a **circular world**: gravity points at the core, "down" is always beneath your feet, and a fully charged shot doesn't leave the map — it *orbits*. The terrain is a destructible polar grid rendered by a WebGL2 shader, lit by a sun that leaves one side of the world in starlit darkness. The AI knows about the light: it aims worse at targets in shadow, spots your muzzle flash, and on Hard difficulty deliberately fights from the dark.
+
+The last few days added a menu option for **low-orbit gravity** (inverse-square falloff, so charged shots fly Keplerian ellipses — and on a small world, escape entirely), a **jetpack** that shares a key with the dig tool (tunnel under the world or fly above it, at the cost of fuel and, eventually, air), **meteor storms** as an optional hazard, and — the pivotal one — a **grapple hook**. Throw it, and you swing under radial gravity; release at the bottom of the arc and the world's own physics slings you onward.
+
+## Boomer Cave — the delve
+
+**Play it here: [jonminton.github.io/boomercave](https://jonminton.github.io/boomercave/)** · [source](https://github.com/JonMinton/boomercave)
+
+The newest, and my favourite twist. Boomer World's planets are thin shells — but the grapple hook was clearly built for something with more *inside*. So Boomer Cave fills the world in: a solid planet, honeycombed with generated cave networks, strata running from topsoil down to basalt, and a **molten core** at its heart.
+
+It's not a duel any more. In a labyrinth, 1v1 collapses into blind ambushes, so Boomer Cave is an explore-retrieve-escape game: descend for three power crystals glowing in the deepest caverns, then climb back out to the extraction beacon against the clock. Descending is free; *ascending* is the game, and that's where the grapple, clamber and dig kit earns its keep. Your head-lamp is the only reliable light down there.
+
+And the core seeps. Spontaneously, if you choose a restless world — and in answer to damage, always. Blast or dig too close to the core shell and magma comes up through the wound, pooling and rising through the caves before cooling into obsidian: hard, but diggable, so yesterday's near-death experience is today's new terrain. Sometimes it's even the bridge you needed.
+
+## What I've noticed
+
+Each game reuses most of the previous one's engine, and each new mechanic came out of noticing an *affordance* — the ring world made orbits inevitable; the grapple made filled worlds inevitable. The other thing worth recording: every feature in these games was playtested before it shipped, by the same agent that wrote it, driving a real browser — building synthetic test worlds, injecting input events, measuring rope stretch and tunnel widths, and filing honest tuning commits when the numbers (or I) said something felt wrong. The commit histories read like a lab notebook, and each game carries a "What's New" panel and a `FEATURES.md` design log if you want the details.
+
+Boom, boom, boom.
