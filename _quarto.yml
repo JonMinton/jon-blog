@@ -2,9 +2,14 @@ project:
   type: website
   output-dir: docs
   pre-render: pre-render.R
+  resources:
+    # CNAME binds the blog.jonminton.net custom domain on GitHub Pages.
+    # It must ship with every publish: `quarto publish gh-pages` rewrites
+    # the whole branch, and losing this file silently unbinds the domain.
+    - CNAME
 website:
   title: Jon Minton's Blog
-  site-url: https://jonminton.github.io/jon-blog/
+  site-url: https://blog.jonminton.net/
   description: Jon Minton's personal blog. All things random.
   twitter-card:
     site: '@jonminton'
