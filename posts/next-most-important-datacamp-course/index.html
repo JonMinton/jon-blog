@@ -572,7 +572,7 @@ Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the r
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/jonminton\.github\.io\/jon-blog\/");
+        var filterRegex = new RegExp("https:\/\/blog\.jonminton\.net\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

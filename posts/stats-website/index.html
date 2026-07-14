@@ -367,7 +367,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>I’ve now taken a lot of my statistics blog material and turned it into a website, available <a href="https://jonminton.github.io/JonStats/pages/extra-courses/hacker-stats/">here</a>.</p>
+<p>I’ve now taken a lot of my statistics blog material and turned it into a website, available <a href="https://stats.jonminton.net/pages/extra-courses/hacker-stats/">here</a>.</p>
 <p>Basically, think of this blog as a ‘staging area’ for statistics material in development, and the stats website as a place where this material is deployed once entire ‘courses’ on particular topics have been completed, rather than in development.</p>
 <p>Feedback on typos, errors and omissions very welcome!</p>
 
@@ -460,7 +460,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/jonminton\.github\.io\/jon-blog\/");
+        var filterRegex = new RegExp("https:\/\/blog\.jonminton\.net\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
