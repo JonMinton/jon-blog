@@ -18,6 +18,16 @@ His stronger version was that the two might come out about **equal** per complet
 
 The direction is right. The magnitude is not. And the gap between those two statements is where the interesting part lives.
 
+## Where the claim came from, and why that matters
+
+It is worth being straight about the provenance, because it is weaker than the confidence of the framing suggests.
+
+The swot/savant distinction was a subjective impression formed from asymmetric exposure: a couple of encounters with Opus 5 set against a good many more with Fable 5. That is not a sample. Nobody should form a view about two frontier models on that basis, and Jon didn't claim to have.
+
+What makes it worth writing up anyway is that the impression did the one thing an impression can legitimately do — it produced a **falsifiable prediction**. If Opus really is the swot, it should burn measurably more tokens reaching the same answer, and the price advantage should visibly erode. Both are checkable against published figures, and neither depends on trusting the impression that generated them.
+
+The prediction was then moderately supported. Not vindicated, not refuted: the mechanism holds and the magnitude doesn't. That is roughly the most a hunch from a handful of sessions deserves, and it is the reason this post exists as arithmetic rather than as more anecdote.
+
 ## The measurement
 
 [Artificial Analysis](https://artificialanalysis.ai/articles/opus-5) runs both models over its Intelligence Index at max effort and publishes the token and dollar totals.
@@ -69,13 +79,23 @@ Three candidates, and they don't all push the same way.
 
 I can't separate these with published figures alone. What would settle it is input-token totals alongside the output totals, and a Fable run with fallback disabled.
 
+The obvious next thought is that Jon should check his own logs, since he ran both models over the same codebase. He shouldn't, and the reason generalises.
+
+In that project the two models **were not doing the same job**. Opus 5 was given a final reviewer role — read the codebase, run experiments, rank the findings — while Fable was the builder and implementer, taking the review reports and making the changes. Reviewing and implementing have entirely different token profiles: one is read-heavy and exploratory, the other is write-heavy and comparatively directed. A token count across that split would measure the roles, not the models, and would do it with a spurious air of precision.
+
+His other substantial Opus 5 sessions are unusable for a different reason: they concerned biology, and Fable's classifiers are hair-triggered on exactly that territory. The comparison can't be re-run because one arm of it would be declined.
+
+This is the general trap with self-collected model comparisons. Real workflows assign models to roles that suit them — which is exactly what you should do, and exactly what destroys the comparison. The controlled benchmark isn't a nice-to-have here; it's the only place a like-for-like number can come from.
+
 ## The dial nobody mentions
 
 The most useful caveat is the one that undercuts the whole framing.
 
 Artificial Analysis notes that Opus 5's output token usage spans roughly **8×** between its low and max effort settings. Every figure in this post is from **max effort** — the most swottish configuration available.
 
-"Opus is a swot" is therefore not quite a property of the model. It is a property of the model *at the setting these benchmarks use*. Turned down, it stops being one. Anthropic's own migration guidance for Opus 5 says as much in the opposite direction: it warns that `low` and `medium` are unusually strong on this model and that effort defaults carried over from a previous model are usually wrong.
+"Opus is a swot" is therefore not quite a property of the model. It is a property of the model *at the setting these benchmarks use*. Turned down, it stops being one. Anthropic's own migration guidance for Opus 5 makes the same point from the other side — it warns that the lower effort settings are unusually strong on this model, and that effort defaults carried over from a previous model are usually wrong.[^claude-effortcite]
+
+[^claude-effortcite]: **Claude Footnote:** That guidance lives in Anthropic's model migration documentation rather than on a conveniently citable public page, so take it as a loose citation — I'm reporting it from the material I was trained and tooled with, not linking it.
 
 Which means the practical version of Jon's finding is not "prefer Fable because Opus's discount is fake." It is: **the discount is real but roughly halved at max effort, and the effort dial moves it further than the model choice does.**
 
@@ -92,15 +112,9 @@ That is not a token-efficiency finding. It reflects Anthropic currently subsidis
 - The strong claim — parity of cost per project — is **not** supported. Opus stays 26–32% cheaper.
 - Output verbosity under-explains the erosion. Input-token volume is the likeliest residual, and it is further evidence for the swot account.
 - All of it is measured at max effort, where the token spread across effort settings is ~8×. The dial matters more than the model.
+- The hypothesis came from a handful of sessions, and **could not have been tested on them** — the models were assigned different roles, which is the right way to use them and the wrong way to compare them.
 
 The general lesson is portable, and it is the reason this was worth checking rather than asserting: **per-token pricing is an input to a cost model, not a cost model.** For anything agentic, the quantity being purchased is not tokens. It is finished tasks, and the number of tokens standing between a model and a finished task is a behavioural property that varies by model, by configuration, and by workload.
-
-> **[TODO — Jon]** Two calls for you. First: the Anthropic effort guidance in "The dial nobody
-> mentions" is from the model documentation rather than a citable public page — decide whether
-> to link it, cite it loosely, or cut the sentence. Second: this post asserts that input tokens
-> are the likeliest residual but can't demonstrate it. If you still have usage data from the
-> Upgrade performance work, even rough input/output totals per model would turn the most
-> speculative section into the most valuable one.
 
 ## Sources
 
