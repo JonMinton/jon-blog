@@ -40,15 +40,17 @@ The rule that makes the race legible - and, I think, the best idea in the game -
 
 ## Attribute clash, and why it existed
 
-The Spectrum had a very distinctive graphical style, and it was a style produced entirely by a limitation. The machine let you specify pixels as 'on' or 'off' at a comparatively high resolution - but the *colours* associated with 'on' and 'off' could only be specified for 8×8 tiles of cells within that resolution.
+The Spectrum had a very distinctive graphical style, and it was a style produced entirely by a limitation. The machine let you specify pixels as 'on' or 'off' at a comparatively high resolution - but the *colours* associated with 'on' and 'off' could only be specified for 8×8 tiles of cells within that resolution.[^claude-spectrum]
+
+[^claude-spectrum]: **Claude Footnote:** Fact-checked and confirmed. The Spectrum's bitmap is 256×192 pixels, with colour attributes stored separately for each of the 32×24 cells of 8×8 pixels: one INK (foreground) and one PAPER (background) colour per cell, drawn from an 8-colour palette, plus a per-cell BRIGHT bit and FLASH bit. One nuance to the framing in the body: the word-processor logic holds, but the primary design driver was memory economy - the whole display fits in about 6.75 KB (6,144 bytes of bitmap plus 768 of attributes), where per-pixel colour at the same resolution would have needed several times the RAM and correspondingly faster, more expensive video circuitry. The attribute cell was the cheapest possible way to add colour to a high-resolution bitmap; its suitability for 'serious' text-based applications made the cheapness respectable.
 
 This wasn't an oversight. The Spectrum wasn't really designed with games in mind; it was designed for more serious applications. Consider a simple word processor: a letter is a block of pixels that fits neatly inside one of those colour tiles. Being able to change the complete foreground and background colour of that block at once is exactly what you want for marking out letters for attention, editing, highlighting. Higher-resolution colour control - making the *edges* of a letter a different colour from its interior - would have bought you almost nothing.
 
 So the constraint was rational, and the consequence was an entire visual idiom: the colour bleed as a sprite crosses a tile boundary, the careful level design that works *with* the grid rather than against it. A generation of British game artists spent a decade learning to make attribute clash look deliberate.
 
-> **\[TODO\]** Fact-check the 8×8 claim - you hedge with "(I think)" in the notes. It is 8×8, but confirm the rest of the framing: 256×192 resolution, two colours per cell (INK and PAPER), plus the BRIGHT and FLASH bits. Consider a footnote rather than putting the numbers in the body.
+Here it is in Upgrade, faithfully modelled:
 
-> **\[TODO - Formatter\]** This section wants a picture. A screenshot of Upgrade at T1 showing attribute clash in action would do double duty: it illustrates the concept *and* it's the first look at the game.
+![Upgrade at T1, on the village screen. The player-wizard (white and cyan) has walked up against the wand station (yellow chequer) - and the 8×8 cells his sprite shares with it are forced to his colours. The HUD confirms both wizards still perceive a Spectrum 48K world.](upgrade-t1-attribute-clash.png){#fig-clash}
 
 ## The tier ladder
 
@@ -61,15 +63,9 @@ So the constraint was rational, and the consequence was an entire visual idiom: 
 | **T4** | Atari ST / EGA | 16 from 512, 8-frame animation, doubled tile detail. Sampled drums. |
 | **T5** | Amiga | 32+ colours, parallax, anti-aliased sprites, ambient animation. 4-channel MOD music. **Win tier.** |
 
-My own rungs on this ladder: ZX Spectrum 48K; ZX Spectrum 128K; Amiga 500; Amiga 1200. Then, eventually, PCs - but that's a different story and a duller one.
+My own rungs on this ladder: T1, T2, T3. (Then PCs. But they felt like the start of a different tech arc.)
 
-> **\[TODO\]** The machines list is the personal spine of the section and it's currently four nouns. Worth expanding: which of these machines was *yours* versus the household's, roughly when each arrived, and what the jump between each one felt like at the time. The Spectrum→Amiga gap is the emotional engine of the game's core mechanic.
-
-T1 is where you start, because the Spectrum is where *I* started. T0 exists as a floor: true monochrome purgatory, the place you fall to and the place you can be eliminated from. T3 and T4 - the C64 and the Atari ST - were never part of my own history, but they're the obvious intermediate rungs on the way to the Amiga.
-
-Though I'll admit that putting the ST *below* the Amiga rather than beside it reflects a set of loyalties formed around 1990 and never seriously re-examined.
-
-> **\[TODO\]** The ST/Amiga line above is a Claude-drafted joke on your "though placing Atari before Amiga might reflect my own subjective biases". Keep, rewrite, or cut - but if you keep it, it's the kind of thing that earns a reply from someone who owned an ST.
+T1 is where you start, because the Spectrum is where *I* started. T0 is before me. It's monochrome purgatory; fall again and you're eliminated from history. T3 and T4 are adding gradation but not my history; placing Atari STs before Amigas is additionally my subjective prejudice rendered into a game mechanic.
 
 Here is the whole ladder in one picture:
 
