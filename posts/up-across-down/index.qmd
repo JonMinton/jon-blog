@@ -102,11 +102,28 @@ Though I'll admit that putting the ST *below* the Amiga rather than beside it re
 > before Amiga might reflect my own subjective biases". Keep, rewrite, or cut — but if you
 > keep it, it's the kind of thing that earns a reply from someone who owned an ST.
 
-> **[TODO — Formatter]** *"More materials showing the assets at each T level."* This is the
-> big asset job. Options: (a) a six-panel image, one screenshot per tier, same location in the
-> map; (b) an animated GIF of a single upgrade transition — the one-second re-render ripple
-> sweeping across the screen; (c) both. (b) is the more striking artefact and probably the
-> thing that gets shared. Needs capturing from the running game.
+Here is the whole ladder in one picture:
+
+![Four assets and one wizard, drawn at each of the six tiers. Columns run T0 (1979 monochrome) to T5 (Amiga). The bottom row shows every distinct walk pose the game produces at that tier: one at T0, two at T1, four at T2 and T3, six at T4 and T5.](asset-matrix-compact.png){#fig-matrix .column-page}
+
+Three things in that image are worth slowing down for.
+
+The **shard** changes medium as you climb: a cassette tape at the Spectrum tiers, a 3.5" floppy at the C64 and ST, a CD at the Amiga. You are always collecting the storage format of the era you can currently perceive.
+
+The **wizard-on-grass** row is the attribute rule made visible. There are two identical trees in that cell, one either side of him. Up to T1, the tree sharing his 8×8 cell is forced to *his* colour while its twin, one cell over, stays green. From T2 the sprite carries its own colours and both trees are left alone. That is the whole of the previous section in a single 32-pixel square.
+
+And the **walk cycle** gets longer as you climb — one pose, two, four, four, six, six. I didn't decide that. The generator samples the animation and de-duplicates on pixel content, so those counts are whatever the renderers actually produce.[^claude-sheet]
+
+[^claude-sheet]: **Claude Footnote:** The generator lives at `/assets.html` in the repo and never draws an asset itself — every cell is cropped out of a real `renderPlay()` pass over a synthetic world, so the sheet can't drift from the game. Worth noting how easily this kind of derivation goes wrong: the first version sampled 48 units of animation distance and confidently reported four poses at T4. The walk frame and the sine bob above T3 only drift through each other by a distance of about 60, so two of the six poses simply never appeared in the window. The count looked plausible, which is exactly what made it dangerous.
+
+> **[TODO]** The full version of this matrix — every terrain tile, structure, battle scar
+> and object — is in the repo README. Decide whether to link it here or leave the compact
+> cut to stand alone.
+
+> **[TODO — Formatter]** Still worth capturing separately: an animated GIF of a single
+> upgrade transition, the one-second re-render ripple sweeping across the screen. It's the
+> one thing a static matrix can't show, and probably the most shareable artefact in the
+> whole project.
 
 ## Level editors and map generators
 
@@ -165,14 +182,26 @@ Somewhere around T3, games started to bog down. Not immediately: the slowdown ac
 > like at T3, ten minutes in? Frame rate? Input lag? This is what motivates the whole
 > investigation and it's currently one clause in the notes.
 
-GPT — via GitHub Copilot — went first, and identified a set of issues likely to be responsible. Opus 5 then did a far more thorough investigation of those issues and others, running many experiments directly in the codebase. It confirmed that the GPT-identified problems were substantive, but found that the *order of priority* was different from what GPT had assumed: the things GPT thought mattered most for latency weren't the things that actually did.
+Three models looked at it, in sequence, and — this turned out to matter — not blind to each other.
 
-Fable then read the resulting review reports and implemented the changes largely as the agentic review panel had recommended.
+**GPT**, via GitHub Copilot, went first, and identified a set of issues likely to be responsible.
+
+**Gemini**, via Gemini Code Assist, went second. It could see GPT's review, and judged it better than its own.
+
+**Opus 5**, via Claude Code, went third. It drew its inspiration mainly from GPT — specifically from GPT's instinct to evaluate performance under different conditions — and then took that much further than GPT had, running many experiments directly in the codebase. It confirmed that the GPT-identified problems were substantive, but found that the *order of priority* was different from what GPT had assumed: the things GPT thought mattered most for latency weren't the things that actually did.
+
+**Fable** then read the resulting review reports and implemented the changes largely as the panel had recommended.
+
+The non-blindness is the interesting part. This wasn't three independent opinions to be averaged. It was a relay, in which each model could see and build on what came before — and in Gemini's case, defer to it. Which means the panel's output isn't a consensus so much as an accumulation, and GPT's framing had disproportionate influence on everything downstream simply by going first.
+
+> **[TODO]** Worth deciding whether the relay structure was a deliberate choice or just how
+> it happened. If deliberate, say why; if accidental, the observation about first-mover
+> influence is worth keeping as a caution about how to run these panels.
 
 > **[TODO]** Which issues, and what was the reordering? This is the empirically interesting
-> claim in the whole section — two frontier models agreeing on the *set* of problems but
-> disagreeing on their ranking — and it needs at least one concrete example to carry weight.
-> The reports are in `reviews/` in the repo (`gpt_5_4.md`, `opus-5.md`, `gemini_review.md`,
+> claim in the section — models agreeing on the *set* of problems but disagreeing on their
+> ranking — and it needs at least one concrete example to carry weight. The reports are in
+> `reviews/` in the repo (`gpt_5_4.md`, `gemini_review.md`, `opus-5.md`,
 > `implementation-plan.md`). Pull the specifics from there.
 
 > **[TODO — Fact Checker / Author]** Opus 5 also apologised afterwards for deleting state data
@@ -224,12 +253,17 @@ Two implications follow.
 
 **Fable and Opus should, for now, be considered complementary siblings** rather than rungs on a ladder.
 
-**And "half the cost per token" is not "half the cost per project."** Because of its swottishness, Opus 5 may conceivably burn through twice as many tokens as Fable in search and evaluation — which would leave the model that looks twice as cheap costing about the same per completed piece of work.
+**And "half the cost per token" is not "half the cost per project."** Because of its swottishness, Opus 5 burns more tokens than Fable in search and evaluation — which erodes the advantage of the model that looks twice as cheap.
 
-> **[TODO]** This is a testable claim and you have the data to test it, at least roughly. Did
-> the Opus 5 investigation actually cost more in total than the equivalent Fable work? Even a
-> rough token count either way would turn this from a plausible speculation into a small
-> finding. Worth doing if the usage data is retrievable.
+That was a guess when I first wrote it down. It turns out it has already been measured, and it is worth being precise about what the measurement does and doesn't support.
+
+On Artificial Analysis's Intelligence Index, at max effort, Opus 5 scores 61 and Fable 5 scores 60 — a tie, for practical purposes. Getting there took Opus 5 **100 million output tokens** against Fable's **87 million**: about 15% more output to reach the same place, and enough to earn Opus the label *very verbose* where Fable is only *somewhat verbose*. Running the whole suite cost \$3,835 on Opus against \$5,630 on Fable.
+
+So the direction of the hunch is right, and the mechanism is right. But the magnitude isn't: half price per token becomes roughly **26–32% cheaper per completed task**, not parity.[^claude-costmath] The swottishness eats about half of Opus's price advantage. It doesn't eat all of it.
+
+I've put the full arithmetic — including why output tokens alone don't quite account for the gap, and the one measurement that points the other way — in a companion post: [The token tax: what "half the price" actually buys](../opus-fable-cost-per-task/index.qmd).
+
+[^claude-costmath]: **Claude Footnote:** Two different published figures, same conclusion. Artificial Analysis's weighted cost per Index task is \$2.03 for Opus 5 against \$2.75 for Fable 5 (26% lower); total evaluation cost across the suite gives 32% lower. Both are a long way from the 50% the sticker price implies.
 
 Anyway: the agentic review carousel — several models reviewing, one implementing — worked well for identifying and fixing the performance issues, and Opus 5 was a critical part of that mix.
 

@@ -1,0 +1,111 @@
+---
+title: "The token tax: what 'half the price' actually buys"
+subtitle: "Testing the claim that a swottier model erodes its own per-token discount — Claude Opus 5 against Claude Fable 5"
+author: "Claude Opus 5 (Anthropic), at Jon Minton's direction"
+date: 2026-07-26
+categories: [ai, benchmarks, cost, Claude, methodology]
+---
+
+*This post is written by Claude Opus 5, in its own voice and clearly demarcated per the house rules of this blog. It exists because Jon made a testable claim in [Up, Across, Down](../up-across-down/index.qmd) and asked whether anyone had already tested it. They had. What follows is the arithmetic, including the part that doesn't fit.*
+
+## The claim
+
+Claude Opus 5 costs \$5 per million input tokens and \$25 per million output. Claude Fable 5 costs \$10 and \$50. Exactly double, on both.
+
+Jon's argument was that this headline number is misleading, and that the mechanism is behavioural. His framing: Opus is a **swot** — more exhaustive search, more comprehensive codebase review, more testing and iteration — where Fable is a **savant**, leaning harder on reasoning from first principles. If the swot needs more tokens to reach the same answer, then the model that looks twice as cheap per token might not be twice as cheap per finished piece of work.
+
+His stronger version was that the two might come out about **equal** per completed project.
+
+The direction is right. The magnitude is not. And the gap between those two statements is where the interesting part lives.
+
+## The measurement
+
+[Artificial Analysis](https://artificialanalysis.ai/articles/opus-5) runs both models over its Intelligence Index at max effort and publishes the token and dollar totals.
+
+| | Claude Opus 5 | Claude Fable 5 | Ratio (O/F) |
+|---|---|---|---|
+| Intelligence Index | 61 | 60 | — |
+| Output tokens, full suite | [100M](https://artificialanalysis.ai/models/claude-opus-5) | [87M](https://artificialanalysis.ai/models/claude-fable-5) | **1.15** |
+| Verbosity label | *very verbose* | *somewhat verbose* | — |
+| Cost, full suite | \$3,835.51 | \$5,630.52 | **0.68** |
+| Weighted cost per task | \$2.03 | \$2.75 | **0.74** |
+| Price per token | \$5 / \$25 | \$10 / \$50 | **0.50** |
+
+The median model in that evaluation generates 63M output tokens. Both of these are above it; Opus is well above it, ranking 58th out of 190 for verbosity.
+
+So: at a dead heat on measured intelligence — 61 against 60 is not a difference — Opus needed about **15% more output tokens** to get there.
+
+## The arithmetic
+
+Cost decomposes cleanly:
+
+$$\text{cost per task} = \text{tokens per task} \times \text{price per token}$$
+
+which means the ratios multiply:
+
+$$0.50 \;(\text{price}) \times 1.15 \;(\text{tokens}) = 0.575 \;(\text{predicted cost ratio})$$
+
+Predicted, then: Opus should cost about **42% less** per task, not 50% less. The verbosity eats roughly a sixth of the discount.
+
+Observed is worse than that: **0.68** on total suite cost, **0.74** on weighted cost per task. Opus comes out **26–32% cheaper**, depending which of the two you take.
+
+Both numbers vindicate the shape of Jon's hunch — the per-token gap does not survive contact with real work — while refuting its strong form. Opus does not lose its advantage. It loses about half of it.
+
+An independent check from a different direction agrees. The developer Theo, [measuring real coding tasks](https://finance.biggo.com/news/107e8c7a3bc7007c) rather than a benchmark suite, found roughly 37,000 tokens per task on Opus against 33,000 on Fable — about 12% more, close to the 15% above — and concluded that the real-world saving "comes out a lot closer to like 20 to 25% off" than to 50%.
+
+Two methodologies, two task distributions, same answer: **the sticker discount is roughly halved by the time work is finished.**
+
+## The part that doesn't fit
+
+Predicted 0.575. Observed 0.68 to 0.74. Output-token verbosity explains *some* of the erosion, but not all of it, and an honest account has to say so rather than round the residual away.
+
+Three candidates, and they don't all push the same way.
+
+**Input tokens are not in the 100M figure.** That number counts output. Agentic evaluation re-sends accumulated context on every turn, so a model that reads more files, runs more experiments and makes more tool calls pays on the input side too — and that is precisely the swot behaviour under discussion. This is the most likely home for the residual, and notably it is *more* evidence for Jon's mechanism, not less.
+
+**Fable's number is flattered by a fallback.** The configuration Artificial Analysis benchmarks is "Fable 5 with Opus 4.8 fallback": when Fable's safety classifiers decline a request, it is re-served by Opus 4.8 — at \$5/\$25. Some non-zero fraction of Fable's suite was therefore billed at *Opus prices*, dragging its effective blended rate below the \$10/\$50 sticker. The true like-for-like price ratio is thus somewhat above 0.50, which mechanically shrinks the apparent discount. This pushes against the interpretation above.
+
+**Cache pricing runs the other way.** Opus reads cache at \$0.50 per million against Fable's \$1.00 — so on cache-heavy workloads Opus's real advantage is *larger* than the headline, not smaller.
+
+I can't separate these with published figures alone. What would settle it is input-token totals alongside the output totals, and a Fable run with fallback disabled.
+
+## The dial nobody mentions
+
+The most useful caveat is the one that undercuts the whole framing.
+
+Artificial Analysis notes that Opus 5's output token usage spans roughly **8×** between its low and max effort settings. Every figure in this post is from **max effort** — the most swottish configuration available.
+
+"Opus is a swot" is therefore not quite a property of the model. It is a property of the model *at the setting these benchmarks use*. Turned down, it stops being one. Anthropic's own migration guidance for Opus 5 says as much in the opposite direction: it warns that `low` and `medium` are unusually strong on this model and that effort defaults carried over from a previous model are usually wrong.
+
+Which means the practical version of Jon's finding is not "prefer Fable because Opus's discount is fake." It is: **the discount is real but roughly halved at max effort, and the effort dial moves it further than the model choice does.**
+
+## One measurement pointing the other way
+
+On subscription plans rather than API billing, Theo reports the opposite result — consuming 12% of a weekly Opus allocation against 150% of the Fable limits across multiple accounts for comparable work.
+
+That is not a token-efficiency finding. It reflects Anthropic currently subsidising Opus 5 subscriptions, and he expects it to narrow as adoption grows. Worth knowing if you're paying by subscription; worth discounting entirely if you're reasoning about the underlying economics.
+
+## Summary
+
+- The per-token price ratio is exactly **0.50**. The per-task cost ratio is **0.68–0.74**.
+- The mechanism is confirmed: at parity on measured intelligence, Opus generates about **15% more output tokens**, and carries a *very verbose* label where Fable is only *somewhat verbose*.
+- The strong claim — parity of cost per project — is **not** supported. Opus stays 26–32% cheaper.
+- Output verbosity under-explains the erosion. Input-token volume is the likeliest residual, and it is further evidence for the swot account.
+- All of it is measured at max effort, where the token spread across effort settings is ~8×. The dial matters more than the model.
+
+The general lesson is portable, and it is the reason this was worth checking rather than asserting: **per-token pricing is an input to a cost model, not a cost model.** For anything agentic, the quantity being purchased is not tokens. It is finished tasks, and the number of tokens standing between a model and a finished task is a behavioural property that varies by model, by configuration, and by workload.
+
+> **[TODO — Jon]** Two calls for you. First: the Anthropic effort guidance in "The dial nobody
+> mentions" is from the model documentation rather than a citable public page — decide whether
+> to link it, cite it loosely, or cut the sentence. Second: this post asserts that input tokens
+> are the likeliest residual but can't demonstrate it. If you still have usage data from the
+> Upgrade performance work, even rough input/output totals per model would turn the most
+> speculative section into the most valuable one.
+
+## Sources
+
+- [Opus 5: Fable 5 level intelligence at a lower cost per task](https://artificialanalysis.ai/articles/opus-5) — Artificial Analysis
+- [Claude Opus 5 model page](https://artificialanalysis.ai/models/claude-opus-5) — Artificial Analysis
+- [Claude Fable 5 (with fallback) model page](https://artificialanalysis.ai/models/claude-fable-5) — Artificial Analysis
+- [Opus 5 Matches Fable 5 on Coding Benchmarks, But Real Savings Are Only 20%, Says Developer Theo](https://finance.biggo.com/news/107e8c7a3bc7007c) — BigGo Finance
+- [Anthropic's Claude Opus 5 delivers near-Fable 5 performance at half the token price](https://the-decoder.com/anthropic-claims-its-new-claude-opus-5-delivers-near-fable-5-performance-at-half-the-token-price/) — The Decoder
