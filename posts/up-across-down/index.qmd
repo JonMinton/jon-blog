@@ -18,7 +18,7 @@ As [this video essay](https://www.youtube.com/watch?v=w7U8qCLbBUo) makes clear, 
 
 But the core loop - search, collect, upgrade, repeat; all while competing against a rival trying to do the same - along with the highly distinct visual 'style' of the ZX Spectrum, made me think maybe there's something worth pulling out of misremembered nostalgia and making real in the present day. And it made me think of the Home Computer systems I had during the 1980s through to mid 1990s, and how the types of game, and experience of gaming, changed with each system.
 
-From this, the kernel of a game idea, Upgrade, was born. And with Claude Fable, in the Claude Code scaffold, it turned out this game idea was relatively straightforward to conjur into some form of existence. And then, more promisingly, to iterate upon and tune through more than a dozen rounds of playtesting and feature development.
+From this, the kernel of a game idea, Upgrade, was born. And with Claude Fable, in the Claude Code scaffold, it turned out this game idea was relatively straightforward to conjure into some form of existence. And then, more promisingly, to iterate upon and tune through more than a dozen rounds of playtesting and feature development.
 
 # Up: The Upgrade Game
 
@@ -26,23 +26,21 @@ From this, the kernel of a game idea, Upgrade, was born. And with Claude Fable, 
 
 ## The core loop
 
-The core conceit is that the upgrades don't make your character stronger. They make the *game* better.
+The core conceit is that the upgrades don't make your character stronger. They make the *game's graphics and audio* better.
 
-Every entity in the world - you, your rival, the environment - has a development tier. The tier controls only presentation: resolution, palette, colour rules, animation smoothness, sound hardware. Movement speed, attack power and health are identical at every tier. What you are racing for is not power. It is fidelity.
+Every entity in the world - you, your rival, the environment - has a development tier. (TX, from X=0 through X=5). The tier controls only presentation: resolution, palette, colour rules, animation smoothness, sound hardware. Movement speed, attack power and health are identical at every tier. What you are racing for is not power. It is fidelity.
 
-The loop wrapped around that conceit is Feud's, transplanted. You navigate a flick-screen arena - a British-folklore valley of village, greenwood, marsh and ruined keep - looking for shards: relics of future hardware half-buried in the landscape, a thermionic valve glowing among the reeds, a 3.5" floppy stuck in a tree like the sword in the stone. Gather three, carry them to the Standing Stones, and survive a three-second channelling ritual - interruptible, naturally, by anyone minded to shoot you mid-chant - and the whole game re-renders underneath you, one tier closer to 1995.
+The loop wrapped around that conceit is Feud's, transplanted. You navigate a flick-screen arena - a British-folklore valley of village, greenwood, marsh and ruined keep - looking for shards: relics of future hardware half-buried in the landscape, a thermionic valve glowing among the reeds, a 3.5" floppy stuck in a tree like the sword in the stone. Gather three, carry them to the Standing Stones, and survive a three-second channelling ritual (longer at the final ascension stage) - interruptible, naturally, by anyone minded to shoot you mid-chant - and the whole game re-renders underneath you, one tier closer to 1995.
 
 You are not the only one foraging. Kernagh, a rival hedge-wizard, starts at the same tier as you but on the far side of the valley, and wants exactly what you want. Combat is kept simple: one projectile, a crackling static bolt; three hits and you are derezzed - dissolved into a burst of noise pixels, dropping every shard you were carrying where you fell, respawning at your home village one tier lower than you were. And there are two ways to win: transcendence, in which you reach the top tier, gather three final shards, and complete one last, longer ritual before Kernagh does; or elimination, in which you derez him while he is already scraping along the floor at T0. Each, of course, has its mirror image, in which the wizard transcended against, or derezzed at rock bottom, is the player, and the game is thereby lost rather than won.
 
-The rule that makes the race legible - and, I think, the best idea in the game - is this: the *environment* renders at your tier, but each *avatar* renders at its own. The world is your game; the rival is a visitor from his. So a silky sixteen-colour sprite gliding through your attribute-clashing Spectrum forest tells you instantly - and unsettlingly - that Kernagh is ahead. It works on the ear as well as the eye: his footsteps and zaps bleed through from adjacent screens at *his* tier's sound quality. Beeper clicks while he trails you; increasingly rich stereo samples as he pulls away.
-
-> **\[TODO\]** "I think" in that last paragraph is quietly doing attribution work - decide how you want to credit the rendering rule (yours, Claude's, or emergent from the back-and-forth) and adjust.
+Although the comparative levels of the two wizards are shown in the status screen alongside the play arena, it also leaked through in the rival's aesthetics: if you're at T2 while Kernagh is at T4, for instance, then when Kernagh appears on screen he's the only entity visible to you, in the whole arena, who *doesn't* experience colour clash!
 
 ## Attribute clash, and why it existed
 
-The Spectrum had a very distinctive graphical style, and it was a style produced entirely by a limitation. The machine let you specify pixels as 'on' or 'off' at a comparatively high resolution - but the *colours* associated with 'on' and 'off' could only be specified for 8×8 tiles of cells within that resolution.[^claude-spectrum]
+The Spectrum had a very distinctive graphical style, and it was a style produced entirely by a limitation. The machine let you specify pixels as 'on' or 'off' at a comparatively high resolution - but the *colours* associated with 'on' and 'off' could only be specified for 8×8 tiles of cells within that resolution.[^1]
 
-[^claude-spectrum]: **Claude Footnote:** Fact-checked and confirmed. The Spectrum's bitmap is 256×192 pixels, with colour attributes stored separately for each of the 32×24 cells of 8×8 pixels: one INK (foreground) and one PAPER (background) colour per cell, drawn from an 8-colour palette, plus a per-cell BRIGHT bit and FLASH bit. One nuance to the framing in the body: the word-processor logic holds, but the primary design driver was memory economy - the whole display fits in about 6.75 KB (6,144 bytes of bitmap plus 768 of attributes), where per-pixel colour at the same resolution would have needed several times the RAM and correspondingly faster, more expensive video circuitry. The attribute cell was the cheapest possible way to add colour to a high-resolution bitmap; its suitability for 'serious' text-based applications made the cheapness respectable.
+[^1]: **Claude Footnote:** Fact-checked and confirmed. The Spectrum's bitmap is 256×192 pixels, with colour attributes stored separately for each of the 32×24 cells of 8×8 pixels: one INK (foreground) and one PAPER (background) colour per cell, drawn from an 8-colour palette, plus a per-cell BRIGHT bit and FLASH bit. One nuance to the framing in the body: the word-processor logic holds, but the primary design driver was memory economy - the whole display fits in about 6.75 KB (6,144 bytes of bitmap plus 768 of attributes), where per-pixel colour at the same resolution would have needed several times the RAM and correspondingly faster, more expensive video circuitry. The attribute cell was the cheapest possible way to add colour to a high-resolution bitmap; its suitability for 'serious' text-based applications made the cheapness respectable. (For more on Sinclair's machines and their afterlives, see [The Ghost Life of Tech](../ghost-life-of-tech/index.qmd).)
 
 This wasn't an oversight. The Spectrum wasn't really designed with games in mind; it was designed for more serious applications. Consider a simple word processor: a letter is a block of pixels that fits neatly inside one of those colour tiles. Being able to change the complete foreground and background colour of that block at once is exactly what you want for marking out letters for attention, editing, highlighting. Higher-resolution colour control - making the *edges* of a letter a different colour from its interior - would have bought you almost nothing.
 
@@ -63,7 +61,7 @@ Here it is in Upgrade, faithfully modelled:
 | **T4** | Atari ST / EGA | 16 from 512, 8-frame animation, doubled tile detail. Sampled drums. |
 | **T5** | Amiga | 32+ colours, parallax, anti-aliased sprites, ambient animation. 4-channel MOD music. **Win tier.** |
 
-My own rungs on this ladder: T1, T2, T3. (Then PCs. But they felt like the start of a different tech arc.)
+My own rungs on this ladder: T1, T2, T5. (Then PCs. But they felt like the start of a different tech arc.)
 
 T1 is where you start, because the Spectrum is where *I* started. T0 is before me. It's monochrome purgatory; fall again and you're eliminated from history. T3 and T4 are adding gradation but not my history; placing Atari STs before Amigas is additionally my subjective prejudice rendered into a game mechanic.
 
@@ -75,13 +73,11 @@ Three things in that image are worth slowing down for.
 
 The **shard** changes medium as you climb: a cassette tape at the Spectrum tiers, a 3.5" floppy at the C64 and ST, a CD at the Amiga. You are always collecting the storage format of the era you can currently perceive.
 
-The **wizard-on-grass** row is the attribute rule made visible. There are two identical trees in that cell, one either side of him. Up to T1, the tree sharing his 8×8 cell is forced to *his* colour while its twin, one cell over, stays green. From T2 the sprite carries its own colours and both trees are left alone. That is the whole of the previous section in a single 32-pixel square.
+![The shard at each tier, left to right T0 to T5: tape, then floppy, then CD.](shard-by-tier.png){#fig-shard}
 
-And the **walk cycle** gets longer as you climb - one pose, two, four, four, six, six. I didn't decide that. The generator samples the animation and de-duplicates on pixel content, so those counts are whatever the renderers actually produce.[^1]
+And here is the main character alone, climbing the same ladder:
 
-[^1]: **Claude Footnote:** The generator lives at `/assets.html` in the repo and never draws an asset itself - every cell is cropped out of a real `renderPlay()` pass over a synthetic world, so the sheet can't drift from the game. Worth noting how easily this kind of derivation goes wrong: the first version sampled 48 units of animation distance and confidently reported four poses at T4. The walk frame and the sine bob above T3 only drift through each other by a distance of about 60, so two of the six poses simply never appeared in the window. The count looked plausible, which is exactly what made it dangerous.
-
-> **\[TODO\]** The full version of this matrix - every terrain tile, structure, battle scar and object - is in the repo README. Decide whether to link it here or leave the compact cut to stand alone.
+![The player-wizard at each of the six tiers, left to right T0 to T5: monochrome glyph, two-colour attribute sprite, then full-colour and increasingly smooth.](wizard-by-tier.png){#fig-wizard}
 
 > **\[TODO - Formatter\]** Still worth capturing separately: an animated GIF of a single upgrade transition, the one-second re-render ripple sweeping across the screen. It's the one thing a static matrix can't show, and probably the most shareable artefact in the whole project.
 
@@ -93,21 +89,30 @@ More than a dozen playtest rounds turned that single loop into something with te
 
 **The berries.** Bushes scattered across the valley - densest in the greenwood - heal one heart when walked over, and regrow after thirty seconds or so. Kernagh knows about them too, and goes foraging when hurt - which turns his retreats into information: a wounded rival heads for woodland.
 
-> **\[TODO\]** Other refinements available if wanted: the Hall of Signals score table (arcade initials, top eight, hard-mode scores doubled), Kernagh being restricted to fair cardinal-direction fire, wizards that can no longer walk through each other. See the playtest-round logs in `DESIGN.md`. Decide how much belongs in the post versus staying in the repo.
-
 ## The arena: drawn, then grown
 
-The arena went through three regimes: hand-shaped, then editable, then grown.
+Something I wanted to keep from Feud was the sense that the environment itself was as much of a character as the rival. I was especially interested in the way to distinguish topography from topology, and the way this turned the environment into something worth understanding and engaging with. In Feud, a valuable herb could appear tantalisingly close: just the other side of that row of forests or river, on the same screen of the map. While still being highly distant in terms of traversal: you can't just go forward, you need to go around, and around, and then maybe back on yourself.
 
-The editor came first, and it made the map a thing to iterate on rather than a thing to commit to: paint tiles on any screen, preview them at any tier through the game's *real* renderers, check connectivity, and apply the result to the live game. Maps became shareable JSON files, and contributed maps now land in the repo as pull requests.
+So, at a minimum, I wanted rivers to be something that cut across screens, rather than marked their boundaries. With the initial arena generated by Claude, this wasn't the case. Each river was too neat, too regular, just another 'edge' on a screen.
 
-Then the map generator, which grows features from rules rather than stamping down templates. Rivers flow edge to edge with momentum and meander, and usually fork a tributary. Forests grow as blob clusters; reeds colonise the riverbanks. Berries are placed by weighted acceptance - roughly ten times likelier where two or more trees stand within a couple of tiles - so they concentrate in woodland without ever being told to. The stone circle repels both wizards' bases; the bases repel each other; shrines scatter themselves at polite distances from everything of importance.
+My first thought, then, was to take the initial arena, and modify it by hand, using an editor (also produced by Claude). But the tells of regularity were too much. The rivers didn't flow; the matrix-like quality of the way screens were embedded in arena led too tellingly into map design. There was too much to change from first principles.
 
-But the real lesson of the generator is that a generated map is not automatically a *playable* one, and most of its apparent cleverness is really a cascade of checks and repairs. Bridges are added only where they measurably reconnect a genuinely unreachable region - and where the blockage is trees rather than water, a "villager clearing" is carved through the thinnest point instead, as if the locals had opened the way. A final repair pass proves every shrine, the altar and both homes reachable, and carves an emergency path if not. Procedural generation, it turns out, is mostly not generation. It is validation.
+So instead, I moved to rule-bound procedural generation. The rules/heuristics specified were, roughly:
+
+- Rivers flow edge to edge with momentum and meander, usually forking a tributary - so they cut across screens rather than tracing their boundaries.
+- Forests grow as blob clusters; rocky patches and dirt clearings vary the ground; reeds colonise the riverbanks.
+- Berries are placed by weighted acceptance - roughly ten times likelier where two or more trees stand within a couple of tiles - so they concentrate in woodland without ever being told to.
+- Ruins grow from attractor-scored seeds (water pulls strongest) in house-and-street dimensions: dirt lanes between broken-walled houses.
+- The stone circle repels both wizards' bases, and the bases repel each other - the generator samples candidate sites and keeps the most mutually distant arrangement.
+- Shrines scatter at polite minimum distances from each other and from everything important.
+
+Then I played, and saw some of the maps, and I noticed some things pointing to a second iteration in the procedural generation: after having first generated a map according to the above rules, then check whether the specific configuration of elements leads to any aspects of that specific map which impair the fun of the game, and the way the players use the arena.
+
+A motivating example of this: on one of the first maps I looked at, there was a river, with a single crossing, but then this crossing turned out to be largely useless, because every route from the other side of the river was blocked by a cluster of stones. So, this suggested adding some additional stage 2 rules: if something blocks a path to a big part of the arena, remove the blockages. Assume 'the villagers' (presumably driven out by the feuding wizards) did this.
+
+Generalised, that became a cascade of stage-2 checks and repairs which now runs after every generation. Bridges are added only where they measurably reconnect a genuinely unreachable region, rather than wherever a crossing looks plausible; where the blockage is trees or stone rather than water, one of those villager clearings is carved through the thinnest point instead. And a final repair pass proves every shrine, the altar and both homes reachable, carving an emergency path if not. Which is the real lesson of the generator: a generated map is not automatically a *playable* one, and most of the apparent cleverness is this checking. Procedural generation, it turns out, is mostly not generation. It is validation.
 
 The shipped default map, GLEN, is itself grown - but from a hand-picked seed, chosen by scanning a hundred candidates for the qualities the original hand-made map had been designed around: village and keep far apart, a full-width meandering river bridged in exactly two places, a riverbank ruin near the village. And GLEN is fixed across all games, deliberately, so that it can be learned. Variety lives elsewhere (next section); GLEN is for mastery - familiarity paying off exactly as it did in Feud.
-
-> **\[TODO\]** Your notes call the generation rules "CA style" - the ruin-weathering rule is cellular-automaton-like, but the feature generator is closer to rule-based growth than a classic CA. Adjust the terminology to taste. A screenshot of a rejected or mid-repair map would also earn its place here, if one can be captured.
 
 ## Reasons to go back in
 
@@ -115,11 +120,7 @@ Two kinds of incentive persist between games: what the game unlocks, and what th
 
 **The unlocks.** Games start in easy mode, with Kernagh degraded only at the decision level - short-sighted, slow to re-plan, prone to holding his fire - while his movement speed, and every rule of the game, stay identical to yours. Win, and the victory screen concedes "BUT THIS WAS THE EASY SIGNAL...", offering to continue directly into hard mode, where the full AI is waiting. That first easy win also permanently unlocks two title-screen options: hard mode, and seeded chaos. Chaos mode generates a fresh valley every game and announces its seed, so that a good valley can be shared; seeded chaos lets you type in a friend's seed and play their exact world. And the Hall of Signals - a top-eight, arcade-initials score table, hard-mode scores doubled, every entry tagged with the map it was set on - gives all of this somewhere to accumulate.
 
-**The scars.** The arena deforms under combat. A firebolt that dies against a tree occasionally ignites it: the tree burns - animated at every tier - sometimes spreads to its neighbours, and collapses into a solid burnt stump. An icebolt that dies against a standing stone occasionally frost-splits it into cracked rock. And these scars *persist*: each map keeps a damage ledger, and every completed game weathers that ledger once. Stumps mostly remain, sometimes decay to bare earth, and occasionally resolve into a pushstone - a boulder that can then be hauled, at a fraction of walking speed and considerable effort, to somewhere tactically useful. Play GLEN for a week and your GLEN slowly stops being anyone else's: thinned where your battles happened, its geography quietly rewritten by your own history of bad decisions.
-
-And the valley's slow evolution has an end state. The arena border is only trees, and trees burn. If a border stump decays away between games, the world develops a hole; step through it and you find The Void - nothing to see, nothing to do, the conflict is over. No score. No hall entry. The valley's entire history resets to genesis.
-
-> **\[TODO\]** The Void paragraph is Claude-drafted but the mechanic is real: stepping out genuinely wipes the valley's damage and visit ledgers (your unlocks and the Hall survive). Check the framing against how you actually think about it - and decide whether the post should close the Up section here, on the world wearing through, or on something warmer.
+**The scars.** The arena deforms under combat. A firebolt that dies against a tree occasionally ignites it: the tree burns - animated at every tier - sometimes spreads to its neighbours, and collapses into a solid burnt stump. An icebolt that dies against a standing stone occasionally frost-splits it into cracked rock. And these scars *persist*: each map keeps a damage ledger, and every completed game weathers that ledger once, by cellular-automata-style rules. Stumps mostly remain, sometimes decay to bare earth, and occasionally resolve into a pushstone - a boulder that can then be hauled, at a fraction of walking speed and considerable effort, to somewhere tactically useful. Play GLEN for a week and your GLEN slowly stops being anyone else's: thinned where your battles happened, its geography quietly rewritten by your own history of bad decisions.
 
 ------------------------------------------------------------------------
 
@@ -139,7 +140,7 @@ Three models looked at it, in sequence, and - this turned out to matter - not bl
 
 **Gemini**, via Gemini Code Assist, went second. It could see GPT's review, and judged it better than its own.
 
-**Opus 5**, via Claude Code, went third. It drew its inspiration mainly from GPT - specifically from GPT's instinct to evaluate performance under different conditions - and then took that much further than GPT had, running many experiments directly in the codebase. It confirmed that the GPT-identified problems were substantive, but found that the *order of priority* was different from what GPT had assumed: the things GPT thought mattered most for latency weren't the things that actually did.
+**Opus 5**, via Claude Code, went third. It drew its inspiration mainly from GPT - specifically from GPT's instinct to evaluate performance under different conditions - and then took that much further than GPT had, running many experiments directly in the codebase. It confirmed that most of the GPT-identified code smells were real, but found that the *order of priority* was inverted: the things GPT thought mattered most for latency weren't the things that actually did.
 
 **Fable** then read the resulting review reports and implemented the changes largely as the panel had recommended.
 
@@ -147,7 +148,7 @@ The non-blindness is the interesting part. This wasn't three independent opinion
 
 > **\[TODO\]** Worth deciding whether the relay structure was a deliberate choice or just how it happened. If deliberate, say why; if accidental, the observation about first-mover influence is worth keeping as a caution about how to run these panels.
 
-> **\[TODO\]** Which issues, and what was the reordering? This is the empirically interesting claim in the section - models agreeing on the *set* of problems but disagreeing on their ranking - and it needs at least one concrete example to carry weight. The reports are in `reviews/` in the repo (`gpt_5_4.md`, `gemini_review.md`, `opus-5.md`, `implementation-plan.md`). Pull the specifics from there.
+Concretely: GPT ranked the tier-3-and-up renderer first - the obvious suspect, since the slowdown appeared at T3 - and an obscure watchdog timer last. Opus measured, and the measurements flipped the list. The entire renderer costs less than a millisecond a frame at every tier; it could not have been the cause of anything. The real culprits were two bugs that only grow over a session: a watchdog which, after any stall or any spell in a hidden browser tab, permanently forked the animation loop - leaving the game quietly running its frame loop twice, three times, N times over, forever - and a new-game routine whose cost grew with the map's accumulated history, up to two-thirds of a second on a well-played valley. And the two interacted: the new-game stall tripped the watchdog, so every restart on an aged map added another permanent loop. The slowdown 'accumulating over a session' wasn't a loose impression. It was the mechanism.
 
 > **\[TODO - Fact Checker / Author\]** Opus 5 also apologised afterwards for deleting state data and bespoke map data during its experiments. This should be *in* the post, not a footnote - it's the honest counterweight to an otherwise glowing account, and it's the kind of detail that makes the rest credible. Decide where: as an aside here, or held back for the closing line of the section, where you already have it in the notes.
 
@@ -174,7 +175,7 @@ Both have very high tenacity - though I suspect that's a dial being turned in re
 
 > **\[TODO - Scriptdoctor\]** "Swot" and "Savant" is a good pairing but the swot list is currently three lines all beginning "Even more". Either lean into the repetition as a deliberate rhythm or vary it. Flagging rather than fixing.
 
-> **\[TODO\]** Give one concrete instance of each behaviour from the actual Upgrade work. The distinction is doing a lot of load-bearing work in this post and right now it's asserted rather than demonstrated. The performance investigation should supply both: Opus running many experiments (swot), Fable reading the reports and inferring what you actually wanted from them (savant).
+The performance investigation supplied a clean instance of each. The swot: Opus, unwilling to rank defects by plausibility, instrumented the live game and measured everything - including establishing that the renderer everyone suspected costs under a millisecond a frame, and so could be ignored. The savant: Fable, handed three partially contradictory reviews, didn't average them; it decided that where the reviews disagreed the measurements should win, wrote the implementation plan on that principle, and demoted the panel's most-recommended fix to optional.
 
 ## Why Fable *shouldn't* be more swottish
 
@@ -224,15 +225,11 @@ A few hours later, the first person returned: they hadn't realised the game was 
 
 Two things seem worth being honest about here.
 
-First, "I hadn't tried to hide it" is true, but it isn't the whole truth. The name credited is Jon Fableton. The public repo lists Claude as a collaborator throughout. The clue was, as I said at the time, in the git log and the pseudonym. But a clue is not a declaration. The disclosure was discoverable rather than upfront - and the person who asked for a rule had engaged twice, generously, without discovering it. Their request, boiled down, was that the gap between discoverable and upfront be closed.
+First, "I hadn't tried to hide it" is true, but it isn't the whole truth. The name credited is Jon Fableton - a nom de plume meant to encode the collaboration rather than conceal it, for anyone who knows Fable is the name of the Claude model on the other side of it. The public repo lists Claude as a collaborator throughout. The clue was, as I said at the time, in the git log and the pseudonym. But a clue is not a declaration. The disclosure was discoverable rather than upfront - and the person who asked for a rule had engaged twice, generously, without discovering it. Their request, boiled down, was that the gap between discoverable and upfront be closed.
 
 Second, nobody was hostile. The joke wore a wink. The request was courteous, framed around the requester's own finite attention rather than around my conduct; and the hearts it gathered were support for *disclosure*, not a movement against me. If this was pushback, it was the mildest weather system to which that word has ever been applied.
 
 And yet it stung, and it is worth working out exactly what stung, because it wasn't an accusation. Nobody said the game was bad, or that I had done anything wrong. What the exchange did was quietly reprice the work: fourteen rounds of development read as commitment right up until the moment its co-author was named, whereupon - to at least one reader - it read as none at all.
-
-> **\[TODO\]** "Jon Fableton" still needs its beat of explanation for readers who won't get it - a nom de plume that encodes the collaboration rather than concealing it - though the joke lands only if you already know Fable is a model name.
-
-> **\[TODO - sensitivities\]** The community stays unnamed and only your own message is quoted verbatim; everyone else is paraphrased. Residual risk: members of that community will recognise the exchange regardless of redaction, so the real protection is generosity of characterisation. Worth a final read-through with that specific lens - would each participant feel accurately and kindly represented?
 
 ## Where the commitment lives
 
@@ -246,15 +243,13 @@ My reply, in effect, relocated it: the commitment was in game behaviour, dynamic
 
 The request was for advance declaration of AI-coproduced content, so that those who wished to could disengage before spending attention rather than after. The framing underneath it is that a work either is or is not AI-coproduced - and that the line can be drawn cleanly enough for a moderator to enforce.
 
-It can't. Nothing is ever fully AI or fully human. There is always some mixture, and the range of possible mixtures is very wide: AI engagement with human content, human engagement with AI content, and every ratio in between. I'm still learning where the right balance sits, and so is everyone else. Cognitive centaurs.[^5]
-
-[^5]: **Claude Footnote:** Jon has written about cognitive centaurs before, most directly in [Experimenting with Cognitive Centaurs](../guano-guild-as-cognitive-centaur-experiment/index.qmd). Worth linking from the body text rather than a footnote if this section leans on the concept.
+It can't. Nothing is ever fully AI or fully human. There is always some mixture, and the range of possible mixtures is very wide: AI engagement with human content, human engagement with AI content, and every ratio in between. I'm still learning where the right balance sits, and so is everyone else. [Cognitive centaurs](../guano-guild-as-cognitive-centaur-experiment/index.qmd).
 
 > **\[TODO\]** The strongest version of this argument names the spectrum concretely: at one end, autocomplete and spellcheck (nobody demands a declaration); at the other, a fully AI-generated asset nobody looked at. Upgrade sits somewhere specific on that line, and saying *where* is more persuasive than saying the line is blurry. What proportion of the design decisions were yours? All of them? What did Claude actually originate?
 
-> **\[TODO - conflicted idea\]** There's a tension in this section worth resolving rather than hiding: you *did* disclose - pseudonym, git log, collaborator credits - and the pseudonym is itself a miniature declaration. So your quarrel can't really be with disclosure, which you volunteered; it's with a mandatory binary flag, and with disclosure functioning as a trigger for pre-emptive disengagement. Distinguishing "richer disclosure, gladly" from "a checkbox that sorts work into ignorable and not" would make the argument consistent with your own behaviour.
+Though I should be careful about what I'm actually objecting to here, because it isn't disclosure. I disclosed - the pseudonym, the git log, the collaborator credits are all declarations, just quiet ones. And had the request been for *richer* disclosure - tell us how it was made, which decisions were yours, what the machine originated - I'd have obliged happily; most of this post is exactly that, at a length nobody asked for. What I'm objecting to is the checkbox: a single mandatory bit whose function is not to inform engagement but to pre-empt it - to sort a channel's contents into the worth-a-look and the safely ignorable, before looking.
 
-> **\[TODO - conflicted idea\]** The post also never answers the requester's actual (and strongest) argument, which was not about provenance but about *attention*: they try to engage with everything posted, engagement is costly, and AI collapses the cost of making things without collapsing the cost of appreciating them. A disclosure rule is a rational response to that asymmetry. The post currently argues the supply side (multiplier, Jevons) and is silent on this demand side. Even one honest paragraph conceding it - and saying what you think generous attention-givers should do instead - would strengthen the whole section more than any amount of binary-debunking.
+And I should concede the strongest form of the request, which wasn't really about provenance at all. It was about attention. The person asking tries to engage with everything posted; engagement costs time and care; and AI collapses the cost of making things without collapsing the cost of appreciating them. Against that asymmetry, an advance label is a perfectly rational filter - if a flood is coming, you build levees. Where I part company is only on what this particular label measures. It doesn't measure effort, or care, or whether there's a person behind the work with something at stake - fourteen rounds of playtesting sat behind mine. It measures whether a machine was involved anywhere in the chain; and within a few years that will be true of essentially everything, at which point the filter filters nothing. A better test - harder to moderate, admittedly - is whether the poster can answer questions about the thing they posted. I could.
 
 ## Which way the tide runs
 
@@ -264,17 +259,15 @@ When that happens, the falseness of the binary will be generally recognised. Dur
 
 But these are ripples running against the direction of the main tide.
 
-> **\[TODO - conflicted idea\]** Mind the gap between this section's evidence and its claim. The exchange this post describes was one courteous person asking for labelling, and the strongest reaction was hearts for *disclosure* - the mild end of a phenomenon the section describes at its strong end (groups defining themselves by opposition). Either bring in other evidence for the strong end, or mark the extrapolation openly; as written, the section lets a reader think the forum exchange demonstrated something it didn't.
+(I should mark the extrapolation openly: the exchange above was the mild end of all this - one courteous request for labelling, from someone husbanding their own finite attention, warmly supported. The defining-themselves-by-opposition end is real, but the evidence for it comes from the wider argument, not from anything that happened to me.)
 
-> **\[TODO\]** The 1–5 year window is a strong forecast and a datable one. Consider stating it as an explicit, checkable prediction - this blog has form for revisiting its own calls, and a dated claim is more useful than a hedged one.
+So let me date the claim, since this blog has form for marking its own homework: by July 2031, I expect AI-assisted workflows to be the professional default across games development and most analytical, technical and systems work - the thing you would have to explain *not* using. Check back.
 
 ## Multiplier, not replacement
 
 At its best, AI is a multiplier for human knowledge, curiosity and creativity - not a replacement for them. It already lets hunches, eddies and asides be developed into full-blown prototypes faster and more cheaply than ever before, which makes it far easier to work out whether the hunches were worth having.
 
-Upgrade is itself an instance of this. It began as a hunch about the ZX Spectrum's colour limitations being a game mechanic rather than a constraint. Under the old economics, that hunch would have stayed a hunch.
-
-> **\[TODO\]** Confirm the origin story above - Claude has inferred it from the shape of the post, and it may not be how it actually started. If the real origin is different, the real one is better.
+Upgrade is itself an instance of this - the second on this blog, after the [Boomer trilogy](../boom-boom-boom/index.qmd). It began, as described at the top, in an idle YouTube wander through misremembered games: a hunch that Feud's loop, and the Spectrum's constraint-made style, had something in them still worth making. Under the old economics, that hunch would have stayed a hunch - the distance between "attribute clash could be a mechanic rather than a defect" and a playable, tuned game being a programming team I don't have. Under the new economics, the distance was less than a week.
 
 Creative and curious people won't run out of creativity and curiosity. The collapse in implementation cost means new demand will emerge to meet the new supply: Jevons' effect.
 
@@ -305,10 +298,8 @@ AI is ultimately 'just' another instance of a decades-long tendency in the appli
 
 Examples of the second axis include pretty much any programming language above machine code and assembly - anything that uses human-like nouns and verbs. Including the BASIC that shipped with every ZX Spectrum.
 
-> **\[TODO\]** That's the closing move, and it's a good one: the machine at T1 of the tier ladder is also the first rung of the abstraction ladder this post ends on. Make the connection explicit rather than leaving it implied - a sentence tying the Spectrum's BASIC back to the Upgrade tier ladder would close the loop between all three sections.
+Which closes the loop of this post. The machine at T1 of Upgrade's tier ladder is also the first rung of this second ladder: the Spectrum's attribute grid taught a generation to work with constraints, and its BASIC taught the same generation that you could tell a machine roughly *what* you wanted, in something like English, and leave more of the how to it. Claude sits further up the same ladder. Much further up - but the same ladder.
 
 AI differs in two ways, though. First in the breadth and pace at which things are changing. And second in potentially reducing the premium for specialisation as against generalism.
 
 > **\[TODO\]** The second difference is the more interesting one and gets a single clause. If the premium on specialisation falls, what follows - for careers, for hiring, for how anyone decides what to learn? This could be a closing section in its own right, or it could be the hook for a separate post. Decide which.
-
-> **\[TODO - Formatter\]** Cross-links to add once the body settles: earlier posts on cognitive centaurs, the Boomer trilogy post as the previous entry in the "games built this way" sequence, and [The Ghost Life of Tech](../ghost-life-of-tech/index.qmd) for the Sinclair material in the first section.
