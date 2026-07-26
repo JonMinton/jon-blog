@@ -1,0 +1,342 @@
+---
+title: "Up, Across, Down"
+subtitle: "On building Upgrade, a new retro game; on Opus 5 and Fable 5 as complementary siblings; and on the pushback that comes with calling an AI-codeveloped game 'mine'"
+author: Jon Minton
+date: 2026-07-26
+categories: [ai, games, game design, retro computing, Claude, cognitive centaur]
+---
+
+> **[SKELETON — Claude, 2026-07-26]** This is a first-pass scaffold built from `notes.md`.
+> Blockquoted **[TODO]** lines mark work still to do. Blockquoted *[from notes]* blocks are
+> your own notes ported over more or less verbatim where the level of detail suggests they
+> need unpacking rather than paraphrasing. Draft paragraphs are written where the shape of
+> the argument already seemed clear enough to commit to prose — treat those as proposals,
+> not decisions. Delete this block before publishing.
+
+Three things happened over the last few weeks that turn out to be the same story told at three different altitudes. I built a game. I used several frontier models to make it run properly. And I posted it somewhere, and watched a friendly reception curdle the moment someone worked out how it was made.
+
+Up, across, down.
+
+> **[TODO]** Decide whether this opening stays. It's a Claude-drafted framing sentence — the
+> "three altitudes" conceit is an invention, not from your notes. If the buried-lede,
+> start-with-the-Spectrum approach is more your voice, cut it.
+
+---
+
+# Up: The Upgrade Game
+
+**Play it: [jonminton.github.io/upgrade-game](https://jonminton.github.io/upgrade-game/)** · [map editor](https://jonminton.github.io/upgrade-game/editor.html) · [source](https://github.com/JonMinton/upgrade-game)
+
+## Feud, and what it was for
+
+The inspiration was *Feud*, a ZX Spectrum game in which two wizards — brothers — battle to defeat each other across a multi-screen arena, foraging for the herbs they need to cast spells at one another.
+
+> *[from notes]* Inspiration was the ZX Spectrum game Feud, in which two wizards (two brothers) battle to defeat each other over a multi-screen arena.
+
+> **[TODO]** Unpack this. What did Feud actually *feel* like to play? The mechanic Upgrade
+> inherits is the rivalry-plus-foraging loop, but a reader who's never seen Feud needs a
+> sentence or two on the texture of it — the flick-screen world, the sense of a rival moving
+> around the map on his own errands while you move on yours.
+
+> **[TODO — Gopher]** *Robin of the Wood* (Odin, 1985) is listed as the second inspiration in
+> `DESIGN.md` but doesn't appear in the notes. Decide whether it earns a mention here — it's
+> where the lush-forest-maze and item-gated-encounter elements come from.
+
+## My own machines
+
+ZX Spectrum 48K. ZX Spectrum 128K. Amiga 500. Amiga 1200. Then, eventually, PCs — but that's a different story and a duller one.
+
+> **[TODO]** This is the personal spine of the whole first section, and it's currently four
+> nouns. Worth expanding: which of these machines was *yours* versus the household's, roughly
+> when each arrived, and — importantly for the T-level argument below — what the jump between
+> each one felt like at the time. The Spectrum→Amiga gap is the emotional engine of the game's
+> core mechanic, so it should land here rather than being explained later.
+
+## Attribute clash, and why it existed
+
+The Spectrum had a very distinctive graphical style, and it was a style produced entirely by a limitation. The machine let you specify pixels as 'on' or 'off' at a comparatively high resolution — but the *colours* associated with 'on' and 'off' could only be specified for 8×8 tiles of cells within that resolution.
+
+This wasn't an oversight. The Spectrum wasn't really designed with games in mind; it was designed for more serious applications. Consider a simple word processor: a letter is a block of pixels that fits neatly inside one of those colour tiles. Being able to change the complete foreground and background colour of that block at once is exactly what you want for marking out letters for attention, editing, highlighting. Higher-resolution colour control — making the *edges* of a letter a different colour from its interior — would have bought you almost nothing.
+
+So the constraint was rational, and the consequence was an entire visual idiom: the colour bleed as a sprite crosses a tile boundary, the careful level design that works *with* the grid rather than against it. A generation of British game artists spent a decade learning to make attribute clash look deliberate.
+
+> **[TODO]** Fact-check the 8×8 claim — you hedge with "(I think)" in the notes. It is 8×8,
+> but confirm the rest of the framing: 256×192 resolution, two colours per cell (INK and
+> PAPER), plus the BRIGHT and FLASH bits. Consider a footnote rather than putting the numbers
+> in the body.
+
+> **[TODO — Formatter]** This section wants a picture. A screenshot of Upgrade at T1 showing
+> attribute clash in action would do double duty: it illustrates the concept *and* it's the
+> first look at the game.
+
+## The mechanic: upgrades that improve the game, not you
+
+The core conceit is that the upgrades don't make your character stronger. They make the *game* better.
+
+Every entity in the world — you, your rival, the environment — has a development tier. The tier controls only presentation: resolution, palette, colour rules, animation smoothness, sound hardware. Movement speed, attack power and health are identical at every tier. What you are racing for is not power. It is fidelity.
+
+You navigate a multi-screen arena looking for shards. Three shards let you perform an upgrade, and when you do, the aesthetics of the whole game shift underneath you.
+
+> **[TODO]** The rendering rule is the best idea in the game and isn't in the notes at all:
+> the *environment* renders at your tier, but each *avatar* renders at its own. So seeing a
+> silky 16-colour sprite glide through your attribute-clashing Spectrum forest tells you
+> instantly — and unsettlingly — that your rival is ahead. Write this properly; it's the
+> paragraph people will quote.
+
+## The tier ladder
+
+| Tier | Machine modelled | What changes |
+|---|---|---|
+| **T0** | Late-70s / ZX81-ish | 1-bit monochrome, chunky glyphs, near-silence. The floor — you can't fall below it. |
+| **T1** | ZX Spectrum 48K | 256×192, 8×8 attribute cells, full clash faithfully modelled. 1-channel beeper. **Player start.** |
+| **T2** | Spectrum 128 / Amstrad-ish | Clash minimised by smarter cell alignment. AY chip: 3 channels, music and SFX coexist. |
+| **T3** | C64-style 8-bit | 16 fixed colours, hardware sprites free of the attribute grid, push-scroll instead of screen-flick. SID-ish sound. |
+| **T4** | Atari ST / EGA | 16 from 512, 8-frame animation, doubled tile detail. Sampled drums. |
+| **T5** | Amiga | 32+ colours, parallax, anti-aliased sprites, ambient animation. 4-channel MOD music. **Win tier.** |
+
+T1 is where you start, because the Spectrum is where *I* started. T0 exists as a floor: true monochrome purgatory, the place you fall to and the place you can be eliminated from. T3 and T4 — the C64 and the Atari ST — were never part of my own history, but they're the obvious intermediate rungs on the way to the Amiga.
+
+Though I'll admit that putting the ST *below* the Amiga rather than beside it reflects a set of loyalties formed around 1990 and never seriously re-examined.
+
+> **[TODO]** The ST/Amiga line above is a Claude-drafted joke on your "though placing Atari
+> before Amiga might reflect my own subjective biases". Keep, rewrite, or cut — but if you
+> keep it, it's the kind of thing that earns a reply from someone who owned an ST.
+
+> **[TODO — Formatter]** *"More materials showing the assets at each T level."* This is the
+> big asset job. Options: (a) a six-panel image, one screenshot per tier, same location in the
+> map; (b) an animated GIF of a single upgrade transition — the one-second re-render ripple
+> sweeping across the screen; (c) both. (b) is the more striking artefact and probably the
+> thing that gets shared. Needs capturing from the running game.
+
+## Level editors and map generators
+
+> *[from notes]* More on how level editors and then map generators were added: CA style rules
+> as specified and implemented. Multi-stage iteration of maps: checking for where wand station
+> is too close to edge; ensuring bases are sufficiently far from each other; checking all of
+> the arena becomes accessible through 'clearing' mechanics etc.
+
+> **[TODO]** This is one of the most substantive technical passages in the post and it's
+> currently four clauses. Suggested shape:
+>
+> 1. **Why an editor first.** Hand-authoring 24 screens is tedious; an editor makes the map a
+>    thing you can iterate on rather than a thing you commit to.
+> 2. **The CA rules.** Specify what the cellular-automaton generation actually does — seed,
+>    neighbourhood rule, number of smoothing passes. Include the rule if it's short enough to
+>    be quotable.
+> 3. **The validity cascade.** This is the interesting bit: a generated map isn't
+>    automatically *playable*, so there's a multi-stage check-and-repair pass — Standing Stones
+>    not too near an edge, the two bases far enough apart, every part of the arena reachable
+>    once clearing mechanics are accounted for. Worth naming this as the general lesson:
+>    procedural generation is mostly not generation, it's validation.
+> 4. What a rejected map looks like, if you can screenshot one.
+
+## Other mechanics
+
+> *[from notes]* Additional game mechanics: Easy and Hard Mode; Icewands and Firewands
+> (different trade-offs); the gameplay and cross-game loop.
+
+> *[from notes]* Additional arena mechanics: standard initial map, with slight modification
+> from procedurally generated first instance. Then chaos mode. Opportunity to create and
+> supply new maps (either from nothing or procedurally generated then modified) via editor.
+
+> **[TODO]** Unpack the wand trade-off specifically — firewand harms, icewand freezes, and the
+> pedestal in your village swaps between them. What's the actual strategic tension? That's the
+> bit that makes it a *choice* rather than a pickup.
+
+> **[TODO]** "Cross-game loop" needs defining. From the README: beating easy unlocks hard mode
+> and seeded chaos. So progression persists between games rather than only within them. Say
+> what that's *for* — what does it change about how you approach a second session?
+
+> **[TODO]** GLEN — the fixed default map — deserves a sentence. It's fixed across all games
+> deliberately, so you can learn it. That's a design position worth stating: chaos mode is the
+> variety, GLEN is the mastery.
+
+---
+
+# Across: Opus 5, Fable 5, and two ways of being good
+
+The second act is about performance — the game's, and then the models'.
+
+## The slowdown
+
+Somewhere around T3, games started to bog down. Not immediately: the slowdown accumulated over a session, which is the worst kind, because it means the problem isn't a single expensive operation but something leaking.
+
+> **[TODO]** Describe the symptom concretely before diagnosing it. What did it actually feel
+> like at T3, ten minutes in? Frame rate? Input lag? This is what motivates the whole
+> investigation and it's currently one clause in the notes.
+
+GPT — via GitHub Copilot — went first, and identified a set of issues likely to be responsible. Opus 5 then did a far more thorough investigation of those issues and others, running many experiments directly in the codebase. It confirmed that the GPT-identified problems were substantive, but found that the *order of priority* was different from what GPT had assumed: the things GPT thought mattered most for latency weren't the things that actually did.
+
+Fable then read the resulting review reports and implemented the changes largely as the agentic review panel had recommended.
+
+> **[TODO]** Which issues, and what was the reordering? This is the empirically interesting
+> claim in the whole section — two frontier models agreeing on the *set* of problems but
+> disagreeing on their ranking — and it needs at least one concrete example to carry weight.
+> The reports are in `reviews/` in the repo (`gpt_5_4.md`, `opus-5.md`, `gemini_review.md`,
+> `implementation-plan.md`). Pull the specifics from there.
+
+> **[TODO — Fact Checker / Author]** Opus 5 also apologised afterwards for deleting state data
+> and bespoke map data during its experiments. This should be *in* the post, not a footnote —
+> it's the honest counterweight to an otherwise glowing account, and it's the kind of detail
+> that makes the rest credible. Decide where: as an aside here, or held back for the closing
+> line of the section, where you already have it in the notes.
+
+## Swot and Savant
+
+Within recent LLM performance benchmarks, Opus 5 — despite being nominally a tier below Fable 5, and at half the cost per token[^claude-pricing] — achieves similar performance on many technical and applied-knowledge tasks.
+
+[^claude-pricing]: **Claude Footnote:** The per-token figures at time of writing: Claude Fable 5 is \$10 per million input tokens and \$50 per million output; Claude Opus 5 is \$5 and \$25. So "half the cost per token" is exactly right, on both input and output.
+
+I don't have a strong reason to doubt this, beyond the usual worry about which metrics got chosen. But my initial impression is that the two models often reach similar outcomes by quite different routes. Crudely: Opus 5 is more of a **swot**, and Fable 5 more of a **savant**.
+
+**Swot behaviour:**
+
+- Even more extensive and comprehensive RAG searches
+- Even more comprehensive review of codebases
+- Even more exhaustive testing and iteration
+
+**Savant behaviour:**
+
+- More reliance on reasoning from first principles
+- More creative, and often more intelligent, inference about the latent subgoals and implicit assumptions behind a prompt
+
+Both have very high tenacity — though I suspect that's a dial being turned in response to capacity and demand rather than a fixed property of either model.
+
+> **[TODO — Scriptdoctor]** "Swot" and "Savant" is a good pairing but the swot list is
+> currently three lines all beginning "Even more". Either lean into the repetition as a
+> deliberate rhythm or vary it. Flagging rather than fixing.
+
+> **[TODO]** Give one concrete instance of each behaviour from the actual Upgrade work. The
+> distinction is doing a lot of load-bearing work in this post and right now it's asserted
+> rather than demonstrated. The performance investigation should supply both: Opus running
+> many experiments (swot), Fable reading the reports and inferring what you actually wanted
+> from them (savant).
+
+## Why Fable *shouldn't* be more swottish
+
+So although Opus 5 and Fable 5 are intended as different tiers, for now they can perhaps be thought of as similarly capable models that often reach similar outcomes by different means.
+
+And there's a reason Fable probably *shouldn't* try to be more swottish. Its guardrails hair-trigger whenever anything touching biology or cybersecurity happens to be searched for or reasoned about.[^claude-guardrails] The more exhaustively it searched and explored, the more likely it would be to trip one of those by chance. Given that its token cost is double Opus 5's, it shouldn't go too far in that direction in any case.
+
+[^claude-guardrails]: **Claude Footnote:** Concretely, Fable 5 can decline a request by returning a normal response with a `refusal` stop reason and a category — `bio` and `cyber` among them — rather than an error. Anthropic's own guidance is that benign adjacent work in security tooling and the life sciences can trip these as false positives, which is why the API offers a server-side fallback to another model. Worth noting for the argument here: Opus 5 also ships with elevated cybersecurity safeguards, so the difference between the two is one of degree rather than kind. Jon — you may want to soften the claim above accordingly, or leave it as your impression and let this footnote do the qualifying.
+
+Two implications follow.
+
+**Fable and Opus should, for now, be considered complementary siblings** rather than rungs on a ladder.
+
+**And "half the cost per token" is not "half the cost per project."** Because of its swottishness, Opus 5 may conceivably burn through twice as many tokens as Fable in search and evaluation — which would leave the model that looks twice as cheap costing about the same per completed piece of work.
+
+> **[TODO]** This is a testable claim and you have the data to test it, at least roughly. Did
+> the Opus 5 investigation actually cost more in total than the equivalent Fable work? Even a
+> rough token count either way would turn this from a plausible speculation into a small
+> finding. Worth doing if the usage data is retrievable.
+
+Anyway: the agentic review carousel — several models reviewing, one implementing — worked well for identifying and fixing the performance issues, and Opus 5 was a critical part of that mix.
+
+> **[TODO]** "Agentic review carousel" is a good coinage and this is the first time it appears.
+> Either introduce it earlier, when you describe the GPT→Opus→Fable sequence, or define it here.
+
+---
+
+# Down: The pushback
+
+## What happened
+
+I posted Upgrade to the Show & Tell channel of a local game developers' forum.
+
+There was some initial engagement. I mentioned the number of iterations and the tuning involved. Then someone pointed out that it was written *by* Claude.
+
+I hadn't tried to hide it. The name credited is Jon Fableton. The public repo lists Claude as a collaborator throughout.
+
+But the tone shifted anyway. The initial positive response cooled, and the conversation moved to a request that the moderators require an explicit declaration of AI-coproduced content — so that the person asking could ignore and disengage from it. There was strong support for that sentiment.
+
+> **[TODO]** Sensitivities check. Decide whether to name the forum, and how identifiable the
+> individuals are. Recommendation: keep it unnamed and unquoted — the argument doesn't need
+> specifics, and specifics turn a general observation into a callout of particular people.
+> Flagging because it's your call, not mine.
+
+> **[TODO]** "Jon Fableton" needs a beat of explanation for readers who won't get it. It's a
+> good joke — a nom de plume that encodes the collaboration rather than concealing it — but
+> right now it lands only if you already know Fable is a model name.
+
+## The false binary
+
+The framing underneath the request is that a work is either AI or human, and that the line can be drawn cleanly enough for a moderator to enforce.
+
+It can't. Nothing is ever fully AI or fully human. There is always some mixture, and the range of possible mixtures is very wide: AI engagement with human content, human engagement with AI content, and every ratio in between. I'm still learning where the right balance sits, and so is everyone else. Cognitive centaurs.[^claude-centaur]
+
+[^claude-centaur]: **Claude Footnote:** Jon has written about cognitive centaurs before, most directly in [Experimenting with Cognitive Centaurs](../guano-guild-as-cognitive-centaur-experiment/index.qmd). Worth linking from the body text rather than a footnote if this section leans on the concept.
+
+> **[TODO]** The strongest version of this argument names the spectrum concretely: at one end,
+> autocomplete and spellcheck (nobody demands a declaration); at the other, a fully
+> AI-generated asset nobody looked at. Upgrade sits somewhere specific on that line, and
+> saying *where* is more persuasive than saying the line is blurry. What proportion of the
+> design decisions were yours? All of them? What did Claude actually originate?
+
+## Which way the tide runs
+
+Workflows with AI *will* come to outcompete workflows without AI across pretty much every dimension, and will become the dominant means of doing games development — or any other kind of analytical, technical, systems work — within one to five years.
+
+When that happens, the falseness of the binary will be generally recognised. During the transition, though, there will be groups and cliques that increasingly define themselves by their opposition to AI. To the extent that some consumers share those sentiments, those groups may get short-term bumps in engagement and support.
+
+But these are ripples running against the direction of the main tide.
+
+> **[TODO]** The 1–5 year window is a strong forecast and a datable one. Consider stating it
+> as an explicit, checkable prediction — this blog has form for revisiting its own calls, and
+> a dated claim is more useful than a hedged one.
+
+## Multiplier, not replacement
+
+At its best, AI is a multiplier for human knowledge, curiosity and creativity — not a replacement for them. It already lets hunches, eddies and asides be developed into full-blown prototypes faster and more cheaply than ever before, which makes it far easier to work out whether the hunches were worth having.
+
+Upgrade is itself an instance of this. It began as a hunch about the ZX Spectrum's colour limitations being a game mechanic rather than a constraint. Under the old economics, that hunch would have stayed a hunch.
+
+> **[TODO]** Confirm the origin story above — Claude has inferred it from the shape of the
+> post, and it may not be how it actually started. If the real origin is different, the real
+> one is better.
+
+Creative and curious people won't run out of creativity and curiosity. The collapse in implementation cost means new demand will emerge to meet the new supply: Jevons' effect.
+
+## The Lump of Labour
+
+This is the corrective to the intuitive framing of AI's role, and it explains why AI is so often instinctively seen as a threat. The instinct is the **Lump of Labour fallacy**: the assumption that there is a fixed, finite demand for stuff — prototypes, games, analytic outputs, websites, databases, papers — so that any technology reducing the cost of producing that stuff must reduce the total labour an industry can support, and therefore put people out of work.
+
+The irony is that some of the less insightful *proponents* of AI in business — mid and senior managers, executives — subscribe to exactly the same fallacy. They are attracted to implementing AI for precisely the reason many other people are repelled by it: they think they can and should simply reduce headcount.
+
+And there's a sting in that.
+
+Large organisations tend to be *less* adaptable to the pace of change required to get the best out of AI. They have standards, procedures, conventions and long-established ways of working that will ultimately impede the wholesale reconfiguration of work, tasks and roles that would let them use AI to multiply what their employees can do. Smaller, nimbler, AI-native organisations — without the cold hand of history and path dependency — can structure themselves from scratch around agentic working, and will very soon be able to outcompete the old behemoths.
+
+Which produces the beautiful outcome: if a large, slowly-adapting organisation *does* use AI to justify making talented staff redundant en masse, those former staff are now better placed than ever before to form AI-native startups and destroy their alma maters.
+
+But only if the laid-off staff recognise that AI is the solution rather than the problem, and embrace it as a multiplier of human effort rather than rejecting and opposing it.
+
+> **[TODO — Scriptdoctor]** "Destroy their alma maters" is doing good work but "alma mater"
+> usually means where you *studied*, not where you worked. Options: keep it as deliberate
+> wry misuse, or swap to "former employers" and lose some of the bite. Your call.
+
+## The long arc
+
+AI is ultimately 'just' another instance of a decades-long tendency in the applied information sciences, which has progressed along two axes:
+
+1. Information retrieval, production and processing speeds increase.
+2. The level of abstraction and generalisation at which humans instruct machines goes *up* — becoming more about intent and outcome, and less about process and mechanism.
+
+Examples of the second axis include pretty much any programming language above machine code and assembly — anything that uses human-like nouns and verbs. Including the BASIC that shipped with every ZX Spectrum.
+
+> **[TODO]** That's the closing move, and it's a good one: the machine at T1 of the tier ladder
+> is also the first rung of the abstraction ladder this post ends on. Make the connection
+> explicit rather than leaving it implied — a sentence tying the Spectrum's BASIC back to the
+> Upgrade tier ladder would close the loop between all three sections.
+
+AI differs in two ways, though. First in the breadth and pace at which things are changing. And second in potentially reducing the premium for specialisation as against generalism.
+
+> **[TODO]** The second difference is the more interesting one and gets a single clause. If
+> the premium on specialisation falls, what follows — for careers, for hiring, for how anyone
+> decides what to learn? This could be a closing section in its own right, or it could be the
+> hook for a separate post. Decide which.
+
+> **[TODO — Formatter]** Cross-links to add once the body settles: earlier posts on cognitive
+> centaurs, the Boomer trilogy post as the previous entry in the "games built this way"
+> sequence, and [The Ghost Life of Tech](../ghost-life-of-tech/index.qmd) for the Sinclair
+> material in the first section.
