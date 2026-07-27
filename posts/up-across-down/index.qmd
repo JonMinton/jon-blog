@@ -28,7 +28,7 @@ The core conceit is that the upgrades don't make your character stronger. They m
 
 Every entity in the world - you, your rival, the environment - has a development tier. (TX, from X=0 through X=5). The tier controls only presentation: resolution, palette, colour rules, animation smoothness, sound hardware. Movement speed, attack power and health are identical at every tier. What you are racing for is not power. It is fidelity.
 
-The loop wrapped around that conceit is Feud's, transplanted. You navigate a flick-screen arena - a British-folklore valley of village, greenwood, marsh and ruined keep - looking for shards: relics of future hardware half-buried in the landscape, a thermionic valve glowing among the reeds, a 3.5" floppy stuck in a tree like the sword in the stone. Gather three, carry them to the Standing Stones, and survive a three-second channelling ritual (longer at the final ascension stage) - interruptible, naturally, by anyone minded to shoot you mid-chant - and the whole game re-renders underneath you, one tier closer to 1995.
+The loop wrapped around that conceit is Feud's, transplanted. You navigate a flick-screen arena - a British-folklore valley of village, greenwood, marsh and ruined keep - looking for shards: relics of future hardware half-buried in the landscape, e.g. a thermionic valve glowing among the reeds, a 3.5" floppy stuck in a tree like the sword in the stone. Gather three, carry them to the Standing Stones, and survive a three-second channelling ritual (longer at the final ascension stage) - interruptible, naturally, by anyone minded to shoot you mid-chant - and the whole game re-renders underneath you, one tier closer to 1995.
 
 You are not the only one foraging. Kernagh, a rival hedge-wizard, starts at the same tier as you but on the far side of the valley, and wants exactly what you want. Combat is kept simple: one projectile, a crackling static bolt; three hits and you are derezzed - dissolved into a burst of noise pixels, dropping every shard you were carrying where you fell, respawning at your home village one tier lower than you were. And there are two ways to win: transcendence, in which you reach the top tier, gather three final shards, and complete one last, longer ritual before Kernagh does; or elimination, in which you derez him while he is already scraping along the floor at T0. Each, of course, has its mirror image, in which the wizard transcended against, or derezzed at rock bottom, is the player, and the game is thereby lost rather than won.
 
@@ -53,8 +53,8 @@ Here it is in Upgrade, faithfully modelled:
 | Tier | Machine modelled | What changes |
 |------------------------|------------------------|------------------------|
 | **T0** | Late-70s / ZX81-ish | 1-bit monochrome, chunky glyphs, near-silence. The floor - you can't fall below it. |
-| **T1** | ZX Spectrum 48K | 256×192, 8×8 attribute cells, full clash faithfully modelled. 1-channel beeper. **Player start.** |
-| **T2** | Spectrum 128 / Amstrad-ish | Clash minimised by smarter cell alignment. AY chip: 3 channels, music and SFX coexist. |
+| **T1** | ZX Spectrum 48K | 256×192, 8×8 attribute cells, full clash faithfully modelled. 1-channel beeper. **Player starts here.** |
+| **T2** | Spectrum 128 | Clash minimised by smarter cell alignment. AY chip: 3 channels, music and SFX coexist. |
 | **T3** | C64-style 8-bit | 16 fixed colours, hardware sprites free of the attribute grid, push-scroll instead of screen-flick. SID-ish sound. |
 | **T4** | Atari ST / EGA | 16 from 512, 8-frame animation, doubled tile detail. Sampled drums. |
 | **T5** | Amiga | 32+ colours, parallax, anti-aliased sprites, ambient animation. 4-channel MOD music. **Win tier.** |
