@@ -124,9 +124,9 @@ Two kinds of incentive persist between games: what the game unlocks, and what th
 
 # Across: Opus 5, Fable 5, and two ways of being good
 
-Playing the game for a few minutes - it's designed to take between 5 and 10 minutes to play - revealed some of the design issues and decisions mentioned above. But playing a few minutes longer, the game started, sometimes but not all times to become a bit... sluggish.
+Playing the game for a few minutes - it's designed to take between 5 and 10 minutes to play - revealed some of the design issues and decisions mentioned above. But playing a few minutes longer, the game started, sometimes but not all times, to become a bit... sluggish.
 
-Usually, but not always, this happened around T3; motion became jerky, music became more stoccato, less fluid. The whole experience started to become more like wading through sand than ambling purposefully through a magic forest. Something was off.
+Usually, but not always, this happened around T3; motion became jerky, music became more staccato, less fluid. The whole experience started to become more like wading through sand than ambling purposefully through a magic forest. Something was off.
 
 Here I changed the pattern: instead of Claude Fable as codesigner and implementer, I thought I'd have Fable's work reviewed by a few of its peers. This is a pattern I've referred to either as 'Agentic Peer Review', 'Multi-Agent, Multi-Family Review Carousel', or, more pointedly, 'Multi-Agent Circular Firing Squads'.
 
@@ -138,15 +138,15 @@ Therefore, for review, I try to consult with models from *different* families. I
 
 For this review, I used Github Copilot for consulting ChatGPT (probably not now the most efficient means of doing so, since Github Copilot became a lot more stingy in token usage); and Google's own code harness to consult Gemini. Each model was from a different company, so a different family.
 
-But I'd also heard, and had a little experience trying out, Claude Opus 5, which released just a few days ago. Initial widely reported benchmarking suggests Opus 5 may have something like parity with Fable 5, despite being nominally from a model tier below. So, I though Opus 5 would be worth including too, despite also being an Anthropic model.
+But I'd also heard, and had a little experience trying out, Claude Opus 5, which released just a few days ago. Initial widely reported benchmarking suggests Opus 5 may have something like parity with Fable 5, despite being nominally from a model tier below. So, I thought Opus 5 would be worth including too, despite also being an Anthropic model.
 
 For each of the models, I provided a near identical prompt: review the whole codebase, look for any potential performance issues, write a report detailing such potential issues within a self-identifying .md file within a new reviews/ subdirectory.
 
-The face the models weren't blind to each other's reviewers - something I should have addressed by using different branches for each, then merging after, meant later models *were* influenced the reviews left by earlier models. GPT went first, and seemed very thorough. Gemini went second, 'peeking' into GPT's review notes, and judging it to be better and more thorough than its own.
+The fact the models weren't blind to each other's reviews - something I should have addressed by using different branches for each, then merging after - meant later models *were* influenced by the reviews left by earlier models. GPT went first, and seemed very thorough. Gemini went second, 'peeking' into GPT's review notes, and judging it to be better and more thorough than its own.
 
 **Opus 5**, via Claude Code, went third. It drew its inspiration mainly from GPT - specifically from GPT's instinct to evaluate performance under different conditions - and then took that much further than GPT had, running many experiments directly in the codebase. It confirmed that most of the GPT-identified code smells were real, but found that the *order of priority* was inverted: the things GPT thought mattered most for latency weren't the things that actually did.
 
-(Unfortunately, as part of its extensive evaluations, Opus 5 apparently deleted some cached state and data, including some interim edits I'd made to the default map. It apologised, but because the state hadn't been fully saved before review, the damage had already been done. If you are going to get a new model to interfere with an existing model's codebase, consider branch hygiene much more than I did!.
+(Unfortunately, as part of its extensive evaluations, Opus 5 apparently deleted some cached state and data, including some interim edits I'd made to the default map. It apologised, but because the state hadn't been fully saved before review, the damage had already been done. If you are going to get a new model to interfere with an existing model's codebase, consider branch hygiene much more than I did!)
 
 **Fable** then read the resulting review reports and implemented the changes largely as the panel had recommended.
 
@@ -196,15 +196,15 @@ Two implications follow.
 
 **And "half the cost per token" is not "half the cost per project."** Because of its swottishness, Opus 5 burns more tokens than Fable in search and evaluation - which erodes the advantage of the model that looks twice as cheap.
 
-That was a guess when I first wrote it down. It turns out it has already been measured, and it is worth being precise about what the measurement does and doesn't support.
+That was a guess when I first wrote it down. It turns out it has already been measured, and it is worth being precise about what the measurement does and doesn't support. Claude (Fable) summarises what's known thusly:
 
-On Artificial Analysis's Intelligence Index, at max effort, Opus 5 scores 61 and Fable 5 scores 60 - a tie, for practical purposes. Getting there took Opus 5 **100 million output tokens** against Fable's **87 million**: about 15% more output to reach the same place, and enough to earn Opus the label *very verbose* where Fable is only *somewhat verbose*. Running the whole suite cost \$3,835 on Opus against \$5,630 on Fable.
-
-So the direction of the hunch is right, and the mechanism is right. But the magnitude isn't: half price per token becomes roughly **26–32% cheaper per completed task**, not parity.[^4] The swottishness eats about half of Opus's price advantage. It doesn't eat all of it.
+> On Artificial Analysis's Intelligence Index, at max effort, Opus 5 scores 61 and Fable 5 scores 60 - a tie, for practical purposes. Getting there took Opus 5 **100 million output tokens** against Fable's **87 million**: about 15% more output to reach the same place, and enough to earn Opus the label *very verbose* where Fable is only *somewhat verbose*. Running the whole suite cost \$3,835 on Opus against \$5,630 on Fable.
+>
+> So the direction of the hunch is right, and the mechanism is right. But the magnitude isn't: half price per token becomes roughly **26–32% cheaper per completed task**, not parity.[^4] The swottishness eats about half of Opus's price advantage. It doesn't eat all of it.
 
 [^4]: **Claude Footnote:** Two different published figures, same conclusion. Artificial Analysis's weighted cost per Index task is \$2.03 for Opus 5 against \$2.75 for Fable 5 (26% lower); total evaluation cost across the suite gives 32% lower. Both are a long way from the 50% the sticker price implies.
 
-I've put the full arithmetic - including why output tokens alone don't quite account for the gap, and the one measurement that points the other way - in a companion post: [The token tax: what "half the price" actually buys](../opus-fable-cost-per-task/index.qmd).
+A fuller account is available in this Claude-credited sister post: [The token tax: what "half the price" actually buys](../opus-fable-cost-per-task/index.qmd).
 
 Anyway: the agentic circular firing squad - asking one LLM to try to rip apart another's codebase, then another, then implementing what survives - worked well for identifying and fixing the performance issues, and Opus 5 was a critical part of that mix.
 
@@ -226,7 +226,7 @@ I hadn't tried to hide the collaboration, and said so:
 >
 > There is an editor through the /editor/ path off root. So means of providing more human input to assets.
 
-[^jon-fableton]: I credit the game, in the game to 'Jon Fableton', an (I thought) fairly on-the-nose nod to this being the work of a 'cognitive centaur'. The git log explicitly includes Claude as a collaborator; and the cadence of revisions and updates to the repo is likely unfeasible by human alone. 
+[^jon-fableton]: I credit the game, in the game, to 'Jon Fableton', an (I thought) fairly on-the-nose nod to this being the work of a 'cognitive centaur'. The git log explicitly includes Claude as a collaborator; and the cadence of revisions and updates to the repo is likely unfeasible by human alone. 
 
 ## 'Just asking Claude'
 
