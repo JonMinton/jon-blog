@@ -79,8 +79,6 @@ And here is the main character alone, climbing the same ladder:
 
 ![The player-wizard at each of the six tiers, left to right T0 to T5: monochrome glyph, two-colour attribute sprite, then full-colour and increasingly smooth.](wizard-by-tier.png){#fig-wizard}
 
-> **\[TODO - Formatter\]** Still worth capturing separately: an animated GIF of a single upgrade transition, the one-second re-render ripple sweeping across the screen. It's the one thing a static matrix can't show, and probably the most shareable artefact in the whole project.
-
 ## Wands, berries and other refinements
 
 More than a dozen playtest rounds turned that single loop into something with texture. Two of the additions matter enough to describe.
@@ -126,27 +124,31 @@ Two kinds of incentive persist between games: what the game unlocks, and what th
 
 # Across: Opus 5, Fable 5, and two ways of being good
 
-The second act is about performance - the game's, and then the models'.
+Playing the game for a few minutes - it's designed to take between 5 and 10 minutes to play - revealed some of the design issues and decisions mentioned above. But playing a few minutes longer, the game started, sometimes but not all times to become a bit... sluggish.
 
-## The slowdown
+Usually, but not always, this happened around T3; motion became jerky, music became more stoccato, less fluid. The whole experience started to become more like wading through sand than ambling purposefully through a magic forest. Something was off.
 
-Somewhere around T3, games started to bog down. Not immediately: the slowdown accumulated over a session, which is the worst kind, because it means the problem isn't a single expensive operation but something leaking.
+Here I changed the pattern: instead of Claude Fable as codesigner and implementer, I thought I'd have Fable's work reviewed by a few of its peers. This is a pattern I've referred to either as 'Agentic Peer Review', 'Multi-Agent, Multi-Family Review Carousel', or, more pointedly, 'Multi-Agent Circular Firing Squads'.
 
-> **\[TODO\]** Describe the symptom concretely before diagnosing it. What did it actually feel like at T3, ten minutes in? Frame rate? Input lag? This is what motivates the whole investigation and it's currently one clause in the notes.
+Regardless of the name or specifics, the basic idea of this: each instance of any specific model is cut from the same cloth. So, no matter how much you prompt a Fable or a Sol or a... whatever to be very self critical and analytical when working as a reviewer, if it's the same model type as the worker/implementer model, it will tend to have the same preferences and blind spots as the instance it's evaluating.
 
-Three models looked at it, in sequence, and - this turned out to matter - not blind to each other.
+By contrast, model instances from different companies are likely to have, hopefully, somewhat less overlap in how they 'reason' and 'think'. Though each will have its own strengths, limitations and blind spots, they're not likely to be exactly the same.
 
-**GPT**, via GitHub Copilot, went first, and identified a set of issues likely to be responsible.
+Therefore, for review, I try to consult with models from *different* families. Ideally, but not always (and not in this case) I also try to blind each reviewer from all the other reviewers too.
 
-**Gemini**, via Gemini Code Assist, went second. It could see GPT's review, and judged it better than its own.
+For this review, I used Github Copilot for consulting ChatGPT (probably not now the most efficient means of doing so, since Github Copilot became a lot more stingy in token usage); and Google's own code harness to consult Gemini. Each model was from a different company, so a different family.
+
+But I'd also heard, and had a little experience trying out, Claude Opus 5, which released just a few days ago. Initial widely reported benchmarking suggests Opus 5 may have something like parity with Fable 5, despite being nominally from a model tier below. So, I though Opus 5 would be worth including too, despite also being an Anthropic model.
+
+For each of the models, I provided a near identical prompt: review the whole codebase, look for any potential performance issues, write a report detailing such potential issues within a self-identifying .md file within a new reviews/ subdirectory.
+
+The face the models weren't blind to each other's reviewers - something I should have addressed by using different branches for each, then merging after, meant later models *were* influenced the reviews left by earlier models. GPT went first, and seemed very thorough. Gemini went second, 'peeking' into GPT's review notes, and judging it to be better and more thorough than its own.
 
 **Opus 5**, via Claude Code, went third. It drew its inspiration mainly from GPT - specifically from GPT's instinct to evaluate performance under different conditions - and then took that much further than GPT had, running many experiments directly in the codebase. It confirmed that most of the GPT-identified code smells were real, but found that the *order of priority* was inverted: the things GPT thought mattered most for latency weren't the things that actually did.
 
+(Unfortunately, as part of its extensive evaluations, Opus 5 apparently deleted some cached state and data, including some interim edits I'd made to the default map. It apologised, but because the state hadn't been fully saved before review, the damage had already been done. If you are going to get a new model to interfere with an existing model's codebase, consider branch hygiene much more than I did!.
+
 **Fable** then read the resulting review reports and implemented the changes largely as the panel had recommended.
-
-The non-blindness is the interesting part. This wasn't three independent opinions to be averaged. It was a relay, in which each model could see and build on what came before - and in Gemini's case, defer to it. Which means the panel's output isn't a consensus so much as an accumulation, and GPT's framing had disproportionate influence on everything downstream simply by going first.
-
-> **\[TODO\]** Worth deciding whether the relay structure was a deliberate choice or just how it happened. If deliberate, say why; if accidental, the observation about first-mover influence is worth keeping as a caution about how to run these panels.
 
 Concretely: GPT ranked the tier-3-and-up renderer first - the obvious suspect, since the slowdown appeared at T3 - and an obscure watchdog timer last. Opus measured, and the measurements flipped the list. The entire renderer costs less than a millisecond a frame at every tier; it could not have been the cause of anything. The real culprits were two bugs that only grow over a session: a watchdog which, after any stall or any spell in a hidden browser tab, permanently forked the animation loop - leaving the game quietly running its frame loop twice, three times, N times over, forever - and a new-game routine whose cost grew with the map's accumulated history, up to two-thirds of a second on a well-played valley. And the two interacted: the new-game stall tripped the watchdog, so every restart on an aged map added another permanent loop. The slowdown 'accumulating over a session' wasn't a loose impression. It was the mechanism.
 
@@ -160,22 +162,28 @@ Within recent LLM performance benchmarks, Opus 5 - despite being nominally a tie
 
 I don't have a strong reason to doubt this, beyond the usual worry about which metrics got chosen. But my initial impression is that the two models often reach similar outcomes by quite different routes. Crudely: Opus 5 is more of a **swot**, and Fable 5 more of a **savant**.
 
+**Savant behaviour:**
+
+- High reliance on reasoning from first principles
+- Creative, and often more intelligent, inference about the latent subgoals and implicit assumptions behind a prompt
+
 **Swot behaviour:**
 
 - Even more extensive and comprehensive RAG searches
 - Even more comprehensive review of codebases
 - Even more exhaustive testing and iteration
 
-**Savant behaviour:**
-
-- More reliance on reasoning from first principles
-- More creative, and often more intelligent, inference about the latent subgoals and implicit assumptions behind a prompt
-
 Both have very high tenacity - though I suspect that's a dial being turned in response to capacity and demand rather than a fixed property of either model.
 
-> **\[TODO - Scriptdoctor\]** "Swot" and "Savant" is a good pairing but the swot list is currently three lines all beginning "Even more". Either lean into the repetition as a deliberate rhythm or vary it. Flagging rather than fixing.
-
 The performance investigation supplied a clean instance of each. The swot: Opus, unwilling to rank defects by plausibility, instrumented the live game and measured everything - including establishing that the renderer everyone suspected costs under a millisecond a frame, and so could be ignored. The savant: Fable, handed three partially contradictory reviews, didn't average them; it decided that where the reviews disagreed the measurements should win, wrote the implementation plan on that principle, and demoted the panel's most-recommended fix to optional.
+
+And the pattern isn't just mine. Someone on Reddit posted a side-by-side from [MineBench](https://minebench.ai) - a benchmark-cum-toy which has models build Minecraft-style voxel scenes from a text prompt, outputting raw block coordinates, with humans voting pairwise on the results - giving both siblings the same two words: *a fighter jet*.
+
+![MineBench, same prompt to both models. Top: Claude Fable 5's build - one jet on a runway, 83,457 blocks. Bottom: Claude Opus 5's - an aerial battle over an ocean, 512,910 blocks.](differences-between-fable-5-and-opus-5-on-v0-wva19c9dfnfh1.gif){#fig-minebench}
+
+Fable built one jet, parked on a runway, with just enough scenery to frame it: 83,457 blocks. Opus built 512,910 blocks - six times as many - of jets banking over an ocean through launch plumes and towering clouds. Same prompt, same corporate parent, similar competence; utterly different ideas about how much work two words deserved. And because MineBench's output *is* the blocks, the swot's thoroughness here is literally made of output tokens: the token tax, rendered in voxels. (Which scene is *better* is exactly what the benchmark settles by human vote - and honestly, Opus's is more cinematic. The point isn't quality. It's disposition: the swot answers everything the prompt might conceivably have meant; the savant decides what it did mean, and stops.)
+
+> **\[TODO - Gopher\]** Source link needed: the GIF's filename carries the Reddit slug ("differences-between-fable-5-and-opus-5-on..."), but Reddit is unreachable from this session and the thread isn't search-indexed yet. Paste the permalink here and credit the poster's username.
 
 ## Why Fable *shouldn't* be more swottish
 
