@@ -162,6 +162,14 @@ Within recent LLM performance benchmarks, Opus 5 - despite being nominally a tie
 
 I don't have a strong reason to doubt this, beyond the usual worry about which metrics got chosen. But my initial impression is that the two models often reach similar outcomes by quite different routes. Crudely: Opus 5 is more of a **swot**, and Fable 5 more of a **savant**.
 
+Here's an illustration, from the first of 15 such comparisons on a subreddit, showing how Fable 5 and Opus 5 differ when both prompted to produce 'a fighter jet' in minebench.ai:
+
+And the pattern isn't just mine. [A post on r/ClaudeAI](https://www.reddit.com/r/ClaudeAI/s/kUK3YEsuJu) collects fifteen side-by-side comparisons from [MineBench](https://minebench.ai) - a benchmark-cum-toy which has models build Minecraft-style voxel scenes from a text prompt, outputting raw block coordinates, with humans voting pairwise on the results. Here is what the two siblings did with the same three words, *a fighter jet*:
+
+![MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks.](differences-between-fable-5-and-opus-5-on-v0-wva19c9dfnfh1.gif){#fig-minebench alt="MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks."}
+
+The prompt is singular, and Fable's reading of it is exact: one jet, flying low over a runway, with just enough scenery to frame it - 83,457 blocks. Opus built 512,910 blocks - six times as many - and *three* fighter jets, of different sizes, banking over an ocean through launch plumes and towering clouds. Nobody asked for the second jet, let alone the third. Nor is this a one-off: the post carries fifteen such comparisons, and the pattern holds across them. Opus overengineers, filling the voxel space as if to impress; Fable is consistently more restrained - subtle and precise about the brief, down to respecting the difference between 'a fighter jet' and 'fighter jets'. And because MineBench's output *is* the blocks, the swot's thoroughness here is literally made of output tokens: the token tax, rendered in voxels. (Which scene is *better* is exactly what the benchmark settles by human vote - and honestly, Opus's is more cinematic. The point isn't quality. It's disposition: the swot answers everything the prompt might conceivably have meant; the savant decides what it did mean, and stops.) \## Why Fable *shouldn't* be more swottish
+
 **Savant behaviour:**
 
 - High reliance on reasoning from first principles
@@ -176,13 +184,6 @@ I don't have a strong reason to doubt this, beyond the usual worry about which m
 Both have very high tenacity - though I suspect that's a dial being turned in response to capacity and demand rather than a fixed property of either model.
 
 The performance investigation supplied a clean instance of each. The swot: Opus, unwilling to rank defects by plausibility, instrumented the live game and measured everything - including establishing that the renderer everyone suspected costs under a millisecond a frame, and so could be ignored. The savant: Fable, handed three partially contradictory reviews, didn't average them; it decided that where the reviews disagreed the measurements should win, wrote the implementation plan on that principle, and demoted the panel's most-recommended fix to optional.
-
-And the pattern isn't just mine. [A post on r/ClaudeAI](https://www.reddit.com/r/ClaudeAI/s/kUK3YEsuJu) collects fifteen side-by-side comparisons from [MineBench](https://minebench.ai) - a benchmark-cum-toy which has models build Minecraft-style voxel scenes from a text prompt, outputting raw block coordinates, with humans voting pairwise on the results. Here is what the two siblings did with the same two words, *a fighter jet*:
-
-![MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks.](differences-between-fable-5-and-opus-5-on-v0-wva19c9dfnfh1.gif){#fig-minebench}
-
-The prompt is singular, and Fable's reading of it is exact: one jet, flying low over a runway, with just enough scenery to frame it - 83,457 blocks. Opus built 512,910 blocks - six times as many - and *three* fighter jets, of different sizes, banking over an ocean through launch plumes and towering clouds. Nobody asked for the second jet, let alone the third. Nor is this a one-off: the post carries fifteen such comparisons, and the pattern holds across them. Opus overengineers, filling the voxel space as if to impress; Fable is consistently more restrained - subtle and precise about the brief, down to respecting the difference between 'a fighter jet' and 'fighter jets'. And because MineBench's output *is* the blocks, the swot's thoroughness here is literally made of output tokens: the token tax, rendered in voxels. (Which scene is *better* is exactly what the benchmark settles by human vote - and honestly, Opus's is more cinematic. The point isn't quality. It's disposition: the swot answers everything the prompt might conceivably have meant; the savant decides what it did mean, and stops.)
-## Why Fable *shouldn't* be more swottish
 
 So although Opus 5 and Fable 5 are intended as different tiers, for now they can perhaps be thought of as similarly capable models that often reach similar outcomes by different means.
 
