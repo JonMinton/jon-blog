@@ -6,8 +6,6 @@ date: 2026-07-26
 categories: [ai, games, game design, retro computing, Claude, cognitive centaur]
 ---
 
-> **\[SKELETON - Claude, 2026-07-26\]** This is a first-pass scaffold built from `notes.md`. Blockquoted **\[TODO\]** lines mark work still to do. Blockquoted *\[from notes\]* blocks are your own notes ported over more or less verbatim where the level of detail suggests they need unpacking rather than paraphrasing. Draft paragraphs are written where the shape of the argument already seemed clear enough to commit to prose - treat those as proposals, not decisions. Delete this block before publishing.
-
 ## Back
 
 Less than a week ago, I found myself stimulating my brain to produce good feelings by exposing my eyeballs to some YouTube videos showing playthroughs of ZX Spectrum games. I found myself idly engaged by [a playthrough of Robin of the Woods](https://www.youtube.com/watch?v=vGIg5z7oE4w&t=672s), a game in which the player navigates a multiscreen medieval forest, nonchalantly clubbing enemies to crumbled unconsciousness for the crime of patrolling endlessly in straight lines.
@@ -124,7 +122,7 @@ Two kinds of incentive persist between games: what the game unlocks, and what th
 
 # Across: Opus 5, Fable 5, and two ways of being good
 
-Playing the game for a few minutes - it's designed to take between 5 and 10 minutes to play - revealed some of the design issues and decisions mentioned above. But playing a few minutes longer, the game started, sometimes but not all times, to become a bit... sluggish.
+Playing the game for a few minutes - it's designed to take between 5 and 10 minutes to play - revealed some of the design issues, and prompted some of the design decisions, mentioned above. But playing a few minutes longer, the game started, sometimes but not all times, to become a bit... sluggish.
 
 Usually, but not always, this happened around T3; motion became jerky, music became more staccato, less fluid. The whole experience started to become more like wading through sand than ambling purposefully through a magic forest. Something was off.
 
@@ -206,7 +204,7 @@ That was a guess when I first wrote it down. It turns out it has already been me
 
 A fuller account is available in this Claude-credited sister post: [The token tax: what "half the price" actually buys](../opus-fable-cost-per-task/index.qmd).
 
-Anyway: the agentic circular firing squad - asking one LLM to try to rip apart another's codebase, then another, then implementing what survives - worked well for identifying and fixing the performance issues, and Opus 5 was a critical part of that mix.
+Anyway: the agentic circular firing squad worked well for identifying and fixing the performance issues, and Opus 5 was a critical part of that mix.
 
 ------------------------------------------------------------------------
 
