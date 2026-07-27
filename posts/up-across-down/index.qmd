@@ -162,18 +162,18 @@ Within recent LLM performance benchmarks, Opus 5 - despite being nominally a tie
 
 I don't have a strong reason to doubt this, beyond the usual worry about which metrics got chosen. But my initial impression is that the two models often reach similar outcomes by quite different routes. Crudely: Opus 5 is more of a **swot**, and Fable 5 more of a **savant**.
 
-Here's an illustration, from the first of 15 such comparisons on a subreddit, showing how Fable 5 and Opus 5 differ when both prompted to produce 'a fighter jet' in minebench.ai:
+Here's an illustration, from the first of 15 such comparisons on [a subreddit post](https://www.reddit.com/r/ClaudeAI/s/kUK3YEsuJu), showing how Fable 5 and Opus 5 differ when both prompted to produce 'a fighter jet' in [minebench.ai](https://minebench.ai): a benchmark-cum-toy which has models build Minecraft-style voxel scenes from a text prompt, outputting raw block coordinates, with humans voting pairwise on the results:
 
-And the pattern isn't just mine. [A post on r/ClaudeAI](https://www.reddit.com/r/ClaudeAI/s/kUK3YEsuJu) collects fifteen side-by-side comparisons from [MineBench](https://minebench.ai) - a benchmark-cum-toy which has models build Minecraft-style voxel scenes from a text prompt, outputting raw block coordinates, with humans voting pairwise on the results. Here is what the two siblings did with the same three words, *a fighter jet*:
+![MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks.](differences-between-fable-5-and-opus-5-on-v0-wva19c9dfnfh1.gif){#fig-minebench}
 
-![MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks.](differences-between-fable-5-and-opus-5-on-v0-wva19c9dfnfh1.gif){#fig-minebench alt="MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks."}
+So, Opus 5 appears so 'eager to impress' that it massively overengineers the task, filling the voxel space with unnecessary details, and elements, and so burning through far more tokens than it needs to. Arguably, if being strict in interpreting the prompt, Opus 5 is so focused on giving *more* than required that it fails the test, as the prompt was for '*a* fighter jet', implying one fighter jet, whereas Opus 5 delivers three, of the same design but different sizes, as if the two smaller jets are the larger jet's children, flying together in a protective convoy. 
 
-The prompt is singular, and Fable's reading of it is exact: one jet, flying low over a runway, with just enough scenery to frame it - 83,457 blocks. Opus built 512,910 blocks - six times as many - and *three* fighter jets, of different sizes, banking over an ocean through launch plumes and towering clouds. Nobody asked for the second jet, let alone the third. Nor is this a one-off: the post carries fifteen such comparisons, and the pattern holds across them. Opus overengineers, filling the voxel space as if to impress; Fable is consistently more restrained - subtle and precise about the brief, down to respecting the difference between 'a fighter jet' and 'fighter jets'. And because MineBench's output *is* the blocks, the swot's thoroughness here is literally made of output tokens: the token tax, rendered in voxels. (Which scene is *better* is exactly what the benchmark settles by human vote - and honestly, Opus's is more cinematic. The point isn't quality. It's disposition: the swot answers everything the prompt might conceivably have meant; the savant decides what it did mean, and stops.) \## Why Fable *shouldn't* be more swottish
+So, we have something like:
 
 **Savant behaviour:**
 
 - High reliance on reasoning from first principles
-- Creative, and often more intelligent, inference about the latent subgoals and implicit assumptions behind a prompt
+- Creative, and often more intelligent, inference about the latent subgoals and implicit assumptions behind a prompt; at the very least not appearing to forget the prompt
 
 **Swot behaviour:**
 
@@ -223,33 +223,77 @@ Then a second person added, with a smiley, that they assumed it takes rather les
 
 I hadn't tried to hide the collaboration, and said so:
 
-> Clue's in the git log and pseudonym. 😉 I meant mainly in terms of game behaviour, dynamics, balance, features, the progression loop etc. for example introduced a means of procedurally generating the maps to produce more organic rivers and forests, then specifying and implementing cellular automata style rules for how they change between visits. But also noticed performance issues creeping in and used a kind of agentic circular firing squad (asking one LLM to try to rip apart another's codebases etc) to try to fix this.
+> Clue's in the git log and pseudonym.[^jon-fableton] 😉 I meant mainly in terms of game behaviour, dynamics, balance, features, the progression loop etc. for example introduced a means of procedurally generating the maps to produce more organic rivers and forests, then specifying and implementing cellular automata style rules for how they change between visits. But also noticed performance issues creeping in and used a kind of agentic circular firing squad (asking one LLM to try to rip apart another's codebases etc) to try to fix this.
 >
 > There is an editor through the /editor/ path off root. So means of providing more human input to assets.
 
-A few hours later, the first person returned: they hadn't realised the game was made with AI. They didn't want to restart a conversation the community had evidently had before. But as someone who tries to check out, and reply to, as much of what gets posted there as they can, they were starting to feel discouraged from doing so by the absence of an AI disclosure rule. They would rather know in advance, and just not interact. They raised it with the moderators - politely, and explicitly heading off any pile-on - and their message drew more hearts than anything else in the thread, including my game. A moderator thanked them, and said the question was already under active discussion.
+[^jon-fableton]: I credit the game, in the game to 'Jon Fableton', an (I thought) fairly on-the-nose nod to this being the work of a 'cognitive centaur'. The git log explicitly includes Claude as a collaborator; and the cadence of revisions and updates to the repo is likely unfeasible by human alone. 
 
-Two things seem worth being honest about here.
+## 'Just asking Claude'
 
-First, "I hadn't tried to hide it" is true, but it isn't the whole truth. The name credited is Jon Fableton - a nom de plume meant to encode the collaboration rather than conceal it, for anyone who knows Fable is the name of the Claude model on the other side of it. The public repo lists Claude as a collaborator throughout. The clue was, as I said at the time, in the git log and the pseudonym. But a clue is not a declaration. The disclosure was discoverable rather than upfront - and the person who asked for a rule had engaged twice, generously, without discovering it. Their request, boiled down, was that the gap between discoverable and upfront be closed.
+To me this, and the declared preference to just skip or ignore anything 'by AI', is probably where the biggest difference in framing lies. History doesn't repeat, they say, but it rhymes, and to me it rhymes with something like the following: 
 
-Second, nobody was hostile. The joke wore a wink. The request was courteous, framed around the requester's own finite attention rather than around my conduct; and the hearts it gathered were support for *disclosure*, not a movement against me. If this was pushback, it was the mildest weather system to which that word has ever been applied.
+> A: I programmed this...
+> B: Very good.
+> A: ...in Fortran.
+> B: Then you didn't program it; you got the Fortran compiler to program it.
 
-And yet it stung, and it is worth working out exactly what stung, because it wasn't an accusation. Nobody said the game was bad, or that I had done anything wrong. What the exchange did was quietly reprice the work: fourteen rounds of development read as commitment right up until the moment its co-author was named, whereupon - to at least one reader - it read as none at all.
+Generalise that dialogue across the decades and it becomes a scheme: the same conversation, restaged every ten or fifteen years, with yesterday's 'not real programming' promoted - without ceremony, and without apology - to today's 'real programming'.
 
-## Where the commitment lives
+::: {.column-page}
+```{mermaid}
+flowchart LR
+  classDef real fill:#2e6b4f,color:#ffffff,stroke:#1d4733
+  classDef fake fill:#8f3b3b,color:#ffffff,stroke:#5e2222
+  classDef old fill:#555555,color:#eeeeee,stroke:#333333
 
-The joke's premise deserves to be taken seriously, because it is doing real work. A show-and-tell channel doesn't only trade in artifacts; it trades in evidence of effort. "That's committed" was praise for the fourteen rounds. "Less commitment if you're just asking Claude" was the claim that those rounds don't count - that commitment lives at the keyboard, in the typing of the code, and nowhere else.
+  subgraph D40["1940s"]
+    direction TB
+    m40["Machine code<br/>'real programming'"]:::real
+  end
 
-My reply, in effect, relocated it: the commitment was in game behaviour, dynamics, balance, features, the progression loop - in the several hundred decisions about what the game should be, which of its emergent behaviours to keep, and what each playtest's irritations actually meant. Claude typed nearly every line. The design ledger is mine. Whether that ledger counts as commitment is, I suspect, exactly the question the next few years of this argument will be about.
+  subgraph D50["1950s"]
+    direction TB
+    f50["Fortran<br/>'you got the compiler to do it'"]:::fake --> a50["Assembly<br/>'real programming' (now)"]:::real --> m50["Machine code"]:::old
+  end
 
-> **\[TODO\]** This section is a seed, deliberately not fully grown - the effort-attribution question (what did *you* do, what did Claude originate, and which layer does credit attach to) could carry a whole post. To earn its place here it probably needs just two concrete examples: one design decision that was unambiguously yours, and one thing Claude originated that you chose to keep. Verify "Claude typed nearly every line" while you're at it.
+  subgraph D70["1970s"]
+    direction TB
+    c70["C<br/>'high-level languages waste the machine'"]:::fake --> f70["Fortran<br/>'real programming' (now)"]:::real --> r70["⋮"]:::old
+  end
 
-## The false binary
+  subgraph D80["1980s"]
+    direction TB
+    b80["BASIC & construction kits<br/>'toy language, toy tools'"]:::fake --> c80["C<br/>'real programming' (now)"]:::real --> r80["⋮"]:::old
+  end
 
-The request was for advance declaration of AI-coproduced content, so that those who wished to could disengage before spending attention rather than after. The framing underneath it is that a work either is or is not AI-coproduced - and that the line can be drawn cleanly enough for a moderator to enforce.
+  subgraph D90["1990s"]
+    direction TB
+    j90["Java, Visual Basic<br/>'the machine manages your memory for you'"]:::fake --> c90["C++<br/>'real programming' (now)"]:::real --> r90["⋮"]:::old
+  end
 
-It can't. Nothing is ever fully AI or fully human. There is always some mixture, and the range of possible mixtures is very wide: AI engagement with human content, human engagement with AI content, and every ratio in between. I'm still learning where the right balance sits, and so is everyone else. [Cognitive centaurs](../guano-guild-as-cognitive-centaur-experiment/index.qmd).
+  subgraph D00["2000s"]
+    direction TB
+    p00["Python, JavaScript<br/>'that's just scripting'"]:::fake --> j00["Java, C#<br/>'real programming' (now)"]:::real --> r00["⋮"]:::old
+  end
+
+  subgraph D10["2010s"]
+    direction TB
+    n10["No-code platforms, level editors, Scratch<br/>'that's just configuration'"]:::fake --> p10["Python<br/>'real programming' (now)"]:::real --> r10["⋮"]:::old
+  end
+
+  subgraph D20["2020s"]
+    direction TB
+    e20["English, via Claude<br/>'you just asked'"]:::fake --> n20["Everything below<br/>'real programming' (now)"]:::real --> r20["⋮"]:::old
+  end
+
+  D40 --> D50 --> D70 --> D80 --> D90 --> D00 --> D10 --> D20
+```
+:::
+
+The boundary has never stopped moving, and it has only ever moved in one direction. Nobody now demands that you manage your own registers before being taken seriously. The Fortran objection didn't lose the argument; it died of old age, and its children took up the family business one rung higher.
+
+And as with 'real programming', so with 'made by AI': the declaration being asked for assumes a line - work that is AI, work that is not - drawn cleanly enough for a moderator to enforce. It can't be. Nothing is ever fully AI or fully human. There is always some mixture, and the range of possible mixtures is very wide: AI engagement with human content, human engagement with AI content, and every ratio in between. I'm still learning where the right balance sits, and so is everyone else. [Cognitive centaurs](../guano-guild-as-cognitive-centaur-experiment/index.qmd).
 
 > **\[TODO\]** The strongest version of this argument names the spectrum concretely: at one end, autocomplete and spellcheck (nobody demands a declaration); at the other, a fully AI-generated asset nobody looked at. Upgrade sits somewhere specific on that line, and saying *where* is more persuasive than saying the line is blurry. What proportion of the design decisions were yours? All of them? What did Claude actually originate?
 
