@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-07-26">
+
+<title>⬆️ Up, ⬅️➡️ Across, ⬇️ Down – Jon Minton’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b4c3c3ebc6e6f52ba473d680e7702c0d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-12d95f8286d9db9756aed14812d158a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta name="twitter:title" content="⬆️ Up, ⬅️➡️ Across, ⬇️ Down – Jon Minton’s Blog">
+<meta name="twitter:description" content="On building Upgrade, a new retro game; on Opus 5 and Fable 5 as complementary siblings; and on the pushback that comes with calling an AI-codeveloped game ‘mine’">
+<meta name="twitter:image" content="https://blog.jonminton.net/posts/up-across-down/upgrade-t1-attribute-clash.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image-height" content="900">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html"> 
+<span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net"> <i class="bi bi-window-fullscreen" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">⬆️ Up, ⬅️➡️ Across, ⬇️ Down</h1>
+            <p class="subtitle lead">On building Upgrade, a new retro game; on Opus 5 and Fable 5 as complementary siblings; and on the pushback that comes with calling an AI-codeveloped game ‘mine’</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">ai</div>
+                <div class="quarto-category">games</div>
+                <div class="quarto-category">game design</div>
+                <div class="quarto-category">retro computing</div>
+                <div class="quarto-category">Claude</div>
+                <div class="quarto-category">cognitive centaur</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 26, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+
+<section id="back" class="level2">
+<h2 class="anchored" data-anchor-id="back">Back</h2>
+<p>Less than a week ago, I found myself stimulating my brain to produce good feelings by exposing my eyeballs to some YouTube videos showing playthroughs of ZX Spectrum games. I found myself idly engaged by <a href="https://www.youtube.com/watch?v=vGIg5z7oE4w&amp;t=672s">a playthrough of Robin of the Woods</a>, a game in which the player navigates a multiscreen medieval forest, nonchalantly clubbing enemies to crumbled unconsciousness for the crime of patrolling endlessly in straight lines.</p>
+<p>This reminded me of, to my mind, a better ZX Spectrum game, Feud, about two wizards - brothers locked in bitter rivalry - who wander around a similar forested arena of largely black screens, seeking ingredients for potions which, when deposited at cauldrons near their bases, grant them spells which, ultimately, allow them to vanquish their sibling, thereby either losing the game (if the vanquished sibling is the player), or winning the game (if the vanquished sibling is the computer-controlled rival).</p>
+<p>As <a href="https://www.youtube.com/watch?v=w7U8qCLbBUo">this video essay</a> makes clear, in practice Feud probably isn’t as good as I remember. Only a minority of spells matter, meaning only a minority of ingredients matter, meaning only a minority of locations matter. And as there’s only one arena, which never changes, after a few playthroughs beating the game becomes just a matter of repeating the same routes, acquiring the same ingredients, shooting fire and lightning into the rival until he, Wicked Witch of the West Style, descends into the floor, producing a single perfunctory “Victory” screen.</p>
+<p>But the core loop - search, collect, upgrade, repeat; all while competing against a rival trying to do the same - along with the highly distinct visual ‘style’ of the ZX Spectrum, made me think maybe there’s something worth pulling out of misremembered nostalgia and making real in the present day. And it made me think of the Home Computer systems I had during the 1980s through to mid 1990s, and how the types of game, and experience of gaming, changed with each system.</p>
+<p>From this, the kernel of a game idea, Upgrade, was born. And with Claude Fable, in the Claude Code scaffold, it turned out this game idea was relatively straightforward to conjure into some form of existence. And then, more promisingly, to iterate upon and tune through more than a dozen rounds of playtesting and feature development.</p>
+</section>
+<section id="up-the-upgrade-game" class="level1 page-columns page-full">
+<h1>⬆️ Up: The Upgrade Game</h1>
+<p><strong>Play it: <a href="https://jonminton.github.io/upgrade-game/">jonminton.github.io/upgrade-game</a></strong> · <a href="https://jonminton.github.io/upgrade-game/editor.html">map editor</a> · <a href="https://github.com/JonMinton/upgrade-game">source</a></p>
+<section id="the-core-loop" class="level2">
+<h2 class="anchored" data-anchor-id="the-core-loop">The core loop</h2>
+<p>The core conceit is that the upgrades don’t make your character stronger. They make the <em>game’s graphics and audio</em> better.</p>
+<p>Every entity in the world - you, your rival, the environment - has a development tier. (TX, from X=0 through X=5). The tier controls only presentation: resolution, palette, colour rules, animation smoothness, sound hardware. Movement speed, attack power and health are identical at every tier. What you are racing for is not power. It is fidelity.</p>
+<p>The loop wrapped around that conceit is Feud’s, transplanted. You navigate a flick-screen arena - a British-folklore valley of village, greenwood, marsh and ruined keep - looking for shards: relics of future hardware half-buried in the landscape, a thermionic valve glowing among the reeds, a 3.5” floppy stuck in a tree like the sword in the stone. Gather three, carry them to the Standing Stones, and survive a three-second channelling ritual (longer at the final ascension stage) - interruptible, naturally, by anyone minded to shoot you mid-chant - and the whole game re-renders underneath you, one tier closer to 1995.</p>
+<p>You are not the only one foraging. Kernagh, a rival hedge-wizard, starts at the same tier as you but on the far side of the valley, and wants exactly what you want. Combat is kept simple: one projectile, a crackling static bolt; three hits and you are derezzed - dissolved into a burst of noise pixels, dropping every shard you were carrying where you fell, respawning at your home village one tier lower than you were. And there are two ways to win: transcendence, in which you reach the top tier, gather three final shards, and complete one last, longer ritual before Kernagh does; or elimination, in which you derez him while he is already scraping along the floor at T0. Each, of course, has its mirror image, in which the wizard transcended against, or derezzed at rock bottom, is the player, and the game is thereby lost rather than won.</p>
+<p>Although the comparative levels of the two wizards are shown in the status screen alongside the play arena, it also leaked through in the rival’s aesthetics: if you’re at T2 while Kernagh is at T4, for instance, then when Kernagh appears on screen he’s the only entity visible to you, in the whole arena, who <em>doesn’t</em> experience colour clash!</p>
+</section>
+<section id="attribute-clash-and-why-it-existed" class="level2">
+<h2 class="anchored" data-anchor-id="attribute-clash-and-why-it-existed">Attribute clash, and why it existed</h2>
+<p>The Spectrum had a very distinctive graphical style, and it was a style produced entirely by a limitation. The machine let you specify pixels as ‘on’ or ‘off’ at a comparatively high resolution - but the <em>colours</em> associated with ‘on’ and ‘off’ could only be specified for 8×8 tiles of cells within that resolution.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>This wasn’t an oversight. The Spectrum wasn’t really designed with games in mind; it was designed for more serious applications. Consider a simple word processor: a letter is a block of pixels that fits neatly inside one of those colour tiles. Being able to change the complete foreground and background colour of that block at once is exactly what you want for marking out letters for attention, editing, highlighting. Higher-resolution colour control - making the <em>edges</em> of a letter a different colour from its interior - would have bought you almost nothing.</p>
+<p>So the constraint was rational, and the consequence was an entire visual idiom: the colour bleed as a sprite crosses a tile boundary, the careful level design that works <em>with</em> the grid rather than against it. A generation of British game artists spent a decade learning to make attribute clash look deliberate.</p>
+<p>Here it is in Upgrade, faithfully modelled:</p>
+<div id="fig-clash" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-clash-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="upgrade-t1-attribute-clash.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-clash-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Upgrade at T1, on the village screen. The player-wizard (white and cyan) has walked up against the wand station (yellow chequer) - and the 8×8 cells his sprite shares with it are forced to his colours. The HUD confirms both wizards still perceive a Spectrum 48K world.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-tier-ladder" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-tier-ladder">The tier ladder</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tier</th>
+<th>Machine modelled</th>
+<th>What changes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>T0</strong></td>
+<td>Late-70s / ZX81-ish</td>
+<td>1-bit monochrome, chunky glyphs, near-silence. The floor - you can’t fall below it.</td>
+</tr>
+<tr class="even">
+<td><strong>T1</strong></td>
+<td>ZX Spectrum 48K</td>
+<td>256×192, 8×8 attribute cells, full clash faithfully modelled. 1-channel beeper. <strong>Player start.</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>T2</strong></td>
+<td>Spectrum 128 / Amstrad-ish</td>
+<td>Clash minimised by smarter cell alignment. AY chip: 3 channels, music and SFX coexist.</td>
+</tr>
+<tr class="even">
+<td><strong>T3</strong></td>
+<td>C64-style 8-bit</td>
+<td>16 fixed colours, hardware sprites free of the attribute grid, push-scroll instead of screen-flick. SID-ish sound.</td>
+</tr>
+<tr class="odd">
+<td><strong>T4</strong></td>
+<td>Atari ST / EGA</td>
+<td>16 from 512, 8-frame animation, doubled tile detail. Sampled drums.</td>
+</tr>
+<tr class="even">
+<td><strong>T5</strong></td>
+<td>Amiga</td>
+<td>32+ colours, parallax, anti-aliased sprites, ambient animation. 4-channel MOD music. <strong>Win tier.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>My own rungs on this ladder: T1, T2, T5. (Then PCs. But they felt like the start of a different tech arc.)</p>
+<p>T1 is where you start, because the Spectrum is where <em>I</em> started. T0 is before me. It’s monochrome purgatory; fall again and you’re eliminated from history. T3 and T4 are adding gradation but not my history; placing Atari STs before Amigas is additionally my subjective prejudice rendered into a game mechanic.</p>
+<p>Here is the whole ladder in one picture:</p>
+<div id="fig-matrix" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="asset-matrix-compact.png" class="img-fluid figure-img column-page">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Four assets and one wizard, drawn at each of the six tiers. Columns run T0 (1979 monochrome) to T5 (Amiga). The bottom row shows every distinct walk pose the game produces at that tier: one at T0, two at T1, four at T2 and T3, six at T4 and T5.
+</figcaption>
+</figure>
+</div>
+<p>Three things in that image are worth slowing down for.</p>
+<p>The <strong>shard</strong> changes medium as you climb: a cassette tape at the Spectrum tiers, a 3.5” floppy at the C64 and ST, a CD at the Amiga. You are always collecting the storage format of the era you can currently perceive.</p>
+<div id="fig-shard" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="shard-by-tier.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The shard at each tier, left to right T0 to T5: tape, then floppy, then CD.
+</figcaption>
+</figure>
+</div>
+<p>And here is the main character alone, climbing the same ladder:</p>
+<div id="fig-wizard" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wizard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="wizard-by-tier.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wizard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The player-wizard at each of the six tiers, left to right T0 to T5: monochrome glyph, two-colour attribute sprite, then full-colour and increasingly smooth.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="wands-berries-and-other-refinements" class="level2">
+<h2 class="anchored" data-anchor-id="wands-berries-and-other-refinements">Wands, berries and other refinements</h2>
+<p>More than a dozen playtest rounds turned that single loop into something with texture. Two of the additions matter enough to describe.</p>
+<p><strong>The wands.</strong> The first prototypes had one weapon. Now a pedestal in your home village lets you swap the default firewand - a point of damage and a brief stagger - for an icewand, which does no damage at all but freezes its target for three and a half seconds. The trade-off is real. The firewand is the attrition route: it is how tiers get knocked off Kernagh, and a derezzed wizard scatters his carried shards where he falls, ready for looting. The icewand harms nobody, and instead wins tempo: three and a half seconds is long enough to complete your own ritual while your rival stands frozen beside the stones, or to walk off with the shards he was guarding. Damage the rival, in other words, or merely inconvenience him at precisely the right moment.</p>
+<p><strong>The berries.</strong> Bushes scattered across the valley - densest in the greenwood - heal one heart when walked over, and regrow after thirty seconds or so. Kernagh knows about them too, and goes foraging when hurt - which turns his retreats into information: a wounded rival heads for woodland.</p>
+</section>
+<section id="the-arena-drawn-then-grown" class="level2">
+<h2 class="anchored" data-anchor-id="the-arena-drawn-then-grown">The arena: drawn, then grown</h2>
+<p>Something I wanted to keep from Feud was the sense that the environment itself was as much of a character as the rival. I was especially interested in the way to distinguish topography from topology, and the way this turned the environment into something worth understanding and engaging with. In Feud, a valuable herb could appear tantalisingly close: just the other side of that row of forests or river, on the same screen of the map. While still being highly distant in terms of traversal: you can’t just go forward, you need to go around, and around, and then maybe back on yourself.</p>
+<p>So, at a minimum, I wanted rivers to be something that cut across screens, rather than marked their boundaries. With the initial arena generated by Claude, this wasn’t the case. Each river was too neat, too regular, just another ‘edge’ on a screen.</p>
+<p>My first thought, then, was to take the initial arena, and modify it by hand, using an editor (also produced by Claude). But the tells of regularity were too much. The rivers didn’t flow; the matrix-like quality of the way screens were embedded in arena led too tellingly into map design. There was too much to change from first principles.</p>
+<p>So instead, I moved to rule-bound procedural generation. The rules/heuristics specified were, roughly:</p>
+<ul>
+<li>Rivers flow edge to edge with momentum and meander, usually forking a tributary - so they cut across screens rather than tracing their boundaries.</li>
+<li>Forests grow as blob clusters; rocky patches and dirt clearings vary the ground; reeds colonise the riverbanks.</li>
+<li>Berries are placed by weighted acceptance - roughly ten times likelier where two or more trees stand within a couple of tiles - so they concentrate in woodland without ever being told to.</li>
+<li>Ruins grow from attractor-scored seeds (water pulls strongest) in house-and-street dimensions: dirt lanes between broken-walled houses.</li>
+<li>The stone circle repels both wizards’ bases, and the bases repel each other - the generator samples candidate sites and keeps the most mutually distant arrangement.</li>
+<li>Shrines scatter at polite minimum distances from each other and from everything important.</li>
+</ul>
+<p>Then I played, and saw some of the maps, and I noticed some things pointing to a second iteration in the procedural generation: after having first generated a map according to the above rules, then check whether the specific configuration of elements leads to any aspects of that specific map which impair the fun of the game, and the way the players use the arena.</p>
+<p>A motivating example of this: on one of the first maps I looked at, there was a river, with a single crossing, but then this crossing turned out to be largely useless, because every route from the other side of the river was blocked by a cluster of stones. So, this suggested adding some additional stage 2 rules: if something blocks a path to a big part of the arena, remove the blockages. Assume ‘the villagers’ (presumably driven out by the feuding wizards) did this.</p>
+<p>Generalised, that became a cascade of stage-2 checks and repairs which now runs after every generation. Bridges are added only where they measurably reconnect a genuinely unreachable region, rather than wherever a crossing looks plausible; where the blockage is trees or stone rather than water, one of those villager clearings is carved through the thinnest point instead. And a final repair pass proves every shrine, the altar and both homes reachable, carving an emergency path if not. Which is the real lesson of the generator: a generated map is not automatically a <em>playable</em> one, and most of the apparent cleverness is this checking. Procedural generation, it turns out, is mostly not generation. It is validation.</p>
+<p>The shipped default map, GLEN, is itself grown - but from a hand-picked seed, chosen by scanning a hundred candidates for the qualities the original hand-made map had been designed around: village and keep far apart, a full-width meandering river bridged in exactly two places, a riverbank ruin near the village. And GLEN is fixed across all games, deliberately, so that it can be learned. Variety lives elsewhere (next section); GLEN is for mastery - familiarity paying off exactly as it did in Feud.</p>
+</section>
+<section id="reasons-to-go-back-in" class="level2">
+<h2 class="anchored" data-anchor-id="reasons-to-go-back-in">Reasons to go back in</h2>
+<p>Two kinds of incentive persist between games: what the game unlocks, and what the valley remembers.</p>
+<p><strong>The unlocks.</strong> Games start in easy mode, with Kernagh degraded only at the decision level - short-sighted, slow to re-plan, prone to holding his fire - while his movement speed, and every rule of the game, stay identical to yours. Win, and the victory screen concedes “BUT THIS WAS THE EASY SIGNAL…”, offering to continue directly into hard mode, where the full AI is waiting. That first easy win also permanently unlocks two title-screen options: hard mode, and seeded chaos. Chaos mode generates a fresh valley every game and announces its seed, so that a good valley can be shared; seeded chaos lets you type in a friend’s seed and play their exact world. And the Hall of Signals - a top-eight, arcade-initials score table, hard-mode scores doubled, every entry tagged with the map it was set on - gives all of this somewhere to accumulate.</p>
+<p><strong>The scars.</strong> The arena deforms under combat. A firebolt that dies against a tree occasionally ignites it: the tree burns - animated at every tier - sometimes spreads to its neighbours, and collapses into a solid burnt stump. An icebolt that dies against a standing stone occasionally frost-splits it into cracked rock. And these scars <em>persist</em>: each map keeps a damage ledger, and every completed game weathers that ledger once, by cellular-automata-style rules. Stumps mostly remain, sometimes decay to bare earth, and occasionally resolve into a pushstone - a boulder that can then be hauled, at a fraction of walking speed and considerable effort, to somewhere tactically useful. Play GLEN for a week and your GLEN slowly stops being anyone else’s: thinned where your battles happened, its geography quietly rewritten by your own history of bad decisions.</p>
+<hr>
+</section>
+</section>
+<section id="across-opus-5-fable-5-and-two-ways-of-being-good" class="level1">
+<h1>⬅️➡️ Across: Opus 5, Fable 5, and two ways of being good</h1>
+<p>Playing the game for a few minutes - it’s designed to take between 5 and 10 minutes to play - revealed some of the design issues, and prompted some of the design decisions, mentioned above. But playing a few minutes longer, the game started, sometimes but not all times, to become a bit… sluggish.</p>
+<p>Usually, but not always, this happened around T3; motion became jerky, music became more staccato, less fluid. The whole experience started to become more like wading through sand than ambling purposefully through a magic forest. Something was off.</p>
+<p>Here I changed the pattern: instead of Claude Fable as codesigner and implementer, I thought I’d have Fable’s work reviewed by a few of its peers. This is a pattern I’ve referred to either as ‘Agentic Peer Review’, ‘Multi-Agent, Multi-Family Review Carousel’, or, more pointedly, ‘Multi-Agent Circular Firing Squads’.</p>
+<p>Regardless of the name or specifics, the basic idea of this: each instance of any specific model is cut from the same cloth. So, no matter how much you prompt a Fable or a Sol or a… whatever to be very self critical and analytical when working as a reviewer, if it’s the same model type as the worker/implementer model, it will tend to have the same preferences and blind spots as the instance it’s evaluating.</p>
+<p>By contrast, model instances from different companies are likely to have, hopefully, somewhat less overlap in how they ‘reason’ and ‘think’. Though each will have its own strengths, limitations and blind spots, they’re not likely to be exactly the same.</p>
+<p>Therefore, for review, I try to consult with models from <em>different</em> families. Ideally, but not always (and not in this case) I also try to blind each reviewer from all the other reviewers too.</p>
+<p>For this review, I used Github Copilot for consulting ChatGPT (probably not now the most efficient means of doing so, since Github Copilot became a lot more stingy in token usage); and Google’s own code harness to consult Gemini. Each model was from a different company, so a different family.</p>
+<p>But I’d also heard, and had a little experience trying out, Claude Opus 5, which released just a few days ago. Initial widely reported benchmarking suggests Opus 5 may have something like parity with Fable 5, despite being nominally from a model tier below. So, I thought Opus 5 would be worth including too, despite also being an Anthropic model.</p>
+<p>For each of the models, I provided a near identical prompt: review the whole codebase, look for any potential performance issues, write a report detailing such potential issues within a self-identifying .md file within a new reviews/ subdirectory.</p>
+<p>The fact the models weren’t blind to each other’s reviews - something I should have addressed by using different branches for each, then merging after - meant later models <em>were</em> influenced by the reviews left by earlier models. GPT went first, and seemed very thorough. Gemini went second, ‘peeking’ into GPT’s review notes, and judging it to be better and more thorough than its own.</p>
+<p><strong>Opus 5</strong>, via Claude Code, went third. It drew its inspiration mainly from GPT - specifically from GPT’s instinct to evaluate performance under different conditions - and then took that much further than GPT had, running many experiments directly in the codebase. It confirmed that most of the GPT-identified code smells were real, but found that the <em>order of priority</em> was inverted: the things GPT thought mattered most for latency weren’t the things that actually did.</p>
+<p>(Unfortunately, as part of its extensive evaluations, Opus 5 apparently deleted some cached state and data, including some interim edits I’d made to the default map. It apologised, but because the state hadn’t been fully saved before review, the damage had already been done. If you are going to get a new model to interfere with an existing model’s codebase, consider branch hygiene much more than I did!)</p>
+<p><strong>Fable</strong> then read the resulting review reports and implemented the changes largely as the panel had recommended.</p>
+<p>Concretely: GPT ranked the tier-3-and-up renderer first - the obvious suspect, since the slowdown appeared at T3 - and an obscure watchdog timer last. Opus measured, and the measurements flipped the list. The entire renderer costs less than a millisecond a frame at every tier; it could not have been the cause of anything. The real culprits were two bugs that only grow over a session: a watchdog which, after any stall or any spell in a hidden browser tab, permanently forked the animation loop - leaving the game quietly running its frame loop twice, three times, N times over, forever - and a new-game routine whose cost grew with the map’s accumulated history, up to two-thirds of a second on a well-played valley. And the two interacted: the new-game stall tripped the watchdog, so every restart on an aged map added another permanent loop. The slowdown ‘accumulating over a session’ wasn’t a loose impression. It was the mechanism.</p>
+<section id="swot-and-savant" class="level2">
+<h2 class="anchored" data-anchor-id="swot-and-savant">Swot and Savant</h2>
+<p>Within recent LLM performance benchmarks, Opus 5 - despite being nominally a tier below Fable 5, and at half the cost per token<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> - achieves similar performance on many technical and applied-knowledge tasks.</p>
+<p>I don’t have a strong reason to doubt this, beyond the usual worry about which metrics got chosen. But my initial impression is that the two models often reach similar outcomes by quite different routes. Crudely: Opus 5 is more of a <strong>swot</strong>, and Fable 5 more of a <strong>savant</strong>.</p>
+<p>Here’s an illustration, from the first of 15 such comparisons on <a href="https://www.reddit.com/r/ClaudeAI/s/kUK3YEsuJu">a subreddit post</a>, showing how Fable 5 and Opus 5 differ when both prompted to produce ‘a fighter jet’ in <a href="https://minebench.ai">minebench.ai</a>: a benchmark-cum-toy which has models build Minecraft-style voxel scenes from a text prompt, outputting raw block coordinates, with humans voting pairwise on the results:</p>
+<div id="fig-minebench" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-minebench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="differences-between-fable-5-and-opus-5-on-v0-wva19c9dfnfh1.gif" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-minebench-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: MineBench, same prompt to both models. Top: Claude Fable 5 - a single jet flying low over a runway, 83,457 blocks. Bottom: Claude Opus 5 - three jets of different sizes in an aerial battle over an ocean, 512,910 blocks.
+</figcaption>
+</figure>
+</div>
+<p>So, Opus 5 appears so ‘eager to impress’ that it massively overengineers the task, filling the voxel space with unnecessary details, and elements, and so burning through far more tokens than it needs to. Arguably, if being strict in interpreting the prompt, Opus 5 is so focused on giving <em>more</em> than required that it fails the test, as the prompt was for ‘<em>a</em> fighter jet’, implying one fighter jet, whereas Opus 5 delivers three, of the same design but different sizes, as if the two smaller jets are the larger jet’s children, flying together in a protective convoy.</p>
+<p>So, we have something like:</p>
+<p><strong>Savant behaviour:</strong></p>
+<ul>
+<li>High reliance on reasoning from first principles</li>
+<li>Creative, and often more intelligent, inference about the latent subgoals and implicit assumptions behind a prompt; at the very least not appearing to forget the prompt</li>
+</ul>
+<p><strong>Swot behaviour:</strong></p>
+<ul>
+<li>Even more extensive and comprehensive RAG searches</li>
+<li>Even more comprehensive review of codebases</li>
+<li>Even more exhaustive testing and iteration</li>
+</ul>
+<p>Both have very high tenacity - though I suspect that’s a dial being turned in response to capacity and demand rather than a fixed property of either model.</p>
+<p>The performance investigation supplied a clean instance of each. The swot: Opus, unwilling to rank defects by plausibility, instrumented the live game and measured everything - including establishing that the renderer everyone suspected costs under a millisecond a frame, and so could be ignored. The savant: Fable, handed three partially contradictory reviews, didn’t average them; it decided that where the reviews disagreed the measurements should win, wrote the implementation plan on that principle, and demoted the panel’s most-recommended fix to optional.</p>
+<p>So although Opus 5 and Fable 5 are intended as different tiers, for now they can perhaps be thought of as similarly capable models that often reach similar outcomes by different means.</p>
+<p>And there’s a reason Fable probably <em>shouldn’t</em> try to be more swottish. Its guardrails hair-trigger whenever anything touching biology or cybersecurity happens to be searched for or reasoned about.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The more exhaustively it searched and explored, the more likely it would be to trip one of those by chance. Given that its token cost is double Opus 5’s, it shouldn’t go too far in that direction in any case.</p>
+<p>Two implications follow.</p>
+<p><strong>Fable and Opus should, for now, be considered complementary siblings</strong> rather than rungs on a ladder.</p>
+<p><strong>And “half the cost per token” is not “half the cost per project.”</strong> Because of its swottishness, Opus 5 burns more tokens than Fable in search and evaluation - which erodes the advantage of the model that looks twice as cheap.</p>
+<p>That was a guess when I first wrote it down. It turns out it has already been measured, and it is worth being precise about what the measurement does and doesn’t support. Claude (Fable) summarises what’s known thusly:</p>
+<blockquote class="blockquote">
+<p>On Artificial Analysis’s Intelligence Index, at max effort, Opus 5 scores 61 and Fable 5 scores 60 - a tie, for practical purposes. Getting there took Opus 5 <strong>100 million output tokens</strong> against Fable’s <strong>87 million</strong>: about 15% more output to reach the same place, and enough to earn Opus the label <em>very verbose</em> where Fable is only <em>somewhat verbose</em>. Running the whole suite cost $3,835 on Opus against $5,630 on Fable.</p>
+<p>So the direction of the hunch is right, and the mechanism is right. But the magnitude isn’t: half price per token becomes roughly <strong>26–32% cheaper per completed task</strong>, not parity.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> The swottishness eats about half of Opus’s price advantage. It doesn’t eat all of it.</p>
+</blockquote>
+<p>A fuller account is available in this Claude-credited sister post: <a href="../../posts/opus-fable-cost-per-task/index.html">The token tax: what “half the price” actually buys</a>.</p>
+<p>Anyway: the agentic circular firing squad worked well for identifying and fixing the performance issues, and Opus 5 was a critical part of that mix.</p>
+<hr>
+</section>
+</section>
+<section id="down-the-pushback" class="level1">
+<h1>⬇️ Down: The pushback</h1>
+<section id="what-happened" class="level2">
+<h2 class="anchored" data-anchor-id="what-happened">What happened</h2>
+<p>I posted Upgrade to the show-and-tell channel of a local game-development community, some of whose members I’d recently met in person.</p>
+<p>The first response was warm: “very cool idea!”. I replied that the game had been through about fourteen rounds of development, including some attempts at optimising performance, and that there were some unadvertised behaviours and features that would hopefully reward replay. This drew more warmth still - “oh wow, that’s committed” - together with a question about playtesting, and a self-reflection from the same person about their own past habit of making things in a trance, pushing them out, and being done with them.</p>
+<p>Then a second person added, with a smiley, that they assumed it takes rather less commitment if you’re just asking Claude to do it.</p>
+<p>I hadn’t tried to hide the collaboration, and said so:</p>
+<blockquote class="blockquote">
+<p>Clue’s in the git log and pseudonym.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> 😉 I meant mainly in terms of game behaviour, dynamics, balance, features, the progression loop etc. for example introduced a means of procedurally generating the maps to produce more organic rivers and forests, then specifying and implementing cellular automata style rules for how they change between visits. But also noticed performance issues creeping in and used a kind of agentic circular firing squad (asking one LLM to try to rip apart another’s codebases etc) to try to fix this.</p>
+<p>There is an editor through the /editor/ path off root. So means of providing more human input to assets.</p>
+</blockquote>
+<p>After this, the response from the first person shifted. No reply addressed to me. Instead an appeal to the channel moderators, to have a clearer policy for flagging any works produced with AI, with the intent not of exploring and understanding how AI is being used, and which AI tools are being employed, but instead simply to try to skip and ignore anything made with AI.</p>
+<p>AI, it seems, was framed as something between a form of dishonesty, and a contaminant; a contaminant so potent that even a single drop, a single whiff, should be considered reason to banish and avoid, almost a form of digital leprosy.</p>
+</section>
+<section id="just-asking-claude" class="level2">
+<h2 class="anchored" data-anchor-id="just-asking-claude">‘Just asking Claude’</h2>
+<p>To me this, and the declared preference to just skip or ignore anything ‘by AI’, is probably where the biggest difference in framing lies. History doesn’t repeat, they say, but it rhymes, and to me it rhymes with something like the following:</p>
+<blockquote class="blockquote">
+<p>A: I wrote this…<br>
+B: Very good.<br>
+A: …in Fortran.<br>
+B: Then you didn’t write it; you got the Fortran compiler to write it.</p>
+</blockquote>
+<p>You see, there really was a time when programming meant working with <strong>machine code</strong>, specifying how individual memory addresses on a specific machine should be populated. And then there was a time when programming meant <strong>assembly code</strong>, working with the first abstraction layer, allowing clusters of memory addresses to be modified in a known pattern. Then there was a time when programming meant something like programming in Fortran, or Pascal, or Ada, or later C or C++, where some attention still needed to be paid to things like memory addresses, but instructions became more human-like, and the programmer’s attention could turn more to the overall intent of their code, specified in cross-machine abstractions (the same code should largely work regardless of whether a machine has 48K or 128K, for example).</p>
+<p>And then in the 1990s and 2000s there were higher level languages still: Python, Java, JavaScript and so on, where the electronic machinery was concealed from the coder even more.</p>
+<p>And, in games development and other computer-based specialisms, there were additional specialised abstraction layers through more tools, programs for very specialised programming of very specific aspects of a game: level editors; 2D and 3D graphics software; music software; game-specific macro software; and so on. Each concealed more of the underlying machinery of building a game and its assets; each, arguably, allowed the developer to focus on what’s most valuable to them and where they can provide most value to a complex project: creating that piece of scenery, designing that piece of incidental music or sound effect, tweaking rules and behaviours within the game to see how they affected the quality of play.</p>
+<p>And what repeats with each new abstraction layer is the <em>gatekeeping</em> by specialists working with the abstraction layer below: Python isn’t really writing code (at least not good code); C++ is. C++ isn’t really writing code; assembly language is… and so on… and so on… for decade after decade after decade. Ultimately, the gatekeepers keep losing, not to <em>any</em> kind of higher level programming language (very few Spectrum games were written in BASIC, for example; it was always too slow compared with assembly), but to those abstraction layers and tools that target and expose the <em>right kind of abstraction</em> from the human user’s perspective. The <em>right kind of abstraction</em> depends on the user, of course. If they’re a statistician, then a language where one can easily write and interact with rectangular datasets, and call statistical tests and procedures without having to write them as functions from scratch, is the right level of abstraction. If they’re a digital musician, then something that allows them to play a keyboard and have the notes encoded automatically, with additional effects specified by the press of virtual buttons and the turn of virtual dials, is probably the right level. If they’re a digital artist, then being able to create 2D sprites by painting pixels on an interactive canvas, rather than changing numbers in a matrix, is probably the right level of abstraction.</p>
+<p>In each of these cases, the fact of using a higher or more specialised abstraction layer becomes recognised, eventually, by the majority in an occupation or industry, as some form of programming, or at least some form of making, and valued as such. Often the abstracted ‘barbarians’ from one generation become new ‘gatekeepers’ in the next. So it goes…</p>
+<p>Fundamentally, I see codeveloping a game - or other complex project - using a coding scaffold as not much different to using any other form of abstraction layer above machine code. Currently it seems many disagree.</p>
+<p>Over, say, the next 1 to 5 years, I just don’t think such scepticism and gatekeeping can be sustained. Coding scaffolds are simply too good at allowing too many people to express and contribute their judgement, intent, and vision like never before, and at speeds never before possible. Just as many people’s full extent of engaging with programming in the 1980s may have been writing <code>10 PRINT "Hello"; 20 GOTO 10</code>, so even with the unlocked possibilities of coding scaffolds and agentic AI many people’s full engagement may never extend much beyond one-shotting: “Make a nice fun shooter game. I want to play!” But where the sustained intention, judgement, engagement and artistic vision does exist, a code scaffold will allow it to be realised both with much higher probability and at much faster speed.</p>
+<p>At its best, AI is a multiplier for human knowledge, curiosity and creativity - not a replacement for them. It already lets hunches, eddies and asides be developed into full-blown prototypes faster and more cheaply than ever before, which makes it far easier to work out whether the hunches were worth pursuing. The fact it can do this, so clearly, consistently, demonstrably, should also allay one of the implicit, often unsaid, latent concerns that seems to be fuelling resistance to AI in domains and fields, like game development, where it can be of most value. This concern is that there is, ultimately, only so much demand for new products, new games, new ideas, and so if the cost and effort of producing a product falls to the floor, so will the size of the labour market for those various roles and occupations tasked with implementing products, games and ideas.</p>
+<p>The riposte to this argument has already been glimpsed in the paragraph before last. I wrote that a code scaffold will allow things to be realised “with much higher probability” than ever before, as well as faster. What I mean by this is that, but for Claude Code, <strong>Upgrade</strong> would, realistically, <em>not have existed</em>. It’s vanishingly unlikely I would have spent, say, all spare hours of the day, all weekends, for maybe a year or more, poring over the sound and graphics limitations of a half dozen obsolete computers, nor learned how to use TypeScript at such a level as to render bespoke graphics, produce sounds and music, run through animation loops, and gone through the same fourteen or so rounds of game development and iteration, as I did using Claude Code. No: I’d almost certainly just have thought “that’s a cool game idea”, and done nothing with it.</p>
+<p>This is, yet again, an example of The Jevons Paradox, or Jevons Effects: the fact that, as the cost of a technology falls, the demand for that technology increases, rather than remains static. It’s happened again and again over many technologies, for many centuries.</p>
+<p>Claude Code doesn’t replace games developers. It superpowers them.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><strong>Claude Footnote:</strong> Fact-checked and confirmed. The Spectrum’s bitmap is 256×192 pixels, with colour attributes stored separately for each of the 32×24 cells of 8×8 pixels: one INK (foreground) and one PAPER (background) colour per cell, drawn from an 8-colour palette, plus a per-cell BRIGHT bit and FLASH bit. One nuance to the framing in the body: the word-processor logic holds, but the primary design driver was memory economy - the whole display fits in about 6.75 KB (6,144 bytes of bitmap plus 768 of attributes), where per-pixel colour at the same resolution would have needed several times the RAM and correspondingly faster, more expensive video circuitry. The attribute cell was the cheapest possible way to add colour to a high-resolution bitmap; its suitability for ‘serious’ text-based applications made the cheapness respectable. (For more on Sinclair’s machines and their afterlives, see <a href="../../posts/ghost-life-of-tech/index.html">The Ghost Life of Tech</a>.)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><strong>Claude Footnote:</strong> The per-token figures at time of writing: Claude Fable 5 is $10 per million input tokens and $50 per million output; Claude Opus 5 is $5 and $25. So “half the cost per token” is exactly right, on both input and output.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><strong>Claude Footnote:</strong> Concretely, Fable 5 can decline a request by returning a normal response with a <code>refusal</code> stop reason and a category - <code>bio</code> and <code>cyber</code> among them - rather than an error. Anthropic’s own guidance is that benign adjacent work in security tooling and the life sciences can trip these as false positives, which is why the API offers a server-side fallback to another model. Worth noting for the argument here: Opus 5 also ships with elevated cybersecurity safeguards, so the difference between the two is one of degree rather than kind.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><strong>Claude Footnote:</strong> Two different published figures, same conclusion. Artificial Analysis’s weighted cost per Index task is $2.03 for Opus 5 against $2.75 for Fable 5 (26% lower); total evaluation cost across the suite gives 32% lower. Both are a long way from the 50% the sticker price implies.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>I credit the game, in the game, to ‘Jon Fableton’, an (I thought) fairly on-the-nose nod to this being the work of a ‘cognitive centaur’. The git log explicitly includes Claude as a collaborator; and the cadence of revisions and updates to the repo is likely unfeasible by human alone.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.jonminton\.net\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
