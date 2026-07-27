@@ -152,7 +152,6 @@ The face the models weren't blind to each other's reviewers - something I should
 
 Concretely: GPT ranked the tier-3-and-up renderer first - the obvious suspect, since the slowdown appeared at T3 - and an obscure watchdog timer last. Opus measured, and the measurements flipped the list. The entire renderer costs less than a millisecond a frame at every tier; it could not have been the cause of anything. The real culprits were two bugs that only grow over a session: a watchdog which, after any stall or any spell in a hidden browser tab, permanently forked the animation loop - leaving the game quietly running its frame loop twice, three times, N times over, forever - and a new-game routine whose cost grew with the map's accumulated history, up to two-thirds of a second on a well-played valley. And the two interacted: the new-game stall tripped the watchdog, so every restart on an aged map added another permanent loop. The slowdown 'accumulating over a session' wasn't a loose impression. It was the mechanism.
 
-> **\[TODO - Fact Checker / Author\]** Opus 5 also apologised afterwards for deleting state data and bespoke map data during its experiments. This should be *in* the post, not a footnote - it's the honest counterweight to an otherwise glowing account, and it's the kind of detail that makes the rest credible. Decide where: as an aside here, or held back for the closing line of the section, where you already have it in the notes.
 
 ## Swot and Savant
 
@@ -189,7 +188,7 @@ So although Opus 5 and Fable 5 are intended as different tiers, for now they can
 
 And there's a reason Fable probably *shouldn't* try to be more swottish. Its guardrails hair-trigger whenever anything touching biology or cybersecurity happens to be searched for or reasoned about.[^3] The more exhaustively it searched and explored, the more likely it would be to trip one of those by chance. Given that its token cost is double Opus 5's, it shouldn't go too far in that direction in any case.
 
-[^3]: **Claude Footnote:** Concretely, Fable 5 can decline a request by returning a normal response with a `refusal` stop reason and a category - `bio` and `cyber` among them - rather than an error. Anthropic's own guidance is that benign adjacent work in security tooling and the life sciences can trip these as false positives, which is why the API offers a server-side fallback to another model. Worth noting for the argument here: Opus 5 also ships with elevated cybersecurity safeguards, so the difference between the two is one of degree rather than kind. Jon - you may want to soften the claim above accordingly, or leave it as your impression and let this footnote do the qualifying.
+[^3]: **Claude Footnote:** Concretely, Fable 5 can decline a request by returning a normal response with a `refusal` stop reason and a category - `bio` and `cyber` among them - rather than an error. Anthropic's own guidance is that benign adjacent work in security tooling and the life sciences can trip these as false positives, which is why the API offers a server-side fallback to another model. Worth noting for the argument here: Opus 5 also ships with elevated cybersecurity safeguards, so the difference between the two is one of degree rather than kind. 
 
 Two implications follow.
 
@@ -233,123 +232,29 @@ I hadn't tried to hide the collaboration, and said so:
 
 To me this, and the declared preference to just skip or ignore anything 'by AI', is probably where the biggest difference in framing lies. History doesn't repeat, they say, but it rhymes, and to me it rhymes with something like the following: 
 
-> A: I programmed this...
-> B: Very good.
-> A: ...in Fortran.
-> B: Then you didn't program it; you got the Fortran compiler to program it.
+> A: I wrote this...\
+> B: Very good.\
+> A: ...in Fortran.\
+> B: Then you didn't write it; you got the Fortran compiler to write it.
 
-Generalise that dialogue across the decades and it becomes a scheme: the same conversation, restaged every ten or fifteen years, with yesterday's 'not real programming' promoted - without ceremony, and without apology - to today's 'real programming'.
+You see, there really was a time when programming meant working with **machine code**, specifying how individual memory addresses on a specific machine should be populated. And then there was a time when programming meant **assembly code**, working with the first abstraction layer, allowing clusters of memory addresses to be modified in a known pattern. Then there was a time when programming meant something like programming in Fortran, or Pascal, or Ada, or later C or C++, where some attention still needed to be paid to things like memory addresses, but instructions became more human-like, and the programmer's attention could turn more to the overall intent of their code, specified in cross-machine abstractions (the same code should largely work regardless of whether a machine has 48K or 128K, for example).
 
-::: {.column-page}
-```{mermaid}
-flowchart LR
-  classDef real fill:#2e6b4f,color:#ffffff,stroke:#1d4733
-  classDef fake fill:#8f3b3b,color:#ffffff,stroke:#5e2222
-  classDef old fill:#555555,color:#eeeeee,stroke:#333333
+And then in the 1990s and 2000s there were higher level languages still: Python, Java, JavaScript and so on, where the electronic machinery was concealed from the coder even more.
 
-  subgraph D40["1940s"]
-    direction TB
-    m40["Machine code<br/>'real programming'"]:::real
-  end
+And, in games development and other computer-based specialisms, there were additional specialised abstraction layers through more tools, programs for very specialised programming of very specific aspects of a game: level editors; 2D and 3D graphics software; music software; game-specific macro software; and so on. Each concealed more of the underlying machinery of building a game and its assets; each, arguably, allowed the developer to focus on what's most valuable to them and where they can provide most value to a complex project: creating that piece of scenery, designing that piece of incidental music or sound effect, tweaking rules and behaviours within the game to see how they affected the quality of play.
 
-  subgraph D50["1950s"]
-    direction TB
-    f50["Fortran<br/>'you got the compiler to do it'"]:::fake --> a50["Assembly<br/>'real programming' (now)"]:::real --> m50["Machine code"]:::old
-  end
+And what repeats with each new abstraction layer is the *gatekeeping* by specialists working with the abstraction layer below: Python isn't really writing code (at least not good code); C++ is. C++ isn't really writing code; assembly language is... and so on... and so on... for decade after decade after decade. Ultimately, the gatekeepers keep losing, not to *any* kind of higher level programming language (very few Spectrum games were written in BASIC, for example; it was always too slow compared with assembly), but to those abstraction layers and tools that target and expose the *right kind of abstraction* from the human user's perspective. The *right kind of abstraction* depends on the user, of course. If they're a statistician, then a language where one can easily write and interact with rectangular datasets, and call statistical tests and procedures without having to write them as functions from scratch, is the right level of abstraction. If they're a digital musician, then something that allows them to play a keyboard and have the notes encoded automatically, with additional effects specified by the press of virtual buttons and the turn of virtual dials, is probably the right level. If they're a digital artist, then being able to create 2D sprites by painting pixels on an interactive canvas, rather than changing numbers in a matrix, is probably the right level of abstraction.
 
-  subgraph D70["1970s"]
-    direction TB
-    c70["C<br/>'high-level languages waste the machine'"]:::fake --> f70["Fortran<br/>'real programming' (now)"]:::real --> r70["⋮"]:::old
-  end
+In each of these cases, the fact of using a higher or more specialised abstraction layer becomes recognised, eventually, by the majority in an occupation or industry, as some form of programming, or at least some form of making, and valued as such. Often the abstracted 'barbarians' from one generation become new 'gatekeepers' in the next. So it goes...
 
-  subgraph D80["1980s"]
-    direction TB
-    b80["BASIC & construction kits<br/>'toy language, toy tools'"]:::fake --> c80["C<br/>'real programming' (now)"]:::real --> r80["⋮"]:::old
-  end
+Fundamentally, I see codeveloping a game - or other complex project - using a coding scaffold as not much different to using any other form of abstraction layer above machine code. Currently it seems many disagree. 
 
-  subgraph D90["1990s"]
-    direction TB
-    j90["Java, Visual Basic<br/>'the machine manages your memory for you'"]:::fake --> c90["C++<br/>'real programming' (now)"]:::real --> r90["⋮"]:::old
-  end
+I just don't think such scepticism and gatekeeping can be sustained. Coding scaffolds are simply too good at allowing too many people to express and contribute their judgement, intent, and vision like never before, and at speeds never before possible. Just as many people's full extent of engaging with programming in the 1980s may have been writing `10 PRINT "Hello"; 20 GOTO 10`, so even with the unlocked possibilities of coding scaffolds and agentic AI many people's full engagement may never extend much beyond one-shotting: "Make a nice fun shooter game. I want to play!" But where the sustained intention, judgement, engagement and artistic vision does exist, a code scaffold will allow it to be realised both with much higher probability and at much faster speed.
 
-  subgraph D00["2000s"]
-    direction TB
-    p00["Python, JavaScript<br/>'that's just scripting'"]:::fake --> j00["Java, C#<br/>'real programming' (now)"]:::real --> r00["⋮"]:::old
-  end
+At its best, AI is a multiplier for human knowledge, curiosity and creativity - not a replacement for them. It already lets hunches, eddies and asides be developed into full-blown prototypes faster and more cheaply than ever before, which makes it far easier to work out whether the hunches were worth pursuing. The fact it can do this, so clearly, consistently, demonstrably, should also allay one of the implicit, often unsaid, latent concerns that seems to be fuelling resistance to AI in domains and fields, like game development, where it can be of most value. This concern is that there is, ultimately, only so much demand for new products, new games, new ideas, and so if the cost and effort of producing a product falls to the floor, so will the size of the labour market for those various roles and occupations tasked with implementing products, games and ideas. 
 
-  subgraph D10["2010s"]
-    direction TB
-    n10["No-code platforms, level editors, Scratch<br/>'that's just configuration'"]:::fake --> p10["Python<br/>'real programming' (now)"]:::real --> r10["⋮"]:::old
-  end
+The riposte to this argument has already been glimpsed, in the paragraph before last. I wrote that a code scaffold will allow things to be realised "with much higher probability" than ever before, as well as faster. What I mean by this is that, but for Claude Code, **Upgrade** would, realistically, *not have existed*. It's vanishingly unlikely I would have spent, say, all spare hours of the day, all weekends, for maybe a year or more, poring over the sound and graphics limitations of a half dozen obsolete computers, nor learned how to use TypeScript at such a level as to render bespoke graphics, produce sounds and music, run through animation loops, and gone through the same fourteen or so rounds of game development and iteration, as I did using Claude Code. No: I'd almost certainly just have thought "that's a cool game idea", and done nothing with it.
 
-  subgraph D20["2020s"]
-    direction TB
-    e20["English, via Claude<br/>'you just asked'"]:::fake --> n20["Everything below<br/>'real programming' (now)"]:::real --> r20["⋮"]:::old
-  end
+This is, yet again, an example of The Jevons Paradox, or Jevons Effects: the fact that, as the cost of a technology falls, the demand for that technology increases, rather than remains static.
 
-  D40 --> D50 --> D70 --> D80 --> D90 --> D00 --> D10 --> D20
-```
-:::
-
-The boundary has never stopped moving, and it has only ever moved in one direction. Nobody now demands that you manage your own registers before being taken seriously. The Fortran objection didn't lose the argument; it died of old age, and its children took up the family business one rung higher.
-
-And as with 'real programming', so with 'made by AI': the declaration being asked for assumes a line - work that is AI, work that is not - drawn cleanly enough for a moderator to enforce. It can't be. Nothing is ever fully AI or fully human. There is always some mixture, and the range of possible mixtures is very wide: AI engagement with human content, human engagement with AI content, and every ratio in between. I'm still learning where the right balance sits, and so is everyone else. [Cognitive centaurs](../guano-guild-as-cognitive-centaur-experiment/index.qmd).
-
-> **\[TODO\]** The strongest version of this argument names the spectrum concretely: at one end, autocomplete and spellcheck (nobody demands a declaration); at the other, a fully AI-generated asset nobody looked at. Upgrade sits somewhere specific on that line, and saying *where* is more persuasive than saying the line is blurry. What proportion of the design decisions were yours? All of them? What did Claude actually originate?
-
-Though I should be careful about what I'm actually objecting to here, because it isn't disclosure. I disclosed - the pseudonym, the git log, the collaborator credits are all declarations, just quiet ones. And had the request been for *richer* disclosure - tell us how it was made, which decisions were yours, what the machine originated - I'd have obliged happily; most of this post is exactly that, at a length nobody asked for. What I'm objecting to is the checkbox: a single mandatory bit whose function is not to inform engagement but to pre-empt it - to sort a channel's contents into the worth-a-look and the safely ignorable, before looking.
-
-And I should concede the strongest form of the request, which wasn't really about provenance at all. It was about attention. The person asking tries to engage with everything posted; engagement costs time and care; and AI collapses the cost of making things without collapsing the cost of appreciating them. Against that asymmetry, an advance label is a perfectly rational filter - if a flood is coming, you build levees. Where I part company is only on what this particular label measures. It doesn't measure effort, or care, or whether there's a person behind the work with something at stake - fourteen rounds of playtesting sat behind mine. It measures whether a machine was involved anywhere in the chain; and within a few years that will be true of essentially everything, at which point the filter filters nothing. A better test - harder to moderate, admittedly - is whether the poster can answer questions about the thing they posted. I could.
-
-## Which way the tide runs
-
-Workflows with AI *will* come to outcompete workflows without AI across pretty much every dimension, and will become the dominant means of doing games development - or any other kind of analytical, technical, systems work - within one to five years.
-
-When that happens, the falseness of the binary will be generally recognised. During the transition, though, there will be groups and cliques that increasingly define themselves by their opposition to AI. To the extent that some consumers share those sentiments, those groups may get short-term bumps in engagement and support.
-
-But these are ripples running against the direction of the main tide.
-
-(I should mark the extrapolation openly: the exchange above was the mild end of all this - one courteous request for labelling, from someone husbanding their own finite attention, warmly supported. The defining-themselves-by-opposition end is real, but the evidence for it comes from the wider argument, not from anything that happened to me.)
-
-So let me date the claim, since this blog has form for marking its own homework: by July 2031, I expect AI-assisted workflows to be the professional default across games development and most analytical, technical and systems work - the thing you would have to explain *not* using. Check back.
-
-## Multiplier, not replacement
-
-At its best, AI is a multiplier for human knowledge, curiosity and creativity - not a replacement for them. It already lets hunches, eddies and asides be developed into full-blown prototypes faster and more cheaply than ever before, which makes it far easier to work out whether the hunches were worth having.
-
-Upgrade is itself an instance of this - the second on this blog, after the [Boomer trilogy](../boom-boom-boom/index.qmd). It began, as described at the top, in an idle YouTube wander through misremembered games: a hunch that Feud's loop, and the Spectrum's constraint-made style, had something in them still worth making. Under the old economics, that hunch would have stayed a hunch - the distance between "attribute clash could be a mechanic rather than a defect" and a playable, tuned game being a programming team I don't have. Under the new economics, the distance was less than a week.
-
-Creative and curious people won't run out of creativity and curiosity. The collapse in implementation cost means new demand will emerge to meet the new supply: Jevons' effect.
-
-## The Lump of Labour
-
-This is the corrective to the intuitive framing of AI's role, and it explains why AI is so often instinctively seen as a threat. The instinct is the **Lump of Labour fallacy**: the assumption that there is a fixed, finite demand for stuff - prototypes, games, analytic outputs, websites, databases, papers - so that any technology reducing the cost of producing that stuff must reduce the total labour an industry can support, and therefore put people out of work.
-
-The irony is that some of the less insightful *proponents* of AI in business - mid and senior managers, executives - subscribe to exactly the same fallacy. They are attracted to implementing AI for precisely the reason many other people are repelled by it: they think they can and should simply reduce headcount.
-
-And there's a sting in that.
-
-Large organisations tend to be *less* adaptable to the pace of change required to get the best out of AI. They have standards, procedures, conventions and long-established ways of working that will ultimately impede the wholesale reconfiguration of work, tasks and roles that would let them use AI to multiply what their employees can do. Smaller, nimbler, AI-native organisations - without the cold hand of history and path dependency - can structure themselves from scratch around agentic working, and will very soon be able to outcompete the old behemoths.
-
-Which produces the beautiful outcome: if a large, slowly-adapting organisation *does* use AI to justify making talented staff redundant en masse, those former staff are now better placed than ever before to form AI-native startups and destroy their alma maters.
-
-But only if the laid-off staff recognise that AI is the solution rather than the problem, and embrace it as a multiplier of human effort rather than rejecting and opposing it.
-
-> **\[TODO - Scriptdoctor\]** "Destroy their alma maters" is doing good work but "alma mater" usually means where you *studied*, not where you worked. Options: keep it as deliberate wry misuse, or swap to "former employers" and lose some of the bite. Your call.
-
-> **\[TODO - scope\]** This section and The long arc are where the post drifts furthest from "I made a game". The material is good, but it's a different essay - labour economics and organisational adaptation - grafted onto a maker's diary. Options: compress to a paragraph each with a forward-pointer, or split into a companion post (as was done with the token-tax arithmetic) and let this post end closer to home. Worth deciding deliberately rather than by accretion.
-
-## The long arc
-
-AI is ultimately 'just' another instance of a decades-long tendency in the applied information sciences, which has progressed along two axes:
-
-1.  Information retrieval, production and processing speeds increase.
-2.  The level of abstraction and generalisation at which humans instruct machines goes *up* - becoming more about intent and outcome, and less about process and mechanism.
-
-Examples of the second axis include pretty much any programming language above machine code and assembly - anything that uses human-like nouns and verbs. Including the BASIC that shipped with every ZX Spectrum.
-
-Which closes the loop of this post. The machine at T1 of Upgrade's tier ladder is also the first rung of this second ladder: the Spectrum's attribute grid taught a generation to work with constraints, and its BASIC taught the same generation that you could tell a machine roughly *what* you wanted, in something like English, and leave more of the how to it. Claude sits further up the same ladder. Much further up - but the same ladder.
-
-AI differs in two ways, though. First in the breadth and pace at which things are changing. And second in potentially reducing the premium for specialisation as against generalism.
-
-> **\[TODO\]** The second difference is the more interesting one and gets a single clause. If the premium on specialisation falls, what follows - for careers, for hiring, for how anyone decides what to learn? This could be a closing section in its own right, or it could be the hook for a separate post. Decide which.
+Claude Code doesn't replace games developers. It superpowers them. 
