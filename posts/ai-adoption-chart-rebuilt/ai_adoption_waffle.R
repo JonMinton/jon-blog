@@ -79,6 +79,7 @@ base_plot <- function(d) {
   ggplot(d, aes(col, -row, fill = tier)) +
     geom_tile(width = 0.82, height = 0.82) +
     scale_fill_manual(values = pal, name = NULL) +
+    guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
     coord_equal() +
     theme_void(base_family = "mono") +
     theme(legend.position = "bottom",

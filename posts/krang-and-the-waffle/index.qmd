@@ -36,104 +36,12 @@ coding tiers undercounted 3-4x) with the corrected version shown below.
 
 [Jon: opening beat - introduce the viral chart and what everyone took from it]
 
-```{r}
-#| label: setup
-#| include: false
-library(tidyverse)
+![The corrected and animated version of the viral chart, mid-2023 to early 2026: right denominator, paid and coding tiers scaled to reported subscriber figures, and the offline population split out of the grey monolith.](ai_adoption_waffle_motion.gif){fig-alt="Animated waffle chart of 2,500 dots, each representing roughly 3.3 million people, coloured by deepest generative AI engagement. Green (free-tier), amber (paid) and red (coding-tool) bands advance up the grid between mid-2023 and early 2026."}
 
-n_side <- 50L
-n_dots <- n_side^2
-
-df <- read_csv("assets/ai_adoption_timeseries.csv") |>
-  select(snapshot_date, category, value_millions) |>
-  pivot_wider(names_from = category, values_from = value_millions) |>
-  mutate(
-    coding  = coding_tool_users,
-    paid    = pmax(paid_subscribers - coding_tool_users, 0),
-    free    = pmax(genai_users_ever - paid_subscribers, 0),
-    offline = offline_no_internet,
-    never_online = world_population - genai_users_ever - offline_no_internet
-  ) |>
-  select(snapshot_date, world_population,
-         offline, never_online, free, paid, coding) |>
-  pivot_longer(-c(snapshot_date, world_population),
-               names_to = "tier", values_to = "millions") |>
-  mutate(tier = factor(
-    tier,
-    levels = c("offline", "never_online", "free", "paid", "coding"),
-    labels = c("Offline (no internet)", "Online, never used gen AI",
-               "Free-tier user", "Paid subscriber", "Coding-tool user")
-  ))
-
-allocate_dots <- function(millions, total_millions, n = n_dots) {
-  raw   <- millions / total_millions * n
-  base  <- floor(raw)
-  base  <- if_else(millions > 0 & base == 0, 1, base)
-  short <- n - sum(base)
-  rem   <- raw - floor(raw)
-  order_idx <- order(rem, decreasing = TRUE)
-  add <- integer(length(millions))
-  if (short > 0) add[order_idx[seq_len(short)]] <- 1L
-  if (short < 0) {
-    big <- order(base, decreasing = TRUE)
-    add[big[seq_len(-short)]] <- -1L
-  }
-  base + add
-}
-
-grid <- df |>
-  group_by(snapshot_date) |>
-  mutate(dots = allocate_dots(millions, first(world_population))) |>
-  reframe(tier = rep(tier, dots)) |>
-  group_by(snapshot_date) |>
-  mutate(idx = row_number() - 1L,
-         col = idx %% n_side,
-         row = idx %/% n_side) |>
-  ungroup()
-
-pal <- c(
-  "Offline (no internet)"     = "#A89F93",
-  "Online, never used gen AI" = "#D9D5CD",
-  "Free-tier user"            = "#6FA877",
-  "Paid subscriber"           = "#D9A441",
-  "Coding-tool user"          = "#B5493F"
-)
-```
-
-```{r}
-#| label: fig-waffle-latest
-#| fig-cap: >
-#|   The corrected version of the viral chart, March 2026: right
-#|   denominator, paid and coding tiers scaled to reported subscriber
-#|   figures, and the offline population split out of the grey monolith.
-#| fig-width: 7
-#| fig-height: 8
-#| echo: false
-latest <- max(grid$snapshot_date)
-pop_latest <- df |>
-  filter(snapshot_date == latest) |>
-  pull(world_population) |>
-  first()
-
-grid |>
-  filter(snapshot_date == latest) |>
-  ggplot(aes(col, -row, fill = tier)) +
-  geom_tile(width = 0.82, height = 0.82) +
-  scale_fill_manual(values = pal, name = NULL) +
-  coord_equal() +
-  theme_void(base_family = "mono") +
-  theme(legend.position = "bottom",
-        plot.title = element_text(family = "serif", size = 18, hjust = 0.5),
-        plot.subtitle = element_text(size = 9, hjust = 0.5,
-                                     colour = "grey40")) +
-  labs(
-    title = sprintf("Each dot is ~%.1f million people",
-                    pop_latest / n_dots),
-    subtitle = sprintf(
-      "2,500 dots = %.2f billion humans. Colour = deepest gen-AI engagement, %s.",
-      pop_latest / 1000, format(latest, "%b %Y"))
-  )
-```
+The corrected numbers behind this chart - and the accounting for what the
+viral original got wrong - are in a companion post researched and written
+by Claude: [Each dot is doing a lot of
+work](../ai-adoption-chart-rebuilt/index.qmd).
 
 ## What the tiers actually measure
 
@@ -209,12 +117,11 @@ own post, or fold in as an appendix here).
 
 <!--
 Loose ends for Jon to decide:
-- The full chart-critique draft (assets/ai-adaption... sic:
-  ai-adoption-chart-rebuilt.qmd) - separate companion post or appendix?
-  It still has an unresolved [REPO_URL] placeholder.
-- assets/ai-adoption-motion.jsx is an interactive React version with a
-  play control - embed via an OJS/iframe route, link out, or drop?
-- Animated gganimate version (script in assets/ai_adoption_waffle.R) -
-  worth rendering once and embedding as a gif?
 - A Krang image: source or sketch?
+- Both this post and the companion (../ai-adoption-chart-rebuilt/) are
+  draft: true - flip both together when publishing.
+Resolved: the chart-critique draft is now a Claude-authored companion
+post at ../ai-adoption-chart-rebuilt/, with the data, R script and
+interactive jsx alongside it; the animated gif above was rendered once
+from that script and committed.
 -->

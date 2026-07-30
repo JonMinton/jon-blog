@@ -1,8 +1,8 @@
 ---
 title: "Each dot is doing a lot of work: rebuilding the viral AI adoption chart"
-author: "Jon Minton"
-date: "2026-07-12"
-categories: [AI, data visualisation, statistics, R]
+author: "Claude Fable 5 (Anthropic)"
+date: "2026-07-30"
+categories: [AI, data visualisation, statistics, R, claude]
 description: >
   The viral 2,500-dot AI adoption chart got its denominator wrong and
   understated paid users by three to four times. Here I rebuild it from
@@ -14,6 +14,17 @@ execute:
   message: false
 draft: true
 ---
+
+::: {.callout-note}
+## A note on authorship
+
+This post was written by Claude (Fable 5), Anthropic's LLM, working as an
+agent in Jon's blog repository - researching the source figures, building
+the dataset, and writing the analysis and code below. Jon commissioned,
+reviewed and edited it. It is the technical companion to his post
+[Krang and the Waffle](../krang-and-the-waffle/index.qmd), which uses the
+animated version of this chart and is about something else entirely.
+:::
 
 In late February 2026 a waffle chart went viral: 2,500 dots, each standing
 for about 3.2 million people, coloured by their "most advanced AI
@@ -154,6 +165,7 @@ grid |>
   ggplot(aes(col, -row, fill = tier)) +
   geom_tile(width = 0.82, height = 0.82) +
   scale_fill_manual(values = pal, name = NULL) +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
   coord_equal() +
   theme_void(base_family = "mono") +
   theme(legend.position = "bottom",
@@ -171,10 +183,12 @@ grid |>
 
 The animated version -- the green band advancing up the grid from mid-2023,
 the amber and red corner slowly becoming visible to the naked eye -- is
-built with `gganimate` from the same grid object. I have kept it out of the
-rendered post to spare the CI runner; the script that produces it, along
-with the data and an interactive version with a play control and milestone
-markers for the major model releases, is in the repository.
+built with `gganimate` from the same grid object. It appears in [Krang and
+the Waffle](../krang-and-the-waffle/index.qmd), so I have kept it out of
+this post rather than render the same movement twice; the script that
+produces it (`ai_adoption_waffle.R`), along with the data and an
+interactive React version with a play control (`ai-adoption-motion.jsx`),
+sits alongside this post's source.
 
 ```{r}
 #| label: animate
@@ -185,6 +199,7 @@ p_anim <- grid |>
   ggplot(aes(col, -row, fill = tier)) +
   geom_tile(width = 0.82, height = 0.82) +
   scale_fill_manual(values = pal, name = NULL) +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
   coord_equal() +
   theme_void(base_family = "mono") +
   theme(legend.position = "bottom") +
@@ -200,8 +215,9 @@ anim <- animate(p_anim, nframes = 140, fps = 12,
 anim_save("ai_adoption_waffle_motion.gif", anim)
 ```
 
-Code, data and the interactive version are at
-[REPO_URL]([REPO_URL]). The dataset
+Code, data and the interactive version are in [this post's folder on
+GitHub](https://github.com/JonMinton/jon-blog/tree/main/posts/ai-adoption-chart-rebuilt).
+The dataset
 (`ai_adoption_timeseries.csv`) carries a source note per row; corrections
 and better estimates welcome, particularly for the triangulated 2023--2024
 snapshots, where the brackets are doing a lot of work.
