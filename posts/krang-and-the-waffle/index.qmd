@@ -4,124 +4,50 @@ subtitle: "Agentic scaffolds, the viral AI adoption chart, and the best single i
 author: "Jon Minton"
 date: "2026-07-30"
 categories: [AI, pop culture, data visualisation, statistics]
+image: player-original-waffle.jpeg
 execute:
   warning: false
   message: false
 draft: true
 ---
 
-<!--
-SCAFFOLD - structure and beat-notes by Claude, for Jon to write into.
-Two core propositions (Jon's):
-  P1: There is a world of difference in practical utility between an
-      agentically scaffolded LLM and a bare LLM (chatbot in a box).
-  P2: TMNT's Krang is the most efficient single pop-cultural image of
-      that difference: a brain alone vs a brain in an exoskeleton.
-Supporting material: the rebuilt viral AI adoption waffle chart
-(assets/ai-adoption-chart-rebuilt.qmd has a full standalone draft of the
-chart critique; data + scripts in assets/).
--->
 
-## The waffle
+One of the most impactful charts on AI adoption from earlier this year is this waffle chart from Damian Player, back in Feb 2026.
 
-<!--
-Beat 1 - Hook. The viral 2,500-dot chart (Damian Player, Feb 2026):
-84% grey never-used, green free tier, yellow sliver of paid, one red
-dot for AI coding-tool users. Caption culture: "you're early".
-Establish the chart quickly; the full stats-pedant critique lives in
-the companion piece / appendix, not here. One or two sentences of
-acknowledgement that the numbers were off (denominator error, paid and
-coding tiers undercounted 3-4x) with the corrected version shown below.
--->
+![Damian Player's original chart, February 2026. Reproduced for commentary; via [Gerlyn's fact-check](https://gerlyn.substack.com/p/why-that-viral-2500-dots-ai-graphic).](player-original-waffle.jpeg){fig-alt="Waffle chart of 2,500 dots titled 'Each dot is ~3.2 million people'. A vast grey field labelled 'Never used AI (84%)', a green band of free chatbot users (16%), a short row of yellow dots for those paying $20 a month, and a single red dot labelled 'Uses coding scaffold'."}
 
-[Jon: opening beat - introduce the viral chart and what everyone took from it]
+Note the colours of the squares, with only a single solitary square coloured red, implying use of an LLM within a Code Scaffold.
 
-![The corrected and animated version of the viral chart, mid-2023 to early 2026: right denominator, paid and coding tiers scaled to reported subscriber figures, and the offline population split out of the grey monolith.](ai_adoption_waffle_motion.gif){fig-alt="Animated waffle chart of 2,500 dots, each representing roughly 3.3 million people, coloured by deepest generative AI engagement. Green (free-tier), amber (paid) and red (coding-tool) bands advance up the grid between mid-2023 and early 2026."}
+To me there's a world of difference between LLMs in code scaffolds (the red square) and even the relatively sophisticated, paid-for LLMs represented by the orange squares. In many ways the gap in effective capability between the red square and the orange squares is even bigger than that between the 'premium' LLMs of the orange squares and the free tier LLMs of the green squares.
 
-The corrected numbers behind this chart - and the accounting for what the
-viral original got wrong - are in a companion post researched and written
-by Claude: [Each dot is doing a lot of
-work](../ai-adoption-chart-rebuilt/index.qmd).
+The quickest way to explain the difference between the orange square and the red square is with this very silly pop culture icon: Krang from Teenage Mutant Ninja Turtles:
 
-## What the tiers actually measure
+::: {layout-ncol=2}
+![Krang-as-blob](krang-blob.png){fig-alt="Krang from the 1987 Teenage Mutant Ninja Turtles cartoon: a scowling pink brain-like alien with small eyes, a wide toothy grimace, and stumpy tentacle arms, with no body."}
 
-<!--
-Beat 2 - Pivot from "how many" to "what kind". The chart's tiers read
-as a spending ladder (free < $20/month < coding tools), but the more
-interesting reading is that they are tiers of *embodiment*: how much
-of the world the model has been given hands to act on.
-This is where P1 lands: the practical gulf between a bare LLM - a
-brain you talk to through a letterbox - and an agentically scaffolded
-one, with tools, a file system, an execution loop, memory, the ability
-to check its own work. Same brain, radically different practical
-utility. Possible concrete contrasts: asking a chatbot to describe a
-fix vs an agent applying, testing and committing it; copy-paste
-round-tripping vs direct action.
--->
+![Krang-as-blob-and-body](krang-android-body.png){fig-alt="Krang's android body from the 1987 cartoon: a large hulking humanoid robot, with Krang the pink brain creature visible inside a cavity in its stomach."}
+:::
 
-[Jon: develop P1 - the free/paid/coding split is really a
-disembodied/embodied split, and the practical difference is enormous]
+So, Krang has a (is a?) pink blobby brain, inside a big hulking robot body.
 
-## Krang
+You can see that Krang-as-blob *does* have some limited means of interacting with and perceiving the world: eyes, ears, stumpy little pink hands. In theory speaking and listening alone provide some means of influencing the world (for good or, in Krang's case, evil),[^1] and the stumpy pink hands *could* in theory carry, make and craft things in their own right. But with these capabilities alone, what Krang-as-blob can do is pretty limited, despite the high reasoning capabilities attributed to him (as the villainous mastermind in the show).
 
-<!--
-Beat 3 - P2, the central image. Krang from Teenage Mutant Ninja
-Turtles: a warlord reduced to a disembodied brain - clever, malevolent,
-shouty, and almost completely impotent - who becomes formidable only
-when installed in the belly of an android exoskeleton built for him.
-The LLM is Krang-the-brain; the agentic scaffold is the exoskeleton.
-Why this image is *efficient*: it carries in one picture (a) the brain
-is not diminished by needing the body, (b) the body without the brain
-is inert, (c) the combination is a different order of thing than
-either part, and (d) the brain famously sits in the robot's *stomach*,
-visibly a component, not a soul - which is more honest than most
-AI metaphors manage.
-Optional: image of Krang here - need a copyright-safe option; a
-hand-drawn sketch would be very on-brand for this blog.
--->
+[^1]: I really hope the analogy doesn't hold *too well*, and modern frontier LLMs aren't, like Krang, evil megalomaniacs, as then we have a very severe *alignment problem*...
 
-[Jon: develop P2 - Krang as the most efficient single pop-cultural
-image of the scaffold/LLM distinction]
+Krang-as-blob is an *orange square* on the adoption wafflechart. A premium reasoning LLM, who listens and thinks and plans and responds, but in practice can't alone do much more.
 
-## Rereading the red dot
+The robot body is the *code scaffold*. On its own, the robot body is inert. And on its own, Krang-as-blob is, if not exactly benign, severely rate limited.
 
-<!--
-Beat 4 - Synthesis. Bring the two together: the red dot (coding-tool
-users, ~6-10M overlap-adjusted) is not just the top of a pricing
-ladder; it is, to a first approximation, the set of people who have
-used a brain *with a body*. Nearly everyone's mental model of "AI" -
-including most of the green band's - is formed on the disembodied
-version. Implications to consider: public debate about AI capability
-is mostly debate about Krang-in-a-jar; the diffusion story that
-matters may be exoskeleton diffusion, not brain access, and the chart
-has no way to show that a body can be handed to anyone already
-holding a brain.
--->
+But put Krang-as-blob into the robot body, and suddenly Krang's affordances and capabilities multiply many times over. Krang, as in Krang-as-blob-and-body, can't just advise and implore others to do his (nefarious) bidding, but do work himself.
 
-[Jon: synthesis - what the red dot means once you've got the Krang
-frame, and why the interesting diffusion curve is the one the chart
-can't show]
+That's the difference between the red square and the orange squares, and why that difference really matters.
 
 ## Coda
 
-<!--
-Beat 5 - Close. Options: (a) land on "you're early" meaning something
-different under this reading - early to embodiment, not to AI; (b) a
-deflationary one-liner about waiting for the technodrome; (c) point
-forward to the companion piece with the full chart rebuild, animation
-and interactive version (assets/ - needs a decision: publish as its
-own post, or fold in as an appendix here).
--->
+When I passed a screenshot of Player's famous wafflechart to Claude Fable a few weeks ago, it wasn't just able to identify the source, but also find the underlying data, make reasonable corrections to some of the assumptions and sources used, and find data covering adoption over time, both correcting the chart as of Feb 2026, and allowing change in the adoption picture to be represented over time using a motion chart, shown below.
 
-[Jon: closing beat]
+![The corrected and animated version of the chart, mid-2023 to early 2026: right denominator, paid and coding tiers scaled to reported subscriber figures, and the offline population split out of the grey monolith.](ai_adoption_waffle_motion.gif){fig-alt="Animated waffle chart of 2,500 dots, each representing roughly 3.3 million people, coloured by deepest generative AI engagement. Green (free-tier), amber (paid) and red (coding-tool) bands advance up the grid between mid-2023 and early 2026."}
 
-<!--
-Loose ends for Jon to decide:
-- A Krang image: source or sketch?
-- Both this post and the companion (../ai-adoption-chart-rebuilt/) are
-  draft: true - flip both together when publishing.
-Resolved: the chart-critique draft is now a Claude-authored companion
-post at ../ai-adoption-chart-rebuilt/, with the data, R script and
-interactive jsx alongside it; the animated gif above was rendered once
-from that script and committed.
--->
+The tl;dr: the share of LLM use in code scaffolds as of Feb 2026 was likely an under-estimate, but not by much in absolute terms. There were *red squares* at the time, not a solitary *red square*. Exposure has increased over time too. But qualitatively, then and now, the key distinction, and relative exposure to green, orange and red squares, remains broadly correct.
+
+To see a Claude Fable-authored technical post on its production of the animated wafflechart, [click here](../ai-adoption-chart-rebuilt/index.qmd).
