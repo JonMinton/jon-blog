@@ -1,0 +1,220 @@
+---
+title: "Krang and the Waffle"
+subtitle: "Agentic scaffolds, the viral AI adoption chart, and the best single image we have for the difference between a brain and a body"
+author: "Jon Minton"
+date: "2026-07-30"
+categories: [AI, pop culture, data visualisation, statistics]
+execute:
+  warning: false
+  message: false
+draft: true
+---
+
+<!--
+SCAFFOLD - structure and beat-notes by Claude, for Jon to write into.
+Two core propositions (Jon's):
+  P1: There is a world of difference in practical utility between an
+      agentically scaffolded LLM and a bare LLM (chatbot in a box).
+  P2: TMNT's Krang is the most efficient single pop-cultural image of
+      that difference: a brain alone vs a brain in an exoskeleton.
+Supporting material: the rebuilt viral AI adoption waffle chart
+(assets/ai-adoption-chart-rebuilt.qmd has a full standalone draft of the
+chart critique; data + scripts in assets/).
+-->
+
+## The waffle
+
+<!--
+Beat 1 - Hook. The viral 2,500-dot chart (Damian Player, Feb 2026):
+84% grey never-used, green free tier, yellow sliver of paid, one red
+dot for AI coding-tool users. Caption culture: "you're early".
+Establish the chart quickly; the full stats-pedant critique lives in
+the companion piece / appendix, not here. One or two sentences of
+acknowledgement that the numbers were off (denominator error, paid and
+coding tiers undercounted 3-4x) with the corrected version shown below.
+-->
+
+[Jon: opening beat - introduce the viral chart and what everyone took from it]
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+
+n_side <- 50L
+n_dots <- n_side^2
+
+df <- read_csv("assets/ai_adoption_timeseries.csv") |>
+  select(snapshot_date, category, value_millions) |>
+  pivot_wider(names_from = category, values_from = value_millions) |>
+  mutate(
+    coding  = coding_tool_users,
+    paid    = pmax(paid_subscribers - coding_tool_users, 0),
+    free    = pmax(genai_users_ever - paid_subscribers, 0),
+    offline = offline_no_internet,
+    never_online = world_population - genai_users_ever - offline_no_internet
+  ) |>
+  select(snapshot_date, world_population,
+         offline, never_online, free, paid, coding) |>
+  pivot_longer(-c(snapshot_date, world_population),
+               names_to = "tier", values_to = "millions") |>
+  mutate(tier = factor(
+    tier,
+    levels = c("offline", "never_online", "free", "paid", "coding"),
+    labels = c("Offline (no internet)", "Online, never used gen AI",
+               "Free-tier user", "Paid subscriber", "Coding-tool user")
+  ))
+
+allocate_dots <- function(millions, total_millions, n = n_dots) {
+  raw   <- millions / total_millions * n
+  base  <- floor(raw)
+  base  <- if_else(millions > 0 & base == 0, 1, base)
+  short <- n - sum(base)
+  rem   <- raw - floor(raw)
+  order_idx <- order(rem, decreasing = TRUE)
+  add <- integer(length(millions))
+  if (short > 0) add[order_idx[seq_len(short)]] <- 1L
+  if (short < 0) {
+    big <- order(base, decreasing = TRUE)
+    add[big[seq_len(-short)]] <- -1L
+  }
+  base + add
+}
+
+grid <- df |>
+  group_by(snapshot_date) |>
+  mutate(dots = allocate_dots(millions, first(world_population))) |>
+  reframe(tier = rep(tier, dots)) |>
+  group_by(snapshot_date) |>
+  mutate(idx = row_number() - 1L,
+         col = idx %% n_side,
+         row = idx %/% n_side) |>
+  ungroup()
+
+pal <- c(
+  "Offline (no internet)"     = "#A89F93",
+  "Online, never used gen AI" = "#D9D5CD",
+  "Free-tier user"            = "#6FA877",
+  "Paid subscriber"           = "#D9A441",
+  "Coding-tool user"          = "#B5493F"
+)
+```
+
+```{r}
+#| label: fig-waffle-latest
+#| fig-cap: >
+#|   The corrected version of the viral chart, March 2026: right
+#|   denominator, paid and coding tiers scaled to reported subscriber
+#|   figures, and the offline population split out of the grey monolith.
+#| fig-width: 7
+#| fig-height: 8
+#| echo: false
+latest <- max(grid$snapshot_date)
+pop_latest <- df |>
+  filter(snapshot_date == latest) |>
+  pull(world_population) |>
+  first()
+
+grid |>
+  filter(snapshot_date == latest) |>
+  ggplot(aes(col, -row, fill = tier)) +
+  geom_tile(width = 0.82, height = 0.82) +
+  scale_fill_manual(values = pal, name = NULL) +
+  coord_equal() +
+  theme_void(base_family = "mono") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(family = "serif", size = 18, hjust = 0.5),
+        plot.subtitle = element_text(size = 9, hjust = 0.5,
+                                     colour = "grey40")) +
+  labs(
+    title = sprintf("Each dot is ~%.1f million people",
+                    pop_latest / n_dots),
+    subtitle = sprintf(
+      "2,500 dots = %.2f billion humans. Colour = deepest gen-AI engagement, %s.",
+      pop_latest / 1000, format(latest, "%b %Y"))
+  )
+```
+
+## What the tiers actually measure
+
+<!--
+Beat 2 - Pivot from "how many" to "what kind". The chart's tiers read
+as a spending ladder (free < $20/month < coding tools), but the more
+interesting reading is that they are tiers of *embodiment*: how much
+of the world the model has been given hands to act on.
+This is where P1 lands: the practical gulf between a bare LLM - a
+brain you talk to through a letterbox - and an agentically scaffolded
+one, with tools, a file system, an execution loop, memory, the ability
+to check its own work. Same brain, radically different practical
+utility. Possible concrete contrasts: asking a chatbot to describe a
+fix vs an agent applying, testing and committing it; copy-paste
+round-tripping vs direct action.
+-->
+
+[Jon: develop P1 - the free/paid/coding split is really a
+disembodied/embodied split, and the practical difference is enormous]
+
+## Krang
+
+<!--
+Beat 3 - P2, the central image. Krang from Teenage Mutant Ninja
+Turtles: a warlord reduced to a disembodied brain - clever, malevolent,
+shouty, and almost completely impotent - who becomes formidable only
+when installed in the belly of an android exoskeleton built for him.
+The LLM is Krang-the-brain; the agentic scaffold is the exoskeleton.
+Why this image is *efficient*: it carries in one picture (a) the brain
+is not diminished by needing the body, (b) the body without the brain
+is inert, (c) the combination is a different order of thing than
+either part, and (d) the brain famously sits in the robot's *stomach*,
+visibly a component, not a soul - which is more honest than most
+AI metaphors manage.
+Optional: image of Krang here - need a copyright-safe option; a
+hand-drawn sketch would be very on-brand for this blog.
+-->
+
+[Jon: develop P2 - Krang as the most efficient single pop-cultural
+image of the scaffold/LLM distinction]
+
+## Rereading the red dot
+
+<!--
+Beat 4 - Synthesis. Bring the two together: the red dot (coding-tool
+users, ~6-10M overlap-adjusted) is not just the top of a pricing
+ladder; it is, to a first approximation, the set of people who have
+used a brain *with a body*. Nearly everyone's mental model of "AI" -
+including most of the green band's - is formed on the disembodied
+version. Implications to consider: public debate about AI capability
+is mostly debate about Krang-in-a-jar; the diffusion story that
+matters may be exoskeleton diffusion, not brain access, and the chart
+has no way to show that a body can be handed to anyone already
+holding a brain.
+-->
+
+[Jon: synthesis - what the red dot means once you've got the Krang
+frame, and why the interesting diffusion curve is the one the chart
+can't show]
+
+## Coda
+
+<!--
+Beat 5 - Close. Options: (a) land on "you're early" meaning something
+different under this reading - early to embodiment, not to AI; (b) a
+deflationary one-liner about waiting for the technodrome; (c) point
+forward to the companion piece with the full chart rebuild, animation
+and interactive version (assets/ - needs a decision: publish as its
+own post, or fold in as an appendix here).
+-->
+
+[Jon: closing beat]
+
+<!--
+Loose ends for Jon to decide:
+- The full chart-critique draft (assets/ai-adaption... sic:
+  ai-adoption-chart-rebuilt.qmd) - separate companion post or appendix?
+  It still has an unresolved [REPO_URL] placeholder.
+- assets/ai-adoption-motion.jsx is an interactive React version with a
+  play control - embed via an OJS/iframe route, link out, or drop?
+- Animated gganimate version (script in assets/ai_adoption_waffle.R) -
+  worth rendering once and embedding as a gif?
+- A Krang image: source or sketch?
+-->

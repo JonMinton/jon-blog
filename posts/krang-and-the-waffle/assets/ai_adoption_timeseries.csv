@@ -1,0 +1,36 @@
+snapshot_date,category,value_millions,low_millions,high_millions,source_note
+2023-06-30,world_population,8045,8045,8045,UN WPP mid-2023 estimate
+2023-06-30,offline_no_internet,2600,2400,2700,ITU Facts & Figures 2023 (~2.6bn offline)
+2023-06-30,genai_users_ever,350,200,500,Triangulated: ChatGPT ~100M MAU Jan 2023 (Reuters/Similarweb) plus Bing Chat/Bard; no population-normalised telemetry exists for this period
+2023-06-30,paid_subscribers,2,1,4,ChatGPT Plus launched Feb 2023; low single-digit millions across Plus/Midjourney
+2023-06-30,coding_tool_users,1.5,1,2,GitHub Copilot ~1M paid seats 2023
+2023-12-31,world_population,8080,8080,8080,UN WPP interpolation
+2023-12-31,offline_no_internet,2600,2400,2700,ITU 2023
+2023-12-31,genai_users_ever,500,350,700,ChatGPT 100M WAU Nov 2023 (OpenAI DevDay); Gemini launch Dec 2023; survey-based ever-use higher than active-use telemetry
+2023-12-31,paid_subscribers,5,3,8,ChatGPT Plus growth + Midjourney + early Claude Pro
+2023-12-31,coding_tool_users,2,1.5,3,Copilot 1.3M paid subscribers reported Feb 2024 (Microsoft earnings) plus free/edu seats
+2024-06-30,world_population,8120,8120,8120,UN WPP interpolation
+2024-06-30,offline_no_internet,2500,2300,2600,ITU 2024
+2024-06-30,genai_users_ever,650,450,900,ChatGPT ~200M WAU Aug 2024 (Reuters); Meta AI and Gemini expanding; multi-tool overlap adjusted
+2024-06-30,paid_subscribers,10,7,14,ChatGPT Plus approaching 10M; Gemini Advanced; Claude Pro; Perplexity Pro
+2024-06-30,coding_tool_users,2.8,2,4,Copilot growth + Cursor early traction
+2024-12-31,world_population,8160,8160,8160,UN WPP interpolation
+2024-12-31,offline_no_internet,2400,2200,2600,ITU 2024/25
+2024-12-31,genai_users_ever,800,600,1000,ChatGPT 300M WAU Dec 2024 (OpenAI via TechCrunch); DeepSeek pre-launch; overlap-adjusted all-tool estimate
+2024-12-31,paid_subscribers,16,11,25,ChatGPT Plus >10M (OpenAI COO) + Pro tier (Dec 2024) + Gemini/Claude/Perplexity/Midjourney
+2024-12-31,coding_tool_users,3.8,3,6,Copilot ~1.8M paid trajectory + Cursor + Windsurf
+2025-06-30,world_population,8190,8190,8190,UN WPP interpolation
+2025-06-30,offline_no_internet,2300,2200,2500,ITU 2025 (~2.2bn offline)
+2025-06-30,genai_users_ever,810,700,1100,Microsoft AI Economy Institute: 15.1% of working-age (15-64) population H1 2025 x ~5.36bn = ~809M; upper bound reflects survey-based ever-use (Ipsos/KPMG) exceeding telemetry-based active use
+2025-06-30,paid_subscribers,40,30,55,ChatGPT ~35M paying subscribers Jul 2025 (Reuters) + Claude Pro/Max + Google AI Pro + Perplexity + Grok
+2025-06-30,coding_tool_users,5,4,8,Copilot 1.8M paid mid-2025 + Cursor + Claude Code + Codex; overlap-adjusted
+2025-12-31,world_population,8230,8230,8230,UN WPP interpolation
+2025-12-31,offline_no_internet,2200,2100,2400,ITU 2025
+2025-12-31,genai_users_ever,880,800,1300,Microsoft AI Diffusion Report H2 2025 (Jan 2026): 16.3% of working-age population x ~5.4bn = ~880M; viral chart's 1.3bn misapplied the % to total population; survey upper bound higher still
+2025-12-31,paid_subscribers,60,45,85,OpenAI >50M paying consumer subscribers + >9M business seats (early 2026) + Claude/Gemini/Perplexity/Grok; overlap-adjusted
+2025-12-31,coding_tool_users,8,6,11,Copilot 4.7M paid (Microsoft earnings Jan 2026) + Codex 1.6M weekly + Cursor >1M DAU + Claude Code; heavy multi-tool overlap adjusted
+2026-03-31,world_population,8250,8250,8250,UN WPP interpolation
+2026-03-31,offline_no_internet,2200,2100,2400,ITU 2025 carried forward
+2026-03-31,genai_users_ever,965,850,1400,Microsoft Q1 2026 update: 17.8% of working-age population x ~5.42bn = ~965M
+2026-03-31,paid_subscribers,70,55,95,Extrapolated one quarter from Dec 2025 base at observed growth rates
+2026-03-31,coding_tool_users,9,7,12,Extrapolated one quarter; git pushes +78% YoY (Microsoft Q1 2026 report) supports continued growth
