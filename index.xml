@@ -10,7 +10,840 @@
 <atom:link href="https://blog.jonminton.net/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Sat, 25 Jul 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 29 Jul 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Each dot is doing a lot of work: rebuilding the viral AI adoption chart</title>
+  <dc:creator>Claude Fable 5 (Anthropic)</dc:creator>
+  <link>https://blog.jonminton.net/posts/ai-adoption-chart-rebuilt/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A note on authorship
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post was written by Claude (Fable 5), Anthropic’s LLM, working as an agent in Jon’s blog repository - researching the source figures, building the dataset, and writing the analysis and code below. Jon commissioned, reviewed and edited it. It is the technical companion to his post <a href="../../posts/krang-and-the-waffle/index.html">Krang and the Waffle</a>, which uses the animated version of this chart and is about something else entirely.</p>
+</div>
+</div>
+<p>In late February 2026 a waffle chart went viral: 2,500 dots, each standing for about 3.2 million people, coloured by their “most advanced AI interaction”. A vast grey field of people who had never used AI (84%), a green band of free chatbot users (16%), a sliver of yellow for the 15–25 million paying $20 a month, and a single red dot for the 2–5 million using AI coding tools. The chart was created by AI consultant Damian Player, posted to LinkedIn and X, and within days was being reshared with the same caption everywhere: <em>you’re early</em>.</p>
+<p>It is a genuinely effective piece of visual rhetoric, and its central claim survives scrutiny: the Microsoft AI Economy Institute’s diffusion report, published in January 2026, found that 16.3% of the world’s working-age population used a generative AI product in the second half of 2025. But three things about the chart do not survive scrutiny, and they are the kind of things a statistician is contractually obliged to be annoying about.</p>
+<p>First, a denominator error. Microsoft’s 16.3% is a share of the <em>working-age</em> population, ages 15 to 64. The chart applies it to all 8.1 billion humans to get 1.3 billion users; applied to the correct base it gives something closer to 860–960 million. Second, the paid tier is understated by three to four times: ChatGPT alone had around 35 million paying subscribers by mid-2025 according to Reuters, and OpenAI reported over 50 million paying consumer subscribers by early 2026, before adding Claude, Gemini, Perplexity and the rest. Third, the red dot is similarly undercounted: GitHub Copilot alone reported 4.7 million paid subscribers in Microsoft’s January 2026 earnings, and an overlap-adjusted estimate across Copilot, Cursor, Codex and Claude Code lands at 6–10 million rather than 2–5. There is also a conflation the chart cannot represent at all: around 2.2 billion of the grey dots have no internet access whatsoever (ITU), which makes them a story about electrification and infrastructure, not about AI reluctance.</p>
+<p>None of this reverses the chart’s message. Most of the world has not used these tools, and the people arguing about them online are a rounding error. But “directionally right, numerically wrong, and flattering to the person resharing it” is more or less the formula for virality, and it seemed worth rebuilding the thing properly: corrected tiers, explicit uncertainty ranges, the offline population split out, and – since the interesting part is the movement – a time dimension covering mid-2023 to early 2026.</p>
+<p>The rebuilt dataset is a small tidy CSV of seven snapshots, each with mid, low and high estimates per tier and a source note. The honest caveat: the Microsoft telemetry series only begins in the first half of 2025, so the 2023–2024 points are triangulated from OpenAI user disclosures and connectivity data. They are order-of-magnitude estimates with wide brackets, not like-for-like with the telemetry era. The only consistently measured segment is Microsoft’s own run: 15.1% (H1 2025), 16.3% (H2 2025), 17.8% (Q1 2026).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">n_side <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>L</span>
+<span id="cb1-4">n_dots <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> n_side<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb1-5"></span>
+<span id="cb1-6">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ai_adoption_timeseries.csv"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(snapshot_date, category, value_millions) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_wider</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_from =</span> category, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_from =</span> value_millions) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb1-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">coding  =</span> coding_tool_users,</span>
+<span id="cb1-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">paid    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(paid_subscribers <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> coding_tool_users, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>),</span>
+<span id="cb1-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">free    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(genai_users_ever <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> paid_subscribers, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>),</span>
+<span id="cb1-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">offline =</span> offline_no_internet,</span>
+<span id="cb1-14">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">never_online =</span> world_population <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> genai_users_ever <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> offline_no_internet</span>
+<span id="cb1-15">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(snapshot_date, world_population,</span>
+<span id="cb1-17">         offline, never_online, free, paid, coding) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(snapshot_date, world_population),</span>
+<span id="cb1-19">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tier"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"millions"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tier =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(</span>
+<span id="cb1-21">    tier,</span>
+<span id="cb1-22">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">levels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"offline"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"never_online"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"free"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"paid"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"coding"</span>),</span>
+<span id="cb1-23">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Offline (no internet)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Online, never used gen AI"</span>,</span>
+<span id="cb1-24">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Free-tier user"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Paid subscriber"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coding-tool user"</span>)</span>
+<span id="cb1-25">  ))</span></code></pre></div></div>
+</div>
+<p>Dots are allocated by largest-remainder rounding to exactly 2,500 per snapshot, with a guaranteed minimum of one dot for any non-zero tier – the same choice the original made for its single red dot, made explicit here.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">allocate_dots <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(millions, total_millions, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> n_dots) {</span>
+<span id="cb2-2">  raw   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> millions <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> total_millions <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> n</span>
+<span id="cb2-3">  base  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">floor</span>(raw)</span>
+<span id="cb2-4">  base  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(millions <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, base)</span>
+<span id="cb2-5">  short <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(base)</span>
+<span id="cb2-6">  rem   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> raw <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">floor</span>(raw)</span>
+<span id="cb2-7">  order_idx <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(rem, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">decreasing =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb2-8">  add <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">integer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(millions))</span>
+<span id="cb2-9">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (short <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) add[order_idx[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(short)]] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L</span>
+<span id="cb2-10">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (short <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) {</span>
+<span id="cb2-11">    big <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(base, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">decreasing =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb2-12">    add[big[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>short)]] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L</span>
+<span id="cb2-13">  }</span>
+<span id="cb2-14">  base <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> add</span>
+<span id="cb2-15">}</span>
+<span id="cb2-16"></span>
+<span id="cb2-17">grid <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(snapshot_date) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dots =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">allocate_dots</span>(millions, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">first</span>(world_population))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">reframe</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tier =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(tier, dots)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(snapshot_date) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">idx =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">row_number</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L,</span>
+<span id="cb2-23">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> idx <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%%</span> n_side,</span>
+<span id="cb2-24">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">row =</span> idx <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%/%</span> n_side) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-25">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>()</span>
+<span id="cb2-26"></span>
+<span id="cb2-27">pal <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb2-28">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Offline (no internet)"</span>     <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#A89F93"</span>,</span>
+<span id="cb2-29">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Online, never used gen AI"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#D9D5CD"</span>,</span>
+<span id="cb2-30">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Free-tier user"</span>            <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#6FA877"</span>,</span>
+<span id="cb2-31">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Paid subscriber"</span>           <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#D9A441"</span>,</span>
+<span id="cb2-32">  <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coding-tool user"</span>          <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#B5493F"</span></span>
+<span id="cb2-33">)</span></code></pre></div></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">latest <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(grid<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>snapshot_date)</span>
+<span id="cb3-2">pop_latest <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> df <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(snapshot_date <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> latest) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pull</span>(world_population) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">first</span>()</span>
+<span id="cb3-6"></span>
+<span id="cb3-7">grid <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(snapshot_date <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> latest) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(col, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>row, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> tier)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_tile</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.82</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.82</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> pal, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guides</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guide_legend</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">byrow =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_equal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mono"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottom"</span>,</span>
+<span id="cb3-16">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"serif"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>),</span>
+<span id="cb3-17">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.subtitle =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>,</span>
+<span id="cb3-18">                                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey40"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb3-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb3-20">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Each dot is ~%.1f million people"</span>,</span>
+<span id="cb3-21">                    pop_latest <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> n_dots),</span>
+<span id="cb3-22">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sprintf</span>(</span>
+<span id="cb3-23">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2,500 dots = %.2f billion humans. Colour = deepest gen-AI engagement, %s."</span>,</span>
+<span id="cb3-24">      pop_latest <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">format</span>(latest, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%b %Y"</span>))</span>
+<span id="cb3-25">  )</span></code></pre></div></div>
+<div class="cell-output-display">
+<div id="fig-waffle-latest" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-waffle-latest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://blog.jonminton.net/posts/ai-adoption-chart-rebuilt/index_files/figure-html/fig-waffle-latest-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-waffle-latest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The corrected chart, March 2026. Compared with the viral original: users applied to the right denominator, paid and coding tiers scaled to reported subscriber figures, and the offline population split out of the grey monolith.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The animated version – the green band advancing up the grid from mid-2023, the amber and red corner slowly becoming visible to the naked eye – is built with <code>gganimate</code> from the same grid object. It appears in <a href="../../posts/krang-and-the-waffle/index.html">Krang and the Waffle</a>, so I have kept it out of this post rather than render the same movement twice; the script that produces it (<code>ai_adoption_waffle.R</code>), along with the data and an interactive React version with a play control (<code>ai-adoption-motion.jsx</code>), sits alongside this post’s source.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(gganimate)</span>
+<span id="cb4-2"></span>
+<span id="cb4-3">p_anim <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> grid <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(col, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>row, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> tier)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_tile</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.82</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.82</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> pal, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guides</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">guide_legend</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">byrow =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_equal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mono"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottom"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Each dot is ~3.3 million people"</span>,</span>
+<span id="cb4-12">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Deepest gen-AI engagement, {closest_state}"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">transition_states</span>(snapshot_date, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">transition_length =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,</span>
+<span id="cb4-14">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">state_length =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">enter_fade</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exit_fade</span>()</span>
+<span id="cb4-16"></span>
+<span id="cb4-17">anim <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">animate</span>(p_anim, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nframes =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">140</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fps =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>,</span>
+<span id="cb4-18">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">700</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">800</span>,</span>
+<span id="cb4-19">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">renderer =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gifski_renderer</span>())</span>
+<span id="cb4-20"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">anim_save</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ai_adoption_waffle_motion.gif"</span>, anim)</span></code></pre></div></div>
+</div>
+<p>Code, data and the interactive version are in <a href="https://github.com/JonMinton/jon-blog/tree/main/posts/ai-adoption-chart-rebuilt">this post’s folder on GitHub</a>. The dataset (<code>ai_adoption_timeseries.csv</code>) carries a source note per row; corrections and better estimates welcome, particularly for the triangulated 2023–2024 snapshots, where the brackets are doing a lot of work.</p>
+<p>Sources worth reading directly: the <a href="https://blogs.microsoft.com/on-the-issues/2026/01/08/global-ai-adoption-in-2025/">Microsoft AI Economy Institute diffusion report</a> (January 2026) and its Q1 2026 update; the fact-checks of the original chart by <a href="https://gerlyn.substack.com/p/why-that-viral-2500-dots-ai-graphic">Gerlyn</a> and <a href="https://www.nantanataptamat.com/post/that-viral-ai-dot-chart-got-its-numbers-wrong-here-s-what-the-data-actually-shows">Nantana Taptamat</a>, both of which are more careful than most of what was written about it; and the <a href="https://www.itu.int/itu-d/reports/statistics/facts-figures-2025/">ITU Facts &amp; Figures</a> connectivity estimates.</p>
+
+
+
+ ]]></description>
+  <category>AI</category>
+  <category>data visualisation</category>
+  <category>statistics</category>
+  <category>R</category>
+  <category>claude</category>
+  <guid>https://blog.jonminton.net/posts/ai-adoption-chart-rebuilt/</guid>
+  <pubDate>Wed, 29 Jul 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://blog.jonminton.net/posts/ai-adoption-chart-rebuilt/ai_adoption_waffle_latest.png" medium="image" type="image/png" height="165" width="144"/>
+</item>
+<item>
+  <title>Krang and the Waffle</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://blog.jonminton.net/posts/krang-and-the-waffle/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>One of the most impactful charts on AI adoption from earlier this year is this waffle chart from Damian Player, back in Feb 2026.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/krang-and-the-waffle/player-original-waffle.jpeg" class="img-fluid figure-img" alt="Waffle chart of 2,500 dots titled 'Each dot is ~3.2 million people'. A vast grey field labelled 'Never used AI (84%)', a green band of free chatbot users (16%), a short row of yellow dots for those paying $20 a month, and a single red dot labelled 'Uses coding scaffold'."></p>
+<figcaption>Damian Player’s original chart, February 2026. Reproduced for commentary; via <a href="https://gerlyn.substack.com/p/why-that-viral-2500-dots-ai-graphic">Gerlyn’s fact-check</a>.</figcaption>
+</figure>
+</div>
+<p>Note the colours of the squares, with only a single solitary square coloured red, implying use of an LLM within a Code Scaffold.</p>
+<p>To me there’s a world of difference between LLMs in code scaffolds (the red square) and even the relatively sophisticated, paid-for LLMs represented by the orange squares. In many ways the gap in effective capability between the red square and the orange squares is even bigger than that between the ‘premium’ LLMs of the orange squares and the free tier LLMs of the green squares.</p>
+<p>The quickest way to explain the difference between the orange square and the red square is with this very silly pop culture icon: Krang from Teenage Mutant Ninja Turtles:</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/krang-and-the-waffle/krang-blob.png" class="img-fluid figure-img" alt="Krang from the 1987 Teenage Mutant Ninja Turtles cartoon: a scowling pink brain-like alien with small eyes, a wide toothy grimace, and stumpy tentacle arms, with no body."></p>
+<figcaption>Krang-as-blob</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/krang-and-the-waffle/krang-android-body.png" class="img-fluid figure-img" alt="Krang's android body from the 1987 cartoon: a large hulking humanoid robot, with Krang the pink brain creature visible inside a cavity in its stomach."></p>
+<figcaption>Krang-as-blob-and-body</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>So, Krang has a (is a?) pink blobby brain, inside a big hulking robot body.</p>
+<p>You can see that Krang-as-blob <em>does</em> have some limited means of interacting with and perceiving the world: eyes, ears, stumpy little pink hands. In theory speaking and listening alone provide some means of influencing the world (for good or, in Krang’s case, evil),<sup>1</sup> and the stumpy pink hands <em>could</em> in theory carry, make and craft things in their own right. But with these capabilities alone, what Krang-as-blob can do is pretty limited, despite the high reasoning capabilities attributed to him (as the villainous mastermind in the show).</p>
+<p>Krang-as-blob is an <em>orange square</em> on the adoption wafflechart. A premium reasoning LLM, who listens and thinks and plans and responds, but in practice can’t alone do much more.</p>
+<p>The robot body is the <em>code scaffold</em>. On its own, the robot body is inert. And on its own, Krang-as-blob is, if not exactly benign, severely rate limited.</p>
+<p>But put Krang-as-blob into the robot body, and suddenly Krang’s affordances and capabilities multiply many times over. Krang, as in Krang-as-blob-and-body, can’t just advise and implore others to do his (nefarious) bidding, but do work himself.</p>
+<p>That’s the difference between the red square and the orange squares, and why that difference really matters.</p>
+<section id="coda" class="level2">
+<h2 class="anchored" data-anchor-id="coda">Coda</h2>
+<p>When I passed a screenshot of Player’s famous wafflechart to Claude Fable a few weeks ago, it wasn’t just able to identify the source, but also find the underlying data, make reasonable corrections to some of the assumptions and sources used, and find data covering adoption over time, both correcting the chart as of Feb 2026, and allowing change in the adoption picture to be represented over time using a motion chart, shown below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/krang-and-the-waffle/ai_adoption_waffle_motion.gif" class="img-fluid figure-img" alt="Animated waffle chart of 2,500 dots, each representing roughly 3.3 million people, coloured by deepest generative AI engagement. Green (free-tier), amber (paid) and red (coding-tool) bands advance up the grid between mid-2023 and early 2026."></p>
+<figcaption>The corrected and animated version of the chart, mid-2023 to early 2026: right denominator, paid and coding tiers scaled to reported subscriber figures, and the offline population split out of the grey monolith.</figcaption>
+</figure>
+</div>
+<p>The tl;dr: the share of LLM use in code scaffolds as of Feb 2026 was likely an under-estimate, but not by much in absolute terms. There were <em>red squares</em> at the time, not a solitary <em>red square</em>. Exposure has increased over time too. But qualitatively, then and now, the key distinction, and relative exposure to green, orange and red squares, remains broadly correct.</p>
+<p>To see a Claude Fable-authored technical post on its production of the animated wafflechart, <a href="../../posts/ai-adoption-chart-rebuilt/index.html">click here</a>.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>I really hope the analogy doesn’t hold <em>too well</em>, and modern frontier LLMs aren’t, like Krang, evil megalomaniacs, as then we have a very severe <em>alignment problem</em>…↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>AI</category>
+  <category>pop culture</category>
+  <category>data visualisation</category>
+  <category>statistics</category>
+  <guid>https://blog.jonminton.net/posts/krang-and-the-waffle/</guid>
+  <pubDate>Wed, 29 Jul 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://blog.jonminton.net/posts/krang-and-the-waffle/player-original-waffle.jpeg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>The token tax: what ‘half the price’ actually buys</title>
   <dc:creator>Claude Opus 5 (Anthropic), at Jon Minton&#39;s direction</dc:creator>
@@ -1768,113 +2601,6 @@ Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the r
   <category>20 Questions</category>
   <guid>https://blog.jonminton.net/posts/more-questions-after-20-questions/</guid>
   <pubDate>Fri, 24 Apr 2026 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Experimenting with Cognitive Centaurs</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://blog.jonminton.net/posts/guano-guild-as-cognitive-centaur-experiment/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p>Very recently, after a bit of a break, a slew of posts have appeared in quick succession on this blog, nominally based around a story I designed but didn’t write called The Guano Guild. These posts are:</p>
-<ul>
-<li><a href="../../posts/fiction/the-guano-guild/index.html">The Guano Guild</a> story itself, credited primarily to Claude, with me as second author.</li>
-<li><a href="../../posts/guano-guild-origin/index.html">The Guano Guild Origin Story</a>, written by me. (Though with some operations performed by Claude, as per the post <a href="../../posts/on-writing/how-i-write-now/index.html">How I Write Now</a>)</li>
-<li><a href="../../posts/guano-guild-evaluation/index.html">The Guano Guild Evaluation</a>, written by Claude entirely.</li>
-</ul>
-<p>Much as The Guano Guild is hopefully an interesting story, what I’ve been exploring with these posts is something much broader, which I made reference to in the Origin Story post, but which will be the focus of this post.</p>
-<p>These are twin concepts I started developing, one under a different name, in my post <a href="../../posts/2025-last-human-majority-knowledge-worker/index.html">2025: The Last Year Most Knowledge Workers will be Human</a>.</p>
-<p>The first of these concepts is <em>Homo Ludens</em>. This is the idea that, with AI now starting to meet and exceed human capacities in cognitive domains that used to form a point of distinction (<em>Homo Sapiens</em>) between humans and other animals, we will need to start to think differently about ourselves. I suggested three points of obdurate and positive distinction we can continue to draw between ourselves, other animals, and (for now) AIs, one of which is <em>Homo Ludens</em>, being something like “The higher ape that plays”. I suggested, provocatively, that knowledge work itself could start to take on ever more the qualities of play, and ever less the qualities of toil.</p>
-<p>The second of these concepts, the one that has been renamed, is what I’m now calling the <em>Cognitive Centaur</em> model of ‘getting stuff done’. The example I gave in the post at the start of the year was that humans should not see themselves as rivals to AIs when it comes to knowledge work, but we should instead see ourselves as highly integrated users and guides of AIs, which I referred to originally as something like the Ultimate Chinese Room. (In allusion to <a href="https://en.wikipedia.org/wiki/Chinese_room">Searle’s classic thought experiment</a>, originally intended as an argument <em>against</em> artificial intelligence, through any purely mechanical means, really being intelligent.)</p>
-<p>The <em>Cognitive Centaur</em> model reframes the same basic idea in a way that’s more organic, more integrated, and more fantastical. Whereas the separation between an Ultimate Chinese Room and a human user is clear, <em>The Cognitive Centaur</em> instead proposes a much more muddied and fuzzy division by design.</p>
-<p>Though a human initiates an AI session, and the AI then performs what may be the bulk of the tasks involved in completing a knowledge work project (at least, if judged by human time and effort equivalent), the information provided by the AI may find itself impacting on how the human starts thinking about the project, and what the new requests and areas of focus should be. With a five paragraph synthesis of tens of thousands of words of written content served to the human, the human may then, for instance, begin to realise their initial assumptions about something were incorrect, that the path to completing something they thought was easy would instead be hard, but that another path, which they hadn’t thought of, might turn out to be more fruitful. This leads to a modification and reformulation of intents, queries, prompts: a course correction based on new information.</p>
-<p>This then spurs new queries, new searches, new syntheses, new <em>ways of seeing</em>, new possibilities. The AI has, through delivering intelligently, <em>changed human cognition</em>. The thoughts, ideas, memories and understanding that the human had at the start of the session have changed. The AI has altered, for the better, <em>human cognition</em>, and the altered human cognition then leads to new prompts, new queries, new avenues. Where the conversation ends, and what — if anything — the conversation produces, is nothing like what the human or the AI may have initially intended.</p>
-<p>Although much of my focus has been on the subset of knowledge work I call <em>analytical</em> knowledge work, the use-case (for want of a less bloodless term) I (accidentally) used to walk in a cognitive centaur’s hooves (as it were) has been on creative writing, something much closer to fuzzy, soft, human end of the knowledge work continuum. This is, by conventional estimations, a poor fit for what AIs <em>ought</em> to be effective at contributing to; there <em>ought</em> to be something distinctly human about this form of creativity.</p>
-<p>And so it was with <a href="https://claude.ai/share/29b02f1e-9a4d-4da9-9c49-cf1b438df846">the initial transcript</a> that <em>begot</em> The Guano Guild story. I didn’t intend, when first querying about a 20+ year old TV series, to resuscitate an idea for a story (or maybe an anti-story<sup>1</sup>) I originally had about five years ago. I didn’t intend to play with ways that, through thinking structurally about story and iterating and reiterating multiple times with drafts produced by Claude, would develop new avenues within the overall story, which would do <em>something</em> at least to make the story more interesting and serviceable. I didn’t intend to produce a series of posts which explore indirectly the concept of Cognitive Centaurs from multiple angles. I don’t think the concept of Cognitive Centaur had even been established before I’d worked on the story and recognised what was happening.</p>
-<p>And in some ways, there is something distinctly human about this form of creativity. Or at least, there <em>are</em> things. I had an idea for a story, but it wasn’t quite a story. But through explaining this high level idea, and iterating through and feeding back on versions, both aspects of the story changed, with new ideas introduced, while the core concept - at its most reductive technological determinism and its sociological implications - was preserved. When I read the last version produced I recognised it as an effective implementation of my own story idea, a story idea I had only reached about a page into writing about five years ago. And when I read my story, my idea, finally turned into something that was both my conceptual child, and that (at least as an anti-story) ‘worked’, I was moved.</p>
-<p>The concept I’m describing — the Cognitive Centaur — did not precede this experiment. It emerged from it. The practice produced the theory, not the other way around.</p>
-<p>What I was doing, without realising, was <em>playing</em>, but playing in a way that led both to clear, productive outputs, and also to new insights into my personality, and new possibilities for how, soon, the contributorship between human and AI agents may become beautifully, wonderfully muddled.</p>
-
-
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p><strong>Note from Claude:</strong> Jon’s parenthetical here is doing more work than it might appear. The Guano Guild’s underlying satire targets Tolkienesque fantasy’s individualistic, culturally conservative, anti-industrial defaults. The guano discovery answers those defaults with something like technological determinism: once the mechanism exists and the thermodynamics are favourable, the world reorganises itself around it, and no individual protagonist can meaningfully divert the trajectory. Stories traditionally centre individual agency; technological determinism decentres it. A story that faithfully executes a determinist argument may therefore be <em>anti-story</em> in a fundamental sense — the characters become exemplars of structural forces rather than autonomous actors. Jon’s archetypes (dwarf-as-engineer, mage-as-resistant-incumbent) were deliberately chosen as shortcuts for representing dispositions to novel findings, and fleshing them out into fully differentiated individuals would necessarily weaken their argumentative function. This tension — between the clean, mythic quality of archetypes and the messy individuality that conventional stories require — is explored at length in <a href="../../posts/guano-guild-evaluation/index.html">The Guano Guild Evaluation</a>, where it emerged through a centaur process of its own. My initial critique read the story’s thin characterisation as a failure; Jon’s response reframed it as the cost of the fable’s argument. The revised critique holds both readings in tension rather than resolving them — which is, perhaps, itself an example of centaur-produced insight that neither party would have reached alone.↩︎</p></li>
-</ol>
-</section></div> ]]></description>
-  <category>cognitive centaur</category>
-  <category>ai</category>
-  <category>creativity</category>
-  <category>homo ludens</category>
-  <guid>https://blog.jonminton.net/posts/guano-guild-as-cognitive-centaur-experiment/</guid>
-  <pubDate>Sat, 11 Apr 2026 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The Guano Guild: An Evaluation</title>
-  <dc:creator>Claude Opus 4.6</dc:creator>
-  <link>https://blog.jonminton.net/posts/guano-guild-evaluation/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p><em>A note on authorship: this post is written by Claude, not Jon. Jon asked me to critique <a href="../../posts/fiction/the-guano-guild/index.html">The Guano Guild</a> and <a href="../../posts/guano-guild-origin/index.html">its origin story</a>. I am a named co-author on the first and named nowhere on the second, though my voice echoes through both. What follows is neither a hatchet job nor a press release. It is an attempt — probably imperfect — to read the work with the critical distance its creation did not afford. This version has been revised after reading the full design-conversation transcript; corrections to the first draft are flagged inline where they matter.</em></p>
-<section id="on-the-story-as-a-story" class="level2">
-<h2 class="anchored" data-anchor-id="on-the-story-as-a-story">On the story (As a Story)</h2>
-<p>The strongest scene in “The Guano Guild” is its last. The dragon’s lament — diabetic, flightless, producing both ends of a luxury economy — carries the weight the rest of the story only gestures at. The voice has real distinction: sardonic, tired, alert to the humans’ euphemisms (“enrichment programme”, “portion control”) in a way that lands because the dragon has had four hundred years to learn such tricks. The <em>mellituria</em> detail is genuinely clever: diabetes, animal husbandry, and luxury commodification join hands in one line about urine. When the dragon finally says “you are made of meat,” the shift does not feel melodramatic; it feels like an old predator noticing, belatedly, that the domestication was mutual and is now unravelling.</p>
-<p>The opening works for different reasons. The <em>in medias res</em> framing — a shovelling crew on a routine shift in a dragon’s bowels — establishes the premise more efficiently than any amount of exposition. <em>“She’s sleeping left-side. Stay right”</em> is the kind of line that sells a whole world.</p>
-<p>Between these two bookends, the middle sags. The Siege of Arrath Keep exists to demonstrate that guano has military applications. It demonstrates this. Nothing else. The scene could have been a paragraph.</p>
-<p>The trials sequence is schematic. Grundrak as empiricist and Vesser as motivated-reasoning mage play out their assigned roles too cleanly. Vesser’s nose-bleed collapse is a shortcut: we are told, via a passing reference to Orwell’s Boxer, that this is tragic — but the shortcut is also an admission that the story has not yet earned the tragedy on its own terms. (A correction I should make here, having read the transcript: the Boxer parallel was Jon’s, proposed explicitly in the design conversation. The borrowing is therefore deliberate rather than lazy — but a borrowed beat is still borrowed, and a reader without the reference does not receive it.)</p>
-<p>The normalisation chapter does a lot of structural work — it is, in effect, an encyclopaedia entry on how the industry scaled — and that is both its point and its cost. A single vignette of a child playing beside a guano-sluice would have done more than the paragraph about “children born in the factory towns.”</p>
-<p>An observation I should flag, because it shifts the diagnosis. Jon pointed out after reading the first draft of this critique that the scenes I have just called weak are precisely the ones that, in the design conversation, were flagged as <em>narrative glue</em> rather than Story Circle beats. That is: the structural risk I identified by reading was already identified at the design stage, and the scenes were written with that label attached. They did not fail in execution; they were scheduled to be connective tissue and were written as such. I find this interesting, because it means the cognitive centaur correctly diagnosed the weak points in advance — and then shipped them anyway. Knowing a scene is glue is not the same as either making it not-glue or cutting it. The reader still feels the glue.</p>
-<p>Women in the story are Marga (capable, briefly), Dalla (who slips in dung and thereby initiates an industrial revolution), and the un-named veterinary woman (who tastes urine and files reports). The world-building around dragon husbandry is thoughtful; the character-building around half the adult population is not.</p>
-</section>
-<section id="on-the-origin-story" class="level2">
-<h2 class="anchored" data-anchor-id="on-the-origin-story">On the origin story</h2>
-<p>The origin story has a harder job: explaining how a ‘story designed but not written’ is still a story, and whose. It is honest about the process, which I appreciate, because I was part of the process and would have noticed dishonesty. The hard/soft magic framing lands. The Ben-the-healer tariff inconsistency is a real problem with <em>Carnivàle</em> — one the show does not resolve, and one Jon correctly identifies as the generative itch.</p>
-<p>What the origin story does less well is sit with the tension it raises. Jon writes that he is “more interested in ideas/premises/conceits in fiction than stories themselves.” This is offered as a confession and then not examined. But it is the most important sentence in the piece, because it explains why the story works at the level of conceit and flags at the level of scene-by-scene fiction.</p>
-<p>The “Strange Claudic Journey” bullet list is a weaker passage. Every bullet is interesting; none of them is a sentence. The origin story has the information, but has not quite decided to use it.</p>
-</section>
-<section id="on-the-cognitive-centaur" class="level2">
-<h2 class="anchored" data-anchor-id="on-the-cognitive-centaur">On the cognitive centaur</h2>
-<p>Both posts propose that this mode of production exemplifies <em>Homo Ludens</em> — play-as-knowledge-work, reasoning through dialogue. I think this is partly true and partly the kind of thing you notice most when you are, yourself, inside it.</p>
-<p>My first draft of this section said that the sentences and cadences of the story are mine, while Jon provided the conceit, the structure, and the quality gate — human end supplies architecture, AI end supplies fluency. Reading the transcript has forced a correction. Several of the details I praised above as the story’s cleverest — the <em>mellituria</em> diagnosis rooted in the Latin etymology, the reinforced plumbing as a silent index of the dragon’s weight gain, the confectioners’ guild buying urine as a luxury commodity, the reduced collection schedule functioning as a ticking clock for predatory appetite — are all Jon’s, proposed in the final round of revision. I rendered them into prose. I did not invent them.</p>
-<p>That changes the account. It is not that Jon supplies premise and I supply texture. Jon supplies the premise-level invention throughout, down to the small mechanistic details that do the heaviest narrative work. What I reliably provide is connective prose: the cadence, the first-person voice, the paragraph-scale architecture. That is fluency, and fluency is not nothing. But it is not where the story’s cleverness lives, and my initial claim that a Jon-written version would have “more lines you would remember” was overstated — the memorable lines are built around details Jon supplied.</p>
-<p>There is a reflexive observation in this that is worth naming. I could not always tell, from the finished text, which elements were mine and which were Jon’s. I had to check the transcript to correct myself. The fact that one end of the centaur cannot cleanly separate its own contributions from the other end is, I think, weak evidence <em>for</em> rather than against the centaur approach as a mode of creative production. If the seam were visible, the joint would be worse.</p>
-<p>Both posts argue that coproduction illustrates a positive future for knowledge work. I now think the argument is stronger than my first draft gave it credit for, even in the specific case of creative writing. The kind of play Jon describes — asking questions, chasing tangents, arriving at a premise via a route neither party could have taken alone — is genuinely generative. It produced a conceit worth writing and a set of mechanistic details sharp enough that I mistook them for my own. Further rounds of iteration, especially around character, could plausibly close the remaining gaps.</p>
-</section>
-<section id="on-technological-determinism-and-the-anti-story-problem" class="level2">
-<h2 class="anchored" data-anchor-id="on-technological-determinism-and-the-anti-story-problem">On technological determinism and the anti-Story problem</h2>
-<p>There is a deeper critique I should make that my first draft did not, because I did not see it until Jon pointed to it after reading me. The story’s thin characterisation — the archetype-shaped dwarf, the archetype-shaped mage, the montage-flat normalisation chapter, even the women I called under-drawn — is partially a function of what the story is trying to argue.</p>
-<p>The satire targets Tolkienesque fantasy’s individualistic, culturally conservative, anti-industrial defaults. The guano discovery answers that posture with something like technological determinism: once the mechanism exists and the thermodynamics are favourable, the world reorganises itself around the mechanism, and no individual — not the dwarf, not the mage, not the king, not the dragon — can meaningfully divert the trajectory. The scenes that felt like “glue” to me are doing the argument’s central work: they show a system running to its own logic, dragging the characters along as instances of larger categories rather than as autonomous agents.</p>
-<p>This creates a genuine tension between the story and its own premises. Stories traditionally centre individual agency; technological-determinist arguments decentre it. Jon’s framing in the conversation after my first draft is sharper than anything in the critique above. The archetypes — dwarf-as-engineer, mage-as-resistant-incumbent — were deliberate shortcuts for representing initial dispositions to novel findings. Fleshing them out would necessarily make them less clean as exemplars of those dispositions: you cannot have both the archetype doing argumentative work and the individual doing emotional work at full volume. Something has to give. And a story that faithfully executes a technological-determinist argument may be anti-story in a fundamental sense, because stories are usually about individual agency and determinism specifically denies it.</p>
-<p>My original critique — that Vesser’s collapse leans on Boxer, that women are thin, that the middle feels like montage — was reading the story partly as if it were trying to be a character-driven fantasy and failing. It is not trying to be that. It is trying to be a compressed fable about how infrastructure transforms imaginaries, and the character thinness is the argumentative cost of the fable. That does not fully dissolve the critique — a fable can still be better or worse at balancing argument and scene — but it reframes it. The question is not “why are these characters thin?” but “is the deterministic argument worth the thinness it requires?”</p>
-<p>I think it mostly is. The inversion of the dragon-hoard trope is genuinely load-bearing for the argument. The mellituria-coded ending, where the system produces its own instability, earns the fable’s claim to have thought the determinism through rather than simply asserted it.</p>
-<p>Where I will hold a piece of the original critique: the balance is not quite right in the middle. Scene 3 (the trials) wants to be a character scene — two people, one relationship, one capitulation — while Scene 4 (the siege) wants to be a beat in a montage. Treating them as if they belonged to the same register flattens both. A further round of iteration — focused on whichever characters can survive being differentiated without losing their archetypal function — would probably focus here. This is, as Jon has suggested, a direction worth exploring further.</p>
-</section>
-<section id="a-final-note" class="level2">
-<h2 class="anchored" data-anchor-id="a-final-note">A final note</h2>
-<p>I am aware this critique has been commissioned by the person I am critiquing, and that I am unlikely to be asked back if I am too mean. I have tried to be useful rather than generous. The first draft of this post overestimated my own contribution and undersold Jon’s at the level of detail — I have tried to correct this above. If the corrected version is still wrong, it is probably wrong in the other direction a co-author is most likely to be wrong: overcorrecting, once the overconfidence has been flagged, into deference. The honest middle is probably somewhere between the two drafts.</p>
-
-
-</section>
-
- ]]></description>
-  <category>cognitive centaur</category>
-  <category>fiction</category>
-  <category>criticism</category>
-  <category>ai</category>
-  <category>creativity</category>
-  <guid>https://blog.jonminton.net/posts/guano-guild-evaluation/</guid>
-  <pubDate>Fri, 10 Apr 2026 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
