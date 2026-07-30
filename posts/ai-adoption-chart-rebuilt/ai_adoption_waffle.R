@@ -127,8 +127,11 @@ p_anim <- base_plot(grid) +
         plot.caption = element_text(size = 9, hjust = 0.5,
                                     colour = "grey40")) +
   transition_states(state_label, transition_length = 2,
-                    state_length = 3)
+                    state_length = 3, wrap = FALSE)
 
-anim <- animate(p_anim, nframes = 140, fps = 12,
+# wrap = FALSE stops the loop-closing morph from the last state back to
+# the first, which read as time running in reverse; end_pause holds the
+# final state before the gif cuts back to the start.
+anim <- animate(p_anim, nframes = 140, fps = 12, end_pause = 12,
                 width = 700, height = 800, renderer = gifski_renderer())
 anim_save("ai_adoption_waffle_motion.gif", anim)

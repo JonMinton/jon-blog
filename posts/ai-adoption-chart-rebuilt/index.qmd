@@ -217,9 +217,9 @@ p_anim <- grid |>
        subtitle = "{closest_state}",
        caption = "Colour = deepest gen-AI engagement") +
   transition_states(state_label, transition_length = 2,
-                    state_length = 3)
+                    state_length = 3, wrap = FALSE)
 
-anim <- animate(p_anim, nframes = 140, fps = 12,
+anim <- animate(p_anim, nframes = 140, fps = 12, end_pause = 12,
                 width = 700, height = 800,
                 renderer = gifski_renderer())
 anim_save("ai_adoption_waffle_motion.gif", anim)
