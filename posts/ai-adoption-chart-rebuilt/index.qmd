@@ -194,19 +194,30 @@ sits alongside this post's source.
 #| eval: false
 library(gganimate)
 
+# group = idx pins each tile to its grid position, so tiles stay fixed
+# and crossfade colour as bands grow; the transition variable is a
+# "Mon YYYY" label so {closest_state} displays reader-friendly text.
+grid <- grid |>
+  mutate(state_label = factor(
+    format(snapshot_date, "%b %Y"),
+    levels = format(sort(unique(snapshot_date)), "%b %Y")
+  ))
+
 p_anim <- grid |>
-  ggplot(aes(col, -row, fill = tier)) +
+  ggplot(aes(col, -row, fill = tier, group = idx)) +
   geom_tile(width = 0.82, height = 0.82) +
   scale_fill_manual(values = pal, name = NULL) +
   guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
   coord_equal() +
   theme_void(base_family = "mono") +
-  theme(legend.position = "bottom") +
+  theme(legend.position = "bottom",
+        plot.subtitle = element_text(family = "serif", size = 26,
+                                     face = "bold", hjust = 0.5)) +
   labs(title = "Each dot is ~3.3 million people",
-       subtitle = "Deepest gen-AI engagement, {closest_state}") +
-  transition_states(snapshot_date, transition_length = 2,
-                    state_length = 3) +
-  enter_fade() + exit_fade()
+       subtitle = "{closest_state}",
+       caption = "Colour = deepest gen-AI engagement") +
+  transition_states(state_label, transition_length = 2,
+                    state_length = 3)
 
 anim <- animate(p_anim, nframes = 140, fps = 12,
                 width = 700, height = 800,

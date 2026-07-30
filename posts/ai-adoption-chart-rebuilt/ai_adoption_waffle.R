@@ -105,17 +105,30 @@ ggsave("ai_adoption_waffle_latest.png", p_static,
        width = 7, height = 8, dpi = 200)
 
 # ---- Animated: motion chart over all snapshots --------------------------
+# group = idx pins each tile's identity to its grid position, so tiles
+# stay fixed and crossfade colour as bands grow, rather than gganimate
+# matching tiles by row order and sliding them around the canvas.
+# The transition variable is a "Mon YYYY" label (chronological factor)
+# so {closest_state} displays reader-friendly text directly.
+grid <- grid |>
+  mutate(state_label = factor(
+    format(snapshot_date, "%b %Y"),
+    levels = format(sort(unique(snapshot_date)), "%b %Y")
+  ))
+
 p_anim <- base_plot(grid) +
+  aes(group = idx) +
   labs(title = "Each dot is ~3.3 million people",
-       subtitle = "Deepest gen-AI engagement, {closest_state}") +
-  transition_states(snapshot_date, transition_length = 2,
-                    state_length = 3) +
-  enter_fade() + exit_fade()
+       subtitle = "{closest_state}",
+       caption = "Colour = deepest gen-AI engagement") +
+  theme(plot.subtitle = element_text(family = "serif", size = 26,
+                                     face = "bold", hjust = 0.5,
+                                     colour = "grey20"),
+        plot.caption = element_text(size = 9, hjust = 0.5,
+                                    colour = "grey40")) +
+  transition_states(state_label, transition_length = 2,
+                    state_length = 3)
 
 anim <- animate(p_anim, nframes = 140, fps = 12,
                 width = 700, height = 800, renderer = gifski_renderer())
 anim_save("ai_adoption_waffle_motion.gif", anim)
-
-# Note: dot identity is positional, so tiles recolour in place as bands
-# grow -- visually this reads as the green/amber/red bands advancing up
-# the grid, which is the intended effect.
