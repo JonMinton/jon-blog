@@ -24,10 +24,10 @@
 
 <section id="about-this-post" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-post">About this post</h2>
-<p>This post is an AI transcription of <a href="../../../posts/handdrawn-stats/repeated-measures/index.html">the original handwritten notes on repeated measures</a>, written on a reMarkable tablet as a single ultra-long page (over 73,000 pixels tall). It is the <strong>second</strong> transcription attempt of the same source: the first, by Claude Opus 4.6 in February 2026, is <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed/index.html">here</a>, and remains unchanged as a record of what that model could do at that time.</p>
+<p>This post is an AI transcription of <a href="../../../posts/handdrawn-stats/repeated-measures/index.html">the original handwritten notes on repeated measures</a>, written on a reMarkable tablet as a single ultra-long page (1620 × 73,475 pixels). It is the <strong>second</strong> transcription attempt of the same source: the first, by Claude Opus 4.6 in February 2026, is <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed/index.html">here</a>, and remains unchanged as a record of what that model could do at that time.</p>
 <p>That’s the point of keeping these as separate, dated posts rather than correcting earlier attempts in place: the same fixed source document, revisited by successive models, becomes a small longitudinal benchmark for how AI parsing of dense handwritten technical material — mixed prose, equations, diagrams, code, and colour — improves over time.</p>
-<p>This attempt (by Claude Fable 5, July 2026) re-sliced the source scan into 27 overlapping native-resolution segments and read every section against the pixels. The hand-drawn diagrams, annotated equations, and coloured illustrations are preserved as images from the original — they are a key part of the explanation and lose their character if converted to plain text. The surrounding narrative text and R code examples are transcribed into readable markdown.</p>
-<p>Where the original handwriting is in colour, this transcription now renders the text in colour too: <span style="color: #2e8b57;">green passages</span> mark Jon’s detailed discussion and answers, as in the source. The remaining colours — blue for diagram labels, red for diagram elements and emphasis, orange and purple for highlighted equation components — occur within the preserved images, where they appear exactly as drawn.</p>
+<p>The transcription challenge was never just reading the words. It was also <strong>demarcation</strong>: deciding which portions of the canvas are prose, and which are figures, tables, glyphs, annotated equations, or boxed notes. The first attempt’s crops swallowed whole paragraphs of body prose into “figure” images. This attempt went back to the source scan and re-segmented the canvas from scratch: Claude Fable 5 (July 2026) read all 27 native-resolution slices and transcribed the text, while a team of Claude Opus 5 agents independently demarcated every non-prose entity with tight pixel boundaries. Every figure below is a fresh crop from the original scan, cut to hug the graphical content; everything that is prose — including prose the first attempt left trapped inside images — is text.</p>
+<p>Where the original handwriting is in colour, this transcription renders it in colour too: <span style="color: #2e8b57;">green passages</span> mark Jon’s detailed discussion and answers; boxed notes appear as coloured callouts. Colours inside the figures — blue diagram labels, red annotations, highlighter boxes on equations — appear exactly as drawn.</p>
 <hr>
 </section>
 <section id="repeated-measures" class="level2">
@@ -39,7 +39,7 @@
 <p>Because of this, we have some variety in initial shapes and sizes of our population:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_01_stick_figures.png" class="img-fluid figure-img"></p>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-01-stick-figures.png" class="img-fluid figure-img"></p>
 <figcaption>Stick figures illustrating variety in the population</figcaption>
 </figure>
 </div>
@@ -62,8 +62,8 @@
 <p>So, the first few rows of our data might look something like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_02_data_table.png" class="img-fluid figure-img"></p>
-<figcaption>Hand-drawn data table</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-02-data-table.png" class="img-fluid figure-img"></p>
+<figcaption>Hand-drawn data table: SubId, VisDate, Weight, Height, Sex, Arm</figcaption>
 </figure>
 </div>
 <p>Let’s try to understand this data by asking ourselves a series of questions:</p>
@@ -111,12 +111,14 @@
 <p>They’re nested.</p>
 <p>Specifically, our observations (each row in the dataset) are time-persons. And we know each time-person is ‘nested within’ a grouping variable called a person (or subject).</p>
 <p>Graphically we can represent this grouping as follows for the rows shown in the dataset above:</p>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_03_nesting_diagram.png" class="img-fluid figure-img"></p>
-<figcaption>Nesting diagram — subjects containing time-person observations</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-03-nesting-diagram.png" class="img-fluid figure-img"></p>
+<figcaption>Nesting diagram — subjects (group level) containing time-person observations (individual level), with notation key</figcaption>
 </figure>
 </div>
+<div style="color: #2e8b57;">
 <p>Our awareness of this grouping relationship will be critical both for how we continue to visualise the data, and for how we model the data.</p>
 </div>
 </section>
@@ -133,15 +135,15 @@
 <p>So, maybe our graphing canvas should be set up as follows:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_04_vis_building_blocks.png" class="img-fluid figure-img"></p>
-<figcaption>Building up the visualisation — axes, points, lines, groupings</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-04-canvas-design.png" class="img-fluid figure-img"></p>
+<figcaption>Building up the visualisation: vertical axis (weight or some derivative), horizontal axis (time since first visit), points (a time-subject’s weight at time t), lines (one polyline per subject), groupings (symbol shapes and/or colours distinguishing Arm A and Arm B)</figcaption>
 </figure>
 </div>
 <p>Given the above design decisions, our main statistical graphic for this kind of data might look something like the following:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_05_spaghetti_plot.png" class="img-fluid figure-img"></p>
-<figcaption>Spaghetti plot — individual trajectories by supplement arm</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-05-spaghetti-plot.png" class="img-fluid figure-img"></p>
+<figcaption>Spaghetti plot — individual weight trajectories over weeks since start, red circles for Sup A, blue triangles for Sup B</figcaption>
 </figure>
 </div>
 <p>With this kind of visualisation, complicated though it is, it should at least be apparent that there’s an upwards drift in weight over time. We also have some sense of the number of subjects (not observations) in the study; we can maybe temper our expectations a little about whether our main question of interest — whether Sup A or Sup B are better for weight gain — can be answered in a way that shows a statistically significant difference even if there’s a substantive difference really between the two supplements. We might well be underpowered (mainly because I didn’t want to spend too long drawing dots and lines!)</p>
@@ -165,49 +167,115 @@ font-style: inherit;">1</span>,</span>
 <span id="cb1-2">             <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">data =</span> data)</span></code></pre></div></div>
+<p>Graphically:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_06_m1_graph.png" class="img-fluid figure-img"></p>
-<figcaption>M1 graphically — a horizontal line through the data</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-06-m1-graph.png" class="img-fluid figure-img"></p>
+<figcaption>M1 graphically — a horizontal line (the mean, α) through the data</figcaption>
 </figure>
 </div>
-<p>Not a very useful model. Let’s try to do better, firstly by accounting for the two arms (Sup A or Sup B).</p>
+<p>Not a very useful model. Let’s try to do better, firstly by accounting for the two arms (Supp A or Supp B).</p>
+<p><img src="https://latex.codecogs.com/png.latex?M2:%20%5Cquad%20y%20=%20%5Calpha_0%20+%20%5Calpha_B%20+%20%5Cepsilon,%20%5Cqquad%20%5Cepsilon%20%5Csim%20N(0,%20%5Csigma%5E2)"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctext%7Bwhere%20%7D%20%5Calpha_B%20=%20%5Cbegin%7Bcases%7D%201%20&amp;%20%5Ctext%7Biff%20%7D%20Supp%20=%20B%20%5C%5C%200%20&amp;%20%5Ctext%7Biff%20%7D%20Supp%20=%20A%20%5Cend%7Bcases%7D"></p>
+<p>In R, something like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">mod02 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(wt <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> is_supp_B,</span>
+<span id="cb2-2">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dta <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span></span>
+<span id="cb2-3">              <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb2-4">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">is_supp_B =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(</span>
+<span id="cb2-5">                  Supp <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb2-6">              )</span>
+<span id="cb2-7">            )</span></code></pre></div></div>
+<p>And graphically:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_07_m2_equation_graph.png" class="img-fluid figure-img"></p>
-<figcaption>M2 — equation, R code, and graphical representation with two horizontal lines</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-07-m2-graph.png" class="img-fluid figure-img"></p>
+<figcaption>M2 graphically — two horizontal lines, at α₀ and α₀ + α_B</figcaption>
 </figure>
 </div>
-<p>So: <img src="https://latex.codecogs.com/png.latex?%5Calpha_0"> is the mean of y for Supp A, and <img src="https://latex.codecogs.com/png.latex?%5Calpha_0%20+%20%5Calpha_B"> (not <img src="https://latex.codecogs.com/png.latex?%5Calpha_B"> alone) the mean of y for Supp B.</p>
+<p>So, <img src="https://latex.codecogs.com/png.latex?%5Calpha_0"> is the mean of y for Supp A, and <img src="https://latex.codecogs.com/png.latex?%5Calpha_0%20+%20%5Calpha_B"> (not <img src="https://latex.codecogs.com/png.latex?%5Calpha_B"> alone) the mean of y for Supp B.</p>
 <p>This might look like an improvement, but in some ways it’s not. It’s a wrong turn. For instance, what would happen if Supp B really causes the most weight gain, but the average subject in the Supp A arm both tends to be heavier and to be visited more often and to exit the study earlier?</p>
-<p>With this kind of model we might end up thinking Supp A, not Supp B, is ‘better’ because its model-implied mean value is higher.</p>
+<p>With this kind of model, we might end up thinking Supp A, not Supp B, is ‘better’ because its model-implied mean value is higher.</p>
 <p>In both of the models so far, we haven’t yet modelled the effect of time. Let’s look at that:</p>
+<p><img src="https://latex.codecogs.com/png.latex?M3:%20%5Cquad%20y%20=%20%5Calpha%20+%20%5Cbeta%20t%20+%20%5Cepsilon,%20%5Cqquad%20%5Cepsilon%20%5Csim%20N(0,%20%5Csigma%5E2)"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_08_m3_equation_graph.png" class="img-fluid figure-img"></p>
-<figcaption>M3 — adding time as a predictor, with equation and graph</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-08-m3-graph.png" class="img-fluid figure-img"></p>
+<figcaption>M3 graphically — a single upward-sloping line with slope β</figcaption>
 </figure>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">mod03 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> days_since_start,</span>
+<span id="cb3-2">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dta)</span></code></pre></div></div>
 <p>Great, now we’ve got a coefficient for capturing the trend over time. However, we haven’t included some way of representing:</p>
 <ol type="i">
 <li>the subject membership of observations</li>
 <li>the difference in growth trends between supplement arms</li>
 </ol>
 <p>Let’s start with the second issue. One naive approach would be to include a coefficient for a flag variable, which is 1 if the arm is Sup B, but 0 otherwise.</p>
+<p><img src="https://latex.codecogs.com/png.latex?M4:%20%5Cquad%20y%20%5Csim%20%5Calpha_0%20+%20%5Calpha_B%20+%20%5Cbeta%20t%20+%20%5Cepsilon,%20%5Cqquad%20%5Cepsilon%20%5Csim%20N(0,%20%5Csigma%5E2)"></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_09_m4_m5_splitting.png" class="img-fluid figure-img"></p>
-<figcaption>M4, coefficient splitting, and M5 — allowing different slopes by supplement arm</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-09-m4-graph.png" class="img-fluid figure-img"></p>
+<figcaption>M4 graphically — two parallel sloped lines, at α₀ + βt and α₀ + α_B + βt</figcaption>
 </figure>
 </div>
-<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ that we’ve applied to the intercept parameter <img src="https://latex.codecogs.com/png.latex?%5Calpha"> can also (or instead) be applied to the slope coefficient <img src="https://latex.codecogs.com/png.latex?%5Cbeta">.</p>
+<p>But again, like M02, this doesn’t actually allow for the <em>trend</em> to be different between the two arms, which is what we need to try to calculate.</p>
+<p>In M02 and M04, we have in effect ‘split’ the <img src="https://latex.codecogs.com/png.latex?%5Calpha"> parameters controlling the intercept, in two:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Calpha%20%5Crightarrow%20%5Calpha_0%20+%20%5Calpha_B"></p>
+<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ that we’ve applied to the intercept parameter <img src="https://latex.codecogs.com/png.latex?%5Calpha"> can also (or instead) be applied to the slope coefficient <img src="https://latex.codecogs.com/png.latex?%5Cbeta">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?y%20%5Csim%20%5Calpha%20+%20%5Cbeta%20t"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbeta%20%5Crightarrow%20%5Cbeta_0%20+%20%5Cbeta_B"></p>
+<p><span style="color: #2e8b57;">(where <img src="https://latex.codecogs.com/png.latex?%5Cbeta_B"> = 1 iff arm = B, 0 otherwise)</span></p>
+<p>Substituting:</p>
+<p><img src="https://latex.codecogs.com/png.latex?M5:%20%5Cquad%20y%20%5Csim%20%5Calpha%20+%20(%5Cbeta_0%20+%20%5Cbeta_B)t"></p>
+<p>So, we now have another coefficient <img src="https://latex.codecogs.com/png.latex?%5Cbeta_B"> (to be determined) that allows a different slope for Supp B than Supp A.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_10_m5_green_box.png" class="img-fluid figure-img"></p>
-<figcaption>Slopes for arms A and B by sign of <img src="https://latex.codecogs.com/png.latex?%5Cbeta_B">, and a note on nested models and the F-test</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-10-slope-comparisons.png" class="img-fluid figure-img"></p>
+<figcaption>Slope comparisons — slope for B steeper than A if β_B &gt; 0; shallower if β_B &lt; 0</figcaption>
 </figure>
+</div>
+<div style="color: #2e8b57; border: 1px solid #2e8b57; border-radius: 4px; padding: 0.5em 1em;">
+<p><strong>Note:</strong> As <img src="https://latex.codecogs.com/png.latex?y%20%5Csim%20%5Calpha%20+%20%5Cbeta%20t"> is <em>nested in</em> (a restricted version of) <img src="https://latex.codecogs.com/png.latex?y%20%5Csim%20%5Calpha%20+%20(%5Cbeta_0%20+%20%5Cbeta_B)t"> we can run an <strong>F-test</strong> as one way of testing if Supp B has a diff slope to Supp A.</p>
 </div>
 <p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. <span style="color: #2e8b57;">(&amp; subjects have different initial weights)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-11-subject-glyph.png" class="img-fluid figure-img"></p>
+<figcaption>Glyph — a subject ‘holding’ their grouped observations</figcaption>
+</figure>
+</div>
 <p>How do we try to account for this too?</p>
 </section>
 <section id="an-interesting-detour" class="level3">
@@ -220,75 +288,88 @@ font-style: inherit;">data =</span> data)</span></code></pre></div></div>
 <p>If we arrange the data into many facets, one for each subject, we can do a simple regression for each subject series?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_11_many_models_panels.png" class="img-fluid figure-img"></p>
-<figcaption>Individual regression panels for each subject</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-12-many-models-panels.png" class="img-fluid figure-img"></p>
+<figcaption>Many models — a panel of small per-subject regressions</figcaption>
 </figure>
 </div>
-<p>We could compare the slope coefficient for each of these series, and maybe see if the types of slope coefficient for Supp A arm looks different to that for Supp B arm.</p>
-<p>We could even represent our uncertainty in the coefficients visually, producing something like a forest plot (used in meta analysis):</p>
+<p>We could compare the slope coefficients for each of these series, and maybe see if the types of slope coefficient for Supp A arm looks different to that for Supp B arm.</p>
+<p>We could even represent our uncertainty in the coeffs visually, producing something like a forest plot (used in meta analysis):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_12_forest_plot.png" class="img-fluid figure-img"></p>
-<figcaption>Forest plot with pooled estimates by arm</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-13-forest-plot.png" class="img-fluid figure-img"></p>
+<figcaption>Forest plot — per-subject slope estimates (points) with uncertainty intervals (lines), grouped by arm</figcaption>
 </figure>
 </div>
-<p>We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.</p>
+<p>We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the blue lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.</p>
+<div style="color: #2e8b57;">
+<p><strong>Note:</strong> By convention, pooled estimates are represented as diamonds:</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-14-pooled-estimate-glyphs.png" class="img-fluid figure-img"></p>
+<figcaption>Pooled-estimate glyph conventions — individual estimates vs the pooled-estimate diamond, and diamonds for the Arm A and Arm B pooled estimates</figcaption>
+</figure>
+</div>
 <p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n-of-1 ‘study’) it’s not something I’ve seen before, and it’s almost certainly not a particularly good approach for all kinds of reasons. I’ve mainly just mentioned it to help with the intuition some more…</p>
 <section id="back-on-track" class="level3">
 <h3 class="anchored" data-anchor-id="back-on-track">Back on Track</h3>
 <p>So if meta-analysis isn’t actually used for this kind of problem, what is?</p>
-<p>It’s something between <strong>One</strong> Model AND <strong>MANY</strong> Models.</p>
+<p>It’s something between</p>
+<p><strong>One Model</strong> AND <strong>MANY models</strong></p>
+<p>It’s called multi-level modelling because we have multi-level data:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_13_one_vs_many.png" class="img-fluid figure-img"></p>
-<figcaption>One model vs Many models — and the multi-level middle ground</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-15-one-vs-many.png" class="img-fluid figure-img"></p>
+<figcaption>Multi-level data — different grouping structures, with varying numbers of observations per group</figcaption>
 </figure>
 </div>
-<p>It’s called multi-level modelling because we have multi-level data.</p>
 </section>
 <section id="how-does-it-work" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h3>
 <p>Well, we need to tell the model about the way the data are grouped.</p>
 <p>Let’s go back to the fundamentals… A (generalised) linear model is:</p>
-<p><img src="https://latex.codecogs.com/png.latex?Y_i%20%5Csim%20f(%5Ctheta_i,%20%5Calpha)%20%5Cqquad%20%5Ctext%7B%E2%86%90%20Stochastic%20Component%7D"></p>
-<p><img src="https://latex.codecogs.com/png.latex?%5Ctheta%20=%20g(X_i,%20%5Cbeta)%20%5Cqquad%20%5Ctext%7B%E2%86%90%20Systematic%20Component%7D"></p>
-<div style="color: #2e8b57;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-16-glm-equations.png" class="img-fluid figure-img"></p>
+<figcaption>The Grandmother Model equations — stochastic component (blue) and systematic component (red), with the α highlighted</figcaption>
+</figure>
+</div>
+<div style="color: #2e8b57; border: 1px solid #2e8b57; border-radius: 4px; padding: 0.5em 1em;">
 <p><strong>Note:</strong> This is a very generalised &amp; abstracted notation. The <img src="https://latex.codecogs.com/png.latex?%5Calpha"> &amp; <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> here mean something different to the <img src="https://latex.codecogs.com/png.latex?%5Calpha"> &amp; <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> used elsewhere in this post.</p>
 </div>
 <p>This is what I’ve called before the Grandmother Model, a general framework for thinking about what statistical models contain. In a previous post I referred to <img src="https://latex.codecogs.com/png.latex?g(.)"> as a TRANSFORMER, and <img src="https://latex.codecogs.com/png.latex?f(.)"> as a NOISEMAKER, and drew them as follows:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_14_transformer_noisemaker.png" class="img-fluid figure-img"></p>
-<figcaption>The Transformer and Noisemaker framework, with Fixed Effects vs Random Effects table</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-17-model-transformer-noisemaker.png" class="img-fluid figure-img"></p>
+<figcaption>The Model box — the g(.) transformer feeding the f(.) noisemaker, with β and α as their respective inputs</figcaption>
 </figure>
 </div>
+<p>So, we have two places where we can ‘tell’ our model about how our observations are grouped into subjects: we can either tell the transformer <img src="https://latex.codecogs.com/png.latex?g(.)">, or we can tell the noisemaker <img src="https://latex.codecogs.com/png.latex?f(.)">. Which of the two components we tell affects what the model tends to be called:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_15_fe_re_table.png" class="img-fluid figure-img"></p>
-<figcaption>Fixed Effects vs Random Effects — which component do we ‘tell’?</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-18-tell-table.png" class="img-fluid figure-img"></p>
+<figcaption>Component we ‘tell’ vs what we call the model — transformer g(.) → Fixed Effects Model; noisemaker f(.) → Random Effects Model</figcaption>
 </figure>
 </div>
-<p>And both of these types of model can be referred to as either <strong>Mixed Effects Models</strong> or <strong>Multi-level Models</strong>.</p>
+<p>And both of these types of model can be referred to as either <span style="color: #9955bb;"><strong>Mixed Effects Models</strong></span> or <span style="color: #9955bb;"><strong>Multi-level Models</strong></span>.</p>
 <p>If you’ve ever encountered these terms and haven’t been sure what they mean, then hopefully this clarifies a few things.</p>
 <p>Let’s now think through how we could ‘tell’ our model about group-level membership of observations, first through the transformer, <img src="https://latex.codecogs.com/png.latex?g(.)">, leading to a fixed effects model specification, then through the noisemaker, <img src="https://latex.codecogs.com/png.latex?f(.)">, leading to a random effects model.</p>
 </section>
-<section id="fixed-effect-model-approach" class="level3">
-<h3 class="anchored" data-anchor-id="fixed-effect-model-approach">Fixed Effect model approach</h3>
+<section id="fixed-effects-model-approach" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-effects-model-approach">Fixed Effects model approach</h3>
 <p>Let’s say we have J groups. We could include, in our model, J additional dummy variables, each of which takes the value 1 if the observation comes from group j, 0 otherwise.</p>
 <p>In doing this, we’re expanding the intercept part of our model, potentially a lot:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_16_fe_equations.png" class="img-fluid figure-img"></p>
-<figcaption>Fixed effects equations with coloured annotations</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-19-fe-equation-expansion.png" class="img-fluid figure-img"></p>
+<figcaption>Fixed effects equation expansion — the intercept part (green) expands into J flag terms; slope part (purple) and error part (orange) unchanged; shown long-hand then as a summation</figcaption>
 </figure>
 </div>
+<p>(where <img src="https://latex.codecogs.com/png.latex?F_j"> indicates a Flag variable which is 1 if obs is in group j; 0 otherwise.)</p>
 <p>This fixed effects modelling approach is less exotic than it might first appear. We’re just adding some more <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> coefficients to the transformer part of the model <img src="https://latex.codecogs.com/png.latex?g(.)"> to be determined through the usual approaches (maximum likelihood, optimisation and so on).</p>
 <p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope-difference-by-arm part of the model).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_17_barbed_aside.png" class="img-fluid figure-img"></p>
-<figcaption>A mildly barbed aside</figcaption>
-</figure>
+<div style="color: #c0392b; border: 1px solid #c0392b; border-radius: 4px; padding: 0.5em 1em;">
+<p><strong>A mildly barbed aside:</strong> This kind of resource-munching and often-inefficient modelling approach seems surprisingly popular with economists and econometricians…</p>
 </div>
 <p>So, is there a more efficient way of ‘telling’ a model about group differences, especially when there are many groups, many of which involve few observations? Yes there is! It’s the…</p>
 </section>
@@ -298,15 +379,39 @@ font-style: inherit;">data =</span> data)</span></code></pre></div></div>
 <p>So, in RE, the ‘action’ is in the bit of the specification highlighted orange at the end:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_18_re_equation_decomposition.png" class="img-fluid figure-img"></p>
-<figcaption>RE equation decomposition — splitting the error term</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-20-re-equation.png" class="img-fluid figure-img"></p>
+<figcaption>The RE starting point — Y_ij = β₀ + β₁t + ε, with intercept part (green), slope part (purple) and error/‘noisemaker’ part (orange) labelled</figcaption>
 </figure>
 </div>
-<p>Overall variation (<img src="https://latex.codecogs.com/png.latex?%5Cepsilon">) = group-level variation (<img src="https://latex.codecogs.com/png.latex?%5Ctau">) + residual/remaining variation (<img src="https://latex.codecogs.com/png.latex?e">)</p>
+<p>As with the FE model, we can imagine ‘splitting’ a component of the above into two or more subcomponents. In this case it’s the orange component <img src="https://latex.codecogs.com/png.latex?%5Cepsilon">:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_19_re_fe_comparison_diagrams.png" class="img-fluid figure-img"></p>
-<figcaption>Comparing FE flags vs RE normal distribution for representing group variation</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-21-variance-decomposition.png" class="img-fluid figure-img"></p>
+<figcaption>Variance decomposition — overall variation (ε) = group-level variation (τ) + residual/remaining variation (e)</figcaption>
+</figure>
+</div>
+<p>Usually, both <img src="https://latex.codecogs.com/png.latex?%5Ctau"> &amp; <img src="https://latex.codecogs.com/png.latex?e"> are draws from a Normal distribution:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctau%20%5Csim%20N(.,%20%5Ctheta_J)"></p>
+<p><img src="https://latex.codecogs.com/png.latex?e%20%5Csim%20N(.,%20%5Ctheta)"></p>
+<p>Say at <img src="https://latex.codecogs.com/png.latex?t=0"> there are 8 groups (<img src="https://latex.codecogs.com/png.latex?J=8">), and the starting values for each group look as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-22-group-starting-values.png" class="img-fluid figure-img"></p>
+<figcaption>Group starting values — eight group-level values y₀₁ … y₀₈ scattered around the overall mean ȳ₀</figcaption>
+</figure>
+</div>
+<p>In a FE model there are 8 flags which indicate how much to shift up or down from the overall intercept <img src="https://latex.codecogs.com/png.latex?%5Cbar%7By%7D_0">:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-23-fe-flags.png" class="img-fluid figure-img"></p>
+<figcaption>FE representation — eight flags, one per group, each encoding that group’s deviation from the overall intercept</figcaption>
+</figure>
+</div>
+<p>In an RE model all of this group level variation is simplified and stylised as draws from a single Normal distribution:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-24-re-normal.png" class="img-fluid figure-img"></p>
+<figcaption>RE representation — group-level variation summarised as a single Normal distribution around the overall intercept</figcaption>
 </figure>
 </div>
 <p>So, the aim of this approach is to represent the ‘gist’ of the observed group-level variation in fewer parameters. This means less of the data budget is ‘spent’ on representing group level variation, and so more of the budget can be spent on better estimating other model parameters instead.</p>
@@ -315,10 +420,22 @@ font-style: inherit;">data =</span> data)</span></code></pre></div></div>
 <h3 class="anchored" data-anchor-id="modelling-what-were-actually-interested-in-modelling">Modelling what we’re actually interested in modelling</h3>
 <p>After all this discussion about how to represent group level variation, it’s important not to lose sight of what we’re trying to do, namely: see if Supp B has a higher weight gain trend than Supp A.</p>
 <p>We’re now used to the idea of splitting out the components of a regression model, as they relate to intercepts, slopes, and ‘errors’, and the way we need to do that one more time to get a model containing coefficients that can help us answer our main research question.</p>
+<p>Let’s draw out our RE model spec again, but slightly differently:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_20_final_model_spec.png" class="img-fluid figure-img"></p>
-<figcaption>Final model specification with coloured annotations</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-25-regrouped-spec.png" class="img-fluid figure-img"></p>
+<figcaption>The RE spec regrouped — Y_ij = (β₀ + τ) + β₁t + e, with intercept, slope and error parts labelled and systematic/stochastic glyphs marking each term</figcaption>
+</figure>
+</div>
+<p>Here I’ve grouped the intercept part into a systematic component (<img src="https://latex.codecogs.com/png.latex?%5Cbeta_0">) and a stochastic component (<img src="https://latex.codecogs.com/png.latex?%5Ctau">), where <img src="https://latex.codecogs.com/png.latex?%5Ctau%20%5Csim%20N(0,%20%5Csigma_J%5E2)">. The model’s exactly the same, it’s just rearranged.</p>
+<p>The purpose of this rearrangement is to make it easier to see what component to focus on, and ‘split’, in order to answer the research question about whether the two supplements have different weight change trajectories. As we’re interested in trajectories we know the component to target is the slope; more specifically <img src="https://latex.codecogs.com/png.latex?%5Cbeta_1">:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cbeta_1%20%5Crightarrow%20%5Cbar%7B%5Cbeta_1%7D%20+%20%5Cbeta_%7B1B%7D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctext%7Bwhere%20%7D%20%5Cbeta_%7B1B%7D%20=%20%5Cbegin%7Bcases%7D%201%20&amp;%20%5Ctext%7Biff%20%7D%20Supp%20=%20B%20%5C%5C%200%20&amp;%20%5Ctext%7Botherwise%7D%20%5Cend%7Bcases%7D"></p>
+<p>Substituting:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-26-final-spec.png" class="img-fluid figure-img"></p>
+<figcaption>Substituting the split slope into the regrouped spec, giving the final model: Y_ij = β₀ + τ + (β̄₁ + β₁B)t + e</figcaption>
 </figure>
 </div>
 <p>Which will be our final model specification.</p>
@@ -334,11 +451,11 @@ font-style: inherit;">data =</span> data)</span></code></pre></div></div>
 <p>In R, there are a number of packages and functions that can run the above model. As an example, using the <code>lmer</code> function in the <code>lme4</code> package we could write something like:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_21_lmer_code.png" class="img-fluid figure-img"></p>
-<figcaption>R lme4 code with highlighted components</figcaption>
+<p><img src="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/fig-27-lmer-code.png" class="img-fluid figure-img"></p>
+<figcaption>The lme4::lmer call, handwritten in blue, with the arm-by-time interaction highlighted purple and the random-intercept term highlighted orange</figcaption>
 </figure>
 </div>
-<p>Our main coefficient of interest is the term highlighted purple, and our random intercepts component is highlighted orange.</p>
+<p>Our main coefficient of interest is the term highlighted <span style="background-color: #f0b3f0; color: #000;">purple</span>, and our random intercepts component is highlighted <span style="background-color: #ffd9a3; color: #000;">orange</span>.</p>
 <p>Using the <code>summary()</code> function, summaries of both the fixed effects and random effects components will be returned.</p>
 </section>
 <section id="discussion" class="level3">
@@ -352,17 +469,23 @@ font-style: inherit;">data =</span> data)</span></code></pre></div></div>
 <section id="claudes-reflection-on-this-transcription" class="level3">
 <h3 class="anchored" data-anchor-id="claudes-reflection-on-this-transcription">Claude’s reflection on this transcription</h3>
 <p><em>This section is written by Claude (Fable 5), reflecting on this second transcription attempt and on what changed since the first.</em></p>
-<p>The February 2026 attempt by Opus 4.6 ended its reflection by proposing exactly this experiment: revisit the same source image with a newer model and see how the accuracy changes. Five months later, the answer is: substantially.</p>
-<p><strong>Method.</strong> The 73,475-pixel scan was sliced into 27 overlapping segments at native resolution (1620×3000), and every segment was read against the earlier transcription. Where the earlier attempt had to reconstruct passages from partially legible pixels, this pass could verify them word-by-word.</p>
-<p><strong>What changed.</strong> Around twenty errors in the first transcription were identified and are corrected here. They fall into recognisable failure modes:</p>
+<p>The February 2026 attempt by Opus 4.6 ended its reflection by proposing exactly this experiment: revisit the same source image with a newer model and see how the accuracy changes. Five months later, the answer is: substantially — and on two distinct axes.</p>
+<p><strong>Axis one: reading the words.</strong> The 73,475-pixel scan was sliced into 27 overlapping segments at native resolution, and every segment read against the earlier transcription. Around twenty errors in the first attempt were identified, falling into recognisable failure modes:</p>
 <ul>
 <li><strong>Plausible substitution</strong>: “consider <em>sex</em> as a control variable” had become “age” (the worked dataset has a Sex column and no Age column); “an <em>F-test</em>” had become “Likelihood Ratio Tests”; “a separate <em>n-of-1</em> ‘study’” had become “n=2”. Each substitute is the kind of thing a statistician plausibly <em>would</em> write — which is what makes this failure mode dangerous.</li>
-<li><strong>Silent omission</strong>: the AIC/BIC fallback sentence, the <img src="https://latex.codecogs.com/png.latex?M_%7BFull%7D">/<img src="https://latex.codecogs.com/png.latex?M_%7BRest%7D"> nested-model equations, the “An ‘Interesting’ Detour” heading, and the Grandmother Model passage with its general <img src="https://latex.codecogs.com/png.latex?Y_i%20%5Csim%20f(%5Ctheta_i,%20%5Calpha)">, <img src="https://latex.codecogs.com/png.latex?%5Ctheta%20=%20g(X_i,%20%5Cbeta)"> notation were all simply absent.</li>
+<li><strong>Silent omission</strong>: the AIC/BIC fallback sentence, the <img src="https://latex.codecogs.com/png.latex?M_%7BFull%7D">/<img src="https://latex.codecogs.com/png.latex?M_%7BRest%7D"> nested-model equations, the “An ‘Interesting’ Detour” heading, and the Grandmother Model passage were all simply absent.</li>
 <li><strong>Invention</strong>: the closing sentence of the testing section did not exist in the source. (The first attempt’s reflection candidly reported a larger hallucination it had already caught — a fabricated paragraph about Satterthwaite approximations — so this smaller residual invention fits the pattern it described.)</li>
 <li><strong>Word-level drift</strong>: “Subject-Dates” → “Subject-Time”, “facets” → “panels”, “used” → “good”, swapped symbols in the variance decomposition, and similar.</li>
 </ul>
-<p><strong>What stayed the same.</strong> The hand-drawn diagrams, coloured annotated equations, and sketches remain preserved as native-resolution crops — that design decision from the first attempt has aged well, and this post reuses those crops unchanged. What’s new on the colour front is that green passages of prose are now rendered as green text rather than flagged with bracketed notes, so the visual structure of the original — black questions, green worked answers — carries into the transcription.</p>
-<p><strong>The benchmark point.</strong> This post and <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed/index.html">its predecessor</a> now form a two-point series against a fixed, unchanging source document. The first attempt rated itself 60–70% successful, and identified raw pixel-reading — not reasoning — as its bottleneck. This attempt found the same source fully legible at the same slice resolutions, including the final section that pushed the earlier model past its limits. If a future model repeats the exercise, the interesting question will no longer be <em>can it read the handwriting</em> but whether it catches anything this pass missed — errors of the kind that are invisible until a better reader finds them.</p>
+<p><strong>Axis two: demarcating the canvas.</strong> This was the deeper limitation of the first attempt, and Jon’s framing of it is exact: the problem “wasn’t just the transcription of text; it was also the demarcation of which portions of the canvas relate to images, tables, glyphs and figures.” The first attempt’s 21 crops were segmentations of convenience — several swallowed multiple paragraphs of body prose into “figure” images (its <code>img_09</code>, for instance, contained five paragraphs of flowing text alongside the diagrams it was named for), one caption described contents its image didn’t have, and hand-written equations transcribable as mathematics were left as pixels.</p>
+<p>For this attempt the canvas was re-segmented from the source: a team of Claude Opus 5 agents each swept a range of slices and classified every non-prose entity — figure, table, plain equation, annotated equation, code, coloured note-box, coloured prose — with tight pixel boundaries. Reconciling their maps against Fable 5’s own reading produced the 27 fresh crops used above, cut to hug the graphical content. The consequences for the reader:</p>
+<ul>
+<li><strong>Prose is text.</strong> Every flowing paragraph, including those the first attempt left inside images, is now selectable, searchable, quotable text.</li>
+<li><strong>Plain equations are mathematics.</strong> M1–M5, the variance-decomposition distributions, the slope split, and the full/restricted model pair are rendered as LaTeX. Only equations whose <em>annotations</em> carry meaning — highlighter boxes, coloured labels, glyph arrows — remain as images, because there the drawing is the content.</li>
+<li><strong>Boxed notes are callouts.</strong> The green F-test note, the green notation caveat, and the red “mildly barbed aside” are styled text blocks in their original colours, not screenshots of handwriting.</li>
+<li><strong>Figures are figures.</strong> What remains as image — sketches, plots, diagrams, tables, glyphs, annotated equations, highlighted code — is there because it is genuinely graphical, and each crop now contains that entity and little else.</li>
+</ul>
+<p><strong>The benchmark point.</strong> This post and <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed/index.html">its predecessor</a> now form a two-point series against a fixed, unchanging source document. The first attempt rated itself 60–70% successful and identified raw pixel-reading as its bottleneck. This attempt found the source fully legible, and found the harder residual problem to be segmentation judgement — decisions about what <em>kind</em> of content each region is. If a future model repeats the exercise, the interesting questions will be whether it catches reading errors this pass missed, and whether it would carve the canvas differently again.</p>
 
 
 </section>
