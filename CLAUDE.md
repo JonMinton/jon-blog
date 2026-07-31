@@ -41,6 +41,10 @@ Once a reMarkable PDF has been fully converted to `posts/[post-title]/index.qmd`
   - The post is meta-commentary about the writing process itself and may want to reference the original source.
   - Jon explicitly asks to keep it for provenance — in which case move it to `posts/[post-title]/source/` so it's clearly archival, not live content.
 
+### Transcription posts are a longitudinal series — never correct in place
+
+For AI transcriptions of handwritten source material (the `handdrawn-stats` posts), each model's attempt is a **separate, dated post** (e.g. `repeated-measures-transcribed` = Opus 4.6, Feb 2026; `repeated-measures-transcribed-fable-5` = Fable 5, Jul 2026). Earlier attempts are frozen records for assessing model progress over time against a fixed source — do not "fix" them, even when errors are found. A new attempt gets its own post directory (suffixed with the model name), its own date, links to the source and prior attempts, and its own reflection section. Cross-link prior attempts forward to the new one.
+
 ## Git Workflow
 
 All work happens directly on `main`. There is no separate `experimental/claude` branch — that pattern was retired once it became clear Claude's edits weren't producing catastrophic misinterpretations and the merge-and-conflict overhead was costing more than it bought.
@@ -61,16 +65,6 @@ All work happens directly on `main`. There is no separate `experimental/claude` 
 This is Jon Minton's personal Quarto blog - a static website built with Quarto that outputs to GitHub Pages. The blog covers diverse topics including statistics, data science, AI, pop culture analysis, and social commentary.
 
 ## Building and Rendering
-
-**Preview the blog locally:**
-```bash
-quarto preview
-```
-
-**Render the full site:**
-```bash
-quarto render
-```
 
 The rendered site outputs to the `docs/` directory (configured in `_quarto.yml`).
 
@@ -119,21 +113,6 @@ When `quarto render` is run in the background, use these **safe** methods to che
 
 ## Project Structure
 
-```
-.
-├── _quarto.yml           # Main Quarto configuration
-├── posts/                # All blog posts, organized by topic
-│   ├── glms/            # Multi-part GLM statistics series
-│   ├── unpop/           # Pop culture analysis posts
-│   ├── tardy-tuesday/   # Tidy Tuesday data visualizations
-│   ├── handdrawn-stats/ # Hand-drawn statistics illustrations
-│   └── [topic]/index.qmd
-├── docs/                 # Rendered output (GitHub Pages)
-├── index.qmd            # Homepage with post listing
-├── about.qmd            # About page
-└── *.qmd                # Top-level pages (glms.qmd, tardy-tuesday.qmd, etc.)
-```
-
 **Post organization:**
 - Each post lives in `posts/[category]/[post-name]/index.qmd`
 - Multi-part series organized in subdirectories (e.g., `glms/intro-to-glms/lms-are-glms-part-01/`)
@@ -181,11 +160,6 @@ Here is some text before the list.
 Here is text after the list.
 ```
 
-Other formatting rules:
-- Paragraph breaks require blank lines between paragraphs (markdown standard)
-- Use `**bold**` for emphasis in bullet points when needed
-- Links: `[Link text](url)` for external, `[Link text](../path/index.qmd)` for internal
-
 **Images and media:**
 - Store in the same directory as the post's `index.qmd`
 - Reference with relative paths: `![Alt text](filename.jpg)`
@@ -211,37 +185,7 @@ The GLM framework applies to many models.[^claude-ml]
 
 Footnotes can include bibliography citations using `@citationkey` format if the post has a `bibliography: references.bib` entry in the YAML frontmatter. See `.claude/footnote-rendering-fix.md` for full details on the footnote rendering fix and conventions.
 
-## Themes and Styling
-
-The blog uses dual themes configured in `_quarto.yml`:
-- Light: cosmo
-- Dark: slate
-- Custom CSS: `styles.css`
-
-## R Integration
-
-This is primarily an R-based blog with Quarto. R scripts handle word counting and pre-render automation. Posts may contain R code chunks with statistical analyses and visualizations.
-
-## Content Categories
-
-The blog has several major content areas linked in the navbar:
-- **Statistical Theory and Applications** (glms.qmd): GLM series and statistical tutorials
-- **Tardy Tuesday** (tardy-tuesday.qmd): Tidy Tuesday data visualization challenges
-- **Hand-drawn Statistics** (hand-drawn-statistics.qmd): Visual explanations of stats concepts
-- **Unpopular Opinions** (unpop.qmd): Pop culture and media analysis
-
 ## Common Workflow Patterns
-
-**Creating a new post:**
-1. Create directory: `posts/[category]/[post-name]/`
-2. Add `index.qmd` with proper YAML frontmatter
-3. Add any images/assets to the same directory
-4. Render to preview: `quarto preview`
-
-**Editing existing posts:**
-- Posts are in `posts/**/**/index.qmd`
-- After editing, render to see changes
-- Word count updates automatically on next render via pre-render script
 
 **Working with series posts:**
 The GLM series follows a numbered pattern (`lms-are-glms-part-XX`) within subdirectories by topic area. When adding to a series, maintain the numbering convention and place in the appropriate subdirectory.
@@ -250,30 +194,7 @@ The GLM series follows a numbered pattern (`lms-are-glms-part-XX`) within subdir
 
 ### Duplicate or Missing Footnotes in Rendered Output
 
-**Symptom:** Footnotes appear duplicated, missing, or incorrect in the rendered HTML even though the source `.qmd` file is correct.
-
-**Cause:** Stale Quarto cache in `_freeze/` directory. When footnote IDs are changed (e.g., from `[^1]` to `[^claude-ml]`), the cached render state can conflict with the new source.
-
-**Solution:**
-```bash
-# Clear cache for specific post
-rm -rf _freeze/posts/[path-to-post]/
-
-# Re-render the post
-quarto render posts/[path-to-post]/index.qmd
-```
-
-**Example:**
-```bash
-# If part-02 has duplicate footnotes:
-rm -rf _freeze/posts/glms/intro-to-glms/lms-are-glms-part-02/
-quarto render posts/glms/intro-to-glms/lms-are-glms-part-02/index.qmd
-```
-
-**When to use this fix:**
-- After changing footnote IDs (numbered → descriptive)
-- When footnotes appear duplicated in rendered output
-- When user's footnotes are missing but Claude footnotes appear multiple times
+Use the `footnote-cache-fix` skill (`.claude/skills/footnote-cache-fix/SKILL.md`) — stale `_freeze/` cache is the usual cause and the skill has the clear-and-rerender steps.
 
 ### Render Warnings
 
