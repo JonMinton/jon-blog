@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jon Minton">
-<meta name="dcterms.date" content="2026-02-15">
+<meta name="dcterms.date" content="2026-07-31">
 
-<title>Repeated Measures (Transcribed: Opus 4.6) – Jon Minton’s Blog</title>
+<title>Repeated Measures (Transcribed: Fable 5) – Jon Minton’s Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -140,9 +140,9 @@ window.Quarto = {
 };
 </script>
 
-<meta name="twitter:title" content="Repeated Measures (Transcribed: Opus 4.6) – Jon Minton’s Blog">
-<meta name="twitter:description" content="AI-assisted transcription of handwritten notes on repeated measures and multi-level modelling">
-<meta name="twitter:image" content="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed/img_01_stick_figures.png">
+<meta name="twitter:title" content="Repeated Measures (Transcribed: Fable 5) – Jon Minton’s Blog">
+<meta name="twitter:description" content="A second AI transcription of the handwritten repeated measures notes — same source, newer model">
+<meta name="twitter:image" content="https://blog.jonminton.net/posts/handdrawn-stats/repeated-measures-transcribed-fable-5/img_01_stick_figures.png">
 <meta name="twitter:site" content="@jonminton">
 <meta name="twitter:image-height" content="700">
 <meta name="twitter:image-width" content="1620">
@@ -392,8 +392,8 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Repeated Measures (Transcribed: Opus 4.6)</h1>
-            <p class="subtitle lead">AI-assisted transcription of handwritten notes on repeated measures and multi-level modelling</p>
+      <h1 class="title">Repeated Measures (Transcribed: Fable 5)</h1>
+            <p class="subtitle lead">A second AI transcription of the handwritten repeated measures notes — same source, newer model</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">statistics</div>
                 <div class="quarto-category">multi-level-modelling</div>
@@ -417,7 +417,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 15, 2026</p>
+        <p class="date">July 31, 2026</p>
       </div>
     </div>
     
@@ -439,10 +439,10 @@ window.Quarto = {
 
 <section id="about-this-post" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-post">About this post</h2>
-<p>This post is an AI-assisted transcription of <a href="../../../posts/handdrawn-stats/repeated-measures/index.html">the original handwritten notes on repeated measures</a>, written on a reMarkable tablet as a single ultra-long page. The original handwritten version remains available in full, but at over 73,000 pixels tall it can be difficult to read on screen.</p>
-<p><em>(This February 2026 transcription by Claude Opus 4.6 is kept unchanged as a dated record of model capability at the time. A later transcription of the same source, by a newer model, is <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed-fable-5/index.html">here</a> — together they track how AI parsing of this material improves over time.)</em></p>
-<p>This transcription was produced by Claude, using an iterative image-slicing approach to parse the handwriting. The hand-drawn diagrams, annotated equations, and coloured illustrations are preserved as images from the original — they are a key part of the explanation and lose their character if converted to plain text. The surrounding narrative text and R code examples have been transcribed into readable markdown.</p>
-<p>Where colour was used in the original handwriting, this is noted. The colour scheme is: <strong>black</strong> for main text, <strong>green</strong> for detailed discussion and answers, <strong>blue</strong> for diagram labels, <strong>red</strong> for diagram elements and emphasis, <strong>orange</strong> for highlighted equation components, and <strong>purple/pink</strong> for specific highlighted terms.</p>
+<p>This post is an AI transcription of <a href="../../../posts/handdrawn-stats/repeated-measures/index.html">the original handwritten notes on repeated measures</a>, written on a reMarkable tablet as a single ultra-long page (over 73,000 pixels tall). It is the <strong>second</strong> transcription attempt of the same source: the first, by Claude Opus 4.6 in February 2026, is <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed/index.html">here</a>, and remains unchanged as a record of what that model could do at that time.</p>
+<p>That’s the point of keeping these as separate, dated posts rather than correcting earlier attempts in place: the same fixed source document, revisited by successive models, becomes a small longitudinal benchmark for how AI parsing of dense handwritten technical material — mixed prose, equations, diagrams, code, and colour — improves over time.</p>
+<p>This attempt (by Claude Fable 5, July 2026) re-sliced the source scan into 27 overlapping native-resolution segments and read every section against the pixels. The hand-drawn diagrams, annotated equations, and coloured illustrations are preserved as images from the original — they are a key part of the explanation and lose their character if converted to plain text. The surrounding narrative text and R code examples are transcribed into readable markdown.</p>
+<p>Where the original handwriting is in colour, this transcription now renders the text in colour too: <span style="color: #2e8b57;">green passages</span> mark Jon’s detailed discussion and answers, as in the source. The remaining colours — blue for diagram labels, red for diagram elements and emphasis, orange and purple for highlighted equation components — occur within the preserved images, where they appear exactly as drawn.</p>
 <hr>
 </section>
 <section id="repeated-measures" class="level2">
@@ -462,7 +462,7 @@ window.Quarto = {
 <p>However, our budget is finite, and can only stretch to tens, not hundreds or thousands, of subjects in each arm.</p>
 <p>And, all subjects have a weight at the start, before we treat them with Sup A or Sup B.</p>
 <p>Obviously, the subjects’ starting weight can’t be attributed to Sup A or Sup B. It’s what they came with. So any claims about the weight adding effects of the supplements can only be based on how the weights of subjects changes over the course of the study.</p>
-<p>One good thing about the study, however, is that each subject’s weight is measured multiple times over the course of the study, not just the first and end.</p>
+<p>One good thing about the study, however, is that each subject’s weight is measured multiple times over the course of the study, not just the start and end.</p>
 </section>
 <section id="understanding-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-data">Understanding the Data</h3>
@@ -484,44 +484,48 @@ window.Quarto = {
 <p>Let’s try to understand this data by asking ourselves a series of questions:</p>
 <section id="what-is-our-observational-unit" class="level4">
 <h4 class="anchored" data-anchor-id="what-is-our-observational-unit">1) What is our observational unit?</h4>
-<p><em>[Green text in original]</em></p>
-<p>Each row is an observation. Each row shows the characteristics of a given subject at a given point in time. So our observational unit is: Subject-Time.</p>
-<p>More abstractly, we can say each row is about a time × person.</p>
+<div style="color: #2e8b57;">
+<p>Each row is an observation. Each row shows the characteristics of a subject on a given date, so our observational unit is: Subject-Dates.</p>
+<p>More abstractly, we can say each unit is a time-person.</p>
+</div>
 </section>
 <section id="what-is-our-treatment-variable-t" class="level4">
 <h4 class="anchored" data-anchor-id="what-is-our-treatment-variable-t">2) What is our treatment variable, T?</h4>
-<p><em>[Green text in original]</em></p>
-<p>This is the variable for Arm. Something like:</p>
+<div style="color: #2e8b57;">
+<p>This is the variable Arm, which is either:</p>
 <ul>
-<li>A = Sup A</li>
-<li>B = Sup B</li>
+<li>A – Supp A</li>
+<li>B – Supp B</li>
 </ul>
-<p>(So, we’ll need some way of comparing changes in response for people in Arm B compared with Arm A)</p>
+<p>(So, we’ll want some way of comparing changes in response for people in Arm B compared with Arm A)</p>
+</div>
 </section>
 <section id="what-is-our-response-variable-y" class="level4">
 <h4 class="anchored" data-anchor-id="what-is-our-response-variable-y">3) What is our response variable (Y)?</h4>
-<p><em>[Green text in original]</em></p>
+<div style="color: #2e8b57;">
 <p>This definitely <em>involves</em> the weight column, but it might not <em>just</em> be the weight column.</p>
 <p>Firstly, we know it needs to involve <em>change</em> in weight, because each subject had some weight at the start, that we know can’t be caused by the supplement, which they only started taking at the start of the trial.</p>
 <p>Secondly, we might want to account for the <em>height</em> as part of outcome/response, as someone who’s taller can probably change weight more easily than someone who’s shorter. (Something to ponder…)</p>
+</div>
 </section>
 <section id="what-are-our-control-variables-x" class="level4">
 <h4 class="anchored" data-anchor-id="what-are-our-control-variables-x">4) What are our control variables (X)?</h4>
-<p><em>[Green text in original]</em></p>
-<p>If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider age as a control variable.</p>
+<div style="color: #2e8b57;">
+<p>If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider sex as a control variable.</p>
 <p>We might also wish to consider starting weight as a control variable, as well as maybe height.</p>
-<p>However, given our discussion about the response variable above, we might not want to simply use height in its standard way, and instead use it as part of our derivation of the response instead.</p>
+<p>However, given our discussion about the response variable above, we might not want to plug height in as a control in the standard way, and instead use it as part of our derivation of the response instead.</p>
 <p>There are also nonstandard approaches to consider for controlling for starting weight too, which come about from pondering the next question.</p>
+</div>
 </section>
 <section id="are-our-observations-independent" class="level4">
 <h4 class="anchored" data-anchor-id="are-our-observations-independent">5) Are our observations independent?</h4>
-<p><em>[Green text in original]</em></p>
+<div style="color: #2e8b57;">
 <p>This question might sound like it’s coming out of left field, but it’s really central to how we can think about and approach modelling this kind of data.</p>
-<p>Independent (&amp; identically distributed) are two standard assumptions made when deriving most statistics models. If our data aren’t independent then the assumptions aren’t correct, and so neither will what our model estimates be.</p>
+<p>Independent (&amp; identically distributed) are two standard assumptions made when deriving most stats models. If our data aren’t independent then the assumptions aren’t correct, and so neither will what our model estimates be.</p>
 <p>In the case of our data, we know our data aren’t independent in one very obvious and important way.</p>
 <p>They’re nested.</p>
 <p>Specifically, our observations (each row in the dataset) are time-persons. And we know each time-person is ‘nested within’ a grouping variable called a person (or subject).</p>
-<p>Graphically we can represent this grouping as follows:</p>
+<p>Graphically we can represent this grouping as follows for the rows shown in the dataset above:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_03_nesting_diagram.png" class="img-fluid figure-img"></p>
@@ -529,6 +533,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>Our awareness of this grouping relationship will be critical both for how we continue to visualise the data, and for how we model the data.</p>
+</div>
 </section>
 </section>
 <section id="visualising-the-data" class="level3">
@@ -600,20 +605,24 @@ window.Quarto = {
 <figcaption>M4, coefficient splitting, and M5 — allowing different slopes by supplement arm</figcaption>
 </figure>
 </div>
-<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ need never be applied to just the intercept (<span class="math inline">\(\alpha\)</span>); it can also be applied to the slope coefficient <span class="math inline">\(\beta\)</span>.</p>
+<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ that we’ve applied to the intercept parameter <span class="math inline">\(\alpha\)</span> can also (or instead) be applied to the slope coefficient <span class="math inline">\(\beta\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_10_m5_green_box.png" class="img-fluid figure-img"></p>
-<figcaption>Condensed M5 specification and R code</figcaption>
+<figcaption>Slopes for arms A and B by sign of <span class="math inline">\(\beta_B\)</span>, and a note on nested models and the F-test</figcaption>
 </figure>
 </div>
-<p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. It doesn’t have different groups, or different initial weights.</p>
-<p>How do we try to account for this? Perhaps we shouldn’t be thinking about one model, but</p>
+<p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. <span style="color: #2e8b57;">(&amp; subjects have different initial weights)</span></p>
+<p>How do we try to account for this too?</p>
+</section>
+<section id="an-interesting-detour" class="level3">
+<h3 class="anchored" data-anchor-id="an-interesting-detour">An ‘Interesting’ Detour</h3>
+<p>Maybe we shouldn’t be thinking about one model, but</p>
 </section>
 </section>
 <section id="many-models" class="level2">
 <h2 class="anchored" data-anchor-id="many-models">MANY Models ??!</h2>
-<p>If we arrange the data into many panels, one for each subject, we can do a simple regression for each subject series!</p>
+<p>If we arrange the data into many facets, one for each subject, we can do a simple regression for each subject series?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_11_many_models_panels.png" class="img-fluid figure-img"></p>
@@ -629,10 +638,10 @@ window.Quarto = {
 </figure>
 </div>
 <p>We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.</p>
-<p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n=2 ‘study’), this is actually not a particularly good approach for all kinds of reasons. I’ve merely just mentioned it to be helpful with the intuition some more.</p>
+<p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n-of-1 ‘study’) it’s not something I’ve seen before, and it’s almost certainly not a particularly good approach for all kinds of reasons. I’ve mainly just mentioned it to help with the intuition some more…</p>
 <section id="back-on-track" class="level3">
 <h3 class="anchored" data-anchor-id="back-on-track">Back on Track</h3>
-<p>So, if meta-analysis isn’t actually good for this kind of problem, what is?</p>
+<p>So if meta-analysis isn’t actually used for this kind of problem, what is?</p>
 <p>It’s something between <strong>One</strong> Model AND <strong>MANY</strong> Models.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -645,7 +654,13 @@ window.Quarto = {
 <section id="how-does-it-work" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h3>
 <p>Well, we need to tell the model about the way the data are grouped.</p>
-<p>Let’s go back to the fundamentals… A (generalised) linear model has a stochastic component and a systematic component. In a previous post I compared the systematic component <span class="math inline">\(g(.)\)</span> to a TRANSFORMER and the stochastic component <span class="math inline">\(f(.)\)</span> to a NOISEMAKER:</p>
+<p>Let’s go back to the fundamentals… A (generalised) linear model is:</p>
+<p><span class="math display">\[Y_i \sim f(\theta_i, \alpha) \qquad \text{← Stochastic Component}\]</span></p>
+<p><span class="math display">\[\theta = g(X_i, \beta) \qquad \text{← Systematic Component}\]</span></p>
+<div style="color: #2e8b57;">
+<p><strong>Note:</strong> This is a very generalised &amp; abstracted notation. The <span class="math inline">\(\alpha\)</span> &amp; <span class="math inline">\(\beta\)</span> here mean something different to the <span class="math inline">\(\alpha\)</span> &amp; <span class="math inline">\(\beta\)</span> used elsewhere in this post.</p>
+</div>
+<p>This is what I’ve called before the Grandmother Model, a general framework for thinking about what statistical models contain. In a previous post I referred to <span class="math inline">\(g(.)\)</span> as a TRANSFORMER, and <span class="math inline">\(f(.)\)</span> as a NOISEMAKER, and drew them as follows:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_14_transformer_noisemaker.png" class="img-fluid figure-img"></p>
@@ -658,7 +673,7 @@ window.Quarto = {
 <figcaption>Fixed Effects vs Random Effects — which component do we ‘tell’?</figcaption>
 </figure>
 </div>
-<p>And both of those layers of model can be referred to as either <strong>Mixed Effect</strong> or <strong>Multi-level Model</strong>.</p>
+<p>And both of these types of model can be referred to as either <strong>Mixed Effects Models</strong> or <strong>Multi-level Models</strong>.</p>
 <p>If you’ve ever encountered these terms and haven’t been sure what they mean, then hopefully this clarifies a few things.</p>
 <p>Let’s now think through how we could ‘tell’ our model about group-level membership of observations, first through the transformer, <span class="math inline">\(g(.)\)</span>, leading to a fixed effects model specification, then through the noisemaker, <span class="math inline">\(f(.)\)</span>, leading to a random effects model.</p>
 </section>
@@ -673,7 +688,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>This fixed effects modelling approach is less exotic than it might first appear. We’re just adding some more <span class="math inline">\(\beta\)</span> coefficients to the transformer part of the model <span class="math inline">\(g(.)\)</span> to be determined through the usual approaches (maximum likelihood, optimisation and so on).</p>
-<p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope differences, by-arm part of the model).</p>
+<p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope-difference-by-arm part of the model).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_17_barbed_aside.png" class="img-fluid figure-img"></p>
@@ -692,7 +707,7 @@ window.Quarto = {
 <figcaption>RE equation decomposition — splitting the error term</figcaption>
 </figure>
 </div>
-<p>Overall variation = group-level variation (<span class="math inline">\(\tau\)</span>) + residual/remaining variation (<span class="math inline">\(\epsilon\)</span>)</p>
+<p>Overall variation (<span class="math inline">\(\epsilon\)</span>) = group-level variation (<span class="math inline">\(\tau\)</span>) + residual/remaining variation (<span class="math inline">\(e\)</span>)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_19_re_fe_comparison_diagrams.png" class="img-fluid figure-img"></p>
@@ -714,46 +729,45 @@ window.Quarto = {
 <p>Which will be our final model specification.</p>
 </section>
 <section id="testing-and-interpreting-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="testing-and-interpreting-the-model">Testing and interpreting the model</h3>
-<p>One easy test we can perform is by comparing the above specification, including a coefficient that flags arm <span class="math inline">\(\beta_{Bs}\)</span>, with a restricted model that omits this term. We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform Likelihood Ratio Tests, looking for statistically significant p-values.</p>
-<p>Arguably, the t-value on the coefficient <span class="math inline">\(\beta_{Bs}\)</span> for testing should also be equivalent (so it might be easier to just look at that instead). But remember: evidence of there being two different slopes between groups is a good reason to understand/explore what these differences in slope between groups really mean.</p>
-<p>In R, there are a number of packages for fitting this kind of model:</p>
+<h3 class="anchored" data-anchor-id="testing-and-interpreting-the-model">‘Testing’ and interpreting the model</h3>
+<p>One easy test we can perform is by comparing the above specification, including a coefficient that flags arm B, with a restricted model that omits this term:</p>
+<p><span class="math display">\[M_{Full}: \quad Y_{ij} = \beta_0 + \tau + (\bar{\beta_1} + \beta_{1B})t + e\]</span></p>
+<p><span class="math display">\[M_{Rest}: \quad Y_{ij} = \beta_0 + \tau + \beta_1 t + e\]</span></p>
+<p>We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform an F-test, looking for a statistically significant p-value.</p>
+<p>If this fails, we can still make use of measures like AIC or BIC, where by convention we ‘prefer’ the model with the lowest score.</p>
+<p>Implicitly, the t-value on the coefficient <span class="math inline">\(\beta_{1B}\)</span> tests for something akin to this model comparison. If the p-value associated with the t test on this coefficient is below 0.05 that’s reasonable evidence of there being a real difference in slope between arms.</p>
+<p>In R, there are a number of packages and functions that can run the above model. As an example, using the <code>lmer</code> function in the <code>lme4</code> package we could write something like:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_21_lmer_code.png" class="img-fluid figure-img"></p>
 <figcaption>R lme4 code with highlighted components</figcaption>
 </figure>
 </div>
-<p>Using the <code>summary</code> function, both the fixed effects and random components will be returned.</p>
+<p>Our main coefficient of interest is the term highlighted purple, and our random intercepts component is highlighted orange.</p>
+<p>Using the <code>summary()</code> function, summaries of both the fixed effects and random effects components will be returned.</p>
 </section>
 <section id="discussion" class="level3">
 <h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
-<p>In this long excursion through grouped data analysis, we’ve focused on a very fictitious and unrealistic example: how to best make <em>people</em> fat.</p>
+<p>In this long excursion through grouped data analysis, we’ve focused on a very fictitious and unrealistic example: how best to make <em>people</em> fat.</p>
 <p>However, if we change the species and context even this example is probably useful in practice. Imagine we work in farming, for example, and have bought a lot of baby chickens or cows, and want to decide on a type of feed to help them ‘grow’ the fastest.</p>
 <p>Often the animals (‘livestock’) will be quite homogeneous, from the same genetic stock and often even of the same sex. This kind of modelling approach would probably work for figuring out what type of feed to use in a way that’s both fairly robust and fairly cheap. (Though as a vegetarian, I’d rather have come up with a different real world application of this kind of model!)</p>
-<p>Even if this specific model specification isn’t useful for you, hopefully the broader process and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
+<p>Even if this specific model specification isn’t useful for you, hopefully the broader processes and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
 <hr>
 </section>
 <section id="claudes-reflection-on-this-transcription" class="level3">
 <h3 class="anchored" data-anchor-id="claudes-reflection-on-this-transcription">Claude’s reflection on this transcription</h3>
-<p><em>This section is written by Claude (Opus 4.6), reflecting on the process and quality of this transcription.</em></p>
-<p>Jon rates this transcription as roughly 60-70% successful, which I think is fair. It was an interesting experiment that revealed both possibilities and clear limitations.</p>
-<p><strong>What worked reasonably well:</strong></p>
+<p><em>This section is written by Claude (Fable 5), reflecting on this second transcription attempt and on what changed since the first.</em></p>
+<p>The February 2026 attempt by Opus 4.6 ended its reflection by proposing exactly this experiment: revisit the same source image with a newer model and see how the accuracy changes. Five months later, the answer is: substantially.</p>
+<p><strong>Method.</strong> The 73,475-pixel scan was sliced into 27 overlapping segments at native resolution (1620×3000), and every segment was read against the earlier transcription. Where the earlier attempt had to reconstruct passages from partially legible pixels, this pass could verify them word-by-word.</p>
+<p><strong>What changed.</strong> Around twenty errors in the first transcription were identified and are corrected here. They fall into recognisable failure modes:</p>
 <ul>
-<li>The iterative “shingling” approach — slicing the 73,000-pixel image into overlapping segments, borrowing the concept from R’s <code>lattice</code> package — was effective for turning an otherwise impossibly large image into manageable chunks.</li>
-<li>The earlier, more narrative sections of the notes were transcribed with reasonable accuracy. Larger handwriting and standard prose are within my comfort zone.</li>
-<li>Identifying the overall structure, section boundaries, and colour usage was straightforward even at low resolution.</li>
+<li><strong>Plausible substitution</strong>: “consider <em>sex</em> as a control variable” had become “age” (the worked dataset has a Sex column and no Age column); “an <em>F-test</em>” had become “Likelihood Ratio Tests”; “a separate <em>n-of-1</em> ‘study’” had become “n=2”. Each substitute is the kind of thing a statistician plausibly <em>would</em> write — which is what makes this failure mode dangerous.</li>
+<li><strong>Silent omission</strong>: the AIC/BIC fallback sentence, the <span class="math inline">\(M_{Full}\)</span>/<span class="math inline">\(M_{Rest}\)</span> nested-model equations, the “An ‘Interesting’ Detour” heading, and the Grandmother Model passage with its general <span class="math inline">\(Y_i \sim f(\theta_i, \alpha)\)</span>, <span class="math inline">\(\theta = g(X_i, \beta)\)</span> notation were all simply absent.</li>
+<li><strong>Invention</strong>: the closing sentence of the testing section did not exist in the source. (The first attempt’s reflection candidly reported a larger hallucination it had already caught — a fabricated paragraph about Satterthwaite approximations — so this smaller residual invention fits the pattern it described.)</li>
+<li><strong>Word-level drift</strong>: “Subject-Dates” → “Subject-Time”, “facets” → “panels”, “used” → “good”, swapped symbols in the variance decomposition, and similar.</li>
 </ul>
-<p><strong>What didn’t work well:</strong></p>
-<ul>
-<li>I hallucinated content towards the end of the document, fabricating an entire paragraph about Satterthwaite’s approximation and Kenward-Roger adjustments that appeared nowhere in the original notes. This is a serious failure mode — confidently generating plausible-sounding technical content that the author never wrote. The final slice was the tallest (5,748px), pushing the limits of readable resolution, and rather than flagging uncertainty I filled in gaps with invention.</li>
-<li>Several phrases were misread: “a mildly barbed aside” became “entity model aside”; “height as part of outcome/response” became “home/regime”; “need never” became “can never”. These aren’t catastrophic individually, but they accumulate.</li>
-<li>Dense handwriting, especially where equations, annotations, and colour overlap, remained challenging. Many of the annotated equations had to be preserved as images rather than transcribed, which is the right call but also an honest acknowledgement of the limitation.</li>
-</ul>
-<p><strong>The broader point:</strong></p>
-<p>Claude models are currently less multimodal than some alternatives when it comes to this kind of image parsing task. Google’s Gemini models, with their heritage in OCR (Google Lens, Cloud Vision) and their ability to ingest very high-resolution images natively, likely have a comparative advantage for raw handwriting extraction. The bottleneck here wasn’t reasoning about the content — it was reliably reading the pixels.</p>
-<p>This remains a genuinely hard problem. Handwriting recognition on structured technical content (mixing prose, equations, diagrams, code, and colour) is at the frontier of what current multimodal models can do. The shingling workaround helped, but it’s a workaround — not a solution to the underlying resolution and parsing constraints.</p>
-<p>If nothing else, this experiment provides a useful baseline. As multimodal capabilities improve, it would be interesting to revisit this same source image and see how the accuracy changes.</p>
+<p><strong>What stayed the same.</strong> The hand-drawn diagrams, coloured annotated equations, and sketches remain preserved as native-resolution crops — that design decision from the first attempt has aged well, and this post reuses those crops unchanged. What’s new on the colour front is that green passages of prose are now rendered as green text rather than flagged with bracketed notes, so the visual structure of the original — black questions, green worked answers — carries into the transcription.</p>
+<p><strong>The benchmark point.</strong> This post and <a href="../../../posts/handdrawn-stats/repeated-measures-transcribed/index.html">its predecessor</a> now form a two-point series against a fixed, unchanging source document. The first attempt rated itself 60–70% successful, and identified raw pixel-reading — not reasoning — as its bottleneck. This attempt found the same source fully legible at the same slice resolutions, including the final section that pushed the earlier model past its limits. If a future model repeats the exercise, the interesting question will no longer be <em>can it read the handwriting</em> but whether it catches anything this pass missed — errors of the kind that are invisible until a better reader finds them.</p>
 
 
 </section>
