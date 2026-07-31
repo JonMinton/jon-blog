@@ -36,7 +36,7 @@ And, all subjects have a weight at the start, before we treat them with Sup A or
 
 Obviously, the subjects' starting weight can't be attributed to Sup A or Sup B. It's what they came with. So any claims about the weight adding effects of the supplements can only be based on how the weights of subjects changes over the course of the study.
 
-One good thing about the study, however, is that each subject's weight is measured multiple times over the course of the study, not just the first and end.
+One good thing about the study, however, is that each subject's weight is measured multiple times over the course of the study, not just the start and end.
 
 ### Understanding the Data
 
@@ -61,20 +61,20 @@ Let's try to understand this data by asking ourselves a series of questions:
 
 *[Green text in original]*
 
-Each row is an observation. Each row shows the characteristics of a given subject at a given point in time. So our observational unit is: Subject-Time.
+Each row is an observation. Each row shows the characteristics of a subject on a given date, so our observational unit is: Subject-Dates.
 
-More abstractly, we can say each row is about a time × person.
+More abstractly, we can say each unit is a time-person.
 
 #### 2) What is our treatment variable, T?
 
 *[Green text in original]*
 
-This is the variable for Arm. Something like:
+This is the variable Arm, which is either:
 
-- A = Sup A
-- B = Sup B
+- A – Supp A
+- B – Supp B
 
-(So, we'll need some way of comparing changes in response for people in Arm B compared with Arm A)
+(So, we'll want some way of comparing changes in response for people in Arm B compared with Arm A)
 
 #### 3) What is our response variable (Y)?
 
@@ -90,11 +90,11 @@ Secondly, we might want to account for the *height* as part of outcome/response,
 
 *[Green text in original]*
 
-If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider age as a control variable.
+If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider sex as a control variable.
 
 We might also wish to consider starting weight as a control variable, as well as maybe height.
 
-However, given our discussion about the response variable above, we might not want to simply use height in its standard way, and instead use it as part of our derivation of the response instead.
+However, given our discussion about the response variable above, we might not want to plug height in as a control in the standard way, and instead use it as part of our derivation of the response instead.
 
 There are also nonstandard approaches to consider for controlling for starting weight too, which come about from pondering the next question.
 
@@ -104,7 +104,7 @@ There are also nonstandard approaches to consider for controlling for starting w
 
 This question might sound like it's coming out of left field, but it's really central to how we can think about and approach modelling this kind of data.
 
-Independent (& identically distributed) are two standard assumptions made when deriving most statistics models. If our data aren't independent then the assumptions aren't correct, and so neither will what our model estimates be.
+Independent (& identically distributed) are two standard assumptions made when deriving most stats models. If our data aren't independent then the assumptions aren't correct, and so neither will what our model estimates be.
 
 In the case of our data, we know our data aren't independent in one very obvious and important way.
 
@@ -112,7 +112,7 @@ They're nested.
 
 Specifically, our observations (each row in the dataset) are time-persons. And we know each time-person is 'nested within' a grouping variable called a person (or subject).
 
-Graphically we can represent this grouping as follows:
+Graphically we can represent this grouping as follows for the rows shown in the dataset above:
 
 ![Nesting diagram — subjects containing time-person observations](img_03_nesting_diagram.png)
 
@@ -181,17 +181,21 @@ Let's start with the second issue. One naive approach would be to include a coef
 
 ![M4, coefficient splitting, and M5 — allowing different slopes by supplement arm](img_09_m4_m5_splitting.png)
 
-The clue to the solution is to realise this same kind of coefficient 'splitting' need never be applied to just the intercept ($\alpha$); it can also be applied to the slope coefficient $\beta$.
+The clue to the solution is to realise this same kind of coefficient 'splitting' that we've applied to the intercept parameter $\alpha$ can also (or instead) be applied to the slope coefficient $\beta$.
 
-![Condensed M5 specification and R code](img_10_m5_green_box.png)
+![Slopes for arms A and B by sign of $\beta_B$, and a note on nested models and the F-test](img_10_m5_green_box.png)
 
-This kind of model spec helps for comparing the slopes, but now we've neglected the fact of observations being grouped in subjects. It doesn't have different groups, or different initial weights.
+This kind of model spec helps for comparing the slopes, but now we've neglected the fact of observations being grouped in subjects. *[Green annotation in original: & subjects have different initial weights]*
 
-How do we try to account for this? Perhaps we shouldn't be thinking about one model, but
+How do we try to account for this too?
+
+### An 'Interesting' Detour
+
+Maybe we shouldn't be thinking about one model, but
 
 ## MANY Models ??!
 
-If we arrange the data into many panels, one for each subject, we can do a simple regression for each subject series!
+If we arrange the data into many facets, one for each subject, we can do a simple regression for each subject series?
 
 ![Individual regression panels for each subject](img_11_many_models_panels.png)
 
@@ -203,11 +207,11 @@ We could even represent our uncertainty in the coefficients visually, producing 
 
 We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.
 
-However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n=2 'study'), this is actually not a particularly good approach for all kinds of reasons. I've merely just mentioned it to be helpful with the intuition some more.
+However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n-of-1 'study') it's not something I've seen before, and it's almost certainly not a particularly good approach for all kinds of reasons. I've mainly just mentioned it to help with the intuition some more...
 
 ### Back on Track
 
-So, if meta-analysis isn't actually good for this kind of problem, what is?
+So if meta-analysis isn't actually used for this kind of problem, what is?
 
 It's something between **One** Model AND **MANY** Models.
 
@@ -219,13 +223,21 @@ It's called multi-level modelling because we have multi-level data.
 
 Well, we need to tell the model about the way the data are grouped.
 
-Let's go back to the fundamentals... A (generalised) linear model has a stochastic component and a systematic component. In a previous post I compared the systematic component $g(.)$ to a TRANSFORMER and the stochastic component $f(.)$ to a NOISEMAKER:
+Let's go back to the fundamentals... A (generalised) linear model is:
+
+$$Y_i \sim f(\theta_i, \alpha) \qquad \text{← Stochastic Component}$$
+
+$$\theta = g(X_i, \beta) \qquad \text{← Systematic Component}$$
+
+*[Green note in original: This is a very generalised & abstracted notation. The $\alpha$ & $\beta$ here mean something different to the $\alpha$ & $\beta$ used elsewhere in this post.]*
+
+This is what I've called before the Grandmother Model, a general framework for thinking about what statistical models contain. In a previous post I referred to $g(.)$ as a TRANSFORMER, and $f(.)$ as a NOISEMAKER, and drew them as follows:
 
 ![The Transformer and Noisemaker framework, with Fixed Effects vs Random Effects table](img_14_transformer_noisemaker.png)
 
 ![Fixed Effects vs Random Effects — which component do we 'tell'?](img_15_fe_re_table.png)
 
-And both of those layers of model can be referred to as either **Mixed Effect** or **Multi-level Model**.
+And both of these types of model can be referred to as either **Mixed Effects Models** or **Multi-level Models**.
 
 If you've ever encountered these terms and haven't been sure what they mean, then hopefully this clarifies a few things.
 
@@ -241,7 +253,7 @@ In doing this, we're expanding the intercept part of our model, potentially a lo
 
 This fixed effects modelling approach is less exotic than it might first appear. We're just adding some more $\beta$ coefficients to the transformer part of the model $g(.)$ to be determined through the usual approaches (maximum likelihood, optimisation and so on).
 
-However, with this approach we're potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and 'gluttonous', munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope differences, by-arm part of the model).
+However, with this approach we're potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and 'gluttonous', munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope-difference-by-arm part of the model).
 
 ![A mildly barbed aside](img_17_barbed_aside.png)
 
@@ -255,7 +267,7 @@ So, in RE, the 'action' is in the bit of the specification highlighted orange at
 
 ![RE equation decomposition — splitting the error term](img_18_re_equation_decomposition.png)
 
-Overall variation = group-level variation ($\tau$) + residual/remaining variation ($\epsilon$)
+Overall variation ($\epsilon$) = group-level variation ($\tau$) + residual/remaining variation ($e$)
 
 ![Comparing FE flags vs RE normal distribution for representing group variation](img_19_re_fe_comparison_diagrams.png)
 
@@ -271,27 +283,37 @@ We're now used to the idea of splitting out the components of a regression model
 
 Which will be our final model specification.
 
-### Testing and interpreting the model
+### 'Testing' and interpreting the model
 
-One easy test we can perform is by comparing the above specification, including a coefficient that flags arm $\beta_{Bs}$, with a restricted model that omits this term. We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform Likelihood Ratio Tests, looking for statistically significant p-values.
+One easy test we can perform is by comparing the above specification, including a coefficient that flags arm B, with a restricted model that omits this term:
 
-Arguably, the t-value on the coefficient $\beta_{Bs}$ for testing should also be equivalent (so it might be easier to just look at that instead). But remember: evidence of there being two different slopes between groups is a good reason to understand/explore what these differences in slope between groups really mean.
+$$M_{Full}: \quad Y_{ij} = \beta_0 + \tau + (\bar{\beta_1} + \beta_{1B})t + e$$
 
-In R, there are a number of packages for fitting this kind of model:
+$$M_{Rest}: \quad Y_{ij} = \beta_0 + \tau + \beta_1 t + e$$
+
+We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform an F-test, looking for a statistically significant p-value.
+
+If this fails, we can still make use of measures like AIC or BIC, where by convention we 'prefer' the model with the lowest score.
+
+Implicitly, the t-value on the coefficient $\beta_{1B}$ tests for something akin to this model comparison. If the p-value associated with the t test on this coefficient is below 0.05 that's reasonable evidence of there being a real difference in slope between arms.
+
+In R, there are a number of packages and functions that can run the above model. As an example, using the `lmer` function in the `lme4` package we could write something like:
 
 ![R lme4 code with highlighted components](img_21_lmer_code.png)
 
-Using the `summary` function, both the fixed effects and random components will be returned.
+Our main coefficient of interest is the term highlighted purple, and our random intercepts component is highlighted orange.
+
+Using the `summary()` function, summaries of both the fixed effects and random effects components will be returned.
 
 ### Discussion
 
-In this long excursion through grouped data analysis, we've focused on a very fictitious and unrealistic example: how to best make *people* fat.
+In this long excursion through grouped data analysis, we've focused on a very fictitious and unrealistic example: how best to make *people* fat.
 
 However, if we change the species and context even this example is probably useful in practice. Imagine we work in farming, for example, and have bought a lot of baby chickens or cows, and want to decide on a type of feed to help them 'grow' the fastest.
 
 Often the animals ('livestock') will be quite homogeneous, from the same genetic stock and often even of the same sex. This kind of modelling approach would probably work for figuring out what type of feed to use in a way that's both fairly robust and fairly cheap. (Though as a vegetarian, I'd rather have come up with a different real world application of this kind of model!)
 
-Even if this specific model specification isn't useful for you, hopefully the broader process and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to 'operationalise' other data analysis challenges too!
+Even if this specific model specification isn't useful for you, hopefully the broader processes and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to 'operationalise' other data analysis challenges too!
 
 ---
 
@@ -320,3 +342,19 @@ Claude models are currently less multimodal than some alternatives when it comes
 This remains a genuinely hard problem. Handwriting recognition on structured technical content (mixing prose, equations, diagrams, code, and colour) is at the frontier of what current multimodal models can do. The shingling workaround helped, but it's a workaround — not a solution to the underlying resolution and parsing constraints.
 
 If nothing else, this experiment provides a useful baseline. As multimodal capabilities improve, it would be interesting to revisit this same source image and see how the accuracy changes.
+
+### Addendum: verification pass, July 2026
+
+*This section is written by Claude (Fable 5), which revisited the source image five months after the original transcription — exactly the experiment the reflection above proposed.*
+
+The original 73,000-pixel scan was re-sliced into 27 overlapping native-resolution segments and every segment read against this page. The handwriting that was at the edge of legibility in February 2026 — including the final section where the original attempt hallucinated content — now reads reliably, and the full pass surfaced and corrected around twenty transcription errors. Representative examples:
+
+- "consider **sex** as a control variable" had become "age" (the dataset has a Sex column and no Age column);
+- "we can perform an **F-test**" had become "Likelihood Ratio Tests", and the following sentence about falling back to AIC/BIC was missing entirely;
+- the $M_{Full}$ / $M_{Rest}$ nested-model equations had been dropped;
+- "a separate **n-of-1** 'study'" had become "n=2", and the clause "it's not something I've seen before" was missing;
+- the closing sentence of the testing section was an invention not present in the original, now replaced with what the notes actually say;
+- the heading "An 'Interesting' Detour" and the Grandmother Model passage (with the general $Y_i \sim f(\theta_i, \alpha)$, $\theta = g(X_i, \beta)$ notation and its green caveat note) were restored;
+- several smaller word-level drifts ("Subject-Dates" → "Subject-Time", "facets" → "panels", "used" → "good", swapped symbols in the variance decomposition) were corrected.
+
+The hand-drawn diagrams, coloured annotated equations, and sketches remain preserved as native-resolution crops of the original — that decision has aged well. What changed is that the surrounding prose can now be verified word-by-word against the pixels rather than reconstructed from them.
