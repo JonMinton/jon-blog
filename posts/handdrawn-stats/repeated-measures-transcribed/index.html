@@ -461,7 +461,7 @@ window.Quarto = {
 <p>However, our budget is finite, and can only stretch to tens, not hundreds or thousands, of subjects in each arm.</p>
 <p>And, all subjects have a weight at the start, before we treat them with Sup A or Sup B.</p>
 <p>Obviously, the subjects’ starting weight can’t be attributed to Sup A or Sup B. It’s what they came with. So any claims about the weight adding effects of the supplements can only be based on how the weights of subjects changes over the course of the study.</p>
-<p>One good thing about the study, however, is that each subject’s weight is measured multiple times over the course of the study, not just the first and end.</p>
+<p>One good thing about the study, however, is that each subject’s weight is measured multiple times over the course of the study, not just the start and end.</p>
 </section>
 <section id="understanding-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-data">Understanding the Data</h3>
@@ -484,18 +484,18 @@ window.Quarto = {
 <section id="what-is-our-observational-unit" class="level4">
 <h4 class="anchored" data-anchor-id="what-is-our-observational-unit">1) What is our observational unit?</h4>
 <p><em>[Green text in original]</em></p>
-<p>Each row is an observation. Each row shows the characteristics of a given subject at a given point in time. So our observational unit is: Subject-Time.</p>
-<p>More abstractly, we can say each row is about a time × person.</p>
+<p>Each row is an observation. Each row shows the characteristics of a subject on a given date, so our observational unit is: Subject-Dates.</p>
+<p>More abstractly, we can say each unit is a time-person.</p>
 </section>
 <section id="what-is-our-treatment-variable-t" class="level4">
 <h4 class="anchored" data-anchor-id="what-is-our-treatment-variable-t">2) What is our treatment variable, T?</h4>
 <p><em>[Green text in original]</em></p>
-<p>This is the variable for Arm. Something like:</p>
+<p>This is the variable Arm, which is either:</p>
 <ul>
-<li>A = Sup A</li>
-<li>B = Sup B</li>
+<li>A – Supp A</li>
+<li>B – Supp B</li>
 </ul>
-<p>(So, we’ll need some way of comparing changes in response for people in Arm B compared with Arm A)</p>
+<p>(So, we’ll want some way of comparing changes in response for people in Arm B compared with Arm A)</p>
 </section>
 <section id="what-is-our-response-variable-y" class="level4">
 <h4 class="anchored" data-anchor-id="what-is-our-response-variable-y">3) What is our response variable (Y)?</h4>
@@ -507,20 +507,20 @@ window.Quarto = {
 <section id="what-are-our-control-variables-x" class="level4">
 <h4 class="anchored" data-anchor-id="what-are-our-control-variables-x">4) What are our control variables (X)?</h4>
 <p><em>[Green text in original]</em></p>
-<p>If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider age as a control variable.</p>
+<p>If we have a big enough sample then we might not need control variables. But with our small dataset we should definitely consider sex as a control variable.</p>
 <p>We might also wish to consider starting weight as a control variable, as well as maybe height.</p>
-<p>However, given our discussion about the response variable above, we might not want to simply use height in its standard way, and instead use it as part of our derivation of the response instead.</p>
+<p>However, given our discussion about the response variable above, we might not want to plug height in as a control in the standard way, and instead use it as part of our derivation of the response instead.</p>
 <p>There are also nonstandard approaches to consider for controlling for starting weight too, which come about from pondering the next question.</p>
 </section>
 <section id="are-our-observations-independent" class="level4">
 <h4 class="anchored" data-anchor-id="are-our-observations-independent">5) Are our observations independent?</h4>
 <p><em>[Green text in original]</em></p>
 <p>This question might sound like it’s coming out of left field, but it’s really central to how we can think about and approach modelling this kind of data.</p>
-<p>Independent (&amp; identically distributed) are two standard assumptions made when deriving most statistics models. If our data aren’t independent then the assumptions aren’t correct, and so neither will what our model estimates be.</p>
+<p>Independent (&amp; identically distributed) are two standard assumptions made when deriving most stats models. If our data aren’t independent then the assumptions aren’t correct, and so neither will what our model estimates be.</p>
 <p>In the case of our data, we know our data aren’t independent in one very obvious and important way.</p>
 <p>They’re nested.</p>
 <p>Specifically, our observations (each row in the dataset) are time-persons. And we know each time-person is ‘nested within’ a grouping variable called a person (or subject).</p>
-<p>Graphically we can represent this grouping as follows:</p>
+<p>Graphically we can represent this grouping as follows for the rows shown in the dataset above:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_03_nesting_diagram.png" class="img-fluid figure-img"></p>
@@ -599,20 +599,24 @@ window.Quarto = {
 <figcaption>M4, coefficient splitting, and M5 — allowing different slopes by supplement arm</figcaption>
 </figure>
 </div>
-<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ need never be applied to just the intercept (<span class="math inline">\(\alpha\)</span>); it can also be applied to the slope coefficient <span class="math inline">\(\beta\)</span>.</p>
+<p>The clue to the solution is to realise this same kind of coefficient ‘splitting’ that we’ve applied to the intercept parameter <span class="math inline">\(\alpha\)</span> can also (or instead) be applied to the slope coefficient <span class="math inline">\(\beta\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_10_m5_green_box.png" class="img-fluid figure-img"></p>
-<figcaption>Condensed M5 specification and R code</figcaption>
+<figcaption>Slopes for arms A and B by sign of <span class="math inline">\(\beta_B\)</span>, and a note on nested models and the F-test</figcaption>
 </figure>
 </div>
-<p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. It doesn’t have different groups, or different initial weights.</p>
-<p>How do we try to account for this? Perhaps we shouldn’t be thinking about one model, but</p>
+<p>This kind of model spec helps for comparing the slopes, but now we’ve neglected the fact of observations being grouped in subjects. <em>[Green annotation in original: &amp; subjects have different initial weights]</em></p>
+<p>How do we try to account for this too?</p>
+</section>
+<section id="an-interesting-detour" class="level3">
+<h3 class="anchored" data-anchor-id="an-interesting-detour">An ‘Interesting’ Detour</h3>
+<p>Maybe we shouldn’t be thinking about one model, but</p>
 </section>
 </section>
 <section id="many-models" class="level2">
 <h2 class="anchored" data-anchor-id="many-models">MANY Models ??!</h2>
-<p>If we arrange the data into many panels, one for each subject, we can do a simple regression for each subject series!</p>
+<p>If we arrange the data into many facets, one for each subject, we can do a simple regression for each subject series?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_11_many_models_panels.png" class="img-fluid figure-img"></p>
@@ -628,10 +632,10 @@ window.Quarto = {
 </figure>
 </div>
 <p>We could even use other techniques from meta analysis, like weighting points by the inverse of variance (meaning the wider the lines, the smaller the weight) to get a pooled estimate for each arm, and then try to compare the two pooled point estimates and their respective pooled uncertainty.</p>
-<p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n=2 ‘study’), this is actually not a particularly good approach for all kinds of reasons. I’ve merely just mentioned it to be helpful with the intuition some more.</p>
+<p>However, although this approach is maybe interesting to think about (not least as it effectively treats each subject as a separate n-of-1 ‘study’) it’s not something I’ve seen before, and it’s almost certainly not a particularly good approach for all kinds of reasons. I’ve mainly just mentioned it to help with the intuition some more…</p>
 <section id="back-on-track" class="level3">
 <h3 class="anchored" data-anchor-id="back-on-track">Back on Track</h3>
-<p>So, if meta-analysis isn’t actually good for this kind of problem, what is?</p>
+<p>So if meta-analysis isn’t actually used for this kind of problem, what is?</p>
 <p>It’s something between <strong>One</strong> Model AND <strong>MANY</strong> Models.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -644,7 +648,11 @@ window.Quarto = {
 <section id="how-does-it-work" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-it-work">How does it work?</h3>
 <p>Well, we need to tell the model about the way the data are grouped.</p>
-<p>Let’s go back to the fundamentals… A (generalised) linear model has a stochastic component and a systematic component. In a previous post I compared the systematic component <span class="math inline">\(g(.)\)</span> to a TRANSFORMER and the stochastic component <span class="math inline">\(f(.)\)</span> to a NOISEMAKER:</p>
+<p>Let’s go back to the fundamentals… A (generalised) linear model is:</p>
+<p><span class="math display">\[Y_i \sim f(\theta_i, \alpha) \qquad \text{← Stochastic Component}\]</span></p>
+<p><span class="math display">\[\theta = g(X_i, \beta) \qquad \text{← Systematic Component}\]</span></p>
+<p><em>[Green note in original: This is a very generalised &amp; abstracted notation. The <span class="math inline">\(\alpha\)</span> &amp; <span class="math inline">\(\beta\)</span> here mean something different to the <span class="math inline">\(\alpha\)</span> &amp; <span class="math inline">\(\beta\)</span> used elsewhere in this post.]</em></p>
+<p>This is what I’ve called before the Grandmother Model, a general framework for thinking about what statistical models contain. In a previous post I referred to <span class="math inline">\(g(.)\)</span> as a TRANSFORMER, and <span class="math inline">\(f(.)\)</span> as a NOISEMAKER, and drew them as follows:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_14_transformer_noisemaker.png" class="img-fluid figure-img"></p>
@@ -657,7 +665,7 @@ window.Quarto = {
 <figcaption>Fixed Effects vs Random Effects — which component do we ‘tell’?</figcaption>
 </figure>
 </div>
-<p>And both of those layers of model can be referred to as either <strong>Mixed Effect</strong> or <strong>Multi-level Model</strong>.</p>
+<p>And both of these types of model can be referred to as either <strong>Mixed Effects Models</strong> or <strong>Multi-level Models</strong>.</p>
 <p>If you’ve ever encountered these terms and haven’t been sure what they mean, then hopefully this clarifies a few things.</p>
 <p>Let’s now think through how we could ‘tell’ our model about group-level membership of observations, first through the transformer, <span class="math inline">\(g(.)\)</span>, leading to a fixed effects model specification, then through the noisemaker, <span class="math inline">\(f(.)\)</span>, leading to a random effects model.</p>
 </section>
@@ -672,7 +680,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>This fixed effects modelling approach is less exotic than it might first appear. We’re just adding some more <span class="math inline">\(\beta\)</span> coefficients to the transformer part of the model <span class="math inline">\(g(.)\)</span> to be determined through the usual approaches (maximum likelihood, optimisation and so on).</p>
-<p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope differences, by-arm part of the model).</p>
+<p>However, with this approach we’re potentially adding a lot of additional coefficients to our model, and if there are a lot of groups, each of which might only contain a handful of observations, this approach might be unnecessarily complicated and ‘gluttonous’, munching its way through our finite data budget in a very inefficient way that leaves little resource left to help improve the fit on the coefficients we actually care about (those on the slope and slope-difference-by-arm part of the model).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_17_barbed_aside.png" class="img-fluid figure-img"></p>
@@ -691,7 +699,7 @@ window.Quarto = {
 <figcaption>RE equation decomposition — splitting the error term</figcaption>
 </figure>
 </div>
-<p>Overall variation = group-level variation (<span class="math inline">\(\tau\)</span>) + residual/remaining variation (<span class="math inline">\(\epsilon\)</span>)</p>
+<p>Overall variation (<span class="math inline">\(\epsilon\)</span>) = group-level variation (<span class="math inline">\(\tau\)</span>) + residual/remaining variation (<span class="math inline">\(e\)</span>)</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_19_re_fe_comparison_diagrams.png" class="img-fluid figure-img"></p>
@@ -713,24 +721,29 @@ window.Quarto = {
 <p>Which will be our final model specification.</p>
 </section>
 <section id="testing-and-interpreting-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="testing-and-interpreting-the-model">Testing and interpreting the model</h3>
-<p>One easy test we can perform is by comparing the above specification, including a coefficient that flags arm <span class="math inline">\(\beta_{Bs}\)</span>, with a restricted model that omits this term. We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform Likelihood Ratio Tests, looking for statistically significant p-values.</p>
-<p>Arguably, the t-value on the coefficient <span class="math inline">\(\beta_{Bs}\)</span> for testing should also be equivalent (so it might be easier to just look at that instead). But remember: evidence of there being two different slopes between groups is a good reason to understand/explore what these differences in slope between groups really mean.</p>
-<p>In R, there are a number of packages for fitting this kind of model:</p>
+<h3 class="anchored" data-anchor-id="testing-and-interpreting-the-model">‘Testing’ and interpreting the model</h3>
+<p>One easy test we can perform is by comparing the above specification, including a coefficient that flags arm B, with a restricted model that omits this term:</p>
+<p><span class="math display">\[M_{Full}: \quad Y_{ij} = \beta_0 + \tau + (\bar{\beta_1} + \beta_{1B})t + e\]</span></p>
+<p><span class="math display">\[M_{Rest}: \quad Y_{ij} = \beta_0 + \tau + \beta_1 t + e\]</span></p>
+<p>We can compare the two models in a number of ways: if both are fit with Maximum Likelihood (ML) estimation, we can perform an F-test, looking for a statistically significant p-value.</p>
+<p>If this fails, we can still make use of measures like AIC or BIC, where by convention we ‘prefer’ the model with the lowest score.</p>
+<p>Implicitly, the t-value on the coefficient <span class="math inline">\(\beta_{1B}\)</span> tests for something akin to this model comparison. If the p-value associated with the t test on this coefficient is below 0.05 that’s reasonable evidence of there being a real difference in slope between arms.</p>
+<p>In R, there are a number of packages and functions that can run the above model. As an example, using the <code>lmer</code> function in the <code>lme4</code> package we could write something like:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img_21_lmer_code.png" class="img-fluid figure-img"></p>
 <figcaption>R lme4 code with highlighted components</figcaption>
 </figure>
 </div>
-<p>Using the <code>summary</code> function, both the fixed effects and random components will be returned.</p>
+<p>Our main coefficient of interest is the term highlighted purple, and our random intercepts component is highlighted orange.</p>
+<p>Using the <code>summary()</code> function, summaries of both the fixed effects and random effects components will be returned.</p>
 </section>
 <section id="discussion" class="level3">
 <h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
-<p>In this long excursion through grouped data analysis, we’ve focused on a very fictitious and unrealistic example: how to best make <em>people</em> fat.</p>
+<p>In this long excursion through grouped data analysis, we’ve focused on a very fictitious and unrealistic example: how best to make <em>people</em> fat.</p>
 <p>However, if we change the species and context even this example is probably useful in practice. Imagine we work in farming, for example, and have bought a lot of baby chickens or cows, and want to decide on a type of feed to help them ‘grow’ the fastest.</p>
 <p>Often the animals (‘livestock’) will be quite homogeneous, from the same genetic stock and often even of the same sex. This kind of modelling approach would probably work for figuring out what type of feed to use in a way that’s both fairly robust and fairly cheap. (Though as a vegetarian, I’d rather have come up with a different real world application of this kind of model!)</p>
-<p>Even if this specific model specification isn’t useful for you, hopefully the broader process and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
+<p>Even if this specific model specification isn’t useful for you, hopefully the broader processes and steps covered — thinking about the data, the questions we want to ask of it and so on — is helpful for trying to ‘operationalise’ other data analysis challenges too!</p>
 <hr>
 </section>
 <section id="claudes-reflection-on-this-transcription" class="level3">
@@ -753,6 +766,21 @@ window.Quarto = {
 <p>Claude models are currently less multimodal than some alternatives when it comes to this kind of image parsing task. Google’s Gemini models, with their heritage in OCR (Google Lens, Cloud Vision) and their ability to ingest very high-resolution images natively, likely have a comparative advantage for raw handwriting extraction. The bottleneck here wasn’t reasoning about the content — it was reliably reading the pixels.</p>
 <p>This remains a genuinely hard problem. Handwriting recognition on structured technical content (mixing prose, equations, diagrams, code, and colour) is at the frontier of what current multimodal models can do. The shingling workaround helped, but it’s a workaround — not a solution to the underlying resolution and parsing constraints.</p>
 <p>If nothing else, this experiment provides a useful baseline. As multimodal capabilities improve, it would be interesting to revisit this same source image and see how the accuracy changes.</p>
+</section>
+<section id="addendum-verification-pass-july-2026" class="level3">
+<h3 class="anchored" data-anchor-id="addendum-verification-pass-july-2026">Addendum: verification pass, July 2026</h3>
+<p><em>This section is written by Claude (Fable 5), which revisited the source image five months after the original transcription — exactly the experiment the reflection above proposed.</em></p>
+<p>The original 73,000-pixel scan was re-sliced into 27 overlapping native-resolution segments and every segment read against this page. The handwriting that was at the edge of legibility in February 2026 — including the final section where the original attempt hallucinated content — now reads reliably, and the full pass surfaced and corrected around twenty transcription errors. Representative examples:</p>
+<ul>
+<li>“consider <strong>sex</strong> as a control variable” had become “age” (the dataset has a Sex column and no Age column);</li>
+<li>“we can perform an <strong>F-test</strong>” had become “Likelihood Ratio Tests”, and the following sentence about falling back to AIC/BIC was missing entirely;</li>
+<li>the <span class="math inline">\(M_{Full}\)</span> / <span class="math inline">\(M_{Rest}\)</span> nested-model equations had been dropped;</li>
+<li>“a separate <strong>n-of-1</strong> ‘study’” had become “n=2”, and the clause “it’s not something I’ve seen before” was missing;</li>
+<li>the closing sentence of the testing section was an invention not present in the original, now replaced with what the notes actually say;</li>
+<li>the heading “An ‘Interesting’ Detour” and the Grandmother Model passage (with the general <span class="math inline">\(Y_i \sim f(\theta_i, \alpha)\)</span>, <span class="math inline">\(\theta = g(X_i, \beta)\)</span> notation and its green caveat note) were restored;</li>
+<li>several smaller word-level drifts (“Subject-Dates” → “Subject-Time”, “facets” → “panels”, “used” → “good”, swapped symbols in the variance decomposition) were corrected.</li>
+</ul>
+<p>The hand-drawn diagrams, coloured annotated equations, and sketches remain preserved as native-resolution crops of the original — that decision has aged well. What changed is that the surrounding prose can now be verified word-by-word against the pixels rather than reconstructed from them.</p>
 
 
 </section>
