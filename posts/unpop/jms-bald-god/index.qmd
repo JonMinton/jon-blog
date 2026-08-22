@@ -16,8 +16,8 @@ It was Babylon 5, a sci-fi show, created by J Michael Straczynski, set on a cyli
 In the title I described the show as 'Diplomatic Sci-Fi', as surfacing and resolving conflict between alien factions through skilled negotiation and compromise forms much of the narrative backbone of the show.
 
 ```{dot}
-//| label: fig-dyad-structure
-//| fig-cap: "The ambassador-aide structure of Babylon 5's four peer factions, as established in the early seasons. Horizontal ties among the principals carry the diplomacy; the vertical tie within each faction carries counsel and conscience. The human hosts substitute a command triad for the ambassador-aide dyad."
+//| label: fig-faction-hierarchies
+//| fig-cap: "The internal hierarchies of Babylon 5's four peer factions, as established in the early seasons. Each delegation pairs an ambassador with an aide; the human hosts instead field a command triad, with two subordinates at rough parity."
 graph b5_dyads {
   graph [newrank=true, splines=true, nodesep=0.45, ranksep=1.1,
          fontname="Helvetica", bgcolor="transparent"]
@@ -73,14 +73,5 @@ graph b5_dyads {
 
   { rank=same; sheridan; delenn; londo; gkar }
   { rank=same; ivanova; garibaldi; lennier; vir; natoth }
-
-  // diplomacy among the principals
-  edge [color="gray25", penwidth=1.2, constraint=false]
-  sheridan -- delenn
-  delenn -- londo
-  londo -- gkar
-  sheridan -- londo
-  delenn -- gkar
-  sheridan -- gkar
 }
 ```
