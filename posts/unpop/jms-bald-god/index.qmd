@@ -13,4 +13,74 @@ When it comes to the 1990s, there's much less doubt as to his favourite TV serie
 
 It was Babylon 5, a sci-fi show, created by J Michael Straczynski, set on a cylindrical spinning space station which functions as something like a cross between a model UN and a cosmopolitan city. 
 
-In the title I described the show as 'Diplomatic Sci-Fi', as surfacing and resolving conflict between alien factions through skilled negotiation and compromise forms much of the narrative backbone of the show. 
+In the title I described the show as 'Diplomatic Sci-Fi', as surfacing and resolving conflict between alien factions through skilled negotiation and compromise forms much of the narrative backbone of the show.
+
+```{dot}
+//| label: fig-dyad-structure
+//| fig-cap: "The ambassador-aide structure of Babylon 5's four peer factions, as established in the early seasons. Horizontal ties among the principals carry the diplomacy; the vertical tie within each faction carries counsel and conscience. The human hosts substitute a command triad for the ambassador-aide dyad."
+graph b5_dyads {
+  graph [newrank=true, splines=true, nodesep=0.45, ranksep=1.1,
+         fontname="Helvetica", bgcolor="transparent"]
+  node [shape=box, style="rounded,filled", fillcolor="white",
+        fontname="Helvetica", fontsize=11, color="gray35", margin="0.15,0.08"]
+  edge [color="gray45"]
+
+  subgraph cluster_humans {
+    label="Earth Alliance (hosts)"
+    fontsize=12
+    style="rounded,dashed"
+    color="#2a78d6"
+    bgcolor="#eaf2fc"
+    sheridan  [label="Sinclair / Sheridan\nCommander"]
+    ivanova   [label="Ivanova\nFirst Officer"]
+    garibaldi [label="Garibaldi\nSecurity Chief"]
+    sheridan -- ivanova
+    sheridan -- garibaldi
+  }
+
+  subgraph cluster_minbari {
+    label="Minbari Federation"
+    fontsize=12
+    style="rounded"
+    color="#eda100"
+    bgcolor="#fdf3dd"
+    delenn  [label="Delenn\nAmbassador"]
+    lennier [label="Lennier\nAide"]
+    delenn -- lennier
+  }
+
+  subgraph cluster_centauri {
+    label="Centauri Republic"
+    fontsize=12
+    style="rounded"
+    color="#eb6834"
+    bgcolor="#fdece5"
+    londo [label="Londo Mollari\nAmbassador"]
+    vir   [label="Vir Cotto\nAide"]
+    londo -- vir
+  }
+
+  subgraph cluster_narn {
+    label="Narn Regime"
+    fontsize=12
+    style="rounded"
+    color="#1baf7a"
+    bgcolor="#e4f6ee"
+    gkar   [label="G'Kar\nAmbassador"]
+    natoth [label="Na'Toth\nAide"]
+    gkar -- natoth
+  }
+
+  { rank=same; sheridan; delenn; londo; gkar }
+  { rank=same; ivanova; garibaldi; lennier; vir; natoth }
+
+  // diplomacy among the principals
+  edge [color="gray25", penwidth=1.2, constraint=false]
+  sheridan -- delenn
+  delenn -- londo
+  londo -- gkar
+  sheridan -- londo
+  delenn -- gkar
+  sheridan -- gkar
+}
+```
