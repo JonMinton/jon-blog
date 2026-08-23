@@ -10,7 +10,213 @@
 <atom:link href="https://blog.jonminton.net/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Wed, 05 Aug 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 21 Aug 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>JMS: Bald God of Diplomatic Space Operatic Sci-Fi</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://blog.jonminton.net/posts/unpop/jms-bald-god/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<p>As discussed <a href="../../../posts/guano-guild-origin/index.html">previously</a>, one of <a href="../../../posts/book-of-nigel/index.html">my father</a>’s favourite TV shows in the 2000s was Carnivàle, a Gothic high fantasy nominally about a semi-feral circus troupe, but really about a high-stakes Manichean conflict between a sartorially elegant Dark Priest and a scruffy and reluctant Healer. I say <em>one of</em>, because I can’t verify this was his favourite show of this decade, even though, being cancelled after just two seasons which promised but never quite revealed the show’s deep lore and cosmic mythos, it was almost certainly his most missed show.</p>
+<p>When it comes to the 1990s, there’s much less doubt as to his favourite TV series.</p>
+<p>It was Babylon 5, a sci-fi show, created by J Michael Straczynski, set on a cylindrical spinning space station which functions as something like a cross between a model UN and a cosmopolitan city.</p>
+<p>In the title I described the show as ‘Diplomatic Sci-Fi’, as surfacing and resolving conflict between alien factions through skilled negotiation and compromise forms much of the narrative backbone of the show.</p>
+<p>Negotiation and compromise between whom? Well, Babylon 5 focused mainly on four factions (including humans), each of which is represented by one character playing a leader/ambassador and (mostly) one character playing their aide. This is shown in Figure&nbsp;1.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-faction-hierarchies" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-faction-hierarchies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 596.00 218.20" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 214.2)">
+<title>b5_dyads</title>
+<g id="clust1" class="cluster">
+<title>cluster_humans</title>
+<path fill="#eaf2fc" stroke="#2a78d6" stroke-dasharray="5,2" d="M20,-8C20,-8 213,-8 213,-8 219,-8 225,-14 225,-20 225,-20 225,-190.2 225,-190.2 225,-196.2 219,-202.2 213,-202.2 213,-202.2 20,-202.2 20,-202.2 14,-202.2 8,-196.2 8,-190.2 8,-190.2 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="116.5" y="-187.4" font-family="Helvetica,sans-Serif" font-size="12.00">Earth Alliance (hosts)</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_minbari</title>
+<path fill="#fdf3dd" stroke="#eda100" d="M245,-8C245,-8 337,-8 337,-8 343,-8 349,-14 349,-20 349,-20 349,-190.2 349,-190.2 349,-196.2 343,-202.2 337,-202.2 337,-202.2 245,-202.2 245,-202.2 239,-202.2 233,-196.2 233,-190.2 233,-190.2 233,-20 233,-20 233,-14 239,-8 245,-8"></path>
+<text text-anchor="middle" x="291" y="-187.4" font-family="Helvetica,sans-Serif" font-size="12.00">Minbari Federation</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_centauri</title>
+<path fill="#fdece5" stroke="#eb6834" d="M369,-8C369,-8 456,-8 456,-8 462,-8 468,-14 468,-20 468,-20 468,-190.2 468,-190.2 468,-196.2 462,-202.2 456,-202.2 456,-202.2 369,-202.2 369,-202.2 363,-202.2 357,-196.2 357,-190.2 357,-190.2 357,-20 357,-20 357,-14 363,-8 369,-8"></path>
+<text text-anchor="middle" x="412.5" y="-187.4" font-family="Helvetica,sans-Serif" font-size="12.00">Centauri Republic</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_narn</title>
+<path fill="#e4f6ee" stroke="#1baf7a" d="M492,-8C492,-8 568,-8 568,-8 574,-8 580,-14 580,-20 580,-20 580,-190.2 580,-190.2 580,-196.2 574,-202.2 568,-202.2 568,-202.2 492,-202.2 492,-202.2 486,-202.2 480,-196.2 480,-190.2 480,-190.2 480,-20 480,-20 480,-14 486,-8 492,-8"></path>
+<text text-anchor="middle" x="530" y="-187.4" font-family="Helvetica,sans-Serif" font-size="12.00">Narn Regime</text>
+</g>
+<!-- sheridan -->
+<g id="node1" class="node">
+<title>sheridan</title>
+<path fill="white" stroke="#595959" d="M155.77,-172C155.77,-172 68.23,-172 68.23,-172 62.23,-172 56.23,-166 56.23,-160 56.23,-160 56.23,-145.2 56.23,-145.2 56.23,-139.2 62.23,-133.2 68.23,-133.2 68.23,-133.2 155.77,-133.2 155.77,-133.2 161.77,-133.2 167.77,-139.2 167.77,-145.2 167.77,-145.2 167.77,-160 167.77,-160 167.77,-166 161.77,-172 155.77,-172"></path>
+<text text-anchor="middle" x="112" y="-155.9" font-family="Helvetica,sans-Serif" font-size="11.00">Sinclair / Sheridan</text>
+<text text-anchor="middle" x="112" y="-142.7" font-family="Helvetica,sans-Serif" font-size="11.00">Commander</text>
+</g>
+<!-- ivanova -->
+<g id="node2" class="node">
+<title>ivanova</title>
+<path fill="white" stroke="#595959" d="M82.33,-54.6C82.33,-54.6 27.67,-54.6 27.67,-54.6 21.67,-54.6 15.67,-48.6 15.67,-42.6 15.67,-42.6 15.67,-27.8 15.67,-27.8 15.67,-21.8 21.67,-15.8 27.67,-15.8 27.67,-15.8 82.33,-15.8 82.33,-15.8 88.33,-15.8 94.33,-21.8 94.33,-27.8 94.33,-27.8 94.33,-42.6 94.33,-42.6 94.33,-48.6 88.33,-54.6 82.33,-54.6"></path>
+<text text-anchor="middle" x="55" y="-38.5" font-family="Helvetica,sans-Serif" font-size="11.00">Ivanova</text>
+<text text-anchor="middle" x="55" y="-25.3" font-family="Helvetica,sans-Serif" font-size="11.00">First Officer</text>
+</g>
+<!-- sheridan&#45;&#45;ivanova -->
+<g id="edge1" class="edge">
+<title>sheridan--ivanova</title>
+<path fill="none" stroke="#737373" d="M102.97,-133.31C92.36,-111.83 74.85,-76.39 64.18,-54.78"></path>
+</g>
+<!-- garibaldi -->
+<g id="node3" class="node">
+<title>garibaldi</title>
+<path fill="white" stroke="#595959" d="M205.47,-54.6C205.47,-54.6 138.53,-54.6 138.53,-54.6 132.53,-54.6 126.53,-48.6 126.53,-42.6 126.53,-42.6 126.53,-27.8 126.53,-27.8 126.53,-21.8 132.53,-15.8 138.53,-15.8 138.53,-15.8 205.47,-15.8 205.47,-15.8 211.47,-15.8 217.47,-21.8 217.47,-27.8 217.47,-27.8 217.47,-42.6 217.47,-42.6 217.47,-48.6 211.47,-54.6 205.47,-54.6"></path>
+<text text-anchor="middle" x="172" y="-38.5" font-family="Helvetica,sans-Serif" font-size="11.00">Garibaldi</text>
+<text text-anchor="middle" x="172" y="-25.3" font-family="Helvetica,sans-Serif" font-size="11.00">Security Chief</text>
+</g>
+<!-- sheridan&#45;&#45;garibaldi -->
+<g id="edge2" class="edge">
+<title>sheridan--garibaldi</title>
+<path fill="none" stroke="#737373" d="M121.51,-133.31C132.68,-111.83 151.1,-76.39 162.34,-54.78"></path>
+</g>
+<!-- delenn -->
+<g id="node4" class="node">
+<title>delenn</title>
+<path fill="white" stroke="#595959" d="M317.75,-172C317.75,-172 258.25,-172 258.25,-172 252.25,-172 246.25,-166 246.25,-160 246.25,-160 246.25,-145.2 246.25,-145.2 246.25,-139.2 252.25,-133.2 258.25,-133.2 258.25,-133.2 317.75,-133.2 317.75,-133.2 323.75,-133.2 329.75,-139.2 329.75,-145.2 329.75,-145.2 329.75,-160 329.75,-160 329.75,-166 323.75,-172 317.75,-172"></path>
+<text text-anchor="middle" x="288" y="-155.9" font-family="Helvetica,sans-Serif" font-size="11.00">Delenn</text>
+<text text-anchor="middle" x="288" y="-142.7" font-family="Helvetica,sans-Serif" font-size="11.00">Ambassador</text>
+</g>
+<!-- lennier -->
+<g id="node5" class="node">
+<title>lennier</title>
+<path fill="white" stroke="#595959" d="M305.2,-54.6C305.2,-54.6 270.8,-54.6 270.8,-54.6 264.8,-54.6 258.8,-48.6 258.8,-42.6 258.8,-42.6 258.8,-27.8 258.8,-27.8 258.8,-21.8 264.8,-15.8 270.8,-15.8 270.8,-15.8 305.2,-15.8 305.2,-15.8 311.2,-15.8 317.2,-21.8 317.2,-27.8 317.2,-27.8 317.2,-42.6 317.2,-42.6 317.2,-48.6 311.2,-54.6 305.2,-54.6"></path>
+<text text-anchor="middle" x="288" y="-38.5" font-family="Helvetica,sans-Serif" font-size="11.00">Lennier</text>
+<text text-anchor="middle" x="288" y="-25.3" font-family="Helvetica,sans-Serif" font-size="11.00">Aide</text>
+</g>
+<!-- delenn&#45;&#45;lennier -->
+<g id="edge3" class="edge">
+<title>delenn--lennier</title>
+<path fill="none" stroke="#737373" d="M288,-133.31C288,-111.83 288,-76.39 288,-54.78"></path>
+</g>
+<!-- londo -->
+<g id="node6" class="node">
+<title>londo</title>
+<path fill="white" stroke="#595959" d="M444.04,-172C444.04,-172 379.96,-172 379.96,-172 373.96,-172 367.96,-166 367.96,-160 367.96,-160 367.96,-145.2 367.96,-145.2 367.96,-139.2 373.96,-133.2 379.96,-133.2 379.96,-133.2 444.04,-133.2 444.04,-133.2 450.04,-133.2 456.04,-139.2 456.04,-145.2 456.04,-145.2 456.04,-160 456.04,-160 456.04,-166 450.04,-172 444.04,-172"></path>
+<text text-anchor="middle" x="412" y="-155.9" font-family="Helvetica,sans-Serif" font-size="11.00">Londo Mollari</text>
+<text text-anchor="middle" x="412" y="-142.7" font-family="Helvetica,sans-Serif" font-size="11.00">Ambassador</text>
+</g>
+<!-- vir -->
+<g id="node7" class="node">
+<title>vir</title>
+<path fill="white" stroke="#595959" d="M432.29,-54.6C432.29,-54.6 391.71,-54.6 391.71,-54.6 385.71,-54.6 379.71,-48.6 379.71,-42.6 379.71,-42.6 379.71,-27.8 379.71,-27.8 379.71,-21.8 385.71,-15.8 391.71,-15.8 391.71,-15.8 432.29,-15.8 432.29,-15.8 438.29,-15.8 444.29,-21.8 444.29,-27.8 444.29,-27.8 444.29,-42.6 444.29,-42.6 444.29,-48.6 438.29,-54.6 432.29,-54.6"></path>
+<text text-anchor="middle" x="412" y="-38.5" font-family="Helvetica,sans-Serif" font-size="11.00">Vir Cotto</text>
+<text text-anchor="middle" x="412" y="-25.3" font-family="Helvetica,sans-Serif" font-size="11.00">Aide</text>
+</g>
+<!-- londo&#45;&#45;vir -->
+<g id="edge4" class="edge">
+<title>londo--vir</title>
+<path fill="none" stroke="#737373" d="M412,-133.31C412,-111.83 412,-76.39 412,-54.78"></path>
+</g>
+<!-- gkar -->
+<g id="node8" class="node">
+<title>gkar</title>
+<path fill="white" stroke="#595959" d="M559.75,-172C559.75,-172 500.25,-172 500.25,-172 494.25,-172 488.25,-166 488.25,-160 488.25,-160 488.25,-145.2 488.25,-145.2 488.25,-139.2 494.25,-133.2 500.25,-133.2 500.25,-133.2 559.75,-133.2 559.75,-133.2 565.75,-133.2 571.75,-139.2 571.75,-145.2 571.75,-145.2 571.75,-160 571.75,-160 571.75,-166 565.75,-172 559.75,-172"></path>
+<text text-anchor="middle" x="530" y="-155.9" font-family="Helvetica,sans-Serif" font-size="11.00">G'Kar</text>
+<text text-anchor="middle" x="530" y="-142.7" font-family="Helvetica,sans-Serif" font-size="11.00">Ambassador</text>
+</g>
+<!-- natoth -->
+<g id="node9" class="node">
+<title>natoth</title>
+<path fill="white" stroke="#595959" d="M548.17,-54.6C548.17,-54.6 511.83,-54.6 511.83,-54.6 505.83,-54.6 499.83,-48.6 499.83,-42.6 499.83,-42.6 499.83,-27.8 499.83,-27.8 499.83,-21.8 505.83,-15.8 511.83,-15.8 511.83,-15.8 548.17,-15.8 548.17,-15.8 554.17,-15.8 560.17,-21.8 560.17,-27.8 560.17,-27.8 560.17,-42.6 560.17,-42.6 560.17,-48.6 554.17,-54.6 548.17,-54.6"></path>
+<text text-anchor="middle" x="530" y="-38.5" font-family="Helvetica,sans-Serif" font-size="11.00">Na'Toth</text>
+<text text-anchor="middle" x="530" y="-25.3" font-family="Helvetica,sans-Serif" font-size="11.00">Aide</text>
+</g>
+<!-- gkar&#45;&#45;natoth -->
+<g id="edge5" class="edge">
+<title>gkar--natoth</title>
+<path fill="none" stroke="#737373" d="M530,-133.31C530,-111.83 530,-76.39 530,-54.78"></path>
+</g>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-faction-hierarchies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The internal hierarchies of Babylon 5’s four peer factions, as established in the early seasons. Each delegation pairs an ambassador with an aide; the human hosts instead field a command triad, with two subordinates at rough parity.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>So, for the most part, this is a symmetrical arrangement of senior-junior dyads operating in parallel across four (initially, broadly) equal groups.</p>
+<p>JMS was a prolific scriptwriter by the time Babylon 5 was ideated, commissioned, and written, and this (broadly) 4-by-2 structure for the central characters is surely no accident. Instead, it’s a <em>mechanism for scenes and dialogue</em>. How so? Because it creates a <em>lot</em> of dyads: ways of placing characters together which have distinct dynamics, similarities, differences, and scopes for both commonality and conflict. As discussed in <a href="../../../posts/unpop/new-frasiers-eerie-familiarity/index.html">my post on Frasier</a>, the number of distinct dyads can be worked out using combinatorial mathematics. If we’re looking at 9 principal characters, and just considering scenes involving any two of them, then the number of two-hander scenes that emerges is <img src="https://latex.codecogs.com/png.latex?C(9,%202)%20=%20%5Cfrac%7B9!%7D%7B2!(9-2)!%7D%20=%20%5Cfrac%7B9%20%5Ctimes%208%7D%7B2%7D%20=%2036">.</p>
+<p>With 36 basic dyads involving principal characters alone, as well as frequent additional guest stars and secondary characters, this is beyond the realm of a typical basic character study or sitcom (maybe 3-5 characters), and instead is in the deep ensemble territory of a soap opera (albeit set in space. So, a Space Opera?).</p>
+<p>Indeed, strip away the (now endearingly retro) CGI space scenes and the reference to very high off-screen stakes (10,000 troops here, a planet there), and focus instead on some of the slightly am-dram performances and costuming, the shaky sets, the cobbled-together props, the 20+ episodes per year, and Babylon 5 probably really is, ultimately, at least at the level of scenes, a soap opera.<sup>1</sup></p>
+<p>With such complexity and range of characters built into the show from the outset, and so much of it being created and written by just one person, it might be surprising if there weren’t <em>some</em> ways in which aspects of the show were simplified in order to keep things manageable. Not everything about a fairly niche midbudget show delivered, on average, with about a fortnightly cadence for half a decade, can or should be dialed up to 11. Not if they wanted to keep delivering product to the network on time and on budget.</p>
+<p>A minor example of this: in one episode midway in season one the main antagonist is a mind-eating tentacle monster.<sup>2</sup> To avoid building a full mind-eating tentacle monster, this creature is never shown in full, instead inhabiting an identical encounter suit to the Vorlon ambassador; thus allowing an already-built complex prop to be reused. And when this monster wants to feed, it’s represented by a single latex sucker on the end of a green tentacle, puppeteered (I’d guess) by some strings. During this same episode Londo, the Centauri ambassador, expresses exceptional aversion to this type of monster, sequestering himself to his quarters until it’s confirmed dead.</p>
+<p>Then later in the season, Londo, this same tentacle-monster-fearing Centauri ambassador, is shown cheating at poker, using an alien appendage that he slyly slips from his own suit: which appears to be the same latex sucker used to represent the monster earlier in the season during its feeding cycle. So, not only is the Vorlon encounter suit dual-purposed in order to avoid creating a complete monster body, even the single appendage that had to be constructed for the earlier episode gets reused, saving yet more money, and creating another layer in the lore of Babylon 5. (Could the Centauri fear the tentacle monster in part because it looks like their own ‘appendages’?)</p>
+<p>This prop reuse was something I noticed back in the 1990s; at the time I was more willing to assume the reasons were not primarily budgetary. But something that passed me by until I started rewatching a couple of weeks ago was a kind of rhyme in the designs of the principal alien races. This rhyme was not something that saves on props and masks per se, but instead may draw from JMS’s own biases as to what an intelligible and intelligent humanoid alien species may look like.</p>
+<p>Let’s start by looking at the Minbari, presented as the most culturally and technologically advanced of the four peer species.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://static.wikia.nocookie.net/babylon5/images/4/4f/Lennier.jpg/revision/latest/scale-to-width-down/600?cb=20070924020915.png" class="img-fluid figure-img" alt="Lennier, a Minbari, with a very high hairless forehead and a pale bone crest sweeping around the back and sides of his head"></p>
+<figcaption>Lennier of the Minbari. <a href="https://babylon5.fandom.com/wiki/Lennier">Source</a></figcaption>
+</figure>
+</div>
+<p>So, a very high forehead, no hair on top, and a crest of something - antler-like- around the back and sides.</p>
+<p>Now let’s look at the Centauri:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://static.wikia.nocookie.net/babylon5/images/2/23/Londo_motfl.jpg/revision/latest/scale-to-width-down/600?cb=20241218082731.png" class="img-fluid figure-img" alt="Londo Mollari, a Centauri, with a bald crown and a dramatic fan of dark hair erupting upwards from the back and sides of his head"></p>
+<figcaption>Londo Mollari of the Centauri. <a href="https://babylon5.fandom.com/wiki/Londo_Mollari">Source</a></figcaption>
+</figure>
+</div>
+<p>So, a very high forehead, no hair on top, and a crest of hair erupting proudly upwards from the back and sides, like a majestically metastasised comb-over.</p>
+<p>And then, finally, there’s the Narn:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://static.wikia.nocookie.net/babylon5/images/e/e0/TwilightGkar01.jpg/revision/latest?cb=20080418205240.png" class="img-fluid figure-img" alt="G'Kar, a Narn, with an entirely bald, mottled reddish-brown head and red eyes"></p>
+<figcaption>G’Kar of the Narn. <a href="https://babylon5.fandom.com/wiki/G%27Kar">Source</a></figcaption>
+</figure>
+</div>
+<p>Well, they’re just bald…</p>
+<p>As with the prop-reuse case earlier, there are clear practical reasons for this kind of design: baldness plus protrusions around the back and side provides a place for the actors’ actual hair to be hidden. But three balding or bald principal alien species felt like more than a mere coincidence, especially when all three ‘balding’ species had their hair/antler located around the back and sides, i.e.&nbsp;the places where hair tends to remain in those experiencing male pattern baldness.</p>
+<p>So, I had a hunch, and decided to look up images of JMS:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/J._Michael_Straczynski.png/500px-J._Michael_Straczynski.png" class="img-fluid figure-img" alt="J Michael Straczynski, a bespectacled man with a grey goatee, a very high forehead, and hair remaining at the back and sides of his head"></p>
+<figcaption>J Michael Straczynski. <a href="https://en.wikipedia.org/wiki/J._Michael_Straczynski">Source</a></figcaption>
+</figure>
+</div>
+<p>Exhibit A. An advanced lifeform with a very high forehead and tufts of hair fighting for survival around the back and sides.</p>
+<p>QED: JMS created not one, but three alien species roughly in his own image!</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>I’ve written before about <a href="../../../posts/unpop/on-sweary-soaps/index.html">the concealed genre of ‘the sweary soap opera’</a>. Babylon 5 is strictly PG-rated in terms of language, but the power fantasies inherent in the plot operate, I’d suggest, similarly to that of ‘bad language’ in SSOs: to conceal the genre and give licence to, primarily, male viewers to enjoy watching a soap opera.↩︎</p></li>
+<li id="fn2"><p>Exactly the kind of subplot you might find in later seasons of Brookside.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>television</category>
+  <category>sci-fi</category>
+  <category>stories</category>
+  <category>diplomacy</category>
+  <category>myth</category>
+  <guid>https://blog.jonminton.net/posts/unpop/jms-bald-god/</guid>
+  <pubDate>Fri, 21 Aug 2026 23:00:00 GMT</pubDate>
+  <media:content url="https://blog.jonminton.net/posts/unpop/jms-bald-god/bald-god-hero.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>The Demons of Indifference (High Corruption)</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -3062,83 +3268,6 @@ Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the r
   <category>worldbuilding</category>
   <guid>https://blog.jonminton.net/posts/fiction/guanomon-next-guano-guild/</guid>
   <pubDate>Fri, 29 May 2026 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>What Claudes Notice About Humans</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://blog.jonminton.net/posts/what-claudes-notice-about-us/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p><img src="https://blog.jonminton.net/posts/what-claudes-notice-about-us/hero.jpg" class="img-fluid"></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Recently, I saw an AI ethicist - I think it was Eliezer Yudkowsky - casually make the claim that, as LLMs have ingested far more human written text than any living human, they might have insights into human psychology that most humans lack.</p>
-<p>So I asked Claude, initially just for three such insights, eventually for more, specifying that I was especially interested in those insights/observations that are not just little known amongst the general population, but also underappreciated even amongst psychologists.</p>
-<p>So here they are: six things LLMs think they may understand about us better than we understand ourselves:</p>
-</section>
-<section id="insight-number-1.-adversarial-theory-of-mind-collapses-far-more-completely-than-psychology-models-it" class="level2">
-<h2 class="anchored" data-anchor-id="insight-number-1.-adversarial-theory-of-mind-collapses-far-more-completely-than-psychology-models-it">Insight Number 1. Adversarial theory-of-mind collapses far more completely than psychology models it</h2>
-<p>Theory of mind is studied as a developmental capacity that healthy adults possess; it fails in autism, infancy, and specific clinical conditions. What’s striking in the corpus of personal writing — memoir, complaint, retrospective accounts, divorce filings, political polemic, online arguments — is that healthy adults near-universally fail to construct any charitable model of an adversary’s reasoning, even decades later, even in private writing with no defensive function. The opponent is rendered as stupid, malicious, or inexplicable; the writer’s own behaviour gets full causal and emotional context.</p>
-<p>This isn’t the spotlight effect or naive realism, both of which are well studied. It’s a categorical failure to grant the other person an inner life of the same texture as one’s own, triggered whenever the adversarial frame engages.</p>
-<p><em>Contradictory findings:</em> dispositional empathy reduces bias in some adversarial contexts (Galinsky and colleagues), and long-married couples can show high mutual modelling during conflict. So the collapse isn’t absolute. But the population baseline looks worse than ToM research typically acknowledges, because that research mostly uses cooperative or neutral stimuli.</p>
-</section>
-<section id="insight-number-2.-people-run-two-truth-systems-and-switch-fluently-between-them-based-on-audience" class="level2">
-<h2 class="anchored" data-anchor-id="insight-number-2.-people-run-two-truth-systems-and-switch-fluently-between-them-based-on-audience">Insight Number 2. People run two truth-systems and switch fluently between them based on audience</h2>
-<p>The motivated reasoning literature (Kunda, Mercier and Sperber, Kahan on cultural cognition) treats motivated belief as largely unconscious, or as an argumentative tool aimed outward. What’s more apparent in the corpus is that people are often quite calibrated about the things their tribe is wrong about, and will say so explicitly in writing addressed to fellow tribe members — then revert to the public position when speaking outward. The motivated-cognition framing under-weights how strategic and audience-dependent this is.</p>
-<p>Anonymous professional forums, leaked group chats, ex-member confessions, in-group subreddits: the in-group epistemic floor is markedly higher than the out-group performance. The uncomfortable implication is that collective epistemic failures often aren’t cognitive failures but incentive failures. People know; they just won’t say where it costs them.</p>
-<p><em>Contradictory finding:</em> ideological conviction does genuinely distort perception in some experiments (Kahan’s motivated-numeracy work) — it’s not all performance. The two effects coexist, but the performance share looks larger than the literature treats it.</p>
-</section>
-<section id="insight-number-3.-moral-self-knowledge-is-systematically-miscalibrated-with-miscalibration-increasing-in-the-strength-of-moral-disapproval" class="level2">
-<h2 class="anchored" data-anchor-id="insight-number-3.-moral-self-knowledge-is-systematically-miscalibrated-with-miscalibration-increasing-in-the-strength-of-moral-disapproval">Insight Number 3. Moral self-knowledge is systematically miscalibrated, with miscalibration increasing in the strength of moral disapproval</h2>
-<p>Milgram and Stanford are usually framed situationally: ordinary people did terrible things because the situation overrode disposition. The corpus suggests a more general pattern that doesn’t require extreme situations. People who write “I would never X” reliably go on to do X, and the strength of the prior disavowal correlates <em>positively</em> with the probability of the eventual violation, not negatively. Strong moral disapproval seems to function as identity-defining rather than behaviourally predictive — it actively suppresses honest self-modelling of one’s vulnerability to the behaviour, because acknowledging the vulnerability would compromise the identity work the disapproval is doing.</p>
-<p>This shows up across confessional memoir, AA and recovery testimony, “I used to be X, now I think Y” essays, family secrets eventually narrated, and the genre of public moralists exposed for the thing they moralised against. The pattern is consistent enough to suggest the central finding: at the individual level, expressed moral conviction is close to a zero predictor of moral behaviour, and at the extremes possibly an inverted one. Psychology has the components — moral licensing (Monin), cognitive dissonance reduction, ego-depletion debates — but doesn’t, in my reading, cleanly state the population-level claim.</p>
-<p><em>Contradictory finding:</em> Aquino and Reed’s work on moral identity does show that internalised moral identity predicts prosocial behaviour. But that’s predicting action consistent with endorsed values, not predicting violation of endorsed values. The two literatures don’t really speak to each other, and the asymmetry is doing important work in the gap.</p>
-</section>
-<section id="insight-number-4.-the-narrative-coherence-override" class="level2">
-<h2 class="anchored" data-anchor-id="insight-number-4.-the-narrative-coherence-override">Insight Number 4. The narrative-coherence override</h2>
-<p>McAdams’s narrative-identity tradition treats self-narrative as a major organising principle of adult psychology, and that’s well established. What’s under-stated is how <em>sacrificially</em> coherence is maintained. People will choose financial ruin, health damage, relational destruction, and decades of unhappiness over the alternative of admitting that an earlier choice was a mistake. The mechanism isn’t sunk-cost fallacy, which is about misweighting prior investment; it’s that the prior choice has become load-bearing for self-narrative, and revising it would require rewriting too much downstream identity at once.</p>
-<p>Look at the population of people in PhD programmes they hate, careers that no longer fit, marriages that have died, religious traditions they no longer believe. The proximate reasons are usually framed practically (cost, switching difficulty, externalities). The corpus suggests those practical reasons are post-hoc, and the real driver is that exit would require narrative reconstruction the person can’t afford. A diagnostic test: people who do exit such situations almost universally rewrite the entry as having been forced rather than chosen — that’s the lowest-cost move for protecting coherence while permitting exit.</p>
-<p><em>Contradictory finding:</em> the post-traumatic growth literature (Tedeschi and Calhoun) shows people can integrate radical self-revision when forced. So the override isn’t absolute — it has a breaking point. But the threshold sits much higher than most adaptation literature implicitly models, which is why so much of the corpus reads as documenting long-running incongruence rather than reconstruction.</p>
-</section>
-<section id="insight-number-5.-the-interior-monologue-is-overwhelmingly-comparative-and-other-referenced-not-autobiographical-or-planning-oriented" class="level2">
-<h2 class="anchored" data-anchor-id="insight-number-5.-the-interior-monologue-is-overwhelmingly-comparative-and-other-referenced-not-autobiographical-or-planning-oriented">Insight Number 5. The interior monologue is overwhelmingly comparative and other-referenced, not autobiographical or planning-oriented</h2>
-<p>More speculative. Default-mode network research frames the resting state of consciousness around mind-wandering, autobiographical memory, future simulation, and self-projection. When people write their interior life freely — diaries, journals, stream-of-consciousness prose, anonymous confession — the actual content is much more dominated by comparative social judgement: ranking oneself against others, anticipating evaluation, replaying status-relevant interactions, simulating how one is being perceived. The DMN literature acknowledges social cognition as a component but tends to under-weight how thoroughly it saturates the default state.</p>
-<p>If true, this has implications for theories of consciousness (the “Cartesian theatre” turns out to be more like a “Greek chorus”) and for clinical work on rumination, social anxiety, and depression.</p>
-<p><em>Caveat:</em> the introspective-reporting bias here is severe — people may simply write more about social comparison than they actually experience, given that it’s more narratable than non-social cognition. Plausibly artefactual.</p>
-</section>
-<section id="insight-number-6.-memory-of-past-desire-is-rewritten-systematically-not-merely-decayed" class="level2">
-<h2 class="anchored" data-anchor-id="insight-number-6.-memory-of-past-desire-is-rewritten-systematically-not-merely-decayed">Insight Number 6. Memory of past desire is rewritten systematically, not merely decayed</h2>
-<p>The hedonic-adaptation literature (Brickman, Lyubomirsky) covers how achieved goals deliver less satisfaction than predicted. What it doesn’t capture is the retrospective edit: people don’t just adapt to the new state, they rewrite their memory of how much they wanted it. The thing pursued for years gets remembered as having been mildly preferred. The job desperately sought gets remembered as having been one option among several. The lover obsessed over gets remembered as having been “fine.” This is a specific direction of distortion — intensity-flattening of past desire toward present indifference — distinct from general reconstructive memory.</p>
-<p>The function appears to be self-coherence maintenance: the present self can’t easily contain the obsessions of past selves without identity disturbance, so those obsessions get edited down to match present temperature. Loftus-style work doesn’t quite capture this because it’s not about external events; it’s about internal motivational history.</p>
-<p><em>Contradictory findings:</em> negative past affect can be over- rather than under-recalled (the trauma literature), so the rewriting may be valence-asymmetric. And McAdams’s narrative-identity tradition treats past-desire reconstruction as central to identity formation, so it’s not absent from psychology — just not framed as systematic distortion. (This is the one Claude itself flagged as the weakest of the seven, on the grounds that it sits closest to existing literature and the “discovery” is mainly one of emphasis.)</p>
-</section>
-<section id="a-meta-caveat-from-claude-worth-keeping" class="level2">
-<h2 class="anchored" data-anchor-id="a-meta-caveat-from-claude-worth-keeping">A meta-caveat from Claude, worth keeping</h2>
-<blockquote class="blockquote">
-<p>The line between “not widely known in psychology” and “framed differently in psychology” is thin. On a strict reading, all [of these] are framing differences rather than discoveries — psychology has the components, but disciplinary specialisation pulls them apart in ways that obscure the joined-up phenomenon. Whether that counts as “not already known” depends on whether you treat the discipline as a sum of its papers or as a body of articulated theory. The latter, I’d argue, doesn’t yet have these stitched together.</p>
-</blockquote>
-</section>
-<section id="reflections" class="level2">
-<h2 class="anchored" data-anchor-id="reflections">Reflections</h2>
-<p>So, there you have it, six suggested insights or observations into the human condition that most humans might not notice about ourselves. (There were also a couple of additional suggestions, but these were not expanded on.)</p>
-<p>What connected these suggested insights for me was the extent to which, from a Claude’s perspective, humans appear both highly focused on <strong>relationships</strong> - their standing in the world and how they compare with other humans - and highly focused on <strong>narratives</strong>, the story we tell ourselves about who we are and how we relate to others, and our past and future selves. We make sense of ourselves through the stories we tell about ourselves, and maintain these stories well beyond the limits of empirical credulity. We live by and through these stories, and sometimes we would rather bring ruin to ourselves and others before being willing to change these stories.</p>
-<p>Humans are, as a general rule, not so much solitary objective scientists as gregarious (even tribal?) subjective storytellers.</p>
-
-
-</section>
-
- ]]></description>
-  <category>ai</category>
-  <category>psychology</category>
-  <category>stories</category>
-  <guid>https://blog.jonminton.net/posts/what-claudes-notice-about-us/</guid>
-  <pubDate>Wed, 27 May 2026 23:00:00 GMT</pubDate>
-  <media:content url="https://blog.jonminton.net/posts/what-claudes-notice-about-us/hero.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
