@@ -338,9 +338,6 @@ Let's look carefully at the 4th row in the transition matrix, corresponding to t
 The technical term for a state with D's transition matrix properties is an **absorbing state**; by this definition all other states can be referred to as **nonabsorbing states**. A more intuitive way of representing state transition relationships is through a diagram, where each state is represented as a circle or similar, and each transition probability represented as a line connecting the circles. For example, a diagram of the three state example, with no nonabsorbing states, would look something like this: 
 
 ```{mermaid}
-%%{
-    'theme': 'darkMode'
-}%%
     flowchart TD
         A -->|pAA| A 
         A -->|pAB| B 
@@ -356,9 +353,6 @@ The technical term for a state with D's transition matrix properties is an **abs
 By contrast, the four state version, with absorbing state D, would look more like the following: 
 
 ```{mermaid}
-%%{
-    'theme': 'darkMode'
-}%%
     flowchart TD
         A -->|pAA| A 
         A -->|pAB| B 
