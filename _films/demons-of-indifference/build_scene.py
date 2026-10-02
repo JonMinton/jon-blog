@@ -866,6 +866,9 @@ if STILLS:
 else:
     if FRAMES:
         scene.frame_start, scene.frame_end = FRAMES
+    else:
+        # everything before the incense is under the HUD's black spell card: hud.py fills it in
+        scene.frame_start = max(0, int(fr(C("incense"))) - 2)
     scene.frame_step = STEP
     scene.render.filepath = os.path.join(OUT, "")
     scene.render.use_overwrite = False
