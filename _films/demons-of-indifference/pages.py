@@ -46,7 +46,7 @@ def font(path, size, index=0):
 
 
 def sans(size):
-    return font(SANS, size, 7)  # Avenir Next Regular
+    return font(SANS, size, 5)  # Avenir Next Medium
 
 
 def sans_bold(size):

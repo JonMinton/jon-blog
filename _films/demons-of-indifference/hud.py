@@ -236,7 +236,7 @@ def mappings(layer, t):
         y = y0 + i * 58
         d.text((x0, y), left, font=sans(30), fill=(*WHITE, a8(b)))
         lx = x0 + sans(30).getlength(left) + 16
-        d.text((lx, y + 2), "→", font=sans(30), fill=(*GREY, a8(b)))
+        d.text((lx, y + 2), "→", font=font(MONO, 30), fill=(*GREY, a8(b)))
         d.text((lx + 46, y - 2), right, font=demon(34), fill=(*RED, a8(b)))
 
 

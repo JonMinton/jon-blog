@@ -281,7 +281,7 @@ def page_material(name, states):
     # the multiply blend wants a colour; a value plugs in as grey
     nt.links.new(dim.outputs[2], p.inputs["Base Color"])
     nt.links.new(dim.outputs[2], p.inputs["Emission Color"])
-    p.inputs["Emission Strength"].default_value = 0.42
+    p.inputs["Emission Strength"].default_value = 0.3
     return m, facs, scr.outputs[0]
 
 
@@ -437,7 +437,7 @@ for i, x in enumerate(XS):
     aim = empty(f"aim{i}", (x, 0, 1.0))
     tr.target = aim
 
-LAMP_MAX = 380.0
+LAMP_MAX = 210.0
 # (time, [level per lectern]) - levels hold until the next entry, with ramps between
 LEVELS = [
     (0.0, [0, 0, 0, 0]),
@@ -563,7 +563,7 @@ demon, demon_glow = build_demon("Demon")
 DEMON_EMIT = M_DEMON.node_tree.nodes["Principled BSDF"].inputs["Emission Strength"]
 
 
-def beside(i, dx=0.4, dy=0.04, dz=0.12):
+def beside(i, dx=0.46, dy=0.16, dz=0.12):
     c = tablet_center(i)
     return Vector((c.x + dx, c.y + dy, c.z + dz))
 
@@ -576,20 +576,20 @@ D = [
     (C("puff") + 0.4, beside(0), 0.0, 1.0),
     (C("title") - 0.3, beside(0), 0.0, 1.0),
     (C("errors") - 0.3, beside(0), 0.5, 1.0),
-    (C("errors") + 0.5, beside(0, 0.2, -0.2, 0.12), 0.9, 1.0),   # leans in...
-    (C("errors") + 1.0, beside(0, 0.34, -0.1, 0.16), 0.3, 1.0),  # ...and is pulled back
-    (C("ed2") + 0.2, beside(0, 0.34, -0.1, 0.16), 0.3, 1.0),
-    (C("ed2") + 1.0, beside(0, 1.2, -0.4, 0.5), 0.0, 1.0),
-    (C("ed2") + 1.9, beside(1, 0.3, -0.02, 0.08), 0.8, 1.0),
-    (C("ed3") + 0.2, beside(1, 0.3, -0.02, 0.08), 0.8, 1.0),
-    (C("ed3") + 1.0, beside(1, 1.2, -0.4, 0.5), 0.0, 1.0),
+    (C("errors") + 0.5, beside(0, 0.32, 0.04, 0.1), 0.9, 1.0),   # leans in...
+    (C("errors") + 1.0, beside(0, 0.46, 0.2, 0.16), 0.3, 1.0),  # ...and is pulled back
+    (C("ed2") + 0.2, beside(0, 0.46, 0.2, 0.16), 0.3, 1.0),
+    (C("ed2") + 1.0, beside(0, 1.2, 0.5, 0.75), 0.0, 1.0),
+    (C("ed2") + 1.9, beside(1, 0.36, 0.14, 0.06), 0.8, 1.0),
+    (C("ed3") + 0.2, beside(1, 0.36, 0.14, 0.06), 0.8, 1.0),
+    (C("ed3") + 1.0, beside(1, 1.2, 0.5, 0.75), 0.0, 1.0),
     (C("ed3") + 1.9, beside(2, 0.3, -0.1, 0.12), 0.6, 1.0),
     (C("flood"), beside(2, 0.3, -0.1, 0.12), 0.6, 1.0),
     (C("flood") + 1.6, beside(2, 0.3, -0.12, 0.2), 0.3, 1.4),
     (C("lift") - 0.2, beside(2, 0.3, -0.12, 0.2), 0.3, 1.4),
     (C("lift") + 1.0, beside(2, 0.34, 0.1, 0.24), 0.9, 1.0),
     (C("ed4") + 0.2, beside(2, 0.34, 0.1, 0.24), 0.9, 1.0),
-    (C("ed4") + 1.0, beside(2, 1.2, -0.4, 0.5), 0.0, 1.0),
+    (C("ed4") + 1.0, beside(2, 1.2, 0.5, 0.75), 0.0, 1.0),
     (C("ed4") + 1.9, beside(3, 0.3, -0.12, 0.14), 0.5, 1.0),
     (C("pullback") + 0.3, beside(3, 0.3, -0.12, 0.14), 0.5, 1.0),
     (C("pullback") + 4.0, Vector((0, -0.6, 2.1)), 0.0, 1.6),
@@ -605,7 +605,7 @@ for t, loc, rz, s in D:
     key(demon, "scale", t, (s, s, s))
 
 # quill pecks during the mild edits: small darts towards the page
-base = beside(1, 0.3, -0.02, 0.08)
+base = beside(1, 0.36, 0.14, 0.06)
 for k, t in enumerate(mt):
     key(demon, "location", t - 0.08, base.copy())
     key(demon, "location", t, base + Vector((-0.06 - 0.01 * (k % 3), -0.02, -0.05)))
@@ -834,10 +834,10 @@ SHOTS = [
     (C("multiply") + 7.0, (Vector((-1.0, -11.0, 6.8)), Vector((0, 6, 0.6))), 28),
     (C("terminal") + 4.0, (Vector((-3.0, -12.5, 7.6)), Vector((0, 7, 0.5))), 28),
     (C("coda") - 0.3, (Vector((-4.0, -13.0, 8.0)), Vector((0, 7, 0.5))), 28),
-    (C("coda") + 3.5, medium(0, 0.35, -1.45, 0.38, (0.12, 0.05, 0.12)), 45),
-    (C("vanish"), medium(0, 0.25, -1.1, 0.3, (0.1, 0.08, 0.14)), 45),
-    (C("end") + 1.0, medium(0, 0.2, -1.0, 0.28, (0.1, 0.08, 0.14)), 45),
-    (C("fin"), medium(0, 0.15, -0.9, 0.26, (0.1, 0.08, 0.14)), 45),
+    (C("coda") + 3.5, medium(0, 0.4, -1.75, 0.5, (0.1, 0.1, 0.2)), 45),
+    (C("vanish"), medium(0, 0.3, -1.4, 0.45, (0.1, 0.12, 0.24)), 45),
+    (C("end") + 1.0, medium(0, 0.25, -1.3, 0.42, (0.1, 0.12, 0.24)), 45),
+    (C("fin"), medium(0, 0.2, -1.2, 0.4, (0.1, 0.12, 0.24)), 45),
 ]
 for t, (cl, tg), lens in SHOTS:
     key(cam, "location", t, Vector(cl))
