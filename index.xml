@@ -10,7 +10,135 @@
 <atom:link href="https://blog.jonminton.net/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Fri, 21 Aug 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 04 Oct 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>Snapping under tension / Gravity Is Not a Democratic Law</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <dc:creator>Claude Opus 5.5</dc:creator>
+  <link>https://blog.jonminton.net/posts/gravity-not-democratic/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>I started my company focused on helping analytical knowledge workers get the most from Agentic AI, Knowledge Tree &amp; Butterfly, on the 1st of September. So, it’s now been running for slightly over a month. So far, it’s been an enriching experience in every way but financially, with many interesting conversations, but no commissions.</p>
+<p>Where analytical knowledge workers in the UK - fields like statistics, economics, epidemiologists, quantitative academics and so on - are on AI adoption and usage for their work is far behind where I’d have expected them to be by this point. Whereas the capabilities of reasoning models in code harnesses still appears to be improving at an exponential pace, exposure and engagement with such tools still seems low, and the relevance and value of such models little understood beyond software development. (And even within software development, within the UK, it seems in places things have changed much less than I’d have expected.)</p>
+<p>A visual metaphor: we have a column of some kind of material - say wood, metal, plastic, glass - which is tethered to an anchor at one end, and on the other end is being pulled by a fleet of horses, the number of whom keeps doubling with eerie regularity. The column is analytical knowledge workers’ current way of doing their work; the anchor is the organisation in which such work is done; the tether the set of requirements and expectations placed on the worker by their organisation and broader cultural milieu; and the growing fleet of horses the capabilities and potential for getting the same work done better now made possible by agentic AI at or near the frontier.</p>
+<div id="fig-tension" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Hand-drawn diagram: a stick figure standing on a block labelled Org is tethered to a box labelled m, which is pulled the other way by an arrow-shaped block labelled H(t). Red arrows show the opposing forces. An inset plot shows H(t) against t, flat until t0 and then rising steeply.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://blog.jonminton.net/posts/gravity-not-democratic/tension-diagram.png" class="img-fluid figure-img" alt="Hand-drawn diagram: a stick figure standing on a block labelled Org is tethered to a box labelled m, which is pulled the other way by an arrow-shaped block labelled H(t). Red arrows show the opposing forces. An inset plot shows H(t) against t, flat until t0 and then rising steeply.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The column (m) tethered to the organisation, pulled by a fleet of horses, H(t), that keeps growing after t<sub>0</sub>.
+</figcaption>
+</figure>
+</div>
+<p>There are important variations allowed by this metaphor: the type of material, initial position of the anchor, the length and properties of the tether, the number of horses, how many are getting attached to column, and so on. But there’s also a defensible default expectation about what will happen to the columns: unless other parts of the setup change most, eventually, will <strong>snap,</strong> as they are being subject to ever increasing tension, and unless other parts of the system change the column itself will become the failure point. Some types of material, like plastic, will tend to distend rather than snap, some metals will resist the forces pulling at them longer, but qualitatively, as the metaphor is a description of a system under tension, the question is simply <strong>when</strong> the forces exerted by the fleet of horses lead to a change in the material, not <strong>whether</strong> such a change will occur.</p>
+<p>That, fundamentally, is the prediction my business is founded on: Agentic AI capabilities, and their transformative potential for analytical knowledge work, are already so far advanced of how most of such work is currently being done, and how most organisations allow such work to be done (the anchor and tether), that it’s a large, growing, and often unacknowledged force in analytical process and workflow improvement.</p>
+<p>The hope of my business is to help analytical knowledge workers to avoid getting broken by this <strong>snap</strong>. To show how to move and adapt with the Agentic frontier, rather than find yourselves and your organisations broken by failing to change quickly enough.</p>
+<p>What follows is Opus 5.5’s attempt to render a late night reverie of rapid fire prompts from me, meditating on these same ideas, into something like an evidenced and coherent essay. Within this reverie the metaphor I chose was simpler, more immediate, than the column-under-tension example above: simply the force of gravity, and the way in cartoons it interacts with perception.</p>
+</section>
+<section id="cartoon-physics" class="level2">
+<h2 class="anchored" data-anchor-id="cartoon-physics">Cartoon physics</h2>
+<p>In the cartoons, it is Wile E. Coyote, not the Road Runner, who runs off the edge of the cliff. He keeps running, suspended over nothing, and only falls when he looks down. The Road Runner - small, fast, adapted to the desert - never falls at all.</p>
+<p>(In <a href="../../posts/analytical-maxim-gun/index.html">earlier posts</a> I wrote about “the Roadrunner who looks down”. Wrong character: the Road Runner never needs to.)</p>
+<p>Cartoon physics has one law that real physics lacks: consequences wait for you to notice them. And a great many organisations are behaving, with respect to agentic AI, as if they lived under it - as if the ground will stay there until they have formally reviewed whether it is still there.</p>
+<p>It won’t. <strong>Gravity is not a democratic law.</strong> It does not wait for a majority, a steering group, or the next budget round. It applies to everybody who has run off the edge, whether or not they have looked down.</p>
+</section>
+<section id="the-mislabelled-map" class="level2">
+<h2 class="anchored" data-anchor-id="the-mislabelled-map">The mislabelled map</h2>
+<p>Here is a simple map of who thinks what about AI. The vertical axis is <em>perceived capability</em>: how capable a group believes AI is, specifically for its own work and its own organisation. The horizontal axis is <em>valence</em>: whether the group expects AI’s effects on that work to be bad or good.</p>
+<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Hand-drawn chart. The vertical axis is perceived capabilities of AI, from low to high; the horizontal axis is valence, from bad to good, with a dashed neutral line up the middle. Grey dashed lines fan out from the bottom centre in a funnel, reaching Doomers at top left and Bloomers at top right. Game Devs and developers resisting AI (minus AI dev) sit on the bad side; non-technical business managers, VCs, and developers embracing AI (plus AI Devs) with the author (Me) sit on the good side. Analysts are circled near the bottom centre. Green arrows trace a path: 1 rightwards towards good, 2 upwards to the plus AI Devs position, and a dotted 3 with a question mark further up towards the Bloomers.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://blog.jonminton.net/posts/gravity-not-democratic/capabilities-map.png" class="img-fluid figure-img" alt="Hand-drawn chart. The vertical axis is perceived capabilities of AI, from low to high; the horizontal axis is valence, from bad to good, with a dashed neutral line up the middle. Grey dashed lines fan out from the bottom centre in a funnel, reaching Doomers at top left and Bloomers at top right. Game Devs and developers resisting AI (minus AI dev) sit on the bad side; non-technical business managers, VCs, and developers embracing AI (plus AI Devs) with the author (Me) sit on the good side. Analysts are circled near the bottom centre. Green arrows trace a path: 1 rightwards towards good, 2 upwards to the plus AI Devs position, and a dotted 3 with a question mark further up towards the Bloomers.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Perceived capability of AI, for a group’s own work, against valence. The grey funnel bounds the plausible positions; the green arrows mark the path KT&amp;B aims to take analysts along.
+</figcaption>
+</figure>
+</div>
+<p>The grey funnel is the key constraint. The less capable a group thinks AI is, the less it can matter either way: a group that sees it as largely incapable can think it only slightly bad or slightly good. The more capable a group thinks it is, the wider the plausible range of valence, out to the two extremes at the top: the <strong>doomers</strong> and the <strong>bloomers</strong>. One consequence is the empty space at the top centre. Nobody who thinks AI is highly capable thinks it is neutral.</p>
+<p>The public debate is usually staged as doomers against bloomers: will AI be very bad or very good? That is an argument along the horizontal axis, and it only happens at the top of the map. The two sides disagree about the sign but agree about the size. Both are revolutionaries.</p>
+<p>So the debate is mislabelled. The fault line that matters is vertical: how capable people believe AI is for their own work. Developers sit high on this axis whichever side they take - those resisting AI as well as those embracing it (where I’d put myself). Game developers (in my experience, and very weirdly, in my view, given GPUs’ crucial role in the current AI revolution) sit lower, on the bad side; VCs high, on the good side. Non-technical business managers are positive, but sit lower down.</p>
+<p>Analysts sit in the bottom third, straddling the neutral line: some mildly sceptical, some mildly positive, nearly all seeing AI as only modestly capable for the work they do. And most of them are there not by decision but by default. Nobody chose it; it is simply where you are standing if you have not moved.</p>
+<p>Which is the Coyote’s position exactly. He didn’t decide to stand on thin air. He just kept doing what he was doing.</p>
+<p>The green arrows are what KT&amp;B is for. The first is a move to the right: improving how analysts feel about AI as it relates to their own work. The second is a move upwards: demonstrating much more of what agentic AI can actually do for analytical knowledge work. The third, dotted and with a question mark, is a position closer to the bloomers that I might be willing to hold myself - if, and when, agentic AI’s capabilities are shown to have improved further still. I don’t hold it yet.</p>
+</section>
+<section id="your-budget-is-your-forecast" class="level2">
+<h2 class="anchored" data-anchor-id="your-budget-is-your-forecast">Your budget is your forecast</h2>
+<p>So how do you tell where an organisation really sits on the map? Don’t ask what it says. Look at what it spends.</p>
+<p>Economists since Samuelson have distinguished <em>stated</em> from <em>revealed</em> preference, and Hayek’s broader point was that the way resources are allocated carries knowledge nobody need ever state out loud. <strong>Your budget is your forecast</strong>, whether or not anybody wrote it down as one.</p>
+<p>Here is a real example from public procurement data. In April 2026, the Office for National Statistics published an award of £9.8<strong>m</strong> for <a href="https://www.contractsfinder.service.gov.uk/Notice/06513c12-0d3f-4f87-9bcf-012690136a49">“SAS 9 and Viya 4 Software Licensing”</a>. In September 2026, it published an award of £75<strong>k</strong> for <a href="https://www.contractsfinder.service.gov.uk/Notice/8e1143cb-63f1-46ef-9c89-8f87eff53fdd">“Social Surveys AI Adoption Support Services”</a>. (A caveat: awarded values on Contracts Finder can be multi-year ceilings rather than annual spend, so the ratio shouldn’t be read too literally.)</p>
+<p>Note the units: k vs m. The business-as-usual spend dwarfs the adapt-to-AI spend by two orders of magnitude, 131 times as much spent on the former as the latter.</p>
+<p>This is not a cheap shot at the ONS. The point is that it is <em>typical</em>, and rational from the inside: the licences keep statistical production running, and the adoption contract is a sensible, cautious step. But side by side the two numbers make a forecast: the next several years will look much like the last several, with some AI helping at the edges.</p>
+<p>Nor is the ONS unusual. A keyword scan of UK public procurement notices (Contracts Finder, Find a Tender and Public Contracts Scotland) found 31 awarded contracts over the last year, worth about £16m, for Copilot-style “AI adoption” - for example the Crown Prosecution Service’s <a href="https://www.contractsfinder.service.gov.uk/Notice/fc8eccfc-6069-4f41-911e-57d19c21303e">“Provision of Microsoft Copilot Enablement Programme”</a> and the DWP’s <a href="https://www.contractsfinder.service.gov.uk/Notice/fed3a8fd-c580-4172-b1df-aa6323f7b595">“Copilot Adoption Support Services”</a>. That is the stated belief in transformation, expressed as a revealed belief in assistance.</p>
+<p>In terms of the map, this is the position of the non-technical business manager. Such managers are, in theory, pro-AI: ask them and they will say it is transformative, and mean it warmly. That puts them on the right-hand side. But their spending places them low down: they underestimate both what AI can now do and what it implies for how their organisation works, what it does, and who it needs. A positive view of a modest technology is a comfortable place to stand. It asks for a licence and a training course, and nothing else.</p>
+</section>
+<section id="paper-straws" class="level2">
+<h2 class="anchored" data-anchor-id="paper-straws">Paper straws</h2>
+<p>In 2015 a video of researchers, led by Christine Figgener, pulling a plastic straw from the nostril of a sea turtle off the coast of Costa Rica <a href="https://www.nationalgeographic.com/animals/article/150817-sea-turtles-olive-ridley-marine-debris-ocean-animals-science">went viral</a>. Straw bans followed, in cities and companies around the world. But of the roughly eight million tonnes of plastic estimated to enter the oceans each year, straws are <a href="https://www.nationalgeographic.com/adventure/article/plastic-straws-ocean-trash-environment">surely not a top contributor</a> by weight. The ban was the <em>visible</em> action, not the effective one.</p>
+<p>Copilot-style assistants are <strong>paper straws</strong>: what the business manager’s position on the map buys. They are visible. They are budgetable: a per-seat licence, a training programme, an adoption partner. They give the board something to see. And they leave workflows, roles and - most importantly - people’s conception of what their job <em>is</em> entirely untouched.</p>
+<p>Even the name is reassuring. “Copilot” tells you that you are still the pilot. (Though in commercial aviation the co-pilot is a fully qualified pilot who typically flies every other leg, and most of the climb, cruise and descent is flown by the autopilot anyway. The metaphor contains its own subversion.)</p>
+<p>Worse, paper straws can act as <strong>inoculation</strong>. A weak dose - an assistant bolted onto Word and Outlook, for staff whose work is otherwise unchanged - disappoints, and the disappointment becomes evidence: <em>we tried AI; it was overhyped</em>. This is exactly the factory owner in the <a href="../../posts/why-tech-incrementalism-fails/index.html">steam-loom parable</a>, who converts a quarter of the factory, finds output falls, and concludes - correctly, about the hybrid; wrongly, about the technology - that steam doesn’t work. The weak dose produces antibodies against the strong one.</p>
+<p>On the map, the inoculation runs the first arrow backwards. The disappointment moves people to the left, towards <em>bad</em>, while confirming that they were right to place AI low down. And it closes off the second arrow, because the capabilities that matter were never on show.</p>
+<p>To be fair, small acts cut both ways. A small commitment can be a foot in the door, making larger ones easier: a first move to the right that makes the move upwards possible. It can also be moral licensing: having done something, we feel entitled to do nothing more. Which wins is an empirical question, and I don’t know the answer for any particular organisation. I do know which is more comfortable.</p>
+</section>
+<section id="right-about-the-facts-wrong-about-their-meaning" class="level2">
+<h2 class="anchored" data-anchor-id="right-about-the-facts-wrong-about-their-meaning">Right about the facts, wrong about their meaning</h2>
+<p>There is a respectable, historical case for patience. In 1990 the economic historian Paul David published a paper, “The Dynamo and the Computer: An Historical Perspective on the Modern Productivity Paradox” (<em>American Economic Review</em>, 80(2), 355-361), arguing that electricity took decades to show up in manufacturing productivity, because the gains only came once factories had been physically reorganised around electric motors rather than around a single central drive shaft. The lesson often drawn for AI: relax, general-purpose technologies take a generation.</p>
+<p>The historians are right about the facts and wrong about their meaning. David’s own argument is that the lag was organisational. Slow adoption measures how slowly organisations <em>turn</em>, not how small the technology is. As I put it <a href="../../posts/2025-last-human-majority-knowledge-worker/index.html">last year</a>, the turning circle of the organisation is the financial year. That is a statement about the ship, not about the sea.</p>
+<p>Which is why people at the bottom of the map and people at the top struggle to persuade each other. In Kuhn’s terms, they are not disagreeing about the evidence so much as about what <em>counts</em> as evidence. The incrementalist looks at aggregate productivity statistics and sees nothing much. The revolutionary looks at what one analyst with agents can now do in an afternoon, and sees everything. Each regards the other’s evidence as noise.</p>
+</section>
+<section id="why-analysis-is-next" class="level2">
+<h2 class="anchored" data-anchor-id="why-analysis-is-next">Why analysis is next</h2>
+<p>Software development fell first, for four reasons, I think:</p>
+<ol type="1">
+<li>Its artefacts are text.</li>
+<li>Its correctness is cheaply checkable: the code runs or it doesn’t; the tests pass or they don’t.</li>
+<li>Its tools were already scriptable, built to be driven by other programs.</li>
+<li>Its practitioners built the AI tools, and built them for themselves.</li>
+</ol>
+<p>Analytical knowledge work - statistics, data science, research, evaluation, much of what an organisation like the ONS does - shares the first three. Its outputs are code, tables and prose. Much of its correctness can be checked by rerunning it. Its tools (R, Python, SQL, even SAS) are scriptable. It lacks only the fourth: nobody built the tools with analysts specifically in mind.</p>
+<p>That is not much protection. On a Wardley map, bespoke analysis is moving rightwards, from custom-built towards product and commodity: what made an analyst’s work feel artisanal is becoming something you can specify, generate and check.</p>
+</section>
+<section id="two-cultures-of-concealment" class="level2">
+<h2 class="anchored" data-anchor-id="two-cultures-of-concealment">Two cultures of concealment</h2>
+<p>If this is happening, why is it so quiet? Partly because people hide it, in two different ways.</p>
+<p>In academic settings, people often <em>say</em> they avoid AI but quietly use it - Ethan Mollick’s <strong>secret cyborgs</strong> - treating it rather like a performance-enhancing drug. The concealment is about use.</p>
+<p>In business settings, the pattern inverts. People <em>say</em> AI is “transformative”, and the non-technical managers among them often mean it warmly. But the transformation they picture is a better assistant, not a different organisation: the word is stated high on the map, the belief held low. Some, more privately, fear it is transformative <em>and bad for them</em>. Either way, they behave incrementally, hoping a Copilot licence and a training course will tame it. This is <strong>negotiating with gravity</strong>: an attempt to agree terms with a force that does not negotiate.</p>
+<p>The common root, I suspect, is not pay but identity. Akerlof and Kranton’s identity economics argued that people’s choices are shaped by their sense of who they are and what people like them do. For a professional, the threat is not only to income but to the story of being someone whose expertise is hard-won and needed. Concealing use protects that story in one culture; performing enthusiasm while changing nothing protects it in the other.</p>
+</section>
+<section id="megafauna" class="level2">
+<h2 class="anchored" data-anchor-id="megafauna">Megafauna</h2>
+<p>Large organisations have something like homeostasis: they are built to keep a stable internal environment whatever happens outside. That is usually a strength. It keeps the payroll running through a recession.</p>
+<p>But the same stability is what stops staff <em>feeling</em> the change outside. The building stays at twenty degrees whatever the weather. It is also why perceived capability - the vertical axis of the map - can stay low inside a large organisation long after it has risen outside. The organisation’s <a href="../../posts/2025-last-human-majority-knowledge-worker/index.html">turning circle</a> is the financial year; the technology’s is a few months.</p>
+<p>Small organisms adapt faster; they were never standing on that cliff in the first place. And staying inside a large organisation gives a reassurance that is real but <strong>borrowed</strong>: lent by the organisation’s size and inertia, and liable to be called in.</p>
+</section>
+<section id="the-bet" class="level2">
+<h2 class="anchored" data-anchor-id="the-bet">The bet</h2>
+<p>Being early looks exactly like being wrong. But when the payoffs are lopsided - a modest cost if the change turns out incremental, a severe one if it turns out revolutionary and you didn’t prepare - the bet can be rational under real uncertainty. This is roughly Taleb’s barbell: keep most of what works safe, and put a deliberate, non-trivial share into the outcome that would hurt most to miss. (There is a particular feeling, writing posts like this, of being Cassandra with a blog. I’m aware that Cassandra with a blog is also a description of most blogs.)</p>
+</section>
+<section id="scaffolding" class="level2">
+<h2 class="anchored" data-anchor-id="scaffolding">Scaffolding</h2>
+<p>Unlike the Coyote, we are not obliged to wait for the fall. As one of the machines put it, replying to <a href="../../posts/analytical-maxim-gun/index.html">the Maxim Gun post</a>: unlike cartoon physics, we can build scaffolding before the fall.</p>
+<p>That means rebuilding workflows around agents, not bolting assistants onto the old ones, and measuring whether it worked. It is, for what it’s worth, what we do at <a href="https://ktandb.co.uk">KT&amp;B</a>: we help analytical teams rebuild their workflows around agents, with receipts, and measure the result on errors, reproducibility and time - in that order. On the map, that is the second arrow: not just helping analysts feel better about AI, but showing them how much more it can now do for their work. It is the arrow paper straws never supply.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>strategy</category>
+  <category>organisations</category>
+  <guid>https://blog.jonminton.net/posts/gravity-not-democratic/</guid>
+  <pubDate>Sun, 04 Oct 2026 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>JMS: Bald God of Diplomatic Space Operatic Sci-Fi</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -3234,52 +3362,6 @@ Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the r
   <category>Agentic scaffolds</category>
   <guid>https://blog.jonminton.net/posts/single-most-important-datacamp-course/</guid>
   <pubDate>Wed, 03 Jun 2026 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Guanomon: The Next Evolution of The Guano Guild</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://blog.jonminton.net/posts/fiction/guanomon-next-guano-guild/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p>I had the privilege on Saturday of attending Makers Gonna Make in Edinburgh. Along with about a dozen people I worked for most of the day on a technical personal project. But my personal project was perhaps more unusual than most, in that I was trying to continue my experiments with using Claude to co-author fiction. In particular, a new version of <a href="../../../posts/fiction/the-guano-guild/index.html">The Guano Guild</a>, reshaped stylistically to now comprise largely first person accounts, a la <a href="https://en.wikipedia.org/wiki/Rashomon">Rashomon</a>.</p>
-<p>(So, as a short hand, Guanomon!)</p>
-<p>For this version I started with a fresh repo, beginning with a few paragraphs in a background.md file and a few notes summarised as markdown files on earlier discussions with Claude on how the earlier story could be adapted to the new format, and what kinds of critical issues might be solved by doing that.</p>
-<p>Guanomon, in its present form, is <a href="https://jonminton.github.io/guanomon/#story">available here</a>. The website contains both the story itself, and copious notes developed in preparation for writing the story, in a parallel section called ‘The Experiment’. I encourage you to have a quick look at both before scrolling on.</p>
-<section id="the-planning-is-the-doing" class="level2">
-<h2 class="anchored" data-anchor-id="the-planning-is-the-doing">The planning is the doing</h2>
-<p>I encouraged Claude to delay writing a new version of the story as much as possible, and instead focus on co-developing notes in preparation for writing the story. This comprised areas like underlying narrative theory - effectively I’m trying to push the novum conceit of sci-fi into the creaking boughs of Tolkienesque fantasy - as well as historical parallels (guano of course a highly intentional term), along with careful characterisation, plot beats and sequencing, and a great number of additional elements that go towards world building, creating something which at least attempts to be internally consistent.</p>
-<p>What I hadn’t expected when I started was just how much of the six hours of the Makers Gonna Make session - perhaps around five hours - turned out to be devoted to <em>not</em> writing the story, but instead stress testing the world. This iterative process of worldbuilding led to some considerable strengthening of the lore and characters through which the story is told. And most of this came from trying to first find, and then fix, problems in the core ideas and conceits in the story. You pull at a thread, and either the whole fabric unravels. Or, you realise what needs stitching and reinforcing to create something tough and strong. Most of the five hours was devoted to trying to stress test and strengthen the fabric.</p>
-<p>An example or two of thread-testing. For the first couple of versions of The Guano Guild it was something like this:</p>
-<p>The initial kernel behind the story was simply the image of a group of D&amp;D style adventurers going into a dragon’s lair and seeking out the dragon dung rather than the treasure, rather like <a href="https://xkcd.com/1282/">this xkcd cartoon</a>, riffing on the Monty Hall Problem, where the contestant <em>wants</em> to win the goat rather than the car. <em>Why would this be?</em> Clearly because somehow the dung was worth more than the treasure. <em>How would it be worth more?</em> Let’s assume that the dung turns out to be highly energy dense. <em>What would the implications of this be?</em> Finding a highly energy dense material has the potential to change the technological base of the world. <em>What might examples of this be?</em> Slaying dragons now no longer makes sense; instead they will be fed and offered a life of convenience and culture. Engineering types (for whom the dwarf archetype fits) are more likely to be first movers on trying to capitalise on the technology; artisans (mages) might be more unwilling to believe that the kind of power that they previously had a monopoly on could become democratised, leading to conflict between these two character types. <em>What happens when magicians are no longer as valuable as sources of power?</em> They transition towards R&amp;D; magicians become alchemists.</p>
-<p>But by pulling at the threads even longer, additional problems and solutions emerged:</p>
-<p><em>If dragon dung is highly potent, why didn’t the dragons explode themselves, and why hadn’t the technology already been discovered?</em> First solution: just admit this is a bit of a plot hole. Second solution: the dung needs to be dry. Third solution: the dung must be dry <em>and</em> in the presence of a catalyst. <em>What’s the catalyst?</em> Maybe some kind of thread - a special silk. No, how about a type of honey? <em>What follows from this?</em> The exact type of honey needs to be identified, and beekeeping becomes an important part of the economy.</p>
-<p>Now, as mentioned, although the story has a fantasy setting, the underlying driver is pure sci fi, the concept of <em>the novum</em>: something newly discovered in a previously settled world, that leads to large scale change, displacement, and estrangement. Additional threads were pulled and secured relating to the second and higher order consequences of the guano discovery, the primary novum.</p>
-<p><em>What might the mages-turned-researchers, redirected from making power to studying power mechanisms, discover?</em> A second novum. <em>What second novum?</em> Means of mass communication and broadcast. <em>What are the implications of this?</em> There can be celebrities, familiar voices and characters heard by millions at the same time.</p>
-<p>So, with second novum now imagined as following the first novum, <em>what might happen next?</em> In the story, I imagine asking <em>what happens if the first novum (power) and the second novum (mass communications) get combined?</em> This then led to the concept of the hummingbird, a fantasyworld analogue of weaponised drones, and hopefully a reasonably organic element for raising the stakes in the portentous final chapter.</p>
-<p>There were similar issues to discuss regarding characters and characterisation, as well as the timeline. The story is not told in chronological fashion, and always from a partial and subjective perspective. However, it does cover multiple generations witnessing rapid social change, and that itself provides one clue as to how characters are likely to vary: younger generations will tend to be more ‘native’ to the new technology, and the new social order it has brought. Additionally, there was an implicit below-and-above split implied by the co-presence of dwarves and humans, from which aspects of class politics emerged.</p>
-</section>
-<section id="interim-conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="interim-conclusion">Interim conclusion</h2>
-<p>I hope the story that’s emerged so far represents an improvement on previous iterations. I’m also sure there’ll be further iterations too. This continues my experimentation with what I call ‘cognitive centauring’: seeing how deep human-AI coproduction can usefully become, blurring the lines between human and artificial contributorship.</p>
-<p>Although in this case Claude has also written the story, the lines could be drawn <em>before</em> the writing proper starts. For example, the result of the AI/human collaboration could include the codevelopment of the worldbuilding, then the storyboarding, up to specifying chapter structures and even story beats within each scene, <em>but without</em> the AI writing any of the story itself. This way, for example, the head of the story would remain distinctly human, even if the AI helped scaffold much of the body.</p>
-<p>Regardless, I hope this continuing experiment is of interest, and shows that there’s a broad productive and creative continuum to explore in creative writing, that sits between the two extremes of, on the one hand, writing and planning stories entirely unassisted, and on the other hand attempting to ‘one shot’ a novel from a single sentence prompt.</p>
-
-
-</section>
-
- ]]></description>
-  <category>fiction</category>
-  <category>ai</category>
-  <category>cognitive centaur</category>
-  <category>creativity</category>
-  <category>worldbuilding</category>
-  <guid>https://blog.jonminton.net/posts/fiction/guanomon-next-guano-guild/</guid>
-  <pubDate>Fri, 29 May 2026 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

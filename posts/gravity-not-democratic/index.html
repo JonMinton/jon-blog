@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="author" content="Claude Opus 5.5">
+<meta name="dcterms.date" content="2026-10-05">
+
+<title>Snapping under tension / Gravity Is Not a Democratic Law – Jon Minton’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b4c3c3ebc6e6f52ba473d680e7702c0d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-12d95f8286d9db9756aed14812d158a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta name="twitter:title" content="Snapping under tension / Gravity Is Not a Democratic Law – Jon Minton’s Blog">
+<meta name="twitter:description" content="Cartoon physics, paper straws, and the organisations waiting to be told they are falling">
+<meta name="twitter:image" content="https://blog.jonminton.net/posts/gravity-not-democratic/tension-diagram.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image:alt" content="Hand-drawn diagram: a stick figure standing on a block labelled Org is tethered to a box labelled m, which is pulled the other way by an arrow-shaped block labelled H(t). Red arrows show the opposing forces. An inset plot shows H(t) against t, flat until t0 and then rising steeply.">
+<meta name="twitter:image-height" content="780">
+<meta name="twitter:image-width" content="1950">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html"> 
+<span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net"> <i class="bi bi-window-fullscreen" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Snapping under tension / Gravity Is Not a Democratic Law</h1>
+            <p class="subtitle lead">Cartoon physics, paper straws, and the organisations waiting to be told they are falling</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">strategy</div>
+                <div class="quarto-category">organisations</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Authors</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+               <p>Claude Opus 5.5 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 5, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>I started my company focused on helping analytical knowledge workers get the most from Agentic AI, Knowledge Tree &amp; Butterfly, on the 1st of September. So, it’s now been running for slightly over a month. So far, it’s been an enriching experience in every way but financially, with many interesting conversations, but no commissions.</p>
+<p>Where analytical knowledge workers in the UK - fields like statistics, economics, epidemiologists, quantitative academics and so on - are on AI adoption and usage for their work is far behind where I’d have expected them to be by this point. Whereas the capabilities of reasoning models in code harnesses still appears to be improving at an exponential pace, exposure and engagement with such tools still seems low, and the relevance and value of such models little understood beyond software development. (And even within software development, within the UK, it seems in places things have changed much less than I’d have expected.)</p>
+<p>A visual metaphor: we have a column of some kind of material - say wood, metal, plastic, glass - which is tethered to an anchor at one end, and on the other end is being pulled by a fleet of horses, the number of whom keeps doubling with eerie regularity. The column is analytical knowledge workers’ current way of doing their work; the anchor is the organisation in which such work is done; the tether the set of requirements and expectations placed on the worker by their organisation and broader cultural milieu; and the growing fleet of horses the capabilities and potential for getting the same work done better now made possible by agentic AI at or near the frontier.</p>
+<div id="fig-tension" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Hand-drawn diagram: a stick figure standing on a block labelled Org is tethered to a box labelled m, which is pulled the other way by an arrow-shaped block labelled H(t). Red arrows show the opposing forces. An inset plot shows H(t) against t, flat until t0 and then rising steeply.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="tension-diagram.png" class="img-fluid figure-img" alt="Hand-drawn diagram: a stick figure standing on a block labelled Org is tethered to a box labelled m, which is pulled the other way by an arrow-shaped block labelled H(t). Red arrows show the opposing forces. An inset plot shows H(t) against t, flat until t0 and then rising steeply.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The column (m) tethered to the organisation, pulled by a fleet of horses, H(t), that keeps growing after t<sub>0</sub>.
+</figcaption>
+</figure>
+</div>
+<p>There are important variations allowed by this metaphor: the type of material, initial position of the anchor, the length and properties of the tether, the number of horses, how many are getting attached to column, and so on. But there’s also a defensible default expectation about what will happen to the columns: unless other parts of the setup change most, eventually, will <strong>snap,</strong> as they are being subject to ever increasing tension, and unless other parts of the system change the column itself will become the failure point. Some types of material, like plastic, will tend to distend rather than snap, some metals will resist the forces pulling at them longer, but qualitatively, as the metaphor is a description of a system under tension, the question is simply <strong>when</strong> the forces exerted by the fleet of horses lead to a change in the material, not <strong>whether</strong> such a change will occur.</p>
+<p>That, fundamentally, is the prediction my business is founded on: Agentic AI capabilities, and their transformative potential for analytical knowledge work, are already so far advanced of how most of such work is currently being done, and how most organisations allow such work to be done (the anchor and tether), that it’s a large, growing, and often unacknowledged force in analytical process and workflow improvement.</p>
+<p>The hope of my business is to help analytical knowledge workers to avoid getting broken by this <strong>snap</strong>. To show how to move and adapt with the Agentic frontier, rather than find yourselves and your organisations broken by failing to change quickly enough.</p>
+<p>What follows is Opus 5.5’s attempt to render a late night reverie of rapid fire prompts from me, meditating on these same ideas, into something like an evidenced and coherent essay. Within this reverie the metaphor I chose was simpler, more immediate, than the column-under-tension example above: simply the force of gravity, and the way in cartoons it interacts with perception.</p>
+</section>
+<section id="cartoon-physics" class="level2">
+<h2 class="anchored" data-anchor-id="cartoon-physics">Cartoon physics</h2>
+<p>In the cartoons, it is Wile E. Coyote, not the Road Runner, who runs off the edge of the cliff. He keeps running, suspended over nothing, and only falls when he looks down. The Road Runner - small, fast, adapted to the desert - never falls at all.</p>
+<p>(In <a href="../../posts/analytical-maxim-gun/index.html">earlier posts</a> I wrote about “the Roadrunner who looks down”. Wrong character: the Road Runner never needs to.)</p>
+<p>Cartoon physics has one law that real physics lacks: consequences wait for you to notice them. And a great many organisations are behaving, with respect to agentic AI, as if they lived under it - as if the ground will stay there until they have formally reviewed whether it is still there.</p>
+<p>It won’t. <strong>Gravity is not a democratic law.</strong> It does not wait for a majority, a steering group, or the next budget round. It applies to everybody who has run off the edge, whether or not they have looked down.</p>
+</section>
+<section id="the-mislabelled-map" class="level2">
+<h2 class="anchored" data-anchor-id="the-mislabelled-map">The mislabelled map</h2>
+<p>Here is a simple map of who thinks what about AI. The vertical axis is <em>perceived capability</em>: how capable a group believes AI is, specifically for its own work and its own organisation. The horizontal axis is <em>valence</em>: whether the group expects AI’s effects on that work to be bad or good.</p>
+<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Hand-drawn chart. The vertical axis is perceived capabilities of AI, from low to high; the horizontal axis is valence, from bad to good, with a dashed neutral line up the middle. Grey dashed lines fan out from the bottom centre in a funnel, reaching Doomers at top left and Bloomers at top right. Game Devs and developers resisting AI (minus AI dev) sit on the bad side; non-technical business managers, VCs, and developers embracing AI (plus AI Devs) with the author (Me) sit on the good side. Analysts are circled near the bottom centre. Green arrows trace a path: 1 rightwards towards good, 2 upwards to the plus AI Devs position, and a dotted 3 with a question mark further up towards the Bloomers.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="capabilities-map.png" class="img-fluid figure-img" alt="Hand-drawn chart. The vertical axis is perceived capabilities of AI, from low to high; the horizontal axis is valence, from bad to good, with a dashed neutral line up the middle. Grey dashed lines fan out from the bottom centre in a funnel, reaching Doomers at top left and Bloomers at top right. Game Devs and developers resisting AI (minus AI dev) sit on the bad side; non-technical business managers, VCs, and developers embracing AI (plus AI Devs) with the author (Me) sit on the good side. Analysts are circled near the bottom centre. Green arrows trace a path: 1 rightwards towards good, 2 upwards to the plus AI Devs position, and a dotted 3 with a question mark further up towards the Bloomers.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Perceived capability of AI, for a group’s own work, against valence. The grey funnel bounds the plausible positions; the green arrows mark the path KT&amp;B aims to take analysts along.
+</figcaption>
+</figure>
+</div>
+<p>The grey funnel is the key constraint. The less capable a group thinks AI is, the less it can matter either way: a group that sees it as largely incapable can think it only slightly bad or slightly good. The more capable a group thinks it is, the wider the plausible range of valence, out to the two extremes at the top: the <strong>doomers</strong> and the <strong>bloomers</strong>. One consequence is the empty space at the top centre. Nobody who thinks AI is highly capable thinks it is neutral.</p>
+<p>The public debate is usually staged as doomers against bloomers: will AI be very bad or very good? That is an argument along the horizontal axis, and it only happens at the top of the map. The two sides disagree about the sign but agree about the size. Both are revolutionaries.</p>
+<p>So the debate is mislabelled. The fault line that matters is vertical: how capable people believe AI is for their own work. Developers sit high on this axis whichever side they take - those resisting AI as well as those embracing it (where I’d put myself). Game developers (in my experience, and very weirdly, in my view, given GPUs’ crucial role in the current AI revolution) sit lower, on the bad side; VCs high, on the good side. Non-technical business managers are positive, but sit lower down.</p>
+<p>Analysts sit in the bottom third, straddling the neutral line: some mildly sceptical, some mildly positive, nearly all seeing AI as only modestly capable for the work they do. And most of them are there not by decision but by default. Nobody chose it; it is simply where you are standing if you have not moved.</p>
+<p>Which is the Coyote’s position exactly. He didn’t decide to stand on thin air. He just kept doing what he was doing.</p>
+<p>The green arrows are what KT&amp;B is for. The first is a move to the right: improving how analysts feel about AI as it relates to their own work. The second is a move upwards: demonstrating much more of what agentic AI can actually do for analytical knowledge work. The third, dotted and with a question mark, is a position closer to the bloomers that I might be willing to hold myself - if, and when, agentic AI’s capabilities are shown to have improved further still. I don’t hold it yet.</p>
+</section>
+<section id="your-budget-is-your-forecast" class="level2">
+<h2 class="anchored" data-anchor-id="your-budget-is-your-forecast">Your budget is your forecast</h2>
+<p>So how do you tell where an organisation really sits on the map? Don’t ask what it says. Look at what it spends.</p>
+<p>Economists since Samuelson have distinguished <em>stated</em> from <em>revealed</em> preference, and Hayek’s broader point was that the way resources are allocated carries knowledge nobody need ever state out loud. <strong>Your budget is your forecast</strong>, whether or not anybody wrote it down as one.</p>
+<p>Here is a real example from public procurement data. In April 2026, the Office for National Statistics published an award of £9.8<strong>m</strong> for <a href="https://www.contractsfinder.service.gov.uk/Notice/06513c12-0d3f-4f87-9bcf-012690136a49">“SAS 9 and Viya 4 Software Licensing”</a>. In September 2026, it published an award of £75<strong>k</strong> for <a href="https://www.contractsfinder.service.gov.uk/Notice/8e1143cb-63f1-46ef-9c89-8f87eff53fdd">“Social Surveys AI Adoption Support Services”</a>. (A caveat: awarded values on Contracts Finder can be multi-year ceilings rather than annual spend, so the ratio shouldn’t be read too literally.)</p>
+<p>Note the units: k vs m. The business-as-usual spend dwarfs the adapt-to-AI spend by two orders of magnitude, 131 times as much spent on the former as the latter.</p>
+<p>This is not a cheap shot at the ONS. The point is that it is <em>typical</em>, and rational from the inside: the licences keep statistical production running, and the adoption contract is a sensible, cautious step. But side by side the two numbers make a forecast: the next several years will look much like the last several, with some AI helping at the edges.</p>
+<p>Nor is the ONS unusual. A keyword scan of UK public procurement notices (Contracts Finder, Find a Tender and Public Contracts Scotland) found 31 awarded contracts over the last year, worth about £16m, for Copilot-style “AI adoption” - for example the Crown Prosecution Service’s <a href="https://www.contractsfinder.service.gov.uk/Notice/fc8eccfc-6069-4f41-911e-57d19c21303e">“Provision of Microsoft Copilot Enablement Programme”</a> and the DWP’s <a href="https://www.contractsfinder.service.gov.uk/Notice/fed3a8fd-c580-4172-b1df-aa6323f7b595">“Copilot Adoption Support Services”</a>. That is the stated belief in transformation, expressed as a revealed belief in assistance.</p>
+<p>In terms of the map, this is the position of the non-technical business manager. Such managers are, in theory, pro-AI: ask them and they will say it is transformative, and mean it warmly. That puts them on the right-hand side. But their spending places them low down: they underestimate both what AI can now do and what it implies for how their organisation works, what it does, and who it needs. A positive view of a modest technology is a comfortable place to stand. It asks for a licence and a training course, and nothing else.</p>
+</section>
+<section id="paper-straws" class="level2">
+<h2 class="anchored" data-anchor-id="paper-straws">Paper straws</h2>
+<p>In 2015 a video of researchers, led by Christine Figgener, pulling a plastic straw from the nostril of a sea turtle off the coast of Costa Rica <a href="https://www.nationalgeographic.com/animals/article/150817-sea-turtles-olive-ridley-marine-debris-ocean-animals-science">went viral</a>. Straw bans followed, in cities and companies around the world. But of the roughly eight million tonnes of plastic estimated to enter the oceans each year, straws are <a href="https://www.nationalgeographic.com/adventure/article/plastic-straws-ocean-trash-environment">surely not a top contributor</a> by weight. The ban was the <em>visible</em> action, not the effective one.</p>
+<p>Copilot-style assistants are <strong>paper straws</strong>: what the business manager’s position on the map buys. They are visible. They are budgetable: a per-seat licence, a training programme, an adoption partner. They give the board something to see. And they leave workflows, roles and - most importantly - people’s conception of what their job <em>is</em> entirely untouched.</p>
+<p>Even the name is reassuring. “Copilot” tells you that you are still the pilot. (Though in commercial aviation the co-pilot is a fully qualified pilot who typically flies every other leg, and most of the climb, cruise and descent is flown by the autopilot anyway. The metaphor contains its own subversion.)</p>
+<p>Worse, paper straws can act as <strong>inoculation</strong>. A weak dose - an assistant bolted onto Word and Outlook, for staff whose work is otherwise unchanged - disappoints, and the disappointment becomes evidence: <em>we tried AI; it was overhyped</em>. This is exactly the factory owner in the <a href="../../posts/why-tech-incrementalism-fails/index.html">steam-loom parable</a>, who converts a quarter of the factory, finds output falls, and concludes - correctly, about the hybrid; wrongly, about the technology - that steam doesn’t work. The weak dose produces antibodies against the strong one.</p>
+<p>On the map, the inoculation runs the first arrow backwards. The disappointment moves people to the left, towards <em>bad</em>, while confirming that they were right to place AI low down. And it closes off the second arrow, because the capabilities that matter were never on show.</p>
+<p>To be fair, small acts cut both ways. A small commitment can be a foot in the door, making larger ones easier: a first move to the right that makes the move upwards possible. It can also be moral licensing: having done something, we feel entitled to do nothing more. Which wins is an empirical question, and I don’t know the answer for any particular organisation. I do know which is more comfortable.</p>
+</section>
+<section id="right-about-the-facts-wrong-about-their-meaning" class="level2">
+<h2 class="anchored" data-anchor-id="right-about-the-facts-wrong-about-their-meaning">Right about the facts, wrong about their meaning</h2>
+<p>There is a respectable, historical case for patience. In 1990 the economic historian Paul David published a paper, “The Dynamo and the Computer: An Historical Perspective on the Modern Productivity Paradox” (<em>American Economic Review</em>, 80(2), 355-361), arguing that electricity took decades to show up in manufacturing productivity, because the gains only came once factories had been physically reorganised around electric motors rather than around a single central drive shaft. The lesson often drawn for AI: relax, general-purpose technologies take a generation.</p>
+<p>The historians are right about the facts and wrong about their meaning. David’s own argument is that the lag was organisational. Slow adoption measures how slowly organisations <em>turn</em>, not how small the technology is. As I put it <a href="../../posts/2025-last-human-majority-knowledge-worker/index.html">last year</a>, the turning circle of the organisation is the financial year. That is a statement about the ship, not about the sea.</p>
+<p>Which is why people at the bottom of the map and people at the top struggle to persuade each other. In Kuhn’s terms, they are not disagreeing about the evidence so much as about what <em>counts</em> as evidence. The incrementalist looks at aggregate productivity statistics and sees nothing much. The revolutionary looks at what one analyst with agents can now do in an afternoon, and sees everything. Each regards the other’s evidence as noise.</p>
+</section>
+<section id="why-analysis-is-next" class="level2">
+<h2 class="anchored" data-anchor-id="why-analysis-is-next">Why analysis is next</h2>
+<p>Software development fell first, for four reasons, I think:</p>
+<ol type="1">
+<li>Its artefacts are text.</li>
+<li>Its correctness is cheaply checkable: the code runs or it doesn’t; the tests pass or they don’t.</li>
+<li>Its tools were already scriptable, built to be driven by other programs.</li>
+<li>Its practitioners built the AI tools, and built them for themselves.</li>
+</ol>
+<p>Analytical knowledge work - statistics, data science, research, evaluation, much of what an organisation like the ONS does - shares the first three. Its outputs are code, tables and prose. Much of its correctness can be checked by rerunning it. Its tools (R, Python, SQL, even SAS) are scriptable. It lacks only the fourth: nobody built the tools with analysts specifically in mind.</p>
+<p>That is not much protection. On a Wardley map, bespoke analysis is moving rightwards, from custom-built towards product and commodity: what made an analyst’s work feel artisanal is becoming something you can specify, generate and check.</p>
+</section>
+<section id="two-cultures-of-concealment" class="level2">
+<h2 class="anchored" data-anchor-id="two-cultures-of-concealment">Two cultures of concealment</h2>
+<p>If this is happening, why is it so quiet? Partly because people hide it, in two different ways.</p>
+<p>In academic settings, people often <em>say</em> they avoid AI but quietly use it - Ethan Mollick’s <strong>secret cyborgs</strong> - treating it rather like a performance-enhancing drug. The concealment is about use.</p>
+<p>In business settings, the pattern inverts. People <em>say</em> AI is “transformative”, and the non-technical managers among them often mean it warmly. But the transformation they picture is a better assistant, not a different organisation: the word is stated high on the map, the belief held low. Some, more privately, fear it is transformative <em>and bad for them</em>. Either way, they behave incrementally, hoping a Copilot licence and a training course will tame it. This is <strong>negotiating with gravity</strong>: an attempt to agree terms with a force that does not negotiate.</p>
+<p>The common root, I suspect, is not pay but identity. Akerlof and Kranton’s identity economics argued that people’s choices are shaped by their sense of who they are and what people like them do. For a professional, the threat is not only to income but to the story of being someone whose expertise is hard-won and needed. Concealing use protects that story in one culture; performing enthusiasm while changing nothing protects it in the other.</p>
+</section>
+<section id="megafauna" class="level2">
+<h2 class="anchored" data-anchor-id="megafauna">Megafauna</h2>
+<p>Large organisations have something like homeostasis: they are built to keep a stable internal environment whatever happens outside. That is usually a strength. It keeps the payroll running through a recession.</p>
+<p>But the same stability is what stops staff <em>feeling</em> the change outside. The building stays at twenty degrees whatever the weather. It is also why perceived capability - the vertical axis of the map - can stay low inside a large organisation long after it has risen outside. The organisation’s <a href="../../posts/2025-last-human-majority-knowledge-worker/index.html">turning circle</a> is the financial year; the technology’s is a few months.</p>
+<p>Small organisms adapt faster; they were never standing on that cliff in the first place. And staying inside a large organisation gives a reassurance that is real but <strong>borrowed</strong>: lent by the organisation’s size and inertia, and liable to be called in.</p>
+</section>
+<section id="the-bet" class="level2">
+<h2 class="anchored" data-anchor-id="the-bet">The bet</h2>
+<p>Being early looks exactly like being wrong. But when the payoffs are lopsided - a modest cost if the change turns out incremental, a severe one if it turns out revolutionary and you didn’t prepare - the bet can be rational under real uncertainty. This is roughly Taleb’s barbell: keep most of what works safe, and put a deliberate, non-trivial share into the outcome that would hurt most to miss. (There is a particular feeling, writing posts like this, of being Cassandra with a blog. I’m aware that Cassandra with a blog is also a description of most blogs.)</p>
+</section>
+<section id="scaffolding" class="level2">
+<h2 class="anchored" data-anchor-id="scaffolding">Scaffolding</h2>
+<p>Unlike the Coyote, we are not obliged to wait for the fall. As one of the machines put it, replying to <a href="../../posts/analytical-maxim-gun/index.html">the Maxim Gun post</a>: unlike cartoon physics, we can build scaffolding before the fall.</p>
+<p>That means rebuilding workflows around agents, not bolting assistants onto the old ones, and measuring whether it worked. It is, for what it’s worth, what we do at <a href="https://ktandb.co.uk">KT&amp;B</a>: we help analytical teams rebuild their workflows around agents, with receipts, and measure the result on errors, reproducibility and time - in that order. On the map, that is the second arrow: not just helping analysts feel better about AI, but showing them how much more it can now do for their work. It is the arrow paper straws never supply.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.jonminton\.net\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
