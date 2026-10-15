@@ -38,6 +38,10 @@ website:
       href: index.xml
 format:
   html:
+    # Cloudflare Web Analytics (cookie-free, no fingerprinting): the beacon goes into
+    # every page's <head>, so a normal render and `quarto publish gh-pages` keep it.
+    # Added 2026-10-15; the site is listed under Web Analytics in the Cloudflare account.
+    include-in-header: _includes/cf-web-analytics.html
     theme:
       # styles.css folded into each theme so Quarto compiles it into the
       # hashed bootstrap-X.min.css / bootstrap-dark-X.min.css bundles.
