@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jon Minton">
+<meta name="dcterms.date" content="2026-10-18">
+
+<title>MMDS (B): For when you need to chisel your coding itch – Jon Minton’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b4c3c3ebc6e6f52ba473d680e7702c0d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-12d95f8286d9db9756aed14812d158a3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;0f1e121c841945939c873af1030390ec&quot;}"></script><!-- End Cloudflare Web Analytics -->
+
+
+<meta name="twitter:title" content="MMDS (B): For when you need to chisel your coding itch – Jon Minton’s Blog">
+<meta name="twitter:description" content="(AKA: In defence of save scumming)">
+<meta name="twitter:image" content="https://blog.jonminton.net/posts/mmds-b/troops-simple.png">
+<meta name="twitter:site" content="@jonminton">
+<meta name="twitter:image:alt" content="Hand-drawn sketch: three enemy troops labelled A, B and C, with green lines showing their sightlines to one another, and three party members X, Y and Z off to the right.">
+<meta name="twitter:image-height" content="360">
+<meta name="twitter:image-width" content="900">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Jon Minton’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-statistics--data-science" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Statistics &amp; Data Science</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-statistics--data-science">    
+        <li>
+    <a class="dropdown-item" href="../../glms.html">
+ <span class="dropdown-text">Statistical Theory and Applications</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../tardy-tuesday.html">
+ <span class="dropdown-text">Tardy Tuesday</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../hand-drawn-statistics.html">
+ <span class="dropdown-text">Hand-drawn Statistics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../unpop.html"> 
+<span class="menu-text">Unpop</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://jonminton.net"> <i class="bi bi-window-fullscreen" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JonMinton"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/JonMinton"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://uk.linkedin.com/in/jon-minton-09480b13a"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">MMDS (B): For when you need to chisel your coding itch</h1>
+            <p class="subtitle lead">(AKA: In defence of save scumming)</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">Agentic scaffolds</div>
+                <div class="quarto-category">games</div>
+                <div class="quarto-category">coding</div>
+                <div class="quarto-category">experiment</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jon Minton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 18, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>About this post: an experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post has been published in two versions at the same time, labelled only <strong>A</strong> and <strong>B</strong>: <a href="../../posts/mmds-a/index.html">Version A</a> · <a href="../../posts/mmds-b/index.html">Version B</a>.</p>
+<p>Both versions start from the same handwritten draft by Jon Minton. One is that draft with light proofreading only: typos, grammar slips and hyphenation. The other has been heavily edited by AI. Claude Code (Claude Opus 5.5) acted as the main editor. OpenAI’s Codex (gpt-6-astra) then reviewed that edit and suggested rewordings, especially of passages that read as typical of Claude, and Claude Code revised any of those rewordings that read as typical of OpenAI models. Both versions share the same title, figures and section headers. Headers marked † were added by Claude, in both versions.</p>
+<p>Which version is which was decided by a coin toss, and the answer is not recorded anywhere in this site’s source code. It has been committed in advance as the SHA-256 hash <code>8fdd2876f883600c12141d05a572ba77e643048c6d1f70f7c8f04738a3cff17c</code>, so when the answer is revealed, anyone can check that it was not changed after the fact. The hypotheses being tested will be published with the reveal.</p>
+<p>Details of how to register which version you prefer will be added here.</p>
+</div>
+</div>
+<p>In terms of capabilities, the world’s never been as unequally distributed as it is right now. The future is here: it’s just unequally distributed. And what stops people isn’t how well resourced they are. It’s mindset and institutional barriers. Within my business I’m hoping to address both. Mindset is the cornerstone issue.</p>
+<section id="what-gets-lost" class="level2">
+<h2 class="anchored" data-anchor-id="what-gets-lost">What gets lost †</h2>
+<p>Something happened in the last year within software development: people who for years had learned to write code stopped writing code. Or at least stopped writing it directly. They stopped because they realised agentic scaffolds, electronic bodies given to beautiful alien minds to allow them to interact with the electronic world, could translate their intent for a piece of code into the code itself, much faster and more accurately than they could. But they could specify their intent, and they could assess the outputs generated by these models, because they had both the hard-won expertise to know how code works, and what good code looks like; and they had the seniority to switch to the higher-level perspective of purpose, user needs and design.</p>
+<p>But this transformation, even within software, has been bittersweet: what happens to future generations of developers when no longer exposed to the rockface of the codebase directly, and when the production of software becomes an act of pedantic conversation? What happens to their ability to discern whether solutions offered by alien minds meet the true intents of human beings? What happens to their ability to confirm both manifest and latent/implicit requirements are being satisfied by these solutions? When does the athlete who becomes a coach cease to be a good coach, because he is no longer an athlete? What about the coach who has never been an athlete, because she has never had the need to develop first-hand experience of building and maintaining and honing a body into a tool of embodied capability and expertise? What is being lost now? What might be lost - in terms of both work-readiness and job purpose and meaning - for future generations?</p>
+<p>These are bigger questions than I can cope with. They float around the periphery of my attention constantly. They’re unanswerable for now. But given rates of progress in agentic capabilities they’re questions whose answers will start to reveal themselves, I fear, faster than we’ll be ready for them.</p>
+</section>
+<section id="harsh-but-fair" class="level2">
+<h2 class="anchored" data-anchor-id="harsh-but-fair">Harsh but fair †</h2>
+<p>What I can say, as both an analyst and coder: There is something about the act of writing, running, evaluating, debugging, iterating, restructuring, and refactoring code directly, which as an experience is lost when direct exposure to this type of activity, to the blinking cursor inviting the first symbol to be fed into the empty text file, starts falling away. There is something lost in the act of sending code to be executed, of waiting for a compiler to pronounce its harsh binary judgement on a stream of thousands of hand-chiselled symbols as malformed due to a missing closing parenthesis, an overloaded operator, a one-character typo in a function name instantiation or invocation, and so on. There is something lost in the move to the higher-level abstraction layer of expressing purpose and intent.</p>
+<p>Often, in practice, that something lost is frustration, the sense of pushing and prodding at a rockface of literally implemented logical sequences until pieces of it give way to paths taking you inches closer to your intended destination. The sense of rerunning history twenty times, and on all but one occasion finding the rock unyielding, or finding the tunnel you’ve built collapsing on top of you.</p>
+<p>The kind of frustration that comes from hand-coding, however, has an unusual and mixed character. On the one hand it is harsh: one misplaced character can destroy you. On the other hand it is fair: a solution exists, the world is rule-bound and consistent, and though these rules are complex and obscure, they can always be understood with enough effort and knowledge. The rules are the rules, and like the physical constants of the known universe, they care not one jot for organisational structure or social hierarchy.</p>
+</section>
+<section id="a-stopgap" class="level2">
+<h2 class="anchored" data-anchor-id="a-stopgap">A stopgap †</h2>
+<p>This blog post is for the code chisellers who still want to chisel, but who recognise, either tacitly or explicitly, that the economic niche within which the specific and peculiar predilection towards chiselling they possess has now become undermined. This post is for people who want to be exposed to a stream of experience of failure, but a quality of failure that is harsh but fair. Failure as feedback, as signal offering opportunity for course correction, for always learning, for doing better, inching ever closer towards their destination.</p>
+<p>This blog post is for people who recognise their job was a series of games, and that within this series of games the ultimately more satisfying and rewarding games were not those pitting human players against other human players, but one human, or team of humans, against environments of logical symbolism, and within these environments learning how to build structures to satisfy their needs and those of other humans, of building, brick by brick, palaces of the mind.</p>
+<p>The solution I offer - half honestly, half satirically - is limited and partial and finite. It’s a stopgap. It’s arguably even a joke. But it’s the solution (or ‘solution’) I found myself turning to during the first month or so of using agentic AI almost continually during working hours to set up, maintain and develop my business. Within work hours I was indirectly responsible for a lot of working code being written, solving a lot of specific problems relating to both the administration and the broader intentions of the business; for example, on the first day I was able to create a business website, register as a Limited company on Companies House, register with the Information Commissioner’s Office, set up company email addresses and phone numbers, and set up an electronic booking system for turning queries into calendar sessions. This would likely have taken weeks otherwise. Since then, co-developing my business with agentic AI has easily taken at least a day a week of administration tasks from my working week, ensured I’ve never missed an appointment, allowed me to pivot and play with pitches and introductions, let me build around a dozen films, design and redesign the styles and idents for my company, and explore hidden links and patterns between the dozens of conversations and interviews I’ve had so far. With agentic AI, my company is a team of highly capable intentional beings, even if I am the only one made of flesh and bone.</p>
+<p>But having intents whose solutions involved code getting written and executed is not the same as writing code. And so, as someone who has historically liked to code, albeit mainly in the context of data science and statistical analysis, for the first month of my business I found myself drawn to a shadow life, of giving myself something like chiselling code in my downtime, in large part to avoid feeling too much loss in delegating most of my working code to machines.</p>
+</section>
+<section id="shadow-gambit" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-gambit">Shadow Gambit †</h2>
+<p>More specifically, for the first month, and during evenings and weekends, I found myself investing a lot of hours in a game called Shadow Gambit, by the now-defunct German indie game developer Mimimi. In Shadow Gambit, you manage a small crew of undead pirates, sent in small teams of usually just three people to infiltrate islands occupied by religious zealots. And by occupied, I mean heavily occupied: in contrast to your infiltration force of three, there are typically over a hundred enemy forces to deal with. Almost always, you start off outnumbered at least twenty to one.</p>
+<p>So, is it a power fantasy, you might be wondering? Something like the Doom games, for example, where most enemies put up almost no challenge, are literal cannon fodder, and the flow of violent decimation is, for skilled players, so easy to drift into as to become a form of demonic digital parkour? Not so. In Shadow Gambit, even a single enemy can be a match for each of your characters, and a wrong move can, and almost invariably does, lead to the loss of a mission.</p>
+<p>And in Shadow Gambit, single enemies are almost never what you have to be concerned about, because enemies almost never appear in isolation. Instead, enemies appear almost invariably in complex groups of mutually supportive and reinforcing teams: patrol teams of two or three, looked over by sentries with wide visibility, supported by elite troops too powerful for any single character to defeat. Without paying careful attention, trying to attack any one troop within the field will lead to two or three others noticing, who then in turn alert maybe two dozen more. One false move, one mistimed action or step, and this cascade of alarms and attention brings the full weight of a sector’s forces to bear on your tiny party. Within seconds, invariably, it’s then game over.</p>
+</section>
+<section id="outnumbered-twenty-to-one" class="level2">
+<h2 class="anchored" data-anchor-id="outnumbered-twenty-to-one">Outnumbered twenty to one †</h2>
+<p>With these huge asymmetries between forces, how can the player win? This typically involves, loosely, a looped series of steps:</p>
+<ul>
+<li><strong>Observation and situational awareness</strong>: Look carefully at the arrangement of troops, their colocation, their comparative strengths and limitations, their inherent toughness, their level of embedding within the troops’ mutual surveillance and support structure. Consider which troops are covering which other troops. Look for dynamics in these patterns of mutual observation and support over place and time, and whether there are times and periods in patrol sequences where the structure becomes looser and more surgically permeable.</li>
+<li><strong>Party resources and capabilities</strong>: Not all characters have identical capabilities. Ideally they should have special abilities which complement each other. Some may be less versatile but faster, others may have particular niches opening up infiltration possibilities and strategies not otherwise possible. Regardless, remember that the enemy has a supreme numerical advantage, so any successful approach for neutralising the enemy force depends on breaking the forces to be neutralised down into a manageable sequence of smaller operations.</li>
+<li><strong>Strategising and sequencing</strong>: With a deep knowledge of the overall challenge to overcome (the enemy forces) and the resources available to address these challenges (your party members), think carefully about how to sequence a series of smaller operations in such a way as to degrade and unravel the Big Problem, in such a way that no single operation, no single step in the sequence, will lead to a catastrophic failure.</li>
+<li><strong>Implementation and operationalisation</strong>: With a general gameplan ideated, broken down into a proposed sequence of specific operations, the challenge of actually implementing this correctly still remains. The right idea, done wrong, can still be catastrophic, as even mistiming and misplacing an event by a second or a few pixels can still lead to failure. Consider, for each substep in an operation in the sequence, which available party member might be best placed to implement; consider also whether some steps must be executed in parallel rather than in strict series. (Something known in the game as ‘Shadow Mode’, in which one command leads to two or more party members simultaneously executing a series of pre-defined actions.)</li>
+</ul>
+<p>Shadow Gambit is a game where the modal experience of the player tends to be observing and planning, not implementing. As a highly simplified illustration of the importance of observational and situational awareness, consider the following representation of a grouping of troops:</p>
+<p><img src="troops-simple.png" class="img-fluid" alt="Hand-drawn sketch: three enemy troops labelled A, B and C, with green lines showing their sightlines to one another, and three party members X, Y and Z off to the right."></p>
+<p>Here A, B and C represent specific enemy forces, X, Y and Z your party, and the green lines emanating from the troops represent the viewcones, indicating which troops are observing which other troops. Here it should be clear the first troop to neutralise should be C, as no troop is guarding them whereas C is guarding A. As a second step both A and B need to be neutralised, but simultaneously, because A guards B and B guards A. In this very simple example your resources X, Y and Z equal those of the enemy, so a simultaneous three-way takedown becomes possible. But then let’s turn to a slightly more complicated and realistic example:</p>
+<p><img src="troops-sound.png" class="img-fluid" alt="Hand-drawn sketch: four enemy troops A, B, C and D, with green sightlines between them and dashed red circles around each showing hearing range; C and D sit close enough for their hearing circles to overlap. Party members X, Y and Z are off to the right."></p>
+<p>Here not just the viewcones, showing sightlines connecting troops, are shown in green, but there are also dashed red circles indicating what each troop can hear as well. In the game, sound travels less far than sight, but sound awareness is in all directions, rather than more narrowly along the viewcone. Although C and D do not guard each other visually, as do A and B, they do guard each other audially, through their close physical proximity. The types of solution are two-fold: 1) use a special ability possessed by some party members, known as a lure, which will cause C and D to become separated enough to be taken down individually without alerting each other; or 2) attempt a simultaneous take-down of C and D. In either case, the need to sequence the operations becomes clear, simply because there are more enemy forces than party members.</p>
+</section>
+<section id="save-fail-reload" class="level2">
+<h2 class="anchored" data-anchor-id="save-fail-reload">Save, fail, reload †</h2>
+<p>As mentioned, even if the right general strategy has been identified, and the party members are well suited to the problems, and the correct sequence of substeps has been determined, failures in execution can still lead, in a few seconds, to game overs. The solution to this, pretty much the only way to play this kind of game, is to save constantly, potentially every few seconds of game time, and then to reload constantly, when - not if - the first five or ten attempts fail either due to poor strategising or implementation. (Most gamers call this pattern save scumming, because saving and loading repeatedly is usually considered a form of cheating, as well as forming a break from the flow of a gaming experience. With Shadow Gambit, no other approach tends to be tenable.)</p>
+<p>But what does this type of game, and this approach to completing a game, evoke as a form of experience? I’d suggest it’s largely the experience of hand-writing, designing, planning and (especially) debugging code. As with Shadow Gambit, failure with code is sudden, definitive, and frequent. As with Shadow Gambit, the need to keep saving and restoring needs to become an embodied habit. As with Shadow Gambit, failure in making working code can emerge at multiple levels: from having fundamentally the wrong understanding of the situation and means at one’s disposal, to having the right idea but applied in the wrong sequence, through to a simple one-letter typo. And as with Shadow Gambit, the modal experience of coding may tend to vacillate between long periods of observing and thinking, and long periods of iterating rapidly through multiple similar attempts at debugging and walking forward one small step at a time.</p>
+</section>
+<section id="a-name-for-the-genre" class="level2">
+<h2 class="anchored" data-anchor-id="a-name-for-the-genre">A name for the genre †</h2>
+<p>The formal name for games like Shadow Gambit is unresolved. Mimimi, its creator, preferred the term Stealth Strategy, although other terms, like Real-Time Tactics (RTT), Tactical Stealth, and Commandos-like (after the first game which introduced the core game mechanics), have also been used over time. My preferred term for this subgenre of games is MMDS: <strong>M</strong>editative <strong>M</strong>urder <strong>D</strong>ebugging <strong>S</strong>imulators, hence the acronym in the blog post title.</p>
+<p>Regardless, this specific subgenre has always been fairly niche. Over about a quarter century there have perhaps been only two dozen or so games of this type ever made. More sadly still, Shadow Gambit was Mimimi’s last ever game, with poor sales leading to the company collapsing. And so far, years after Mimimi’s demise, no company appears to have picked up the torch of this highly niche games genre.</p>
+<p>But of all types of game, except perhaps those intentionally designed to teach programming (such as Tomorrow Corporation’s Human Resource Machine, designed to introduce assembly and machine language thinking; and its sequel 7 Billion Humans, focused more on functional programming paradigms), I’ve found no type of game that can scratch the itch of hand-chiselling and debugging code as neatly as the MMDS genre can.</p>
+<p>Perhaps, I’d suggest, the genre is niche for a reason: that this type of activity is not inherently fun, and that people who have been hand-chiselling code for the last few decades are either drawn from a very unusual neurotype, or have managed to convince themselves that debugging is inherently fun, or some mixture of both.</p>
+<p>But if, if hand-chiselling code is something you do find fun, and this is something that, as a result of agentic AI you find yourself doing a lot less in your day job than you used to, then I can recommend MMDS as a way of scratching that particular cognitive itch!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.jonminton\.net\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="JonMinton/BlogComments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

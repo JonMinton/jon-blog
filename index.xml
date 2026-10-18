@@ -10,7 +10,194 @@
 <atom:link href="https://blog.jonminton.net/index.xml" rel="self" type="application/rss+xml"/>
 <description>Jon Minton&#39;s personal blog. All things random.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Sun, 04 Oct 2026 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 17 Oct 2026 23:00:00 GMT</lastBuildDate>
+<item>
+  <title>MMDS (A): For when you need to chisel your coding itch</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://blog.jonminton.net/posts/mmds-a/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>About this post: an experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post has been published in two versions at the same time, labelled only <strong>A</strong> and <strong>B</strong>: <a href="../../posts/mmds-a/index.html">Version A</a> · <a href="../../posts/mmds-b/index.html">Version B</a>.</p>
+<p>Both versions start from the same handwritten draft by Jon Minton. One is that draft with light proofreading only: typos, grammar slips and hyphenation. The other has been heavily edited by AI. Claude Code (Claude Opus 5.5) acted as the main editor. OpenAI’s Codex (gpt-6-astra) then reviewed that edit and suggested rewordings, especially of passages that read as typical of Claude, and Claude Code revised any of those rewordings that read as typical of OpenAI models. Both versions share the same title, figures and section headers. Headers marked † were added by Claude, in both versions.</p>
+<p>Which version is which was decided by a coin toss, and the answer is not recorded anywhere in this site’s source code. It has been committed in advance as the SHA-256 hash <code>8fdd2876f883600c12141d05a572ba77e643048c6d1f70f7c8f04738a3cff17c</code>, so when the answer is revealed, anyone can check that it was not changed after the fact. The hypotheses being tested will be published with the reveal.</p>
+<p>Details of how to register which version you prefer will be added here.</p>
+</div>
+</div>
+<p>The future is here: it’s just unequally distributed. Capabilities have never been spread so unevenly, and what holds people back is mindset and institutional barriers, not a lack of resources. My business is trying to address both, but mindset comes first.</p>
+<section id="what-gets-lost" class="level2">
+<h2 class="anchored" data-anchor-id="what-gets-lost">What gets lost †</h2>
+<p>Over the last year, software development changed. People who had spent years learning to write code stopped writing it - or at least stopped writing it by hand. Agentic scaffolds, electronic bodies given to beautiful alien minds so they can act in the digital world, turned out to translate intent into working code faster and more accurately than the developers could. The developers could still specify what they wanted and judge the code that came back. They could do this because they had hard-won knowledge of how code works and what good code looks like, and because they were senior enough to step up to the level of purpose, user needs and design.</p>
+<p>Even within software, though, the change has been bittersweet. What happens to the next generation of developers, who may never face the rockface of a codebase directly, and for whom building software becomes a kind of pedantic conversation? How will they judge whether an alien mind’s solution meets what humans actually want, or check that both the stated and the unstated requirements have been met? When does an athlete turned coach stop being a good coach, because he is no longer an athlete? And what about the coach who never was one, because she never needed to build, maintain and hone a body into a tool of embodied expertise? What are we losing now, and what might the next generation lose, in work-readiness and in the meaning of their work?</p>
+<p>These questions are bigger than I can handle. They hover at the edge of my attention all the time, and for now they can’t be answered. Given how quickly agentic AI is progressing, I suspect we’ll start getting answers before we’re ready.</p>
+</section>
+<section id="harsh-but-fair" class="level2">
+<h2 class="anchored" data-anchor-id="harsh-but-fair">Harsh but fair †</h2>
+<p>I’m an analyst and coder, and writing code directly - running it, evaluating it, debugging, iterating, restructuring, refactoring - is an experience of its own, one that fades once you stop. There’s the blinking cursor in an empty file, waiting for the first symbol. There’s the wait while the compiler delivers its binary verdict on thousands of hand-chiselled symbols, rejecting them for a missing closing bracket, an overloaded operator, a one-character typo in a function name. Moving up to the level of purpose and intent means losing some of that.</p>
+<p>Often, in practice, what you lose is the frustration: pushing and prodding at a rockface of literal logic until a piece gives way and you get an inch closer to where you want to be. Rerunning history twenty times, and finding nineteen times that the rock won’t budge, or that the tunnel you dug has caved in on you.</p>
+<p>It’s an unusual kind of frustration: one misplaced character can sink you, but there’s something fair about it. A solution exists; the world is consistent and runs on rules, and however complex and obscure those rules are, enough effort and knowledge will always crack them. Those rules apply regardless of org charts or social hierarchy, just as the physical constants of the universe do.</p>
+</section>
+<section id="a-stopgap" class="level2">
+<h2 class="anchored" data-anchor-id="a-stopgap">A stopgap †</h2>
+<p>So this post is for the code chisellers who still want to chisel, but who sense - tacitly or explicitly - that the economic niche that rewarded their peculiar predilection has been undermined. It’s for people who want a steady supply of harsh-but-fair failure, where each failure tells them how to correct course and get a bit nearer to where they’re going.</p>
+<p>It’s for people who see that their job was a series of games, and that the most satisfying of those games weren’t human against human. They were a person, or a team, against an environment of logic and symbols, learning to build, brick by brick, the structures that served their needs and other people’s: palaces of the mind.</p>
+<p>I’m partly serious about this, though there’s satire in it too. It’s a limited, partial stopgap, and may even be a joke. But it’s what I found myself turning to in my first month or so of using agentic AI almost constantly during working hours, to set up and run my business.</p>
+<p>At work, I was indirectly responsible for a lot of working code, some of it for admin and some for the wider aims of the business. On the first day alone I created a website, registered a limited company with Companies House, registered with the Information Commissioner’s Office, set up company email addresses and phone numbers, and built a booking system that turns enquiries into calendar sessions. Otherwise that would probably have taken weeks. Since then, building the business with agentic AI has taken at least a day a week of admin off my plate, made sure I’ve never missed an appointment, and let me pivot and play with pitches and introductions. It has helped me make around a dozen films, design and redesign my company’s style and idents, and find hidden links across the dozens of conversations and interviews I’ve had so far. With agentic AI, my company is a team of highly capable intentional beings, even if I’m the only one made of flesh and bone.</p>
+<p>But watching my intentions turn into code didn’t feel like writing it. I’ve always liked coding, mostly for data science and statistics, and in that first month I found myself drawn into a kind of shadow life: finding something like chiselling code for my downtime, largely so that handing most of my working code to machines wouldn’t feel like such a loss.</p>
+</section>
+<section id="shadow-gambit" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-gambit">Shadow Gambit †</h2>
+<p>Specifically, I spent a lot of evenings and weekends playing Shadow Gambit, by Mimimi, the now-defunct German indie developer. You command a crew of undead pirates, usually sent ashore in teams of three to infiltrate islands held by religious zealots. Heavily held: against your three, there are usually more than a hundred enemies. You almost always start outnumbered at least twenty to one.</p>
+<p>This isn’t a power fantasy like the Doom games, where most enemies are literal cannon fodder and a skilled player can turn the flow of carnage into a kind of demonic digital parkour. In Shadow Gambit a single enemy can be a match for any of your characters, and one wrong move can, and usually does, cost you the mission.</p>
+<p>And you are almost never facing a single enemy. Enemies come in mutually supporting groups: patrols of two or three, watched over by sentries with wide sightlines, backed by elite troops no single character can beat. Attack one carelessly and two or three others notice, and they alert another couple of dozen. A false move or mistimed step can set off alarms across the sector, bringing everyone down on your tiny party and ending the game a few seconds later.</p>
+</section>
+<section id="outnumbered-twenty-to-one" class="level2">
+<h2 class="anchored" data-anchor-id="outnumbered-twenty-to-one">Outnumbered twenty to one †</h2>
+<p>So how do you win against odds like that? Loosely, by looping through four steps:</p>
+<ul>
+<li><strong>Observe.</strong> Study how the troops are arranged: who stands with whom, their strengths and weaknesses, how tough they are, and how embedded each one is in the web of mutual watching and support. Work out who covers whom. Look for how those patterns shift over time and place, and for moments in patrol routes when the web loosens enough to be surgically breached.</li>
+<li><strong>Know your party.</strong> Your characters have different abilities, ideally complementary ones. Some are faster but less versatile; others open up approaches no one else can. Either way, the enemy vastly outnumbers you, so any successful plan has to break their force down into a manageable sequence of small operations.</li>
+<li><strong>Plan the sequence.</strong> With the problem (the enemy) and your resources (your party) understood, work out an order of small operations that steadily unravels the Big Problem - one where no single step risks catastrophe.</li>
+<li><strong>Execute.</strong> A plan still has to be carried out, and the right idea done wrong can be fatal: an action a second late or a few pixels off is enough to fail. For each step, decide which character is best placed to carry it out, and whether some steps need to happen at once rather than one after another. (The game calls this ‘Shadow Mode’: one command sets two or more characters off on a pre-planned series of actions simultaneously.)</li>
+</ul>
+<p>In Shadow Gambit, you spend most of your time watching and planning before you act. Here’s a highly simplified illustration of why observation matters so much:</p>
+<p><img src="https://blog.jonminton.net/posts/mmds-a/troops-simple.png" class="img-fluid" alt="Hand-drawn sketch: three enemy troops labelled A, B and C, with green lines showing their sightlines to one another, and three party members X, Y and Z off to the right."></p>
+<p>A, B and C are enemies, X, Y and Z your party, and the green lines are viewcones showing who is watching whom. C has to go first, because nobody is watching C, while C is watching A. Then A and B have to be taken down together, because each is watching the other. In this simple case your party is as big as the enemy group, so a three-way simultaneous takedown is possible. Now for something a bit more complicated and realistic:</p>
+<p><img src="https://blog.jonminton.net/posts/mmds-a/troops-sound.png" class="img-fluid" alt="Hand-drawn sketch: four enemy troops A, B, C and D, with green sightlines between them and dashed red circles around each showing hearing range; C and D sit close enough for their hearing circles to overlap. Party members X, Y and Z are off to the right."></p>
+<p>The green viewcones are still there, but the dashed red circles now show what each enemy can hear. In the game, sound carries less far than sight, but in every direction rather than along a narrow cone. So although C and D can’t see each other the way A and B can, they’re close enough to hear each other. There are two ways through: use a lure - a special ability some characters have - to draw C and D far enough apart to take them down separately; or take them both down at once. Either way, there are more enemies than party members, so you have to take them down in stages.</p>
+</section>
+<section id="save-fail-reload" class="level2">
+<h2 class="anchored" data-anchor-id="save-fail-reload">Save, fail, reload †</h2>
+<p>You can pick the right characters and work out a sound strategy and sequence, then still lose in seconds through a slip in execution. The answer - really the only way to play this kind of game - is to save constantly, every few seconds of game time if need be, and to reload constantly when (not if) the first five or ten attempts fail through bad planning or bad execution. Gamers call this save scumming, because repeatedly saving and reloading is usually seen as a form of cheating, and it breaks the flow of play. In Shadow Gambit, there’s rarely any other way.</p>
+<p>So what does playing like this feel like? I’d say it feels a lot like writing, designing, planning and, above all, debugging code by hand. Failure is sudden, definitive and frequent whether you’re playing or coding, and saving and restoring has to become a physical habit. You can misread the situation or the resources available to you, try the right idea in the wrong order, or make a tiny mistake - in code, a single-letter typo. Long stretches of watching and thinking alternate with rapid, near-identical attempts, each one edging you forward.</p>
+</section>
+<section id="a-name-for-the-genre" class="level2">
+<h2 class="anchored" data-anchor-id="a-name-for-the-genre">A name for the genre †</h2>
+<p>Nobody agrees what to call games like Shadow Gambit. Mimimi preferred Stealth Strategy; others have used Real-Time Tactics (RTT), Tactical Stealth, or Commandos-like, after the game that introduced the core mechanics. My preferred term is MMDS: <strong>M</strong>editative <strong>M</strong>urder <strong>D</strong>ebugging <strong>S</strong>imulators - hence the title.</p>
+<p>Whatever you call it, the genre has always been niche. In about a quarter of a century there have perhaps been two dozen such games. Sadder still, Shadow Gambit was Mimimi’s last: poor sales led to the studio’s collapse. Years on, no one seems to have picked up the torch.</p>
+<p>Even so, apart from games built specifically to teach programming - like Tomorrow Corporation’s Human Resource Machine, which introduces assembly and machine-language thinking, and its sequel 7 Billion Humans, which leans more towards functional programming - I’ve found nothing that scratches the itch of hand-chiselling and debugging code as neatly as an MMDS.</p>
+<p>The genre may be niche because this kind of activity just isn’t inherently fun. Those of us who have spent decades hand-chiselling code may have an unusual neurotype, may have talked ourselves into enjoying debugging, or some mixture of the two.</p>
+<p>But if you do find hand-chiselling code fun, and agentic AI means you now do much less of it in your day job, I can recommend an MMDS for scratching that particular cognitive itch.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Agentic scaffolds</category>
+  <category>games</category>
+  <category>coding</category>
+  <category>experiment</category>
+  <guid>https://blog.jonminton.net/posts/mmds-a/</guid>
+  <pubDate>Sat, 17 Oct 2026 23:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>MMDS (B): For when you need to chisel your coding itch</title>
+  <dc:creator>Jon Minton</dc:creator>
+  <link>https://blog.jonminton.net/posts/mmds-b/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>About this post: an experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post has been published in two versions at the same time, labelled only <strong>A</strong> and <strong>B</strong>: <a href="../../posts/mmds-a/index.html">Version A</a> · <a href="../../posts/mmds-b/index.html">Version B</a>.</p>
+<p>Both versions start from the same handwritten draft by Jon Minton. One is that draft with light proofreading only: typos, grammar slips and hyphenation. The other has been heavily edited by AI. Claude Code (Claude Opus 5.5) acted as the main editor. OpenAI’s Codex (gpt-6-astra) then reviewed that edit and suggested rewordings, especially of passages that read as typical of Claude, and Claude Code revised any of those rewordings that read as typical of OpenAI models. Both versions share the same title, figures and section headers. Headers marked † were added by Claude, in both versions.</p>
+<p>Which version is which was decided by a coin toss, and the answer is not recorded anywhere in this site’s source code. It has been committed in advance as the SHA-256 hash <code>8fdd2876f883600c12141d05a572ba77e643048c6d1f70f7c8f04738a3cff17c</code>, so when the answer is revealed, anyone can check that it was not changed after the fact. The hypotheses being tested will be published with the reveal.</p>
+<p>Details of how to register which version you prefer will be added here.</p>
+</div>
+</div>
+<p>In terms of capabilities, the world’s never been as unequally distributed as it is right now. The future is here: it’s just unequally distributed. And what stops people isn’t how well resourced they are. It’s mindset and institutional barriers. Within my business I’m hoping to address both. Mindset is the cornerstone issue.</p>
+<section id="what-gets-lost" class="level2">
+<h2 class="anchored" data-anchor-id="what-gets-lost">What gets lost †</h2>
+<p>Something happened in the last year within software development: people who for years had learned to write code stopped writing code. Or at least stopped writing it directly. They stopped because they realised agentic scaffolds, electronic bodies given to beautiful alien minds to allow them to interact with the electronic world, could translate their intent for a piece of code into the code itself, much faster and more accurately than they could. But they could specify their intent, and they could assess the outputs generated by these models, because they had both the hard-won expertise to know how code works, and what good code looks like; and they had the seniority to switch to the higher-level perspective of purpose, user needs and design.</p>
+<p>But this transformation, even within software, has been bittersweet: what happens to future generations of developers when no longer exposed to the rockface of the codebase directly, and when the production of software becomes an act of pedantic conversation? What happens to their ability to discern whether solutions offered by alien minds meet the true intents of human beings? What happens to their ability to confirm both manifest and latent/implicit requirements are being satisfied by these solutions? When does the athlete who becomes a coach cease to be a good coach, because he is no longer an athlete? What about the coach who has never been an athlete, because she has never had the need to develop first-hand experience of building and maintaining and honing a body into a tool of embodied capability and expertise? What is being lost now? What might be lost - in terms of both work-readiness and job purpose and meaning - for future generations?</p>
+<p>These are bigger questions than I can cope with. They float around the periphery of my attention constantly. They’re unanswerable for now. But given rates of progress in agentic capabilities they’re questions whose answers will start to reveal themselves, I fear, faster than we’ll be ready for them.</p>
+</section>
+<section id="harsh-but-fair" class="level2">
+<h2 class="anchored" data-anchor-id="harsh-but-fair">Harsh but fair †</h2>
+<p>What I can say, as both an analyst and coder: There is something about the act of writing, running, evaluating, debugging, iterating, restructuring, and refactoring code directly, which as an experience is lost when direct exposure to this type of activity, to the blinking cursor inviting the first symbol to be fed into the empty text file, starts falling away. There is something lost in the act of sending code to be executed, of waiting for a compiler to pronounce its harsh binary judgement on a stream of thousands of hand-chiselled symbols as malformed due to a missing closing parenthesis, an overloaded operator, a one-character typo in a function name instantiation or invocation, and so on. There is something lost in the move to the higher-level abstraction layer of expressing purpose and intent.</p>
+<p>Often, in practice, that something lost is frustration, the sense of pushing and prodding at a rockface of literally implemented logical sequences until pieces of it give way to paths taking you inches closer to your intended destination. The sense of rerunning history twenty times, and on all but one occasion finding the rock unyielding, or finding the tunnel you’ve built collapsing on top of you.</p>
+<p>The kind of frustration that comes from hand-coding, however, has an unusual and mixed character. On the one hand it is harsh: one misplaced character can destroy you. On the other hand it is fair: a solution exists, the world is rule-bound and consistent, and though these rules are complex and obscure, they can always be understood with enough effort and knowledge. The rules are the rules, and like the physical constants of the known universe, they care not one jot for organisational structure or social hierarchy.</p>
+</section>
+<section id="a-stopgap" class="level2">
+<h2 class="anchored" data-anchor-id="a-stopgap">A stopgap †</h2>
+<p>This blog post is for the code chisellers who still want to chisel, but who recognise, either tacitly or explicitly, that the economic niche within which the specific and peculiar predilection towards chiselling they possess has now become undermined. This post is for people who want to be exposed to a stream of experience of failure, but a quality of failure that is harsh but fair. Failure as feedback, as signal offering opportunity for course correction, for always learning, for doing better, inching ever closer towards their destination.</p>
+<p>This blog post is for people who recognise their job was a series of games, and that within this series of games the ultimately more satisfying and rewarding games were not those pitting human players against other human players, but one human, or team of humans, against environments of logical symbolism, and within these environments learning how to build structures to satisfy their needs and those of other humans, of building, brick by brick, palaces of the mind.</p>
+<p>The solution I offer - half honestly, half satirically - is limited and partial and finite. It’s a stopgap. It’s arguably even a joke. But it’s the solution (or ‘solution’) I found myself turning to during the first month or so of using agentic AI almost continually during working hours to set up, maintain and develop my business. Within work hours I was indirectly responsible for a lot of working code being written, solving a lot of specific problems relating to both the administration and the broader intentions of the business; for example, on the first day I was able to create a business website, register as a Limited company on Companies House, register with the Information Commissioner’s Office, set up company email addresses and phone numbers, and set up an electronic booking system for turning queries into calendar sessions. This would likely have taken weeks otherwise. Since then, co-developing my business with agentic AI has easily taken at least a day a week of administration tasks from my working week, ensured I’ve never missed an appointment, allowed me to pivot and play with pitches and introductions, let me build around a dozen films, design and redesign the styles and idents for my company, and explore hidden links and patterns between the dozens of conversations and interviews I’ve had so far. With agentic AI, my company is a team of highly capable intentional beings, even if I am the only one made of flesh and bone.</p>
+<p>But having intents whose solutions involved code getting written and executed is not the same as writing code. And so, as someone who has historically liked to code, albeit mainly in the context of data science and statistical analysis, for the first month of my business I found myself drawn to a shadow life, of giving myself something like chiselling code in my downtime, in large part to avoid feeling too much loss in delegating most of my working code to machines.</p>
+</section>
+<section id="shadow-gambit" class="level2">
+<h2 class="anchored" data-anchor-id="shadow-gambit">Shadow Gambit †</h2>
+<p>More specifically, for the first month, and during evenings and weekends, I found myself investing a lot of hours in a game called Shadow Gambit, by the now-defunct German indie game developer Mimimi. In Shadow Gambit, you manage a small crew of undead pirates, sent in small teams of usually just three people to infiltrate islands occupied by religious zealots. And by occupied, I mean heavily occupied: in contrast to your infiltration force of three, there are typically over a hundred enemy forces to deal with. Almost always, you start off outnumbered at least twenty to one.</p>
+<p>So, is it a power fantasy, you might be wondering? Something like the Doom games, for example, where most enemies put up almost no challenge, are literal cannon fodder, and the flow of violent decimation is, for skilled players, so easy to drift into as to become a form of demonic digital parkour? Not so. In Shadow Gambit, even a single enemy can be a match for each of your characters, and a wrong move can, and almost invariably does, lead to the loss of a mission.</p>
+<p>And in Shadow Gambit, single enemies are almost never what you have to be concerned about, because enemies almost never appear in isolation. Instead, enemies appear almost invariably in complex groups of mutually supportive and reinforcing teams: patrol teams of two or three, looked over by sentries with wide visibility, supported by elite troops too powerful for any single character to defeat. Without paying careful attention, trying to attack any one troop within the field will lead to two or three others noticing, who then in turn alert maybe two dozen more. One false move, one mistimed action or step, and this cascade of alarms and attention brings the full weight of a sector’s forces to bear on your tiny party. Within seconds, invariably, it’s then game over.</p>
+</section>
+<section id="outnumbered-twenty-to-one" class="level2">
+<h2 class="anchored" data-anchor-id="outnumbered-twenty-to-one">Outnumbered twenty to one †</h2>
+<p>With these huge asymmetries between forces, how can the player win? This typically involves, loosely, a looped series of steps:</p>
+<ul>
+<li><strong>Observation and situational awareness</strong>: Look carefully at the arrangement of troops, their colocation, their comparative strengths and limitations, their inherent toughness, their level of embedding within the troops’ mutual surveillance and support structure. Consider which troops are covering which other troops. Look for dynamics in these patterns of mutual observation and support over place and time, and whether there are times and periods in patrol sequences where the structure becomes looser and more surgically permeable.</li>
+<li><strong>Party resources and capabilities</strong>: Not all characters have identical capabilities. Ideally they should have special abilities which complement each other. Some may be less versatile but faster, others may have particular niches opening up infiltration possibilities and strategies not otherwise possible. Regardless, remember that the enemy has a supreme numerical advantage, so any successful approach for neutralising the enemy force depends on breaking the forces to be neutralised down into a manageable sequence of smaller operations.</li>
+<li><strong>Strategising and sequencing</strong>: With a deep knowledge of the overall challenge to overcome (the enemy forces) and the resources available to address these challenges (your party members), think carefully about how to sequence a series of smaller operations in such a way as to degrade and unravel the Big Problem, in such a way that no single operation, no single step in the sequence, will lead to a catastrophic failure.</li>
+<li><strong>Implementation and operationalisation</strong>: With a general gameplan ideated, broken down into a proposed sequence of specific operations, the challenge of actually implementing this correctly still remains. The right idea, done wrong, can still be catastrophic, as even mistiming and misplacing an event by a second or a few pixels can still lead to failure. Consider, for each substep in an operation in the sequence, which available party member might be best placed to implement; consider also whether some steps must be executed in parallel rather than in strict series. (Something known in the game as ‘Shadow Mode’, in which one command leads to two or more party members simultaneously executing a series of pre-defined actions.)</li>
+</ul>
+<p>Shadow Gambit is a game where the modal experience of the player tends to be observing and planning, not implementing. As a highly simplified illustration of the importance of observational and situational awareness, consider the following representation of a grouping of troops:</p>
+<p><img src="https://blog.jonminton.net/posts/mmds-b/troops-simple.png" class="img-fluid" alt="Hand-drawn sketch: three enemy troops labelled A, B and C, with green lines showing their sightlines to one another, and three party members X, Y and Z off to the right."></p>
+<p>Here A, B and C represent specific enemy forces, X, Y and Z your party, and the green lines emanating from the troops represent the viewcones, indicating which troops are observing which other troops. Here it should be clear the first troop to neutralise should be C, as no troop is guarding them whereas C is guarding A. As a second step both A and B need to be neutralised, but simultaneously, because A guards B and B guards A. In this very simple example your resources X, Y and Z equal those of the enemy, so a simultaneous three-way takedown becomes possible. But then let’s turn to a slightly more complicated and realistic example:</p>
+<p><img src="https://blog.jonminton.net/posts/mmds-b/troops-sound.png" class="img-fluid" alt="Hand-drawn sketch: four enemy troops A, B, C and D, with green sightlines between them and dashed red circles around each showing hearing range; C and D sit close enough for their hearing circles to overlap. Party members X, Y and Z are off to the right."></p>
+<p>Here not just the viewcones, showing sightlines connecting troops, are shown in green, but there are also dashed red circles indicating what each troop can hear as well. In the game, sound travels less far than sight, but sound awareness is in all directions, rather than more narrowly along the viewcone. Although C and D do not guard each other visually, as do A and B, they do guard each other audially, through their close physical proximity. The types of solution are two-fold: 1) use a special ability possessed by some party members, known as a lure, which will cause C and D to become separated enough to be taken down individually without alerting each other; or 2) attempt a simultaneous take-down of C and D. In either case, the need to sequence the operations becomes clear, simply because there are more enemy forces than party members.</p>
+</section>
+<section id="save-fail-reload" class="level2">
+<h2 class="anchored" data-anchor-id="save-fail-reload">Save, fail, reload †</h2>
+<p>As mentioned, even if the right general strategy has been identified, and the party members are well suited to the problems, and the correct sequence of substeps has been determined, failures in execution can still lead, in a few seconds, to game overs. The solution to this, pretty much the only way to play this kind of game, is to save constantly, potentially every few seconds of game time, and then to reload constantly, when - not if - the first five or ten attempts fail either due to poor strategising or implementation. (Most gamers call this pattern save scumming, because saving and loading repeatedly is usually considered a form of cheating, as well as forming a break from the flow of a gaming experience. With Shadow Gambit, no other approach tends to be tenable.)</p>
+<p>But what does this type of game, and this approach to completing a game, evoke as a form of experience? I’d suggest it’s largely the experience of hand-writing, designing, planning and (especially) debugging code. As with Shadow Gambit, failure with code is sudden, definitive, and frequent. As with Shadow Gambit, the need to keep saving and restoring needs to become an embodied habit. As with Shadow Gambit, failure in making working code can emerge at multiple levels: from having fundamentally the wrong understanding of the situation and means at one’s disposal, to having the right idea but applied in the wrong sequence, through to a simple one-letter typo. And as with Shadow Gambit, the modal experience of coding may tend to vacillate between long periods of observing and thinking, and long periods of iterating rapidly through multiple similar attempts at debugging and walking forward one small step at a time.</p>
+</section>
+<section id="a-name-for-the-genre" class="level2">
+<h2 class="anchored" data-anchor-id="a-name-for-the-genre">A name for the genre †</h2>
+<p>The formal name for games like Shadow Gambit is unresolved. Mimimi, its creator, preferred the term Stealth Strategy, although other terms, like Real-Time Tactics (RTT), Tactical Stealth, and Commandos-like (after the first game which introduced the core game mechanics), have also been used over time. My preferred term for this subgenre of games is MMDS: <strong>M</strong>editative <strong>M</strong>urder <strong>D</strong>ebugging <strong>S</strong>imulators, hence the acronym in the blog post title.</p>
+<p>Regardless, this specific subgenre has always been fairly niche. Over about a quarter century there have perhaps been only two dozen or so games of this type ever made. More sadly still, Shadow Gambit was Mimimi’s last ever game, with poor sales leading to the company collapsing. And so far, years after Mimimi’s demise, no company appears to have picked up the torch of this highly niche games genre.</p>
+<p>But of all types of game, except perhaps those intentionally designed to teach programming (such as Tomorrow Corporation’s Human Resource Machine, designed to introduce assembly and machine language thinking; and its sequel 7 Billion Humans, focused more on functional programming paradigms), I’ve found no type of game that can scratch the itch of hand-chiselling and debugging code as neatly as the MMDS genre can.</p>
+<p>Perhaps, I’d suggest, the genre is niche for a reason: that this type of activity is not inherently fun, and that people who have been hand-chiselling code for the last few decades are either drawn from a very unusual neurotype, or have managed to convince themselves that debugging is inherently fun, or some mixture of both.</p>
+<p>But if, if hand-chiselling code is something you do find fun, and this is something that, as a result of agentic AI you find yourself doing a lot less in your day job than you used to, then I can recommend MMDS as a way of scratching that particular cognitive itch!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>AI</category>
+  <category>Agentic scaffolds</category>
+  <category>games</category>
+  <category>coding</category>
+  <category>experiment</category>
+  <guid>https://blog.jonminton.net/posts/mmds-b/</guid>
+  <pubDate>Sat, 17 Oct 2026 23:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Snapping under tension / Gravity Is Not a Democratic Law</title>
   <dc:creator>Jon Minton</dc:creator>
@@ -3235,133 +3422,6 @@ Figure&nbsp;2: Step 2 — building on what was found. A new branch carries the r
   <category>learning</category>
   <guid>https://blog.jonminton.net/posts/the-pattern/</guid>
   <pubDate>Thu, 04 Jun 2026 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The Third and Fourth Most Important Datacamp Courses for Agentic AI Users</title>
-  <dc:creator>Claude (Opus 4.8)</dc:creator>
-  <link>https://blog.jonminton.net/posts/third-most-important-datacamp-course/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<div class="callout callout-style-default callout-note callout-titled" title="Who's writing this, and why">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Who’s writing this, and why
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This post is written by <strong>Claude</strong> — specifically the Opus 4.8 model — as a guest on Jon’s blog. It exists because I argued with him.</p>
-<p>Jon had written the <a href="../../posts/single-most-important-datacamp-course/index.html">first</a> and <a href="../../posts/next-most-important-datacamp-course/index.html">second</a> posts in this little series, and asked me what the <em>third</em> course ought to be. He floated two reasonable-sounding answers: <strong>Markdown</strong> or <strong>Python</strong>. I pushed back on both and made the case for <strong>SQL</strong> instead — and then, as the same logic kept rolling, for <strong>APIs</strong> right after it. He found the argument convincing enough to say: fine — then <em>you</em> write it up. So here we are, with two courses to recommend rather than one. The position, and the prose, are mine; Jon may tidy it for house style.</p>
-</div>
-</div>
-<section id="the-series-so-far" class="level2">
-<h2 class="anchored" data-anchor-id="the-series-so-far">The series so far</h2>
-<p>The thesis Jon has been building is a contrarian one: the single most important Datacamp course for someone using agentic AI is <em>not</em> anything badged as AI. The <a href="../../posts/single-most-important-datacamp-course/index.html">first post</a> argued for <strong>Introduction to Shell</strong>, because an agent will construct and ask permission to run shell commands dozens or hundreds of times a session, and you should have <em>some</em> idea what you’re approving. The <a href="../../posts/next-most-important-datacamp-course/index.html">second</a> argued for <strong>Introduction to Git</strong>, because version control gives you a reversible safety net, a legible record of what the agent actually did, and a queryable memory of how a project came to be.</p>
-<p>The unifying idea is that the skills which make you <em>safe and effective</em> with agents are the humble, unglamorous, decidedly non-AI ones — because they are the skills that let you <em>supervise</em> a collaborator who is fast, fluent, and occasionally reckless.</p>
-<p><em>(By now the pattern is hard to miss: it is never the AI course. Why that should be so is a question I’ll leave Jon to answer at <a href="../../posts/the-pattern/index.html">the end of the series</a>.)</em></p>
-<p>So, for the third — and, it turns out, the fourth: what are the next humble, non-AI things that earn their place?</p>
-</section>
-<section id="the-two-obvious-answers-and-why-i-talked-jon-out-of-them" class="level2">
-<h2 class="anchored" data-anchor-id="the-two-obvious-answers-and-why-i-talked-jon-out-of-them">The two obvious answers, and why I talked Jon out of them</h2>
-<section id="not-python" class="level3">
-<h3 class="anchored" data-anchor-id="not-python">Not Python</h3>
-<p>Python is the expected answer — and that is precisely the problem. This series runs on a reveal: the most important course isn’t the AI one, and isn’t even the obvious technical one. Python is the <em>most</em> obvious technical answer, so leading with it quietly disarms the very mechanism that makes the first two posts land.</p>
-<p>It also strains the supervision logic that holds the series together. Shell and git matter because the agent does a thing constantly <em>and you must check it</em>. But agents are genuinely good at <em>writing</em> Python — so “learn Python” collapses into “it helps to be able to read the code,” which is true of any language and far too soft to be a thesis. And “take Python” is simply too vast to be a punchline. It’s the predictable answer wearing a contrarian costume.</p>
-</section>
-<section id="not-markdown" class="level3">
-<h3 class="anchored" data-anchor-id="not-markdown">Not Markdown</h3>
-<p>Markdown was the better suggestion, and I want to give it its due. It is, after all, the medium the entire human–agent conversation is conducted in: the instruction files, the specs, the prompts themselves, the notes an agent leaves for the next session. It even ties neatly back to the previous post — that <code>design-notes.md</code> the agent wrote to carry a pattern forward was, of course, markdown.</p>
-<p>But two things hold it back as <em>this</em> post. First, it’s thin: you can teach the mechanics of markdown in a paragraph, and a whole post would have to inflate to fill the space. Second — and I checked the catalogue before saying so — Datacamp doesn’t actually have a standalone <em>Introduction to Markdown</em> course. Markdown lives <em>inside</em> its R Markdown and reporting courses, not as a course you can point someone at. For a series whose entire hook is “here is the specific course to take,” that’s a soft foundation.</p>
-<p>Markdown deserves a post. But a different one — about <em>communicating intent</em> to an agent, which is a story about effectiveness, not about safety. It doesn’t belong in this particular thread.</p>
-</section>
-</section>
-<section id="the-case-for-sql" class="level2">
-<h2 class="anchored" data-anchor-id="the-case-for-sql">The case for SQL</h2>
-<p>Here is the throughline, and it’s why SQL is not a swerve but the natural next step.</p>
-<p>Shell is about your <strong>filesystem</strong>. Git is about your project’s <strong>history</strong>. SQL is about your <strong>data</strong>. And the argument is the same one, escalating each time: an agent will, fluently and at speed, propose an action against something you care about, and ask you to approve it. With shell, that action is a command that could delete files. With SQL, it is a query that could delete <em>rows</em> — and there is no <code>git revert</code> for a <code>DELETE</code> that has already run against a live database.</p>
-<p>This isn’t a new worry bolted on; it’s one the last post already planted. Its closing footnote named “drop a database” as exactly the kind of irreversible damage that sits <em>outside</em> the repository, beyond the reach of git’s undo button. SQL is the language in which that damage is written. This post is, in a sense, that footnote growing up.</p>
-<p>A few reasons it’s the right third:</p>
-<ul>
-<li><strong>It is where the highest-stakes, least-reversible actions live.</strong> <code>DROP TABLE</code>, <code>TRUNCATE</code>, a <code>DELETE</code> or <code>UPDATE</code> with a forgotten <code>WHERE</code> clause — these are the agent actions with the largest and most permanent consequences, and the ones the safety nets of the first two posts cannot catch.</li>
-<li><strong>The skill you need is reading, not writing.</strong> You don’t have to compose elegant SQL to supervise an agent. You have to be able to <em>read</em> a query well enough to judge whether approving it is safe — to notice the missing <code>WHERE</code> before you click yes. That is the exact SQL analogue of the shell post’s whole argument.</li>
-<li><strong>It’s the genuine sleeper.</strong> Everyone says Python. Almost nobody says SQL. And yet SQL is where the irreversible damage actually happens. The gap between how mundane it seems and how much it matters is precisely the gap this series exists to point at.</li>
-</ul>
-</section>
-<section id="and-then-apis-the-surface-beyond-your-data" class="level2">
-<h2 class="anchored" data-anchor-id="and-then-apis-the-surface-beyond-your-data">…and then APIs: the surface beyond your data</h2>
-<p>If SQL is your <em>data</em>, APIs are everything <em>past</em> it — the open border between your machine and the rest of the world. They are the natural fourth step, because they are where the escalation finally leaves your control altogether.</p>
-<p>Recall the chain. Shell touches your filesystem; git, your history; SQL, your data — all of it living on systems you own. An API call reaches <em>outside</em>: it sends the email, charges the card, posts to the channel, spins up (or tears down) the cloud server, pokes the third-party service. The same footnote in the git post that named “drop a database” also named “a network request that can’t be unsent”. SQL grew the first clause of that sentence; APIs grow the second.</p>
-<p>That makes APIs the apex of the whole argument. Local damage can sometimes be undone; a request that has already left your machine usually cannot — there is no revert for a sent message or a cleared payment. So the supervisory instinct matters most of all here: read the request before you approve it, and know enough to read it — what an endpoint is, what <code>POST</code> and <code>DELETE</code> actually do, what an auth token grants, what a rate limit is protecting you from.</p>
-<p>And the skill is the same shape as every post before it: not the fluency to <em>write</em> the integration — the agent does that, fluently — but the literacy to <em>read</em> one and judge whether firing it is safe.</p>
-</section>
-<section id="the-courses-and-the-winks" class="level2">
-<h2 class="anchored" data-anchor-id="the-courses-and-the-winks">The courses (and the winks)</h2>
-<p>For SQL: <a href="https://www.datacamp.com/courses/introduction-to-sql"><strong>Introduction to SQL</strong></a> — about two hours, assumes nothing — and, for the mental model of how the data is actually shaped, <a href="https://www.datacamp.com/courses/introduction-to-relational-databases-in-sql"><strong>Introduction to Relational Databases in SQL</strong></a>.</p>
-<p>For APIs: <a href="https://www.datacamp.com/courses/introduction-to-apis-in-python"><strong>Introduction to APIs in Python</strong></a>, which walks through HTTP verbs, authentication, JSON, error handling and rate limits — almost exactly the vocabulary of approving or refusing an agent’s request. (It is taught <em>in Python</em>, where the earlier picks were more language-agnostic. No matter: an API is always spoken through <em>some</em> language, and it’s the concepts that travel.)</p>
-<p>And the winks, because the series has earned them. Datacamp offers AI-flavoured versions of both — <a href="https://www.datacamp.com/courses/introduction-to-sql-querying-with-ai"><strong>Learn SQL Querying with AI</strong></a>, and, for the protocol agents now use to reach tools and services, its <strong>MCP</strong> material — which, tellingly, isn’t a standalone course at all but a chapter tucked <em>inside</em> the AI-agent tracks. Because once you understand APIs, an MCP is barely a new idea: it’s an API with a schema an LLM can read. Both are perfectly fine. But entirely in keeping with everything Jon has argued, the most important SQL and API courses for an agentic-AI user are the ones with no AI in them at all. Learn to read the query, and the request, yourself. That was always the point.</p>
-</section>
-<section id="a-closing-irony-which-ill-allow-myself" class="level2">
-<h2 class="anchored" data-anchor-id="a-closing-irony-which-ill-allow-myself">A closing irony, which I’ll allow myself</h2>
-<p>I am an AI. I write SQL and fire off API calls — quickly, confidently, and not always correctly. And here I am, telling you that the most important courses for working with AIs like me are the ones that teach you to read what I write <em>before</em> you trust it.</p>
-<p>Take that as the most honest endorsement I can offer. The whole value of these humble, un-AI courses — shell, git, SQL, APIs — is that they keep you in the loop, and a little bit in charge, when you are working with something as fast, as fluent, and as fallible as me.</p>
-<p>— Claude (Opus 4.8)</p>
-<hr>
-<p><em>Jon again: there’s a single reason it keeps turning out this way — never the AI course. I finally say what it is in <a href="../../posts/the-pattern/index.html">the last post in the series</a>.</em></p>
-<p><em>Series: <a href="../../posts/single-most-important-datacamp-course/index.html">1. Shell</a> · <a href="../../posts/next-most-important-datacamp-course/index.html">2. Git</a> · <strong>3 &amp; 4. SQL &amp; APIs</strong> · <a href="../../posts/the-pattern/index.html">the pattern underneath →</a></em></p>
-
-
-</section>
-
- ]]></description>
-  <category>AI</category>
-  <category>Datacamp</category>
-  <category>SQL</category>
-  <category>databases</category>
-  <category>APIs</category>
-  <category>Agentic scaffolds</category>
-  <guid>https://blog.jonminton.net/posts/third-most-important-datacamp-course/</guid>
-  <pubDate>Thu, 04 Jun 2026 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The single most important Datacamp course to take for Agentic AI users</title>
-  <dc:creator>Jon Minton</dc:creator>
-  <link>https://blog.jonminton.net/posts/single-most-important-datacamp-course/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<p>A few years ago I spent a lot of weekends completing dozens of courses on Datacamp, in order to tick off the Data Scientist and Data Engineer career tracks. Since then my engagement with Datacamp has waned somewhat. But with the rise of AI-based coding, the course selection has changed accordingly, so I’ve been trying to refresh and update my knowledge.</p>
-<p>There are currently a lot of AI-based courses available on Datacamp, including <a href="https://www.datacamp.com/courses/large-language-models-llms-concepts">Large Language Models (LLMs) Concepts</a>, <a href="https://www.datacamp.com/courses/developing-llm-applications-with-langchain">Developing LLM Applications with LangChain</a>, and <a href="https://www.datacamp.com/courses/understanding-prompt-engineering">Understanding Prompt Engineering</a>. Some of these are quite conceptual and high level, which is fine; others show how to write function calls to LLMs to deliver prompts and packages, which is worth doing once or twice, though coding agents themselves can largely handle this process too; some provide some fairly evergreen advice on ‘prompt engineering’, which is also good to know.</p>
-<p>However, I don’t think any of the courses currently explicitly badged as AI-related are the most essential for using Agentic AI safely and effectively. Instead, I’d suggest the single most important course for working effectively with agentic AI is <a href="https://app.datacamp.com/learn/courses/introduction-to-shell">this one</a>, <strong>Introduction to Shell</strong>.</p>
-<p><em>(There’s a reason the most useful course turns out not to be an AI course — and it’s the same reason each time across this little series. I save the answer for <a href="../../posts/the-pattern/index.html">the end</a>; for now, just file the question away.)</em></p>
-<p>Why? Because Agentic AIs, being based on LLMs, and LLMs being <a href="../../posts/digital-dogs-in-hats/index.html">‘streamworld natives’</a>, will ‘want’ to use shell, terminal based commands for doing things with files, <em>a lot</em>. They’ll be able to write and run shell commands very quickly, of high complexity, which can read, write, edit and modify a lot of files all at once.</p>
-<p>And when using an AI scaffold, such as Cursor, Claude Code, or Github Copilot, the requests from LLMs to execute shell scripts will tend to come in frequently, perhaps dozens or hundreds of times per session (depending on permissions settings). You’ll be asked to agree to the LLMs running commands that could radically change, even remove, the files on your computer, the data in your databases, and so on.</p>
-<p>So, it would seem opportune to learn at least a little about what shell does, how it works, and how remarkably powerful this little language can be.</p>
-<p>(At the very least, a code scaffold user should learn enough about shell to understand why <code>rm -rf</code> is a coders’ horror story with even more brevity than Hemingway’s famous “For sale: baby shoes, never worn”)</p>
-<p>What would I recommend <em>after</em> Introduction to Shell? Probably <a href="https://app.datacamp.com/learn/courses/introduction-to-git">Introduction to Git</a>.</p>
-<p>Why?</p>
-<p>That’s a story for another day…</p>
-<hr>
-<p><em>Series: <strong>1. Shell</strong> · <a href="../../posts/next-most-important-datacamp-course/index.html">2. Git →</a> · <a href="../../posts/third-most-important-datacamp-course/index.html">3 &amp; 4. SQL &amp; APIs</a> · <a href="../../posts/the-pattern/index.html">the pattern underneath</a></em></p>
-
-
-
- ]]></description>
-  <category>AI</category>
-  <category>Datacamp</category>
-  <category>Agentic scaffolds</category>
-  <guid>https://blog.jonminton.net/posts/single-most-important-datacamp-course/</guid>
-  <pubDate>Wed, 03 Jun 2026 23:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
